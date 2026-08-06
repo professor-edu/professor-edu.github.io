@@ -936,7 +936,7 @@
 		</h3>
         
         <div class="modal-corpo">
-            <p>Este portal é um projeto de iniciativa pessoal, desenvolvido de forma voluntária e sem fins lucrativos, com o objetivo de partilhar recursos educativos digitais lúdicos para a Educação Pré-Escolar e 1º Ciclo.</p>
+            <p>Este portal é um projeto de iniciativa pessoal, desenvolvido de forma amadora e sem fins lucrativos, com o objetivo de partilhar recursos educativos digitais lúdicos para a Educação Pré-Escolar e 1º Ciclo.</p>
             <p>Sendo um projeto independente de desenvolvimento pessoal nos tempos livres, agradeço que se detetar qualquer erro de programação ou imprecisão pedagógica, entre em contacto para podermos retificar.</p>
             <p>Foi feito um esforço de design para tornar o portal totalmente responsivo, procurando a melhor compatibilidade com telemóveis, tablets, computadores e quadros interativos.</p>
             
@@ -974,7 +974,7 @@
 </div>
 <footer>
 
-        <p><span id="ano-atual"> </span><img src="../SVG/1_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
+        <p><span id="ano-atual"> </span><img src="SVG/1_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
 
 </footer>
 
@@ -1095,6 +1095,20 @@
     window.addEventListener('click', function(evento) {
         if (evento.target === modal) {
             modal.classList.remove('ativo');
+        }
+    });
+	
+	// =====================================================================
+    // DETETA RETROCESSOS NO BROWSER (Destranca os cartões vindos da bfcache)
+    // =====================================================================
+    window.addEventListener('pageshow', function(evento) {
+        // Se evento.persisted for true, a página foi carregada a partir da memória cache
+        if (evento.persisted) {
+            // Localiza todos os cartões de anos e remove a classe de bloqueio
+            const cartoesInstancia = document.querySelectorAll('.cartao-ano');
+            cartoesInstancia.forEach(cartao => {
+                cartao.classList.remove('cartao-clicado');
+            });
         }
     });
 	
