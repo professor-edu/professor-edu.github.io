@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <!-- Alça do Cesto -->
+  <path d="M20,55 C20,15 80,15 80,55" fill="none" stroke="#8e44ad" stroke-width="6" stroke-linecap="round" />
+  <!-- Corpo do Cesto -->
+  <path d="M15,50 L85,50 L75,90 L25,90 Z" fill="#cc5de8" rx="5" />
+  <!-- Borda do Cesto -->
+  <rect x="10" y="45" width="80" height="10" rx="5" fill="#b14ecc" />
+  <!-- Ícone do Doce (Festa) -->
+  <line x1="50" y1="70" x2="50" y2="82" stroke="#ffffff" stroke-width="4" stroke-linecap="round" />
+  <circle cx="50" cy="62" r="10" fill="#ffffff" />
+  <circle cx="50" cy="62" r="6" fill="#b14ecc" />
+</svg>
