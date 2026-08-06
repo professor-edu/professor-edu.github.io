@@ -1,0 +1,2533 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pré-Escolar - Oceano dos Números 🌊</title>
+    
+    <link rel="icon" type="image/png" href="../../logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        /* =====================================================================
+            1. VARIÁVEIS GLOBAIS E ESTRUTURA BASE (TEMPLATES)
+        ===================================================================== */
+
+        :root {
+            --bg-body: #f0f7ff;
+            --cor-pre: #4fd1c5;       
+            --cor-pre-dark: #38a89d;
+            --cor-borda: #48b5aa;    
+            --bg-header: #e1f5f2;    
+            --azul-escuro: #0d47a1;
+            --text-main: #455a64;
+            --azul-vibrante: #0091ff; 
+            
+            /* CORES DOS CARTÕES DO MENU INICIAL (COM VARIÁVEIS DE SOMBRA COMBINANTES) */
+            --cor-btn-azul: #61A0FF;
+            --cor-btn-azul-sombra: #4a8deb;
+            --cor-btn-verde: #5DD279;
+            --cor-btn-verde-sombra: #45b062;
+            --cor-btn-amarelo: #FBC531;
+            --cor-btn-amarelo-sombra: #d4a31c;
+            --cor-btn-vermelho: #FF6B6B;
+            --cor-btn-vermelho-sombra: #e05d5d;
+            --cor-btn-roxo: #A55EEA;
+            --cor-btn-roxo-sombra: #8e44ad;
+            --cor-btn-laranja: #FA983A;
+            --cor-btn-laranja-sombra: #d97d2c;
+            
+            /* CORES DO CONTAINER DE JOGO + RGBA PARA ALTERAR A SHADOW */
+            --cor-c1: #ff6b6b; /* vermelho */
+            --cor-c1-sombra: rgba(255, 107, 107, 0.55);
+            
+            --cor-c2: #4dabf7; /* azul */
+            --cor-c2-sombra: rgba(77, 171, 247, 0.56);
+            
+            --cor-c3: #51cf66; /* verde */
+            --cor-c3-sombra: rgba(69, 176, 98, 0.52);
+            
+            --cor-c4: #fcc419; /* amarelo */
+            --cor-c4-sombra: rgba(251, 197, 49, 0.75);
+            
+            --cor-c5: #cc5de8; /* roxo */
+            --cor-c5-sombra: rgba(165, 94, 234, 0.65);
+            
+            --cor-c6: #ff922b; /* laranja */
+            --cor-c6-sombra: rgba(250, 152, 58, 0.85);
+        }
+
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            text-align: center; 
+            background-color: var(--bg-body); 
+            background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px); 
+            background-size: 25px 25px; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+            overflow-x: hidden; 
+            touch-action: pan-y;
+        }
+
+        /* =====================================================================
+            2. CABEÇALHO, MENU HAMBÚRGUER E BARRA LATERAL (SIDEBAR)
+        ===================================================================== */
+
+        header { 
+            background-color: var(--bg-header); 
+            padding: 25px 20px; 
+            border-bottom: 1px solid var(--cor-borda); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+            position: relative; 
+            flex-shrink: 0; 
+            z-index: 100; 
+        }
+
+        .header-content { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            position: relative; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
+
+        .nav-container { 
+            width: 100%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: flex-start; 
+            gap: 15px; 
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            z-index: 10; 
+        }
+
+        .hamburger { 
+            cursor: pointer; 
+            background: rgba(255,255,255,0.4); 
+            border: none; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 4px; 
+            padding: 10px; 
+            border-radius: 8px; 
+            transition: background 0.4s ease; 
+        }
+
+        .hamburger:hover { background: #fff9c4; }
+        .hamburger span { display: block; width: 20px; height: 2px; background: var(--azul-escuro); transition: 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+        .btn-voltar { 
+            background: var(--cor-pre); 
+            color: white; 
+            border: none; 
+            padding: 8px 20px; 
+            border-radius: 20px; 
+            font-weight: 700; 
+            text-decoration: none; 
+            font-size: 0.9rem; 
+            box-shadow: 0 3px 0 var(--cor-pre-dark); 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: transform 0.2s; 
+            cursor: pointer; 
+        }
+
+        .btn-voltar:hover { transform: scale(1.05); }
+
+        h1 {
+    color: var(--azul-escuro);
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    text-shadow: 
+        -2px -2px 0 #ffffff,  
+         2px -2px 0 #ffffff,
+        -2px  2px 0 #ffffff,
+         2px  2px 0 #ffffff, 
+         0px  6px 12px rgba(0, 0, 0, 0.15); 
+}
+        .subtitulo { color: var(--azul-escuro); font-size: clamp(0.85rem, 3vw, 1.1rem); font-weight: 500; opacity: 0.8; margin-top: 15px; }
+
+        .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: white; z-index: 200; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.1); text-align: left; }
+        .sidebar.active { left: 0; }
+        .sidebar .btn-fechar { background: #fff5f5; color: #ff4757; padding: 20px 25px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; border-bottom: 1px solid #ffebeb; }
+        .sidebar ul { list-style: none; padding: 15px; margin: 0; }
+        .sidebar li a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--text-main); background: #f8fafc; border-radius: 12px; margin-bottom: 8px; transition: 0.3s; }
+        .sidebar li a:hover { background: var(--cor-pre); color: white; transform: translateX(8px); }
+
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 150; }
+        .overlay.active { display: block; }
+
+        /* =====================================================================
+            3. ESTRUTURA DOS CONTENTORES E AJUSTES RESPONSIVOS
+        ===================================================================== */
+
+        main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 25px 20px; width: 100%; box-sizing: border-box; }
+
+        .cartao-jogo-container { 
+            background: white; 
+            width: 100%; 
+            max-width: 950px; 
+            flex: 1; 
+            min-height: 0;
+            padding: 25px 20px; 
+            border-radius: 30px; 
+            box-shadow: 0 4px 15px var(--cor-c6-sombra); 
+            border-top: 8px solid var(--cor-c6); 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: flex-start; 
+            position: relative; 
+            overflow: hidden; 
+        }
+
+        footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--cor-borda); flex-shrink: 0; width: 100%; }
+        footer p { font-size: 0.8rem; color: var(--cor-borda); margin: 0; display: }
+        footer a { color: var(--cor-borda); text-decoration: none; font-weight: 700; }
+
+        .icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
+        .icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; object-fit: contain; }
+        .icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right: 5px; margin-left: 7px; object-fit: contain; }
+        .icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+
+        /* =====================================================================
+            4. O CAMINHO MÁGICO (PROGRESSO DO BONECO COM TRILHO)
+        ===================================================================== */
+
+        .caminho-magico { width: 100%; max-width: 750px; height: 50px; position: relative; display: none; margin-bottom: 5px; flex-shrink: 0; }
+        .caminho-trilho { position: absolute; bottom: 10px; left: 40px; right: 70px; height: 0; border-bottom: 4px dashed #cbd5e1; z-index: 1; }
+
+        .caminho-rasto {
+            position: absolute;
+            bottom: -4px; 
+            left: 0;
+            width: 0%; 
+            height: 4px;
+            background-color: var(--cor-c6);
+            border-radius: 4px;
+            box-shadow: 0 0 8px var(--cor-c6-sombra); 
+            transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 2;
+        }
+
+        .caminho-avatar { 
+            position: absolute; 
+            left: 2%; 
+            bottom: -5px;
+			transform: translateX(-80%); 			
+            width: clamp(40px, 8vw, 60px); 
+            height: auto;
+            object-fit: contain;
+            transition: left 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); 
+            z-index: 3; 
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); 
+            pointer-events: none;
+        }
+
+        .caminho-alvo { 
+            position: absolute; 
+            right: 10px; 
+            bottom: 5px; 
+            width: clamp(45px, 9vw, 55px); 
+            height: auto;
+            object-fit: contain;
+            z-index: 2; 
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); 
+            pointer-events: none;
+            animation: pulsaAlvo 1.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulsaAlvo { 
+            0% { transform: scale(1) rotate(0deg); } 
+            100% { transform: scale(1.15) rotate(0deg); } 
+        }
+
+        /* =====================================================================
+            5. GRELHA DE NAVEGAÇÃO INTERNA TRIPARTIDA DO JOGO
+        ===================================================================== */
+
+        .container-nav-jogo { 
+            width: 100%; 
+            max-width: 700px; 
+            margin: 0 auto;   
+            padding-bottom: 12px; 
+            margin-bottom: 10px; 
+            border-bottom: 2px dashed #e1f5f2; 
+        }
+
+        .top-row-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr; 
+            align-items: center;
+            gap: 15px;
+        }
+
+        .top-row-grid .col-esquerda { justify-self: start; }
+        .top-row-grid .col-centro { justify-self: center; text-align: center; }
+        .top-row-grid .col-direita { justify-self: end; }
+
+        /* =====================================================================
+            6. CLASSIFICAÇÃO DOS ECRÃS E ELEMENTOS DO MENU
+        ===================================================================== */
+
+        .ecra { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; min-height: 350px; text-align: center; flex: 1; box-sizing: border-box; }
+
+        .animacao-tutorial {
+            width: 100%; max-width: 400px; height: 180px;
+            background: #f4faff; border: 3px dashed var(--cor-pre); border-radius: 20px;
+            margin: 0 auto 25px; display: flex; align-items: center; justify-content: center;
+            box-shadow: inset 0 0 15px rgba(0, 145, 255, 0.05); color: var(--cor-pre); font-size: 1.2rem; font-weight: 900;
+            overflow: hidden;
+        }
+
+        .grid-niveis {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+		
+		.grid-niveis > .btn-nivel-novo:only-child {
+			grid-column: 1 / -1; /* Faz o botão ocupar ambas as colunas da grelha */
+			justify-self: center; /* Centra o botão horizontalmente */
+			max-width: 400px; /* Mantém um tamanho confortável e proporcional */
+		}
+
+		/* CAIXA DE NARRATIVA PEDAGÓGICA (COM SUPORTE RELATIVO PARA BOTÃO DE ÁUDIO) */
+		.caixa-narrativa {
+			width: 100%;
+			max-width: 700px;
+			background-color: #fffbeb; /* Amarelo mel muito suave */
+			border: 3px dashed var(--cor-btn-amarelo); 
+			border-radius: 24px;
+			padding: 22px 45px 22px 25px;
+			margin: 20px auto 0;
+			text-align: center;
+			box-shadow: inset 0 0 10px rgba(251, 197, 49, 0.05);
+			position: relative;
+		}
+
+		.caixa-narrativa-titulo {
+			font-size: clamp(1rem, 3.5vw, 1rem);
+			color: var(--azul-escuro);
+			font-weight: 900;
+			margin-bottom: 8px;
+		}
+
+		.caixa-narrativa p {
+			font-size: clamp(0.9rem, 3vw, 0.9rem);
+			color: var(--text-main);
+			font-weight: 500;
+			line-height: 1.5;
+			margin: 0;
+		}
+
+		/* BOTÃO DE ÁUDIO EXCLUSIVO DA CAIXA DE NARRATIVA */
+		.btn-audio-narrativa {
+			position: absolute;
+			top: 2px;
+			right: 2px;
+			width: 36px;
+			height: 36px;
+			border-width: 2px;
+			box-shadow: 0 3px 0 var(--cor-btn-amarelo-sombra), 0 3px 6px rgba(0,0,0,0.1);
+		}
+
+		.btn-audio-narrativa img {
+			width: 16px;
+			height: 16px;
+		}
+
+		.btn-audio-narrativa:active {
+			transform: translateY(2px) !important;
+		}
+
+		/* AJUSTE RESPONSIVO PARA TELEMÓVEL VERTICAL */
+		@media (max-width: 600px) {
+			.btn-audio-narrativa {
+				width: 28px;
+				height: 28px;
+				top: 8px;
+				right: 8px;
+				border-width: 1.5px;
+				box-shadow: 0 2px 0 var(--cor-btn-amarelo-sombra), 0 2px 4px rgba(0,0,0,0.1);
+			}
+			
+			.btn-audio-narrativa img {
+				width: 12px;
+				height: 12px;
+			}
+
+			.btn-audio-narrativa:active {
+				transform: translateY(1.5px) !important;
+			}
+		}
+
+        /* =====================================================================
+            7. BOTÕES COM CORES DIVERSIFICADAS E FEEDBACK TÁTIL (3D REAL)
+        ===================================================================== */
+
+        /* BOTÕES DE SELEÇÃO DE NÍVEL */
+        .btn-nivel-novo {
+			--tamanho-icone: 75px;
+			
+			width: 100%; 
+			padding: 15px 15px; 
+			border-radius: 20px; 
+			border: 4px solid white;
+			color: white; 
+			font-size: 1.3rem; 
+			font-weight: 900; 
+			cursor: pointer; 
+			
+			/* Configuração Flexbox Horizontal */
+			display: flex;
+			flex-direction: row;
+			align-items: center; 
+			justify-content: flex-start;
+			gap: 5px;
+			
+			transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+			text-shadow: 1px 1px 2px rgba(0,0,0,0.25);
+			touch-action: manipulation; 
+			user-select: none; 
+		}
+		
+		.btn-nivel-novo span {
+			flex: 1;
+			text-align: center;
+			margin-right: 10px; 
+		}
+
+        /* Classes Utilitárias Cromáticas para Botões de Nível com Sombras Orgânicas Coordenadas */
+        .bg-azul { 
+            background-color: var(--cor-btn-azul); 
+            box-shadow: 0 6px 0 var(--cor-btn-azul-sombra), 0 10px 15px rgba(0,0,0,0.08); 
+        }
+        .bg-verde { 
+            background-color: var(--cor-btn-verde); 
+            box-shadow: 0 6px 0 var(--cor-btn-verde-sombra), 0 10px 15px rgba(0,0,0,0.08); 
+        }
+        .bg-amarelo { 
+            background-color: var(--cor-btn-amarelo); 
+            box-shadow: 0 6px 0 var(--cor-btn-amarelo-sombra), 0 10px 15px rgba(0,0,0,0.08); 
+        }
+        .bg-vermelho { 
+            background-color: var(--cor-btn-vermelho); 
+            box-shadow: 0 6px 0 var(--cor-btn-vermelho-sombra), 0 10px 15px rgba(0,0,0,0.08); 
+        }
+        .bg-roxo { 
+            background-color: var(--cor-btn-roxo); 
+            box-shadow: 0 6px 0 var(--cor-btn-roxo-sombra), 0 10px 15px rgba(0,0,0,0.08); 
+        }
+        .bg-laranja { 
+            background-color: var(--cor-btn-laranja); 
+            box-shadow: 0 6px 0 var(--cor-btn-laranja-sombra), 0 10px 15px rgba(0,0,0,0.08); 
+        }
+
+        /* Hover dos Botões de Nível (Mantendo a harmonia das sombras 3D) */
+        @media (hover: hover) {
+            .btn-nivel-novo:hover { filter: brightness(1.05); transform: translateY(-2px); }
+            .bg-azul:hover { box-shadow: 0 8px 0 var(--cor-btn-azul-sombra), 0 12px 20px rgba(0,0,0,0.12); }
+            .bg-verde:hover { box-shadow: 0 8px 0 var(--cor-btn-verde-sombra), 0 12px 20px rgba(0,0,0,0.12); }
+            .bg-amarelo:hover { box-shadow: 0 8px 0 var(--cor-btn-amarelo-sombra), 0 12px 20px rgba(0,0,0,0.12); }
+            .bg-vermelho:hover { box-shadow: 0 8px 0 var(--cor-btn-vermelho-sombra), 0 12px 20px rgba(0,0,0,0.12); }
+            .bg-roxo:hover { box-shadow: 0 8px 0 var(--cor-btn-roxo-sombra), 0 12px 20px rgba(0,0,0,0.12); }
+            .bg-laranja:hover { box-shadow: 0 8px 0 var(--cor-btn-laranja-sombra), 0 12px 20px rgba(0,0,0,0.12); }
+        }
+
+        /* Ícones dos Botões de Seleção */
+        .icon-btn-nivel {
+			width: var(--tamanho-icone);       
+			height: var(--tamanho-icone);      
+			object-fit: contain;
+			flex-shrink: 0;
+			filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2)); 
+			pointer-events: none; 
+		}
+
+        /* BOTÕES DE AÇÃO DO ECRÃ DE JOGO E FIM (DINÂMICA 3D) */
+        .btn-acao { 
+            background-color: var(--cor-pre); 
+            color: white; 
+            border: none; 
+            padding: 15px 35px; 
+            font-size: 1.3rem; 
+            font-weight: 700; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            box-shadow: 0 5px 0 var(--cor-pre-dark); 
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease; 
+            text-transform: uppercase; 
+            margin-top: 10px; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px;
+        }
+
+        .btn-acao.primario { background-color: var(--cor-btn-verde); box-shadow: 0 6px 0 #45b062, 0 10px 15px rgba(0,0,0,0.1); }
+        .btn-acao.secundario { background-color: var(--cor-btn-laranja); box-shadow: 0 6px 0 #d97d2c, 0 10px 15px rgba(0,0,0,0.1); }
+        .btn-acao.terciario { background-color: var(--cor-btn-azul); box-shadow: 0 6px 0 #4a8deb, 0 10px 15px rgba(0,0,0,0.1); }
+
+        @media (hover: hover) { 
+            .btn-acao:hover { filter: brightness(1.05); transform: translateY(-2px); }
+            .btn-acao.primario:hover { box-shadow: 0 8px 0 #45b062, 0 12px 20px rgba(0,0,0,0.15); } 
+            .btn-acao.secundario:hover { box-shadow: 0 8px 0 #d97d2c, 0 12px 20px rgba(0,0,0,0.15); } 
+            .btn-acao.terciario:hover { box-shadow: 0 8px 0 #4a8deb, 0 12px 20px rgba(0,0,0,0.15); } 
+        }
+
+        .icon-acao {
+            width: 1.4em;
+            height: 1.4em;
+            object-fit: contain;
+            flex-shrink: 0; 
+            pointer-events: none;
+            transition: transform 0.2s ease;
+        }
+
+        .primario:hover .icon-acao, 
+        .secundario:hover .icon-acao,
+        .terciario:hover .icon-acao {
+            transform: translateX(4px);
+        }
+
+        /* BOTÃO DE VOLTAR AO MENU (BARRA INTERNA) */
+        .btn-voltar-menu {
+            background-color: var(--cor-pre);
+            color: #ffffff; 
+            border: 2px solid var(--cor-pre-dark);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            line-height: 1;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 3px 0 var(--cor-pre-dark), 0 2px 4px rgba(0, 0, 0, 0.12); 
+            transition: background-color 0.2s, transform 0.15s, box-shadow 0.15s;
+            touch-action: manipulation;
+        }
+
+        @media (hover: hover) { 
+            .btn-voltar-menu:hover { 
+                background-color: var(--cor-pre-dark);
+                border-color: var(--cor-pre);
+                transform: translateY(-2px);
+                box-shadow: 0 5px 0 var(--cor-pre-dark), 0 4px 6px rgba(0, 0, 0, 0.15);
+            } 
+        }
+
+        .btn-voltar-menu img { width: 1.5rem; height: 1.5rem; object-fit: contain; }
+        .icon-svg-btn { width: 1.5rem; height: 1.5rem; vertical-align: middle; display: inline-block; object-fit: contain; }
+        .btn-voltar-menu .icon-svg-btn { margin-right: 8px; }
+        .btn-acao .icon-svg-btn { margin-left: 8px; }
+
+        /* REGRAS CRÍTICAS DE PRESSÃO (:ACTIVE) EXECUTADAS APÓS OS HOVERS PARA PRIORIDADE DE ESPECIFICIDADE */
+        .btn-nivel-novo:active { transform: translateY(6px) !important; box-shadow: 0 0px 0 transparent, 0 0px 0 transparent !important; }
+        .btn-acao:active { transform: translateY(6px) !important; box-shadow: 0 0px 0 transparent, 0 0px 0 transparent !important; }
+        .btn-voltar-menu:active { transform: translateY(3px) !important; box-shadow: 0 0px 0 transparent !important; }
+
+        /* =====================================================================
+            8. CLASSE BASE E CORES DOS CARTÕES DE RESPOSTA (CHOICE-CARD)
+        ===================================================================== */
+
+        /* Classe estrutural base sem erros de transição */
+        .choice-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 22px;
+            border-radius: 24px;
+            border: 4px solid #cbd5e1;
+            background-color: white;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+            position: relative;
+            user-select: none;
+            touch-action: manipulation;
+            box-shadow: 0 6px 0 #cbd5e1;
+            min-width: 140px;
+        }
+
+        /* Cores Estáticas */
+        .choice-card.card-vermelho { border-color: #ff6b6b; background-color: #fff5f5; box-shadow: 0 6px 0 #e05d5d; }
+        .choice-card.card-azul     { border-color: #4dabf7; background-color: #f1f9ff; box-shadow: 0 6px 0 #3b94db; }
+        .choice-card.card-amarelo  { border-color: #fcc419; background-color: #fefdf0; box-shadow: 0 6px 0 #e0b012; }
+        .choice-card.card-roxo     { border-color: #cc5de8; background-color: #faf3ff; box-shadow: 0 6px 0 #b14ecc; }
+        .choice-card.card-verde    { border-color: #51cf66; background-color: #ebfbee; box-shadow: 0 6px 0 #42b855; }
+        .choice-card.card-laranja  { border-color: #ff922b; background-color: #fff4e6; box-shadow: 0 6px 0 #e8791b; }
+        .choice-card.card-rosa     { border-color: #f06595; background-color: #fff0f6; box-shadow: 0 6px 0 #d64979; }
+
+        /* Hover sem ressalto visual (mantém sombra 3D física e junta brilho exterior difuso) */
+        @media (hover: hover) {
+            .choice-card:hover { transform: translateY(-2px); }
+            .choice-card.card-vermelho:hover { border-color: #ff6b6b; box-shadow: 0 8px 0 #e05d5d, 0 0 15px rgba(255, 107, 107, 0.4); }
+            .choice-card.card-azul:hover     { border-color: #4dabf7; box-shadow: 0 8px 0 #3b94db, 0 0 15px rgba(77, 171, 247, 0.4); }
+            .choice-card.card-amarelo:hover  { border-color: #fcc419; box-shadow: 0 8px 0 #e0b012, 0 0 15px rgba(251, 196, 25, 0.4); }
+            .choice-card.card-roxo:hover     { border-color: #cc5de8; box-shadow: 0 8px 0 #b14ecc, 0 0 15px rgba(204, 93, 232, 0.4); }
+            .choice-card.card-verde:hover    { border-color: #51cf66; box-shadow: 0 8px 0 #42b855, 0 0 15px rgba(81, 207, 102, 0.4); }
+            .choice-card.card-laranja:hover  { border-color: #ff922b; box-shadow: 0 8px 0 #e8791b, 0 0 15px rgba(255, 146, 43, 0.4); }
+            .choice-card.card-rosa:hover     { border-color: #f06595; box-shadow: 0 8px 0 #d64979, 0 0 15px rgba(240, 101, 149, 0.4); }           
+        }
+
+        /* Feedback Tátil do Choice Card no Clique */
+        .choice-card:active { 
+            transform: translateY(6px) !important; 
+            box-shadow: 0 0px 0 transparent, 0 0px 0 transparent !important; 
+        }
+
+        /* =====================================================================
+            9. DESIGN DO BOTÃO DE ÁUDIO OPCIONAL (LEITOR PARA NÃO LEITORES)
+        ===================================================================== */
+
+        .btn-audio-opcional {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--cor-btn-amarelo);
+            border: 3px solid white;
+            box-shadow: 0 4px 0 var(--cor-btn-amarelo-sombra), 0 4px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            touch-action: manipulation;
+            animation: somPulsa 2s infinite alternate ease-in-out;
+            flex-shrink: 0;
+        }
+
+        .btn-audio-opcional img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        @media (hover: hover) {
+            .btn-audio-opcional:hover {
+                transform: translateY(-2px) scale(1.05);
+                filter: brightness(1.05);
+                box-shadow: 0 6px 0 var(--cor-btn-amarelo-sombra), 0 6px 12px rgba(0,0,0,0.15);
+            }
+        }
+
+        .btn-audio-opcional:active {
+            transform: translateY(4px) !important;
+            box-shadow: 0 0px 0 transparent !important;
+        }
+
+        @keyframes somPulsa {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); box-shadow: 0 4px 0 var(--cor-btn-amarelo-sombra), 0 0 12px rgba(251, 197, 49, 0.6); }
+        }
+
+        /* =====================================================================
+            10. TEXTOS, TÍTULOS E CLASSES DE TRANSIÇÃO DO JOGO CORE
+        ==================================================================== */
+
+        .titulo-destaque {
+			font-size: clamp(1.4rem, 4vw, 1.8rem); 
+			color: var(--azul-escuro); 
+			margin-bottom: 45px; /* Ligeiramente aumentado para acomodar a curva sem sobrepor os elementos inferiores */
+			font-weight: 900;
+			position: relative;
+			display: inline-block; /* Crucial para o sorriso ajustar-se dinamicamente ao comprimento das palavras */
+		}
+
+		/* O Sorriso Curvo (Arco-Íris) por baixo do texto */
+		.titulo-destaque::after {
+			content: '';
+			position: absolute;
+			bottom: -12px; /* Posiciona o traço logo abaixo da linha de texto */
+			left: 10%;     /* Centra o traço deixando uma margem de 10% nas laterais */
+			width: 80%;    /* Comprimento do sorriso proporcional ao texto */
+			height: 14px;  /* Determina a profundidade da curvatura do sorriso */
+			border-bottom: 6px solid var(--cor-c6); /* Espessura e cor do traço (herda dinamicamente) */
+			border-radius: 50%; /* Curva a caixa, transformando a borda inferior num sorriso suave */
+			pointer-events: none; /* Garante que o traço não interfere com cliques ou toques */
+		}
+        .pergunta-destaque { font-size: 1.3rem; color: var(--azul-escuro); font-weight: 900; }
+        .info-nivel { font-size: 1rem; font-weight: 800; color: var(--cor-pre-dark); background: #e6fffa; padding: 8px 20px; border-radius: 20px; border: 2px solid var(--cor-pre); }
+
+        /* BOTÕES PRÉ-ESCOLAR (VIBRANTES) */
+        .btn-pre {
+            background: #e1f5f2; 
+            border: 5px solid var(--cor-pre); 
+            border-radius: 25px;
+            font-size: clamp(1.1rem, 4vw, 1.6rem); 
+            padding: clamp(12px, 3vw, 20px) clamp(20px, 4vw, 40px); 
+            min-width: clamp(120px, 30vw, 180px); 
+            gap: clamp(8px, 2vw, 15px);
+            font-weight: 900; 
+            color: var(--azul-escuro);
+            cursor: pointer; 
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s, border-color 0.2s, color 0.2s;
+            box-shadow: 0 8px 0 var(--cor-borda); 
+            text-transform: uppercase;
+            touch-action: manipulation;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            word-wrap: break-word;
+            line-height: 1.2;
+        }
+
+        @media (hover: hover) { 
+            .btn-pre:hover { transform: translateY(-3px); box-shadow: 0 11px 0 var(--cor-borda); filter: brightness(1.02); } 
+        }
+
+        .btn-pre:active { transform: translateY(8px) !important; box-shadow: 0 0px 0 transparent !important; }
+
+        /* Classes de Estado Dinâmico de Erro e Acerto */
+        .btn-pre.correct { background: #2ed573; color: white; border-color: #219d53; box-shadow: 0 8px 0 #219d53; }
+        .btn-pre.wrong { background: #ffefef; border-color: #ff4757; color: #ff4757; box-shadow: 0 8px 0 #d0303f; animation: shakeError 0.4s ease; }
+
+        /* =====================================================================
+            11. ANIMAÇÕES GLOBAIS E DANÇA DE VITÓRIA DA TAÇA
+        ===================================================================== */
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 80% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes shakeError { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+        .error-shake { animation: shakeError 0.4s ease; }
+
+        @keyframes floatImg { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        /* TAÇA DE VITÓRIA */
+        .taca-vitoria {
+            width: clamp(80px, 15vw, 130px); 
+            margin-bottom: 15px; 
+            object-fit: contain;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            
+            /* Chadeamento premium: Corre o popIn uma vez e depois o tacaDanca eternamente */
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
+                       tacaDanca 3s infinite 0.6s ease-in-out;
+        }
+
+        @keyframes tacaDanca {
+            0%, 100% { 
+                transform: translateY(0) scale(1) rotate(0deg); 
+                filter: drop-shadow(0 6px 12px rgba(251, 197, 49, 0.3)); 
+            }
+            25% { 
+                transform: translateY(-10px) scale(1.06) rotate(-4deg); 
+                filter: drop-shadow(0 14px 24px rgba(251, 197, 49, 0.65)); 
+            }
+            50% { 
+                transform: translateY(0) scale(1) rotate(0deg); 
+                filter: drop-shadow(0 6px 12px rgba(251, 197, 49, 0.3));
+            }
+            75% { 
+                transform: translateY(-10px) scale(1.06) rotate(4deg); 
+                filter: drop-shadow(0 14px 24px rgba(251, 197, 49, 0.65));
+            }
+        }
+
+        /* CONFETIS */
+        #confetti-canvas { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            pointer-events: none; 
+            z-index: 15; 
+            border-radius: 30px;
+        }
+		
+		.botoes-acao-container { display: flex; flex-direction: column; align-items: center; gap: 25px; width: 100%; }
+		.end-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--azul-escuro); margin-bottom: 25px; display: flex; align-items: center; justify-content: center; gap: 15px; }
+		
+		/* =====================================================================
+		   12. SISTEMA HÍBRIDO DO TOPO (ESTRELAS VS PÍLULA)
+		===================================================================== */
+
+		/* CONTENTOR DAS ESTRELAS INDIVIDUAIS (MÓDULO 5 RONDAS OU MENOS) */
+		.grupo-estrelas {
+			display: flex;
+			gap: 6px;
+			align-items: center;
+		}
+
+		.estrela-topo {
+			width: clamp(20px, 4.5vw, 30px);
+			height: clamp(20px, 4.5vw, 30px);
+			object-fit: contain;
+			transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		}
+
+		/* Animação pop quando a estrela acende ( feedback tátil ) */
+		.estrela-topo.acesa {
+			animation: estrelaPop 0.4s forwards ease-in-out;
+		}
+
+		@keyframes estrelaPop {
+			0% { transform: scale(1); }
+			50% { transform: scale(1.35); }
+			100% { transform: scale(1); }
+		}
+
+		/* CONTENTOR DA PÍLULA DE ESTRELA (MÓDULO 5 OU MAIS RONDAS) */
+		.badge-estrela {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background: #ffffff;
+			border: 2px solid var(--cor-pre);
+			border-radius: 20px;
+			padding: 6px 14px;
+			box-shadow: 0 3px 0 var(--cor-pre-dark);
+			font-weight: 800;
+			color: var(--azul-escuro);
+			font-size: 1rem;
+			line-height: 1;
+		}
+
+		.badge-estrela .icon-estrela-badge {
+			width: 22px;
+			height: 22px;
+			object-fit: contain;
+			animation: somPulsa 2s infinite alternate ease-in-out; /* Reutiliza a animação de pulsação */
+		}
+
+		/* Ajuste do Badge para Telemóvel Vertical */
+		@media (max-width: 600px) {
+			.badge-estrela {
+				padding: 4px 10px;
+				font-size: 0.85rem;
+			}
+			.badge-estrela .icon-estrela-badge {
+				width: 18px;
+				height: 18px;
+			}
+		}
+		
+		/* =====================================================================
+		   13. MASCOTE DO JOGO (ANIMAÇÕES E COMPORTAMENTO DE ESTADOS)
+		===================================================================== */
+
+		.mascote-container {
+			position: absolute;
+			bottom: 15px;
+			right: 15px;
+			width: 100px;
+			height: 100px;
+			z-index: 10;
+			pointer-events: none; /* Impede que a mascote bloqueie cliques em botões por baixo */
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.mascote-img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			transition: filter 0.3s ease;
+		}
+
+		/* 1. ESTADO NORMAL (Idle): Flutuação e balanço lateral suave */
+		.mascote-container.idle {
+			animation: mascoteBalanco 3s infinite ease-in-out;
+		}
+
+		@keyframes mascoteBalanco {
+			0%, 100% { 
+				transform: translateY(0) rotate(0deg); 
+			}
+			50% { 
+				transform: translateY(-6px) rotate(3deg); /* Flutua e inclina ligeiramente */
+			}
+		}
+
+		/* 2. ESTADO TRISTE (Erro): Encolhimento e tremor de frustração temporário */
+		.mascote-container.triste {
+			animation: mascoteTriste 0.5s ease-in-out;
+		}
+
+		@keyframes mascoteTriste {
+			0%, 100% { 
+				transform: scale(1) translateX(0); 
+			}
+			20%, 60% { 
+				transform: scale(0.9) translateX(-5px) rotate(-3deg); 
+			}
+			40%, 80% { 
+				transform: scale(0.9) translateX(5px) rotate(3deg); 
+			}
+		}
+
+		/* 3. ESTADO FELIZ (Acerto): Salto elástico com física de cartoon (0.8s de duração) */
+		.mascote-container.feliz {
+			animation: mascoteSalto 0.65s forwards;
+		}
+
+		@keyframes mascoteSalto {
+			0% {
+				transform: translateY(0);
+				animation-timing-function: ease-out; /* Subida: começa rápido e desacelera */
+			}
+			45% {
+				transform: translateY(-50px); /* Altura máxima do salto */
+				animation-timing-function: ease-in; /* Queda: acelera em direção ao chão */
+			}
+			100% {
+				transform: translateY(0);
+			}
+		}
+
+		/* 4. AJUSTE RESPONSIVO PARA TELEMÓVEL VERTICAL */
+		@media (max-width: 600px) {
+			.mascote-container {
+				width: 60px;
+				height: 60px;
+				bottom: 10px;
+				right: 10px;
+			}
+			
+			@keyframes mascoteSalto {
+				0%, 100% { 
+					transform: translateY(0) rotate(0deg); 
+				}
+				50% { 
+					transform: translateY(-25px) rotate(10deg); 
+				}
+			}
+		}
+
+        /* =====================================================================
+            14. MEDIA QUERIES PARA ADAPTAÇÃO GLOBAL (TELEMÓVEIS/PORTÁTEIS)
+        ===================================================================== */
+
+        @media (max-width: 768px) {
+            header { padding: 15px 10px; }
+            .header-content { display: grid; grid-template-columns: 50px 1fr 50px; grid-template-rows: auto auto; gap: 5px; }
+            .nav-container { position: static; transform: none; grid-column: 1 / -1; display: grid; grid-template-columns: 50px 1fr 50px; width: 100%; margin-bottom: 10px; }
+            .hamburger { grid-column: 1; justify-self: start; }
+            .btn-voltar { grid-column: 2; justify-self: center; width: fit-content; }
+            h1, .subtitulo { grid-column: 2; text-align: center; }
+            
+            main { padding: 15px 10px; gap: 10px; }
+            .cartao-jogo-container { padding: 15px; border-radius: 20px;}
+            
+            .top-row-grid {
+                grid-template-columns: auto 1fr auto; 
+                gap: 10px;
+            }
+            .btn-voltar-menu {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+            .pergunta-destaque {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .btn-nivel-novo {
+				--tamanho-icone: 50px;
+				padding: 12px 20px;
+				font-size: 1.1rem;
+				gap: 10px;
+			}
+            .btn-nivel-novo {
+                padding: 15px;
+                font-size: 1.2rem;
+            }
+            #opcoes-resposta {
+                gap: 12px !important;
+            }
+            .container-nav-jogo {
+                max-width: 100%; 
+                padding-bottom: 8px;
+            }
+
+            /* Grelha de navegação bipartida/linhas no mobile para evitar colapso */
+            .top-row-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr; 
+                grid-template-rows: auto auto;   
+                gap: 10px;
+            }
+            .top-row-grid .col-esquerda {
+                grid-column: 1;
+                grid-row: 1;
+                justify-self: start;
+            }
+            .top-row-grid .col-direita {
+                grid-column: 2;
+                grid-row: 1;
+                justify-self: end;
+            }
+            .top-row-grid .col-centro {
+                grid-column: 1 / -1; 
+                grid-row: 2;
+                justify-self: center;
+                text-align: center;
+            }
+			
+			.btn-audio-opcional {
+				width: 32px;
+				height: 32px;
+				border-width: 2px;
+				box-shadow: 0 2px 0 var(--cor-btn-amarelo-sombra), 0 3px 6px rgba(0,0,0,0.1);
+			}
+
+			.btn-audio-opcional img {
+				width: 15px; /* Ícone interno mais pequeno */
+				height: 15px;
+			}
+
+			.btn-audio-opcional:active {
+				transform: translateY(2px) !important;
+			}
+			.end-title { flex-direction: column; gap: 10px; }
+        }
+
+        @media (max-width: 500px) {
+            .grid-niveis {
+                grid-template-columns: 1fr;
+                max-width: 320px;
+            }
+            .info-nivel { padding: 5px 10px; font-size: 0.9rem; }
+            .end-title { flex-direction: column; gap: 10px; }
+        }
+
+        /* ADAPTAÇÕES DE MODO PAISAGEM / LANDSCAPE (EVITA QUEBRAS COM ALTURAS REDUZIDAS) */
+        @media (max-height: 600px) {
+            body { height: auto !important; overflow-y: auto !important; }
+            main { justify-content: flex-start !important; padding-top: 15px; padding-bottom: 15px; overflow-y: visible !important; }
+            .cartao-jogo-container { margin: auto 0; }
+            .info-nivel { padding: 5px 15px; font-size: 1rem; }                                             
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            body { height: auto !important; overflow-y: auto !important; }
+            main { justify-content: flex-start !important; overflow-y: visible !important; }
+            footer { margin-top: auto; }
+        }
+
+        #ecra-jogo {
+            justify-content: flex-start !important; 
+        }
+
+        /* =====================================================================
+           SECÇÃO 15. CSS ESPECÍFICO DO JOGO (ESPAÇO LIVRE POR ADAPTAR)
+        ===================================================================== */
+		/* Tamanho controlado do cesto SVG dentro do cartão de escolha */
+		.choice-card-img {
+			width: clamp(65px, 14vw, 95px);
+			height: clamp(65px, 14vw, 95px);
+			object-fit: contain;
+			margin-bottom: 12px;
+			pointer-events: none; /* Impede interferência tátil */
+		}
+
+		/* Formatação do texto do cesto */
+		.choice-card span {
+			font-size: clamp(1rem, 3.5vw, 1.25rem);
+			font-weight: 900;
+			color: var(--azul-escuro);
+			line-height: 1.1;
+			pointer-events: none;
+		}
+
+		/* Estado visual de erro específico para o Choice Card */
+		.choice-card.wrong {
+			border-color: #ff4757 !important;
+			background-color: #ffefef !important;
+			box-shadow: 0 6px 0 #d0303f !important;
+		}
+
+
+		/* =====================================================================
+		   SECÇÃO 15.1. CSS ESPECÍFICO DO JOGO 
+		===================================================================== */
+
+
+/* GARANTE QUE O CONTENTOR PRINCIPAL SE MANTÉM LIMPO */
+.cartao-jogo-container {
+    background-image: none !important; /* Desativa qualquer fundo geral do cartão */
+    padding: 20px 25px !important;
+}
+
+/* 🚨 NOVO: A IMAGEM DE FUNDO DO MAR É APLICADA APENAS À ÁREA ATIVA DO JOGO */
+#area-jogo-1 {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px !important;
+    box-sizing: border-box;
+    border-radius: 24px; /* Moldura de arestas curvas dentro do cartão */
+    border: 3px solid #e1f5f2; /* Borda fina a condizer com o tema */
+	box-shadow: 0 4px 15px var(--cor-c2-sombra);
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    transition: background-image 0.5s ease-in-out;
+}
+
+/* 3. PAINEL DO TOPO DOS NÚMEROS (Base Móvel: 4 linhas empilhadas na vertical) */
+#imagem-pergunta-container {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    min-height: 0 !important; /* Liberta a altura rígida do cartão mestre */
+    margin-bottom: 5px;
+}
+
+/* Linha base dos botões de números */
+.linha-numeros-roleta {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+/* BOTÕES DE NÚMEROS CIRCULARES TÁTEIS (3D REAL) */
+.btn-numero-circulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(24px, 7vw, 32px);
+    height: clamp(24px, 7vw, 32px);
+    border-radius: 50%; /* Círculo Perfeito */
+    aspect-ratio: 1 / 1;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    font-size: clamp(0.85rem, 2vw, 1.05rem);
+    font-weight: 900;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s, opacity 0.5s ease;
+    touch-action: manipulation;
+    user-select: none;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Cores e Sombras 3D correspondentes a cada linha do Painel */
+.btn-numero-circulo.n-vermelho { background-color: #ff6b6b; box-shadow: 0 3px 0 #e05d5d, 0 3px 6px rgba(0,0,0,0.1); }
+.btn-numero-circulo.n-azul     { background-color: #4dabf7; box-shadow: 0 3px 0 #3b94db, 0 3px 6px rgba(0,0,0,0.1); }
+.btn-numero-circulo.n-verde    { background-color: #51cf66; box-shadow: 0 3px 0 #42b855, 0 3px 6px rgba(0,0,0,0.1); }
+.btn-numero-circulo.n-amarelo  { background-color: #fcc419; box-shadow: 0 3px 0 #e0b012, 0 3px 6px rgba(0,0,0,0.1); }
+
+/* Toque tátil do botão */
+.btn-numero-circulo:active {
+    transform: translateY(3px) !important;
+    box-shadow: 0 0px 0 transparent !important;
+}
+
+/* Estado resolvido: Bloqueia e desbota a linha quando o utilizador acerta na quantidade */
+.linha-numeros-roleta.resolvido {
+    opacity: 0.35;
+    pointer-events: none !important;
+    transition: opacity 0.6s ease;
+}
+
+/* 4. A LAGOA DOS PEIXES (OCUPA TODO O RESTO DA ALTURA DO CARTÃO) */
+#opcoes-resposta {
+    position: relative; /* Âncora absoluta para os peixes nadarem livremente */
+    flex: 1; /* Preenche toda a altura livre restante */
+    width: 100%;
+    min-height: 220px; /* Altura mínima garantida para a água */
+    overflow: hidden; /* Impede que os peixes transbordem do cartão de jogo */
+    border-radius: 18px;
+}
+
+/* ELEMENTO DO PEIXE INDIVIDUAL */
+.peixe-mar {
+    position: absolute;
+    width: clamp(45px, 12vw, 65px);
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    /* Atenção: A transição agora é no 'translate' em vez do 'transform' */
+    transition: translate 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 1s ease;
+    animation: peixeFlutua 3s infinite ease-in-out; 
+}
+
+.peixe-mar:nth-child(2n) {
+    animation-delay: -1.8s;
+    animation-duration: 4.2s; /* Ligeiramente mais rápido */
+}
+
+.peixe-mar:nth-child(3n) {
+    animation-delay: -3.2s;
+    animation-duration: 5.8s; /* Ligeiramente mais lento */
+}
+
+.peixe-mar:nth-child(5n) {
+    animation-delay: -0.7s;
+    animation-duration: 4.8s;
+}
+
+/* Direções de Olhar / Natação */
+.peixe-mar.olha-direita { scale: -1 1; }
+.peixe-mar.olha-esquerda { scale: 1 1; }
+/* Flutuação suave de água */
+@keyframes peixeFlutua {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+}
+
+/* ANIMAÇÃO "NADAR FORA" (Os peixes decolam em aceleração e desvanecem) */
+.peixe-mar.olha-direita.nadar-fora {
+    translate: 450px -30px;
+    opacity: 0;
+}
+
+.peixe-mar.olha-esquerda.nadar-fora {
+    translate: -450px -30px;
+    opacity: 0;
+}
+
+/* =====================================================================
+   RECALIBRAÇÃO DE COORDENADAS PARA TELEMÓVEL VERTICAL ( 600px)
+===================================================================== */
+@media (max-width: 600px) {
+    #imagem-pergunta-container {
+        gap: 6px;
+        margin-bottom: 8px;
+    }
+
+    .linha-numeros-roleta {
+        gap: 8px;
+    }
+
+    .btn-numero-circulo {
+        width: clamp(24px, 7.5vw, 30px);
+        height: clamp(24px, 7.5vw, 30px);
+        border-width: 1.5px;
+    }
+
+    .btn-numero-circulo:active {
+        transform: translateY(2px) !important;
+    }
+
+    #opcoes-resposta {
+        min-height: 200px;
+    }
+
+    .peixe-mar {
+        width: clamp(35px, 11vw, 48px);
+    }
+
+    .peixe-mar.olha-direita.nadar-fora {
+        transform: translateX(280px) scaleX(-1) translateY(-20px);
+        opacity: 0;
+    }
+
+    .peixe-mar.olha-esquerda.nadar-fora {
+        transform: translateX(-280px) scaleX(1) translateY(-20px);
+        opacity: 0;
+    }
+}
+
+/* 🚨 5. NOVO: REORGANIZAÇÃO DO PAINEL PARA DUAS LINHAS EM COMPUTADOR LARGO (769px) */
+@media (min-width: 601px) {
+    /* Transforma as 4 linhas verticais numa grelha compacta de 2x2 (Duas linhas apenas!) */
+    #imagem-pergunta-container {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr; /* 2 colunas */
+        grid-template-rows: auto auto;   /* 2 linhas */
+        gap: 10px 30px; /* Gaps horizontais e verticais arejados */
+        max-width: 650px;
+        margin: 0 auto 10px;
+    }
+
+    /* Centraliza os botões dentro de cada uma das duas metades */
+    .linha-numeros-roleta {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .peixe-mar {
+        width: clamp(55px, 10vw, 75px); /* Peixes ligeiramente maiores no monitor */
+    }
+	#imagem-pergunta-container .linha-numeros-roleta:nth-child(odd) {
+            justify-content: flex-end;
+        }
+
+        /* Alinha a coluna da direita (Verde e Amarelo - pares) para a ESQUERDA */
+        #imagem-pergunta-container .linha-numeros-roleta:nth-child(even) {
+            justify-content: flex-start;
+        }
+}
+
+
+		/* =====================================================================
+		   SECÇÃO 16. CSS DA ANIMAÇÃO INICIAL
+		===================================================================== */
+
+
+
+.tuto-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* IMAGEM DE CENÁRIO DE FUNDO DO MAR (Ocupa toda a caixa tracejada) */
+.tuto-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* PAINEL DE NÚMEROS DO TOPO (Grelha compacta de 2x2 centralizada) */
+.tuto-painel-numeros {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 colunas */
+    grid-template-rows: auto auto;   /* 2 linhas */
+    gap: 4px 25px; /* Espaço estreito vertical e horizontal */
+    width: 220px;
+    z-index: 3;
+}
+
+.tuto-linha-numeros {
+    display: flex;
+    gap: 4px;
+    width: 100%;
+}
+
+/* Alinhamento simétrico das colunas da esquerda e direita ao centro */
+.tuto-painel-numeros .tuto-linha-numeros:nth-child(odd) { justify-content: flex-end; }
+.tuto-painel-numeros .tuto-linha-numeros:nth-child(even) { justify-content: flex-start; }
+
+/* OS BOTÕES DE NÚMEROS REDONDOS EM MINIATURA */
+.tuto-btn-numero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    font-size: 0.45rem;
+    font-weight: 900;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    line-height: 1;
+}
+
+.tuto-btn-numero.n-vermelho { background-color: #ff6b6b; }
+.tuto-btn-numero.n-verde    { background-color: #51cf66; }
+.tuto-btn-numero.n-azul     { background-color: #4dabf7; }
+.tuto-btn-numero.n-amarelo  { background-color: #fcc419; }
+
+/* ANIMAÇÃO DE RESOLVIDO/DESBOTADO (Sincronizada por nível no loop de 11s) */
+.tuto-linha-numeros.tuto-linha-verde { animation: animResolvidoVerde 11s infinite ease-in-out; }
+.tuto-linha-numeros.tuto-linha-vermelha { animation: animResolvidoVermelho 11s infinite ease-in-out; }
+
+/* A LAGOA DO TUTORIAL (Onde os peixes nadam) */
+.tuto-lagoa-peixes {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    z-index: 2;
+    overflow: hidden;
+}
+
+/* PEIXES VETORIAIS DO TUTORIAL */
+.tuto-peixe {
+    position: absolute;
+    width: 25px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+}
+
+/* Alinhamento de direções corrigido */
+.tuto-peixe.olha-direita { transform: scaleX(-1); }
+.tuto-peixe.olha-esquerda { transform: scaleX(1); }
+
+/* Flutuação suave de água na natação em memória */
+.tuto-peixe.p-verde1 { top: 20px; left: 60px; animation: peixeDriftTuto 3.4s infinite ease-in-out; }
+.tuto-peixe.p-verde2 { top: 60px; left: 110px; animation: peixeDriftTuto 2.8s infinite ease-in-out; }
+.tuto-peixe.p-verde3 { top: 40px; left: 160px; animation: peixeDriftTuto 4.1s infinite ease-in-out; }
+
+.tuto-peixe.p-vermelho1 { top: 30px; right: 70px; animation: peixeDriftTuto 3.4s infinite ease-in-out; }
+.tuto-peixe.p-vermelho2 { top: 65px; right: 130px; animation: peixeDriftTuto 2.8s infinite ease-in-out; }
+
+@keyframes peixeDriftTuto {
+    0%, 100% { margin-top: 0px; }
+    50% { margin-top: -4px; }
+}
+
+/* ATIVAÇÃO DE FUGA EXCLUSIVA DE CADA GRUPO (Sincro de 11s) */
+.tuto-peixe.peixe-verde { animation: peixeDriftTuto 4.2s infinite ease-in-out, animFugaVerde 11s infinite cubic-bezier(0.55, 0.055, 0.675, 0.19); }
+.tuto-peixe.peixe-vermelho { animation: peixeDriftTuto 3.4s infinite ease-in-out, animFugaVermelho 11s infinite cubic-bezier(0.55, 0.055, 0.675, 0.19); }
+
+/* A MASCOTE DO CAVALO-MARINHO (Ancorada no canto inferior direito) */
+.tuto-mascote {
+    position: absolute;
+    bottom: 8px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    z-index: 3;
+    transform-origin: bottom center;
+    animation: animMascoteSalto 11s infinite ease-in-out; 
+}
+
+/* ESTRELAS FESTIVAS (Pop na cabeça da mascote) */
+.tuto-estrela {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    z-index: 6;
+    opacity: 0;
+    transform: scale(0);
+    animation: animEstrelasPop 11s infinite ease-out; 
+}
+
+.e-1 { bottom: 54px; right: 15px; }
+.e-2 { bottom: 62px; right: 35px; }
+.e-3 { bottom: 48px; right: 52px; }
+
+/* A MÃOZINHA DO INDICADOR */
+.tuto-mao {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    animation: animMaoNarrativa 11s infinite ease-in-out; 
+}
+
+
+/* =====================================================================
+   CRONOGRAMAS DE SINCRO DE 11 SEGUNDOS (CICLO DUPLO DE 5.5s)
+   Ciclo 1: 0s a 5.5s (Verde - Clica no 3) | Ciclo 2: 5.5s a 11s (Vermelho - Clica no 2)
+===================================================================== */
+
+/* LINHA VERDE RESOLVIDA (Acende a 0.35 aos 14% / 1.5s, apaga no reset a 49%) */
+@keyframes animResolvidoVerde {
+    0%, 13.9% { opacity: 1; pointer-events: auto; }
+    14%, 49% { opacity: 0.35; pointer-events: none; }
+    50%, 100% { opacity: 1; pointer-events: auto; }
+}
+
+/* LINHA VERMELHA RESOLVIDA (Acende a 0.35 aos 64% / 7s, apaga no reset a 99%) */
+@keyframes animResolvidoVermelho {
+    0%, 63.9% { opacity: 1; pointer-events: auto; }
+    64%, 99% { opacity: 0.35; pointer-events: none; }
+    100% { opacity: 1; pointer-events: auto; }
+}
+
+/* FUGA DE PEIXES VERDES (Nadam de frente para a esquerda e fixam scaleX(1) para não rodar!) */
+@keyframes animFugaVerde {
+    0% { opacity: 1; }
+    13.9% { opacity: 1; transform: translateX(0) scaleX(1); }
+    14% { opacity: 1; }
+    22% { opacity: 1; transform: translateX(-180px) scaleX(1); } /* Foge de frente para a esquerda */
+    24%, 49% { opacity: 0; transform: translateX(-180px) scaleX(1); }
+    50% { opacity: 1; transform: translateX(0) scaleX(1); } 
+    100% { opacity: 1; }
+}
+
+/* FUGA DE PEIXES VERMELHOS (Nadam de frente para a direita e fixam scaleX(-1) para não rodar!) */
+@keyframes animFugaVermelho {
+    0%, 49% { opacity: 0; transform: translateX(0) scaleX(-1); } 
+    50% { opacity: 1; transform: translateX(0) scaleX(-1); } 
+    63.9% { opacity: 1; transform: translateX(0) scaleX(-1); }
+    64% { opacity: 1; }
+    72% { opacity: 1; transform: translateX(180px) scaleX(-1); } /* Foge de frente para a direita */
+    74%, 99% { opacity: 0; transform: translateX(180px) scaleX(-1); }
+    100% { opacity: 0; transform: translateX(0) scaleX(-1); }
+}
+
+/* JUMP DUPLO DA MASCOTE */
+@keyframes animMascoteSalto {
+    0% { transform: translateY(0) scale(1); }
+    /* Salto 1 (Verde) */
+    13.9% { transform: translateY(0) scale(1); }
+    15% { transform: translateY(-12px) scale(0.9, 1.15) rotate(5deg); }
+    18% { transform: translateY(0) scale(1.05, 0.95) rotate(-4deg); }
+    21% { transform: translateY(0) scale(1); }
+    /* Salto 2 (Vermelho) */
+    63.9% { transform: translateY(0) scale(1); }
+    65% { transform: translateY(-12px) scale(0.9, 1.15) rotate(5deg); }
+    68% { transform: translateY(0) scale(1.05, 0.95) rotate(-4deg); }
+    71%, 100% { transform: translateY(0) scale(1); }
+}
+
+/* ESTRELAS DUPLAS */
+@keyframes animEstrelasPop {
+    0% { opacity: 0; transform: scale(0); }
+    /* Pop 1 */
+    13.9% { opacity: 0; transform: scale(0); }
+    15% { opacity: 1; transform: scale(1.3) translateY(-8px) rotate(45deg); }
+    19% { opacity: 0; transform: scale(0.8) translateY(-20px) rotate(90deg); }
+    /* Pop 2 */
+    63.9% { opacity: 0; transform: scale(0); }
+    65% { opacity: 1; transform: scale(1.3) translateY(-8px) rotate(45deg); }
+    69% { opacity: 0; transform: scale(0.8) translateY(-20px) rotate(90deg); }
+    100% { opacity: 0; }
+}
+
+/* TRAJETÓRIA DUPLA DA MÃO (🚨 CORRIGIDA: Clica exatamente no Verde 3 e no Vermelho 2) */
+@keyframes animMaoNarrativa {
+    /* CICLO 1: Clica no Verde "3" (Coluna Direita - Centrado na sua metade) */
+    0% { opacity: 0; left: calc(50% + 120px); top: 120px; transform: scale(1); }
+    5% { opacity: 1; left: calc(50% + 42px); top: 15px; transform: scale(1); }     /* 🚨 CORREÇÃO: Alinha exatamente no Verde 3 */
+    7.5% { transform: scale(0.8); }                                                 /* Clique */
+    10% { transform: scale(1); }
+    15% { opacity: 1; left: calc(50% + 42px); top: 15px; transform: scale(1); }
+    18% { opacity: 0; left: calc(50% + 42px); top: 40px; transform: scale(1); }     
+
+    /* CICLO 2: Clica no Vermelho "2" (Coluna Esquerda - Rebaixado à esquerda) */
+    50% { opacity: 0; left: calc(50% + 120px); top: 120px; transform: scale(1); }
+    55% { opacity: 1; left: calc(50% - 86px); top: 15px; transform: scale(1); }     /* 🚨 CORREÇÃO: Alinha exatamente no Vermelho 2 */
+    57.5% { transform: scale(0.8); }                                                /* Clique */
+    60% { transform: scale(1); }
+    65% { opacity: 1; left: calc(50% - 86px); top: 15px; transform: scale(1); }
+    68% { opacity: 0; left: calc(50% - 86px); top: 40px; transform: scale(1); }     
+    100% { opacity: 0; }
+}
+
+
+/* =====================================================================
+   AJUSTES RESPONSIVOS PARA TELEMÓVEL VERTICAL ( 600px)
+===================================================================== */
+@media (max-width: 600px) {
+    .tuto-painel-numeros {
+        width: 140px;
+        grid-template-columns: 1fr; 
+        grid-template-rows: repeat(4, auto);
+        gap: 3px;
+        top: 8px;
+    }
+
+    .tuto-painel-numeros .tuto-linha-numeros:nth-child(odd),
+    .tuto-painel-numeros .tuto-linha-numeros:nth-child(even) { 
+        justify-content: center; 
+    }
+
+    .tuto-linha-numeros {
+        gap: 4px;
+    }
+
+    .tuto-btn-numero {
+        width: 10px;
+        height: 10px;
+        font-size: 0.35rem;
+    }
+
+    .tuto-lagoa-peixes {
+        height: 100px;
+    }
+
+    .tuto-peixe {
+        width: 18px;
+    }
+
+    .tuto-mascote {
+        width: 34px;
+        height: 34px;
+        right: 15px;
+        bottom: 4px;
+    }
+
+    .tuto-estrela {
+        width: 8px;
+        height: 8px;
+    }
+    .e-1 { bottom: 36px; right: 10px; }
+    .e-2 { bottom: 42px; right: 22px; }
+    .e-3 { bottom: 30px; right: 32px; }
+
+    .tuto-mao {
+        width: 22px;
+        height: 22px;
+    }
+    .tuto-mao svg {
+        width: 22px !important;
+        height: 22px !important;
+    }
+
+    /* Trajetórias duplas encurtadas ancoradas a 50% de centro no telemóvel */
+    @keyframes animMaoNarrativa {
+        /* CICLO 1: Clica no Verde "3" móvel (Linha 2, Meio) */
+        0% { opacity: 0; left: calc(50% + 90px); top: 100px; transform: scale(1); }
+        5% { opacity: 1; left: calc(50% - 11px); top: 22px; transform: scale(1); } /* 🚨 Verde 3 móvel */
+        7.5% { transform: scale(0.8); }
+        10% { transform: scale(1); }
+        15% { opacity: 1; left: calc(50% - 11px); top: 22px; transform: scale(1); }
+        18% { opacity: 0; left: calc(50% - 11px); top: 35px; transform: scale(1); }
+
+        /* CICLO 2: Clica no Vermelho "2" móvel (Linha 1, Esquerda) */
+        50% { opacity: 0; left: calc(50% + 90px); top: 100px; transform: scale(1); }
+        55% { opacity: 1; left: calc(50% - 25px); top: 9px; transform: scale(1); }  /* 🚨 Vermelho 2 móvel */
+        57.5% { transform: scale(0.8); }
+        60% { transform: scale(1); }
+        65% { opacity: 1; left: calc(50% - 25px); top: 9px; transform: scale(1); }
+        68% { opacity: 0; left: calc(50% - 25px); top: 25px; transform: scale(1); }
+        100% { opacity: 0; }
+    }
+}
+
+
+        /* =====================================================================
+           SECÇÃO 17. MEDIA QUERIES ESPECÍFICAS DO JOGO (ESPAÇO LIVRE POR ADAPTAR)
+        ===================================================================== */
+
+		@media (max-width: 600px) {
+			.btn-audio-situacao {
+				width: 32px;
+				height: 32px;
+				bottom: 8px;
+				right: 8px;
+				border-width: 2px;
+				box-shadow: 0 2px 0 var(--cor-btn-amarelo-sombra), 0 2px 4px rgba(0,0,0,0.1);
+			}
+
+			.btn-audio-situacao img {
+				width: 14px;
+				height: 14px;
+			}
+
+			.btn-audio-situacao:active {
+				transform: translateY(2px) !important;
+			}
+
+			/* AJUSTE PROPORCIONAL DO ECRÃ DE FIM (MÓVEL VERTICAL) */
+			#ecra-fim .end-stats {
+				font-size: 1.05rem !important; /* Sobrepõe o estilo inline do HTML */
+				padding: 12px 18px !important;  /* Reduz o enchimento interno */
+				margin-bottom: 20px !important; /* Aproxima os botões da caixa */
+				border-width: 2px !important;
+				border-radius: 16px !important;
+				line-height: 1.4 !important;
+			}
+
+			#ecra-fim .botoes-acao-container {
+				gap: 10px !important; /* Aproxima os dois botões de ação */
+			}
+
+			#ecra-fim .btn-acao {
+				font-size: 1.1rem !important;
+				padding: 12px 25px !important;
+				border-radius: 16px !important;
+				margin-top: 5px !important;
+			}
+
+			/* Redução de escala das sombras 3D dos botões de ação em mobile */
+			#ecra-fim .btn-acao.primario { 
+				box-shadow: 0 4px 0 #45b062, 0 6px 10px rgba(0,0,0,0.1) !important; 
+			}
+			#ecra-fim .btn-acao.secundario { 
+				box-shadow: 0 4px 0 #d97d2c, 0 6px 10px rgba(0,0,0,0.1) !important; 
+			}
+		}
+		
+
+    </style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<nav class="sidebar" id="sidebar" aria-label="Navegação Principal do Portal">
+    <div class="btn-fechar" onclick="toggleMenu()" role="button" aria-label="Fechar menu lateral"><span>✕</span> Fechar</div>
+    <ul>
+        <li><a href="../../"><img src="../../SVG/home.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'" aria-hidden="true">Início</a></li>
+        <li><a href="../"><img src="../../SVG/pre.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'" aria-hidden="true">Pré-Escolar</a></li>
+        <li><a href="../../1"><img src="../../SVG/ano1.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'" aria-hidden="true"> 1º Ano</a></li>
+        <li><a href="../../2"><img src="../../SVG/ano2.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'" aria-hidden="true"> 2º Ano</a></li>
+        <li><a href="../../3"><img src="../../SVG/ano3.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'" aria-hidden="true"> 3º Ano</a></li>
+        <li><a href="../../4"><img src="../../SVG/ano4.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'" aria-hidden="true"> 4º Ano</a></li>
+    </ul>
+</nav>
+
+<header role="banner">
+    <div class="header-content">
+        <div class="nav-container">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()" aria-label="Abrir menu de navegação">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="../" class="btn-voltar"><img src="../../SVG/voltar.svg" class="icon-svg-voltar" alt="" aria-hidden="true"> Voltar</a>
+        </div>
+        
+        <h1>Oceano dos Números <img src="img/oceano.svg" class="icon-svg-titulo" alt="" aria-hidden="true"></h1>
+        <div class="subtitulo" id="header-subtitulo" aria-live="polite">Conta os peixes de cada cor e toca no número correto!</div>
+    </div>
+</header>
+
+
+<!-- =====================================================================
+     CORPO PRINCIPAL DO JOGO (MAIN) - OCEANO DOS NÚMEROS
+===================================================================== */ -->
+<main role="main">
+
+    <!-- BARRA DE PROGRESSO (CAMINHO MÁGICO SVG) -->
+    <div class="caminho-magico" id="caminho-magico" aria-label="Progresso do jogo">
+        <div class="caminho-trilho">
+            <div class="caminho-rasto" id="caminho-rasto"></div>
+            <!-- Avatar do Cavalo-Marinho a caminhar no trilho de progresso -->
+            <img src="img/avatar.png" class="caminho-avatar" id="avatar-progresso" alt="Mascote no caminho"> 
+        </div>
+        <!-- Alvo final: Uma taça de vitória -->
+        <img src="img/mar.svg" class="caminho-alvo" id="alvo-progresso" alt="Meta"> 
+    </div>
+
+    <!-- CARTÃO DE JOGO -->
+    <div class="cartao-jogo-container">
+
+        <!-- =====================================================================
+             ECRÃ DE SELEÇÃO / MENU DO JOGO
+             ===================================================================== -->
+        <div id="ecra-selecao" class="ecra" style="display: flex;">
+                        
+
+            <div class="animacao-tutorial" id="animacao-tutorial">
+                <div class="tuto-wrapper">
+                    
+
+                    <img src="img/fundos/fundo_5.jpg" class="tuto-bg-image" alt="" aria-hidden="true">
+
+
+                    <div class="tuto-painel-numeros">
+
+                        <div class="tuto-linha-numeros tuto-linha-vermelha">
+                            <div class="tuto-btn-numero n-vermelho">1</div>
+                            <div class="tuto-btn-numero n-vermelho">2</div>
+                            <div class="tuto-btn-numero n-vermelho">3</div>
+                            <div class="tuto-btn-numero n-vermelho">4</div>
+                            <div class="tuto-btn-numero n-vermelho">5</div>
+                        </div>
+
+                        <div class="tuto-linha-numeros tuto-linha-verde">
+                            <div class="tuto-btn-numero n-verde">1</div>
+                            <div class="tuto-btn-numero n-verde">2</div>
+                            <div class="tuto-btn-numero n-verde">3</div>
+                            <div class="tuto-btn-numero n-verde">4</div>
+                            <div class="tuto-btn-numero n-verde">5</div>
+                        </div>
+
+                        <div class="tuto-linha-numeros tuto-linha-azul">
+                            <div class="tuto-btn-numero n-azul">1</div>
+                            <div class="tuto-btn-numero n-azul">2</div>
+                            <div class="tuto-btn-numero n-azul">3</div>
+                            <div class="tuto-btn-numero n-azul">4</div>
+                            <div class="tuto-btn-numero n-azul">5</div>
+                        </div>
+
+                        <div class="tuto-linha-numeros tuto-linha-amarela">
+                            <div class="tuto-btn-numero n-amarelo">1</div>
+                            <div class="tuto-btn-numero n-amarelo">2</div>
+                            <div class="tuto-btn-numero n-amarelo">3</div>
+                            <div class="tuto-btn-numero n-amarelo">4</div>
+                            <div class="tuto-btn-numero n-amarelo">5</div>
+                        </div>
+                    </div>
+
+
+                    <div class="tuto-lagoa-peixes">
+                        <img src="img/animais/verde.png" class="tuto-peixe peixe-verde p-verde1 olha-esquerda" alt="" aria-hidden="true">
+                        <img src="img/animais/verde.png" class="tuto-peixe peixe-verde p-verde2 olha-esquerda" alt="" aria-hidden="true">
+                        <img src="img/animais/verde.png" class="tuto-peixe peixe-verde p-verde3 olha-esquerda" alt="" aria-hidden="true">
+
+
+                        <img src="img/animais/vermelho.png" class="tuto-peixe peixe-vermelho p-vermelho1 olha-direita" alt="" aria-hidden="true">
+                        <img src="img/animais/vermelho.png" class="tuto-peixe peixe-vermelho p-vermelho2 olha-direita" alt="" aria-hidden="true">
+                    </div>
+
+                    <img src="img/mascote_normal.png" class="tuto-mascote" alt="" aria-hidden="true">
+
+
+                    <img src="../../SVG/estrela_cheia.svg" class="tuto-estrela e-1" alt="" aria-hidden="true">
+                    <img src="../../SVG/estrela_cheia.svg" class="tuto-estrela e-2" alt="" aria-hidden="true">
+                    <img src="../../SVG/estrela_cheia.svg" class="tuto-estrela e-3" alt="" aria-hidden="true">
+
+
+                    <div class="tuto-mao">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:36px; height:36px;">
+                            <g fill="#ffda44" stroke="#2c3e50" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2">
+                                <path d="M8 13V4.5a1.5 1.5 0 0 1 3 0V12m0-.5v-2a1.5 1.5 0 0 1 3 0V12m0-1.5a1.5 1.5 0 0 1 3 0V12" />
+                                <path d="M17 11.5a1.5 1.5 0 0 1 3 0V16a6 6 0 0 1-6 6h-2h.208a6 6 0 0 1-5.012-2.7L7 19q-.468-.718-3.286-5.728a1.5 1.5 0 0 1 .536-2.022a1.87 1.87 0 0 1 2.28.28L8 13" />
+                            </g>
+                        </svg>
+                    </div>
+
+                </div>
+            </div>
+            
+            <h2 class="titulo-destaque">Oceano dos Números Coloridos!</h2>
+            
+            <!-- Grelha de Níveis (Um único botão de nível) -->
+            <div class="grid-niveis" role="group" aria-label="Seleção de Níveis de Jogo">
+                <button class="btn-nivel-novo bg-azul" onclick="iniciarJogo(1)">
+                    <img src="img/menu_1.png" class="icon-btn-nivel" alt="" aria-hidden="true">
+                    <span>Quero ajudar!</span>
+                </button>
+            </div>
+
+            <!-- CAIXA DE NARRATIVA PEDAGÓGICA (OCEANO DOS NÚMEROS) -->
+            <div class="caixa-narrativa">
+                <!-- Botão de Áudio da História Narrada -->
+                <button class="btn-audio-opcional btn-audio-narrativa" onclick="tocarVozNarrativa()" aria-label="Ouvir a história do jogo">
+                    <img src="../../SVG/audio.svg" alt="" aria-hidden="true">
+                </button>
+
+                <div class="caixa-narrativa-titulo">A Missão do Marinho!</div>
+                <p>O pequeno Cavalo-Marinho, que se chama Marinho, adora nadar pelo recife de corais e brincar às escondidas com os seus amigos peixes coloridos! Mas hoje, os peixes perderam-se debaixo de água. Consegues ajudar o Marinho a contar quantos peixinhos há de cada cor e a mandá-los de volta para casa?</p>
+            </div>
+
+        </div>
+
+        <!-- =====================================================================
+             ECRÃ DA ÁREA DE JOGO ATIVO
+             ===================================================================== -->
+        <div id="ecra-jogo" class="ecra">
+            
+            <!-- Cabeçalho Interno do Jogo -->
+            <div class="container-nav-jogo" role="navigation" aria-label="Navegação interna do minijogo">
+                <div class="top-row-grid">
+                    <!-- Coluna Esquerda: Botão Voltar -->
+                    <div class="col-esquerda">
+                        <button class="btn-voltar-menu" onclick="voltarAoMenu()" aria-label="Voltar para a seleção de temas do jogo">
+                            <img src="../../SVG/menu_principal.svg" alt="" aria-hidden="true"> MENU
+                        </button>
+                    </div>
+                    
+                    <!-- Coluna Central: Instrução de Topo com Altifalante Geral -->
+                    <div class="col-centro">
+                        <div style="display: inline-flex; align-items: center; justify-content: center; gap: 12px;">
+                            <div class="pergunta-destaque" id="instrucao-ronda" aria-live="polite">Conta os peixes de cada cor!</div>
+                            <button class="btn-audio-opcional" id="btn-audio-instrucao" onclick="tocarVozInstrucao()" aria-label="Ouvir instrução de voz">
+                                <img src="../../SVG/audio.svg" alt="Ouvir instrução" aria-hidden="true">
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Coluna Direita: Contador Híbrido (Estrelas para 5 Rondas) -->
+                    <div class="col-direita" id="elemento-extra-topo"></div>
+                </div>
+            </div>
+
+            <!-- ÁREA DE JOGO DINÂMICA (Contém o painel de números em cima e o aquário dos peixes em baixo) -->
+            <div id="area-jogo-1" style="display: none; width: 100%; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding-bottom: 20px;">
+                
+                <!-- Painel Superior de Botões de Números (Mapeados por Cor e Quantidade) -->
+                <div id="imagem-pergunta-container">
+                    <!-- Linha Vermelha -->
+                    <div class="linha-numeros-roleta" id="linha-Vermelho">
+                        <button class="btn-numero-circulo n-vermelho" onclick="clicarNumero('Vermelho', 1)">1</button>
+                        <button class="btn-numero-circulo n-vermelho" onclick="clicarNumero('Vermelho', 2)">2</button>
+                        <button class="btn-numero-circulo n-vermelho" onclick="clicarNumero('Vermelho', 3)">3</button>
+                        <button class="btn-numero-circulo n-vermelho" onclick="clicarNumero('Vermelho', 4)">4</button>
+                        <button class="btn-numero-circulo n-vermelho" onclick="clicarNumero('Vermelho', 5)">5</button>
+                    </div>
+                    <!-- Linha Verde -->
+                    <div class="linha-numeros-roleta" id="linha-Verde">
+                        <button class="btn-numero-circulo n-verde" onclick="clicarNumero('Verde', 1)">1</button>
+                        <button class="btn-numero-circulo n-verde" onclick="clicarNumero('Verde', 2)">2</button>
+                        <button class="btn-numero-circulo n-verde" onclick="clicarNumero('Verde', 3)">3</button>
+                        <button class="btn-numero-circulo n-verde" onclick="clicarNumero('Verde', 4)">4</button>
+                        <button class="btn-numero-circulo n-verde" onclick="clicarNumero('Verde', 5)">5</button>
+                    </div>
+                    <!-- Linha Azul -->
+                    <div class="linha-numeros-roleta" id="linha-Azul">
+                        <button class="btn-numero-circulo n-azul" onclick="clicarNumero('Azul', 1)">1</button>
+                        <button class="btn-numero-circulo n-azul" onclick="clicarNumero('Azul', 2)">2</button>
+                        <button class="btn-numero-circulo n-azul" onclick="clicarNumero('Azul', 3)">3</button>
+                        <button class="btn-numero-circulo n-azul" onclick="clicarNumero('Azul', 4)">4</button>
+                        <button class="btn-numero-circulo n-azul" onclick="clicarNumero('Azul', 5)">5</button>
+                    </div>
+                    <!-- Linha Amarela -->
+                    <div class="linha-numeros-roleta" id="linha-Amarelo">
+                        <button class="btn-numero-circulo n-amarelo" onclick="clicarNumero('Amarelo', 1)">1</button>
+                        <button class="btn-numero-circulo n-amarelo" onclick="clicarNumero('Amarelo', 2)">2</button>
+                        <button class="btn-numero-circulo n-amarelo" onclick="clicarNumero('Amarelo', 3)">3</button>
+                        <button class="btn-numero-circulo n-amarelo" onclick="clicarNumero('Amarelo', 4)">4</button>
+                        <button class="btn-numero-circulo n-amarelo" onclick="clicarNumero('Amarelo', 5)">5</button>
+                    </div>
+                </div>
+                
+                <!-- A Lagoa dos Peixes (Onde o JS injetará os peixes absolutos a flutuar) -->
+                <div id="opcoes-resposta">
+                    <!-- Gerado por JS dinamicamente: .peixe-mar -->
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =====================================================================
+             ECRÃ DE FIM DE JOGO (VITÓRIA)
+             ===================================================================== -->
+        <div id="ecra-fim" class="ecra">
+            
+            <img src="../../SVG/taca.svg" class="taca-vitoria" alt="Taça comemorativa">
+            
+            <h2 class="end-title" id="end-title-text" style="margin-bottom: 15px;">Muito Bem!</h2>
+            
+            <div class="end-stats" style="font-size: 1.3rem; color: var(--text-main); margin-bottom: 35px; background: var(--bg-header); padding: 20px 30px; border-radius: 20px; border: 3px dashed var(--cor-pre); max-width: 500px;" aria-live="polite">
+               Contaste todos os peixes coloridos!<br>
+                És um verdadeiro mestre dos números!
+            </div>
+           
+            <div class="botoes-acao-container">
+                <button class="btn-acao primario" onclick="reiniciarJogo()" aria-label="Jogar novamente">
+                    JOGAR OUTRA VEZ <img src="../../SVG/jogar_novo.svg" class="icon-acao" alt="" aria-hidden="true">
+                </button>
+                <button class="btn-acao secundario" onclick="voltarAoMenu()" aria-label="Regressar ao menu">
+                    VOLTAR AO MENU <img src="../../SVG/home.svg" class="icon-acao" alt="" aria-hidden="true">
+                </button>
+            </div>
+            
+        </div>
+
+        <!-- MASCOTE DO CAVALO-MARINHO (Ancorado no canto inferior direito) -->
+        <div class="mascote-container idle" id="mascote-container" style="display: none;">
+            <img src="img/mascote_normal.png" class="mascote-img" id="mascote-img" alt="Cavalo-marinho ajudante">
+        </div>
+
+        <canvas id="confetti-canvas"></canvas>
+
+    </div> 
+</main>
+
+<footer>
+    <p><span id="ano-atual"> </span><img src="../../SVG/pre.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
+</style>
+</footer>
+
+</body>
+
+
+<script>
+    /* =====================================================================
+       SECÇÃO 1: CONFIGURAÇÕES GLOBAIS E ESTADO DA APLICAÇÃO (NÚMEROS)
+    ===================================================================== */
+    
+    // Atualiza o Ano do Rodapé automaticamente
+    document.getElementById('ano-atual').innerText = new Date().getFullYear();
+
+    // Estado ativo do jogo
+    let jogoAtual = 0;
+    let rondaAtual = 0;
+    const totalRondas = 5; // 5 rondas de contagem de peixes por partida
+    let perguntasSessao = []; // Guardará as 5 configurações de ronda da partida ativa
+	const TOTAL_FUNDOS_DISPONIVEIS = 10; // Se no futuro tiver mais fundos de mar, basta mudar este número!
+    let fundosSessao = []; // Array que guardará a lista de fundos baralhada para a partida ativa
+
+    // Ponto de entrada do browser
+    window.onload = function() { 
+        mostrarEcra('ecra-selecao'); 
+    };
+
+    /* =====================================================================
+       SECÇÃO 2: BASE DE DADOS (15 CONFIGURAÇÕES DE QUANTIDADES - RÁCIO 3X)
+    ===================================================================== */
+    
+    // Mapeamento de áudio de instrução geral
+    const AUDIOS_INSTRUCOES = {
+        1: 'audio/instrucao_jogo1.mp3' // "Explorador, ajuda o Marinho! Conta os peixes coloridos e toca no número certo!"
+    };
+
+    // Mapeamento do áudio de narrativa geral no ecrã de seleção
+    const AUDIOS_NARRATIVAS = {
+        1: 'audio/narrativa_jogo1.mp3' // "O pequeno Cavalo-Marinho Marinho adora nadar pelo recife..."
+    };
+
+    // 15 distribuições calibradas de peixes para garantir que nunca sai 0 nem excede 5 por cor
+    const BASE_DE_DADOS_JOGOS = {
+        1: [
+            { Vermelho: 1, Verde: 3, Azul: 2, Amarelo: 4 },
+            { Vermelho: 2, Verde: 4, Azul: 1, Amarelo: 3 },
+            { Vermelho: 3, Verde: 1, Azul: 4, Amarelo: 2 },
+            { Vermelho: 4, Verde: 2, Azul: 3, Amarelo: 1 },
+            { Vermelho: 1, Verde: 5, Azul: 2, Amarelo: 3 },
+            { Vermelho: 5, Verde: 1, Azul: 3, Amarelo: 2 },
+            { Vermelho: 2, Verde: 3, Azul: 5, Amarelo: 1 },
+            { Vermelho: 3, Verde: 2, Azul: 1, Amarelo: 4 },
+            { Vermelho: 4, Verde: 1, Azul: 2, Amarelo: 5 },
+            { Vermelho: 1, Verde: 2, Azul: 4, Amarelo: 3 },
+            { Vermelho: 5, Verde: 3, Azul: 1, Amarelo: 2 },
+            { Vermelho: 2, Verde: 1, Azul: 3, Amarelo: 4 },
+            { Vermelho: 3, Verde: 4, Azul: 2, Amarelo: 1 },
+            { Vermelho: 4, Verde: 2, Azul: 1, Amarelo: 5 },
+            { Vermelho: 2, Verde: 5, Azul: 3, Amarelo: 4 }
+        ]
+    };
+
+    /* =====================================================================
+       SECÇÃO 3: FUNÇÕES UTILITÁRIAS GERAIS E CONTROLO DE FLUXO
+    ===================================================================== */
+    
+    let reservatorioPerguntas = {};
+
+    function prepararPerguntasPartida(idJogo, limite) {
+        const bancoDeDados = BASE_DE_DADOS_JOGOS[idJogo];
+        if (!bancoDeDados) return [];
+
+        if (!reservatorioPerguntas[idJogo] || reservatorioPerguntas[idJogo].length < limite) {
+            reservatorioPerguntas[idJogo] = baralharLista(bancoDeDados);
+        }
+
+        return reservatorioPerguntas[idJogo].splice(0, limite);
+    }
+
+    // Algoritmo de Baralhamento (Fisher-Yates)
+    function baralharLista(lista) {
+        let copia = [...lista];
+        for (let i = copia.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copia[i], copia[j]] = [copia[j], copia[i]];
+        }
+        return copia;
+    }
+
+    // Gera dinamicamente o contador de estrelas vazias no topo do ecrã
+    function prepararContadorTopo() {
+        const topoContainer = document.getElementById('elemento-extra-topo');
+        if (!topoContainer) return;
+
+        topoContainer.innerHTML = ''; 
+
+        const grupo = document.createElement('div');
+        grupo.className = 'grupo-estrelas';
+
+        for (let i = 1; i <= totalRondas; i++) {
+            const img = document.createElement('img');
+            img.src = '../../SVG/estrela_vazia.svg';
+            img.className = 'estrela-topo';
+            img.id = `estrela-ronda-${i}`;
+            img.alt = `Estrela ${i}`;
+            grupo.appendChild(img);
+        }
+        topoContainer.appendChild(grupo);
+    }
+
+    // Atualiza o bonequinho na barra de progresso (0% a 100%)
+    function atualizarProgressoCaminho(percentagem) {
+        const avatar = document.getElementById('avatar-progresso');
+        const rasto = document.getElementById('caminho-rasto');
+        if (avatar) avatar.style.left = `${percentagem}%`;
+        if (rasto) rasto.style.width = `${percentagem}%`;
+
+        // Acende as estrelas do topo de forma tátil em simultâneo com o acerto
+        const topoContainer = document.getElementById('elemento-extra-topo');
+        if (!topoContainer) return;
+
+        for (let i = 1; i <= totalRondas; i++) {
+            const estrela = document.getElementById(`estrela-ronda-${i}`);
+            if (estrela) {
+                if (i <= rondaAtual) {
+                    if (!estrela.classList.contains('acesa')) {
+                        estrela.src = '../../SVG/estrela_cheia.svg';
+                        estrela.classList.add('acesa');
+                    }
+                } else {
+                    estrela.src = '../../SVG/estrela_vazia.svg';
+                    estrela.classList.remove('acesa');
+                }
+            }
+        }
+    }
+
+    // Alternar ecrãs do template base
+    function mostrarEcra(id) {
+        document.querySelectorAll('.ecra').forEach(e => e.style.display = 'none');
+        const e = document.getElementById(id);
+        if (e) e.style.display = 'flex';
+
+        // Controla a visibilidade da Mascote
+        const mascote = document.getElementById('mascote-container');
+        if (mascote) {
+            if (id === 'ecra-jogo') {
+                mascote.style.display = 'flex';
+            } else {
+                mascote.style.display = 'none';
+            }
+        }
+    }
+	
+	function limparConfetis() {
+        confetis = []; 
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+    }
+
+// Retorna ao menu de seleção local limpo (Reseta a imagem de fundo da área ativa)
+    function voltarAoMenu() {
+        pararVozEletiva();
+        limparConfetis();
+        atualizarMascote('idle');
+        
+        // 🚨 NOVO: Remove a imagem de fundo da área de jogo para que o ecrã inicial se mantenha limpo
+        const area1 = document.getElementById('area-jogo-1');
+        if (area1) {
+            area1.style.backgroundImage = 'none';
+        }
+
+        document.getElementById('caminho-magico').style.display = 'none';
+        document.querySelectorAll('[id^="area-jogo-"]').forEach(el => el.style.display = 'none');
+        mostrarEcra('ecra-selecao');
+    }
+
+    function reiniciarJogo() {
+        pararVozEletiva();
+        limparConfetis();
+        iniciarJogo(jogoAtual);
+    }
+
+    /* =====================================================================
+       SECÇÃO 4: MOTORES DE ÁUDIO PERSISTENTES E SÍNTESE DE APITO
+    ===================================================================== */
+    
+    let audioVozAtual = null;
+
+    function tocarVoz(caminhoMp3) {
+        if (!caminhoMp3) return;
+
+        try {
+            if (audioVozAtual) {
+                if (audioVozAtual.src.endsWith(caminhoMp3)) {
+                    audioVozAtual.pause();
+                    audioVozAtual.currentTime = 0;
+                    
+                    const playPromise = audioVozAtual.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(erro => console.warn(erro));
+                    }
+                    return;
+                } else {
+                    pararVozEletiva();
+                }
+            }
+
+            audioVozAtual = new Audio(caminhoMp3);
+            const playPromise = audioVozAtual.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(erro => {
+                    console.warn("Aviso de reprodução automática contornado.", erro);
+                });
+            }
+        } catch (e) {
+            console.error("Falha ao inicializar o ficheiro de áudio.", e);
+        }
+    }
+
+    function pararVozEletiva() {
+        if (audioVozAtual) {
+            audioVozAtual.pause();
+            audioVozAtual.currentTime = 0;
+            audioVozAtual = null;
+        }
+    }
+
+    function tocarVozInstrucao() {
+        const caminhoAudio = AUDIOS_INSTRUCOES[jogoAtual];
+        if (caminhoAudio) {
+            tocarVoz(caminhoAudio);
+        }
+    }
+
+    function tocarVozNarrativa() {
+        const idAtivo = jogoAtual || 1;
+        const caminhoAudio = AUDIOS_NARRATIVAS[idAtivo];
+        if (caminhoAudio) {
+            tocarVoz(caminhoAudio);
+        }
+    }
+
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    
+    function iniciarAudio() {
+        if (!AudioContextClass) return;
+        if (!audioCtx) audioCtx = new AudioContextClass();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+    
+    window.addEventListener('pointerdown', iniciarAudio);
+    window.addEventListener('keydown', iniciarAudio);
+
+    function tocarSom(tipo) {
+        iniciarAudio();
+        if (!audioCtx || audioCtx.state === 'suspended') return;
+
+        const osc = audioCtx.createOscillator(); 
+        const gain = audioCtx.createGain();
+        osc.connect(gain); 
+        gain.connect(audioCtx.destination);
+        const agora = audioCtx.currentTime + 0.02;
+
+        if (tipo === 'acerto') {
+            osc.type = 'sine'; osc.frequency.setValueAtTime(600, agora); osc.frequency.exponentialRampToValueAtTime(1200, agora + 0.2);
+            gain.gain.setValueAtTime(0.3, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); osc.stop(agora + 0.3);
+        } else if (tipo === 'erro') {
+            osc.type = 'triangle'; osc.frequency.setValueAtTime(250, agora); osc.frequency.exponentialRampToValueAtTime(150, agora + 0.2);
+            gain.gain.setValueAtTime(0.3, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); osc.stop(agora + 0.3);
+        } else if (tipo === 'pop') {
+            osc.type = 'sine'; osc.frequency.setValueAtTime(400, agora); osc.frequency.exponentialRampToValueAtTime(800, agora + 0.1);
+            gain.gain.setValueAtTime(0.15, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.1);
+            osc.start(agora); osc.stop(agora + 0.1);
+        } else if (tipo === 'alegria') {
+            osc.type = 'sine'; 
+            osc.frequency.setValueAtTime(150, agora);
+            osc.frequency.exponentialRampToValueAtTime(1800, agora + 0.8); 
+            gain.gain.setValueAtTime(0, agora);
+            gain.gain.linearRampToValueAtTime(0.12, agora + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.001, agora + 0.8);
+            osc.start(agora); osc.stop(agora + 0.8);
+        } else if (tipo === 'vitoria') {
+            const melodia = [
+                { freq: 523.25, tempo: 0.00, duracao: 0.15 }, 
+                { freq: 523.25, tempo: 0.15, duracao: 0.15 }, 
+                { freq: 523.25, tempo: 0.30, duracao: 0.15 }, 
+                { freq: 659.25, tempo: 0.45, duracao: 0.35 }, 
+                { freq: 783.99, tempo: 0.80, duracao: 0.35 }, 
+                { freq: 1046.50, tempo: 1.15, duracao: 0.80 }
+            ];
+
+            melodia.forEach(nota => {
+                const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                o.connect(g); g.connect(audioCtx.destination);
+                o.type = 'triangle'; o.frequency.value = nota.freq;
+                g.gain.setValueAtTime(0, agora + nota.tempo);
+                g.gain.linearRampToValueAtTime(0.3, agora + nota.tempo + 0.02); 
+                g.gain.exponentialRampToValueAtTime(0.001, agora + nota.tempo + nota.duracao);
+                o.start(agora + nota.tempo); o.stop(agora + nota.tempo + nota.duracao);
+            });
+        }
+    }
+
+
+    
+    // Canvas de Confetes (Mantido em memória do template)
+    const canvasConfetti = document.getElementById('confetti-canvas');
+    const ctxConfetti = canvasConfetti.getContext('2d');
+    let confetis = [];
+	
+	function redimensionarCanvas() { 
+        const container = document.querySelector('.cartao-jogo-container');
+        if (container && canvasConfetti) {
+            canvasConfetti.width = container.clientWidth; 
+            canvasConfetti.height = container.clientHeight; 
+        }
+    }
+    window.addEventListener('resize', redimensionarCanvas);
+    
+    function dispararConfetis() {
+        redimensionarCanvas(); 
+        confetis = []; 
+        const cores = ['#4fd1c5', '#ff4757', '#0091ff', '#ffa502', '#eccc68'];
+        for (let i = 0; i < 150; i++) {
+            confetis.push({ 
+                x: Math.random() * canvasConfetti.width, 
+                y: Math.random() * canvasConfetti.height - canvasConfetti.height, 
+                w: Math.random() * 10 + 5, 
+                h: Math.random() * 10 + 5, 
+                cor: cores[Math.floor(Math.random() * cores.length)], 
+                velY: Math.random() * 3 + 2, 
+                velX: Math.random() * 2 - 1, 
+                rotacao: Math.random() * 360, 
+                velRotacao: Math.random() * 5 - 2.5 
+            });
+        }
+        animarConfetis();
+    }
+    
+    function animarConfetis() {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); 
+        let ativos = false;
+        confetis.forEach(c => {
+            c.y += c.velY; 
+            c.x += c.velX; 
+            c.rotacao += c.velRotacao; 
+            if (c.y < canvasConfetti.height) ativos = true;
+            ctxConfetti.save(); 
+            ctxConfetti.translate(c.x, c.y); 
+            ctxConfetti.rotate(c.rotacao * Math.PI / 180);
+            ctxConfetti.fillStyle = c.cor; 
+            ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); 
+            ctxConfetti.restore();
+        });
+        if (ativos) requestAnimationFrame(animarConfetis);
+    }
+
+    // Registador genérico da Mascote do Cavalo-Marinho Marinho
+    function atualizarMascote(estado) {
+        const container = document.getElementById('mascote-container');
+        const img = document.getElementById('mascote-img');
+        if (!container || !img) return;
+
+        container.classList.remove('idle', 'triste', 'feliz');
+
+        if (estado === 'triste') {
+            img.src = 'img/mascote_triste.png';
+            container.classList.add('triste');
+        } else if (estado === 'feliz') {
+            img.src = 'img/mascote_feliz.png';
+            container.classList.add('feliz');
+        } else {
+            img.src = 'img/mascote_normal.png';
+            container.classList.add('idle');
+        }
+    }
+	
+
+
+    /* =====================================================================
+       SECÇÃO 5: O MOTOR DO OCEANO DOS NÚMEROS (CICLO CORE)
+    ===================================================================== */
+    
+    let coresResolvidasNaRonda = 0; // Conta quantas cores já foram resolvidas na ronda ativa
+
+    function iniciarJogo(idJogo) {
+        pararVozEletiva();
+		if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+        
+        jogoAtual = idJogo;
+        rondaAtual = 0;
+        
+        // Ativa o progresso do caminho mágico
+        document.getElementById('caminho-magico').style.display = 'block';
+        atualizarProgressoCaminho(0);
+
+        // 🚨 NOVO ALGORITMO: Cria uma lista de índices com o total de fundos disponíveis e baralha-a
+        let listaFundosBase = [];
+        for (let i = 1; i <= TOTAL_FUNDOS_DISPONIVEIS; i++) {
+            listaFundosBase.push(i);
+        }
+        fundosSessao = baralharLista(listaFundosBase); // Baralha os fundos para garantir exclusividade por ronda
+
+        // Extrai as 5 configurações de quantidades baralhadas
+        perguntasSessao = prepararPerguntasPartida(idJogo, totalRondas);
+
+        prepararContadorTopo();
+
+        document.querySelectorAll('[id^="area-jogo-"]').forEach(el => el.style.display = 'none');
+        const area1 = document.getElementById('area-jogo-1');
+        if (area1) {
+            area1.style.display = 'flex';
+        }
+
+        mostrarEcra('ecra-jogo');
+        prepararRonda();
+    }
+
+// Prepara a interface da ronda com algoritmo de prevenção de colisão (Evita sobreposição de peixes)
+    function prepararRonda() {
+        atualizarMascote('idle');
+        coresResolvidasNaRonda = 0; 
+
+        document.getElementById('instrucao-ronda').textContent = `Conta os peixes de cada cor!`;
+
+        const area1 = document.getElementById('area-jogo-1');
+        if (area1 && fundosSessao.length > 0) {
+            const fundoId = fundosSessao[rondaAtual];
+            area1.style.backgroundImage = `url('img/fundos/fundo_${fundoId}.jpg')`;
+        }
+		
+		
+		const rondaConfig = perguntasSessao[rondaAtual];
+        const aquario = document.getElementById('opcoes-resposta');
+        if (!aquario || !rondaConfig) return;
+
+        // 1. Limpa os peixes da ronda anterior
+        aquario.innerHTML = '';
+
+        // 2. Destranca e restaura as 4 linhas coloridas do painel do topo
+        document.querySelectorAll('.linha-numeros-roleta').forEach(l => {
+            l.classList.remove('resolvido');
+            l.style.pointerEvents = 'auto';
+        });
+
+        // Array para rastrear as coordenadas {x, y} de todos os peixes colocados
+        const peixesColocados = [];
+        
+        // 🚨 Margens de segurança de proximidade em percentagem (Garante zero colisões)
+        const limiteDistanciaX = 15; // Pelo menos 15% de distância na horizontal
+        const limiteDistanciaY = 12; // Pelo menos 12% de distância na vertical
+
+        // 3. MOTOR PROCEDURAL DE COLISÃO: Dispersa os peixes com teste de proximidade
+        Object.keys(rondaConfig).forEach(corNome => {
+            const quantidade = rondaConfig[corNome];
+            const corLimpa = corNome.toLowerCase()
+                                    .normalize("NFD")
+                                    .replace(/[\u0300-\u036f]/g, "");
+
+            for (let i = 0; i < quantidade; i++) {
+                const peixe = document.createElement('img');
+                peixe.className = `peixe-mar peixe-${corNome}`;
+                peixe.src = `img/animais/${corLimpa}.png`; 
+
+                // Atribui uma direção de natação aleatória (esquerda ou direita)
+                const direcao = Math.random() > 0.5 ? 'olha-direita' : 'olha-esquerda';
+                peixe.classList.add(direcao);
+
+                let posX, posY;
+                let colisao = true;
+                let tentativas = 0;
+
+                // Loop inteligente que tenta até 100 vezes encontrar um espaço vazio
+                while (colisao && tentativas < 100) {
+                    posX = 10 + Math.random() * 70; // X entre 10% e 80% do aquário
+                    posY = 10 + Math.random() * 65; // Y entre 10% e 75% do aquário
+                    colisao = false;
+                    tentativas++;
+
+                    // Compara as coordenadas temporárias com todos os peixes já posicionados
+                    for (let outro of peixesColocados) {
+                        const distH = Math.abs(posX - outro.x);
+                        const distV = Math.abs(posY - outro.y);
+                        
+                        // Se estiver na área de proteção de outro peixe, há colisão!
+                        if (distH < limiteDistanciaX && distV < limiteDistanciaY) {
+                            colisao = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Regista a coordenada segura em memória para as próximas comparações
+                peixesColocados.push({ x: posX, y: posY });
+
+                // Aplica o posicionamento seguro ao elemento
+                peixe.style.left = `calc(${posX}%)`;
+                peixe.style.top = `calc(${posY}%)`;
+
+                aquario.appendChild(peixe);
+            }
+        });
+    }
+
+    function clicarNumero(corNome, numeroClicado) {
+        const rondaConfig = perguntasSessao[rondaAtual];
+        if (!rondaConfig) return;
+
+        const quantidadeCorreta = rondaConfig[corNome];
+
+        if (numeroClicado === quantidadeCorreta) {
+            // ACERTOU NA QUANTIDADE!
+            tocarSom('acerto');
+
+            // 1. Tranca a linha colorida correspondente no topo (desbota e desativa)
+            const linhaPainel = document.getElementById(`linha-${corNome}`);
+            if (linhaPainel) {
+                linhaPainel.classList.add('resolvido');
+                linhaPainel.style.pointerEvents = 'none';
+            }
+
+            // 2. Todos os peixes desta cor nadam para fora do ecrã!
+            document.querySelectorAll(`.peixe-${corNome}`).forEach(peixe => {
+                peixe.classList.add('nadar-fora');
+            });
+
+            coresResolvidasNaRonda++;
+
+            // Se as 4 linhas coloridas forem resolvidas, a ronda é concluída!
+            if (coresResolvidasNaRonda === 4) {
+                acertou();
+            }
+        } else {
+            // 🚨 ERRO NA QUANTIDADE!
+            tocarSom('erro');
+            
+            // Ativa o abanão de erro no botão clicado através de detecção de evento do browser
+            const evt = window.event || arguments.callee.caller.arguments[0];
+            if (evt && evt.currentTarget) {
+                const b = evt.currentTarget;
+                b.classList.add('wrong');
+                setTimeout(() => {
+                    b.classList.remove('wrong');
+                }, 500);
+            }
+
+            // 🚨 CORREÇÃO: Ativa a emoção triste na mascote (O Cavalo-Marinho) temporariamente
+            atualizarMascote('triste');
+            
+            // Reverte para o estado normal (idle) após 1.5 segundos (1500ms)
+            setTimeout(() => {
+                atualizarMascote('idle');
+            }, 1500);
+        }
+    }
+
+    // Conclusão bem-sucedida de ronda
+    function acertou() {
+        tocarSom('acerto');
+        pararVozEletiva();
+        rondaAtual++;
+
+        // Sincronismo Sónico e Visual das Estrelas (Aos 300ms)
+        setTimeout(() => {
+            atualizarMascote('feliz');
+            tocarSom('alegria');
+            
+            // Move o progresso e acende a estrela no topo em simultâneo
+            let percentagem = (rondaAtual / totalRondas) * 100;
+            atualizarProgressoCaminho(percentagem);
+        }, 300);
+
+        // Transição final coordenada (Ocorre aos 1200ms)
+        setTimeout(() => {
+            if (rondaAtual >= totalRondas) {
+                tocarSom('vitoria');
+                dispararConfetis();
+                mostrarEcra('ecra-fim');
+            } else {
+                prepararRonda();
+            }
+        }, 1200); 
+    }
+
+</script>
+</body>
+</html>
