@@ -1572,6 +1572,12 @@
         ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
     }
 
+
+	function toggleMenu() { 
+        document.getElementById('sidebar').classList.toggle('active'); 
+        document.getElementById('overlay').classList.toggle('active'); 
+        document.getElementById('hamburgerBtn').classList.toggle('open'); 
+    }
     /* =====================================================================
        SECÇÃO 4: MOTORES DE ÁUDIO PERSISTENTES E SÍNTESE DE APITO
     ===================================================================== */
