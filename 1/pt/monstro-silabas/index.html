@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1º Ano - O Monstro das Sílabas 👾</title>
+    
+    <link rel="icon" type="image/png" href="../../logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Importação do ficheiro de dados externo -->
+    <script src="../dados.js"></script>
+    
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        
+        /* =========================================
+           CSS DO TEMPLATE BASE (1º ANO)
+           ========================================= */
+        :root {
+            --bg-body: #f0f7ff;
+            --azul-vibrante: #0091ff; 
+            --cor-1ano: #0091ff;     
+            --cor-1ano-dark: #0070c5;
+            --cor-borda: #0091ff;            
+            --bg-header: #e3f2fd;    
+            --azul-escuro: #0d47a1;
+			--azul-vibrante: #0091ff;					  
+            --text-main: #455a64;
+            --borda-cartao: #ced6e0;
+            --cor-pt: #ff6b6b;
+            --cor-mat: #4dabf7;
+            --cor-em: #51cf66;
+
+            /* NOVAS CORES DO MENU INICIAL (Referência da Imagem) */
+            --cor-btn-azul: #61A0FF;
+            --cor-btn-verde: #5DD279;
+            --cor-btn-amarelo: #FBC531;
+            --cor-btn-vermelho: #FF6B6B;
+            --cor-btn-roxo: #A55EEA;
+            --cor-btn-laranja: #FA983A;
+            
+            /* Cores de Feedback (Vibrantes) */
+            --cor-sucesso: #2ed573;
+            --cor-sucesso-dark: #219d53;
+            --cor-erro: #ff4757;
+            --cor-erro-dark: #d0303f;
+			--cor-destaque: #ff4757;
+        }
+
+        body { font-family: 'Roboto', sans-serif; text-align: center; background-color: var(--bg-body); margin: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; touch-action: pan-y; }
+        
+        @media (min-width: 769px) and (min-height: 600px) { body { height: 100vh; overflow-y: auto; } }
+
+        header { background-color: var(--bg-header); padding: 25px 20px; border-bottom: 1px solid var(--azul-vibrante); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; flex-shrink: 0; z-index: 100; }
+        .header-content { max-width: 1200px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; }
+        
+        .nav-container { width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 15px; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; }
+        
+        .hamburger { cursor: pointer; background: rgba(255, 255, 255, 0.4); border: none; display: flex; flex-direction: column; gap: 4px; padding: 10px; border-radius: 8px; transition: background 0.4s ease; touch-action: manipulation; }
+        @media (hover: hover) { .hamburger:hover { background: #fff9c4; } }
+        .hamburger span { display: block; width: 20px; height: 2px; background: var(--azul-escuro); transition: 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        
+        .btn-voltar { background: var(--cor-1ano); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; font-size: 0.9rem; box-shadow: 0 3px 0 var(--cor-1ano-dark); display: flex; align-items: center; gap: 8px; transition: 0.2s; cursor: pointer; touch-action: manipulation; }
+        @media (hover: hover) { .btn-voltar:hover { transform: scale(1.05); } }
+        
+        h1 {
+    color: var(--azul-escuro);
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    text-shadow: 
+        -2px -2px 0 #ffffff,  
+         2px -2px 0 #ffffff,
+        -2px  2px 0 #ffffff,
+         2px  2px 0 #ffffff, 
+         0px  6px 12px rgba(0, 0, 0, 0.15); 
+}
+        .subtitulo { color: var(--azul-escuro); font-size: clamp(0.85rem, 3vw, 1.1rem); font-weight: 500; opacity: 0.8; margin-top: 15px; }
+        
+        @media (max-width: 768px) {
+            header { padding: 15px 10px; }
+            .header-content { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+            .nav-container { position: relative; width: 100%; display: flex; justify-content: center; align-items: center; height: 40px; margin-bottom: 5px; transform: none; top: 0; }
+            .hamburger { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); }
+            .btn-voltar { margin: 0 auto; position: relative; z-index: 5; }
+            h1 { text-align: center; font-size: 1.8rem; }
+            .subtitulo { text-align: center; margin-top: 5px; }
+        }
+
+        .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: white; z-index: 200; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.1); text-align: left; }
+        .sidebar.active { left: 0; }
+        .sidebar .btn-fechar { background: #fff5f5; color: #ff4757; padding: 20px 25px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; border-bottom: 1px solid #ffebeb; }
+        .sidebar ul { list-style: none; padding: 15px; margin: 0; }
+        .sidebar li a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--text-main); background: #f8fafc; border-radius: 12px; margin-bottom: 8px; transition: 0.3s; }
+        @media (hover: hover) { .sidebar li a:hover { background: var(--cor-1ano); color: white; transform: translateX(8px); } }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 150; }
+        .overlay.active { display: block; }
+
+        main { flex: 1; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 25px 20px; width: 100%; box-sizing: border-box; }
+
+        .cartao-jogo-container { 
+            background: white; width: 100%; max-width: 950px; flex: 1; min-height: 450px;
+            padding: 25px 20px; border-radius: 30px; box-shadow: 0 4px 15px #ff6b6b91; 
+            border-top: 8px solid var(--cor-pt); display: flex; flex-direction: column; 
+            align-items: center; justify-content: flex-start; position: relative; box-sizing: border-box; 
+        }
+
+        footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--azul-vibrante); flex-shrink: 0; z-index: 10;}
+        footer p { font-size: 0.8rem; color: var(--azul-vibrante); margin: 0; }
+
+        /* =========================================
+           MENU INICIAL E ECRÃS
+           ========================================= */
+        .ecra { width: 100%; display: none; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.4s ease; box-sizing: border-box; flex: 1; }
+        .titulo-menu { font-size: 2rem; color: var(--azul-escuro); margin-bottom: 25px; font-weight: 900;}
+
+        /* =========================================
+           BARRA DE ESTADO DO JOGO (ATUALIZADA)
+           ========================================= */
+        .status-bar-jogo {
+            display: flex; align-items: center; justify-content: space-between; gap: 10px;
+            width: 100%; background: #fdf2f2; padding: 8px 12px;
+            border-radius: 20px; border: 2px solid var(--cor-pt); margin-bottom: 15px; box-sizing: border-box; flex-shrink: 0;
+        }
+
+        .btn-voltar-menu { background-color: white; color: var(--azul-escuro); border: 2px solid var(--cor-pt); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.2s; }
+        .btn-voltar-menu:hover { border-color: var(--azul-escuro); transform: scale(1.05); }
+        
+        .btn-dica { background-color: #fff9c4; border: 2px solid #fbc531; color: #b18500; padding: 6px 12px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.3s; }
+        .btn-dica:hover { border-color: #b18500; transform: scale(1.05); }
+        .btn-dica.esgotada { opacity: 0.5; pointer-events: none; filter: grayscale(100%); }
+
+        .badge-ronda { background: white; font-weight: 800; font-size: 1rem; border: 2px solid #219d53; color: #219d53; padding: 6px 12px; border-radius: 15px; white-space: nowrap; }
+        .badge-erros { background: white; border: 2px solid var(--cor-pt); color: var(--cor-mat); font-weight: 800; font-size: 0.9rem; padding: 6px 12px; border-radius: 15px; white-space: nowrap; }
+		.svg-icon { width: 1.2em; height: 1.2em; vertical-align: middle; margin-right: 5px; fill: currentColor; }
+
+        .progress-bg { background-color: #e2e8f0; border-radius: 20px; height: 35px; flex: 1; overflow: hidden; box-shadow: inset 0 3px 5px rgba(0,0,0,0.1); border: 2px solid white; margin: 0 10px; }
+        .progress-fill { height: 100%; width: 0%; border-radius: 20px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); background-color: var(--cor-1ano); background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent); background-size: 30px 30px; animation: moverRiscas 2s linear infinite; }
+        
+        @media (max-width: 850px) {
+            .status-bar-jogo { flex-wrap: wrap; justify-content: center; }
+            .btn-voltar-menu, .btn-dica { padding: 4px 8px; font-size: 0.8rem;}
+            .badge-ronda, .badge-erros { font-size: 0.9rem; padding: 4px 8px; }
+            .progress-bg { order: 6; min-width: 100%; margin-top: 5px; height: 25px; margin: 5px 0 0 0;}
+        }
+
+        /* =========================================
+           ÁREA DE JOGO LIVRE (Abaixo da status-bar)
+           ========================================= */
+        .area-jogo-custom {
+            display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+            width: 100%; flex: 1; min-height: 0; background: #f8fafc; border: 2px dashed var(--cor-pt); border-radius: 20px; padding: 15px; overflow: hidden;
+            position: relative; color: #94a3b8; font-weight: bold;
+        }
+
+        /* =========================================
+           CSS ESPECÍFICO DO JOGO: O MONSTRO DAS SÍLABAS
+           ========================================= */
+        
+        /* Animação Inicial Tutorial (O alimento sobre até ao monstro) */
+        .animacao-tutorial {
+            position: relative; height: 280px; width: 100%; max-width: 400px; background: #f4faff;
+            border-radius: 20px; border: 3px dashed #bcdcff; margin: 0 auto 30px;
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 20px; overflow: hidden;
+            box-shadow: inset 0 0 15px rgba(0,145,255,0.1);
+        }
+
+        .tut-monstro {
+			width: 120px; height: 140px; background-color: #1dd1a1; border-radius: 60px 60px 20px 20px;
+			display: flex; flex-direction: column; align-items: center; padding-top: 20px;
+			box-shadow: inset -8px -8px 15px rgba(0,0,0,0.15), 0 8px 10px rgba(0,0,0,0.1);
+			position: absolute; /* Adicionado para flutuar de forma independente */
+			bottom: -10px; /* Fixa o monstro na parte inferior do ecrã */
+			z-index: 2;
+		}
+        
+        .tut-olhos { font-size: 2rem; margin-bottom: 5px; animation: olhosMuda 3s infinite ease-in-out; }
+        .tut-boca { width: 30px; height: 8px; background: #2f3542; border-radius: 10px; animation: bocaAbre 3s infinite ease-in-out; }
+        .tut-barriga { 
+            position: absolute; bottom: 15px; width: 45px; height: 45px; background: rgba(255,255,255,0.9);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; font-weight: 900; color: #2f3542; box-shadow: inset 0 3px 5px rgba(0,0,0,0.1);
+        }
+
+        .tut-alimento {
+            position: absolute; top: 20px; width: 100px; padding: 5px; background: white;
+            border: 3px solid #ced6e0; border-radius: 15px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            animation: moveFoodTut 3s infinite ease-in-out; z-index: 5;
+        }
+        
+        .tut-alimento::after {
+            content: '👆'; font-size: 30px; position: absolute; right: -20px; bottom: -20px;
+        }
+
+        .tut-img { font-size: 35px; }
+        .tut-txt { font-size: 1rem; font-weight: 900; color: var(--azul-escuro); }
+
+        @keyframes moveFoodTut {
+			0%, 20% { top: 20px; opacity: 1; transform: scale(1); }
+			45%, 55% { top: 130px; opacity: 1; transform: scale(0.5); }
+			60%, 100% { top: 130px; opacity: 0; transform: scale(0); }
+		}
+        @keyframes bocaAbre {
+            0%, 35% { width: 30px; height: 8px; border-radius: 10px; background: #2f3542; }
+            40%, 60% { width: 45px; height: 40px; border-radius: 50%; background: #1e272e; transform: translateY(-5px);}
+            65%, 100% { width: 30px; height: 8px; border-radius: 10px; background: #2f3542; }
+        }
+        @keyframes olhosMuda {
+            0%, 35% { transform: scale(1); }
+            40%, 60% { transform: scale(1.2); }
+            65%, 100% { transform: scale(1); }
+        }
+
+        /* 1. O PRATO E A COMIDA NO TOPO */
+        .area-comida {
+            height: 45%; min-height: 180px; width: 100%; display: flex; align-items: center; justify-content: center;
+            position: relative; z-index: 20; 
+        }
+
+        .prato {
+            width: clamp(160px, 35vw, 260px); height: clamp(50px, 12vw, 80px);
+            background: #e0e6ed; border-radius: 50%; position: absolute; bottom: 1px;
+            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.05);
+        }
+
+        .alimento-drag {
+            background: white; border: 4px solid #bbc3cc; border-radius: 20px; padding: 12px;
+            width: clamp(160px, 35vw, 220px);
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            cursor: grab; box-shadow: 0 8px 15px rgba(0,0,0,0.1); position: absolute; z-index: 999; 
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            user-select: none; touch-action: none; background-color: #ffffff;
+            bottom: 30px; /* Mantém a imagem dentro do prato */
+        }
+
+        .alimento-drag:active { cursor: grabbing; }
+
+        .alimento-img {
+            width: clamp(80px, 20vw, 120px); height: clamp(80px, 20vw, 120px);
+            object-fit: contain; pointer-events: none;
+        }
+
+        .alimento-txt {
+            font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+            font-weight: 900; color: var(--azul-escuro); text-transform: uppercase;
+            pointer-events: none; word-break: break-word; text-align: center; line-height: 1.1;
+        }
+
+        /* 2. OS MONSTROS NO FUNDO */
+        .area-monstros {
+            height: 55%; width: 100%; display: flex; justify-content: center; align-items: flex-end;
+            gap: clamp(15px, 4vw, 30px); padding-bottom: 20px; position: relative;
+        }
+
+        .monstro {
+            width: clamp(100px, 25vw, 160px); height: clamp(140px, 35vw, 200px);
+            border-radius: 80px 80px 30px 30px; display: flex; flex-direction: column;
+            align-items: center; justify-content: flex-start; padding-top: clamp(20px, 5vw, 35px);
+            position: relative; box-shadow: inset -10px -10px 20px rgba(0,0,0,0.15), 0 10px 15px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+
+        #monstro-2 { background-color: #ff9f43; } /* Laranja */
+        #monstro-3 { background-color: #1dd1a1; } /* Verde */
+        #monstro-4 { background-color: #5f27cd; } /* Roxo */
+
+        .monstro-olhos { font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1; margin-bottom: 5px; transition: 0.2s; pointer-events: none; }
+        
+        .monstro-boca {
+            width: clamp(30px, 8vw, 45px); height: 10px; background: #2f3542;
+            border-radius: 10px; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none;
+        }
+
+        .monstro-barriga {
+            width: clamp(45px, 12vw, 65px); height: clamp(45px, 12vw, 65px); background: rgba(255,255,255,0.9);
+            border-radius: 50%; position: absolute; bottom: clamp(15px, 4vw, 25px); display: flex;
+            align-items: center; justify-content: center; font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 900; color: #2f3542; box-shadow: inset 0 3px 5px rgba(0,0,0,0.1); pointer-events: none;
+        }
+
+        /* EFEITOS QUANDO A COMIDA ESTÁ POR CIMA (FOME) */
+        .monstro.esfomeado { transform: scale(1.1) translateY(-10px); }
+        .monstro.esfomeado .monstro-boca { width: clamp(45px, 12vw, 65px); height: clamp(40px, 10vw, 55px); border-radius: 50%; background: #1e272e; }
+        .monstro.esfomeado .monstro-olhos { transform: scale(1.2); }
+
+        /* Animação da Dica (Pisca o Monstro Correto) */
+        .dica-iluminada {
+            animation: piscarDicaMonstro 0.8s infinite alternate !important;
+        }
+        @keyframes piscarDicaMonstro {
+            from { box-shadow: 0 0 10px #fbc531, inset -10px -10px 20px rgba(0,0,0,0.15); transform: scale(1); filter: brightness(1.1); }
+            to { box-shadow: 0 0 30px #fbc531, 0 10px 15px rgba(0,0,0,0.2), inset -10px -10px 20px rgba(0,0,0,0.15); transform: scale(1.05); filter: brightness(1.3); }
+        }
+
+        /* ANIMAÇÃO A MASTIGAR E ERRO */
+        @keyframes mastigar { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05) translateY(-5px); } }
+        .mastigando { animation: mastigar 0.3s infinite; }
+        
+        @keyframes doente { 0%, 100% { transform: translateX(0); filter: hue-rotate(0deg); } 25% { transform: translateX(-10px); filter: hue-rotate(90deg); } 75% { transform: translateX(10px); filter: hue-rotate(90deg); } }
+        .monstro-doente { animation: doente 0.4s ease-in-out; }
+
+        /* =========================================
+           ECRÃ FIM E BOTÕES DE AÇÃO
+           ========================================= */
+        .end-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--azul-escuro); margin-bottom: 25px; }
+        
+        .btn-acao { 
+            background-color: var(--azul-escuro); color: white; border: none; padding: 15px 35px; 
+            font-size: 1.1rem; font-weight: 700; border-radius: 15px; cursor: pointer; 
+            box-shadow: 0 6px 0 #093273; display: flex; align-items: center; justify-content: center; 
+            gap: 10px; margin-bottom: 20px; width: 100%; max-width: 320px; 
+            transition: transform 0.2s, box-shadow 0.2s, filter 0.2s; 
+        }
+        @media (hover: hover) { .btn-acao:hover { transform: translateY(-3px); box-shadow: 0 9px 0 #093273; filter: brightness(1.15); } }
+        .btn-acao:active { transform: translateY(6px); box-shadow: 0 0px 0 transparent; }
+
+        @media (max-width: 768px) {
+            .alimento-drag { padding: 8px; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes moverRiscas { 0% { background-position: 0 0; } 100% { background-position: 30px 0; } }
+
+        #confetti-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; overflow: hidden; }
+        
+        /* Modal e Overlays Extras */
+        .toast-msg { position: absolute; top: 80px; left: 50%; transform: translateX(-50%) translateY(-10px); background: #fff9c4; border: 2px solid #fbc531; color: #b18500; padding: 8px 20px; border-radius: 20px; font-weight: 900; font-size: 1.1rem; opacity: 0; transition: 0.3s; pointer-events: none; z-index: 50; }
+        .toast-msg.active { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        body { scrollbar-gutter: stable; }
+
+        @media (max-height: 600px) {
+            body { height: auto !important; overflow-y: auto !important; }
+            main { justify-content: flex-start !important; padding-top: 15px; padding-bottom: 15px; overflow-y: visible !important; }
+            .cartao-jogo-container { margin: auto 0; }
+            .area-monstros { padding-bottom: 5px; }
+        }
+        @media (hover: none) and (pointer: coarse) {
+            body { height: auto !important; overflow-y: auto !important; }
+            main { justify-content: flex-start !important; overflow-y: visible !important; }
+            footer { margin-top: auto; }
+        }
+    .icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
+	.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
+	.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
+	.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+</style>
+
+<style>
+  body {
+    background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px);
+    background-size: 25px 25px;
+  }
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<nav class="sidebar" id="sidebar">
+    <div class="btn-fechar" onclick="toggleMenu()"><span>✕</span> Fechar</div>
+    <ul>
+        <li><a href="../../../"><img src="../../../SVG/home.svg" alt="Início" class="icon-svg-menu" onerror="this.style.display='none'">Início</a></li>
+        <li><a href="../../../pre"><img src="../../../SVG/pre.svg" alt="Pré-Escolar" class="icon-svg-menu" onerror="this.style.display='none'">Pré-Escolar</a></li>
+        <li><a href="../../"><img src="../../../SVG/ano1.svg" alt="1º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 1º Ano</a></li>
+        <li><a href="../../../2"><img src="../../../SVG/ano2.svg" alt="2º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 2º Ano</a></li>
+        <li><a href="../../../3"><img src="../../../SVG/ano3.svg" alt="3º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 3º Ano</a></li>
+        <li><a href="../../../4"><img src="../../../SVG/ano4.svg" alt="4º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 4º Ano</a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="header-content">
+        <div class="nav-container">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="../" class="btn-voltar"><img src="../../../SVG/voltar.svg" class="icon-svg-voltar" alt=""> Voltar</a>
+        </div>
+        
+        <h1>O Monstro das Sílabas <img src="../img-titulos/monstro-silabas.svg" class="icon-svg-titulo" alt=""></h1>
+        <div class="subtitulo">Conta as sílabas e alimenta o monstro certo!</div>
+    </div>
+</header>
+
+<main>
+    <div class="cartao-jogo-container">
+        
+        <canvas id="confetti-canvas"></canvas>
+        <div class="toast-msg" id="toast-msg">Mensagem</div>
+
+        <!-- ECRÃ 1: MENU INICIAL -->
+        <div id="ecra-selecao" class="ecra" style="display: flex;">
+            <h2 class="titulo-menu">Como Jogar:</h2>
+            
+            <div class="animacao-tutorial">
+                <div class="tut-monstro">
+                    <div class="tut-olhos">😋</div>
+                    <div class="tut-boca"></div>
+                    <div class="tut-barriga">2</div>
+                </div>
+                <div class="tut-alimento">
+                    <div class="tut-img">🐱</div>
+                    <div class="tut-txt">GATO</div>
+                </div>
+            </div>
+
+            <button class="btn-acao" onclick="iniciarJogo()" style="margin: 0 auto;">JOGAR AGORA ▶️</button>
+        </div>
+
+        <!-- ECRÃ 2: JOGO -->
+        <div id="ecra-jogo" class="ecra">
+            
+            <!-- BARRA DE ESTADO COM DICA -->
+            <div class="status-bar-jogo" id="status-bar" style="display: none;">
+                <button class="btn-voltar-menu" onclick="voltarAoMenu()" id="btn-home-svg"></button>
+				<button id="btn-dica" class="btn-dica" onclick="usarDica()"></button>
+				<div class="badge-ronda"><span id="badge-ronda-svg"></span><span id="val-progresso">1</span>/<span id="val-total">10</span></div>
+				<div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
+				<div class="badge-erros"> <span id="icone-erro-svg"></span> <span id="val-erros">0</span></div>
+            </div>
+
+            <div class="area-jogo-custom" id="area-jogo">
+                <!-- TOPO: A COMIDA A SER ARRASTADA -->
+                <div class="area-comida">
+                    <div class="prato"></div>
+                    
+                    <div id="alimento" class="alimento-drag">
+                        <img id="alimento-img" class="alimento-img" src="" alt="Comida">
+                        <span id="alimento-txt" class="alimento-txt">PALAVRA</span>
+                    </div>
+                </div>
+
+                <!-- BASE: OS 3 MONSTROS -->
+                <div class="area-monstros">
+                    <div class="monstro" id="monstro-2" data-num="2">
+                        <div class="monstro-olhos" id="olho-2">😋</div>
+                        <div class="monstro-boca"></div>
+                        <div class="monstro-barriga">2</div>
+                    </div>
+                    <div class="monstro" id="monstro-3" data-num="3">
+                        <div class="monstro-olhos" id="olho-3">😋</div>
+                        <div class="monstro-boca"></div>
+                        <div class="monstro-barriga">3</div>
+                    </div>
+                    <div class="monstro" id="monstro-4" data-num="4">
+                        <div class="monstro-olhos" id="olho-4">😋</div>
+                        <div class="monstro-boca"></div>
+                        <div class="monstro-barriga">4</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ECRÃ 3: FIM -->
+        <div id="ecra-fim" class="ecra">
+            <div style="font-size: 5rem; margin-bottom: 15px; line-height: 1;">🏆</div>
+            <h2 class="titulo-menu" id="end-title-text" style="margin-bottom: 10px;">Missão Cumprida!</h2>
+            <p style="font-size: 1.2rem; color: var(--text-main); font-weight: bold;">Alimentaste todos os monstros!</p>
+            <div style="font-size: 1.3rem; color: #ff4757; font-weight: bold; margin-bottom: 25px; padding: 10px 25px; border: 2px solid #ff4757; border-radius: 15px;">Eles cuspiram a comida <span id="final-erros">0</span> vezes.</div>
+            <button class="btn-acao" onclick="iniciarJogo()" style="margin: 0 auto; margin-bottom: 10px;">JOGAR DE NOVO 🔄</button>
+        </div>
+
+    </div>
+</main>
+
+<footer>
+    <p><span id="ano-atual"> </span><img src="../../../SVG/1_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
+</footer>
+
+<script>
+    document.getElementById('ano-atual').innerText = new Date().getFullYear();
+    
+	// ==========================================
+    // SVGs BARRA DE ESTADO
+    // ==========================================
+    const SVG_HOME = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" style="margin-right:4px; vertical-align:middle;"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5z" fill="#fff" stroke="#d35400" stroke-width="2" stroke-linejoin="round"/><rect x="10" y="12" width="4" height="10" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/></svg> Menu`;
+    const SVG_STAR = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="#f1c40f" stroke="#f39c12" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px; vertical-align:middle;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
+    const SVG_BULB = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px; vertical-align:middle;"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"></path></svg>`;
+    const SVG_ERRO = `<svg viewBox="0 0 14 14" width="0.8em" height="0.8em" style="margin-right: 5px; vertical-align: middle;"><path d="M2 2 L12 12 M12 2 L2 12" stroke="var(--cor-pt, #ff4757)" stroke-width="3" stroke-linecap="round" /></svg>`;
+
+
+	// Injeção visual na carga da página
+    document.addEventListener("DOMContentLoaded", () => {
+        const btnHome = document.getElementById('btn-home-svg');
+        const badgeRonda = document.getElementById('badge-ronda-svg');
+        const btnDica = document.getElementById('btn-dica');
+        const iconeErro = document.getElementById('icone-erro-svg');
+        
+        if(btnHome) btnHome.innerHTML = SVG_HOME;
+        if(btnDica) btnDica.innerHTML = SVG_BULB + ' Dica';
+        if(iconeErro) iconeErro.innerHTML = SVG_ERRO;
+        if(badgeRonda) badgeRonda.innerHTML = SVG_STAR;
+        
+    });
+
+	
+	
+	function toggleMenu() { 
+        document.getElementById('sidebar').classList.toggle('active'); 
+        document.getElementById('overlay').classList.toggle('active'); 
+        document.getElementById('hamburgerBtn').classList.toggle('open'); 
+    }
+
+    function showToast(msg, isError = false) {
+        const toast = document.getElementById('toast-msg');
+        toast.textContent = msg;
+        toast.style.borderColor = isError ? "#ff4757" : "#fbc531";
+        toast.style.color = isError ? "#ff4757" : "#b18500";
+        toast.style.backgroundColor = isError ? "#ffefef" : "#fff9c4";
+        toast.classList.add('active');
+        setTimeout(() => toast.classList.remove('active'), 2500);
+    }
+
+    /* =========================================
+       DADOS DE FALLBACK (Se ../dados.js falhar)
+       ========================================= */
+    let bancoPalavras = [];
+    if (typeof palavras !== 'undefined') {
+        bancoPalavras = palavras;
+    } else if (typeof window.palavras !== 'undefined') {
+        bancoPalavras = window.palavras;
+    } else {
+        bancoPalavras = [
+            { palavra: "abacaxi", imagem: "img/abacaxi.png", num: 4, divisao: "A-BA-CA-XI" },
+            { palavra: "abelha", imagem: "img/abelha.png", num: 3, divisao: "A-BE-LHA" },
+            { palavra: "bolo", imagem: "img/bolo.png", num: 2, divisao: "BO-LO" },
+            { palavra: "cavalo", imagem: "img/cavalo.png", num: 3, divisao: "CA-VA-LO" },
+            { palavra: "dado", imagem: "img/dado.png", num: 2, divisao: "DA-DO" },
+            { palavra: "elefante", imagem: "img/elefante.png", num: 4, divisao: "E-LE-FAN-TE" },
+            { palavra: "fada", imagem: "img/fada.png", num: 2, divisao: "FA-DA" },
+            { palavra: "gato", imagem: "img/gato.png", num: 2, divisao: "GA-TO" },
+            { palavra: "hipopótamo", imagem: "img/hipopotamo.png", num: 5, divisao: "HI-PO-PÓ-TA-MO" },
+            { palavra: "janela", imagem: "img/janela.png", num: 3, divisao: "JA-NE-LA" }
+        ];
+    }
+
+    /* =========================================
+       ESTADOS E VARIÁVEIS
+       ========================================= */
+    const MAX_PALAVRAS = 10;
+    let palavrasDoJogo = [];
+    let palavraAtualIndex = 0;
+    let rondaAtual = 1; // 1 to 10
+    let errosTotais = 0;
+    let isTransitioning = false;
+
+    // Lógica das Dicas
+    let dicasUsadas = []; 
+
+    // DOM
+    const elStatus = document.getElementById('status-bar');
+    const elProgresso = document.getElementById('val-progresso');
+    const elErros = document.getElementById('val-erros');
+    const elValTotal = document.getElementById('val-total');
+    const elProgressFill = document.getElementById('progress-fill');
+    
+    const elGameScreen = document.getElementById('ecra-jogo');
+    const elEndScreen = document.getElementById('ecra-fim');
+    
+    const alimento = document.getElementById('alimento');
+    const alimentoImg = document.getElementById('alimento-img');
+    const alimentoTxt = document.getElementById('alimento-txt');
+    const monstros = document.querySelectorAll('.monstro');
+    
+    function mostrarEcra(id) {
+        document.querySelectorAll('.ecra').forEach(e => e.style.display = 'none');
+        document.getElementById(id).style.display = 'flex';
+    }
+
+    function voltarAoMenu() {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+        elStatus.style.display = 'none';
+        mostrarEcra('ecra-selecao');
+    }
+
+    function atualizarPlacarUI() {
+        elProgresso.textContent = rondaAtual > MAX_PALAVRAS ? MAX_PALAVRAS : rondaAtual;
+        elErros.textContent = errosTotais;
+        elValTotal.textContent = MAX_PALAVRAS;
+        let percent = ((rondaAtual - 1) / MAX_PALAVRAS) * 100;
+        elProgressFill.style.width = `${percent}%`;
+    }
+
+    function atualizarDicasUI() {
+        const btnDica = document.getElementById('btn-dica');
+        const blocoAtual = Math.floor((rondaAtual - 1) / 5);
+        
+        if (!dicasUsadas[blocoAtual]) {
+            btnDica.classList.remove('esgotada');
+        } else {
+            btnDica.classList.add('esgotada');
+        }
+    }
+
+    /* =========================================
+       LÓGICA PRINCIPAL
+       ========================================= */
+    function iniciarJogo() {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+        rondaAtual = 1;
+        palavraAtualIndex = 0;
+        errosTotais = 0;
+        isTransitioning = false;
+        dicasUsadas = [];
+        
+        // 1. Filtrar e baralhar as palavras por número de sílabas
+        let palavras2 = bancoPalavras.filter(p => p.num === 2).sort(() => Math.random() - 0.5);
+        let palavras3 = bancoPalavras.filter(p => p.num === 3).sort(() => Math.random() - 0.5);
+        let palavras4 = bancoPalavras.filter(p => p.num === 4).sort(() => Math.random() - 0.5);
+
+        // 2. Segurança: se houver menos palavras do que o necessário, duplica a lista para não dar erro
+        while (palavras2.length < 4) palavras2 = palavras2.concat([...palavras2].sort(() => Math.random() - 0.5));
+        while (palavras3.length < 3) palavras3 = palavras3.concat([...palavras3].sort(() => Math.random() - 0.5));
+        while (palavras4.length < 3) palavras4 = palavras4.concat([...palavras4].sort(() => Math.random() - 0.5));
+
+        // 3. Recolher a cota exata (4 de 2 sílabas, 3 de 3 sílabas, 3 de 4 sílabas = 10 rondas)
+        let selecaoExata = [
+            ...palavras2.slice(0, 4),
+            ...palavras3.slice(0, 3),
+            ...palavras4.slice(0, 3)
+        ];
+
+        // 4. Baralhar tudo no final para que não apareçam primeiro todas as de 2, depois as de 3, etc.
+        palavrasDoJogo = selecaoExata.sort(() => Math.random() - 0.5);
+                      
+        elStatus.style.display = 'flex';
+        atualizarPlacarUI();
+        atualizarDicasUI();
+        mostrarEcra('ecra-jogo');
+        
+        carregarPalavra();
+    }
+
+    function getImagePath(imgPath) {
+        if (!imgPath) return '';
+        if (imgPath.startsWith('../') || imgPath.startsWith('http')) return imgPath;
+        return '../' + imgPath;
+    }
+
+    function carregarPalavra() {
+        isTransitioning = false;
+        removerDestaquesDica();
+        atualizarDicasUI();
+
+        const palavraObj = palavrasDoJogo[palavraAtualIndex];
+        
+        // Configurar Imagem
+        elProgressFill.style.width = `${(palavraAtualIndex / MAX_PALAVRAS) * 100}%`;
+        
+        alimentoImg.src = getImagePath(palavraObj.imagem);
+        alimentoImg.onerror = () => { alimentoImg.src = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100' fill='%23eee'/><text x='50' y='50' font-family='sans-serif' font-size='14' text-anchor='middle' dominant-baseline='middle' fill='%23999'>${palavraObj.palavra}</text></svg>`; };
+        alimentoTxt.textContent = palavraObj.palavra;
+
+        resetAlimentoPosition();
+        
+        monstros.forEach(m => {
+            const olho = document.getElementById('olho-' + m.dataset.num);
+            olho.textContent = '😋';
+            m.classList.remove('mastigando', 'monstro-doente', 'esfomeado');
+        });
+    }
+
+    function resetAlimentoPosition() {
+        alimento.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s';
+        alimento.style.transform = 'translate3d(0, 0, 0) scale(1)';
+        alimento.style.opacity = '1'; 
+        currentX = 0;
+        currentY = 0;
+    }
+
+    /* ==================================================
+       SISTEMA DE ARRASTAR E LARGAR (DRAG & DROP CUSTOM)
+       ================================================== */
+    let isDragging = false;
+    let initialX, initialY, currentX = 0, currentY = 0;
+
+    // EVENTOS DE INÍCIO
+    alimento.addEventListener('mousedown', dragStart);
+    alimento.addEventListener('touchstart', dragStart, {passive: false});
+
+    // EVENTOS DE FIM
+    document.addEventListener('mouseup', dragEnd);
+    document.addEventListener('touchend', dragEnd, {passive: false});
+
+    // EVENTOS DE MOVIMENTO
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('touchmove', drag, {passive: false});
+
+    function dragStart(e) {
+        if (isTransitioning) return;
+        
+        if (e.type === "touchstart") {
+            initialX = e.touches[0].clientX - currentX;
+            initialY = e.touches[0].clientY - currentY;
+        } else {
+            initialX = e.clientX - currentX;
+            initialY = e.clientY - currentY;
+        }
+        
+        isDragging = true;
+        alimento.style.transition = 'none'; // Desliga transição para arrasto suave
+        removerDestaquesDica();
+    }
+
+    function drag(e) {
+        if (!isDragging) return;
+        e.preventDefault(); 
+
+        if (e.type === "touchmove") {
+            currentX = e.touches[0].clientX - initialX;
+            currentY = e.touches[0].clientY - initialY;
+        } else {
+            currentX = e.clientX - initialX;
+            currentY = e.clientY - initialY;
+        }
+
+        alimento.style.opacity = '0.9'; 
+        alimento.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) scale(0.6)`;
+
+        // Detetar colisão com Monstros enquanto arrasta
+        let hoverOcorreu = false;
+        monstros.forEach(monstro => {
+            if (isColliding(alimento, monstro)) {
+                monstro.classList.add('esfomeado');
+                document.getElementById('olho-' + monstro.dataset.num).textContent = '😮';
+                hoverOcorreu = true;
+            } else {
+                monstro.classList.remove('esfomeado');
+                document.getElementById('olho-' + monstro.dataset.num).textContent = '😋';
+            }
+        });
+    }
+
+    function dragEnd(e) {
+        if (!isDragging) return;
+        isDragging = false;
+
+        let dropMonstro = null;
+
+        // Procura se colidiu com algum monstro no momento de largar
+        monstros.forEach(monstro => {
+            monstro.classList.remove('esfomeado'); // Tira a classe de boca aberta visualmente
+            if (isColliding(alimento, monstro)) {
+                dropMonstro = monstro;
+            }
+        });
+
+        if (dropMonstro) {
+            verificarResposta(dropMonstro);
+        } else {
+            // Se largou no vazio, volta ao início
+            resetAlimentoPosition();
+            tocarSom('swoosh');
+        }
+    }
+
+    function isColliding(dragEl, targetEl) {
+        const r1 = dragEl.getBoundingClientRect();
+        const r2 = targetEl.getBoundingClientRect();
+        
+        const dragCentroX = r1.left + (r1.width / 2);
+        const dragCentroY = r1.top + (r1.height / 2);
+
+        return (
+            dragCentroX > r2.left &&
+            dragCentroX < r2.right &&
+            dragCentroY > r2.top &&
+            dragCentroY < r2.bottom
+        );
+    }
+
+    /* ==================================================
+       VERIFICAÇÃO DE RESPOSTA E FLUXO DO JOGO
+       ================================================== */
+    function verificarResposta(monstro) {
+        isTransitioning = true;
+        const palavraObj = palavrasDoJogo[palavraAtualIndex];
+        const numSilabasDoMonstro = parseInt(monstro.dataset.num);
+        const olho = document.getElementById('olho-' + monstro.dataset.num);
+
+        if (palavraObj.num === numSilabasDoMonstro) {
+            // ACERTOU
+            tocarSom('chomp');
+            
+            // Animação da comida a ser engolida (encolhe e fica na boca)
+            alimento.style.transition = 'all 0.3s ease-in';
+            alimento.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) scale(0)`;
+            
+            olho.textContent = '🤤';
+            monstro.classList.add('mastigando');
+
+            setTimeout(() => {
+                avancarRonda();
+            }, 800);
+
+        } else {
+            // ERROU
+            errosTotais++;
+            atualizarPlacarUI();
+            tocarSom('erro_monstro');
+            
+            olho.textContent = '🤢';
+            monstro.classList.add('monstro-doente');
+            
+            resetAlimentoPosition();
+
+            setTimeout(() => {
+                olho.textContent = '😋';
+                monstro.classList.remove('monstro-doente');
+                isTransitioning = false;
+            }, 500);
+        }
+    }
+
+    /* --- DICA --- */
+    function usarDica() {
+        const btnDica = document.getElementById('btn-dica');
+        const blocoAtual = Math.floor((rondaAtual - 1) / 5);
+        
+        if(btnDica.classList.contains('esgotada') || dicasUsadas[blocoAtual]) return;
+
+        const palavraObj = palavrasDoJogo[palavraAtualIndex];
+        const monstroCorreto = document.getElementById('monstro-' + palavraObj.num);
+        
+        if (monstroCorreto) {
+            monstroCorreto.classList.add('dica-iluminada');
+            tocarSom('swoosh');
+            
+            dicasUsadas[blocoAtual] = true;
+            atualizarDicasUI();
+        }
+    }
+
+    function removerDestaquesDica() {
+        document.querySelectorAll('.dica-iluminada').forEach(el => el.classList.remove('dica-iluminada'));
+    }
+
+    /* --- GESTÃO GERAL --- */
+    function avancarRonda() {
+        palavraAtualIndex++;
+        rondaAtual++;
+        
+        if (rondaAtual > MAX_PALAVRAS) {
+            elProgressFill.style.width = `100%`;
+            document.getElementById('final-erros').textContent = errosTotais;
+            
+            const titleText = document.getElementById('end-title-text');
+            if (errosTotais === 0) {
+                titleText.textContent = "PERFEITO! 🏆";
+                tocarSom('vitoria'); dispararConfetis();
+            } else if (errosTotais <= 3) {
+                titleText.textContent = "MUITO BEM! 🎉";
+                tocarSom('vitoria'); dispararConfetis();
+            } else {
+                titleText.textContent = "BOM ESFORÇO! 💪";
+                tocarSom('acerto'); 
+            }
+
+            elStatus.style.display = 'none';
+            mostrarEcra('ecra-fim');
+        } 
+        else {
+            atualizarPlacarUI();
+            carregarPalavra();
+        }
+    }
+
+    /* =========================================
+       SISTEMA DE SOM E CONFETIS
+       ========================================= */
+    let audioCtx = null;
+    function iniciarAudio() {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+    document.body.addEventListener('click', iniciarAudio, { once: true });
+    document.body.addEventListener('touchstart', iniciarAudio, { once: true });
+
+    function tocarSom(tipo) {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        const agora = audioCtx.currentTime;
+
+        if (tipo === 'chomp') {
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(150, agora);
+            osc.frequency.exponentialRampToValueAtTime(80, agora + 0.1);
+            osc.frequency.setValueAtTime(150, agora + 0.15);
+            osc.frequency.exponentialRampToValueAtTime(80, agora + 0.25);
+            gain.gain.setValueAtTime(0.1, agora);
+            gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); osc.stop(agora + 0.3);
+        }
+        else if (tipo === 'erro_monstro') {
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(200, agora);
+            osc.frequency.exponentialRampToValueAtTime(50, agora + 0.4);
+            gain.gain.setValueAtTime(0.1, agora);
+            gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.4);
+            osc.start(agora); osc.stop(agora + 0.4);
+        }
+        else if (tipo === 'swoosh') {
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(400, agora);
+            osc.frequency.exponentialRampToValueAtTime(100, agora + 0.2);
+            gain.gain.setValueAtTime(0.05, agora);
+            gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.2);
+            osc.start(agora); osc.stop(agora + 0.2);
+        }
+        else if (tipo === 'acerto') {
+            osc.type = 'sine'; osc.frequency.setValueAtTime(600, agora); osc.frequency.exponentialRampToValueAtTime(1200, agora + 0.2);
+            gain.gain.setValueAtTime(0.1, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); osc.stop(agora + 0.3);
+        } 
+        else if (tipo === 'vitoria_curta') {
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(523.25, agora);
+            osc.frequency.setValueAtTime(659.25, agora + 0.1);
+            gain.gain.setValueAtTime(0.1, agora);
+            gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); osc.stop(agora + 0.3);
+        }
+        else if (tipo === 'vitoria') {
+            const notas =[440, 554.37, 659.25, 880, 1046.50]; 
+            notas.forEach((freq, i) => {
+                const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                o.connect(g); g.connect(audioCtx.destination);
+                o.type = 'triangle'; o.frequency.value = freq;
+                g.gain.setValueAtTime(0.1, agora + i * 0.15); g.gain.exponentialRampToValueAtTime(0.01, agora + i * 0.15 + 0.6);
+                o.start(agora + i * 0.15); o.stop(agora + i * 0.15 + 0.6);
+            });
+        }
+    }
+
+    const canvasConfetti = document.getElementById('confetti-canvas');
+    const ctxConfetti = canvasConfetti.getContext('2d');
+    let confetis = [];
+
+    function redimensionarCanvas() { 
+        canvasConfetti.width = document.querySelector('.cartao-jogo-container').clientWidth; 
+        canvasConfetti.height = document.querySelector('.cartao-jogo-container').clientHeight; 
+    }
+    window.addEventListener('resize', redimensionarCanvas);
+
+    function dispararConfetis() {
+        redimensionarCanvas(); confetis = []; const cores = ['#0091ff', '#2ed573', '#ff4757', '#ffa502', '#eccc68'];
+        for (let i = 0; i < 150; i++) {
+            confetis.push({ x: Math.random() * canvasConfetti.width, y: Math.random() * canvasConfetti.height - canvasConfetti.height, w: Math.random() * 10 + 5, h: Math.random() * 10 + 5, cor: cores[Math.floor(Math.random() * cores.length)], velY: Math.random() * 3 + 2, velX: Math.random() * 2 - 1, rotacao: Math.random() * 360, velRotacao: Math.random() * 5 - 2.5 });
+        }
+        animarConfetis();
+    }
+
+    function animarConfetis() {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); let ativos = false;
+        confetis.forEach(c => {
+            c.y += c.velY; c.x += c.velX; c.rotacao += c.velRotacao; if (c.y < canvasConfetti.height) ativos = true;
+            ctxConfetti.save(); ctxConfetti.translate(c.x, c.y); ctxConfetti.rotate(c.rotacao * Math.PI / 180);
+            ctxConfetti.fillStyle = c.cor; ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); ctxConfetti.restore();
+        });
+        if (ativos) requestAnimationFrame(animarConfetis);
+    }
+
+    // Arranca no menu
+    window.onload = () => mostrarEcra('ecra-selecao');
+
+</script>
+</body>
+</html>
