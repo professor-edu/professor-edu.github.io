@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pré-Escolar - Memória Mágica 🌟</title>
+    
+    <link rel="icon" type="image/png" href="../../logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+
+        *, *::before, *::after {
+    box-sizing: border-box;
+}
+        
+        /* =========================================
+           CSS DO TEMPLATE BASE (ESTRUTURA BOM.HTML)
+           ========================================= */
+        :root {
+            --bg-body: #f0f7ff;
+            --cor-pre: #4fd1c5;     
+            --cor-pre-dark: #38a89d;
+            --cor-borda: #48b5aa;    /* Cor exigida para as bordas e footer */
+            --bg-header: #e1f5f2;    
+            --azul-escuro: #0d47a1;
+            --text-main: #455a64;
+			
+			/* CORES DO CONTAINER DE JOGO + RGBA PARA ALTERAR A SHADOW */
+			--cor-c1: #ff6b6b; /* vermelho */
+			--cor-c1-sombra: rgba(255, 107, 107, 0.55);
+			
+			--cor-c2: #4dabf7; /* azul */
+			--cor-c2-sombra: rgba(77, 171, 247, 0.66);
+			
+			--cor-c3: #51cf66; /* verde */
+			--cor-c3-sombra: rgba(69, 176, 98, 0.52);
+			
+			--cor-c4: #fcc419; /* amarelo */
+			--cor-c4-sombra: rgba(251, 197, 49, 0.75);
+			
+			--cor-c5: #cc5de8; /* roxo */
+			--cor-c5-sombra: rgba(165, 94, 234, 0.65);
+			
+			--cor-c6: #ff922b; /* laranja */
+			--cor-c6-sombra: rgba(250, 152, 58, 0.85);
+        }
+
+        body { font-family: 'Roboto', sans-serif; text-align: center; background-color: var(--bg-body); margin: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
+        
+        /* HEADER - Borda Inferior #48b5aa */
+        header { background-color: var(--bg-header); padding: 25px 20px; border-bottom: 1px solid var(--cor-borda); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; flex-shrink: 0; z-index: 100; }
+        
+        .header-content { max-width: 1200px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; }
+        .nav-container { width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 15px; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; }
+        .hamburger { cursor: pointer; background: rgba(255,255,255,0.4); border: none; display: flex; flex-direction: column; gap: 4px; padding: 10px; border-radius: 8px; transition: background 0.4s ease; }
+        .hamburger:hover { background: #fff9c4; }
+        .hamburger span { display: block; width: 20px; height: 2px; background: var(--azul-escuro); transition: 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        .btn-voltar { background: var(--cor-pre); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; font-size: 0.9rem; box-shadow: 0 3px 0 var(--cor-pre-dark); display: flex; align-items: center; gap: 8px; transition: 0.2s; cursor: pointer; }
+        .btn-voltar:hover { transform: scale(1.05); }
+        h1 {
+    color: var(--azul-escuro);
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    text-shadow: 
+        -2px -2px 0 #ffffff,  
+         2px -2px 0 #ffffff,
+        -2px  2px 0 #ffffff,
+         2px  2px 0 #ffffff, 
+         0px  6px 12px rgba(0, 0, 0, 0.15); 
+}
+        .subtitulo { color: var(--azul-escuro); font-size: clamp(0.85rem, 3vw, 1.1rem); font-weight: 500; opacity: 0.8; margin-top: 15px; }
+        
+        .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: white; z-index: 200; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.1); text-align: left; }
+        .sidebar.active { left: 0; }
+        .sidebar .btn-fechar { background: #fff5f5; color: #ff4757; padding: 20px 25px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; border-bottom: 1px solid #ffebeb; }
+        .sidebar ul { list-style: none; padding: 15px; margin: 0; }
+        .sidebar li a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--text-main); background: #f8fafc; border-radius: 12px; margin-bottom: 8px; transition: 0.3s; }
+        .sidebar li a:hover { background: var(--cor-pre); color: white; transform: translateX(8px); }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 150; }
+        .overlay.active { display: block; }
+
+        /* =========================================
+           ÁREA PRINCIPAL MAXIMIZADA E SEM SCROLL
+           ========================================= */
+        main { flex: 1; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 15px 20px; gap: 15px; }
+        
+        .cartao-jogo-container { 
+            background: white; width: 100%; max-width: 950px; 
+            flex: 1; /* Faz a caixa branca expandir-se verticalmente preenchendo o espaço vazio */
+            padding: 30 px 20px; border-radius: 30px; box-shadow: 0 6px 15px var(--cor-c1-sombra); 
+            border-top: 8px solid var(--cor-c1); display: flex; flex-direction: column; /*cor da borda cartão jogo*/
+            align-items: center; justify-content: center; position: relative; overflow: hidden; 
+        }
+        
+        /* FOOTER - Bordas e Texto #48b5aa */
+        footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--cor-borda); flex-shrink: 0; }
+        footer p { font-size: 0.8rem; color: var(--cor-borda); margin: 0; }
+        footer a { color: var(--cor-borda); text-decoration: none; font-weight: 700; }
+        
+        @media (max-width: 768px) {
+            header { padding: 15px 10px; }
+            .header-content { display: grid; grid-template-columns: 50px 1fr 50px; grid-template-rows: auto auto; gap: 5px; }
+            .nav-container { position: static; transform: none; grid-column: 1 / -1; display: grid; grid-template-columns: 50px 1fr 50px; width: 100%; margin-bottom: 10px; }
+            .hamburger { grid-column: 1; justify-self: start; }
+            .btn-voltar { grid-column: 2; justify-self: center; width: fit-content; }
+            h1, .subtitulo { grid-column: 2; text-align: center; }
+            main { padding: 15px 10px; gap: 10px; }
+            .cartao-jogo-container { padding: 15px; }
+        }
+
+        /* =========================================
+           O CAMINHO MÁGICO 🗺️ (BARRA DE PROGRESSO)
+           ========================================= */
+        .caminho-magico {
+            width: 100%; max-width: 700px; height: 50px; position: relative;
+            display: none; margin-bottom: 5px; flex-shrink: 0;
+        }
+        .caminho-trilho {
+            position: absolute; bottom: 1px; left: 40px; right: 70px; height: 0;
+            border-bottom: 4px dashed #ff6b6b; z-index: 1; /* COR DO TRACEJADO*/
+        }
+        .caminho-avatar { 
+			position: absolute; 
+			left: 0%; 
+			bottom: 0px; 
+			transform: translateX(-50%) scaleX(-1); 
+			width: 45px; 
+			height: 45px; 
+			transition: left 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); 
+			z-index: 3; 
+			filter: drop-shadow(0 3px 3px rgba(0,0,0,0.15)); 
+		}
+		.caminho-avatar img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+        
+		.caminho-alvo { 
+			position: absolute; 
+			right: 10px; 
+			bottom: -2px; 
+			width: 45px; 
+			height: 45px; 
+			z-index: 2; 
+			filter: drop-shadow(0 3px 3px rgba(0,0,0,0.15)); 
+			animation: pulsaAlvo 1.5s infinite alternate ease-in-out;
+		}
+		.caminho-alvo img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+		
+		/* Tamanho das imagens locais nos cartões de tema */
+		.cat-icon img {
+			width: 55px;
+			height: 55px;
+			object-fit: contain;
+		}
+
+		/* Tamanho das imagens locais no fim do jogo e modal */
+		.img-fim {
+			width: 80px;
+			height: 80px;
+			margin: 0 auto 15px auto;
+			object-fit: contain;
+			display: block;
+		}
+		.img-modal {
+			width: 70px;
+			height: 70px;
+			margin: 0 auto 10px auto;
+			object-fit: contain;
+			display: block;
+		}
+		@keyframes pulsaAlvo { 
+            0% { transform: scale(1) rotate(0deg); } 
+            100% { transform: scale(1.15) rotate(0deg); } 
+        }
+		
+		.icon-svg-btn {
+			width: 2.2rem;
+			height: 2.2rem;
+			vertical-align: middle;
+			display: inline-block;
+			object-fit: contain;
+		}
+		/* Espaçamento conforme a posição do ícone */
+		.btn-voltar-menu .icon-svg-btn {
+			margin-right: 8px;
+		}
+		.btn-acao .icon-svg-btn {
+			margin-left: 8px;
+		}
+		
+		.icon-svg-titulo {
+			width: 2.5rem;
+			height: 2.5rem;
+			display: inline-block;
+			vertical-align: middle;
+			margin-left: 8px;
+		}
+
+        /* =========================================
+           CSS ESPECÍFICO: JOGO DA MEMÓRIA (CARTAS GRANDES)
+           ========================================= */
+        .ecra { width: 100%; height: 100%; display: none; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.4s ease; box-sizing: border-box; }
+        #ecra-inicio { display: flex; }
+
+        .titulo-destaque { font-size: 2.5rem; color: var(--azul-escuro); margin-bottom: 10px; margin-top: 0;}
+        .texto-intro { font-size: 1.2rem; color: var(--text-main); margin-bottom: 20px; }
+        
+        .btn-acao { background-color: var(--cor-pre); color: white; border: none; padding: 15px 35px; font-size: 1.3rem; font-weight: 700; border-radius: 15px; cursor: pointer; box-shadow: 0 5px 0 var(--cor-pre-dark); transition: 0.2s; text-transform: uppercase; margin-top: 10px;}
+        .btn-acao:active { transform: translateY(5px); box-shadow: 0 0px 0 transparent; }
+        .btn-acao:hover { filter: brightness(1.05); }
+
+        .titulo-nivel { font-size: 1.5rem; color: var(--azul-escuro); margin: 0 0 15px 0; }
+
+        /* GRELHA MAXIMIZADA PARA APROVEITAR TODO O ESPAÇO */
+        .memory-grid { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 15px; 
+            width: 100%; 
+            max-width: 650px; /* Cartas GIGANTES no desktop/tablet */
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .memory-card { width: 100%; aspect-ratio: 1 / 1; cursor: pointer; position: relative; transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); -webkit-tap-highlight-color: transparent; }
+        .memory-card.flipped, .memory-card.matched { transform: rotateY(180deg) !important; }
+        .memory-card.matched { cursor: default; pointer-events: none; }
+
+        .card-face { position: absolute; width: 100%; height: 100%; top: 0; left: 0; backface-visibility: hidden; border-radius: 15px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.08); box-sizing: border-box; overflow: hidden; transition: opacity 0.3s; }
+        
+        /* Frente da carta aumentada */
+        .card-front { background: linear-gradient(135deg, var(--cor-pre) 0%, #81ecec 100%); border: 3px solid white; color: white; font-size: 3.5rem; }
+        .card-back { background: white; border: 3px solid var(--cor-pre); transform: rotateY(180deg); padding: 12px; }
+        .card-back img { width: 95%; height: 95%; object-fit: contain; pointer-events: none;}
+
+        .memory-card.matched .card-back { border-color: #2ed573; background-color: #eafff0; opacity: 0.6; filter: grayscale(20%); }
+
+        .error-shake .card-back { border-color: #ff4757 !important; background-color: #ffefef !important; animation: shakeError 0.4s ease; }
+
+        /* MODAIS */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); z-index: 300; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; animation: fadeIn 0.3s ease; }
+        .modal-overlay.active { display: flex; }
+        .modal-box { background: white; width: 100%; max-width: 450px; border-radius: 25px; padding: 30px 20px; text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.15); border-top: 8px solid var(--cor-pre); display: flex; flex-direction: column; align-items: center; gap: 15px;}
+        .modal-emoji { font-size: 5rem; line-height: 1; margin: 0; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); animation: popIn 0.5s ease;}
+        .modal-titulo { font-size: 2rem; color: var(--azul-escuro); margin: 0;}
+
+        /* AJUSTES MOBILE PARA A GRELHA */
+        @media (max-width: 600px) {
+            .caminho-trilho { left: 30px; right: 40px; }
+            /* Em telemóveis, a grelha passa a 3 colunas para as cartas continuarem grandes */
+            .memory-grid { grid-template-columns: repeat(3, 1fr); max-width: 100%; gap: 10px;}
+            .titulo-nivel { font-size: 1rem; margin-bottom: 12px;}
+            .card-front { font-size: 2.5rem; }
+            .titulo-destaque { font-size: 2rem; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 80% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes shakeError { 0%, 100% { transform: rotateY(180deg) translateX(0); } 25% { transform: rotateY(180deg) translateX(-8px) rotate(-3deg); } 75% { transform: rotateY(180deg) translateX(8px) rotate(3deg); } }
+
+        /* CONFETIS LIMITADOS AO ECRÃ PARA NÃO GERAR SCROLL NUNCA */
+        #confetti-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; overflow: hidden; }
+    body { scrollbar-gutter: stable; }
+	.icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
+	.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
+	.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
+	h1 .icon-svg { width: 1em; height: 1em; margin-left: 10px; }
+	.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+</style>
+
+<style>
+  body {
+    background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px);
+    background-size: 25px 25px;
+  }
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<nav class="sidebar" id="sidebar">
+    <div class="btn-fechar" onclick="toggleMenu()"><span>✕</span> Fechar</div>
+    <ul>
+        <li><a href="../../"><img src="../../SVG/home.svg" alt="Início" class="icon-svg-menu" onerror="this.style.display='none'">Início</a></li>
+        <li><a href="../"><img src="../../SVG/pre.svg" alt="Pré-Escolar" class="icon-svg-menu" onerror="this.style.display='none'">Pré-Escolar</a></li>
+        <li><a href="../../1"><img src="../../SVG/ano1.svg" alt="1º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 1º Ano</a></li>
+        <li><a href="../../2"><img src="../../SVG/ano2.svg" alt="2º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 2º Ano</a></li>
+        <li><a href="../../3/"><img src="../../SVG/ano3.svg" alt="3º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 3º Ano</a></li>
+        <li><a href="../../4/"><img src="../../SVG/ano4.svg" alt="4º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 4º Ano</a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="header-content">
+        <div class="nav-container">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="../" class="btn-voltar"><img src="../../SVG/voltar.svg" class="icon-svg-voltar" alt=""> Voltar</a>
+        </div>
+        
+		<h1>Memória Mágica<img src="memoria-magica.svg" class="icon-svg-titulo" alt=""></h1>
+        <div class="subtitulo">Tens boa memória? Prova-o!</div>
+    </div>
+</header>
+
+<main>
+    <!-- O CAMINHO MÁGICO 🗺️ (Ocupa o espaço natural) -->
+    <div class="caminho-magico" id="caminho-magico">
+        <div class="caminho-trilho">
+            <div class="caminho-avatar" id="avatar-progresso">
+                <img src="carro.svg" alt="Carro">
+            </div> 
+        </div>
+        <div class="caminho-alvo" id="alvo-progresso">
+            <img src="casa.svg" alt="Casa">
+        </div> 
+    </div>
+
+    <!-- CARTÃO DO JOGO (Adapta-se ao ecrã sem provocar scroll) -->
+    <div class="cartao-jogo-container">
+        
+        <!-- ECRÃ INICIAL -->
+        <div id="ecra-inicio" class="ecra">
+            <span class="cat-icon">
+                        <img src="carta.svg" alt="">
+                    </span>
+            <h2 class="titulo-destaque">Vamos Jogar?</h2>
+            <p class="texto-intro">Encontra os pares para o carro chegar a casa!</p>
+
+			<button class="btn-acao" onclick="iniciarJogo()" style="max-width: 300px;">Começar <img src="../../SVG/seta_direita.svg" class="icon-svg-btn" alt="">
+        </div>
+
+        <!-- ECRÃ DE JOGO -->
+        <div id="ecra-jogo" class="ecra">
+            <h2 class="titulo-nivel" id="titulo-nivel">Nível 1</h2>
+            <div class="memory-grid" id="memory-grid">
+                <!-- Cartas Gigantes Injetadas Aqui -->
+            </div>
+        </div>
+
+        <!-- ECRÃ FINAL -->
+
+		
+		<div id="ecra-fim" class="ecra">
+            <img src="../../SVG/trofeu.svg" class="img-fim" alt="Troféu">
+            <h2 class="titulo-destaque">Chegaste a casa!</h2>
+            <p class="texto-intro">O carro fez a viagem toda graças a ti!</p>
+			<button class="btn-acao" onclick="iniciarJogo()" style="max-width: 300px;">Jogar Novamente <img src="../../SVG/jogar_novo.svg" class="icon-svg-btn" alt=""></button>
+        </div>
+
+        <canvas id="confetti-canvas"></canvas>
+    </div>
+</main>
+
+<!-- Modal de Transição Curta -->
+<div class="modal-overlay" id="modal-transicao">
+    <div class="modal-box">
+        <img src="palmas.svg" class="img-modal" alt="Muito Bem!">
+        <h2 class="modal-titulo">Muito Bem!</h2>
+        <button class="btn-acao" onclick="avancarNivel()">Próxima Aventura ➔</button>
+    </div>
+</div>
+
+<footer>
+    <p><span id="ano-atual"> </span><img src="../../SVG/pre.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
+</style>
+</footer>
+
+<script src="../dados.js"></script>
+
+<script>
+    document.getElementById('ano-atual').innerText = new Date().getFullYear();
+    function toggleMenu() { 
+        document.getElementById('sidebar').classList.toggle('active'); 
+        document.getElementById('overlay').classList.toggle('active'); 
+        document.getElementById('hamburgerBtn').classList.toggle('open'); 
+    }
+
+    /* =========================================
+       CONFIGURAÇÃO DOS NÍVEIS
+       ========================================= */
+    const niveisConfig =[
+    { 
+        titulo: "Animais", 
+        svg: "animais.svg", 
+        palavrasChave: ["abelha", "águia", "baleia", "bode", "borboleta", "burro", "caracol", "cao", "cavalo", "cigarra", "cobra", "coelho", "elefante", "foca", "galinha", "gato", "hipopótamo", "javali", "leão", "macaco", "ovelha", "papagaio", "pato", "peixe", "porco", "rato", "tartaruga", "urso", "vaca"] 
+    },
+    { 
+        titulo: "Comida", 
+        svg: "comida.svg", 
+        palavrasChave: ["banana", "batata", "caju", "cenoura", "leite", "limão", "maçã", "melão", "morango", "ovo", "pão", "pêssego", "queijo", "tomate", "uva"] 
+    },
+    { 
+        titulo: "Objetos", 
+        svg: "objetos.svg", 
+        palavrasChave: ["avião", "bicicleta", "bola", "bota", "cama", "casaco", "dado", "janela", "jipe", "livro", "mala", "mapa", "mota", "óculos", "pote", "tesoura", "vela", "violino"] 
+    }
+];
+
+    let nivelAtual = 0; 
+    let paresEncontrados = 0;
+    const PARES_POR_NIVEL = 6; 
+    const TOTAL_PARES_JOGO = PARES_POR_NIVEL * niveisConfig.length; 
+    let paresGlobais = 0;
+
+    let hasFlippedCard = false;
+    let lockBoard = false;
+    let firstCard, secondCard;
+
+    const memoryGrid = document.getElementById('memory-grid');
+    const avatar = document.getElementById('avatar-progresso');
+
+    // FUNÇÃO REVERTIDA: Retorna exatamente a string que o teu dados.js fornecer (ex: "img/gato.png" ou "../img/gato.png")
+    function getImagePath(imgPath) { 
+        return imgPath ? imgPath : ''; 
+    }
+
+    function mostrarEcra(id) {
+        document.querySelectorAll('.ecra').forEach(e => e.style.display = 'none');
+        document.getElementById(id).style.display = 'flex';
+    }
+
+    function iniciarJogo() {
+        nivelAtual = 0;
+        paresGlobais = 0;
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+        
+        document.getElementById('caminho-magico').style.display = 'block';
+        atualizarCaminho();
+        prepararNivel();
+    }
+
+    function avancarNivel() {
+        nivelAtual++;
+        document.getElementById('modal-transicao').classList.remove('active');
+        prepararNivel();
+    }
+
+    function prepararNivel() {
+		paresEncontrados = 0;
+		hasFlippedCard = false;
+		lockBoard = false;
+		firstCard = null;
+		secondCard = null;
+
+		const config = niveisConfig[nivelAtual];
+		
+		// Injeta o texto do nível E a imagem SVG no cabeçalho
+		document.getElementById('titulo-nivel').innerHTML = `
+			Nível ${nivelAtual + 1}: ${config.titulo} 
+			<img src="${config.svg}" class="icon-svg-titulo" alt="" style="width: 2rem; height: 2rem; vertical-align: middle; margin-left: 8px;">
+		`;
+
+		mostrarEcra('ecra-jogo');
+		gerarGrelha(config.palavrasChave);
+	}
+    function gerarGrelha(palavrasFiltro) {
+        memoryGrid.innerHTML = '';
+        
+        let objetosDisponiveis = palavras.filter(p => palavrasFiltro.includes(p.palavra.toLowerCase()));
+        
+        if (objetosDisponiveis.length < PARES_POR_NIVEL) {
+            let outras = palavras.filter(p => !palavrasFiltro.includes(p.palavra.toLowerCase()));
+            outras = outras.sort(() => Math.random() - 0.5);
+            let faltam = PARES_POR_NIVEL - objetosDisponiveis.length;
+            objetosDisponiveis = objetosDisponiveis.concat(outras.slice(0, faltam));
+        }
+
+        objetosDisponiveis = objetosDisponiveis.sort(() => Math.random() - 0.5).slice(0, PARES_POR_NIVEL);
+
+        let cartas =[];
+        objetosDisponiveis.forEach(obj => { cartas.push(obj); cartas.push(obj); });
+
+        cartas = cartas.sort(() => Math.random() - 0.5);
+
+        cartas.forEach(c => {
+            const cardEl = document.createElement('div');
+            cardEl.classList.add('memory-card');
+            cardEl.dataset.match = c.palavra;
+
+            // src usa agora exatamente a propriedade original gerada
+            cardEl.innerHTML = `
+                <div class="card-face card-front"><img src="estrela.svg" class="icon-svg-titulo" alt=""></div>
+                <div class="card-face card-back">
+                    <img src="${getImagePath(c.imagem)}" alt="${c.palavra}">
+                </div>
+            `;
+            
+            cardEl.addEventListener('click', flipCard);
+            memoryGrid.appendChild(cardEl);
+        });
+    }
+
+    function flipCard() {
+        if (lockBoard) return;
+        if (this === firstCard) return;
+
+        this.classList.add('flipped');
+        tocarSom('flip');
+
+        if (!hasFlippedCard) {
+            hasFlippedCard = true;
+            firstCard = this;
+            return;
+        }
+
+        secondCard = this;
+        checkForMatch();
+    }
+
+    function checkForMatch() {
+        let isMatch = firstCard.dataset.match === secondCard.dataset.match;
+
+        if (isMatch) disableCards();
+        else unflipCards();
+    }
+
+    function disableCards() {
+        lockBoard = true;
+        setTimeout(() => {
+            firstCard.classList.add('matched');
+            secondCard.classList.add('matched');
+            
+            firstCard.removeEventListener('click', flipCard);
+            secondCard.removeEventListener('click', flipCard);
+            
+            paresEncontrados++;
+            paresGlobais++;
+            atualizarCaminho();
+            tocarSom('acerto');
+
+            if (paresEncontrados === PARES_POR_NIVEL) {
+                setTimeout(fimDoNivel, 1000);
+            } else {
+                resetBoard();
+            }
+        }, 500);
+    }
+
+    function unflipCards() {
+        lockBoard = true;
+        
+        setTimeout(() => {
+            firstCard.classList.add('error-shake');
+            secondCard.classList.add('error-shake');
+            tocarSom('erro');
+
+            setTimeout(() => {
+                firstCard.classList.remove('flipped', 'error-shake');
+                secondCard.classList.remove('flipped', 'error-shake');
+                resetBoard();
+            }, 400); 
+            
+        }, 1000); 
+    }
+
+    function resetBoard() {[hasFlippedCard, lockBoard] =[false, false];
+        [firstCard, secondCard] = [null, null];
+    }
+
+    function atualizarCaminho() {
+        let percent = (paresGlobais / TOTAL_PARES_JOGO) * 100;
+        avatar.style.left = `${percent}%`;
+    }
+
+    function fimDoNivel() {
+        if (nivelAtual < niveisConfig.length - 1) {
+            tocarSom('vitoria_curta');
+            document.getElementById('modal-transicao').classList.add('active');
+        } else {
+            tocarSom('vitoria');
+            dispararConfetis();
+            mostrarEcra('ecra-fim');
+        }
+    }
+
+    /* =========================================
+       SISTEMA DE SOM E CONFETIS
+       ========================================= */
+    let audioCtx = null;
+    function iniciarAudio() {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+    document.body.addEventListener('click', iniciarAudio, { once: true });
+
+    function tocarSom(tipo) {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        const agora = audioCtx.currentTime;
+
+        if (tipo === 'flip') {
+            osc.type = 'sine'; osc.frequency.setValueAtTime(300, agora); osc.frequency.exponentialRampToValueAtTime(600, agora + 0.15);
+            gain.gain.setValueAtTime(0.05, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.15);
+            osc.start(agora); osc.stop(agora + 0.15);
+        }
+        else if (tipo === 'acerto') {
+            osc.type = 'sine'; osc.frequency.setValueAtTime(800, agora); osc.frequency.exponentialRampToValueAtTime(1200, agora + 0.2);
+            gain.gain.setValueAtTime(0.1, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); osc.stop(agora + 0.3);
+        } 
+        else if (tipo === 'erro') {
+            osc.type = 'sine'; osc.frequency.setValueAtTime(250, agora); osc.frequency.exponentialRampToValueAtTime(150, agora + 0.2);
+            gain.gain.setValueAtTime(0.1, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); osc.stop(agora + 0.3);
+        }
+        else if (tipo === 'vitoria_curta') {
+            const notas =[523.25, 659.25, 783.99]; 
+            notas.forEach((freq, i) => {
+                const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                o.connect(g); g.connect(audioCtx.destination);
+                o.type = 'triangle'; o.frequency.value = freq;
+                g.gain.setValueAtTime(0.08, agora + i * 0.15); g.gain.exponentialRampToValueAtTime(0.01, agora + i * 0.15 + 0.4);
+                o.start(agora + i * 0.15); o.stop(agora + i * 0.15 + 0.4);
+            });
+        }
+        else if (tipo === 'vitoria') {
+            const notas =[440, 554.37, 659.25, 880, 1046.50]; 
+            notas.forEach((freq, i) => {
+                const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                o.connect(g); g.connect(audioCtx.destination);
+                o.type = 'triangle'; o.frequency.value = freq;
+                g.gain.setValueAtTime(0.1, agora + i * 0.15); g.gain.exponentialRampToValueAtTime(0.01, agora + i * 0.15 + 0.6);
+                o.start(agora + i * 0.15); o.stop(agora + i * 0.15 + 0.6);
+            });
+        }
+    }
+
+    const canvasConfetti = document.getElementById('confetti-canvas');
+    const ctxConfetti = canvasConfetti.getContext('2d');
+    let confetis =[];
+
+    function redimensionarCanvas() { 
+        canvasConfetti.width = document.querySelector('.cartao-jogo-container').clientWidth; 
+        canvasConfetti.height = document.querySelector('.cartao-jogo-container').clientHeight; 
+    }
+    window.addEventListener('resize', redimensionarCanvas);
+
+    function dispararConfetis() {
+        redimensionarCanvas(); confetis =[]; const cores =['#ff4757', '#2ed573', '#0091ff', '#ffa502', '#eccc68'];
+        for (let i = 0; i < 100; i++) {
+            confetis.push({ x: Math.random() * canvasConfetti.width, y: Math.random() * canvasConfetti.height - canvasConfetti.height, w: Math.random() * 10 + 5, h: Math.random() * 10 + 5, cor: cores[Math.floor(Math.random() * cores.length)], velY: Math.random() * 3 + 2, velX: Math.random() * 2 - 1, rotacao: Math.random() * 360, velRotacao: Math.random() * 5 - 2.5 });
+        }
+        animarConfetis();
+    }
+
+    function animarConfetis() {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); let ativos = false;
+        confetis.forEach(c => {
+            c.y += c.velY; c.x += c.velX; c.rotacao += c.velRotacao; if (c.y < canvasConfetti.height) ativos = true;
+            ctxConfetti.save(); ctxConfetti.translate(c.x, c.y); ctxConfetti.rotate(c.rotacao * Math.PI / 180);
+            ctxConfetti.fillStyle = c.cor; ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); ctxConfetti.restore();
+        });
+        if (ativos) requestAnimationFrame(animarConfetis);
+    }
+
+</script>
+</body>
+</html>
