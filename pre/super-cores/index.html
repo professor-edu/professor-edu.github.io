@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pré-Escolar - Super Cores 🎨</title>
+    
+    <link rel="icon" type="image/png" href="../../logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+
+	*, *::before, *::after {
+    box-sizing: border-box;
+}
+		
+        /* =========================================
+           CSS DO TEMPLATE BASE
+           ========================================= */
+        :root {
+            --bg-body: #f0f7ff;
+            --cor-pre: #4fd1c5;       
+            --cor-pre-dark: #38a89d;
+            --cor-borda: #48b5aa;    
+            --bg-header: #e1f5f2;    
+            --azul-escuro: #0d47a1;
+            --text-main: #455a64;
+			
+			/* CORES DOS CARTÕES DO MENU INICIAL */
+            --cor-btn-azul: #61A0FF;
+            --cor-btn-verde: #5DD279;
+            --cor-btn-amarelo: #FBC531;
+            --cor-btn-vermelho: #FF6B6B;
+            --cor-btn-roxo: #A55EEA;
+            --cor-btn-laranja: #FA983A;
+			
+			/* CORES DO CONTAINER DE JOGO + RGBA PARA ALTERAR A SHADOW */
+			--cor-c1: #ff6b6b; /* vermelho */
+			--cor-c1-sombra: rgba(255, 107, 107, 0.55);
+			
+			--cor-c2: #4dabf7; /* azul */
+			--cor-c2-sombra: rgba(77, 171, 247, 0.66);
+			
+			--cor-c3: #51cf66; /* verde */
+			--cor-c3-sombra: rgba(69, 176, 98, 0.52);
+			
+			--cor-c4: #fcc419; /* amarelo */
+			--cor-c4-sombra: rgba(251, 197, 49, 0.75);
+			
+			--cor-c5: #cc5de8; /* roxo */
+			--cor-c5-sombra: rgba(165, 94, 234, 0.65);
+			
+			--cor-c6: #ff922b; /* laranja */
+			--cor-c6-sombra: rgba(250, 152, 58, 0.85);
+        }
+
+        body { font-family: 'Roboto', sans-serif; text-align: center; background-color: var(--bg-body); background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px); background-size: 25px 25px; margin: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; touch-action: pan-y;}
+        header { background-color: var(--bg-header); padding: 25px 20px; border-bottom: 1px solid var(--cor-borda); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; flex-shrink: 0; z-index: 100; }
+        .header-content { max-width: 1200px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; }
+        .nav-container { width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 15px; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; }
+        .hamburger { cursor: pointer; background: rgba(255,255,255,0.4); border: none; display: flex; flex-direction: column; gap: 4px; padding: 10px; border-radius: 8px; transition: background 0.4s ease; }
+        .hamburger:hover { background: #fff9c4; }
+        .hamburger span { display: block; width: 20px; height: 2px; background: var(--azul-escuro); transition: 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        .btn-voltar { background: var(--cor-pre); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; font-size: 0.9rem; box-shadow: 0 3px 0 var(--cor-pre-dark); display: flex; align-items: center; gap: 8px; transition: 0.2s; cursor: pointer; }
+        .btn-voltar:hover { transform: scale(1.05); }
+        h1 {
+    color: var(--azul-escuro);
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    text-shadow: 
+        -2px -2px 0 #ffffff,  
+         2px -2px 0 #ffffff,
+        -2px  2px 0 #ffffff,
+         2px  2px 0 #ffffff, 
+         0px  6px 12px rgba(0, 0, 0, 0.15); 
+}
+        .subtitulo { color: var(--azul-escuro); font-size: clamp(0.85rem, 3vw, 1.1rem); font-weight: 500; opacity: 0.8; margin-top: 15px; }
+        .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: white; z-index: 200; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.1); text-align: left; }
+        .sidebar.active { left: 0; }
+        .sidebar .btn-fechar { background: #fff5f5; color: #ff4757; padding: 20px 25px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; border-bottom: 1px solid #ffebeb; }
+        .sidebar ul { list-style: none; padding: 15px; margin: 0; }
+        .sidebar li a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--text-main); background: #f8fafc; border-radius: 12px; margin-bottom: 8px; transition: 0.3s; }
+        .sidebar li a:hover { background: var(--cor-pre); color: white; transform: translateX(8px); }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 150; }
+        .overlay.active { display: block; }
+        main { flex: 1; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 15px 20px; gap: 15px; }
+        .cartao-jogo-container { background: white; width: 100%; max-width: 950px; flex: 1; padding: 30px 20px; border-radius: 30px; box-shadow: 0 6px 15px var(--cor-c2-sombra); border-top: 8px solid var(--cor-c2); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; overflow: hidden; }
+        footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--cor-borda); flex-shrink: 0; }
+        footer p { font-size: 0.8rem; color: var(--cor-borda); margin: 0; }
+        footer a { color: var(--cor-borda); text-decoration: none; font-weight: 700; }
+        
+        /* =========================================
+           O CAMINHO MÁGICO
+           ========================================= */
+        .caminho-magico { width: 100%; max-width: 700px; height: 50px; position: relative; display: none; margin-bottom: 5px; flex-shrink: 0; }
+        .caminho-trilho { position: absolute; bottom: 1px; left: 40px; right: 70px; height: 0; border-bottom: 4px dashed var(--cor-pre); z-index: 1; }
+        .caminho-avatar { 
+			position: absolute; 
+			left: 0%; 
+			bottom: 0px; 
+			transform: translateX(-50%) scaleX(-1); 
+			width: 45px; 
+			height: 45px; 
+			transition: left 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); 
+			z-index: 3; 
+			filter: drop-shadow(0 3px 3px rgba(0,0,0,0.15)); 
+		}
+		.caminho-avatar img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+        
+		.caminho-alvo { 
+			position: absolute; 
+			right: 10px; 
+			bottom: -2px;
+			width: 45px; 
+			height: 45px; 
+			z-index: 2; 
+			filter: drop-shadow(0 3px 3px rgba(0,0,0,0.15)); 
+			animation: pulsaAlvo 1.5s infinite alternate ease-in-out;
+		}
+		.caminho-alvo img {
+			width: 100%;
+			height: 100%;
+			transform: translateX(-50%) scaleX(-1);
+			object-fit: contain;
+		}
+		
+		/* Tamanho das imagens locais nos cartões de tema */
+		.cat-icon img {
+			width: 55px;
+			height: 55px;
+			object-fit: contain;
+		}
+
+		/* Tamanho das imagens locais no fim do jogo e modal */
+		.img-fim {
+			width: 80px;
+			height: 80px;
+			margin: 0 auto 15px auto;
+			object-fit: contain;
+			display: block;
+		}
+		.img-modal {
+			width: 70px;
+			height: 70px;
+			margin: 0 auto 10px auto;
+			object-fit: contain;
+			display: block;
+		}
+		@keyframes pulsaAlvo { 
+            0% { transform: scale(1) rotate(0deg); } 
+            100% { transform: scale(1.15) rotate(5deg); } 
+        }
+
+        /* =========================================
+           NAVEGAÇÃO INTERNA DOS JOGOS
+           ========================================= */
+        .container-nav-jogo { 
+            width: 100%; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding-bottom: 15px; 
+            margin-bottom: 10px; 
+            border-bottom: 2px dashed #e1f5f2; 
+        }
+        .top-row { 
+            width: 100%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            gap: 15px;
+        }
+        .btn-voltar-menu {
+			background-color: var(--cor-pre); /* Um azul vivo, alegre e perfeitamente infantil */
+			color: #ffffff; /* Texto branco para grande contraste e leitura limpa */
+			border: 2px solid var(--cor-pre-dark);
+			padding: 8px 16px; /* Tamanho mais pequeno e discreto */
+			border-radius: 20px; /* Cantos arredondados suaves */
+			font-size: 0.95rem; /* Texto no tamanho original solicitado */
+			font-weight: 700;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			gap: 6px; /* Espaçamento ideal para um botão menor */
+			
+			/* Sombra muito mais leve, suave e moderna */
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12); 
+			transition: background-color 0.2s, transform 0.1s;
+			touch-action: manipulation;
+		}
+		@media (hover: hover) { 
+			.btn-voltar-menu:hover { 
+				background-color: var(--cor-pre-dark);
+				border: 2px solid var(--cor-pre);
+				transform: translateY(-1px); /* Micro movimento apenas para feedback */
+			} 
+		}
+		.btn-voltar-menu:active {
+			transform: translateY(1px); /* Feedback tátil rápido ao clicar */
+			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+		}
+
+		.btn-voltar-menu img {
+			width: 1.5rem;
+			height: 1.5rem;
+			object-fit: contain;
+
+		}
+		/* Alinhamento do ícone SVG dentro dos botões */
+		.icon-svg-btn {
+			width: 1.5rem;
+			height: 1.5rem;
+			vertical-align: middle;
+			display: inline-block;
+			object-fit: contain;
+		}
+		/* Espaçamento conforme a posição do ícone */
+		.btn-voltar-menu .icon-svg-btn {
+			margin-right: 8px;
+		}
+		.btn-acao .icon-svg-btn {
+			margin-left: 8px;
+		}
+		
+		.btn-acao:active { transform: translateY(5px); box-shadow: 0 0px 0 transparent; }
+        @media (hover: hover) { .btn-acao:hover { filter: brightness(1.05); } }
+        
+        .info-nivel {
+            font-size: 1rem; font-weight: 800; color: var(--cor-pre-dark);
+            background: #e6fffa; padding: 8px 20px; border-radius: 20px; border: 2px solid var(--cor-pre);
+        }
+
+
+        .level-selector { 
+            display: flex; 
+            gap: 8px; 
+            justify-content: center; 
+            flex-wrap: nowrap;
+            flex: 1;
+            max-width: 450px;
+        }
+        .btn-nivel-topo { 
+            flex: 1;
+            background: #f8fafc; 
+            border: 2px solid #ced6e0; 
+            padding: 6px 12px; 
+            border-radius: 12px; 
+            font-weight: 800; 
+            font-size: 0.85rem; 
+            cursor: pointer; 
+            color: var(--text-main); 
+            box-shadow: 0 3px 0 #ced6e0; 
+            transition: all 0.2s ease;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        .btn-nivel-topo:hover { transform: translateY(-2px); box-shadow: 0 5px 0 #ced6e0; background-color: #e3f2fd; }
+        .btn-nivel-topo:active { transform: translateY(2px); box-shadow: 0 0px 0 transparent; }
+        .btn-nivel-topo.ativo { border-color: var(--cor-pre); background-color: #e6fffa; color: var(--azul-escuro); box-shadow: 0 3px 0 var(--cor-pre-dark); transform: translateY(0); }
+        .info-nivel { font-weight: 900; color: var(--cor-pre); font-size: 1rem; }
+
+        /* =========================================
+           MENUS E ECRÃS BASE
+           ========================================= */
+        .ecra { display: none; flex-direction: column; align-items: center; justify-content: flex-start; width: 100%; flex: 1; }
+        .titulo-destaque { font-size: 2.2rem; color: var(--azul-escuro); margin: 0 0 30px 0; font-weight: 700;}
+        .pergunta-destaque { font-size: 1.8rem; color: var(--azul-escuro); margin-bottom: 30px; font-weight: 900; display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;}
+        .tag-cor { padding: 4px 12px; border-radius: 12px; color: white; text-transform: uppercase; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+        .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 100%; max-width: 600px; margin: 0 auto; }
+        .cat-card { background: var(--bg-header); border: 3px solid #bcd2f3; padding: 20px 15px; border-radius: 20px; font-size: 1.1rem; color: var(--azul-escuro); font-weight: bold; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+        .cat-card:hover { transform: translateY(-5px); border-color: var(--cor-c2); box-shadow: 0 8px 15px rgba(79, 209, 197, 0.2); background: #faffff;}
+        .cat-icon { font-size: 3rem; }
+        .btn-acao { background-color: var(--cor-pre); color: white; border: none; padding: 12px 35px; font-size: 1.2rem; font-weight: 800; border-radius: 25px; cursor: pointer; box-shadow: 0 6px 0 var(--cor-pre-dark); transition: 0.2s; text-transform: uppercase; margin-top: 20px;}
+        .btn-acao:active { transform: translateY(6px); box-shadow: 0 0px 0 transparent; }
+
+        /* =========================================
+           ESTILOS ESPECÍFICOS DOS 6 JOGOS
+           ========================================= */
+        .area-jogo-dinamica { 
+            width: 100%; 
+            max-width: 700px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            flex: 1; 
+            gap: 20px; 
+        }
+        
+        .item-drag { 
+            width: clamp(55px, 14vw, 80px); 
+            height: clamp(55px, 14vw, 80px); 
+            cursor: grab; 
+            user-select: none; 
+            touch-action: none; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.15)); 
+            transition: transform 0.1s; 
+            z-index: 10;
+            font-size: clamp(2rem, 5vw, 3rem);
+        }
+
+        .item-drag img {
+            width: 100%;               
+            height: 100%;
+            object-fit: contain;       
+            pointer-events: none;      
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1));
+        }
+
+        .area-itens { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: clamp(8px, 2vw, 15px); 
+            padding: 15px; 
+            background: #f8fafc; 
+            border: 2px dashed #cbd5e1; 
+            border-radius: 20px; 
+            width: 100%; 
+            min-height: 100px; 
+            box-sizing: border-box; 
+        }
+        
+        /* 1. Monstro */
+        .zona-monstro { 
+            width: 100%; 
+            max-width: 400px; 
+            height: clamp(100px, 25vw, 140px); 
+            background-color: #fff1f2; 
+            border: 4px solid #ffccd1; 
+            border-radius: 25px; 
+            position: relative; 
+            transition: 0.2s; 
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 160"><circle cx="280" cy="25" r="12" fill="white" stroke="black" stroke-width="2"/><circle cx="280" cy="25" r="5" fill="black"/><circle cx="370" cy="25" r="12" fill="white" stroke="black" stroke-width="2"/><circle cx="370" cy="25" r="5" fill="black"/><path d="M220 160 L240 140 L260 160 L280 140 L300 160 L320 140 L340 160 L360 140 L380 160 L400 140 L420 160" fill="%23ffccd1" stroke="%23ffccd1" stroke-width="2"/></svg>'); 
+            background-repeat: no-repeat; 
+            background-position: center; 
+            background-size: contain;
+        }
+		.zona-monstro.drag-over { background-color: #e6fffa; border-color: var(--cor-pre); transform: scale(1.05); }
+
+        /* 2. Árvore */
+        .zona-arvore { 
+            width: 100%; 
+            height: clamp(150px, 35vw, 220px); 
+            background: #e8f5e9; 
+            border: 4px solid #81c784; 
+            border-radius: clamp(50px, 15vw, 100px) clamp(50px, 15vw, 100px) 20px 20px; 
+            position: relative; 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            align-content: center; 
+            gap: 10px; 
+            padding: 20px; 
+            box-sizing: border-box; 
+        }
+        .zona-cesto { 
+            width: clamp(110px, 30vw, 150px); 
+            height: clamp(80px, 20vw, 100px); 
+            background: #fff8e1; 
+            border: 4px dashed #ffb300; 
+            border-radius: 10px 10px 40px 40px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: 0.3s; 
+        }
+
+		.zona-cesto.drag-over { background: #ffe082; transform: scale(1.1); }
+
+        /* 3. Comboio */
+        .area-vagoes { display: flex; justify-content: center; gap: 10px; width: 100%; flex-wrap: wrap;}
+        .vagao { 
+            width: clamp(85px, 24vw, 120px); 
+            height: clamp(75px, 20vw, 100px); 
+            border: 4px dashed #ccc; 
+            border-radius: 10px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            transition: 0.2s; 
+            background: #fafafa;
+        }
+		.vagao::after { 
+			content: ''; 
+			position: absolute; 
+			bottom: -22px; 
+			width: 32px; 
+			height: 22px; 
+			background: url('rodas_comboio.png') no-repeat center; 
+			background-size: contain; 
+		}
+        .vagao.drag-over { transform: scale(1.1); border-style: solid;}
+		
+		.miolo-flor img {
+			width: 75%;
+			height: 75%;
+			object-fit: contain;
+			pointer-events: none;
+		}
+		
+		/* Borda específica para o vagão branco para não desaparecer no fundo */
+		.vagao[data-cor="branco"] {
+			border: 4px dashed #e9ebf0 !important; /* Um cinzento-claro definido */
+			background-color: #ffffff !important;
+			box-shadow: inset 0 0 10px rgba(0,0,0,0.05); /* Opcional: dá uma leve profundidade */
+		}
+
+        /* 4. Misturador */
+        .zona-laboratorio { display: flex; align-items: center; justify-content: center; gap: 20px; width: 100%; }
+        .frasco { 
+            width: clamp(90px, 25vw, 120px); 
+            height: clamp(120px, 35vw, 160px); 
+            border: 6px solid #b0bec5; 
+            border-radius: 10px 10px clamp(40px, 10vw, 60px) clamp(40px, 10vw, 60px); 
+            background: rgba(255,255,255,0.8); 
+            position: relative; 
+            overflow: hidden; 
+            display: flex; 
+            align-items: flex-end; 
+            transition: 0.3s; 
+        }
+		.frasco.drag-over { border-color: var(--cor-pre); transform: scale(1.05); }
+        .liquido { width: 100%; height: 0%; background: transparent; transition: height 0.5s, background-color 0.5s; }
+
+        /* 5. Classificação Dupla */
+        .grid-classificacao { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: clamp(8px, 2vw, 15px); 
+            width: 100%; 
+            max-width: 500px; 
+        }
+        .card-item { 
+            background: white; 
+            border: 4px solid #e2e8f0; 
+            border-radius: 15px; 
+            height: clamp(75px, 18vw, 100px); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            box-shadow: 0 4px 0 #e2e8f0; 
+        }
+		.card-item:hover { transform: translateY(-3px); }
+        .card-item:active { transform: translateY(4px); box-shadow: 0 0 0 transparent; }
+        .card-item.selected { border-color: var(--cor-pre); background: #e6fffa; box-shadow: 0 4px 0 var(--cor-pre-dark); }
+
+        /* 6. Flor Mágica */
+        .zona-flor { 
+            position: relative; 
+            width: clamp(240px, 75vw, 300px); 
+            height: clamp(240px, 75vw, 300px); 
+            margin: 0 auto; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .miolo-flor { 
+            width: clamp(80px, 25vw, 100px); 
+            height: clamp(80px, 25vw, 100px); 
+            background: #ffeaa7; 
+            border-radius: 50%; 
+            z-index: 5; 
+            border: 5px solid #fdcb6e; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+        }
+		.petala { 
+            position: absolute; 
+            width: clamp(65px, 20vw, 80px); 
+            height: clamp(65px, 20vw, 80px); 
+            border-radius: 50% 50% 0 50%; 
+            transform-origin: center; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+            border: 3px solid rgba(0,0,0,0.1); 
+        }
+		.petala:hover { transform: scale(1.1) !important; }
+
+        @keyframes shakeError { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+        .error-shake { animation: shakeError 0.4s ease; border-color: #ff4757 !important; }
+        #confetti-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; overflow: hidden; }
+
+        @media (max-width: 600px) {
+            .cat-grid { grid-template-columns: 1fr; }
+            .vagao { width: 80px; height: 80px; }
+            .grid-classificacao { grid-template-columns: repeat(2, 1fr); }
+            .item-drag { width: 60px; height: 60px; }
+			.nav-container {
+                position: relative; /* Tira a posição absoluta */
+                transform: none;
+                top: 0;
+                justify-content: center; /* Centra o botão Voltar */
+                margin-bottom: 15px; /* Dá espaço entre o botão e o título */
+            }
+            .hamburger {
+                position: absolute;
+                left: 0; /* Mantém o menu hambúrguer encostado à esquerda */
+            }
+        }
+		
+		@media (max-width: 600px) {
+            .top-row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                gap: 12px;
+            }
+            .btn-voltar-menu {
+                order: 1; /* Canto superior esquerdo */
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+            .info-nivel {
+                order: 2; /* Canto superior direito */
+                padding: 6px 14px;
+                font-size: 0.85rem;
+            }
+            .level-selector {
+                order: 3; /* Salta para a linha de baixo */
+                width: 100%; 
+                max-width: none;
+                display: flex;
+                gap: 6px;
+            }
+            .btn-nivel-topo {
+                padding: 6px 2px;
+                font-size: clamp(0.7rem, 2.5vw, 0.8rem);
+                border-radius: 10px;
+                box-shadow: 0 2px 0 #ced6e0;
+                white-space: normal;
+                line-height: 1.2;
+            }
+            .btn-nivel-topo.ativo {
+                box-shadow: 0 2px 0 var(--cor-pre-dark);
+            }
+        }
+		
+    body { scrollbar-gutter: stable; }
+	.icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
+	.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
+	.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
+	h1 .icon-svg { width: 1em; height: 1em; margin-left: 10px; }
+	.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+	
+	/* =========================================
+   CORREÇÃO RESPONSIVA PARA A ÁRVORE (JOGO 2)
+   ========================================= */
+@media (max-width: 600px) {
+    /* Reduz substancialmente o tamanho das imagens dentro da copa da árvore no telemóvel */
+    .zona-arvore .item-drag {
+        width: clamp(38px, 11vw, 48px) !important;
+        height: clamp(38px, 11vw, 48px) !important;
+    }
+
+    /* Torna a copa da árvore mais compacta e ajustada ao ecrã vertical */
+    .zona-arvore {
+        height: clamp(130px, 32vw, 175px) !important;
+        gap: 5px !important;
+        padding: 10px 15px !important;
+        border-radius: 50px 50px 15px 15px !important;
+    }
+
+    /* Reduz e afasta o cesto para que fique perfeitamente posicionado por baixo da árvore */
+    .zona-cesto {
+        width: 100px !important;
+        height: 70px !important;
+        margin-top: 10px;
+    }
+
+    /* Evita que a árvore suba em direção à instrução de texto */
+    .area-jogo-dinamica {
+        gap: 12px !important;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<nav class="sidebar" id="sidebar">
+    <div class="btn-fechar" onclick="toggleMenu()"><span>✕</span> Fechar</div>
+    <ul>
+        	<li><a href="../../"><img src="../../SVG/home.svg" alt="Início" class="icon-svg-menu" onerror="this.style.display='none'">Início</a></li>
+        <li><a href="../"><img src="../../SVG/pre.svg" alt="Pré-Escolar" class="icon-svg-menu" onerror="this.style.display='none'">Pré-Escolar</a></li>
+        <li><a href="../../1"><img src="../../SVG/ano1.svg" alt="1º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 1º Ano</a></li>
+        <li><a href="../../2"><img src="../../SVG/ano2.svg" alt="2º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 2º Ano</a></li>
+        <li><a href="../../3/"><img src="../../SVG/ano3.svg" alt="3º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 3º Ano</a></li>
+        <li><a href="../../4/"><img src="../../SVG/ano4.svg" alt="4º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 4º Ano</a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="header-content">
+        <div class="nav-container">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="../" class="btn-voltar"><img src="../../SVG/voltar.svg" class="icon-svg-voltar" alt=""> Voltar</a>
+        </div>
+		<h1>Super Cores!<img src="super-cores.svg" class="icon-svg-titulo" alt=""></h1>
+        <div class="subtitulo" id="jogo-subtitulo">Aprende as cores a brincar!</div>
+    </div>
+</header>
+
+<main>
+    <div class="caminho-magico" id="caminho-magico">
+        <div class="caminho-trilho">
+            <div class="caminho-avatar" id="avatar-progresso">
+                <img src="pincel.svg" alt="">
+            </div> 
+        </div>
+        <div class="caminho-alvo" id="alvo-progresso">
+            <img src="paleta.svg" alt="">
+        </div> 
+    </div>
+
+    <div class="cartao-jogo-container">
+        
+        <div id="ecra-selecao" class="ecra" style="display: flex; justify-content: center;">
+            <h2 class="titulo-destaque">O que queres jogar?</h2>
+            <div class="cat-grid">
+                <div class="cat-card" onclick="selecionarJogo(1)">
+                    <span class="cat-icon"><img src="monstro_cores.svg" alt="Monstro das Cores"></span>
+                    <span>Monstro das Cores</span>
+                </div>
+                <div class="cat-card" onclick="selecionarJogo(2)">
+                    <span class="cat-icon"><img src="arvore_magica.svg" alt="Árvore Mágica"></span>
+                    <span>Árvore Mágica</span>
+                </div>
+                <div class="cat-card" onclick="selecionarJogo(3)">
+                    <span class="cat-icon"><img src="comboio_cores.svg" alt="Comboio das Cores"></span>
+                    <span>Comboio das Cores</span>
+                </div>
+                <div class="cat-card" onclick="selecionarJogo(4)">
+                    <span class="cat-icon"><img src="misturador.svg" alt="Misturador"></span>
+                    <span>Misturador</span>
+                </div>
+                <div class="cat-card" onclick="selecionarJogo(5)">
+                    <span class="cat-icon"><img src="classificacao_dupla.svg" alt="Classificação Dupla"></span>
+                    <span>Classificação Dupla</span>
+                </div>
+                <div class="cat-card" onclick="selecionarJogo(6)">
+                    <span class="cat-icon"><img src="flor_magica.svg" alt="Flor Mágica"></span>
+                    <span>Flor Mágica</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="ecra-jogo" class="ecra">
+            <div class="container-nav-jogo">
+                <div class="top-row">
+					<button class="btn-voltar-menu" onclick="voltarMenu()"><span><img src="../../SVG/menu_principal.svg" class="btn-voltar-menu-img" alt="Jogar Novamente"></span> OUTROS JOGOS</button>
+                    <div class="level-selector" id="botoes-niveis"></div>
+					<div class="info-nivel" id="info-contagem">0/5</div>
+				
+                
+                
+                </div>
+            </div>
+            
+            <div id="instrucao-container"></div>
+
+            <div id="area-jogo-dinamica" class="area-jogo-dinamica">
+            </div>
+        </div>
+
+        <div id="ecra-fim" class="ecra" style="justify-content: center;">
+            <img src="../../SVG/trofeu.svg" class="img-fim" alt="Troféu">
+            <h2 class="titulo-destaque">Parabéns!</h2>
+            <p id="feedback-fim" style="font-size: 1.2rem; margin-bottom: 30px; color: var(--text-main);">Concluíste o nível com sucesso!</p>
+            <button id="btn-proximo-nivel" class="btn-acao" onclick="proximoNivel()">Próximo Nível <img src="proximo_nivel.svg" class="icon-svg-btn" alt=""></button>
+			<button class="btn-acao" onclick="voltarMenu()" style="background-color: #95a5a6; box-shadow: 0 6px 0 #7f8c8d;">OUTROS JOGOS <img src="../../SVG/menu_principal.svg" class="icon-svg-btn" alt=""></button>
+        </div>
+
+        <canvas id="confetti-canvas"></canvas>
+    </div>
+</main>
+
+<footer>
+    <p><span id="ano-atual"> </span><img src="../../SVG/pre.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
+</style>
+</footer>
+
+<script>
+    document.getElementById('ano-atual').innerText = new Date().getFullYear();
+    function toggleMenu() { 
+        document.getElementById('sidebar').classList.toggle('active'); 
+        document.getElementById('overlay').classList.toggle('active'); 
+        document.getElementById('hamburgerBtn').classList.toggle('open'); 
+    }
+
+
+    const DB = {
+		vermelho: {
+			nome: 'Vermelho', hex: '#ff4757', drop: 'gota_vermelho.svg',
+			itens: {
+				frutas: ['img/vermelho_maca.png', 'img/vermelho_morango.png', 'img/vermelho_tomate.png', 'img/vermelho_cereja.png'],
+				animais: ['img/vermelho_caranguejo.png', 'img/vermelho_joaninha.png', 'img/vermelho_passaro.png', 'img/vermelho_peixe.png'],
+				roupas: ['img/vermelho_cachecol.png', 'img/vermelho_luvas.png', 'img/vermelho_vestido.png', 'img/vermelho_calcas.png']
+			}
+		},
+		azul: {
+			nome: 'Azul', hex: '#0091ff', drop: 'gota_azul.svg',
+			itens: {
+				frutas: ['img/azul_mirtilo.png', 'img/azul_doces.png', 'img/azul_uvas.png'],
+				animais: ['img/azul_baleia.png', 'img/azul_peixe.png', 'img/azul_golfinho.png'],
+				roupas: ['img/azul_calcas.png', 'img/azul_shirt.png', 'img/azul_cachecol.png']
+			}
+		},
+		amarelo: {
+			nome: 'Amarelo', hex: '#F2F200', drop: 'gota_amarelo.svg',
+			itens: {
+				frutas: ['img/amarelo_banana.png', 'img/amarelo_limao.png', 'img/amarelo_pera.png'],
+				animais: ['img/amarelo_pintainho.png', 'img/amarelo_pato.png', 'img/amarelo_galinha.png', 'img/amarelo_peixe.png'],
+				roupas: ['img/amarelo_calcas.png', 'img/amarelo_chinelos.png', 'img/amarelo_shirt.png']
+			}
+		},
+		verde: {
+			nome: 'Verde', hex: '#2ed573', drop: 'gota_verde.svg',
+			itens: {
+				frutas: ['img/verde_maca.png', 'img/verde_pera.png', 'img/verde_uvas.png', 'img/verde_azeitonas.png'],
+				animais: ['img/verde_sapo.png', 'img/verde_tartaruga.png', 'img/verde_cobra.png'],
+				roupas: ['img/verde_chapeu.png', 'img/verde_capacete.png', 'img/verde_calcas.png']
+			}
+		},
+		laranja: {
+			nome: 'Laranja', hex: '#ff922b', drop: 'gota_laranja.svg',
+			itens: {
+				frutas: ['img/laranja_laranja.png', 'img/laranja_cebola.png'],
+				animais: ['img/laranja_raposa.png', 'img/laranja_tigre.png', 'img/laranja_peixe.png'],
+				roupas: ['img/laranja_colete.png', 'img/laranja_gorro.png', 'img/laranja_chinelos.png', 'img/laranja_chapeu.png' ]
+			}
+		},
+		roxo: {
+			nome: 'Roxo', hex: '#9b59b6', drop: 'gota_roxo.svg',
+			itens: {
+				frutas: ['img/roxo_beringela.png', 'img/roxo_uvas.png'],
+				animais: ['img/roxo_peixe.png', 'img/roxo_passaro.png'],
+				roupas: ['img/roxo_camisola.png', 'img/roxo_guarda_chuva.png', 'img/roxo_capacete.png']
+			}
+		},
+		branco: {
+			nome: 'Branco', hex: '#ffffff', drop: 'gota_branco.svg',
+			itens: {
+				frutas: ['img/branco_alho.png', 'img/branco_arroz.png', 'img/branco_ovo.png'],
+				animais: ['img/branco_cisne.png', 'img/branco_ovelha.png', 'img/branco_pomba.png'],
+				roupas: ['img/branco_vestido.png', 'img/branco_camisa.png']
+			}
+		},
+		preto: {
+			nome: 'Preto', hex: '#2d3436', drop: 'gota_preto.svg',
+			itens: {
+				frutas: ['img/preto_bolo.png', 'img/preto_cafe.png', 'img/preto_maca.png'],
+				animais: ['img/preto_gato.png', 'img/preto_orca.png'],
+				roupas: ['img/preto_chapeu.png', 'img/preto_oculos.png', 'img/preto_camisola.png']
+			}
+		},
+		rosa: {
+            nome: 'Rosa', hex: '#ff9ff3', drop: 'gota_rosa.svg',
+            itens: { frutas: ['img/rosa_pessego.png'], animais: ['img/rosa_flamingo.png', 'img/rosa_borboleta.png', 'img/rosa_porco.png'], roupas: ['img/rosa_camisola.png', 'img/rosa_capacete.png', 'img/rosa_meias.png', 'img/rosa_camisa.png'] } 
+        },
+        cinzento: {
+            nome: 'Cinzento', hex: '#a4b0be', drop: 'gota_cinzento.svg',
+            itens: { frutas: ['img/cinzento_tomate.png', 'img/cinzento_beringela.png', 'img/cinzento_cogumelos.png'], animais: ['img/cinzento_golfinho.png', 'img/cinzento_cisne.png', 'img/cinzento_ovelha.png', 'img/cinzento_cegonha.png', 'img/cinzento_lobo.png'], roupas: ['img/cinzento_sapato.png', 'img/cinzento_chinelos.png'] }
+        },
+		azul_claro: { 
+            nome: 'Azul Claro', hex: '#74b9ff', drop: 'gota_azul_claro.svg',
+            itens: { frutas: ['img/azul_claro_uvas.png', 'img/azul_claro_gelo.png'], animais: ['img/azul_claro_golfinho.png', 'img/azul_claro_passaro.png', 'img/azul_claro_peixe.png'], roupas: ['img/azul_claro_camisa.png', 'img/azul_claro_cachecol.png', 'img/azul_claro_capacete.png', 'img/azul_claro_sapato.png'] }
+        }
+    };
+
+    const MISTURAS = {
+        'roxo': ['vermelho', 'azul'],
+        'verde': ['azul', 'amarelo'],
+        'laranja': ['vermelho', 'amarelo'],
+        'rosa': ['vermelho', 'branco'],
+        'cinzento': ['preto', 'branco'],
+		'azul_claro': ['azul', 'branco']		
+    };
+
+    let jogoAtivo = 0, nivelAtual = 1, rondaAtual = 0, totalRondas = 5;
+    let alvosAtuais = [], itensFaltam = 0;
+
+    const areaEcraJogo = document.getElementById('ecra-jogo');
+    const areaDinamica = document.getElementById('area-jogo-dinamica');
+    const instrucaoBox = document.getElementById('instrucao-container');
+
+    function mostrarEcra(id) {
+        document.querySelectorAll('.ecra').forEach(e => e.style.display = 'none');
+        document.getElementById(id).style.display = 'flex';
+    }
+
+    function voltarMenu() {
+        document.getElementById('caminho-magico').style.display = 'none';
+        document.getElementById('jogo-subtitulo').textContent = "Aprende as cores a brincar!";
+        limparConfetis(); // Limpa ao voltar para o ecrã inicial
+        mostrarEcra('ecra-selecao');
+    }
+	
+	
+	function proximoNivel() {
+		nivelAtual++;
+		
+		// Chamamos a função mudarNivel que já limpa a ronda e prepara o jogo
+		mudarNivel(nivelAtual);
+		
+		// Atualizamos visualmente os botões do seletor de níveis (aqueles do topo)
+		const botoes = document.querySelectorAll('.btn-nivel-topo');
+		botoes.forEach((btn, index) => {
+			if (index === (nivelAtual - 1)) {
+				btn.classList.add('ativo');
+			} else {
+				btn.classList.remove('ativo');
+			}
+		});
+	}
+
+    function selecionarJogo(id) {
+        jogoAtivo = id;
+        const titulos = ["Monstro das Cores", "Árvore Mágica", "Comboio das Cores", "Misturador de Cores", "Classificação Dupla", "A Flor Mágica"];
+        document.getElementById('jogo-subtitulo').textContent = titulos[id-1];
+        document.getElementById('caminho-magico').style.display = 'block';
+        
+        gerarBotoesNiveis(id);
+        mudarNivel(1);
+		const coresContador = ['#ff4757', '#2ed573', '#0091ff', '#9b59b6', '#e67e22', '#ff6b81'];
+        document.getElementById('info-contagem').style.color = coresContador[id-1];
+    }
+
+    function gerarBotoesNiveis(id) {
+        const div = document.getElementById('botoes-niveis');
+        div.innerHTML = '';
+        let niveis = ["Nível 1", "Nível 2", "Nível 3"];
+        if(id === 4) niveis = ["Cores Secundárias", "Preto & Branco"];
+        if(id === 6) niveis = ["4 Pétalas", "6 Pétalas", "8 Pétalas"];
+
+        niveis.forEach((txt, i) => {
+            const btn = document.createElement('button');
+            btn.className = `btn-nivel-topo ${i===0?'ativo':''}`;
+            btn.innerText = txt;
+            btn.onclick = () => { mudarNivel(i+1); document.querySelectorAll('.btn-nivel-topo').forEach(b=>b.classList.remove('ativo')); btn.classList.add('ativo'); };
+            div.appendChild(btn);
+        });
+    }
+
+    function mudarNivel(n) {
+        nivelAtual = n; 
+        rondaAtual = 0;
+        limparConfetis(); // Limpa os confetes do ecrã de vitória anterior ao iniciar um novo nível
+        
+        if (jogoAtivo === 4) {
+            totalRondas = 3;
+        } else {
+            totalRondas = 5;
+        }
+        
+        mostrarEcra('ecra-jogo');
+        prepararRonda();
+    }
+
+    function atualizarCaminho() {
+        document.getElementById('avatar-progresso').style.left = `${(rondaAtual / totalRondas) * 100}%`;
+        document.getElementById('info-contagem').textContent = `${rondaAtual}/${totalRondas}`;
+    }
+
+    function prepararRonda() {
+        atualizarCaminho();
+        areaDinamica.innerHTML = '';
+        instrucaoBox.innerHTML = '';
+        itensFaltam = 0;
+
+        switch(jogoAtivo) {
+            case 1: gerarMonstro(); break;
+            case 2: gerarArvore(); break;
+            case 3: gerarComboio(); break;
+            case 4: gerarMisturador(); break;
+            case 5: gerarClassificacao(); break;
+            case 6: gerarFlor(); break;
+        }
+    }
+
+    function gerarMonstro() {
+        let pool = nivelAtual === 1 ? ['vermelho','azul'] : (nivelAtual === 2 ? ['vermelho','azul','amarelo','verde'] : Object.keys(DB).slice(0,6));
+        let corAlvo = pool[Math.floor(Math.random() * pool.length)];
+        
+        const monstroIcon = '<img src="monstro_cores.svg" style="width:2rem; height:2rem; vertical-align:middle; margin-right:5px;" alt="">';
+        instrucaoBox.innerHTML = `<h2 class="pergunta-destaque">${monstroIcon} Quero o <span class="tag-cor" style="background:${DB[corAlvo].hex}">${DB[corAlvo].nome}</span></h2>`;
+        
+        areaDinamica.innerHTML = `<div class="zona-monstro" id="drop-monstro" data-cor="${corAlvo}"></div><div class="area-itens" id="zona-itens"></div>`;
+        const dropZone = document.getElementById('drop-monstro');
+        let itens = gerarListaItens(corAlvo, pool, 10, 'tudo');
+        itensFaltam = itens.filter(i => i.cor === corAlvo).length;
+        itens.forEach(item => {
+            let el = criarElementoArrastavel(item.emoji, item.cor);
+            document.getElementById('zona-itens').appendChild(el);
+            ativarDragDrop(el, [dropZone], (alvo) => validarDropUnico(el, item.cor, alvo));
+        });
+    }
+
+    function gerarArvore() {
+        let pool = ['vermelho','amarelo','verde'];
+        if(nivelAtual > 1) pool.push('laranja','roxo');
+        let corAlvo = pool[Math.floor(Math.random() * pool.length)];
+        let tipo = nivelAtual === 1 ? 'frutas' : (nivelAtual === 2 ? 'animais' : 'tudo');
+        
+        const arvoreIcon = '<img src="arvore_magica.svg" style="width:2rem; height:2rem; vertical-align:middle; margin-right:5px;" alt="">';
+        instrucaoBox.innerHTML = `<h2 class="pergunta-destaque">${arvoreIcon} Colhe o que é <span class="tag-cor" style="background:${DB[corAlvo].hex}">${DB[corAlvo].nome}</span></h2>`;
+        
+
+        areaDinamica.innerHTML = `<div class="zona-arvore" id="copa-arvore"></div><div class="zona-cesto" id="drop-cesto" data-cor="${corAlvo}"><img src="cesto.svg" style="width:75%; height:75%; object-fit:contain;" alt=""></div>`;
+        
+        const dropZone = document.getElementById('drop-cesto');
+        let itens = gerarListaItens(corAlvo, pool, 8 + (nivelAtual*2), tipo);
+        itensFaltam = itens.filter(i => i.cor === corAlvo).length;
+        itens.forEach(item => {
+            let el = criarElementoArrastavel(item.emoji, item.cor);
+            let rotacaoAleatoria = Math.floor(Math.random() * 30) - 15;
+            el.style.transform = `rotate(${rotacaoAleatoria}deg)`;
+            document.getElementById('copa-arvore').appendChild(el);
+            ativarDragDrop(el, [dropZone], (alvo) => validarDropUnico(el, item.cor, alvo));
+        });
+    }
+
+    function gerarComboio() {
+        let nVagoes = nivelAtual + 1; 
+        let pool = Object.keys(DB).sort(() => Math.random() - 0.5).slice(0, nVagoes);
+
+		
+		const comboioIcon = '<img src="comboio_cores.svg" style="width:2rem; height:2rem; vertical-align:middle; margin-left:8px;" alt="">';
+        instrucaoBox.innerHTML = `<h2 class="pergunta-destaque">Arruma os objetos nos vagões da mesma cor! ${comboioIcon}</h2>`;
+        
+        let vagoesHTML = pool.map(c => `<div class="vagao" id="vagao-${c}" data-cor="${c}" style="border-color:${DB[c].hex}; background:${DB[c].hex}22;"></div>`).join('');
+        areaDinamica.innerHTML = `<div class="area-itens" id="zona-itens"></div><div class="area-vagoes">${vagoesHTML}</div>`;
+        let dropZones = pool.map(c => document.getElementById(`vagao-${c}`));
+        let itens = [];
+        
+        pool.forEach(c => {
+            // Junta todas as categorias da cor, baralha e escolhe duas imagens de forma dinâmica
+            let todosItens = [
+                ...(DB[c].itens.frutas || []),
+                ...(DB[c].itens.animais || []),
+                ...(DB[c].itens.roupas || [])
+            ].sort(() => Math.random() - 0.5);
+            
+            itens.push({ cor: c, emoji: todosItens[0] });
+            itens.push({ cor: c, emoji: todosItens[1] || todosItens[0] });
+        });
+        
+        itensFaltam = itens.length;
+        itens.sort(() => Math.random() - 0.5).forEach(item => {
+            let el = criarElementoArrastavel(item.emoji, item.cor);
+            document.getElementById('zona-itens').appendChild(el);
+            ativarDragDrop(el, dropZones, (alvo) => validarDropUnico(el, item.cor, alvo));
+        });
+    }
+
+    function gerarMisturador() {
+        let chavesMistura = nivelAtual === 1 ? ['roxo','verde','laranja'] : ['rosa','cinzento','azul_claro'];
+        let alvoKey = chavesMistura[rondaAtual % chavesMistura.length];
+        let ingredientes = MISTURAS[alvoKey];
+        
+        const misturadorIcon = '<img src="misturador.svg" style="width:2rem; height:2rem; vertical-align:middle; margin-right:5px;" alt="">';
+        instrucaoBox.innerHTML = `<h2 class="pergunta-destaque">${misturadorIcon} Cria a cor <span class="tag-cor" style="background:${DB[alvoKey].hex}">${DB[alvoKey].nome}</span></h2>`;
+        
+        areaDinamica.innerHTML = `<div class="zona-laboratorio"><div class="frasco" id="drop-frasco"><div class="liquido" id="liquido-frasco"></div></div></div><div class="area-itens" id="bancada" style="margin-top:20px; border:none; background:transparent;"></div>`;
+        const dropZone = document.getElementById('drop-frasco');
+        window.misturaAtual = [];
+        itensFaltam = 2; 
+        let gotas = [...ingredientes];
+        let errada = Object.keys(DB).find(k => k !== ingredientes[0] && k !== ingredientes[1] && k !== alvoKey);
+        gotas.push(errada);
+        gotas.sort(() => Math.random() - 0.5).forEach(cor => {
+            let el = criarElementoArrastavel(DB[cor].drop, cor);
+            document.getElementById('bancada').appendChild(el);
+            ativarDragDrop(el, [dropZone], (alvo) => {
+                if(ingredientes.includes(cor) && !window.misturaAtual.includes(cor)) {
+                    el.style.visibility = 'hidden';
+                    window.misturaAtual.push(cor);
+                    tocarSom('pop');
+                    
+                    let liq = document.getElementById('liquido-frasco');
+                    liq.style.height = (window.misturaAtual.length * 50) + '%';
+                    liq.style.backgroundColor = DB[cor].hex;
+                    
+                    itensFaltam--;
+                    
+                    if(itensFaltam === 0) {
+                        setTimeout(() => { 
+                            liq.style.backgroundColor = DB[alvoKey].hex; 
+                            tocarSom('acerto'); 
+                        }, 500);
+
+                        setTimeout(() => { 
+                            verificarVitoriaRonda(); 
+                        }, 2500);
+                    }
+                } else {
+                    el.style.transform = "none"; 
+                    el.classList.add('error-shake'); 
+                    tocarSom('erro');
+                    setTimeout(() => el.classList.remove('error-shake'), 400);
+                }
+            });
+        });
+    }
+
+
+	function formatarNome(categoria, chaveCor) {
+        // Frutas e roupas são femininas; Animais são masculinos
+        const isFeminino = (categoria === 'frutas' || categoria === 'roupas');
+        let nomeCor = DB[chaveCor].nome.toLowerCase();
+        let corAjustada = '';
+
+        // Exceções e cores invariáveis em género
+        if (nomeCor === 'azul') corAjustada = 'Azuis';
+        else if (nomeCor === 'verde') corAjustada = 'Verdes';
+        else if (nomeCor === 'laranja') corAjustada = 'Laranjas';
+        else if (nomeCor === 'rosa') corAjustada = 'Rosas';
+        else if (nomeCor === 'azul claro') corAjustada = 'Azuis Claros';
+        else {
+            // Cores que mudam de género (vermelho, amarelo, roxo, preto, branco, cinzento)
+            if (isFeminino) {
+                // Tira o "o" do final e põe "as" (ex: vermelh-o -> vermelh-as)
+                corAjustada = nomeCor.slice(0, -1) + 'as';
+            } else {
+                // Apenas adiciona "s" ao masculino (ex: vermelho -> vermelhos)
+                corAjustada = nomeCor + 's';
+            }
+        }
+        
+        // Capitalizar a primeira letra da categoria e da cor
+        corAjustada = corAjustada.charAt(0).toUpperCase() + corAjustada.slice(1);
+        let catCapitalizada = categoria.charAt(0).toUpperCase() + categoria.slice(1);
+        
+        return catCapitalizada + ' ' + corAjustada;
+    }
+
+    function gerarClassificacao() {
+        let nCards = nivelAtual === 1 ? 4 : (nivelAtual === 2 ? 6 : 9);
+        let gridCategorias = ['frutas', 'animais', 'roupas'];
+        let cores = ['vermelho', 'azul', 'amarelo', 'verde'];
+        
+        let catAlvo = gridCategorias[Math.floor(Math.random() * gridCategorias.length)];
+        let corAlvo = cores[Math.floor(Math.random() * cores.length)];
+        let catNomePT = catAlvo === 'frutas' ? 'Comidas' : (catAlvo === 'animais' ? 'Animais' : 'Roupas');
+        
+        let nomeCor = DB[corAlvo].nome.toLowerCase();
+        let corFormatada = '';
+        let isFeminino = (catAlvo === 'frutas' || catAlvo === 'roupas');
+
+        if (nomeCor === 'azul') corFormatada = 'Azuis';
+        else if (nomeCor === 'verde') corFormatada = 'Verdes';
+        else if (nomeCor === 'laranja') corFormatada = 'Laranjas';
+        else if (nomeCor === 'rosa') corFormatada = 'Rosas';
+        else if (nomeCor === 'azul claro') corFormatada = 'Azuis Claros';
+        else {
+            if (isFeminino) {
+                corFormatada = nomeCor.slice(0, -1) + 'as';
+            } else {
+                corFormatada = nomeCor + 's';
+            }
+        }
+        corFormatada = corFormatada.charAt(0).toUpperCase() + corFormatada.slice(1);
+
+        const classificacaoIcon = '<img src="classificacao_dupla.svg" style="width:2rem; height:2rem; vertical-align:middle; margin-right:5px;" alt="">';
+        instrucaoBox.innerHTML = `<h2 class="pergunta-destaque">${classificacaoIcon} Encontra: <span class="tag-cor" style="background:${DB[corAlvo].hex}">${catNomePT} ${corFormatada}</span></h2>`;
+        areaDinamica.innerHTML = `<div class="grid-classificacao" id="grid-dupla"></div>`;
+        const grid = document.getElementById('grid-dupla');
+
+        let itens = [];
+        
+        // Garante que seleciona as 2 cartas corretas de forma baralhada e sem repetir o mesmo SVG
+        let corretosDisponiveis = [...DB[corAlvo].itens[catAlvo]].sort(() => Math.random() - 0.5);
+        for(let i=0; i<2; i++) {
+            itens.push({ cor: corAlvo, cat: catAlvo, e: corretosDisponiveis[i % corretosDisponiveis.length] });
+        }
+        
+        // Junta todas as opções incorretas possíveis na ronda
+        let poolIncorretos = [];
+        cores.forEach(c => {
+            gridCategorias.forEach(cat => {
+                if (c !== corAlvo || cat !== catAlvo) {
+                    (DB[c].itens[cat] || []).forEach(item => {
+                        poolIncorretos.push({ cor: c, cat: cat, e: item });
+                    });
+                }
+            });
+        });
+        
+        // Baralha todas as opções incorretas e preenche o deck de forma inteiramente única
+        poolIncorretos.sort(() => Math.random() - 0.5);
+        while(itens.length < nCards && poolIncorretos.length > 0) {
+            itens.push(poolIncorretos.pop());
+        }
+        
+        itensFaltam = 2;
+        itens.sort(() => Math.random() - 0.5).forEach(item => {
+            let btn = document.createElement('div');
+            btn.className = "card-item"; 
+
+            let isImagem = item.e.includes('.') || item.e.includes('/') || item.e.includes('http');
+            btn.innerHTML = isImagem 
+                ? `<img src="${item.e}" style="width:80%; height:80%; pointer-events:none; object-fit:contain;">`
+                : item.e;
+            
+            btn.onclick = () => {
+                if(btn.classList.contains('selected')) return;
+                if(item.cor === corAlvo && item.cat === catAlvo) {
+                    btn.classList.add('selected'); 
+                    tocarSom('acerto'); 
+                    itensFaltam--;
+                    if(itensFaltam === 0) setTimeout(verificarVitoriaRonda, 600);
+                } else {
+                    btn.classList.add('error-shake'); 
+                    tocarSom('erro');
+                    setTimeout(() => btn.classList.remove('error-shake'), 400);
+                }
+            };
+            grid.appendChild(btn);
+        });
+    }
+
+    function gerarFlor() {
+        let nPetalas = nivelAtual === 1 ? 4 : (nivelAtual === 2 ? 6 : 8);
+        let poolCores = ['vermelho','azul','amarelo','laranja','roxo'];
+        let corAlvo = poolCores[Math.floor(Math.random() * poolCores.length)];
+        
+        let nomeCor = DB[corAlvo].nome.toLowerCase();
+        let corFormatada = '';
+        
+        if (nomeCor === 'azul') corFormatada = 'Azuis';
+        else if (nomeCor === 'verde') corFormatada = 'Verdes';
+        else if (nomeCor === 'laranja') corFormatada = 'Laranjas';
+        else {
+            corFormatada = nomeCor.slice(0, -1) + 'as'; 
+        }
+        corFormatada = corFormatada.charAt(0).toUpperCase() + corFormatada.slice(1);
+
+        const florIcon = '<img src="flor_magica.svg" style="width:2rem; height:2rem; vertical-align:middle; margin-right:5px;" alt="">';
+        instrucaoBox.innerHTML = `<h2 class="pergunta-destaque">${florIcon} Tira as pétalas <span class="tag-cor" style="background:${DB[corAlvo].hex}">${corFormatada}</span></h2>`;
+        
+        // Emojis de carinha substituídos por imagens SVG locais
+        areaDinamica.innerHTML = `<div class="zona-flor"><div class="miolo-flor" id="miolo-flor"><img src="carinha_feliz.svg" id="img-miolo" alt="Miolo"></div><div id="petalas-container"></div></div>`;
+        const container = document.getElementById('petalas-container');
+        
+        let petalas = [];
+        let nCorretas = Math.floor(nPetalas / 2);
+        itensFaltam = nCorretas;
+        for(let i=0; i<nCorretas; i++) petalas.push(corAlvo);
+        
+        while(petalas.length < nPetalas) {
+            let c = poolCores[Math.floor(Math.random()*poolCores.length)];
+            if(c !== corAlvo) petalas.push(c);
+        }
+        
+        petalas.sort(() => Math.random() - 0.5).forEach((cor, i) => {
+            let p = document.createElement('div');
+            p.className = 'petala';
+            p.style.backgroundColor = DB[cor].hex;
+            let angle = (i * (360 / nPetalas)) * (Math.PI / 180);
+            let radius = 80; 
+            p.style.left = `calc(50% + ${Math.cos(angle) * radius}px - 40px)`;
+            p.style.top = `calc(50% + ${Math.sin(angle) * radius}px - 40px)`;
+            p.style.transform = `rotate(${(i * (360 / nPetalas)) + 45}deg)`;
+            
+            p.onclick = () => {
+                if(cor === corAlvo) {
+                    p.style.transform = `scale(0)`; p.style.opacity = 0; p.style.pointerEvents = 'none';
+                    tocarSom('acerto'); itensFaltam--;
+                    if(itensFaltam === 0) { 
+                        // Altera o SVG do miolo para a versão com óculos de sol quando vence
+                        document.getElementById('img-miolo').src = 'carinha_oculos.svg'; 
+                        setTimeout(verificarVitoriaRonda, 800); 
+                    }
+                } else {
+                    p.classList.add('error-shake'); tocarSom('erro');
+                    setTimeout(() => p.classList.remove('error-shake'), 400);
+                }
+            };
+            container.appendChild(p);
+        });
+    }
+
+    function gerarListaItens(corAlvo, poolCores, quantidade, tipo = 'tudo') {
+        let itens = [];
+        let numCorretos = Math.max(2, Math.floor(quantidade / 3)); 
+
+        const obterItensBaralhados = (cor) => {
+            let arr = [];
+            if(tipo==='frutas' || tipo==='tudo') arr.push(...(DB[cor].itens.frutas || []));
+            if(tipo==='animais' || tipo==='tudo') arr.push(...(DB[cor].itens.animais || []));
+            if(tipo==='roupas' || tipo==='tudo') arr.push(...(DB[cor].itens.roupas || []));
+            if(arr.length === 0) arr.push(DB[cor].drop);
+            return arr.sort(() => Math.random() - 0.5);
+        };
+
+        // Seleciona os itens corretos únicos da cor alvo
+        let corretosDisponiveis = obterItensBaralhados(corAlvo);
+        for(let i=0; i<numCorretos; i++) {
+            itens.push({ cor: corAlvo, emoji: corretosDisponiveis[i % corretosDisponiveis.length] });
+        }
+
+        // Seleciona os itens incorretos baralhados de outras cores sem duplicar o alvo
+        while(itens.length < quantidade) {
+            let c = poolCores[Math.floor(Math.random() * poolCores.length)];
+            if(c !== corAlvo) {
+                let incorretosDisponiveis = obterItensBaralhados(c);
+                let item = incorretosDisponiveis[Math.floor(Math.random() * incorretosDisponiveis.length)];
+                itens.push({ cor: c, emoji: item });
+            }
+        }
+        return itens.sort(() => Math.random() - 0.5);
+    }
+
+    // A FUNÇÃO INTELIGENTE QUE DETETA SE É IMAGEM OU EMOJI
+    function criarElementoArrastavel(conteudo, corID) {
+        const el = document.createElement('div');
+        el.className = 'item-drag'; 
+        el.dataset.cor = corID;
+
+
+        if (conteudo.includes('.') || conteudo.includes('/') || conteudo.includes('http')) {
+            const img = document.createElement('img');
+            img.src = conteudo;
+            img.style.width = '100%'; 
+            img.style.height = '100%';
+            img.style.objectFit = 'contain';
+            img.style.pointerEvents = 'none';
+            el.appendChild(img);
+        } else {
+
+            el.innerText = conteudo;
+        }
+
+        return el;
+    }
+
+    function ativarDragDrop(el, zonasAlvoArray, callbackDrop) {
+        let isDragging = false, startX, startY;
+        el.onpointerdown = (e) => { isDragging = true; el.setPointerCapture(e.pointerId); startX = e.clientX; startY = e.clientY; el.style.zIndex = 1000; };
+        el.onpointermove = (e) => {
+            if(!isDragging) return;
+            el.style.transform = `translate(${e.clientX - startX}px, ${e.clientY - startY}px)`;
+            zonasAlvoArray.forEach(z => {
+                let r = z.getBoundingClientRect();
+                if(e.clientX > r.left && e.clientX < r.right && e.clientY > r.top && e.clientY < r.bottom) z.classList.add('drag-over');
+                else z.classList.remove('drag-over');
+            });
+        };
+        el.onpointerup = (e) => {
+            isDragging = false; 
+            let droppedZone = null;
+            zonasAlvoArray.forEach(z => {
+                z.classList.remove('drag-over');
+                let r = z.getBoundingClientRect();
+                if(e.clientX > r.left && e.clientX < r.right && e.clientY > r.top && e.clientY < r.bottom) droppedZone = z;
+            });
+            if(droppedZone) callbackDrop(droppedZone);
+            else { el.style.transform = "none"; el.style.zIndex = 10; } 
+        };
+    }
+
+    function validarDropUnico(el, corItem, zonaAlvo) {
+        const corRequerida = zonaAlvo.dataset.cor;
+        if(corItem === corRequerida) {
+            el.style.visibility = 'hidden'; el.style.pointerEvents = 'none';
+            tocarSom('acerto'); itensFaltam--;
+            if(itensFaltam === 0) setTimeout(verificarVitoriaRonda, 500);
+        } else {
+            el.style.transform = "none"; el.style.zIndex = 10;
+            el.classList.add('error-shake'); tocarSom('erro');
+            setTimeout(() => el.classList.remove('error-shake'), 400);
+        }
+    }
+
+    function verificarVitoriaRonda() {
+		rondaAtual++;
+		if(rondaAtual >= totalRondas) {
+			atualizarCaminho(); 
+			tocarSom('vitoria'); 
+			dispararConfetis();
+			
+			document.getElementById('feedback-fim').innerText = `Fizeste um excelente trabalho no Nível ${nivelAtual}!`;
+
+			// Definir quantos níveis tem cada jogo
+			let maxNiveis = 3; 
+			if(jogoAtivo === 4) maxNiveis = 2; // Misturador só tem 2
+
+			const btnProximo = document.getElementById('btn-proximo-nivel');
+
+			if (nivelAtual < maxNiveis) {
+				// Se ainda não é o último nível, mostra o botão
+				btnProximo.style.display = 'inline-block';
+			} else {
+				// Se for o último nível, esconde o botão e muda o texto
+				btnProximo.style.display = 'none';
+				document.getElementById('feedback-fim').innerText = `Uau! Completaste todos os níveis deste jogo!`;
+			}
+
+			mostrarEcra('ecra-fim');
+		} else {
+			prepararRonda();
+		}
+	}
+
+    /* =========================================
+       SISTEMA DE SOM E CONFETIS
+       ========================================= */
+    let audioCtx = null;
+    function iniciarAudio() { if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); if (audioCtx.state === 'suspended') audioCtx.resume(); } }
+    document.body.addEventListener('click', iniciarAudio, { once: true }); document.body.addEventListener('touchstart', iniciarAudio, { once: true });
+
+    function tocarSom(tipo) {
+        if (!audioCtx) return; const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain(); osc.connect(gain); gain.connect(audioCtx.destination); const agora = audioCtx.currentTime;
+        if (tipo === 'pop') { osc.type = 'sine'; osc.frequency.setValueAtTime(400, agora); osc.frequency.exponentialRampToValueAtTime(800, agora + 0.1); gain.gain.setValueAtTime(0.05, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.1); osc.start(agora); osc.stop(agora + 0.1); }
+        else if (tipo === 'acerto') { osc.type = 'sine'; osc.frequency.setValueAtTime(600, agora); osc.frequency.exponentialRampToValueAtTime(1200, agora + 0.2); gain.gain.setValueAtTime(0.1, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3); osc.start(agora); osc.stop(agora + 0.3); } 
+        else if (tipo === 'erro') { osc.type = 'sawtooth'; osc.frequency.setValueAtTime(150, agora); gain.gain.setValueAtTime(0.1, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3); osc.start(agora); osc.stop(agora + 0.3); }
+        else if (tipo === 'vitoria') { const notas =[440, 554.37, 659.25, 880, 1046.50]; notas.forEach((freq, i) => { const o = audioCtx.createOscillator(); const g = audioCtx.createGain(); o.connect(g); g.connect(audioCtx.destination); o.type = 'triangle'; o.frequency.value = freq; g.gain.setValueAtTime(0.1, agora + i * 0.15); g.gain.exponentialRampToValueAtTime(0.01, agora + i * 0.15 + 0.6); o.start(agora + i * 0.15); o.stop(agora + i * 0.15 + 0.6); }); }
+    }
+
+    const canvasConfetti = document.getElementById('confetti-canvas');
+    const ctxConfetti = canvasConfetti.getContext('2d');
+    let confetis =[];
+
+    function redimensionarCanvas() { canvasConfetti.width = document.querySelector('.cartao-jogo-container').clientWidth; canvasConfetti.height = document.querySelector('.cartao-jogo-container').clientHeight; }
+    window.addEventListener('resize', redimensionarCanvas);
+
+    function dispararConfetis() {
+        redimensionarCanvas(); confetis =[]; const cores =['#4fd1c5', '#ff4757', '#ffa502', '#eccc68'];
+        for (let i = 0; i < 100; i++) { confetis.push({ x: Math.random() * canvasConfetti.width, y: Math.random() * canvasConfetti.height - canvasConfetti.height, w: Math.random() * 10 + 5, h: Math.random() * 10 + 5, cor: cores[Math.floor(Math.random() * cores.length)], velY: Math.random() * 3 + 2, velX: Math.random() * 2 - 1, rotacao: Math.random() * 360, velRotacao: Math.random() * 5 - 2.5 }); }
+        animarConfetis();
+    }
+
+    function animarConfetis() {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); let ativos = false;
+        confetis.forEach(c => { c.y += c.velY; c.x += c.velX; c.rotacao += c.velRotacao; if (c.y < canvasConfetti.height) ativos = true; ctxConfetti.save(); ctxConfetti.translate(c.x, c.y); ctxConfetti.rotate(c.rotacao * Math.PI / 180); ctxConfetti.fillStyle = c.cor; ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); ctxConfetti.restore(); });
+        if (ativos) requestAnimationFrame(animarConfetis);
+    }
+	
+	function limparConfetis() {
+        confetis = [];
+        if (ctxConfetti && canvasConfetti) {
+            ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+        }
+    }
+</script>
+</body>
+</html>

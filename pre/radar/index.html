@@ -1,0 +1,2664 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pré-Escolar - O Radar 🦇</title>
+    
+    <link rel="icon" type="image/png" href="../../logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        /* =====================================================================
+            1. VARIÁVEIS GLOBAIS E ESTRUTURA BASE (TEMPLATES)
+        ===================================================================== */
+
+        :root {
+            --bg-body: #f0f7ff;
+            --cor-pre: #4fd1c5;       
+            --cor-pre-dark: #38a89d;
+            --cor-borda: #48b5aa;    
+            --bg-header: #e1f5f2;    
+            --azul-escuro: #0d47a1;
+            --text-main: #455a64;
+            --azul-vibrante: #0091ff; 
+            
+            /* CORES DOS CARTÕES DO MENU INICIAL (COM VARIÁVEIS DE SOMBRA COMBINANTES) */
+            --cor-btn-azul: #61A0FF;
+            --cor-btn-azul-sombra: #4a8deb;
+            --cor-btn-verde: #5DD279;
+            --cor-btn-verde-sombra: #45b062;
+            --cor-btn-amarelo: #FBC531;
+            --cor-btn-amarelo-sombra: #d4a31c;
+            --cor-btn-vermelho: #FF6B6B;
+            --cor-btn-vermelho-sombra: #e05d5d;
+            --cor-btn-roxo: #A55EEA;
+            --cor-btn-roxo-sombra: #8e44ad;
+            --cor-btn-laranja: #FA983A;
+            --cor-btn-laranja-sombra: #d97d2c;
+            
+            /* CORES DO CONTAINER DE JOGO + RGBA PARA ALTERAR A SHADOW */
+            --cor-c1: #ff6b6b; /* vermelho */
+            --cor-c1-sombra: rgba(255, 107, 107, 0.55);
+            
+            --cor-c2: #4dabf7; /* azul */
+            --cor-c2-sombra: rgba(77, 171, 247, 0.66);
+            
+            --cor-c3: #51cf66; /* verde */
+            --cor-c3-sombra: rgba(69, 176, 98, 0.52);
+            
+            --cor-c4: #fcc419; /* amarelo */
+            --cor-c4-sombra: rgba(251, 197, 49, 0.75);
+            
+            --cor-c5: #cc5de8; /* roxo */
+            --cor-c5-sombra: rgba(165, 94, 234, 0.65);
+            
+            --cor-c6: #ff922b; /* laranja */
+            --cor-c6-sombra: rgba(250, 152, 58, 0.85);
+        }
+
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            text-align: center; 
+            background-color: var(--bg-body); 
+            background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px); 
+            background-size: 25px 25px; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+            overflow-x: hidden; 
+            touch-action: pan-y;
+        }
+
+        /* =====================================================================
+            2. CABEÇALHO, MENU HAMBÚRGUER E BARRA LATERAL (SIDEBAR)
+        ===================================================================== */
+
+        header { 
+            background-color: var(--bg-header); 
+            padding: 25px 20px; 
+            border-bottom: 1px solid var(--cor-borda); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+            position: relative; 
+            flex-shrink: 0; 
+            z-index: 100; 
+        }
+
+        .header-content { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            position: relative; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
+
+        .nav-container { 
+            width: 100%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: flex-start; 
+            gap: 15px; 
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            z-index: 10; 
+        }
+
+        .hamburger { 
+            cursor: pointer; 
+            background: rgba(255,255,255,0.4); 
+            border: none; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 4px; 
+            padding: 10px; 
+            border-radius: 8px; 
+            transition: background 0.4s ease; 
+        }
+
+        .hamburger:hover { background: #fff9c4; }
+        .hamburger span { display: block; width: 20px; height: 2px; background: var(--azul-escuro); transition: 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+        .btn-voltar { 
+            background: var(--cor-pre); 
+            color: white; 
+            border: none; 
+            padding: 8px 20px; 
+            border-radius: 20px; 
+            font-weight: 700; 
+            text-decoration: none; 
+            font-size: 0.9rem; 
+            box-shadow: 0 3px 0 var(--cor-pre-dark); 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: transform 0.2s; 
+            cursor: pointer; 
+        }
+
+        .btn-voltar:hover { transform: scale(1.05); }
+
+        h1 {
+    color: var(--azul-escuro);
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    text-shadow: 
+        -2px -2px 0 #ffffff,  
+         2px -2px 0 #ffffff,
+        -2px  2px 0 #ffffff,
+         2px  2px 0 #ffffff, 
+         0px  6px 12px rgba(0, 0, 0, 0.15); 
+}
+        .subtitulo { color: var(--azul-escuro); font-size: clamp(0.85rem, 3vw, 1.1rem); font-weight: 500; opacity: 0.8; margin-top: 15px; }
+
+        .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: white; z-index: 200; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.1); text-align: left; }
+        .sidebar.active { left: 0; }
+        .sidebar .btn-fechar { background: #fff5f5; color: #ff4757; padding: 20px 25px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; border-bottom: 1px solid #ffebeb; }
+        .sidebar ul { list-style: none; padding: 15px; margin: 0; }
+        .sidebar li a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--text-main); background: #f8fafc; border-radius: 12px; margin-bottom: 8px; transition: 0.3s; }
+        .sidebar li a:hover { background: var(--cor-pre); color: white; transform: translateX(8px); }
+
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 150; }
+        .overlay.active { display: block; }
+
+        /* =====================================================================
+            3. ESTRUTURA DOS CONTENTORES E AJUSTES RESPONSIVOS
+        ===================================================================== */
+
+        main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 25px 20px; width: 100%; box-sizing: border-box; }
+
+        .cartao-jogo-container { 
+            background: white; 
+            width: 100%; 
+            max-width: 950px; 
+            flex: 1; 
+            min-height: 0;
+            padding: 25px 20px; 
+            border-radius: 30px; 
+            box-shadow: 0 4px 15px var(--cor-c6-sombra); 
+            border-top: 8px solid var(--cor-c6); 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: flex-start; 
+            position: relative; 
+            overflow: hidden; 
+        }
+
+        footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--cor-borda); flex-shrink: 0; width: 100%; }
+        footer p { font-size: 0.8rem; color: var(--cor-borda); margin: 0; display: }
+        footer a { color: var(--cor-borda); text-decoration: none; font-weight: 700; }
+
+        .icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
+        .icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; object-fit: contain; }
+        .icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right: 5px; margin-left: 7px; object-fit: contain; }
+        .icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+
+        /* =====================================================================
+            4. O CAMINHO MÁGICO (PROGRESSO DO BONECO COM TRILHO)
+        ===================================================================== */
+
+        .caminho-magico { width: 100%; max-width: 750px; height: 50px; position: relative; display: none; margin-bottom: 5px; flex-shrink: 0; }
+        .caminho-trilho { position: absolute; bottom: 10px; left: 40px; right: 70px; height: 0; border-bottom: 4px dashed #cbd5e1; z-index: 1; }
+
+        .caminho-rasto {
+            position: absolute;
+            bottom: -4px; 
+            left: 0;
+            width: 0%; 
+            height: 4px;
+            background-color: var(--cor-c6);
+            border-radius: 4px;
+            box-shadow: 0 0 8px var(--cor-c6-sombra); 
+            transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 2;
+        }
+
+        .caminho-avatar { 
+            position: absolute; 
+            left: 0%; 
+            bottom: -5px;
+			transform: translateX(-80%); 			
+            width: clamp(40px, 8vw, 50px); 
+            height: auto;
+            object-fit: contain;
+            transition: left 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); 
+            z-index: 3; 
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); 
+            pointer-events: none;
+        }
+
+        .caminho-alvo { 
+            position: absolute; 
+            right: 10px; 
+            bottom: 5px; 
+            width: clamp(45px, 9vw, 55px); 
+            height: auto;
+            object-fit: contain;
+            z-index: 2; 
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); 
+            pointer-events: none;
+            animation: pulsaAlvo 1.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulsaAlvo { 
+            0% { transform: scale(1) rotate(0deg); } 
+            100% { transform: scale(1.15) rotate(0deg); } 
+        }
+
+        /* =====================================================================
+            5. GRELHA DE NAVEGAÇÃO INTERNA TRIPARTIDA DO JOGO
+        ===================================================================== */
+
+        .container-nav-jogo { 
+            width: 100%; 
+            max-width: 700px; 
+            margin: 0 auto;   
+            padding-bottom: 12px; 
+            margin-bottom: 10px; 
+            border-bottom: 2px dashed #e1f5f2; 
+        }
+
+        .top-row-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr; 
+            align-items: center;
+            gap: 15px;
+        }
+
+        .top-row-grid .col-esquerda { justify-self: start; }
+        .top-row-grid .col-centro { justify-self: center; text-align: center; }
+        .top-row-grid .col-direita { justify-self: end; }
+
+        /* =====================================================================
+            6. CLASSIFICAÇÃO DOS ECRÃS E ELEMENTOS DO MENU
+        ===================================================================== */
+
+        .ecra { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; min-height: 350px; text-align: center; flex: 1; box-sizing: border-box; }
+
+        .animacao-tutorial {
+            width: 100%; max-width: 400px; height: 180px;
+            background: #f4faff; border: 3px dashed var(--cor-pre); border-radius: 20px;
+            margin: 0 auto 25px; display: flex; align-items: center; justify-content: center;
+            box-shadow: inset 0 0 15px rgba(0, 145, 255, 0.05); color: var(--cor-pre); font-size: 1.2rem; font-weight: 900;
+            overflow: hidden;
+        }
+
+        .grid-niveis {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+		
+		.grid-niveis > .btn-nivel-novo:only-child {
+			grid-column: 1 / -1; /* Faz o botão ocupar ambas as colunas da grelha */
+			justify-self: center; /* Centra o botão horizontalmente */
+			max-width: 400px; /* Mantém um tamanho confortável e proporcional */
+		}
+
+		/* CAIXA DE NARRATIVA PEDAGÓGICA (COM SUPORTE RELATIVO PARA BOTÃO DE ÁUDIO) */
+		.caixa-narrativa {
+			width: 100%;
+			max-width: 700px;
+			background-color: #fffbeb; /* Amarelo mel muito suave */
+			border: 3px dashed var(--cor-btn-amarelo); 
+			border-radius: 24px;
+			padding: 22px 45px 22px 25px;
+			margin: 20px auto 0;
+			text-align: center;
+			box-shadow: inset 0 0 10px rgba(251, 197, 49, 0.05);
+			position: relative;
+		}
+
+		.caixa-narrativa-titulo {
+			font-size: clamp(1rem, 3.5vw, 1rem);
+			color: var(--azul-escuro);
+			font-weight: 900;
+			margin-bottom: 8px;
+		}
+
+		.caixa-narrativa p {
+			font-size: clamp(0.9rem, 3vw, 0.9rem);
+			color: var(--text-main);
+			font-weight: 500;
+			line-height: 1.5;
+			margin: 0;
+		}
+
+		/* BOTÃO DE ÁUDIO EXCLUSIVO DA CAIXA DE NARRATIVA */
+		.btn-audio-narrativa {
+			position: absolute;
+			top: 2px;
+			right: 2px;
+			width: 36px;
+			height: 36px;
+			border-width: 2px;
+			box-shadow: 0 3px 0 var(--cor-btn-amarelo-sombra), 0 3px 6px rgba(0,0,0,0.1);
+		}
+
+		.btn-audio-narrativa img {
+			width: 16px;
+			height: 16px;
+		}
+
+		.btn-audio-narrativa:active {
+			transform: translateY(2px) !important;
+		}
+
+		/* AJUSTE RESPONSIVO PARA TELEMÓVEL VERTICAL */
+		@media (max-width: 600px) {
+			.btn-audio-narrativa {
+				width: 28px;
+				height: 28px;
+				top: 8px;
+				right: 8px;
+				border-width: 1.5px;
+				box-shadow: 0 2px 0 var(--cor-btn-amarelo-sombra), 0 2px 4px rgba(0,0,0,0.1);
+			}
+			
+			.btn-audio-narrativa img {
+				width: 12px;
+				height: 12px;
+			}
+
+			.btn-audio-narrativa:active {
+				transform: translateY(1.5px) !important;
+			}
+		}
+
+        /* =====================================================================
+            7. BOTÕES COM CORES DIVERSIFICADAS E FEEDBACK TÁTIL (3D REAL)
+        ===================================================================== */
+
+        /* BOTÕES DE SELEÇÃO DE NÍVEL */
+        .btn-nivel-novo {
+			--tamanho-icone: 75px;
+			
+			width: 100%; 
+			padding: 15px 15px; 
+			border-radius: 20px; 
+			border: 4px solid white;
+			color: white; 
+			font-size: 1.3rem; 
+			font-weight: 900; 
+			cursor: pointer; 
+			
+			/* Configuração Flexbox Horizontal */
+			display: flex;
+			flex-direction: row;
+			align-items: center; 
+			justify-content: flex-start;
+			gap: 15px;
+			
+			transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+			text-shadow: 1px 1px 2px rgba(0,0,0,0.25);
+			touch-action: manipulation; 
+			user-select: none; 
+		}
+		
+		.btn-nivel-novo span {
+			flex: 1;
+			text-align: center;
+			margin-right: 10px; 
+		}
+
+        /* Classes Utilitárias Cromáticas para Botões de Nível com Sombras Orgânicas Coordenadas */
+        .bg-azul { 
+            background-color: var(--cor-btn-azul); 
+            box-shadow: 0 6px 0 var(--cor-btn-azul-sombra), 0 10px 15px rgba(0,0,0,0.08); 
+        }
+        .bg-verde { 
+            background-color: var(--cor-btn-verde); 
+            box-shadow: 0 6px 0 var(--cor-btn-verde-sombra), 0 10px 15px rgba(0,0,0,0.08); 
+        }
+        .bg-amarelo { 
+            background-color: var(--cor-btn-amarelo); 
+            box-shadow: 0 6px 0 var(--cor-btn-amarelo-sombra), 0 10px 15px rgba(0,0,0,0.08); 
+        }
+        .bg-vermelho { 
+            background-color: var(--cor-btn-vermelho); 
+            box-shadow: 0 6px 0 var(--cor-btn-vermelho-sombra), 0 10px 15px rgba(0,0,0,0.08); 
+        }
+        .bg-roxo { 
+            background-color: var(--cor-btn-roxo); 
+            box-shadow: 0 6px 0 var(--cor-btn-roxo-sombra), 0 10px 15px rgba(0,0,0,0.08); 
+        }
+        .bg-laranja { 
+            background-color: var(--cor-btn-laranja); 
+            box-shadow: 0 6px 0 var(--cor-btn-laranja-sombra), 0 10px 15px rgba(0,0,0,0.08); 
+        }
+
+        /* Hover dos Botões de Nível (Mantendo a harmonia das sombras 3D) */
+        @media (hover: hover) {
+            .btn-nivel-novo:hover { filter: brightness(1.05); transform: translateY(-2px); }
+            .bg-azul:hover { box-shadow: 0 8px 0 var(--cor-btn-azul-sombra), 0 12px 20px rgba(0,0,0,0.12); }
+            .bg-verde:hover { box-shadow: 0 8px 0 var(--cor-btn-verde-sombra), 0 12px 20px rgba(0,0,0,0.12); }
+            .bg-amarelo:hover { box-shadow: 0 8px 0 var(--cor-btn-amarelo-sombra), 0 12px 20px rgba(0,0,0,0.12); }
+            .bg-vermelho:hover { box-shadow: 0 8px 0 var(--cor-btn-vermelho-sombra), 0 12px 20px rgba(0,0,0,0.12); }
+            .bg-roxo:hover { box-shadow: 0 8px 0 var(--cor-btn-roxo-sombra), 0 12px 20px rgba(0,0,0,0.12); }
+            .bg-laranja:hover { box-shadow: 0 8px 0 var(--cor-btn-laranja-sombra), 0 12px 20px rgba(0,0,0,0.12); }
+        }
+
+        /* Ícones dos Botões de Seleção */
+        .icon-btn-nivel {
+			width: var(--tamanho-icone);       
+			height: var(--tamanho-icone);      
+			object-fit: contain;
+			flex-shrink: 0;
+			filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2)); 
+			pointer-events: none; 
+		}
+
+        /* BOTÕES DE AÇÃO DO ECRÃ DE JOGO E FIM (DINÂMICA 3D) */
+        .btn-acao { 
+            background-color: var(--cor-pre); 
+            color: white; 
+            border: none; 
+            padding: 15px 35px; 
+            font-size: 1.3rem; 
+            font-weight: 700; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            box-shadow: 0 5px 0 var(--cor-pre-dark); 
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease; 
+            text-transform: uppercase; 
+            margin-top: 10px; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px;
+        }
+
+        .btn-acao.primario { background-color: var(--cor-btn-verde); box-shadow: 0 6px 0 #45b062, 0 10px 15px rgba(0,0,0,0.1); }
+        .btn-acao.secundario { background-color: var(--cor-btn-laranja); box-shadow: 0 6px 0 #d97d2c, 0 10px 15px rgba(0,0,0,0.1); }
+        .btn-acao.terciario { background-color: var(--cor-btn-azul); box-shadow: 0 6px 0 #4a8deb, 0 10px 15px rgba(0,0,0,0.1); }
+
+        @media (hover: hover) { 
+            .btn-acao:hover { filter: brightness(1.05); transform: translateY(-2px); }
+            .btn-acao.primario:hover { box-shadow: 0 8px 0 #45b062, 0 12px 20px rgba(0,0,0,0.15); } 
+            .btn-acao.secundario:hover { box-shadow: 0 8px 0 #d97d2c, 0 12px 20px rgba(0,0,0,0.15); } 
+            .btn-acao.terciario:hover { box-shadow: 0 8px 0 #4a8deb, 0 12px 20px rgba(0,0,0,0.15); } 
+        }
+
+        .icon-acao {
+            width: 1.4em;
+            height: 1.4em;
+            object-fit: contain;
+            flex-shrink: 0; 
+            pointer-events: none;
+            transition: transform 0.2s ease;
+        }
+
+        .primario:hover .icon-acao, 
+        .secundario:hover .icon-acao,
+        .terciario:hover .icon-acao {
+            transform: translateX(4px);
+        }
+
+        /* BOTÃO DE VOLTAR AO MENU (BARRA INTERNA) */
+        .btn-voltar-menu {
+            background-color: var(--cor-pre);
+            color: #ffffff; 
+            border: 2px solid var(--cor-pre-dark);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            line-height: 1;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 3px 0 var(--cor-pre-dark), 0 2px 4px rgba(0, 0, 0, 0.12); 
+            transition: background-color 0.2s, transform 0.15s, box-shadow 0.15s;
+            touch-action: manipulation;
+        }
+
+        @media (hover: hover) { 
+            .btn-voltar-menu:hover { 
+                background-color: var(--cor-pre-dark);
+                border-color: var(--cor-pre);
+                transform: translateY(-2px);
+                box-shadow: 0 5px 0 var(--cor-pre-dark), 0 4px 6px rgba(0, 0, 0, 0.15);
+            } 
+        }
+
+        .btn-voltar-menu img { width: 1.5rem; height: 1.5rem; object-fit: contain; }
+        .icon-svg-btn { width: 1.5rem; height: 1.5rem; vertical-align: middle; display: inline-block; object-fit: contain; }
+        .btn-voltar-menu .icon-svg-btn { margin-right: 8px; }
+        .btn-acao .icon-svg-btn { margin-left: 8px; }
+
+        /* REGRAS CRÍTICAS DE PRESSÃO (:ACTIVE) EXECUTADAS APÓS OS HOVERS PARA PRIORIDADE DE ESPECIFICIDADE */
+        .btn-nivel-novo:active { transform: translateY(6px) !important; box-shadow: 0 0px 0 transparent, 0 0px 0 transparent !important; }
+        .btn-acao:active { transform: translateY(6px) !important; box-shadow: 0 0px 0 transparent, 0 0px 0 transparent !important; }
+        .btn-voltar-menu:active { transform: translateY(3px) !important; box-shadow: 0 0px 0 transparent !important; }
+
+        /* =====================================================================
+            8. CLASSE BASE E CORES DOS CARTÕES DE RESPOSTA (CHOICE-CARD)
+        ===================================================================== */
+
+        /* Classe estrutural base sem erros de transição */
+        .choice-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 22px;
+            border-radius: 24px;
+            border: 4px solid #cbd5e1;
+            background-color: white;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+            position: relative;
+            user-select: none;
+            touch-action: manipulation;
+            box-shadow: 0 6px 0 #cbd5e1;
+            min-width: 140px;
+        }
+
+        /* Cores Estáticas */
+        .choice-card.card-vermelho { border-color: #ff6b6b; background-color: #fff5f5; box-shadow: 0 6px 0 #e05d5d; }
+        .choice-card.card-azul     { border-color: #4dabf7; background-color: #f1f9ff; box-shadow: 0 6px 0 #3b94db; }
+        .choice-card.card-amarelo  { border-color: #fcc419; background-color: #fefdf0; box-shadow: 0 6px 0 #e0b012; }
+        .choice-card.card-roxo     { border-color: #cc5de8; background-color: #faf3ff; box-shadow: 0 6px 0 #b14ecc; }
+        .choice-card.card-verde    { border-color: #51cf66; background-color: #ebfbee; box-shadow: 0 6px 0 #42b855; }
+        .choice-card.card-laranja  { border-color: #ff922b; background-color: #fff4e6; box-shadow: 0 6px 0 #e8791b; }
+        .choice-card.card-rosa     { border-color: #f06595; background-color: #fff0f6; box-shadow: 0 6px 0 #d64979; }
+
+        /* Hover sem ressalto visual (mantém sombra 3D física e junta brilho exterior difuso) */
+        @media (hover: hover) {
+            .choice-card:hover { transform: translateY(-2px); }
+            .choice-card.card-vermelho:hover { border-color: #ff6b6b; box-shadow: 0 8px 0 #e05d5d, 0 0 15px rgba(255, 107, 107, 0.4); }
+            .choice-card.card-azul:hover     { border-color: #4dabf7; box-shadow: 0 8px 0 #3b94db, 0 0 15px rgba(77, 171, 247, 0.4); }
+            .choice-card.card-amarelo:hover  { border-color: #fcc419; box-shadow: 0 8px 0 #e0b012, 0 0 15px rgba(251, 196, 25, 0.4); }
+            .choice-card.card-roxo:hover     { border-color: #cc5de8; box-shadow: 0 8px 0 #b14ecc, 0 0 15px rgba(204, 93, 232, 0.4); }
+            .choice-card.card-verde:hover    { border-color: #51cf66; box-shadow: 0 8px 0 #42b855, 0 0 15px rgba(81, 207, 102, 0.4); }
+            .choice-card.card-laranja:hover  { border-color: #ff922b; box-shadow: 0 8px 0 #e8791b, 0 0 15px rgba(255, 146, 43, 0.4); }
+            .choice-card.card-rosa:hover     { border-color: #f06595; box-shadow: 0 8px 0 #d64979, 0 0 15px rgba(240, 101, 149, 0.4); }           
+        }
+
+        /* Feedback Tátil do Choice Card no Clique */
+        .choice-card:active { 
+            transform: translateY(6px) !important; 
+            box-shadow: 0 0px 0 transparent, 0 0px 0 transparent !important; 
+        }
+
+        /* =====================================================================
+            9. DESIGN DO BOTÃO DE ÁUDIO OPCIONAL (LEITOR PARA NÃO LEITORES)
+        ===================================================================== */
+
+        .btn-audio-opcional {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--cor-btn-amarelo);
+            border: 3px solid white;
+            box-shadow: 0 4px 0 var(--cor-btn-amarelo-sombra), 0 4px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            touch-action: manipulation;
+            animation: somPulsa 2s infinite alternate ease-in-out;
+            flex-shrink: 0;
+        }
+
+        .btn-audio-opcional img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        @media (hover: hover) {
+            .btn-audio-opcional:hover {
+                transform: translateY(-2px) scale(1.05);
+                filter: brightness(1.05);
+                box-shadow: 0 6px 0 var(--cor-btn-amarelo-sombra), 0 6px 12px rgba(0,0,0,0.15);
+            }
+        }
+
+        .btn-audio-opcional:active {
+            transform: translateY(4px) !important;
+            box-shadow: 0 0px 0 transparent !important;
+        }
+
+        @keyframes somPulsa {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); box-shadow: 0 4px 0 var(--cor-btn-amarelo-sombra), 0 0 12px rgba(251, 197, 49, 0.6); }
+        }
+
+        /* =====================================================================
+            10. TEXTOS, TÍTULOS E CLASSES DE TRANSIÇÃO DO JOGO CORE
+        ==================================================================== */
+
+        .titulo-destaque {
+			font-size: clamp(1.4rem, 4vw, 1.8rem); 
+			color: var(--azul-escuro); 
+			margin-bottom: 45px; /* Ligeiramente aumentado para acomodar a curva sem sobrepor os elementos inferiores */
+			font-weight: 900;
+			position: relative;
+			display: inline-block; /* Crucial para o sorriso ajustar-se dinamicamente ao comprimento das palavras */
+		}
+
+		/* O Sorriso Curvo (Arco-Íris) por baixo do texto */
+		.titulo-destaque::after {
+			content: '';
+			position: absolute;
+			bottom: -12px; /* Posiciona o traço logo abaixo da linha de texto */
+			left: 10%;     /* Centra o traço deixando uma margem de 10% nas laterais */
+			width: 80%;    /* Comprimento do sorriso proporcional ao texto */
+			height: 14px;  /* Determina a profundidade da curvatura do sorriso */
+			border-bottom: 6px solid var(--cor-c6); /* Espessura e cor do traço (herda dinamicamente) */
+			border-radius: 50%; /* Curva a caixa, transformando a borda inferior num sorriso suave */
+			pointer-events: none; /* Garante que o traço não interfere com cliques ou toques */
+		}
+        .pergunta-destaque { font-size: 1.1rem; color: var(--azul-escuro); font-weight: 900; }
+        .info-nivel { font-size: 1rem; font-weight: 800; color: var(--cor-pre-dark); background: #e6fffa; padding: 8px 20px; border-radius: 20px; border: 2px solid var(--cor-pre); }
+
+        /* BOTÕES PRÉ-ESCOLAR (VIBRANTES) */
+        .btn-pre {
+            background: #e1f5f2; 
+            border: 5px solid var(--cor-pre); 
+            border-radius: 25px;
+            font-size: clamp(1.1rem, 4vw, 1.6rem); 
+            padding: clamp(12px, 3vw, 20px) clamp(20px, 4vw, 40px); 
+            min-width: clamp(120px, 30vw, 180px); 
+            gap: clamp(8px, 2vw, 15px);
+            font-weight: 900; 
+            color: var(--azul-escuro);
+            cursor: pointer; 
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s, border-color 0.2s, color 0.2s;
+            box-shadow: 0 8px 0 var(--cor-borda); 
+            text-transform: uppercase;
+            touch-action: manipulation;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            word-wrap: break-word;
+            line-height: 1.2;
+        }
+
+        @media (hover: hover) { 
+            .btn-pre:hover { transform: translateY(-3px); box-shadow: 0 11px 0 var(--cor-borda); filter: brightness(1.02); } 
+        }
+
+        .btn-pre:active { transform: translateY(8px) !important; box-shadow: 0 0px 0 transparent !important; }
+
+        /* Classes de Estado Dinâmico de Erro e Acerto */
+        .btn-pre.correct { background: #2ed573; color: white; border-color: #219d53; box-shadow: 0 8px 0 #219d53; }
+        .btn-pre.wrong { background: #ffefef; border-color: #ff4757; color: #ff4757; box-shadow: 0 8px 0 #d0303f; animation: shakeError 0.4s ease; }
+
+        /* =====================================================================
+            11. ANIMAÇÕES GLOBAIS E DANÇA DE VITÓRIA DA TAÇA
+        ===================================================================== */
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 80% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes shakeError { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+        .error-shake { animation: shakeError 0.4s ease; }
+
+        @keyframes floatImg { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        /* TAÇA DE VITÓRIA */
+        .taca-vitoria {
+            width: clamp(80px, 15vw, 130px); 
+            margin-bottom: 15px; 
+            object-fit: contain;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            
+            /* Chadeamento premium: Corre o popIn uma vez e depois o tacaDanca eternamente */
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
+                       tacaDanca 3s infinite 0.6s ease-in-out;
+        }
+
+        @keyframes tacaDanca {
+            0%, 100% { 
+                transform: translateY(0) scale(1) rotate(0deg); 
+                filter: drop-shadow(0 6px 12px rgba(251, 197, 49, 0.3)); 
+            }
+            25% { 
+                transform: translateY(-10px) scale(1.06) rotate(-4deg); 
+                filter: drop-shadow(0 14px 24px rgba(251, 197, 49, 0.65)); 
+            }
+            50% { 
+                transform: translateY(0) scale(1) rotate(0deg); 
+                filter: drop-shadow(0 6px 12px rgba(251, 197, 49, 0.3));
+            }
+            75% { 
+                transform: translateY(-10px) scale(1.06) rotate(4deg); 
+                filter: drop-shadow(0 14px 24px rgba(251, 197, 49, 0.65));
+            }
+        }
+
+        /* CONFETIS */
+        #confetti-canvas { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            pointer-events: none; 
+            z-index: 15; 
+            border-radius: 30px;
+        }
+		
+		.botoes-acao-container { display: flex; flex-direction: column; align-items: center; gap: 25px; width: 100%; }
+		.end-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--azul-escuro); margin-bottom: 25px; display: flex; align-items: center; justify-content: center; gap: 15px; }
+		
+		/* =====================================================================
+		   12. SISTEMA HÍBRIDO DO TOPO (ESTRELAS VS PÍLULA)
+		===================================================================== */
+
+		/* CONTENTOR DAS ESTRELAS INDIVIDUAIS (MÓDULO 5 RONDAS OU MENOS) */
+		.grupo-estrelas {
+			display: flex;
+			gap: 6px;
+			align-items: center;
+		}
+
+		.estrela-topo {
+			width: clamp(20px, 4.5vw, 30px);
+			height: clamp(20px, 4.5vw, 30px);
+			object-fit: contain;
+			transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		}
+
+		/* Animação pop quando a estrela acende ( feedback tátil ) */
+		.estrela-topo.acesa {
+			animation: estrelaPop 0.4s forwards ease-in-out;
+		}
+
+		@keyframes estrelaPop {
+			0% { transform: scale(1); }
+			50% { transform: scale(1.35); }
+			100% { transform: scale(1); }
+		}
+
+		/* CONTENTOR DA PÍLULA DE ESTRELA (MÓDULO 5 OU MAIS RONDAS) */
+		.badge-estrela {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background: #ffffff;
+			border: 2px solid var(--cor-pre);
+			border-radius: 20px;
+			padding: 6px 14px;
+			box-shadow: 0 3px 0 var(--cor-pre-dark);
+			font-weight: 800;
+			color: var(--azul-escuro);
+			font-size: 1rem;
+			line-height: 1;
+		}
+
+		.badge-estrela .icon-estrela-badge {
+			width: 22px;
+			height: 22px;
+			object-fit: contain;
+			animation: somPulsa 2s infinite alternate ease-in-out; /* Reutiliza a animação de pulsação */
+		}
+
+		/* Ajuste do Badge para Telemóvel Vertical */
+		@media (max-width: 600px) {
+			.badge-estrela {
+				padding: 4px 10px;
+				font-size: 0.85rem;
+			}
+			.badge-estrela .icon-estrela-badge {
+				width: 18px;
+				height: 18px;
+			}
+		}
+		
+		/* =====================================================================
+		   13. MASCOTE DO JOGO (ANIMAÇÕES E COMPORTAMENTO DE ESTADOS)
+		===================================================================== */
+
+		.mascote-container {
+			position: absolute;
+			bottom: 15px;
+			right: 15px;
+			width: 100px;
+			height: 100px;
+			z-index: 10;
+			pointer-events: none; /* Impede que a mascote bloqueie cliques em botões por baixo */
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.mascote-img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			transition: filter 0.3s ease;
+		}
+
+		/* 1. ESTADO NORMAL (Idle): Flutuação e balanço lateral suave */
+		.mascote-container.idle {
+			animation: mascoteBalanco 3s infinite ease-in-out;
+		}
+
+		@keyframes mascoteBalanco {
+			0%, 100% { 
+				transform: translateY(0) rotate(0deg); 
+			}
+			50% { 
+				transform: translateY(-6px) rotate(3deg); /* Flutua e inclina ligeiramente */
+			}
+		}
+
+		/* 2. ESTADO TRISTE (Erro): Encolhimento e tremor de frustração temporário */
+		.mascote-container.triste {
+			animation: mascoteTriste 0.5s ease-in-out;
+		}
+
+		@keyframes mascoteTriste {
+			0%, 100% { 
+				transform: scale(1) translateX(0); 
+			}
+			20%, 60% { 
+				transform: scale(0.9) translateX(-5px) rotate(-3deg); 
+			}
+			40%, 80% { 
+				transform: scale(0.9) translateX(5px) rotate(3deg); 
+			}
+		}
+
+		/* 3. ESTADO FELIZ (Acerto): Salto elástico com física de cartoon (0.8s de duração) */
+		.mascote-container.feliz {
+			animation: mascoteSalto 0.65s forwards;
+		}
+
+		@keyframes mascoteSalto {
+			0% {
+				transform: translateY(0);
+				animation-timing-function: ease-out; /* Subida: começa rápido e desacelera */
+			}
+			45% {
+				transform: translateY(-50px); /* Altura máxima do salto */
+				animation-timing-function: ease-in; /* Queda: acelera em direção ao chão */
+			}
+			100% {
+				transform: translateY(0);
+			}
+		}
+
+		/* 4. AJUSTE RESPONSIVO PARA TELEMÓVEL VERTICAL */
+		@media (max-width: 600px) {
+			.mascote-container {
+				width: 60px;
+				height: 60px;
+				bottom: 10px;
+				right: 10px;
+			}
+			
+			@keyframes mascoteSalto {
+				0%, 100% { 
+					transform: translateY(0) rotate(0deg); 
+				}
+				50% { 
+					transform: translateY(-25px) rotate(10deg); 
+				}
+			}
+		}
+
+        /* =====================================================================
+            14. MEDIA QUERIES PARA ADAPTAÇÃO GLOBAL (TELEMÓVEIS/PORTÁTEIS)
+        ===================================================================== */
+
+        @media (max-width: 768px) {
+            header { padding: 15px 10px; }
+            .header-content { display: grid; grid-template-columns: 50px 1fr 50px; grid-template-rows: auto auto; gap: 5px; }
+            .nav-container { position: static; transform: none; grid-column: 1 / -1; display: grid; grid-template-columns: 50px 1fr 50px; width: 100%; margin-bottom: 10px; }
+            .hamburger { grid-column: 1; justify-self: start; }
+            .btn-voltar { grid-column: 2; justify-self: center; width: fit-content; }
+            h1, .subtitulo { grid-column: 2; text-align: center; }
+            
+            main { padding: 15px 10px; gap: 10px; }
+            .cartao-jogo-container { padding: 15px; border-radius: 20px;}
+            
+            .top-row-grid {
+                grid-template-columns: auto 1fr auto; 
+                gap: 10px;
+            }
+            .btn-voltar-menu {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+            .pergunta-destaque {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .btn-nivel-novo {
+				--tamanho-icone: 40px;
+				padding: 12px 20px;
+				font-size: 1.15rem;
+				gap: 10px;
+			}
+            .btn-nivel-novo {
+                padding: 15px;
+                font-size: 1.2rem;
+            }
+            #opcoes-resposta {
+                gap: 12px !important;
+            }
+            .container-nav-jogo {
+                max-width: 100%; 
+                padding-bottom: 8px;
+            }
+
+            /* Grelha de navegação bipartida/linhas no mobile para evitar colapso */
+            .top-row-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr; 
+                grid-template-rows: auto auto;   
+                gap: 10px;
+            }
+            .top-row-grid .col-esquerda {
+                grid-column: 1;
+                grid-row: 1;
+                justify-self: start;
+            }
+            .top-row-grid .col-direita {
+                grid-column: 2;
+                grid-row: 1;
+                justify-self: end;
+            }
+            .top-row-grid .col-centro {
+                grid-column: 1 / -1; 
+                grid-row: 2;
+                justify-self: center;
+                text-align: center;
+            }
+			
+			.btn-audio-opcional {
+				width: 32px;
+				height: 32px;
+				border-width: 2px;
+				box-shadow: 0 2px 0 var(--cor-btn-amarelo-sombra), 0 3px 6px rgba(0,0,0,0.1);
+			}
+
+			.btn-audio-opcional img {
+				width: 15px; /* Ícone interno mais pequeno */
+				height: 15px;
+			}
+
+			.btn-audio-opcional:active {
+				transform: translateY(2px) !important;
+			}
+			.end-title { flex-direction: column; gap: 10px; }
+			
+			#ecra-fim .end-stats {
+				font-size: 1.05rem !important; /* Sobrepõe o estilo inline do HTML */
+				padding: 12px 18px !important;  /* Reduz o enchimento interno */
+				margin-bottom: 20px !important; /* Aproxima os botões da caixa */
+				border-width: 2px !important;
+				border-radius: 16px !important;
+				line-height: 1.4 !important;
+			}
+
+			#ecra-fim .botoes-acao-container {
+				gap: 10px !important; /* Aproxima os dois botões de ação */
+			}
+
+			#ecra-fim .btn-acao {
+				font-size: 1.1rem !important;
+				padding: 12px 25px !important;
+				border-radius: 16px !important;
+				margin-top: 5px !important;
+			}
+
+			/* Redução de escala das sombras 3D dos botões de ação em mobile */
+			#ecra-fim .btn-acao.primario { 
+				box-shadow: 0 4px 0 #45b062, 0 6px 10px rgba(0,0,0,0.1) !important; 
+			}
+			#ecra-fim .btn-acao.secundario { 
+				box-shadow: 0 4px 0 #d97d2c, 0 6px 10px rgba(0,0,0,0.1) !important; 
+			}
+			
+        }
+
+        @media (max-width: 500px) {
+            .grid-niveis {
+                grid-template-columns: 1fr;
+                max-width: 320px;
+            }
+            .info-nivel { padding: 5px 10px; font-size: 0.9rem; }
+            .end-title { flex-direction: column; gap: 10px; }
+        }
+
+        /* ADAPTAÇÕES DE MODO PAISAGEM / LANDSCAPE (EVITA QUEBRAS COM ALTURAS REDUZIDAS) */
+        @media (max-height: 600px) {
+            body { height: auto !important; overflow-y: auto !important; }
+            main { justify-content: flex-start !important; padding-top: 15px; padding-bottom: 15px; overflow-y: visible !important; }
+            .cartao-jogo-container { margin: auto 0; }
+            .info-nivel { padding: 5px 15px; font-size: 1rem; }                                             
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            body { height: auto !important; overflow-y: auto !important; }
+            main { justify-content: flex-start !important; overflow-y: visible !important; }
+            footer { margin-top: auto; }
+        }
+
+        #ecra-jogo {
+            justify-content: flex-start !important; 
+        }
+		
+
+/* =====================================================================
+   SECÇÃO 15. CSS ESPECÍFICO DO JOGO 4 (VERSÃO BLINDADA POR IDS E MÓVEL)
+===================================================================== */
+
+/* GRELHA TRIPARTIDA DO JOGO DO PIP (Computador) */
+#area-jogo-3 {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr; 
+    align-items: center;
+    justify-items: center;
+    gap: clamp(15px, 4vw, 40px);
+    flex: 1;
+    padding: 25px 20px;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #1b283d 0%, #0f172a 100%);
+    border-radius: 24px;
+    border: 3px solid #cbdff7;
+}
+
+/* Estrelas cintilantes puras em CSS */
+#area-jogo-3::before, #area-jogo-3::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: 
+        radial-gradient(1.5px 1.5px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 75px 40px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 150px 20px, #ffda44, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 220px 110px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 290px 45px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 330px 140px, #ffda44, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 450px 30px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 580px 120px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 680px 50px, #ffda44, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 720px 130px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 800px 30px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 890px 90px, #ffda44, rgba(0,0,0,0));
+    background-size: 100% 100%;
+}
+
+#area-jogo-3::before { animation: estrelaPisca 3s infinite alternate ease-in-out; }
+#area-jogo-3::after { animation: estrelaPisca 4s infinite alternate-reverse ease-in-out; transform: rotate(180deg); opacity: 0.5; }
+
+@keyframes estrelaPisca { 0% { opacity: 0.25; } 50% { opacity: 0.95; } 100% { opacity: 0.45; } }
+
+.card-nuvem-radar, #radar-centro {
+    z-index: 1;
+}
+
+/* CONTENTOR DO PORTAL E ALTIFALANTE */
+#radar-centro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* PORTAL DE LUAR (BOLHA TRANSLÚCIDA DO ANIMAL) */
+.portal-animal {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.12); 
+    border: 4px solid rgba(188, 225, 252, 0.4); 
+    box-shadow: 0 0 25px rgba(188, 225, 252, 0.35); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s;
+    touch-action: manipulation;
+}
+
+.portal-animal:hover {
+    transform: translateY(-2px);
+    background-color: rgba(255, 255, 255, 0.16);
+    box-shadow: 0 0 35px rgba(188, 225, 252, 0.5);
+}
+
+.portal-animal:active {
+    transform: translateY(4px) !important;
+    box-shadow: 0 0 10px transparent !important;
+}
+
+.radar-animal-img {
+    width: 105px;
+    height: 105px;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.15));
+    pointer-events: none;
+}
+
+/* CARTOES DE DECISÃO EM NUVENS TRANSLÚCIDAS GLOW */
+.card-nuvem-radar {
+    background-color: rgba(248, 252, 255, 0.94) !important; 
+    border: 4px solid #bce1fc;
+    width: 220px;
+    height: 130px;
+    border-radius: 80px 80px 40px 40px / 70px 70px 40px 40px;
+    box-shadow: 0 0 15px rgba(188, 225, 252, 0.4), 0 8px 0 #9ec9f7; 
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+    position: relative;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+@media (hover: hover) {
+    .card-nuvem-radar:hover {
+        transform: translateY(-2px);
+        border-color: #9ec9f7;
+        box-shadow: 0 0 25px rgba(188, 225, 252, 0.6), 0 10px 0 #9ec9f7;
+    }
+}
+
+.card-nuvem-radar:active {
+    transform: translateY(8px) !important;
+    box-shadow: 0 0px 0 transparent !important;
+}
+
+.card-nuvem-radar.correct {
+    background-color: rgba(235, 251, 238, 0.96) !important;
+    border-color: #51cf66 !important;
+    box-shadow: 0 0 20px rgba(81, 207, 102, 0.4), 0 8px 0 #42b855 !important;
+}
+
+.card-nuvem-radar.wrong {
+    background-color: rgba(255, 239, 239, 0.96) !important;
+    border-color: #ff4757 !important;
+    box-shadow: 0 0 20px rgba(255, 71, 87, 0.4), 0 8px 0 #d0303f !important;
+}
+
+.card-nuvem-radar span {
+    font-size: clamp(0.9rem, 3vw, 1.15rem);
+    font-weight: 900;
+    color: var(--azul-escuro);
+    line-height: 1.2;
+    pointer-events: none;
+}
+
+.icon-seta-nuvem {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 3px rgba(13, 71, 161, 0.15));
+}
+
+/* =====================================================================
+   REGRAS RESPONSIVAS EXTREMAS DO JOGO DO PIP (MÓVEL POR IDS)
+===================================================================== */
+@media (max-width: 600px) {
+    /* 🚨 TRABALHO FORÇADO DO GRID */
+    #area-jogo-3 {
+        display: grid !important; 
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: auto auto !important;
+        gap: 12px !important;
+        padding: 10px 8px !important;
+        border-radius: 20px;
+    }
+
+    /* O portal do animal e o som empilham-se no topo (Linha 1) ocupando as duas colunas */
+    #radar-centro {
+        grid-column: 1 / -1 !important;
+        grid-row: 1 !important;
+        justify-self: center !important;
+        gap: 8px !important;
+    }
+
+    .portal-animal {
+        width: 95px !important;
+        height: 95px !important;
+        border-width: 3px !important;
+        box-shadow: 0 0 15px rgba(188, 225, 252, 0.3) !important;
+    }
+
+    .portal-animal:active {
+        transform: translateY(2px) !important;
+    }
+
+    .radar-animal-img {
+        width: 65px !important;
+        height: 65px !important;
+    }
+
+    /* As duas nuvens de decisão alinham-se lado a lado (Linha 2) com idêntica prioridade */
+    #radar-opcao-esquerda { 
+        grid-column: 1 !important; 
+        grid-row: 2 !important; 
+        justify-self: center !important; 
+    }
+    
+    #radar-opcao-direita { 
+        grid-column: 2 !important; 
+        grid-row: 2 !important; 
+        justify-self: center !important; 
+    }
+
+    /* 🚨 Ajuste dinâmico de nuvens ultra-estreito para caber em ecrãs de 290px */
+    .card-nuvem-radar {
+        width: 100% !important;
+        max-width: 115px !important; /* Tamanho reduzido para caber a 100% sem scroll */
+        height: 90px !important;
+        border-radius: 50px 50px 30px 30px / 45px 45px 25px 25px !important;
+        padding: 6px !important;
+        gap: 4px !important;
+        box-shadow: 0 0 10px rgba(188, 225, 252, 0.2), 0 5px 0 #9ec9f7 !important;
+    }
+    
+    .card-nuvem-radar.correct { box-shadow: 0 0 12px rgba(81, 207, 102, 0.25), 0 5px 0 #42b855 !important; }
+    .card-nuvem-radar.wrong { box-shadow: 0 0 12px rgba(255, 71, 87, 0.25), 0 5px 0 #d0303f !important; }
+    .card-nuvem-radar span { font-size: 0.72rem !important; }
+    .icon-seta-nuvem { width: 18px !important; height: 18px !important; }
+}
+
+
+
+
+        /* =====================================================================
+           SECÇÃO 16. CSS DA ANIMAÇÃO INICIAL
+        ===================================================================== */
+
+/* =====================================================================
+   SECÇÃO 7. CSS DA ANIMAÇÃO INICIAL (DOUBLE-LOOP COZY PIP RADAR)
+===================================================================== */
+
+.tuto-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Grelha Tripartida do Jogo do Pip no Tutorial */
+.tuto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    align-items: center;
+    justify-items: center;
+    gap: 30px;
+    width: 100%;
+    height: 100%;
+    padding: 25px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Nuvens Translúcidas do Tutorial */
+.tuto-cloud {
+    background-color: rgba(248, 252, 255, 0.94) !important;
+    border: 3px solid #bce1fc;
+    width: 110px;
+    height: 70px;
+    box-shadow: 0 0 10px rgba(188, 225, 252, 0.3), 0 5px 0 #9ec9f7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: relative;
+    transition: transform 0.15s ease, background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.tuto-cloud-esq { border-radius: 40px 30px 22px 18px / 35px 35px 15px 18px; }
+.tuto-cloud-dir { border-radius: 30px 40px 18px 22px / 35px 35px 18px 15px; }
+
+.tuto-cloud span {
+    font-size: 0.55rem;
+    font-weight: 900;
+    color: var(--azul-escuro);
+    line-height: 1.1;
+}
+
+.tuto-seta-nuvem {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+/* Ondas sonoras estéreo do altifalante esquerdo/direito (Ripples) */
+.tuto-ripple {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    border: 3px dashed var(--cor-btn-azul);
+    opacity: 0;
+    transform: scale(1);
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Portal Central do Tutorial (Sem cartão de fundo) */
+.tuto-centro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+}
+
+.tuto-portal {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 3px solid rgba(188, 225, 252, 0.4);
+    box-shadow: 0 0 15px rgba(188, 225, 252, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tuto-animal-img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    position: absolute;
+    opacity: 0;
+}
+
+/* Altifalante Dourado Central */
+.tuto-btn-audio {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--cor-btn-amarelo);
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 0 var(--cor-btn-amarelo-sombra);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s ease;
+}
+
+.tuto-btn-audio img {
+    width: 11px;
+    height: 11px;
+    object-fit: contain;
+}
+
+/* Mãozinha Indicadora do Tutorial (5 dedos) */
+.tuto-hand {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    width: 28px;
+    height: 28px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transform-origin: top left;
+    filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.2));
+    animation: animMao 12s infinite ease-in-out;
+}
+
+
+/* =====================================================================
+   SINCRO DE TRANSIÇÕES DO PIP (LOOP DE 12 SEGUNDOS)
+===================================================================== */
+
+/* Animações de Acerto das Nuvens */
+.tuto-cloud-esq { animation: cestoEsqPop 12s infinite ease-in-out; }
+.tuto-cloud-dir { animation: cestoDirPop 12s infinite ease-in-out; }
+
+@keyframes cestoEsqPop {
+    /* Jogada 1 (Esquerda Correta): Acende a verde pastel e pula às 2.5s */
+    0%, 24% { background-color: rgba(248, 252, 255, 0.94); border-color: #bce1fc; box-shadow: 0 0 10px rgba(188, 225, 252, 0.3), 0 5px 0 #9ec9f7; transform: translateY(0); }
+    25% { background-color: rgba(235, 251, 238, 0.96) !important; border-color: #51cf66 !important; box-shadow: 0 0 12px rgba(81, 207, 102, 0.3), 0 5px 0 #42b855 !important; transform: translateY(3px); } /* Clique */
+    27% { background-color: rgba(235, 251, 238, 0.96) !important; border-color: #51cf66 !important; box-shadow: 0 0 12px rgba(81, 207, 102, 0.3), 0 5px 0 #42b855 !important; transform: translateY(-10px); } /* Salto */
+    38% { background-color: rgba(235, 251, 238, 0.96) !important; border-color: #51cf66 !important; box-shadow: 0 0 12px rgba(81, 207, 102, 0.3), 0 5px 0 #42b855 !important; transform: translateY(0); }
+    
+    /* Transição de Jogada */
+    43% { opacity: 0; transform: scale(0.8); }
+    47% { opacity: 1; transform: scale(1); }
+    
+    /* Jogada 2 (Direita Correta): Mantém-se estática */
+    48%, 100% { background-color: rgba(248, 252, 255, 0.94); border-color: #bce1fc; box-shadow: 0 0 10px rgba(188, 225, 252, 0.3), 0 5px 0 #9ec9f7; transform: translateY(0); }
+}
+
+@keyframes cestoDirPop {
+    /* Jogada 1: Mantém-se estática */
+    0%, 42% { background-color: rgba(248, 252, 255, 0.94); border-color: #bce1fc; box-shadow: 0 0 10px rgba(188, 225, 252, 0.3), 0 5px 0 #9ec9f7; transform: translateY(0); }
+    
+    /* Transição de Jogada */
+    43% { opacity: 0; transform: scale(0.8); }
+    47% { opacity: 1; transform: scale(1); }
+    
+    /* Jogada 2 (Direita Correta): Acende a verde pastel e pula às 8.5s */
+    48%, 84% { background-color: rgba(248, 252, 255, 0.94); border-color: #bce1fc; box-shadow: 0 0 10px rgba(188, 225, 252, 0.3), 0 5px 0 #9ec9f7; transform: translateY(0); }
+    85% { background-color: rgba(235, 251, 238, 0.96) !important; border-color: #51cf66 !important; box-shadow: 0 0 12px rgba(81, 207, 102, 0.3), 0 5px 0 #42b855 !important; transform: translateY(3px); } /* Clique */
+    87% { background-color: rgba(235, 251, 238, 0.96) !important; border-color: #51cf66 !important; box-shadow: 0 0 12px rgba(81, 207, 102, 0.3), 0 5px 0 #42b855 !important; transform: translateY(-10px); } /* Salto */
+    98%, 100% { background-color: rgba(235, 251, 238, 0.96) !important; border-color: #51cf66 !important; box-shadow: 0 0 12px rgba(81, 207, 102, 0.3), 0 5px 0 #42b855 !important; transform: translateY(0); }
+}
+
+/* Visibilidade alternada das imagens reais do teu diretório */
+.tuto-img-baleia { animation: showBaleia 12s infinite ease-in-out; }
+.tuto-img-sapo { animation: showSapo 12s infinite ease-in-out; }
+
+@keyframes showBaleia {
+    0%, 42% { opacity: 1; }
+    43%, 100% { opacity: 0; }
+}
+
+@keyframes showSapo {
+    0%, 47% { opacity: 0; }
+    52%, 98% { opacity: 1; }
+    99%, 100% { opacity: 0; }
+}
+
+/* ONDAS SONORAS ESTÉREO DO TUTORIAL (Emissão física a partir do lado sorteado!) */
+.tuto-ripple-esq { animation: rippleEsq 12s infinite ease-in-out; }
+.tuto-ripple-dir { animation: rippleDir 12s infinite ease-in-out; }
+
+@keyframes rippleEsq {
+    0%, 11% { opacity: 0; transform: scale(1); }
+    12% { opacity: 0.9; transform: scale(1); } /* Ativa no clique sónico da jogada 1 */
+    16%, 100% { opacity: 0; transform: scale(2.2); }
+}
+
+@keyframes rippleDir {
+    0%, 71% { opacity: 0; transform: scale(1); }
+    72% { opacity: 0.9; transform: scale(1); } /* Ativa no clique sónico da jogada 2 */
+    76%, 100% { opacity: 0; transform: scale(2.2); }
+}
+
+/* TRAJETÓRIA E TRABALHO DA MÃOZINHA (Coordenadas com alinhamento e compensação de -14px) */
+@keyframes animMao {
+    /* --- JOGADA 1 (Esquerda) --- */
+    0% { opacity: 0; transform: translate(110px, 80px) scale(1); }
+    5% { opacity: 1; transform: translate(110px, 80px) scale(1); }
+    /* Clique sónico: Altifalante Central (X: -14px, Y: 80px) */
+    9% { transform: translate(-14px, 80px) scale(1); }
+    11% { transform: translate(-14px, 80px) scale(0.8); } /* Pressiona */
+    13% { transform: translate(-14px, 80px) scale(1); }
+    /* Escolha 1: Clica na Nuvem Esquerda (X: -84px, Y: 50px) */
+    21% { transform: translate(-84px, 50px) scale(1); }
+    23% { transform: translate(-84px, 50px) scale(0.8); } /* Seleciona */
+    26% { transform: translate(-84px, 50px) scale(1); }
+    34% { opacity: 1; transform: translate(-84px, 80px) scale(1); }
+    38%, 45% { opacity: 0; transform: translate(110px, 80px) scale(1); } /* Afasta-se na transição */
+
+    /* --- JOGADA 2 (Direita) --- */
+    52% { opacity: 1; transform: translate(110px, 80px) scale(1); }
+    /* Clique sónico: Altifalante Central */
+    59% { transform: translate(-14px, 80px) scale(1); }
+    61% { transform: translate(-14px, 80px) scale(0.8); } /* Pressiona */
+    63% { transform: translate(-14px, 80px) scale(1); }
+    /* Escolha 2: Clica na Nuvem Direita (X: 56px, Y: 50px) */
+    71% { transform: translate(56px, 50px) scale(1); }
+    73% { transform: translate(56px, 50px) scale(0.8); } /* Seleciona */
+    76% { transform: translate(56px, 50px) scale(1); }
+    86% { opacity: 1; transform: translate(56px, 80px) scale(1); }
+    90%, 100% { opacity: 0; transform: translate(110px, 80px) scale(1); }
+}
+
+/* =====================================================================
+   RECALIBRAÇÃO DE COORDENADAS PARA TELEMÓVEL VERTICAL ( 600px)
+===================================================================== */
+
+
+@media (max-width: 600px) {
+    
+    /* 🚨 A) ANIMAÇÃO DO TUTORIAL MÓVEL (NUVENS ENCURTADAS A 95PX) */
+    .tuto-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: auto auto !important;
+        gap: 12px !important;
+        padding: 15px 12px !important; /* Ajustado para dar mais folga lateral */
+    }
+
+    .tuto-centro {
+        grid-column: 1 / -1 !important;
+        grid-row: 1 !important;
+        justify-self: center !important;
+        gap: 6px !important;
+    }
+
+    .tuto-portal {
+        width: 65px !important;
+        height: 65px !important;
+        border-width: 2px !important;
+    }
+
+    .tuto-animal-img {
+        width: 45px !important;
+        height: 45px !important;
+    }
+
+    .tuto-btn-audio {
+        width: 20px !important;
+        height: 20px !important;
+        border-width: 1px !important;
+    }
+
+    .tuto-btn-audio img {
+        width: 8px !important;
+        height: 8px !important;
+    }
+
+    /* Alinhamento que junta as nuvens a meio e deixa as bordas do tracejado livres */
+    .tuto-cloud-esq {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+        justify-self: end !important; 
+        margin-right: 5px !important;
+    }
+
+    .tuto-cloud-dir {
+        grid-column: 2 !important;
+        grid-row: 2 !important;
+        justify-self: start !important; 
+        margin-left: 5px !important;
+    }
+
+    /* 🚨 LARGURA REDUZIDA: 95px garante encaixe perfeito dentro dos limites do tracejado */
+    .tuto-cloud {
+        width: 100% !important;
+        max-width: 95px !important; 
+        height: 65px !important; /* Ajustada a altura proporcionalmente */
+        padding: 4px !important;
+        border-radius: 20px 20px 12px 12px / 18px 18px 10px 10px !important;
+        box-shadow: 0 0 8px rgba(188, 225, 252, 0.2), 0 4px 0 #9ec9f7 !important;
+    }
+
+    .tuto-cloud span { font-size: 0.58rem !important; }
+    .tuto-seta-nuvem { width: 14px !important; height: 14px !important; }
+
+    /* Mãozinha mobile */
+    .tuto-hand {
+        width: 22px !important;
+        height: 22px !important;
+        top: 35px !important;
+    }
+    .tuto-hand svg {
+        width: 22px !important;
+        height: 22px !important;
+    }
+
+    /* Trajetória de cliques móveis adaptada para as nuvens de 95px */
+    @keyframes animMao {
+        /* --- JOGADA 1 --- */
+        0% { opacity: 0; transform: translate(80px, 80px) scale(1); }
+        5% { opacity: 1; transform: translate(80px, 80px) scale(1); }
+        /* Clique sónico: Altifalante Central */
+        9% { transform: translate(-11px, 70px) scale(1); }
+        11% { transform: translate(-11px, 70px) scale(0.8); }
+        13% { transform: translate(-11px, 70px) scale(1); }
+        /* Escolha 1: Clica na Nuvem Esquerda (Ajustada para o centro) */
+        21% { transform: translate(-48px, 110px) scale(1); }
+        23% { transform: translate(-48px, 110px) scale(0.8); }
+        26% { transform: translate(-48px, 110px) scale(1); }
+        34% { opacity: 1; transform: translate(-48px, 120px) scale(1); }
+        38%, 45% { opacity: 0; transform: translate(80px, 80px) scale(1); }
+
+        /* --- JOGADA 2 --- */
+        52% { opacity: 1; transform: translate(80px, 80px) scale(1); }
+        /* Clique sónico: Altifalante Central */
+        59% { transform: translate(-11px, 70px) scale(1); }
+        61% { transform: translate(-11px, 70px) scale(0.8); }
+        63% { transform: translate(-11px, 70px) scale(1); }
+        /* Escolha 2: Clica na Nuvem Direita (Ajustada para o centro) */
+        71% { transform: translate(32px, 110px) scale(1); }
+        73% { transform: translate(32px, 110px) scale(0.8); }
+        76% { transform: translate(36px, 110px) scale(1); }
+        86% { opacity: 1; transform: translate(36px, 120px) scale(1); }
+        90%, 100% { opacity: 0; transform: translate(80px, 80px) scale(1); }
+    }
+
+
+    /* 🚨 B) ÁREA DE JOGO ATIVO DO PIP MÓVEL (NUVENS REAL JOGO A 105PX) */
+    #area-jogo-3 {
+        display: grid !important; 
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: auto auto !important;
+        gap: 12px !important;
+        padding: 12px 10px 20px !important;
+        border-radius: 20px;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    #radar-centro {
+        grid-column: 1 / -1 !important;
+        grid-row: 1 !important;
+        justify-self: center !important;
+        gap: 8px !important;
+    }
+
+    .portal-animal {
+        width: 90px !important;
+        height: 90px !important;
+        border-width: 3px !important;
+        box-shadow: 0 0 15px rgba(188, 225, 252, 0.3) !important;
+    }
+
+    .portal-animal:active {
+        transform: translateY(2px) !important;
+    }
+
+    .radar-animal-img {
+        width: 65px !important;
+        height: 65px !important;
+    }
+
+    #radar-opcao-esquerda { 
+        grid-column: 1 !important; 
+        grid-row: 2 !important; 
+        justify-self: end !important; 
+        margin-right: 5px !important;
+    }
+    
+    #radar-opcao-direita { 
+        grid-column: 2 !important; 
+        grid-row: 2 !important; 
+        justify-self: start !important; 
+        margin-left: 5px !important;
+    }
+
+    /* 🚨 LARGURA REDUZIDA JOGO REAL: 105px garante que cabem de forma limpa no tabuleiro real */
+    .card-nuvem-radar {
+        width: 100% !important;
+        max-width: 105px !important;
+        height: 85px !important;
+        border-radius: 50px 50px 30px 30px / 45px 45px 25px 25px !important;
+        padding: 6px !important;
+        gap: 4px !important;
+        box-shadow: 0 0 10px rgba(188, 225, 252, 0.2), 0 5px 0 #9ec9f7 !important;
+    }
+    
+    .card-nuvem-radar.correct { box-shadow: 0 0 12px rgba(81, 207, 102, 0.25), 0 5px 0 #42b855 !important; }
+    .card-nuvem-radar.wrong { box-shadow: 0 0 12px rgba(255, 71, 87, 0.25), 0 5px 0 #d0303f !important; }
+    .card-nuvem-radar span { font-size: 0.72rem !important; }
+    .icon-seta-nuvem { width: 18px !important; height: 18px !important; }
+}
+
+
+        /* =====================================================================
+           SECÇÃO 17. MEDIA QUERIES ESPECÍFICAS DO JOGO (ESPAÇO LIVRE POR ADAPTAR)
+        ===================================================================== */
+		
+		@media (min-width: 769px) {
+			/* Amplia significativamente os cartões de cesto em computadores */
+			.choice-card {
+				width: 220px;
+				min-height: 200px;
+				padding: 25px;
+				border-radius: 28px;
+				border-width: 5px;
+			}
+			
+			.choice-card-img {
+				width: 110px;
+				height: 110px;
+				margin-bottom: 15px;
+			}
+			
+			.choice-card span {
+				font-size: 1.4rem;
+			}
+
+			/* Reduz ligeiramente os gaps internos do jogo para blindar contra scroll vertical */
+			#area-jogo-1 {
+				gap: 25px !important;
+				padding-bottom: 10px;
+			}
+		}
+		
+		
+
+    </style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<nav class="sidebar" id="sidebar" aria-label="Navegação Principal do Portal">
+    <div class="btn-fechar" onclick="toggleMenu()" role="button" aria-label="Fechar menu lateral"><span>✕</span> Fechar</div>
+    <ul>
+        <li><a href="../../"><img src="../../SVG/home.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'" aria-hidden="true">Início</a></li>
+        <li><a href="../"><img src="../../SVG/pre.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'" aria-hidden="true">Pré-Escolar</a></li>
+        <li><a href="../../1"><img src="../../SVG/ano1.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'" aria-hidden="true"> 1º Ano</a></li>
+        <li><a href="../../2"><img src="../../SVG/ano2.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'" aria-hidden="true"> 2º Ano</a></li>
+        <li><a href="../../3"><img src="../../SVG/ano3.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'" aria-hidden="true"> 3º Ano</a></li>
+        <li><a href="../../4"><img src="../../SVG/ano4.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'" aria-hidden="true"> 4º Ano</a></li>
+    </ul>
+</nav>
+
+<header role="banner">
+    <div class="header-content">
+        <div class="nav-container">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()" aria-label="Abrir menu de navegação">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="../" class="btn-voltar"><img src="../../SVG/voltar.svg" class="icon-svg-voltar" alt="" aria-hidden="true"> Voltar</a>
+        </div>
+        
+        <h1>O Radar <img src="radar.svg" class="icon-svg-titulo" alt="" aria-hidden="true"></h1>
+        <div class="subtitulo" id="header-subtitulo" aria-live="polite">De onde vem o som do animal?</div>
+    </div>
+</header>
+
+<main role="main">
+
+    <!-- BARRA DE PROGRESSO (CAMINHO MÁGICO SVG) -->
+    <div class="caminho-magico" id="caminho-magico" aria-label="Progresso do jogo">
+        <div class="caminho-trilho">
+            <div class="caminho-rasto" id="caminho-rasto"></div>
+            <!-- O avatar do morcego Pip avança pelo trilho -->
+            <img src="avatar.png" class="caminho-avatar" id="avatar-progresso" alt="Boneco do aluno no caminho"> 
+        </div>
+        <img src="lua1.svg" class="caminho-alvo" id="alvo-progresso" alt="Alvo a alcançar"> 
+    </div>
+
+    <!-- CARTÃO DE JOGO -->
+    <div class="cartao-jogo-container">
+
+        <!-- =====================================================================
+             ECRÃ DE SELEÇÃO / MENU DO JOGO 4 (O RADAR DO PIP)
+             ===================================================================== -->
+        <div id="ecra-selecao" class="ecra" style="display: flex;">
+                        
+            <div class="animacao-tutorial" id="animacao-tutorial">
+                <div class="tuto-wrapper">
+                    
+                    <div class="tuto-grid">
+                        
+                        <!-- A) NUVEM ESQUERDA DO TUTORIAL -->
+                        <div class="tuto-cloud tuto-cloud-esq">
+                            <span>O som vem daqui?</span>
+                            <svg class="tuto-seta-nuvem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 12H5M5 12l5-5M5 12l5 5" fill="none" stroke="#38a89d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <div class="tuto-ripple tuto-ripple-esq"></div>
+                        </div>
+
+                        <!-- B) PORTAL DE LUAR CENTRAL DO TUTORIAL -->
+                        <div class="tuto-centro">
+                            <div class="tuto-portal">
+                                <!-- Imagem real da Baleia (Recebe a classe base tuto-animal-img) -->
+                                <img src="../quem-sou-eu/dados/baleia.png" class="tuto-animal-img tuto-img-baleia" alt="" aria-hidden="true">
+                                <!-- Imagem real do Sapo (Recebe a classe base tuto-animal-img) -->
+                                <img src="../quem-sou-eu/dados/sapo.png" class="tuto-animal-img tuto-img-sapo" alt="" aria-hidden="true">
+                            </div>
+                            <!-- Altifalante Dourado por baixo -->
+                            <div class="tuto-btn-audio">
+                                <img src="../../SVG/audio.svg" alt="" aria-hidden="true">
+                            </div>
+                        </div>
+
+                        <!-- C) NUVEM DIREITA DO TUTORIAL -->
+                        <div class="tuto-cloud tuto-cloud-dir">
+                            <span>O som vem daqui?</span>
+                            <svg class="tuto-seta-nuvem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12h14M19 12l-5-5M19 12l-5 5" fill="none" stroke="#8e44ad" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <div class="tuto-ripple tuto-ripple-dir"></div>
+                        </div>
+
+                    </div>
+                    
+                    <!-- Mãozinha Indicadora de 5 Dedos (Traço fino e contornos muito macios) -->
+                    <div class="tuto-hand">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px; height:28px;">
+                            <g fill="#ffda44" stroke="#2c3e50" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2">
+                                <path d="M8 13V4.5a1.5 1.5 0 0 1 3 0V12m0-.5v-2a1.5 1.5 0 0 1 3 0V12m0-1.5a1.5 1.5 0 0 1 3 0V12" />
+                                <path d="M17 11.5a1.5 1.5 0 0 1 3 0V16a6 6 0 0 1-6 6h-2h.208a6 6 0 0 1-5.012-2.7L7 19q-.468-.718-3.286-5.728a1.5 1.5 0 0 1 .536-2.022a1.87 1.87 0 0 1 2.28.28L8 13" />
+                            </g>
+                        </svg>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <h2 class="titulo-destaque">O Radar do Pip!</h2>
+            
+            <!-- Grelha de Níveis (Centra-se de forma estática por ser filho único) -->
+            <div class="grid-niveis" role="group" aria-label="Seleção de Temas">
+                <button class="btn-nivel-novo bg-laranja" onclick="iniciarJogo(1)">
+                    <img src="img/menu_1.png" class="icon-btn-nivel" alt="" aria-hidden="true">
+                    <span>Quero Ajudar!</span>
+                </button>
+            </div>
+
+            <!-- CAIXA DE NARRATIVA PEDAGÓGICA (CONTEÚDO DO PIP) -->
+            <div class="caixa-narrativa">
+				<button class="btn-audio-opcional btn-audio-narrativa" onclick="tocarVozNarrativa()" aria-label="Ouvir a história do jogo">
+                    <img src="../../SVG/audio.svg" alt="" aria-hidden="true">
+                </button>
+                <div class="caixa-narrativa-titulo">A Missão do Pip!</div>
+                <p>O morcego bebé Pip precisa da tua ajuda para encontrar os seus amigos animais na floresta escura! Ouve com muita atenção! Será que o som deles vem do lado esquerdo ou do lado direito? Estás pronto para ser o radar do Pip?</p>
+            </div>
+
+        </div>
+
+        <!-- =====================================================================
+             ECRÃ DA ÁREA DE JOGO ATIVO (O RADAR DO PIP)
+             ===================================================================== -->
+        <div id="ecra-jogo" class="ecra">
+            
+            <!-- Cabeçalho Interno do Jogo -->
+            <div class="container-nav-jogo" role="navigation" aria-label="Navegação interna do minijogo">
+                <div class="top-row-grid">
+                    <!-- Coluna Esquerda: Botão Voltar ao Menu Local -->
+                    <div class="col-esquerda">
+                        <button class="btn-voltar-menu" onclick="voltarAoMenu()" aria-label="Voltar para a seleção de temas do jogo">
+                            <img src="../../SVG/menu_principal.svg" alt="" aria-hidden="true"> MENU
+                        </button>
+                    </div>
+                    
+                    <!-- Coluna Central: Instrução de Topo com Áudio Geral Opcional -->
+                    <div class="col-centro">
+                        <div style="display: inline-flex; align-items: center; justify-content: center; gap: 12px;">
+                            <div class="pergunta-destaque" id="instrucao-ronda" aria-live="polite">De onde vem o som do animal?</div>
+                            <button class="btn-audio-opcional" id="btn-audio-instrucao" onclick="tocarVozInstrucao()" aria-label="Ouvir instrução de jogo por voz">
+                                <img src="../../SVG/audio.svg" alt="Ouvir" aria-hidden="true">
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Coluna Direita: Espaço Reservado para a Pílula de Progresso das 10 Rondas (Gerada via JS) -->
+                    <div class="col-direita" id="elemento-extra-topo"></div>
+                </div>
+            </div>
+
+
+            <div id="area-jogo-3" style="display: none; width: 100%;">
+                
+                <!-- A) NUVEM ESQUERDA (Cartão de Decisão) -->
+                <button class="card-nuvem-radar cloud-esquerda" id="radar-opcao-esquerda" onclick="escolherLado('esquerda')">
+                    <span>O som vem daqui?</span>
+                    <!-- Seta Grossa Estilo Marcador de Feltro (Verde) -->
+                    <svg class="icon-seta-nuvem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 12H5M5 12l5-5M5 12l5 5" fill="none" stroke="#38a89d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <!-- B) PORTAL CENTRAL (Animal na bolha de luar e altifalante dourado por baixo) -->
+                <div class="radar-centro-container" id="radar-centro">
+                    <div class="portal-animal" onclick="tocarSomAnimalRadar()">
+                        <img id="radar-imagem-animal" class="radar-animal-img" src="" alt="Animal Oculto">
+                    </div>
+                    <!-- Altifalante Central Dourado (Toca o som do animal balanceado) -->
+                    <button class="btn-audio-opcional" id="btn-audio-radar" onclick="tocarSomAnimalRadar()">
+                        <img src="../../SVG/audio.svg" alt="Ouvir som do animal" aria-hidden="true">
+                    </button>
+                </div>
+
+                <!-- C) NUVEM DIREITA (Cartão de Decisão) -->
+                <button class="card-nuvem-radar cloud-direita" id="radar-opcao-direita" onclick="escolherLado('direita')">
+                    <span>O som vem daqui?</span>
+                    <!-- Seta Grossa Estilo Marcador de Feltro (Roxo) -->
+                    <svg class="icon-seta-nuvem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12h14M19 12l-5-5M19 12l-5 5" fill="none" stroke="#8e44ad" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- =====================================================================
+             ECRÃ DE FIM DE JOGO (VITÓRIA)
+             ===================================================================== -->
+        <div id="ecra-fim" class="ecra">
+            
+            <img src="../../SVG/taca.svg" class="taca-vitoria" alt="Taça dourada a comemorar">
+            
+            <h2 class="end-title" id="end-title-text" style="margin-bottom: 15px;">Fantástico!</h2>
+            
+            <div class="end-stats" style="font-size: 1.3rem; color: var(--text-main); margin-bottom: 35px; background: var(--bg-header); padding: 20px 30px; border-radius: 20px; border: 3px dashed var(--cor-pre); max-width: 500px;" aria-live="polite">
+                Chegaste ao fim do caminho mágico!<br>
+                És um radar de orelhas super afiadas!
+            </div>
+           
+            <div class="botoes-acao-container">
+                <button class="btn-acao primario" onclick="reiniciarJogo()" aria-label="Jogar novamente">
+                    JOGAR OUTRA VEZ <img src="../../SVG/jogar_novo.svg" class="icon-acao" alt="" aria-hidden="true">
+                </button>
+                <button class="btn-acao secundario" onclick="voltarAoMenu()" aria-label="Voltar ao menu inicial">
+                    VOLTAR AO MENU <img src="../../SVG/home.svg" class="icon-acao" alt="" aria-hidden="true">
+                </button>
+            </div>
+            
+        </div>
+
+        <!-- MASCOTE DO PIP (Flutuação em estado normal 'idle') -->
+        <div class="mascote-container idle" id="mascote-container" style="display: none;">
+            <img src="img/mascote_normal.png" class="mascote-img" id="mascote-img" alt="Mascote Pip">
+        </div>
+
+        <canvas id="confetti-canvas"></canvas>
+
+    </div> 
+</main>
+
+<footer>
+    <p><span id="ano-atual"> </span><img src="../../SVG/pre.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
+</style>
+</footer>
+
+</body>
+
+
+<script>
+    /* =====================================================================
+       SECÇÃO 1: CONFIGURAÇÕES GLOBAIS E ESTADO DA APLICAÇÃO
+    ===================================================================== */
+    
+    // Estado ativo do jogo (Mapeado: 1 = Minijogo Único do Pip)
+    let jogoAtual = 1;
+    let rondaAtual = 0;
+    let totalRondas = 10; // 10 Rondas ativo para o Pip
+    let perguntasSessao = []; // Array de partida ativa
+    let reservatorioPerguntas = {}; // Reservatório para impedir repetições
+
+    // Ponto de entrada do browser: Executado apenas quando o DOM está totalmente pronto
+    window.onload = function() { 
+        // Atualiza o Ano do Rodapé de forma segura sem crashar o script
+        const anoEl = document.getElementById('ano-atual');
+        if (anoEl) {
+            anoEl.innerText = new Date().getFullYear();
+        }
+        mostrarEcra('ecra-selecao'); 
+    };
+	
+    // Áudios de instrução e narrativa exclusivos deste ficheiro único (ID 1)
+    const AUDIOS_INSTRUCOES = {
+        1: 'audio/instrucao_jogo1.mp3' // "De onde vem o som do animal?"
+    };
+	
+    // 🚨 CORRIGIDO: Objeto fechado corretamente com };
+    const AUDIOS_NARRATIVAS = {
+        1: 'audio/narrativa_jogo1.mp3' // Ficheiro de voz da história do Jogo 1
+    };
+
+    /* =====================================================================
+       SECÇÃO 2: BASE DE DADOS (28 ANIMAIS PARA RÁCIO DE 10 RONDAS - ID 1)
+    ===================================================================== */
+    
+    // 🚨 CORRIGIDO: Chave mudada de 4 para 1 para casar com o iniciarJogo(1)
+    const BASE_DE_DADOS_JOGOS = {
+        1: [
+            { nome: 'Abelha', imagem: 'img/animais/abelha.png', audio: '../quem-sou-eu/dados/abelha.mp3' },
+            { nome: 'Baleia', imagem: 'img/animais/baleia.png', audio: '../quem-sou-eu/dados/baleia.mp3' },
+            { nome: 'Burro', imagem: 'img/animais/burro.png', audio: '../quem-sou-eu/dados/burro.mp3' },
+            { nome: 'Cão', imagem: 'img/animais/cao.png', audio: '../quem-sou-eu/dados/cao.mp3' },
+            { nome: 'Cavalo', imagem: 'img/animais/cavalo.png', audio: '../quem-sou-eu/dados/cavalo.mp3' },
+            { nome: 'Coruja', imagem: 'img/animais/coruja.png', audio: '../quem-sou-eu/dados/coruja.mp3' },
+            { nome: 'Corvo', imagem: 'img/animais/corvo.png', audio: '../quem-sou-eu/dados/corvo.mp3' },
+            { nome: 'Elefante', imagem: 'img/animais/elefante.png', audio: '../quem-sou-eu/dados/elefante.mp3' },
+            { nome: 'Galinha', imagem: 'img/animais/galinha.png', audio: '../quem-sou-eu/dados/galinha.mp3' },
+            { nome: 'Galo', imagem: 'img/animais/galo.png', audio: '../quem-sou-eu/dados/galo.mp3' },
+            { nome: 'Gato', imagem: 'img/animais/gato.png', audio: '../quem-sou-eu/dados/gato.mp3' },
+            { nome: 'Golfinho', imagem: 'img/animais/golfinho.png', audio: '../quem-sou-eu/dados/golfinho.mp3' },
+            { nome: 'Grilo', imagem: 'img/animais/grilo.png', audio: '../quem-sou-eu/dados/grilo.mp3' },
+            { nome: 'Hiena', imagem: 'img/animais/hiena.png', audio: '../quem-sou-eu/dados/hiena.mp3' },
+            { nome: 'Leão', imagem: 'img/animais/leao.png', audio: '../quem-sou-eu/dados/leao.mp3' },
+            { nome: 'Lobo', imagem: 'img/animais/lobo.png', audio: '../quem-sou-eu/dados/lobo.mp3' },
+            { nome: 'Macaco', imagem: 'img/animais/macaco.png', audio: '../quem-sou-eu/dados/macaco.mp3' },
+            { nome: 'Mosquito', imagem: 'img/animais/mosquito.png', audio: '../quem-sou-eu/dados/mosquito.mp3' },
+            { nome: 'Ovelha', imagem: 'img/animais/ovelha.png', audio: '../quem-sou-eu/dados/ovelha.mp3' },
+            { nome: 'Pássaro', imagem: 'img/animais/passaro.png', audio: '../quem-sou-eu/dados/passaro.mp3' },
+            { nome: 'Pato', imagem: 'img/animais/pato.png', audio: '../quem-sou-eu/dados/pato.mp3' },
+            { nome: 'Pavão', imagem: 'img/animais/pavao.png', audio: '../quem-sou-eu/dados/pavao.mp3' },
+            { nome: 'Peru', imagem: 'img/animais/peru.png', audio: '../quem-sou-eu/dados/peru.mp3' },
+            { nome: 'Pintainho', imagem: 'img/animais/pintainho.png', audio: '../quem-sou-eu/dados/pintainho.mp3' },
+            { nome: 'Pomba', imagem: 'img/animais/pomba.png', audio: '../quem-sou-eu/dados/pomba.mp3' },
+            { nome: 'Porco', imagem: 'img/animais/porco.png', audio: '../quem-sou-eu/dados/porco.mp3' },
+            { nome: 'Sapo', imagem: 'img/animais/sapo.png', audio: '../quem-sou-eu/dados/sapo.mp3' },
+            { nome: 'Vaca', imagem: 'img/animais/vaca.png', audio: '../quem-sou-eu/dados/vaca.mp3' }
+        ]
+    };
+
+    /* =====================================================================
+       SECÇÃO 3: FUNÇÕES UTILITÁRIAS GERAIS (O MOTOR DE JOGO)
+    ===================================================================== */
+    
+    // Controlo do Menu Lateral (Hamburger)
+    function toggleMenu() { 
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const btn = document.getElementById('hamburgerBtn');
+        if (sidebar) sidebar.classList.toggle('active'); 
+        if (overlay) overlay.classList.toggle('active'); 
+        if (btn) btn.classList.toggle('open'); 
+    }
+
+    // Função universal para alternar ecrãs (com controlo inteligente de visibilidade da mascote)
+    function mostrarEcra(id) {
+        document.querySelectorAll('.ecra').forEach(e => e.style.display = 'none');
+        const e = document.getElementById(id);
+        if (e) e.style.display = 'flex';
+
+        const mascote = document.getElementById('mascote-container');
+        if (mascote) {
+            if (id === 'ecra-jogo') {
+                mascote.style.display = 'flex';
+            } else {
+                mascote.style.display = 'none';
+            }
+        }
+    }
+	
+	
+
+    // Retornar ao menu de seleção local limpo
+    function voltarAoMenu() {
+        pararVozEletiva();
+        limparConfetis();
+        atualizarMascote('idle'); 
+        jogoAtual = 1; // Reseta para o ID 1
+        document.getElementById('caminho-magico').style.display = 'none';
+        document.querySelectorAll('[id^="area-jogo-"]').forEach(el => el.style.display = 'none');
+        mostrarEcra('ecra-selecao');
+    }
+
+    // Reiniciar a sessão do jogo ativo de forma limpa
+    function reiniciarJogo() {
+        pararVozEletiva();
+        limparConfetis();
+        iniciarJogo(jogoAtual);
+    }
+
+    // Algoritmo Matemático de Baralhamento (Fisher-Yates)
+    function baralharLista(lista) {
+        let copia = [...lista];
+        for (let i = copia.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copia[i], copia[j]] = [copia[j], copia[i]];
+        }
+        return copia;
+    }
+
+    // Extrai perguntas do reservatório sem repetição entre sessões consecutivas de jogo
+    function prepararPerguntasPartida(idJogo, limite) {
+        const bancoDeDados = BASE_DE_DADOS_JOGOS[idJogo];
+        if (!bancoDeDados) return [];
+
+        if (!reservatorioPerguntas[idJogo] || reservatorioPerguntas[idJogo].length < limite) {
+            reservatorioPerguntas[idJogo] = baralharLista(bancoDeDados);
+        }
+
+        return reservatorioPerguntas[idJogo].splice(0, limite);
+    }
+	
+    // Gere e limpa os estados de emoção da mascote
+    function atualizarMascote(estado) {
+        const container = document.getElementById('mascote-container');
+        const img = document.getElementById('mascote-img');
+        if (!container || !img) return;
+
+        container.classList.remove('idle', 'triste', 'feliz');
+
+        if (estado === 'triste') {
+            img.src = 'img/mascote_triste.png';
+            container.classList.add('triste');
+        } else if (estado === 'feliz') {
+            img.src = 'img/mascote_feliz.png';
+            container.classList.add('feliz');
+        } else {
+            img.src = 'img/mascote_normal.png';
+            container.classList.add('idle');
+        }
+    }
+
+    // Atualiza o bonequinho na barra de progresso (0% a 100%)
+    function atualizarProgressoCaminho(percentagem) {
+        const avatar = document.getElementById('avatar-progresso');
+        const rasto = document.getElementById('caminho-rasto');
+        if (avatar) avatar.style.left = `${percentagem}%`;
+        if (rasto) rasto.style.width = `${percentagem}%`;
+
+        const topoContainer = document.getElementById('elemento-extra-topo');
+        if (!topoContainer) return;
+
+        if (totalRondas <= 5) {
+            for (let i = 1; i <= totalRondas; i++) {
+                const estrela = document.getElementById(`estrela-ronda-${i}`);
+                if (estrela) {
+                    if (i <= rondaAtual) {
+                        if (!estrela.classList.contains('acesa')) {
+                            estrela.src = '../../SVG/estrela_cheia.svg';
+                            estrela.classList.add('acesa');
+                        }
+                    } else {
+                        estrela.src = '../../SVG/estrela_vazia.svg';
+                        estrela.classList.remove('acesa');
+                    }
+                }
+            }
+        } else {
+            const textoContador = document.getElementById('texto-contador-rondas');
+            if (textoContador) {
+                const rondaExibida = Math.min(rondaAtual + 1, totalRondas);
+                textoContador.textContent = `${rondaExibida}/${totalRondas}`;
+            }
+        }
+    }
+	
+    // Gera dinamicamente o contador híbrido dependendo do limite de rondas da partida
+    function prepararContadorTopo() {
+        const topoContainer = document.getElementById('elemento-extra-topo');
+        if (!topoContainer) return;
+
+        topoContainer.innerHTML = ''; 
+
+        if (totalRondas <= 5) {
+            const grupo = document.createElement('div');
+            grupo.className = 'grupo-estrelas';
+
+            for (let i = 1; i <= totalRondas; i++) {
+                const img = document.createElement('img');
+                img.src = '../../SVG/estrela_vazia.svg';
+                img.className = 'estrela-topo';
+                img.id = `estrela-ronda-${i}`;
+                img.alt = `Estrela ${i}`;
+                grupo.appendChild(img);
+            }
+            topoContainer.appendChild(grupo);
+        } else {
+            const badge = document.createElement('div');
+            badge.className = 'badge-estrela';
+            
+            const img = document.createElement('img');
+            img.src = '../../SVG/estrela_cheia.svg';
+            img.className = 'icon-estrela-badge';
+            img.alt = 'Estrela';
+
+            const texto = document.createElement('span');
+            texto.id = 'texto-contador-rondas';
+            texto.textContent = `1/${totalRondas}`;
+
+            badge.appendChild(img);
+            badge.appendChild(texto);
+            topoContainer.appendChild(badge);
+        }
+    }
+	
+	
+
+
+    /* =====================================================================
+       SECÇÃO 4: MOTORES DE ÁUDIO BLINDADOS (SINTETIZADOR E VOZ UNITÁRIA)
+    ===================================================================== */
+    
+    let audioVozAtual = null;
+
+    // Motor de reprodução instantânea com reinício ao clique
+    function tocarVoz(caminhoMp3) {
+        if (!caminhoMp3) return;
+
+        try {
+            if (audioVozAtual) {
+                if (audioVozAtual.src.endsWith(caminhoMp3)) {
+                    audioVozAtual.pause();
+                    audioVozAtual.currentTime = 0;
+                    
+                    const playPromise = audioVozAtual.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(erro => console.warn("Interrupção protegida.", erro));
+                    }
+                    return;
+                } else {
+                    pararVozEletiva();
+                }
+            }
+
+            audioVozAtual = new Audio(caminhoMp3);
+            const playPromise = audioVozAtual.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(erro => {
+                    console.warn("Aviso de bloqueio do navegador contornado.", erro);
+                });
+            }
+        } catch (e) {
+            console.error("Falha ao inicializar o ficheiro de áudio.", e);
+        }
+    }
+
+    function pararVozEletiva() {
+        if (audioVozAtual) {
+            audioVozAtual.pause();
+            audioVozAtual.currentTime = 0;
+            audioVozAtual = null;
+        }
+    }
+
+    function tocarVozInstrucao() {
+        const caminhoAudio = AUDIOS_INSTRUCOES[jogoAtual];
+        if (caminhoAudio) {
+            tocarVoz(caminhoAudio);
+        }
+    }
+
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    
+    function iniciarAudio() {
+        if (!AudioContextClass) return;
+        if (!audioCtx) audioCtx = new AudioContextClass();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+    
+    window.addEventListener('pointerdown', iniciarAudio);
+    window.addEventListener('keydown', iniciarAudio);
+
+    function tocarSom(tipo) {
+        iniciarAudio();
+        if (!audioCtx || audioCtx.state === 'suspended') return;
+
+        const osc = audioCtx.createOscillator(); 
+        const gain = audioCtx.createGain();
+        osc.connect(gain); 
+        gain.connect(audioCtx.destination);
+        const agora = audioCtx.currentTime + 0.02;
+
+        if (tipo === 'acerto') {
+            osc.type = 'sine'; 
+            osc.frequency.setValueAtTime(600, agora); 
+            osc.frequency.exponentialRampToValueAtTime(1200, agora + 0.2);
+            gain.gain.setValueAtTime(0.3, agora); 
+            gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); 
+            osc.stop(agora + 0.3);
+		} else if (tipo === 'alegria') {
+            osc.type = 'sine'; 
+            osc.frequency.setValueAtTime(150, agora);
+            osc.frequency.exponentialRampToValueAtTime(1800, agora + 0.8); 
+            gain.gain.setValueAtTime(0, agora);
+            gain.gain.linearRampToValueAtTime(0.12, agora + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.001, agora + 0.8);
+            osc.start(agora); 
+            osc.stop(agora + 0.8);
+        } else if (tipo === 'erro') {
+            osc.type = 'triangle'; 
+            osc.frequency.setValueAtTime(250, agora); 
+            osc.frequency.exponentialRampToValueAtTime(150, agora + 0.2);
+            gain.gain.setValueAtTime(0.3, agora); 
+            gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); 
+            osc.stop(agora + 0.3);
+        } else if (tipo === 'pop') {
+            osc.type = 'sine'; 
+            osc.frequency.setValueAtTime(400, agora); 
+            osc.frequency.exponentialRampToValueAtTime(800, agora + 0.1);
+            gain.gain.setValueAtTime(0.15, agora); 
+            gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.1);
+            osc.start(agora); 
+            osc.stop(agora + 0.1);
+        } else if (tipo === 'vitoria') {
+            const melodia = [
+                { freq: 523.25, tempo: 0.00, duracao: 0.15 }, 
+                { freq: 523.25, tempo: 0.15, duracao: 0.15 }, 
+                { freq: 523.25, tempo: 0.30, duracao: 0.15 }, 
+                { freq: 659.25, tempo: 0.45, duracao: 0.35 }, 
+                { freq: 783.99, tempo: 0.80, duracao: 0.35 }, 
+                { freq: 1046.50, tempo: 1.15, duracao: 0.80 }
+            ];
+
+            melodia.forEach(nota => {
+                const o = audioCtx.createOscillator(); 
+                const g = audioCtx.createGain();
+                o.connect(g); 
+                g.connect(audioCtx.destination);
+                o.type = 'triangle'; 
+                o.frequency.value = nota.freq;
+                g.gain.setValueAtTime(0, agora + nota.tempo);
+                g.gain.linearRampToValueAtTime(0.3, agora + nota.tempo + 0.02); 
+                g.gain.exponentialRampToValueAtTime(0.001, agora + nota.tempo + nota.duracao);
+                o.start(agora + nota.tempo); 
+                o.stop(agora + nota.tempo + nota.duracao);
+            });
+        }
+    }
+	
+	// Canvas de Confetes Contidos
+    const canvasConfetti = document.getElementById('confetti-canvas');
+    const ctxConfetti = canvasConfetti.getContext('2d');
+    let confetis = [];
+	
+	function redimensionarCanvas() { 
+        const container = document.querySelector('.cartao-jogo-container');
+        if (container && canvasConfetti) {
+            canvasConfetti.width = container.clientWidth; 
+            canvasConfetti.height = container.clientHeight; 
+        }
+    }
+    window.addEventListener('resize', redimensionarCanvas);
+	
+	function dispararConfetis() {
+        redimensionarCanvas(); 
+        confetis = []; 
+        const cores = ['#4fd1c5', '#ff4757', '#0091ff', '#ffa502', '#eccc68'];
+        for (let i = 0; i < 150; i++) {
+            confetis.push({ 
+                x: Math.random() * canvasConfetti.width, 
+                y: Math.random() * canvasConfetti.height - canvasConfetti.height, 
+                w: Math.random() * 10 + 5, 
+                h: Math.random() * 10 + 5, 
+                cor: cores[Math.floor(Math.random() * cores.length)], 
+                velY: Math.random() * 3 + 2, 
+                velX: Math.random() * 2 - 1, 
+                rotacao: Math.random() * 360, 
+                velRotacao: Math.random() * 5 - 2.5 
+            });
+        }
+        animarConfetis();
+    }
+	
+	function animarConfetis() {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); 
+        let ativos = false;
+        confetis.forEach(c => {
+            c.y += c.velY; 
+            c.x += c.velX; 
+            c.rotacao += c.velRotacao; 
+            if (c.y < canvasConfetti.height) ativos = true;
+            ctxConfetti.save(); 
+            ctxConfetti.translate(c.x, c.y); 
+            ctxConfetti.rotate(c.rotacao * Math.PI / 180);
+            ctxConfetti.fillStyle = c.cor; 
+            ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); 
+            ctxConfetti.restore();
+        });
+        if (ativos) requestAnimationFrame(animarConfetis);
+    }
+	
+	function animarConfetis() {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); 
+        let ativos = false;
+        confetis.forEach(c => {
+            c.y += c.velY; 
+            c.x += c.velX; 
+            c.rotacao += c.velRotacao; 
+            if (c.y < canvasConfetti.height) ativos = true;
+            ctxConfetti.save(); 
+            ctxConfetti.translate(c.x, c.y); 
+            ctxConfetti.rotate(c.rotacao * Math.PI / 180);
+            ctxConfetti.fillStyle = c.cor; 
+            ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); 
+            ctxConfetti.restore();
+        });
+        if (ativos) requestAnimationFrame(animarConfetis);
+    }
+	
+    function limparConfetis() {
+        confetis = []; 
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+    }
+	
+	
+
+    // Motor de Balanceamento Estéreo (CORS e Local File Safe)
+    function tocarSomAnimalRadar() {
+        const r = perguntasSessao[rondaAtual];
+        if (!r || !r.audio) return;
+
+        pararVozEletiva();
+
+        try {
+            audioVozAtual = new Audio(r.audio);
+            
+            // 🚨 CORREÇÃO CRÍTICA LOCAL (file:///):
+            // Se correr localmente no PC, contorna as restrições CORS que silenciam o som,
+            // reproduzindo o áudio do animal diretamente de forma mono.
+            if (window.location.protocol === 'file:') {
+                const playPromise = audioVozAtual.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(erro => console.warn("Erro ao reproduzir em local.", erro));
+                }
+                return; // Corta a execução imediatamente para evitar o muting do browser!
+            }
+
+            // Se estiver a correr em ambiente web real (GitHub), executa estéreo 3D real
+            iniciarAudio();
+            if (!audioCtx) {
+                audioVozAtual.play();
+                return;
+            }
+
+            let panner;
+            if (audioCtx.createStereoPanner) {
+                panner = audioCtx.createStereoPanner();
+                panner.pan.setValueAtTime(r.panValue, audioCtx.currentTime);
+            } else {
+                panner = audioCtx.createPanner();
+                panner.panningModel = 'HRTF';
+                panner.setPosition(r.panValue, 0, 1 - Math.abs(r.panValue));
+            }
+
+            const source = audioCtx.createMediaElementSource(audioVozAtual);
+            source.connect(panner);
+            panner.connect(audioCtx.destination);
+
+            const playPromise = audioVozAtual.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(erro => console.warn("Erro ao reproduzir estéreo.", erro));
+            }
+        } catch (e) {
+            console.warn("Fallback automático para Mono.", e);
+            try {
+                audioVozAtual = new Audio(r.audio);
+                audioVozAtual.play();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+
+    /* =====================================================================
+       SECÇÃO 5: CICLO DE VIDA DO JOGO CORE
+    ===================================================================== */
+    
+    // Inicia a sessão de jogo temática (Adaptada para ID 1 de jogo único)
+    function iniciarJogo(idJogo) {
+        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+        
+        // Garante que a narrativa do menu inicial para imediatamente ao entrar na partida
+        pararVozEletiva();
+        
+        jogoAtual = idJogo;
+        rondaAtual = 0;
+        totalRondas = 10; // 10 Rondas ativo para o Pip
+        
+        // Ativa o progresso do caminho mágico
+        document.getElementById('caminho-magico').style.display = 'block';
+        atualizarProgressoCaminho(0);
+
+        // 🚨 CORREÇÃO: Passamos a ler o ID 1 da base de dados, para bater certo com iniciarJogo(1)
+        perguntasSessao = prepararPerguntasPartida(1, totalRondas);
+
+        // Inicializa o contador do topo (Pílula 1/10)
+        prepararContadorTopo();
+
+        // Oculta ecrãs e ativa a área específica
+        document.querySelectorAll('[id^="area-jogo-"]').forEach(el => el.style.display = 'none');
+        
+        // Aponta para a área do Pip (Área 3 no teu HTML)
+        const areaSelecionada = document.getElementById('area-jogo-3');
+        if (areaSelecionada) {
+            areaSelecionada.style.display = 'grid'; // Força 'grid' para o alinhamento
+        }
+
+        mostrarEcra('ecra-jogo');
+        prepararRonda();
+    }
+
+    // Prepara a interface para a ronda ativa (Gere a lógica estéreo do Pip)
+    function prepararRonda() {
+        atualizarMascote('idle');
+
+        // Define a instrução do topo
+        document.getElementById('instrucao-ronda').textContent = `De onde vem o som do animal?`;
+        
+        const r = perguntasSessao[rondaAtual];
+        const imgAnimal = document.getElementById('radar-imagem-animal');
+        
+        if (imgAnimal && r) {
+            imgAnimal.src = r.imagem;
+            imgAnimal.alt = r.nome;
+        }
+
+        // Reseta as nuvens de decisão do HTML
+        const clEsq = document.getElementById('radar-opcao-esquerda');
+        const clDir = document.getElementById('radar-opcao-direita');
+        if (clEsq && clDir) {
+            clEsq.className = 'card-nuvem-radar cloud-esquerda';
+            clDir.className = 'card-nuvem-radar cloud-direita';
+            clEsq.style.pointerEvents = 'auto';
+            clDir.style.pointerEvents = 'auto';
+            clEsq.style.opacity = '1';
+            clDir.style.opacity = '1';
+        }
+
+        // Sorteia o lado (50% Esquerda, 50% Direita)
+        const lados = ['esquerda', 'direita'];
+        const ladoEscolhido = lados[Math.floor(Math.random() * lados.length)];
+        
+        r.correta = ladoEscolhido;
+        r.panValue = (ladoEscolhido === 'esquerda') ? -1.0 : 1.0;
+    }
+
+    function escolherLado(lado) {
+        const r = perguntasSessao[rondaAtual];
+        if (!r) return;
+
+        // Tranca preventivamente ambas as nuvens para evitar cliques na transição
+        const clEsq = document.getElementById('radar-opcao-esquerda');
+        const clDir = document.getElementById('radar-opcao-direita');
+        if (clEsq) clEsq.style.pointerEvents = 'none';
+        if (clDir) clDir.style.pointerEvents = 'none';
+
+        const cardClicado = (lado === 'esquerda') ? clEsq : clDir;
+
+        if (lado === r.correta) {
+            if (cardClicado) cardClicado.classList.add('correct');
+            acertou();
+        } else {
+            if (cardClicado) {
+                cardClicado.classList.add('wrong');
+                errou(cardClicado);
+                cardClicado.style.opacity = '0.5';
+            }
+            // Destranca apenas a nuvem oposta correta para a criança tentar outra vez
+            const cardOposto = (lado === 'esquerda') ? clDir : clEsq;
+            if (cardOposto) cardOposto.style.pointerEvents = 'auto';
+        }
+    }
+
+    function acertou() {
+        tocarSom('acerto');
+        rondaAtual++;
+        
+        // Atualiza o caminho mágico e acende a pílula do topo imediatamente
+        let percentagem = (rondaAtual / totalRondas) * 100;
+        atualizarProgressoCaminho(percentagem);
+
+        // Tranca de segurança nas nuvens
+        document.querySelectorAll('.card-nuvem-radar').forEach(b => b.style.pointerEvents = 'none');
+
+        // Sequenciamento Áudio/Visual:
+        // Som de acerto (0.3s) -> Mascote salta com o som 'alegria' (0.8s)
+        setTimeout(() => {
+            atualizarMascote('feliz');
+            tocarSom('alegria');
+        }, 300);
+
+        // Transição coordenada após o salto e progresso terminarem (1.2s de espera)
+        setTimeout(() => {
+            if (rondaAtual >= totalRondas) {
+                tocarSom('vitoria');
+                dispararConfetis();
+                mostrarEcra('ecra-fim');
+            } else {
+                prepararRonda();
+            }
+        }, 1200); 
+    }
+	
+    // Erro na escolha
+    function errou(elementoAnimar) {
+        tocarSom('erro');
+        elementoAnimar.classList.add('error-shake');
+        
+        atualizarMascote('triste');
+
+        setTimeout(() => {
+            elementoAnimar.classList.remove('error-shake');
+        }, 500);
+
+        setTimeout(() => {
+            atualizarMascote('idle');
+        }, 1500);
+    }
+
+    /* =====================================================================
+       SECÇÃO 6: FUNÇÕES DE MECÂNICAS ESPECÍFICAS
+    ===================================================================== */
+    
+    function tocarVozNarrativa() {
+        // Força estritamente para o ID 1
+        const idAtivo = 1;
+        const caminhoAudio = AUDIOS_NARRATIVAS[idAtivo];
+        if (caminhoAudio) {
+            tocarVoz(caminhoAudio);
+        }
+    }
+
+</script>
+</body>
+</html>

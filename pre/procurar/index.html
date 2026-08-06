@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pré-Escolar - Detetive 🕵️‍♂️</title>
+    
+    <link rel="icon" type="image/png" href="../../logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+
+        *, *::before, *::after {
+    box-sizing: border-box;
+}
+        /* =========================================
+           CSS DO TEMPLATE BASE E MOLDE INTOCÁVEL BOM.HTML
+           ========================================= */
+        :root {
+            --bg-body: #f0f7ff;
+            --cor-pre: #4fd1c5;       
+            --cor-pre-dark: #38a89d;
+            --cor-borda: #48b5aa;    
+            --bg-header: #e1f5f2;    
+            --azul-escuro: #0d47a1;
+            --text-main: #455a64;
+            
+            /* Cor Específica deste Jogo */
+            --cor-jogo: #51cf66;
+            --cor-jogo-dark: #40c057;
+			
+			/* CORES DO CONTAINER DE JOGO + RGBA PARA ALTERAR A SHADOW */
+			--cor-c1: #ff6b6b; /* vermelho */
+			--cor-c1-sombra: rgba(255, 107, 107, 0.55);
+			
+			--cor-c2: #4dabf7; /* azul */
+			--cor-c2-sombra: rgba(77, 171, 247, 0.66);
+			
+			--cor-c3: #51cf66; /* verde */
+			--cor-c3-sombra: rgba(69, 176, 98, 0.52);
+			
+			--cor-c4: #fcc419; /* amarelo */
+			--cor-c4-sombra: rgba(251, 197, 49, 0.75);
+			
+			--cor-c5: #cc5de8; /* roxo */
+			--cor-c5-sombra: rgba(165, 94, 234, 0.65);
+			
+			--cor-c6: #ff922b; /* laranja */
+			--cor-c6-sombra: rgba(250, 152, 58, 0.85);
+        }
+
+        body { font-family: 'Roboto', sans-serif; text-align: center; background-color: var(--bg-body); margin: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; touch-action: pan-y;}
+        
+        header { background-color: var(--bg-header); padding: 25px 20px; border-bottom: 1px solid var(--cor-borda); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; flex-shrink: 0; z-index: 100; }
+        
+        .header-content { max-width: 1200px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; }
+        .nav-container { width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 15px; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; }
+        .hamburger { cursor: pointer; background: rgba(255,255,255,0.4); border: none; display: flex; flex-direction: column; gap: 4px; padding: 10px; border-radius: 8px; transition: background 0.4s ease; }
+        .hamburger:hover { background: #fff9c4; }
+        .hamburger span { display: block; width: 20px; height: 2px; background: var(--azul-escuro); transition: 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        .btn-voltar { background: var(--cor-pre); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; font-size: 0.9rem; box-shadow: 0 3px 0 var(--cor-pre-dark); display: flex; align-items: center; gap: 8px; transition: 0.2s; cursor: pointer; }
+        .btn-voltar:hover { transform: scale(1.05); }
+        h1 {
+    color: var(--azul-escuro);
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    text-shadow: 
+        -2px -2px 0 #ffffff,  
+         2px -2px 0 #ffffff,
+        -2px  2px 0 #ffffff,
+         2px  2px 0 #ffffff, 
+         0px  6px 12px rgba(0, 0, 0, 0.15); 
+}
+        .subtitulo { color: var(--azul-escuro); font-size: clamp(0.85rem, 3vw, 1.1rem); font-weight: 500; opacity: 0.8; margin-top: 15px; }
+        
+        .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: white; z-index: 200; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.1); text-align: left; }
+        .sidebar.active { left: 0; }
+        .sidebar .btn-fechar { background: #fff5f5; color: #ff4757; padding: 20px 25px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; border-bottom: 1px solid #ffebeb; }
+        .sidebar ul { list-style: none; padding: 15px; margin: 0; }
+        .sidebar li a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--text-main); background: #f8fafc; border-radius: 12px; margin-bottom: 8px; transition: 0.3s; }
+        .sidebar li a:hover { background: var(--cor-pre); color: white; transform: translateX(8px); }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 150; }
+        .overlay.active { display: block; }
+
+        /* =========================================
+           ÁREA PRINCIPAL MAXIMIZADA E SEM SCROLL
+           ========================================= */
+        main { flex: 1; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 15px 20px; gap: 15px; }
+        
+        .cartao-jogo-container { 
+            background: white; width: 100%; max-width: 950px; 
+            flex: 1; 
+            padding: 30px 20px; border-radius: 30px; box-shadow: 0 6px 15px var(--cor-c5-sombra); 
+            border-top: 8px solid var(--cor-c5); display: flex; flex-direction: column; 
+            align-items: center; justify-content: flex-start; position: relative; overflow: hidden; 
+        }
+        
+        footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--cor-borda); flex-shrink: 0; }
+        footer p { font-size: 0.8rem; color: var(--cor-borda); margin: 0; }
+        footer a { color: var(--cor-borda); text-decoration: none; font-weight: 700; }
+        
+        @media (max-width: 768px) {
+            header { padding: 15px 10px; }
+            .header-content { display: grid; grid-template-columns: 50px 1fr 50px; grid-template-rows: auto auto; gap: 5px; }
+            .nav-container { position: static; transform: none; grid-column: 1 / -1; display: grid; grid-template-columns: 50px 1fr 50px; width: 100%; margin-bottom: 10px; }
+            .hamburger { grid-column: 1; justify-self: start; }
+            .btn-voltar { grid-column: 2; justify-self: center; width: fit-content; }
+            h1, .subtitulo { grid-column: 2; text-align: center; }
+            main { padding: 15px 10px; gap: 10px; }
+            .cartao-jogo-container { padding: 15px; }
+        }
+
+        /* =========================================
+           O CAMINHO MÁGICO 🕵️‍♂️ -> 🔍
+           ========================================= */
+        .caminho-magico {
+            width: 100%; max-width: 700px; height: 50px; position: relative;
+            display: block; margin-bottom: 0px; flex-shrink: 0;
+        }
+        .caminho-trilho {
+            position: absolute; bottom: 0px; left: 40px; right: 70px; height: 0;
+            border-bottom: 4px dashed var(--cor-c5); z-index: 1;
+        }
+        .caminho-avatar { 
+			position: absolute; 
+			left: 0%; 
+			bottom: 0px; 
+			transform: translateX(-50%) scaleX(-1); 
+			width: 45px; 
+			height: 45px; 
+			transition: left 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); 
+			z-index: 3; 
+			filter: drop-shadow(0 3px 3px rgba(0,0,0,0.15)); 
+		}
+		.caminho-avatar img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+        
+		.caminho-alvo { 
+			position: absolute; 
+			right: 10px; 
+			bottom: -2px; 
+			width: 45px; 
+			height: 45px; 
+			z-index: 2; 
+			filter: drop-shadow(0 3px 3px rgba(0,0,0,0.15)); 
+			animation: pulsaAlvo 1.5s infinite alternate ease-in-out;
+		}
+		.caminho-alvo img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+		
+		/* Tamanho das imagens locais nos cartões de tema */
+		.cat-icon img {
+			width: 55px;
+			height: 55px;
+			object-fit: contain;
+		}
+
+		/* Tamanho das imagens locais no fim do jogo e modal */
+		.img-fim {
+			width: 80px;
+			height: 80px;
+			margin: 0 auto 15px auto;
+			object-fit: contain;
+			display: block;
+		}
+		.img-modal {
+			width: 70px;
+			height: 70px;
+			margin: 0 auto 10px auto;
+			object-fit: contain;
+			display: block;
+		}
+		@keyframes pulsaAlvo { 
+            0% { transform: scale(1) rotate(0deg); } 
+            100% { transform: scale(1.15) rotate(5deg); } 
+        }
+		
+		.icon-svg-btn {
+			width: 2.5rem;
+			height: 2.5rem;
+			vertical-align: middle;
+			display: inline-block;
+			object-fit: contain;
+		}
+		/* Espaçamento conforme a posição do ícone */
+		.btn-voltar-menu .icon-svg-btn {
+			margin-right: 8px;
+		}
+		.btn-acao .icon-svg-btn {
+			margin-left: 8px;
+		}
+
+        /* =========================================
+           MENUS E ECRÃS BASE
+           ========================================= */
+        .ecra { display: none; flex-direction: column; align-items: center; justify-content: flex-start; width: 100%; min-height: 350px; text-align: center; flex: 1; }
+        .pergunta-destaque { font-size: 1.6rem; color: var(--azul-escuro); margin-bottom: 5px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px;}
+
+        /* =========================================
+           CSS ESPECÍFICO: O DETETIVE
+           ========================================= */
+        
+        /* A Caixa do Topo (Alvos) - Sem Background/Border */
+        .alvos-container {
+            display: flex; gap: 20px; justify-content: center; margin-bottom: 15px;
+            padding: 5px; 
+        }
+
+        .alvo-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; }
+
+        /* A imagem Alvo (Apenas com sombra, sem borda ou padding) */
+        .img-alvo {
+            width: clamp(75px, 16vw, 110px);
+            height: clamp(75px, 16vw, 110px);
+            object-fit: contain;
+            background: transparent;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); /* Sombra neutra base */
+            transition: all 0.3s ease;
+        }
+
+        /* EFEITO HOVER PEDIDO: Zoom suave e sombra esverdeada */
+        .img-alvo:hover {
+            transform: scale(1.1) translateY(-4px);
+            filter: drop-shadow(0 10px 15px rgba(81, 207, 102, 0.7)); /* Sombra/Borda esverdeada suave */
+        }
+
+        .img-alvo.encontrado {
+            opacity: 0.3; filter: grayscale(1); pointer-events: none; transform: scale(0.95);
+        }
+
+        .visto-alvo {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            font-size: 3rem; color: var(--cor-jogo); filter: drop-shadow(0 2px 2px white);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; z-index: 10;
+        }
+        .img-alvo.encontrado + .visto-alvo { transform: translate(-50%, -50%) scale(1); }
+
+        /* A Cena do Crime (Quadro de Busca em Grid Inteligente) */
+        .busca-container {
+            display: grid; 
+            justify-content: center; 
+            align-content: center;
+            width: 100%; 
+            flex: 1; /* Ocupa exatamente o espaço restante, evitando scroll */
+            margin: 0 auto;
+        }
+
+        /* FASE 1: 6 Imagens (Grelha 3x2) */
+        .busca-container.fase-1 {
+            grid-template-columns: repeat(3, auto);
+            gap: clamp(15px, 4vw, 30px);
+        }
+        .busca-container.fase-1 .img-busca { width: clamp(70px, 16vw, 110px); height: clamp(70px, 16vw, 110px); }
+
+        /* FASE 2: 12 Imagens (Grelha 4x3) */
+        .busca-container.fase-2 {
+            grid-template-columns: repeat(4, auto);
+            gap: clamp(10px, 3vw, 20px);
+        }
+        .busca-container.fase-2 .img-busca { width: clamp(55px, 12vw, 85px); height: clamp(55px, 12vw, 85px); }
+
+        /* FASE 3: 16 Imagens (Grelha 4x4) */
+        .busca-container.fase-3 {
+            grid-template-columns: repeat(4, auto);
+            gap: clamp(8px, 2vw, 15px);
+        }
+        .busca-container.fase-3 .img-busca { width: clamp(45px, 10vw, 70px); height: clamp(45px, 10vw, 70px); }
+
+
+        .item-busca-wrapper {
+            position: relative;
+            transition: transform 0.2s;
+            display: flex; justify-content: center; align-items: center;
+        }
+        
+        .item-busca-wrapper:hover {
+            transform: scale(1.1) rotate(0deg) !important;
+            z-index: 10;
+        }
+        .item-busca-wrapper:active { transform: scale(0.9) !important; }
+
+        .img-busca {
+            object-fit: contain; background: white; border-radius: 15px; padding: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer;
+            user-select: none; -webkit-tap-highlight-color: transparent;
+            border: 4px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .img-busca.correto {
+            border-color: var(--cor-jogo); background: #eafff0; pointer-events: none;
+            box-shadow: 0 0 15px rgba(81, 207, 102, 0.4);
+        }
+
+        .visto-busca {
+            position: absolute; top: -10px; right: -10px; font-size: 2rem; color: var(--cor-jogo);
+            filter: drop-shadow(0 2px 2px white); opacity: 0; transform: scale(0);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; z-index: 10;
+        }
+        .img-busca.correto + .visto-busca { opacity: 1; transform: scale(1); }
+
+        /* Fim de Jogo e Transições */
+        .titulo-destaque { font-size: 3rem; color: var(--azul-escuro); margin-bottom: 15px; }
+        .btn-acao { background-color: var(--cor-jogo); color: white; border: none; padding: 15px 35px; font-size: 1.3rem; font-weight: 800; border-radius: 20px; cursor: pointer; box-shadow: 0 6px 0 var(--cor-jogo-dark); transition: 0.2s; text-transform: uppercase; margin-top: 15px; display: inline-flex; align-items: center; justify-content: center; gap: 10px;}
+        .btn-acao:active { transform: translateY(6px); box-shadow: 0 0px 0 transparent; }
+        .btn-acao:hover { filter: brightness(1.05); }
+
+        #ecra-transicao { 
+            display: none; flex-direction: column; align-items: center; justify-content: center; 
+            width: 100%; height: 100%; position: absolute; top: 0; left: 0; 
+            background: rgba(255,255,255,0.95); z-index: 20; border-radius: 30px; animation: fadeIn 0.5s ease;
+        }
+
+        @media (max-width: 600px) {
+            .caminho-trilho { left: 30px; right: 40px; }
+            .titulo-destaque { font-size: 2.2rem; }
+            .pergunta-destaque { font-size: 1.3rem; margin-bottom: 5px; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes shakeError { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+        .error-shake { animation: shakeError 0.4s ease; }
+        .error-flash { border-color: #ff4757 !important; background: #ffefef !important; }
+
+        #confetti-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; overflow: hidden; }
+    body { scrollbar-gutter: stable; }
+	.icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
+	.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
+	.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
+	h1 .icon-svg { width: 1em; height: 1em; margin-left: 10px; }
+	.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+</style>
+
+<style>
+  body {
+    background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px);
+    background-size: 25px 25px;
+  }
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<nav class="sidebar" id="sidebar">
+    <div class="btn-fechar" onclick="toggleMenu()"><span>✕</span> Fechar</div>
+    <ul>
+        	<li><a href="../../"><img src="../../SVG/home.svg" alt="Início" class="icon-svg-menu" onerror="this.style.display='none'">Início</a></li>
+        <li><a href="../"><img src="../../SVG/pre.svg" alt="Pré-Escolar" class="icon-svg-menu" onerror="this.style.display='none'">Pré-Escolar</a></li>
+        <li><a href="../../1"><img src="../../SVG/ano1.svg" alt="1º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 1º Ano</a></li>
+        <li><a href="../../2"><img src="../../SVG/ano2.svg" alt="2º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 2º Ano</a></li>
+        <li><a href="../../3/"><img src="../../SVG/ano3.svg" alt="3º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 3º Ano</a></li>
+        <li><a href="../../4/"><img src="../../SVG/ano4.svg" alt="4º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 4º Ano</a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="header-content">
+        <div class="nav-container">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="../" class="btn-voltar"><img src="../../SVG/voltar.svg" class="icon-svg-voltar" alt=""> Voltar</a>
+        </div>
+		<h1>O Detetive<img src="detetive.svg" class="icon-svg-titulo" alt=""></h1>
+        <div class="subtitulo">Abre bem os olhos e encontra a imagem!</div>
+    </div>
+</header>
+
+<main>
+    <!-- O CAMINHO MÁGICO DO DETETIVE -->
+    <div class="caminho-magico" id="caminho-magico">
+        <div class="caminho-trilho">
+            <div class="caminho-avatar" id="avatar-progresso">
+                <img src="detetive.svg" alt="Detetive">
+            </div> 
+        </div>
+        <div class="caminho-alvo" id="alvo-progresso">
+            <img src="lupa.svg" alt="Lupa">
+        </div> 
+    </div>
+
+    <!-- CARTÃO DO JOGO -->
+    <div class="cartao-jogo-container">
+        
+        <!-- ECRÃ 1: JOGO (Começa direto aqui) -->
+        <div id="ecra-jogo" class="ecra">
+            
+            <div class="pergunta-destaque" id="instrucao-ronda">Procura esta imagem:</div>
+
+            <!-- CAIXA DO TOPO (Alvos) -->
+            <div class="alvos-container" id="alvos-container">
+                <!-- Imagens alvo injetadas por JS -->
+            </div>
+
+            <!-- ÁREA DE BUSCA (Grid Automático) -->
+            <div id="busca-container">
+                <!-- Imagens para clicar injetadas por JS -->
+            </div>
+
+        </div>
+
+        <!-- ECRÃ 2: FIM DO JOGO (Sobreposição Absoluta) -->
+        <div id="ecra-transicao" class="ecra">
+            <img src="../../SVG/trofeu.svg" class="img-fim" alt="Troféu">
+            <h2 class="titulo-destaque">Fantástico!</h2>
+            <p style="font-size: 1.3rem; color: var(--text-main); margin-bottom: 25px;">Tens uns olhos de lince. Encontraste tudo!</p>
+			<button class="btn-acao" onclick="iniciarJogo()" style="max-width: 300px;">Jogar Novamente <img src="../../SVG/jogar_novo.svg" class="icon-svg-btn" alt=""></button>
+        </div>
+
+        <canvas id="confetti-canvas"></canvas>
+    </div>
+</main>
+
+<footer>
+    <p><span id="ano-atual"> </span><img src="../../SVG/pre.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
+</style>
+</footer>
+
+<script src="../dados.js"></script>
+
+<script>
+    /* =====================================================================
+       JAVASCRIPT DO TEMPLATE E MENU
+       ===================================================================== */
+    document.getElementById('ano-atual').innerText = new Date().getFullYear();
+    
+    function toggleMenu() { 
+        document.getElementById('sidebar').classList.toggle('active'); 
+        document.getElementById('overlay').classList.toggle('active'); 
+        document.getElementById('hamburgerBtn').classList.toggle('open'); 
+    }
+
+    function mostrarEcra(id) {
+        document.querySelectorAll('.ecra').forEach(e => e.style.display = 'none');
+        const e = document.getElementById(id);
+        if(e) e.style.display = 'flex';
+    }
+
+    function atualizarProgressoCaminho(percentagem) {
+        const avatar = document.getElementById('avatar-progresso');
+        if(avatar) avatar.style.left = `${percentagem}%`;
+    }
+
+    // Rota Segura e Limpa das Imagens
+    function getImagePath(nomeImg) {
+        if (!nomeImg) return '';
+        const nomeFicheiro = nomeImg.replace('img/', '');
+        return `../img/${nomeFicheiro}`;
+    }
+
+    /* =====================================================================
+       LÓGICA DO JOGO "O DETETIVE"
+       ===================================================================== */
+    
+    const TOTAL_RONDAS = 15;
+    let rondaAtual = 0;
+    let alvosDestaRonda =[]; 
+    let alvosEncontrados = 0;
+    let isVerificando = false;
+
+    // Elementos DOM
+    const alvosContainer = document.getElementById('alvos-container');
+    const buscaContainer = document.getElementById('busca-container');
+    const instrucaoTxt = document.getElementById('instrucao-ronda');
+
+    // O jogo arranca logo
+    window.onload = function() {
+        iniciarJogo();
+    };
+
+    function iniciarJogo() {
+        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+        rondaAtual = 0;
+        atualizarProgressoCaminho(0);
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+        
+        mostrarEcra('ecra-jogo');
+        prepararRonda();
+    }
+
+    function prepararRonda() {
+        isVerificando = false;
+        alvosContainer.innerHTML = '';
+        buscaContainer.innerHTML = '';
+        buscaContainer.className = 'busca-container'; // Reset das classes de Fase
+        
+        alvosDestaRonda =[];
+        alvosEncontrados = 0;
+
+        // Configuração de Dificuldade Automática (A grelha adapta-se sem scroll)
+        let qtdAlvos = 1;
+        let qtdTotalCenario = 6;
+
+        if (rondaAtual >= 10) {
+            // Fase 3 (16 imagens - Grelha 4x4)
+            qtdAlvos = 2;
+            qtdTotalCenario = 16;
+            instrucaoTxt.textContent = "Procura estas duas imagens:";
+            buscaContainer.classList.add('fase-3');
+        } else if (rondaAtual >= 5) {
+            // Fase 2 (12 imagens - Grelha 4x3)
+            qtdAlvos = 1;
+            qtdTotalCenario = 12;
+            instrucaoTxt.textContent = "Onde está esta imagem?";
+            buscaContainer.classList.add('fase-2');
+        } else {
+            // Fase 1 (6 imagens - Grelha 3x2)
+            qtdAlvos = 1;
+            qtdTotalCenario = 6;
+            instrucaoTxt.textContent = "Procura esta imagem:";
+            buscaContainer.classList.add('fase-1');
+        }
+
+        // 1. Baralha todas as palavras disponíveis em dados.js
+        let bancoImagens = [...palavras].map(p => p.imagem).sort(() => Math.random() - 0.5);
+
+        // 2. Seleciona os alvos
+        for(let i=0; i<qtdAlvos; i++) {
+            alvosDestaRonda.push(bancoImagens[i]);
+            
+            let wrapper = document.createElement('div');
+            wrapper.className = 'alvo-wrapper';
+            wrapper.innerHTML = `
+                <img src="${getImagePath(bancoImagens[i])}" class="img-alvo" id="alvo-topo-${i}" alt="Alvo">
+                <div class="visto-alvo">✔️</div>
+            `;
+            alvosContainer.appendChild(wrapper);
+        }
+
+        // 3. Prepara a piscina de imagens para o cenário
+        let imagensCenario =[...alvosDestaRonda]; 
+        let imagensRestantes = bancoImagens.slice(qtdAlvos); 
+        
+        while (imagensCenario.length < qtdTotalCenario) {
+            imagensCenario.push(imagensRestantes.pop());
+        }
+
+        // 4. Baralha o cenário e renderiza
+        imagensCenario.sort(() => Math.random() - 0.5);
+
+        imagensCenario.forEach(img => {
+            let wrapper = document.createElement('div');
+            wrapper.className = 'item-busca-wrapper';
+            
+            let rot = Math.floor(Math.random() * 30) - 15;
+            wrapper.style.transform = `rotate(${rot}deg)`;
+            
+            let imgHTML = document.createElement('img');
+            imgHTML.src = getImagePath(img);
+            imgHTML.className = 'img-busca';
+            imgHTML.alt = "Busca";
+            
+            let visto = document.createElement('div');
+            visto.className = 'visto-busca';
+            visto.textContent = '✔️';
+
+            wrapper.appendChild(imgHTML);
+            wrapper.appendChild(visto);
+
+            // Evento de clique
+            wrapper.onclick = () => verificarClique(img, wrapper, imgHTML);
+
+            buscaContainer.appendChild(wrapper);
+        });
+    }
+
+    function verificarClique(imagemClicada, wrapperDOM, imgDOM) {
+        if (isVerificando || imgDOM.classList.contains('correto')) return;
+
+        let alvoIndex = alvosDestaRonda.indexOf(imagemClicada);
+
+        if (alvoIndex !== -1) {
+            // ACERTOU
+            tocarSom('acerto');
+            imgDOM.classList.add('correto');
+            
+            let alvoTopo = document.getElementById(`alvo-topo-${alvoIndex}`);
+            alvoTopo.classList.add('encontrado');
+
+            alvosEncontrados++;
+
+            if (alvosEncontrados === alvosDestaRonda.length) {
+                isVerificando = true;
+                rondaAtual++;
+                
+                let percentagem = (rondaAtual / TOTAL_RONDAS) * 100;
+                atualizarProgressoCaminho(percentagem);
+
+                setTimeout(() => {
+                    if (rondaAtual >= TOTAL_RONDAS) {
+                        tocarSom('vitoria');
+                        dispararConfetis();
+                        mostrarEcra('ecra-transicao');
+                    } else {
+                        prepararRonda();
+                    }
+                }, 1000);
+            }
+
+        } else {
+            // ERROU
+            tocarSom('erro');
+            wrapperDOM.classList.add('error-shake');
+            imgDOM.classList.add('error-flash');
+            
+            setTimeout(() => {
+                wrapperDOM.classList.remove('error-shake');
+                imgDOM.classList.remove('error-flash');
+            }, 400);
+        }
+    }
+
+    /* =====================================================================
+       SISTEMA DE SOM E CONFETIS
+       ===================================================================== */
+    let audioCtx = null;
+    function iniciarAudio() {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+    document.body.addEventListener('click', iniciarAudio, { once: true });
+    document.body.addEventListener('touchstart', iniciarAudio, { once: true });
+
+    function tocarSom(tipo) {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        const agora = audioCtx.currentTime;
+
+        if (tipo === 'acerto') {
+            osc.type = 'sine'; osc.frequency.setValueAtTime(600, agora); osc.frequency.exponentialRampToValueAtTime(1200, agora + 0.2);
+            gain.gain.setValueAtTime(0.1, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); osc.stop(agora + 0.3);
+        } else if (tipo === 'erro') {
+            osc.type = 'triangle'; osc.frequency.setValueAtTime(250, agora); osc.frequency.exponentialRampToValueAtTime(150, agora + 0.2);
+            gain.gain.setValueAtTime(0.1, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); osc.stop(agora + 0.3);
+        } else if (tipo === 'vitoria') {
+            const notas =[440, 554.37, 659.25, 880, 1046.50]; 
+            notas.forEach((freq, i) => {
+                const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                o.connect(g); g.connect(audioCtx.destination);
+                o.type = 'triangle'; o.frequency.value = freq;
+                g.gain.setValueAtTime(0.1, agora + i * 0.15); g.gain.exponentialRampToValueAtTime(0.01, agora + i * 0.15 + 0.6);
+                o.start(agora + i * 0.15); o.stop(agora + i * 0.15 + 0.6);
+            });
+        }
+    }
+
+    const canvasConfetti = document.getElementById('confetti-canvas');
+    const ctxConfetti = canvasConfetti.getContext('2d');
+    let confetis =[];
+    function redimensionarCanvas() { canvasConfetti.width = window.innerWidth; canvasConfetti.height = window.innerHeight; }
+    window.addEventListener('resize', redimensionarCanvas);
+    
+    function dispararConfetis() {
+        redimensionarCanvas(); confetis =[]; const cores =['#4fd1c5', '#ff4757', '#0091ff', '#ffa502', '#eccc68'];
+        for (let i = 0; i < 150; i++) {
+            confetis.push({ x: Math.random() * canvasConfetti.width, y: Math.random() * canvasConfetti.height - canvasConfetti.height, w: Math.random() * 10 + 5, h: Math.random() * 10 + 5, cor: cores[Math.floor(Math.random() * cores.length)], velY: Math.random() * 3 + 2, velX: Math.random() * 2 - 1, rotacao: Math.random() * 360, velRotacao: Math.random() * 5 - 2.5 });
+        }
+        animarConfetis();
+    }
+    function animarConfetis() {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); let ativos = false;
+        confetis.forEach(c => {
+            c.y += c.velY; c.x += c.velX; c.rotacao += c.velRotacao; if (c.y < canvasConfetti.height) ativos = true;
+            ctxConfetti.save(); ctxConfetti.translate(c.x, c.y); ctxConfetti.rotate(c.rotacao * Math.PI / 180);
+            ctxConfetti.fillStyle = c.cor; ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); ctxConfetti.restore();
+        });
+        if (ativos) requestAnimationFrame(animarConfetis);
+    }
+
+</script>
+</body>
+</html>
