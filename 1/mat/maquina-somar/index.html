@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1º Ano - Máquina de Somar 🤖➕</title>
+    
+    <link rel="icon" type="image/png" href="../../logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        /* =========================================
+           CSS DO TEMPLATE BASE DE MATEMÁTICA
+           ========================================= */
+        :root {
+            --bg-body: #f0f7ff;
+            --azul-vibrante: #0091ff; 
+            --cor-1ano: #0091ff;     
+            --cor-1ano-dark: #0070c5;
+            --cor-borda: #0091ff;            
+            --bg-header: #e3f2fd;    
+            --azul-escuro: #0d47a1;
+			--azul-vibrante: #0091ff;					  
+            --text-main: #455a64;
+            --borda-cartao: #ced6e0;
+            --cor-pt: #ff6b6b;
+            --cor-mat: #4dabf7;
+            --cor-em: #51cf66;
+
+            /* NOVAS CORES DO MENU INICIAL (Referência da Imagem) */
+            --cor-btn-azul: #61A0FF;
+            --cor-btn-verde: #5DD279;
+            --cor-btn-amarelo: #FBC531;
+            --cor-btn-vermelho: #FF6B6B;
+            --cor-btn-roxo: #A55EEA;
+            --cor-btn-laranja: #FA983A;
+            
+            /* Cores de Feedback (Vibrantes) */
+            --cor-sucesso: #2ed573;
+            --cor-sucesso-dark: #219d53;
+            --cor-erro: #ff4757;
+            --cor-erro-dark: #d0303f;
+        }
+
+        body { font-family: 'Roboto', sans-serif; text-align: center; background-color: var(--bg-body); margin: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; touch-action: pan-y; }
+        
+        /* HEADER OFICIAL */
+        header { 
+            background-color: var(--bg-header); padding: 25px 20px;
+            border-bottom: 1px solid var(--azul-vibrante);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; flex-shrink: 0; z-index: 100;
+        }
+        .header-content { max-width: 1200px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; }
+        .nav-container { width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 15px; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; }
+        .hamburger { cursor: pointer; background: rgba(255,255,255,0.4); border: none; display: flex; flex-direction: column; gap: 4px; padding: 10px; border-radius: 8px; transition: background 0.4s ease; touch-action: manipulation; }
+        @media (hover: hover) { .hamburger:hover { background: #fff9c4; } }
+        .hamburger span { display: block; width: 20px; height: 2px; background: var(--azul-escuro); transition: 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        .btn-voltar { background: var(--cor-1ano); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; font-size: 0.9rem; box-shadow: 0 3px 0 var(--cor-1ano-dark); display: flex; align-items: center; gap: 8px; transition: 0.2s; touch-action: manipulation;}
+        @media (hover: hover) { .btn-voltar:hover { transform: scale(1.05); } }
+        h1 {
+    color: var(--azul-escuro);
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    text-shadow: 
+        -2px -2px 0 #ffffff,  
+         2px -2px 0 #ffffff,
+        -2px  2px 0 #ffffff,
+         2px  2px 0 #ffffff, 
+         0px  6px 12px rgba(0, 0, 0, 0.15); 
+}
+        .subtitulo { color: var(--azul-escuro); font-size: clamp(0.85rem, 3vw, 1.1rem); font-weight: 500; opacity: 0.8; margin-top: 15px; }
+        
+        .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: white; z-index: 200; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.1); text-align: left; }
+        .sidebar.active { left: 0; }
+        .sidebar .btn-fechar { background: #fff5f5; color: #ff4757; padding: 20px 25px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; border-bottom: 1px solid #ffebeb; }
+        .sidebar ul { list-style: none; padding: 15px; margin: 0; }
+        .sidebar li a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--text-main); background: #f8fafc; border-radius: 12px; margin-bottom: 8px; transition: 0.3s; }
+        @media (hover: hover) { .sidebar li a:hover { background: var(--cor-1ano); color: white; transform: translateX(8px); } }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 150; }
+        .overlay.active { display: block; }
+        
+        main { flex: 1; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 25px 20px; width: 100%; box-sizing: border-box; }
+        .cartao-jogo-container { 
+            background: white; width: 100%; max-width: 950px; 
+            flex: 1; min-height: 0; 
+            padding: 25px 20px; border-radius: 30px; box-shadow: 0 4px 15px #4dabf7a8; 
+            border-top: 8px solid var(--cor-mat); 
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; box-sizing: border-box;
+        }
+		
+        /* FOOTER OFICIAL */
+        footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--azul-vibrante); margin-top: auto; flex-shrink: 0;}
+        footer p { font-size: 0.8rem; color: var(--azul-vibrante); margin: 0; }
+        
+        @media (max-width: 768px) {
+            header { padding: 15px 10px; }
+            .header-content { display: grid; grid-template-columns: 50px 1fr 50px; grid-template-rows: auto auto; gap: 5px; }
+            .nav-container { position: static; transform: none; grid-column: 1 / -1; display: grid; grid-template-columns: 50px 1fr 50px; width: 100%; margin-bottom: 10px; }
+            .hamburger { grid-column: 1; justify-self: start; }
+            .btn-voltar { grid-column: 2; justify-self: center; width: fit-content; }
+            h1, .subtitulo { grid-column: 2; text-align: center; }
+            main { padding: 15px 10px; gap: 10px; }
+            .cartao-jogo-container { padding: 15px; }
+        }
+
+        /* =========================================
+           TUTORIAL ANIMADO & MENU INICIAL
+           ========================================= */
+        .ecra { width: 100%; flex: 1; min-height: 0; display: none; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.4s ease; box-sizing: border-box;}
+        #ecra-inicio { display: flex; }
+        #ecra-jogo { justify-content: flex-start; padding-top: 5px; }
+        .titulo-menu { font-size: clamp(1.6rem, 5vw, 2.2rem); color: var(--azul-escuro); margin-bottom: 25px; font-weight: 900;}
+        
+        /* TUTORIAL ANIMADO DA MÁQUINA DE SOMAR */
+        .animacao-tutorial {
+            position: relative; width: 100%; max-width: 350px; background: #f4faff;
+            border-radius: 20px; border: 3px dashed #bcdcff; margin: 0 auto 25px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;
+            box-shadow: inset 0 0 15px rgba(0,145,255,0.1); height: 180px; overflow: hidden; gap: 15px;
+        }
+        
+        .tut-equacao { display: flex; gap: 8px; align-items: center; }
+        .tut-caixa { width: 45px; height: 45px; background: white; border: 3px solid var(--azul-escuro); border-radius: 10px; font-size: 1.8rem; font-weight: 900; color: var(--azul-escuro); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .tut-caixa.vazia { border-color: #ffa502; color: #ffa502; background: #fff9c4; }
+        .tut-sinal { font-size: 2.2rem; font-weight: 900; color: #a4b0be; }
+        
+        .tut-options { display: flex; gap: 15px; position: relative;}
+        .tut-btn { width: 50px; height: 50px; background: white; border: 3px solid #ced6e0; border-radius: 12px; font-size: 1.5rem; font-weight: 900; color: var(--azul-escuro); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 0 #ced6e0; }
+        .tut-btn.correct { border-color: #2ed573; background: #eafff0; color: #219d53; box-shadow: 0 4px 0 #219d53; }
+        .tut-hand { position: absolute; font-size: 2.5rem; left: 55px; top: 15px; animation: moveHandTutSum 2.5s infinite; z-index: 10; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.2)); }
+        
+        @keyframes moveHandTutSum { 
+            0%, 20% { transform: translate(30px, 30px); opacity: 0; } 
+            30% { transform: translate(0, 0); opacity: 1; } 
+            50%, 70% { transform: translate(0, -5px) scale(0.9); opacity: 1; } 
+            80%, 100% { transform: translate(0, 20px); opacity: 0; } 
+        }
+
+        /* NOVOS BOTÕES DE NÍVEL (Estilo Premium) */
+        /* NOVOS BOTÕES DE NÍVEL (Estilo Premium) */
+		.grid-niveis { 
+			display: grid; 
+			grid-template-columns: 1fr; /* 1 coluna por defeito (Mobile) */
+			gap: 15px; 
+			width: 100%; 
+			max-width: 700px; /* Aumentado para caber bem no PC */
+			margin: 0 auto 20px; 
+		}
+
+		/* Media Query para ecrãs maiores (PC / Tablets na horizontal) */
+		@media (min-width: 768px) {
+			.grid-niveis {
+				grid-template-columns: repeat(2, 1fr); /* 2 colunas lado a lado */
+			}
+		}
+        
+        .btn-nivel-novo {
+            width: 100%; padding: 12px 20px; border-radius: 20px; border: 4px solid white;
+            color: white; cursor: pointer; display: flex; align-items: center; justify-content: flex-start;
+            gap: 15px; transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+            box-shadow: 0 6px 0 #e2e8f0, 0 10px 15px rgba(0,0,0,0.08); text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            touch-action: manipulation; user-select: none; text-align: left;
+        }
+
+        .nivel-icon-novo { font-size: 2rem; background: rgba(255,255,255,0.3); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); text-shadow: none;}
+        .nivel-text-novo { display: flex; flex-direction: column; gap: 2px;}
+        .nivel-titulo-novo { font-size: 1.2rem; font-weight: 900; color: white; display: block;}
+        .nivel-desc-novo { font-size: 0.9rem; color: white; opacity: 0.95; font-weight: 600; text-shadow: none; display: block;}
+
+        .btn-n1 { background-color: #2ed573; } /* Verde */
+        .btn-n2 { background-color: #0091ff; } /* Azul */
+        .btn-n3 { background-color: #ffa502; } /* Laranja */
+        .btn-n4 { background-color: #9b59b6; } /* Roxo */
+
+        @media (hover: hover) { 
+            .btn-nivel-novo:hover { 
+                transform: translateY(-2px); 
+                box-shadow: 0 8px 0 #cbd5e1, 0 12px 20px rgba(0,0,0,0.12); 
+                filter: brightness(1.05); 
+            } 
+        }
+        .btn-nivel-novo:active { 
+            transform: translateY(6px) !important; 
+            box-shadow: 0 0px 0 transparent, 0 0px 0 transparent !important; 
+        }
+
+        /* =========================================
+           BARRA DE PROGRESSO DO JOGO
+           ========================================= */
+        .status-bar-jogo {
+            display: flex; align-items: center; justify-content: space-between; gap: 10px;
+            width: 100%; max-width: 900px; background: #e0ecf3; padding: 8px 12px;
+            border-radius: 20px; border: 2px solid var(--cor-mat); margin-bottom: 20px; box-sizing: border-box; flex-shrink: 0;
+        }
+        
+        .btn-voltar-menu { background-color: white; color: var(--azul-escuro); border: 2px solid var(--cor-mat); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.2s; touch-action: manipulation; }
+        @media (hover: hover) { .btn-voltar-menu:hover { border-color: var(--azul-escuro); transform: scale(1.05); } }
+
+        .btn-dica { background-color: #fff9c4; border: 2px solid #fbc531; color: #b18500; padding: 6px 12px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.3s; position: relative; touch-action: manipulation;}
+        @media (hover: hover) { .btn-dica:hover:not(.esgotada) { border-color: #b18500; transform: scale(1.05); } }
+        .btn-dica.esgotada { opacity: 0.5; pointer-events: none; filter: grayscale(100%); }
+        .hint-badge { position: absolute; top: -6px; right: -6px; background: #ff4757; color: white; font-size: 0.75rem; font-weight: 900; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+
+        .score-erradas { background: white; border: 2px solid var(--cor-pt); color: var(--cor-mat); font-weight: 800; font-size: 0.9rem; padding: 6px 12px; border-radius: 15px; white-space: nowrap; }
+		.svg-icon { width: 1.2em; height: 1.2em; vertical-align: middle; margin-right: 5px; fill: currentColor; }
+        .badge-ronda { font-weight: 800; font-size: 1rem; background: white; padding: 6px 12px; border-radius: 15px; border: 2px solid #219d53; color: #219d53; white-space: nowrap;}
+
+        /* PROGRESS BAR COM 35PX E RISCAS */
+        .progress-bg { background-color: #e2e8f0; border-radius: 20px; height: 35px; flex: 1; overflow: hidden; box-shadow: inset 0 3px 5px rgba(0,0,0,0.1); border: 2px solid white; margin: 0 10px; min-width: 50px;}
+        .progress-fill { height: 100%; width: 0%; border-radius: 20px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); background-color: var(--cor-mat); background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent); background-size: 30px 30px; animation: moverRiscas 2s linear infinite; }
+        
+        @media (max-width: 768px) {
+            .status-bar-jogo { flex-wrap: wrap; justify-content: center; padding: 8px; gap: 8px;}
+            .score-erradas, .badge-ronda { font-size: 0.85rem; padding: 4px 8px; }
+            .btn-voltar-menu, .btn-dica { padding: 4px 8px; font-size: 0.85rem;}
+            .progress-bg { order: 10; min-width: 100%; margin-top: 5px; height: 15px;}
+        }
+
+        /* =========================================
+           ÁREA DE JOGO CUSTOM (MÁQUINA DE SOMAR)
+           ========================================= */
+        .area-jogo-custom {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: 100%; flex: 1; min-height: 0; background: #f8fafc; border: 2px dashed var(--cor-mat); border-radius: 20px; padding: 25px; gap: 15px;
+            position: relative; color: #94a3b8; font-weight: bold; overflow: hidden;
+        }
+
+        .fase-aviso { font-size: 1.4rem; font-weight: 900; color: #0091ff; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;}
+
+        /* A EQUAÇÃO */
+        .equacao-container {
+            display: flex; align-items: flex-start; justify-content: center; gap: 15px; margin-bottom: 40px;
+            background: #f9fcff; padding: 30px 40px; border-radius: 30px; border: 4px dashed #ced6e0;
+            width: 100%; max-width: 700px;
+        }
+
+        .caixa-num { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+
+        .caixa-valor {
+            width: clamp(70px, 15vw, 100px); height: clamp(70px, 15vw, 100px);
+            background: white; border: 4px solid var(--azul-escuro); border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 900; color: var(--azul-escuro);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .caixa-vazia { background: #fff9c4; border-color: #ffa502; color: #ffa502; animation: pulse 1.5s infinite; }
+        .caixa-sucesso { background: #eafff0 !important; border-color: #2ed573 !important; color: #219d53 !important; animation: bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; }
+
+        .sinal-mat {
+            height: clamp(70px, 15vw, 100px); display: flex; align-items: center; justify-content: center;
+            font-size: clamp(3rem, 7vw, 5rem); font-weight: 900; color: #a4b0be; line-height: 1; margin: 0 5px; padding-bottom: 5px;
+        }
+
+        .dots-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; width: 80px; min-height: 20px; }
+        .dot { width: 12px; height: 12px; background-color: var(--cor-1ano); border-radius: 50%; }
+
+        /* Botões de Resposta */
+        .opcoes-container { display: flex; gap: 15px; justify-content: center; width: 100%; margin-top: 20px; flex-wrap: wrap; flex-shrink: 0;}
+
+        .btn-opcao {
+            background: white; border: 4px solid #ced6e0; border-radius: 20px;
+            width: clamp(80px, 18vw, 110px); height: clamp(75px, 16vw, 95px);
+            font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 900; color: var(--azul-escuro);
+            cursor: pointer; box-shadow: 0 8px 0 #ced6e0; transition: all 0.2s;
+            display: flex; align-items: center; justify-content: center; touch-action: manipulation;
+            user-select: none; -webkit-tap-highlight-color: transparent;
+        }
+        @media (hover: hover) { .btn-opcao:hover:not(:disabled) { border-color: var(--azul-vibrante); color: var(--azul-vibrante); transform: translateY(-4px); box-shadow: 0 12px 0 var(--azul-vibrante); } }
+        .btn-opcao:active:not(:disabled) { transform: translateY(8px) !important; box-shadow: 0 0px 0 transparent !important; }
+
+        /* =========================================
+           TRANSIÇÕES E ECRÃ FINAL (PREMIUM)
+           ========================================= */
+        #ecra-transicao { background: transparent; }
+        .titulo-destaque { font-size: clamp(2rem, 6vw, 3rem); color: var(--azul-escuro); margin-bottom: 10px; text-align: center; }
+        .texto-transicao { 
+            font-size: 1.5rem; color: var(--text-main); margin-bottom: 30px; 
+            text-align: center; background: #fff; padding: 25px 40px; 
+            border-radius: 20px; border: 3px solid #e3f2fd; box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            line-height: 1.5;
+        }
+        
+        .botoes-principais { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+        .btn-acao { background-color: var(--cor-mat); color: white; border: none; padding: 15px 35px; font-size: 1.2rem; font-weight: 700; border-radius: 20px; cursor: pointer; box-shadow: 0 6px 0 #3b8cdb; transition: 0.2s; touch-action: manipulation; display: flex; align-items: center; gap: 8px;}
+        .btn-acao:active { transform: translateY(6px); box-shadow: 0 0px 0 transparent; }
+        @media (hover: hover) { .btn-acao:hover { filter: brightness(1.1); transform: translateY(-3px); box-shadow: 0 9px 0 #3b8cdb; } }
+        .btn-acao.verde { background-color: #2ed573; box-shadow: 0 6px 0 #219d53; }
+        @media (hover: hover) { .btn-acao.verde:hover { background-color: #28c76a; box-shadow: 0 9px 0 #219d53;} }
+
+        /* Animações GLOBAIS e Dicas */
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        @keyframes bounceIn { 0% { transform: scale(0.5); opacity: 0; } 80% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes moverRiscas { 0% { background-position: 0 0; } 100% { background-position: 30px 0; } }
+        @keyframes errorShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px) rotate(-2deg); } 75% { transform: translateX(8px) rotate(2deg); } }
+        
+        .error-shake { animation: errorShake 0.4s ease; border-color: #ff4757 !important; background-color: #ffefef !important; color: #ff4757 !important; box-shadow: 0 6px 0 #ff4757 !important;}
+
+        /* Dica Suave */
+        .dica-iluminada { animation: suaveDica 1.5s infinite alternate ease-in-out !important; border-color: #fbc531 !important; color: #b18500 !important; }
+        @keyframes suaveDica {
+            0% { box-shadow: 0 0 0 rgba(251, 197, 49, 0), 0 8px 0 #fbc531; background-color: white; transform: translateY(0); }
+            100% { box-shadow: 0 0 20px rgba(251, 197, 49, 0.8), 0 8px 0 #fbc531; background-color: #fff9c4; transform: translateY(0); }
+        }
+
+        /* CONFETIS */
+        /* CONFETIS DENTRO DO CARTÃO */
+		#confetti-canvas { 
+			position: absolute; /* Em vez de fixed */
+			top: 0; 
+			left: 0; 
+			width: 100%; /* Adapta-se à largura do cartão */
+			height: 100%; /* Adapta-se à altura do cartão */
+			pointer-events: none; 
+			z-index: 9999; 
+		}
+
+        /* Responsividade Extrema (Evitar Scroll) */
+        @media (max-width: 600px) {
+            .equacao-container { padding: 15px; gap: 8px; margin-bottom: 15px; }
+            .caixa-valor { width: 65px; height: 65px; font-size: 2.2rem; border-width: 3px; border-radius: 15px; }
+            .sinal-mat { height: 65px; font-size: 3rem; margin: 0; }
+            .btn-opcao { width: 70px; height: 70px; font-size: 2.2rem; border-width: 3px; box-shadow: 0 6px 0 #ced6e0;}
+        }
+
+        @media (max-height: 600px) {
+            body { height: auto !important; overflow-y: auto !important; }
+            main { justify-content: flex-start !important; padding-top: 15px; padding-bottom: 15px; overflow-y: visible !important; }
+            .cartao-jogo-container { margin: auto 0; }
+        }
+        
+        @media (hover: none) and (pointer: coarse) {
+          body { height: auto !important; overflow-y: auto !important; }
+          main { justify-content: flex-start !important; overflow-y: visible !important; }
+          footer { margin-top: auto; }
+        }   
+    .icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
+	.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
+	.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
+	.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+</style>
+
+<style>
+  body {
+    background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px);
+    background-size: 25px 25px;
+  }
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<nav class="sidebar" id="sidebar">
+    <div class="btn-fechar" onclick="toggleMenu()"><span>✕</span> Fechar</div>
+    <ul>
+        <li><a href="../../../"><img src="../../../SVG/home.svg" alt="Início" class="icon-svg-menu" onerror="this.style.display='none'">Início</a></li>
+        <li><a href="../../../pre"><img src="../../../SVG/pre.svg" alt="Pré-Escolar" class="icon-svg-menu" onerror="this.style.display='none'">Pré-Escolar</a></li>
+        <li><a href="../../"><img src="../../../SVG/ano1.svg" alt="1º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 1º Ano</a></li>
+        <li><a href="../../../2"><img src="../../../SVG/ano2.svg" alt="2º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 2º Ano</a></li>
+        <li><a href="../../../3"><img src="../../../SVG/ano3.svg" alt="3º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 3º Ano</a></li>
+        <li><a href="../../../4"><img src="../../../SVG/ano4.svg" alt="4º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 4º Ano</a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="header-content">
+        <div class="nav-container">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="../" class="btn-voltar"><img src="../../../SVG/voltar.svg" class="icon-svg-voltar" alt=""> Voltar</a>
+        </div>
+        <h1>Máquina de Somar <img src="../img-titulos/maquina-somar.svg" class="icon-svg-titulo" alt=""></h1>
+        <div class="subtitulo">Prova que és um mestre da adição!</div>
+    </div>
+</header>
+
+<main>
+    <div class="cartao-jogo-container">
+        
+        <!-- ECRÃ 1: INÍCIO -->
+        <div id="ecra-inicio" class="ecra">
+            <h2 class="titulo-menu">Escolhe um Nível:</h2>
+            
+            <div class="animacao-tutorial">
+                <div class="tut-equacao">
+                    <div class="tut-caixa">4</div>
+                    <div class="tut-sinal">+</div>
+                    <div class="tut-caixa vazia">?</div>
+                    <div class="tut-sinal">=</div>
+                    <div class="tut-caixa">7</div>
+                </div>
+                <div class="tut-options">
+                    <div class="tut-btn">2</div>
+                    <div class="tut-btn correct">3</div>
+                    <div class="tut-hand">👆</div>
+                </div>
+            </div>
+            
+            <div class="grid-niveis">
+                <button class="btn-nivel-novo btn-n1" onclick="iniciarJogo(1)">
+                    <span class="nivel-icon-novo">🖐️</span>
+                    <span class="nivel-text-novo">
+                        <span class="nivel-titulo-novo">Nível 1: Até 10</span>
+                        <span class="nivel-desc-novo">Contar pelos dedos</span>
+                    </span>
+                </button>
+                <button class="btn-nivel-novo btn-n2" onclick="iniciarJogo(2)">
+                    <span class="nivel-icon-novo">🎒</span>
+                    <span class="nivel-text-novo">
+                        <span class="nivel-titulo-novo">Nível 2: Até 20</span>
+                        <span class="nivel-desc-novo">Passar a dezena</span>
+                    </span>
+                </button>
+                <button class="btn-nivel-novo btn-n3" onclick="iniciarJogo(3)">
+                    <span class="nivel-icon-novo">🧱</span>
+                    <span class="nivel-text-novo">
+                        <span class="nivel-titulo-novo">Nível 3: Até 50</span>
+                        <span class="nivel-desc-novo">Dezenas e unidades simples</span>
+                    </span>
+                </button>
+                <button class="btn-nivel-novo btn-n4" onclick="iniciarJogo(4)">
+                    <span class="nivel-icon-novo">💯</span>
+                    <span class="nivel-text-novo">
+                        <span class="nivel-titulo-novo">Nível 4: Até 100</span>
+                        <span class="nivel-desc-novo">Dezenas exatas e grandes somas</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ECRÃ 2: JOGO -->
+        <div id="ecra-jogo" class="ecra">
+            
+            <div class="status-bar-jogo" id="status-bar-container">
+                <button class="btn-voltar-menu" onclick="voltarAoMenu()" id="btn-home-svg"></button>
+                <button id="btn-dica" class="btn-dica" onclick="usarDica()"><span id="hint-count" class="hint-badge">4</span></button>
+            
+				<div class="badge-ronda"><span id="badge-ronda-svg"></span><span id="val-progresso">1</span>/<span id="val-total">20</span></div> 
+                <div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
+
+				<div class="score-erradas"> <span id="icone-erro-svg"></span> <span id="val-erros">0</span></div>
+            </div>
+
+            <div class="area-jogo-custom">
+                
+                <div id="fase-aviso" class="fase-aviso">FASE 1: VAMOS SOMAR!</div>
+
+                <!-- A MÁQUINA DE SOMAR -->
+                <div class="equacao-container">
+                    <div class="caixa-num">
+                        <div id="box-a" class="caixa-valor">4</div>
+                        <div id="dots-a" class="dots-container"></div>
+                    </div>
+                    
+                    <div class="sinal-mat">+</div>
+                    
+                    <div class="caixa-num">
+                        <div id="box-b" class="caixa-valor caixa-vazia">?</div>
+                        <div id="dots-b" class="dots-container"></div>
+                    </div>
+                    
+                    <div class="sinal-mat">=</div>
+                    
+                    <div class="caixa-num">
+                        <div id="box-c" class="caixa-valor">7</div>
+                        <div id="dots-c" class="dots-container"></div>
+                    </div>
+                </div>
+
+                <!-- BOTÕES -->
+                <div class="opcoes-container" id="opcoes-container"></div>
+            </div>
+        </div>
+
+        <!-- ECRÃ 3: TRANSIÇÃO/FIM -->
+        <div id="ecra-transicao" class="ecra">
+            <div style="font-size: 5rem; margin-bottom: 10px;" id="transicao-icon">⭐</div>
+            <h2 class="titulo-destaque" id="transicao-title">Nível Completo!</h2>
+            <div class="texto-transicao" id="transicao-msg">Mensagem entra aqui.</div>
+            
+            <div class="botoes-principais" id="botoes-transicao">
+                <button class="btn-acao secundario" onclick="reiniciarNivelAtual()">🔄 Repetir Nível</button>
+                <button class="btn-acao verde" onclick="voltarAoMenu()">🏠 Escolher Nível</button>
+            </div>
+        </div>
+		
+		<canvas id="confetti-canvas"></canvas>
+
+    </div>
+</main>
+
+
+
+<footer>
+    <p><span id="ano-atual"> </span><img src="../../../SVG/1_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
+</footer>
+
+<script>
+    document.getElementById('ano-atual').innerText = new Date().getFullYear();
+    
+	// ==========================================
+    // SVGs BARRA DE ESTADO
+    // ==========================================
+    const SVG_HOME = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" style="margin-right:4px; vertical-align:middle;"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5z" fill="#fff" stroke="#d35400" stroke-width="2" stroke-linejoin="round"/><rect x="10" y="12" width="4" height="10" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/></svg> Menu`;
+    const SVG_STAR = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="#f1c40f" stroke="#f39c12" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px; vertical-align:middle;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
+    const SVG_BULB = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px; vertical-align:middle;"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"></path></svg>`;
+    const SVG_ERRO = `<svg viewBox="0 0 14 14" width="0.8em" height="0.8em" style="margin-right: 5px; vertical-align: middle;"><path d="M2 2 L12 12 M12 2 L2 12" stroke="var(--cor-pt, #ff4757)" stroke-width="3" stroke-linecap="round" /></svg>`;
+    
+    // Injeção visual na carga da página
+    document.addEventListener("DOMContentLoaded", () => {
+        const btnHome = document.getElementById('btn-home-svg');
+        const badgeRonda = document.getElementById('badge-ronda-svg');
+        const btnAjuda = document.getElementById('btn-dica');
+        const iconeErro = document.getElementById('icone-erro-svg');
+        
+        if(btnHome) btnHome.innerHTML = SVG_HOME;
+        if(btnAjuda) btnAjuda.innerHTML = SVG_BULB + ' Dica';
+        if(iconeErro) iconeErro.innerHTML = SVG_ERRO;
+        if(badgeRonda) badgeRonda.innerHTML = SVG_STAR;
+        
+    });
+
+	
+	function toggleMenu() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const hamburger = document.getElementById('hamburgerBtn');
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+        hamburger.classList.toggle('open');
+    }
+
+    /* =========================================
+       VARIÁVEIS GLOBAIS
+       ========================================= */
+    const TOTAL_QUESTIONS = 20; // 10 diretas + 10 ocultas
+    let currentLevel = 1;
+    let questionIndex = 0;
+    let errorsCount = 0;
+    let isTransitioning = false;
+    let currentQuestionData = {};
+    let dicasUsadas = []; // Controlo de dicas (4 blocos de 5)
+
+    const elFase = document.getElementById('fase-aviso');
+    const boxA = document.getElementById('box-a');
+    const boxB = document.getElementById('box-b');
+    const boxC = document.getElementById('box-c');
+    const dotsA = document.getElementById('dots-a');
+    const dotsB = document.getElementById('dots-b');
+    const dotsC = document.getElementById('dots-c');
+    const opcoesContainer = document.getElementById('opcoes-container');
+    
+    const elProgresso = document.getElementById('val-progresso');
+    const elTotal = document.getElementById('val-total');
+    const elErros = document.getElementById('val-erros');
+    const elProgressFill = document.getElementById('progress-fill');
+    const btnDica = document.getElementById('btn-dica');
+    const elHintCount = document.getElementById('hint-count');
+
+    // Inicialização
+    window.onload = () => mostrarEcra('ecra-inicio');
+
+    function mostrarEcra(id) {
+        ['ecra-inicio', 'ecra-jogo', 'ecra-transicao'].forEach(e => {
+            const el = document.getElementById(e);
+            if (el) el.style.display = 'none';
+        });
+        document.getElementById(id).style.display = 'flex';
+    }
+
+    /* =========================================
+       GERAÇÃO MATEMÁTICA PROCEDURAL
+       ========================================= */
+    function generateQuestion(level, sublevelIndex) {
+        let a, b, c;
+
+        if (level === 1) {
+            c = Math.floor(Math.random() * 9) + 2; 
+            a = Math.floor(Math.random() * (c - 1)) + 1; 
+            b = c - a;
+        } 
+        else if (level === 2) {
+            c = Math.floor(Math.random() * 10) + 11; 
+            a = Math.floor(Math.random() * (c - 1)) + 1;
+            b = c - a;
+        } 
+        else if (level === 3) {
+            c = Math.floor(Math.random() * 30) + 21; 
+            a = Math.floor(Math.random() * (c - 1)) + 1;
+            b = c - a;
+        } 
+        else if (level === 4) {
+            if(Math.random() > 0.4) {
+                c = (Math.floor(Math.random() * 6) + 5) * 10; 
+                a = (Math.floor(Math.random() * (c/10 - 1)) + 1) * 10;
+                b = c - a;
+            } else {
+                c = Math.floor(Math.random() * 50) + 51; 
+                a = Math.floor(Math.random() * (c - 1)) + 1;
+                b = c - a;
+            }
+        }
+
+        let missingPos, answer;
+
+        if (sublevelIndex < 10) {
+            missingPos = 'c';
+            answer = c;
+        } else {
+            missingPos = Math.random() > 0.5 ? 'a' : 'b';
+            answer = missingPos === 'a' ? a : b;
+        }
+
+        let distractors = generateDistractors(answer, level);
+        let options = [answer, ...distractors].sort(() => Math.random() - 0.5);
+
+        return { a, b, c, missingPos, answer, options };
+    }
+
+    function generateDistractors(ans, level) {
+		let d1, d2;
+		let off1 = Math.floor(Math.random() * 3) + 1;
+		let off2 = Math.floor(Math.random() * 3) + 1;
+		
+		if(Math.random() > 0.5) off1 *= -1;
+		if(Math.random() > 0.5) off2 *= -1;
+
+		// No nível 3 e 4, a distração de "errar por 10" agora pode ser para cima ou para baixo
+		if (level >= 3 && Math.random() > 0.5) {
+			off1 = Math.random() > 0.5 ? 10 : -10; 
+		}
+
+		d1 = ans + off1;
+		d2 = ans + off2;
+
+		// 1. FORÇAR LIMITES (NUNCA MAIOR QUE 100)
+		// Se passar de 100, em vez de somar o erro, subtraímos
+		if (d1 > 100) d1 = ans - Math.abs(off1);
+		if (d2 > 100) d2 = ans - Math.abs(off2);
+		
+		// Garantir que não existem números negativos ou zeros
+		if (d1 <= 0) d1 = ans + 1;
+		if (d2 <= 0) d2 = ans + 2;
+
+		// 2. CORRIGIR REPETIDOS
+		// Se a opção falsa calhar igual à resposta certa:
+		if (d1 === ans) {
+			d1 = ans > 50 ? ans - 1 : ans + 1; // Subtrai se for um número alto, soma se for baixo
+		}
+		
+		// Se a 2ª opção for igual à resposta certa OU igual à 1ª opção:
+		if (d2 === ans || d2 === d1) {
+			d2 = ans > 50 ? ans - 2 : ans + 2;
+			if (d2 === d1) d2 -= 1; // Desempate extra
+		}
+
+		// Retorna as opções garantindo o limite mínimo de 1 (por precaução)
+		return [Math.max(1, d1), Math.max(1, d2)];
+	}
+
+    /* =========================================
+       FLUXO DO JOGO E PLACAR
+       ========================================= */
+    function iniciarJogo(nivel) {
+        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+        currentLevel = nivel;
+        questionIndex = 0;
+        errorsCount = 0;
+        isTransitioning = false;
+        dicasUsadas = [false, false, false, false]; // 4 blocos de 5
+
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+        
+        atualizarPlacar();
+        atualizarDicasUI();
+        mostrarEcra('ecra-jogo');
+        carregarPergunta();
+    }
+
+    function reiniciarNivelAtual() { iniciarJogo(currentLevel); }
+
+    function voltarAoMenu() {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+        mostrarEcra('ecra-inicio');
+    }
+
+    function atualizarPlacar() { 
+        if (elErros) elErros.textContent = errorsCount; 
+        if (elProgresso) elProgresso.textContent = Math.min(questionIndex + 1, TOTAL_QUESTIONS);
+        if (elTotal) elTotal.textContent = TOTAL_QUESTIONS;
+        if (elProgressFill) elProgressFill.style.width = `${(questionIndex / TOTAL_QUESTIONS) * 100}%`;
+    }
+
+    function atualizarDicasUI() {
+        // Dica a cada 5 rondas -> Temos 20 questoes -> Blocos: 0-4 (1), 5-9 (2), 10-14 (3), 15-19 (4)
+        const blocoAtual = Math.floor(questionIndex / 5); 
+        let pistasRestantes = 4 - dicasUsadas.filter(Boolean).length;
+        
+        if (elHintCount) elHintCount.textContent = pistasRestantes;
+
+        if (pistasRestantes <= 0 || dicasUsadas[blocoAtual]) {
+            if (btnDica) btnDica.classList.add('esgotada');
+        } else {
+            if (btnDica) btnDica.classList.remove('esgotada');
+        }
+    }
+
+    function carregarPergunta() {
+        isTransitioning = false;
+        atualizarPlacar();
+        atualizarDicasUI();
+
+        if (questionIndex < 10) {
+            elFase.textContent = "FASE 1: VAMOS SOMAR!";
+            elFase.style.color = "#0091ff";
+        } else {
+            elFase.textContent = "FASE 2: NÚMERO ESCONDIDO!";
+            elFase.style.color = "#ffa502";
+        }
+
+        currentQuestionData = generateQuestion(currentLevel, questionIndex);
+        
+        [boxA, boxB, boxC].forEach(b => {
+            b.className = 'caixa-valor'; 
+            b.textContent = '';
+        });
+        [dotsA, dotsB, dotsC].forEach(d => d.innerHTML = '');
+
+        configurarCaixa(boxA, dotsA, 'a', currentQuestionData.a);
+        configurarCaixa(boxB, dotsB, 'b', currentQuestionData.b);
+        configurarCaixa(boxC, dotsC, 'c', currentQuestionData.c);
+
+        opcoesContainer.innerHTML = '';
+        currentQuestionData.options.forEach(opt => {
+            let btn = document.createElement('button');
+            btn.className = 'btn-opcao';
+            btn.textContent = opt;
+            btn.onclick = () => verificarResposta(opt, btn);
+            opcoesContainer.appendChild(btn);
+        });
+    }
+
+    function configurarCaixa(boxElement, dotsElement, tipo, valor) {
+        if (currentQuestionData.missingPos === tipo) {
+            boxElement.textContent = "?";
+            boxElement.classList.add('caixa-vazia');
+        } else {
+            boxElement.textContent = valor;
+            if (currentLevel === 1) desenharBolinhas(dotsElement, valor);
+        }
+    }
+
+    function desenharBolinhas(container, quantidade) {
+        container.innerHTML = '';
+        for(let i=0; i < quantidade; i++) {
+            let dot = document.createElement('div');
+            dot.className = 'dot';
+            container.appendChild(dot);
+        }
+    }
+
+    function verificarResposta(valorClicado, btnElemento) {
+        if (isTransitioning) return;
+
+        // Remover dicas anteriores
+        document.querySelectorAll('.dica-iluminada').forEach(el => el.classList.remove('dica-iluminada'));
+
+        if (valorClicado === currentQuestionData.answer) {
+            isTransitioning = true;
+            tocarSom('acerto');
+            
+            btnElemento.style.borderColor = "#2ed573";
+            btnElemento.style.color = "#219d53";
+            btnElemento.style.backgroundColor = "#eafff0";
+
+            let caixaVazia;
+            let dotsVazios;
+            if (currentQuestionData.missingPos === 'a') { caixaVazia = boxA; dotsVazios = dotsA; }
+            if (currentQuestionData.missingPos === 'b') { caixaVazia = boxB; dotsVazios = dotsB; }
+            if (currentQuestionData.missingPos === 'c') { caixaVazia = boxC; dotsVazios = dotsC; }
+
+            caixaVazia.textContent = valorClicado;
+            caixaVazia.classList.remove('caixa-vazia');
+            caixaVazia.classList.add('caixa-sucesso');
+
+            if (currentLevel === 1) desenharBolinhas(dotsVazios, valorClicado);
+
+            // Desativar todos os botões de opção para evitar duplo clique
+            document.querySelectorAll('.btn-opcao').forEach(b => b.disabled = true);
+
+            setTimeout(() => {
+                questionIndex++;
+                if (questionIndex === 10) {
+                    mostrarTransicaoMeio();
+                } else if (questionIndex < TOTAL_QUESTIONS) {
+                    carregarPergunta();
+                } else {
+                    finalizarJogo();
+                }
+            }, 1200);
+
+        } else {
+            errorsCount++;
+            atualizarPlacar();
+            tocarSom('erro');
+
+            btnElemento.classList.add('error-shake');
+            btnElemento.disabled = true; // Botão fica indisponível após errar
+            
+            setTimeout(() => {
+                btnElemento.classList.remove('error-shake');
+            }, 400);
+        }
+    }
+
+    /* --- SISTEMA DE DICAS --- */
+    function usarDica() {
+        const blocoAtual = Math.floor(questionIndex / 5);
+        if(btnDica.classList.contains('esgotada') || dicasUsadas[blocoAtual] || isTransitioning) return;
+
+        // Procura o botão de resposta correto
+        const botoes = Array.from(opcoesContainer.children);
+        const btnCorreto = botoes.find(b => parseInt(b.textContent) === currentQuestionData.answer);
+        
+        if (btnCorreto) {
+            btnCorreto.classList.add('dica-iluminada');
+        }
+
+        dicasUsadas[blocoAtual] = true;
+        tocarSom('swoosh');
+        atualizarDicasUI();
+    }
+
+    /* --- TRANSIÇÕES --- */
+    function mostrarTransicaoMeio() {
+        tocarSom('vitoria_curta');
+        document.getElementById('transicao-icon').textContent = "🌟";
+        document.getElementById('transicao-title').textContent = "EXCELENTE!";
+        document.getElementById('transicao-msg').innerHTML = "Agora, descobre o número que está escondido!";
+        document.getElementById('botoes-transicao').style.display = 'none';
+        
+        mostrarEcra('ecra-transicao');
+        
+        setTimeout(() => {
+            mostrarEcra('ecra-jogo');
+            carregarPergunta();
+        }, 2500);
+    }
+
+    function finalizarJogo() {
+        tocarSom('vitoria');
+        dispararConfetis();
+        
+        document.getElementById('transicao-icon').textContent = "🏆";
+        
+        if (errorsCount === 0) {
+            document.getElementById('transicao-title').textContent = "MÁQUINA PERFEITA!";
+        } else if (errorsCount <= 3) {
+            document.getElementById('transicao-title').textContent = "MUITO BEM!";
+        } else {
+            document.getElementById('transicao-title').textContent = "BOM ESFORÇO!";
+        }
+
+        document.getElementById('transicao-msg').innerHTML = `Resolveste ${TOTAL_QUESTIONS} operações!<br>Tiveste <strong>${errorsCount}</strong> respostas erradas.`;
+        document.getElementById('botoes-transicao').style.display = 'flex';
+        
+        mostrarEcra('ecra-transicao');
+    }
+
+    /* =========================================
+       SISTEMA DE SOM E EFEITOS
+       ========================================= */
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const audioCtx = new AudioContext();
+    
+    function tocarSom(tipo) {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        const agora = audioCtx.currentTime;
+
+        if (tipo === 'acerto') {
+            osc.type = 'sine'; osc.frequency.setValueAtTime(600, agora); osc.frequency.exponentialRampToValueAtTime(1200, agora + 0.1);
+            gain.gain.setValueAtTime(0.1, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); osc.stop(agora + 0.3);
+        } 
+        else if (tipo === 'erro') {
+            osc.type = 'triangle'; osc.frequency.setValueAtTime(250, agora); osc.frequency.exponentialRampToValueAtTime(150, agora + 0.2);
+            gain.gain.setValueAtTime(0.1, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.2);
+            osc.start(agora); osc.stop(agora + 0.2);
+        }
+        else if (tipo === 'swoosh') {
+            osc.type = 'sine'; osc.frequency.setValueAtTime(400, agora); osc.frequency.exponentialRampToValueAtTime(100, agora + 0.2);
+            gain.gain.setValueAtTime(0.05, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.2);
+            osc.start(agora); osc.stop(agora + 0.2);
+        }
+        else if (tipo === 'vitoria_curta') {
+            osc.type = 'sine'; osc.frequency.setValueAtTime(523.25, agora); osc.frequency.setValueAtTime(659.25, agora + 0.1);
+            gain.gain.setValueAtTime(0.1, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); osc.stop(agora + 0.3);
+        }
+        else if (tipo === 'vitoria') {
+            const notas =[523.25, 659.25, 783.99, 1046.50];
+            notas.forEach((freq, i) => {
+                const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                o.connect(g); g.connect(audioCtx.destination); o.type = 'sine'; o.frequency.value = freq;
+                g.gain.setValueAtTime(0.1, agora + i * 0.15); g.gain.exponentialRampToValueAtTime(0.01, agora + i * 0.15 + 0.3);
+                o.start(agora + i * 0.15); o.stop(agora + i * 0.15 + 0.3);
+            });
+        }
+    }
+
+    const canvasConfetti = document.getElementById('confetti-canvas');
+    const ctxConfetti = canvasConfetti.getContext('2d');
+    let confetis =[];
+
+    function redimensionarCanvas() {
+        // Vai buscar o contentor em vez de usar a janela inteira
+        const cartao = document.querySelector('.cartao-jogo-container');
+        if (cartao) {
+            canvasConfetti.width = cartao.clientWidth;
+            canvasConfetti.height = cartao.clientHeight;
+        }
+    }
+    window.addEventListener('resize', redimensionarCanvas);
+
+    function dispararConfetis() {
+        redimensionarCanvas(); confetis =[]; const cores =['#ff4757', '#2ed573', '#0091ff', '#ffa502', '#eccc68'];
+        for (let i = 0; i < 100; i++) {
+            confetis.push({ x: Math.random() * canvasConfetti.width, y: Math.random() * canvasConfetti.height - canvasConfetti.height, w: Math.random() * 10 + 5, h: Math.random() * 10 + 5, cor: cores[Math.floor(Math.random() * cores.length)], velY: Math.random() * 3 + 2, velX: Math.random() * 2 - 1, rotacao: Math.random() * 360, velRotacao: Math.random() * 5 - 2.5 });
+        }
+        animarConfetis();
+    }
+
+    function animarConfetis() {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); let ativos = false;
+        confetis.forEach(c => {
+            c.y += c.velY; c.x += c.velX; c.rotacao += c.velRotacao; if (c.y < canvasConfetti.height) ativos = true;
+            ctxConfetti.save(); ctxConfetti.translate(c.x, c.y); ctxConfetti.rotate(c.rotacao * Math.PI / 180);
+            ctxConfetti.fillStyle = c.cor; ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); ctxConfetti.restore();
+        });
+        if (ativos) requestAnimationFrame(animarConfetis);
+    }
+</script>
+</body>
+</html>
