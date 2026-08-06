@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4º Ano - Estudo do Meio 🌍</title>
+    
+    <link rel="icon" type="image/png" href="../../logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-body: #f0f7ff;
+            --azul-vibrante: #0091ff; 
+            --cor-4ano: #a28cf2;     
+            --cor-4ano-dark: #8a72e0; 
+			--cor-borda: #8a72e0;
+            --bg-header: #f3f0ff;    
+            --azul-escuro: #0d47a1;
+            --text-main: #455a64;
+			--cor-cartao-jogo-pt: #ff6b6b; /*ALTERAR NA LINHA 286*/
+			--cor-cartao-jogo-mat: #4dabf7;
+			--cor-cartao-jogo-emeio: #51cf66;
+			
+			/* Cores das Disciplinas */
+            --cor-pt: #ff6b6b;
+            --cor-mat: #4dabf7;
+            --cor-em: #51cf66;
+			--cor-pt-escuro: #b34444;
+			--cor-em-escuro: #327d3e;			
+			
+        }
+
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            text-align: center; 
+            background-color: var(--bg-body); 
+            margin: 0; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; 
+            overflow-x: hidden;
+        }
+
+        /* HEADER COM BORDER AZUL FIXA */
+        header {
+            background-color: var(--bg-header);
+            padding: 25px 20px;
+            border-bottom: 1px solid var(--cor-4ano-dark);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: relative;
+            flex-shrink: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        /* HAMBURGER */
+        .hamburger {
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.4);
+            border: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background 0.4s ease;
+        }
+        .hamburger:hover { background: #fff9c4; }
+
+        .hamburger span { display: block; width: 20px; height: 2px; background: var(--azul-escuro); transition: 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+        /* BOTÃO VOLTAR */
+        .btn-voltar {
+            background: var(--cor-4ano);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.9rem;
+            box-shadow: 0 3px 0 var(--cor-4ano-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        .btn-voltar:hover { transform: scale(1.05); }
+
+        h1 {
+    color: var(--azul-escuro);
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    text-shadow: 
+        -2px -2px 0 #ffffff,  
+         2px -2px 0 #ffffff,
+        -2px  2px 0 #ffffff,
+         2px  2px 0 #ffffff, 
+         0px  6px 12px rgba(0, 0, 0, 0.15); 
+}
+        
+        .subtitulo { 
+            color: var(--azul-escuro); 
+            font-size: clamp(0.85rem, 3vw, 1.1rem); 
+            font-weight: 500; 
+            opacity: 0.8; 
+            margin-top: 15px; 
+        }
+
+        /* SIDEBAR */
+        .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: white; z-index: 200; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.1); text-align: left; }
+        .sidebar.active { left: 0; }
+        .sidebar .btn-fechar { background: #fff5f5; color: #ff4757; padding: 20px 25px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; border-bottom: 1px solid #ffebeb; }
+        .sidebar ul { list-style: none; padding: 15px; margin: 0; }
+        .sidebar li a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--text-main); background: #f8fafc; border-radius: 12px; margin-bottom: 8px; transition: 0.3s; }
+        .sidebar li a:hover { background: var(--cor-4ano); color: white; transform: translateX(8px); }
+
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 150; }
+        .overlay.active { display: block; }
+
+        /* =========================================
+           ÁREA PRINCIPAL E GRELHAS DE JOGOS
+           ========================================= */
+        main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; width: 100%; box-sizing: border-box;}
+        
+        .container-central { width: 100%; max-width: 1000px; display: flex; flex-direction: column; gap: 20px;}
+		
+		.pincelada-dupla {
+			position: relative;
+			display: inline-block;
+			
+			/* CORREÇÃO: Removido o padding-bottom para restaurar a altura original do header */
+			padding-bottom: 0; 
+			
+			z-index: 1;
+		}
+
+		.pincelada-dupla::before {
+			content: '';
+			position: absolute;
+			bottom: -10px; 
+			
+			left: -2%;
+			width: 104%;
+			height: 12px;
+			z-index: -1;
+			pointer-events: none;
+			
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12' preserveAspectRatio='none'%3E%3Cpath d='M0,4 C25,1 50,7 75,2 C90,4 100,2 100,2' fill='none' stroke='%23ff922b' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M10,9 C35,11 65,7 90,10' fill='none' stroke='%23ffd43b' stroke-width='2' stroke-linecap='round' opacity='0.8'/%3E%3C/svg%3E");
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+		}
+
+        /* =========================================
+           SECÇÃO DE DESTAQUES (A Magia da Simetria)
+           ========================================= */
+        .destaques-grid {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			grid-template-rows: 300px;
+			gap: 20px;
+			width: 100%;
+			align-items: stretch;
+		}
+
+        /* Cartão de Destaque MÁXIMO (Ocupa 3 colunas e 2 linhas) */
+        .destaque-principal {
+			grid-column: span 2;
+			grid-row: span 1;
+			background: linear-gradient(135deg, var(--azul-vibrante), var(--azul-escuro));
+			border-radius: 30px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			text-decoration: none;
+			color: white;
+			box-shadow: 0 10px 25px rgba(79, 209, 197, 0.4);
+			position: relative;
+			transition: 0.3s;
+			border: 4px solid white;
+			overflow: hidden;
+			padding: 20px;
+		}
+        .destaque-principal:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 15px 35px rgba(0, 145, 255, 0.4); }
+
+        /* Controla o tamanho da imagem no destaque principal */
+        .img-destaque-grande {
+			width: auto;
+			height: 100%;
+			max-height: 250px;
+			aspect-ratio: 1 / 1;
+			object-fit: contain;
+		}
+        
+        /* Controla o tamanho da imagem nos destaques laterais */
+		.img-destaque-pequena {
+			width: auto;
+			height: 75%; /* Ocupa exatamente 65% de toda a altura útil disponível no centro do cartão */
+			max-width: 85%; /* Impede que ícones mais largos encostem nas bordas laterais */
+			max-height: 180px; /* Limite de segurança para que o ícone nunca fique gigante em ecrãs enormes */
+			margin-top: 20px;
+			object-fit: contain;
+			filter: drop-shadow(0 6px 12px rgba(0,0,0,0.1)); /* Sombra ligeiramente mais marcada para dar volume */
+			transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		}
+                
+        
+        /* Círculo luminoso por trás do ícone */
+        .destaque-principal::before {
+            content: ''; position: absolute; width: 250px; height: 250px;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .destaque-principal .icone-wrapper { 
+            /* margin-bottom apagado porque já não há texto a empurrar */
+            animation: floatIcon 3s ease-in-out infinite; 
+            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        .destaque-principal .nome-jogo { color: white; font-size: 2.2rem; font-weight: 900; text-shadow: 0 2px 5px rgba(0,0,0,0.2);}
+        .destaque-principal .sub-nome { color: #e3f2fd; font-size: 1.1rem; margin-top: 5px; font-weight: 500;}
+
+        /* Cartões de Destaque Secundários (Ocupam 2 colunas cada) */
+        .destaque-secundario {
+			grid-column: span 1;
+			background: white; 
+			border-radius: 25px; 
+			text-decoration: none; 
+			display: flex; 
+			flex-direction: column; 
+			align-items: center; 
+			justify-content: center; 
+			gap: 10px;
+			box-shadow: 0 6px 15px rgba(0,0,0,0.1); 
+			border: 1px solid #eee;
+			border-top: 6px solid #ff922b;
+			transition: 0.3s;
+			position: relative;
+			padding: 20px 15px; /* Reduzido de 30px para 20px para caber perfeitamente nos 340px de altura */
+			box-sizing: border-box; /* Garante que o padding não aumenta o tamanho total do cartão */
+			will-change: transform; /* Avisa o browser para manter a aceleração gráfica sempre ativa */
+			-webkit-backface-visibility: hidden;
+			backface-visibility: hidden; /* Evita micro-distorções de renderização 3D */
+			transform: translateZ(0);
+		}
+        .destaque-secundario:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 12px 20px rgba(0,0,0,0.1); border-top-color: var(--cor-em);}
+        .destaque-secundario .nome-jogo {
+			color: var(--azul-escuro);
+			font-weight: 800;
+			font-size: 1rem; /* Reduzido ligeiramente para se ajustar à pílula */
+			
+			/* Transforma o texto numa pílula tátil */
+			background: #f8fafc; /* Fundo cinza-azul muito suave */
+			border: 2px solid #e2e8f0;
+			padding: 6px 10px;
+			border-radius: 16px;
+			display: inline-block;
+			width: fit-content;
+			
+			transition: background 0.2s ease, border-color 0.2s ease;
+		}
+		
+		/* Quando passa o rato no cartão, o botão do texto também reage */
+		.destaque-secundario:hover .nome-jogo {
+			background: #bae6fd; /* Muda para um azul claro suave */
+			border-color: #7dd3fc;
+		}
+		
+		
+		/* Faz o espaço da imagem crescer verticalmente para ocupar o centro do cartão */
+		.destaque-secundario .icone-wrapper {
+			flex: 1; 
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			min-height: 110px; /* Garante uma área mínima estável para o ícone */
+		}
+
+        /* BADGES (Etiquetas) */
+        .badge {
+			position: absolute;
+			top: 12px; /* Ajustado ligeiramente para cima */
+			left: 12px; 
+			padding: 4px 12px; /* Tornou-se ligeiramente mais compacta para caber melhor no cartão estreito */
+			border-radius: 20px;
+			font-size: 0.75rem; /* Ligeiramente reduzida para se integrar melhor */
+			font-weight: 900;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			z-index: 5;
+			display: flex;
+			align-items: center;
+			gap: 4px;
+		}
+        .badge-novo { background: #ff4757; color: white; box-shadow: 0 4px 0 #d0303f; }
+        .badge-destaque { background: #9b59b6; color: white; box-shadow: 0 4px 0 #8e44ad; }
+
+        /* ANIMAÇÃO FLUTUAR */
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* =========================================
+		   SEPARADOR VISUAL E ANIMADO (MATEMÁTICA)
+		   ========================================= */
+		.separador {
+			display: flex; 
+			align-items: center; 
+			text-align: center; 
+			width: 100%; 
+			max-width: 1000px;
+			margin: 55px 0 45px 0; /* Espaço para a etiqueta caber bem */
+		}
+
+		/* Linhas tracejadas laterais com a cor de EMEIO semitransparente */
+		.separador::before, .separador::after {
+			content: ''; 
+			flex: 1; 
+			border-bottom: 3px dashed color-mix(in srgb, var(--cor-em), transparent 40%); 
+			margin: 0 15px;
+		}
+
+		/* O botão/pílula central */
+		.separador-texto {
+			background: var(--cor-em); 
+			color: white;
+			padding: 10px 25px;
+			border-radius: 50px;
+			font-weight: 900; 
+			font-size: 1.4rem;
+			text-transform: uppercase; 
+			letter-spacing: 2px;
+			box-shadow: 0 6px 15px color-mix(in srgb, var(--cor-em), transparent 60%);
+			border: 2px solid color-mix(in srgb, var(--cor-em), black 15%); /* Contorno ligeiramente mais escuro */
+			position: relative;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		/* A pequena etiqueta amarela */
+		.separador-badge {
+			position: absolute;
+			top: -15px;
+			right: -20px;
+			background: #ffeb3b; 
+			color: var(--azul-escuro);
+			font-size: 0.7rem;
+			font-weight: 900;
+			padding: 4px 10px;
+			border-radius: 12px;
+			transform: rotate(5deg);
+			box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+		}
+
+		/* Animação da Seta */
+		.seta-animada {
+			display: inline-block;
+			animation: deslizar-baixo 1.5s infinite ease-in-out;
+		}
+
+		@keyframes deslizar-baixo {
+			0%, 100% { transform: translateY(0); }
+			50% { transform: translateY(6px); }
+		}
+		
+		.icon-svg-seta { width: 1.1em; height: 1.1em; vertical-align: middle; object-fit: contain; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.2)); /* Uma sombrinha 3D para destacar! */ }
+
+		/* Ajustes para Telemóveis */
+		@media (max-width: 600px) {
+			.separador { margin: 40px 0 30px 0; }
+			.separador-texto { font-size: 1.1rem; padding: 8px 20px; }
+			.separador-badge { font-size: 0.6rem; right: -10px; }
+			.separador::before, .separador::after { margin: 0 10px; }
+		}
+
+		/* =========================================
+           GRELHA GERAL DOS JOGOS & CARTÕES MÁGICOS
+           ========================================= */
+        .grid-jogos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+            gap: 20px;
+            width: 100%;
+        }
+
+        /* Títulos limitados a 2 linhas e cor original */
+        .cartao-frente .nome-jogo {
+			font-weight: 700;
+			font-size: 0.8rem; /* Ligeiramente mais compacto para caber na forma 1:1 */
+			line-height: 1.1;
+			text-align: center;
+			max-width: 85%; /* Evita que o texto encoste nas laterais do cartão */
+			
+			/* Configuração base da pílula */
+			padding: 5px 12px;
+			border-radius: 12px;
+			border: 1.5px solid transparent;
+			display: inline-block;
+			box-sizing: border-box;
+			transition: all 0.2s ease;
+			
+			/* Cores padrão (caso não seja definida nenhuma disciplina específica) */
+			background: #f8fafc;
+			border-color: #e2e8f0;
+			color: var(--azul-escuro);
+		}
+		
+		/* --- CORES DINÂMICAS PARA OS CARTÕES COM ROTAÇÃO --- */
+
+		/* Português (Vermelho Pastel - var(--cor-pt)) */
+		.portugues .nome-jogo {
+			background: #fff5f5;
+			border-color: #ffc9c9;
+		}
+
+		/* Matemática (Azul Pastel - (--cor-mat)) */
+		.matematica .nome-jogo {
+			background: #e7f5ff;
+			border-color: #a5d8ff;
+		}
+
+		/* Estudo do Meio (Verde Pastel) */
+		.estudo-meio .nome-jogo {
+			background: #ebfbee;
+			border-color: #b2f2bb;
+		}
+
+		/* Roxo Pastel */
+		.roxo .nome-jogo {
+			background: #f3f0ff;
+			border-color: #d0bfff;
+			color: #ae3ec9;
+		}
+
+        /* Container 3D do Cartão */
+        .cartao-flip {
+            background: transparent;
+            aspect-ratio: 1/1;
+            perspective: 1000px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* O miolo que dá a cambalhota */
+        .cartao-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        /* Comportamento Hover (PC) e Classe Flipped (Mobile) */
+        @media (hover: hover) {
+            .cartao-flip:hover .cartao-inner { transform: rotateY(180deg); }
+            /* No PC não precisamos do botão voltar no verso */
+            .btn-voltar-verso { display: none !important; }
+            /* No PC o botão jogar fica centrado e maior */
+            .btn-jogar { flex: none !important; width: 80%; margin: 0 auto; }
+        }
+        .cartao-flip.flipped .cartao-inner { transform: rotateY(180deg); }
+
+        /* Frente e Verso (Estrutura partilhada) */
+        .cartao-frente, .cartao-verso {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 25px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            border: 1px solid #eee;
+            box-sizing: border-box;
+        }
+
+        /* --- LADO DA FRENTE --- */
+        .cartao-frente {
+            background: white;
+            border-top: 6px solid var(--cor-em);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Efeito de elevação da frente do cartão */
+        .cartao-frente:hover { box-shadow: 0 12px 20px rgba(0,0,0,0.1); }
+
+        .link-frente {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            gap: 2%;
+            color: inherit;
+            position: relative;
+        }
+
+		/* =========================================
+           BOTÃO DE INFO (O "+" PERFEITO E CENTRADO)
+           ========================================= */
+        .btn-info {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 32px; /* Ligeiramente maior para toque no telemóvel */
+            height: 32px;
+            border-radius: 50%;
+            background: #e3f2fd;
+            border: 2px solid white; /* Borda branca dá um aspeto 3D / autocolante */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Uma sombra suave para sobressair da imagem */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            padding: 0;
+        }
+
+        /* O efeito de levitar quando se toca ou passa o rato */
+        .btn-info:hover { 
+            background: var(--cor-mat); 
+            transform: scale(1.1); 
+            box-shadow: 0 6px 12px rgba(0, 145, 255, 0.2);
+        }
+
+        /* O SINAL DE "+" DESENHADO A CSS PURO */
+        .btn-info::before,
+        .btn-info::after {
+            content: '';
+            position: absolute;
+            background-color: var(--azul-escuro); /* Cor da cruz */
+            border-radius: 3px; /* O Segredo: pontas redondinhas para as crianças! */
+            transition: 0.3s;
+        }
+
+        /* A Barra Horizontal */
+        .btn-info::before { width: 14px; height: 3px; }
+        
+        /* A Barra Vertical */
+        .btn-info::after { width: 3px; height: 14px; }
+
+        /* Quando o fundo fica azul (hover), a cruz fica branca! */
+        .btn-info:hover::before,
+        .btn-info:hover::after {
+            background-color: white;
+        }
+
+
+        /* --- LADO DO VERSO --- */
+        .cartao-verso {
+            background: #f8fafc;
+            border-top: 6px solid #ff922b;
+            transform: rotateY(180deg);
+            padding: 15px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .titulo-verso {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--azul-escuro);
+            margin-bottom: 8px;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .lista-minijogos {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            text-align: left;
+            font-size: 0.7rem;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+        .lista-minijogos li {
+            padding: 3px 0;
+            border-bottom: 1px dashed #ddd;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .lista-minijogos li::before { content: "🔹"; margin-right: 5px; font-size: 0.6rem; }
+
+        .botoes-verso {
+            display: flex;
+            gap: 8px;
+            margin-top: auto;
+            width: 100%;
+        }
+		/* A ANIMAÇÃO SUBTIL (Reflexo de Luz) */
+        @keyframes brilho-luz {
+            0%, 60% { left: -100%; } /* Fica escondido 60% do tempo */
+            100% { left: 200%; }     /* Passa rapidamente e sai pela direita */
+        }
+
+        .btn-jogar {
+            background: var(--cor-em);
+            color: white;
+            text-decoration: none;
+            padding: 8px;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex: 1; 
+            text-align: center;
+            box-shadow: 0 3px 0 var(--cor-em-escuro);
+            
+            /* Preparar o botão para receber a luz */
+            position: relative;
+            overflow: hidden; 
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /* O feixe de luz diagonal */
+        .btn-jogar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, 			rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg); /* Dá a inclinação à luz */
+            animation: brilho-luz 2s infinite; /* A luz passa a cada 2 segundos */
+        }
+
+        /* Apenas no PC: um levitar ultra suave ao passar o rato */
+        .btn-jogar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 0 var(--cor-em-escuro);
+        }
+        .btn-voltar-verso {
+            background: #e0e0e0;
+            color: #333;
+            border: none;
+            border-radius: 15px;
+            padding: 6px 15px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 3px 0 #bdbdbd;
+        }
+
+
+		/* =========================================
+           O NOVO CONTAINER DE IMAGEM FLUIDO
+           ========================================= */
+        .image-wrapper {
+			height: 65%;
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 5px; 
+		}
+
+        .icone-imagem {
+            max-width: 85%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); /* Bónus: dá um ligeiro efeito 3D à imagem! */
+        }	
+
+        /* FOOTER */
+        footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--cor-4ano-dark); }
+        footer p { font-size: 0.8rem; color: var(--cor-4ano-dark); margin: 0; }
+
+        /* RESPONSIVIDADE MOBILE */
+		@media (max-width: 768px) {
+            header { padding: 15px 10px; }
+            .header-content { display: grid; grid-template-columns: 50px 1fr 50px; grid-template-rows: auto auto; gap: 5px; }
+            .nav-container { position: static; transform: none; grid-column: 1 / -1; display: grid; grid-template-columns: 50px 1fr 50px; width: 100%; margin-bottom: 10px; }
+            .hamburger { grid-column: 1; justify-self: start; }
+            .btn-voltar { grid-column: 2; justify-self: center; width: fit-content; }
+            h1, .subtitulo { grid-column: 2; text-align: center; }
+            
+            .destaques-grid {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				grid-template-rows: auto;
+				gap: 12px;
+			}
+            .destaque-principal {
+				grid-column: span 2;
+				grid-row: span 1;
+				padding: 20px 15px;
+				border-radius: 24px;
+			}
+			
+			.img-destaque-grande {
+				width: auto;
+				height: auto;
+				max-height: 180px;
+				aspect-ratio: 1 / 1;
+				object-fit: contain;
+			}
+            .destaque-secundario {
+				grid-column: span 1;
+				padding: 28px 10px 14px 10px; 
+				border-radius: 20px;
+				gap: 10px;
+			}
+			
+			.destaque-secundario:active {
+				transform: translateY(2px);
+				box-shadow: 0 2px 0 #cbd5e1;
+			}
+
+			.destaque-secundario .icone-wrapper {
+				min-height: 60px; /* Reduzido para dar respiro vertical */
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			
+			.img-destaque-pequena {
+				height: 60px;
+				width: auto;
+			}
+			
+			.destaque-secundario .nome-jogo {
+				font-size: 0.85rem;
+				padding: 4px 12px;
+				border-radius: 12px;
+				border-width: 1.5px;
+			}
+			
+			.badge {
+				font-size: 0.62rem; /* Texto mais pequeno e discreto */
+				padding: 3px 8px;
+				top: 8px;
+				left: 8px;
+				gap: 3px; /* Aproxima ligeiramente o ícone do texto do badge */
+			}
+
+			/* Força o ícone dentro do badge a encolher no mobile */
+			.badge .icon-svg-menu {
+				width: 11px !important;
+				height: 11px !important;
+			}
+            
+            .separador { font-size: 1.1rem; margin: 50px 0 40px 0 !important;}
+            .grid-jogos { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
+        }
+		
+		.icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
+		.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
+		.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
+		.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+    body { scrollbar-gutter: stable; }
+	
+	.texto-info {
+			text-align: center;
+			margin-top: 15px;
+			font-size: 0.7rem;
+			font-weight: 500;
+			font-style: italic;
+			color: var(--text-main); /* Usa a cor do teu tema */
+		}
+</style>
+
+<style>
+  body {
+    background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px);
+    background-size: 25px 25px;
+  }
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<nav class="sidebar" id="sidebar">
+    <div class="btn-fechar" onclick="toggleMenu()"><span>✕</span> Fechar</div>
+    <ul>
+        <li><a href="../../"><img src="../../SVG/home.svg" alt="Início" class="icon-svg-menu" onerror="this.style.display='none'">Início</a></li>
+        <li><a href="../../pre"><img src="../../SVG/pre.svg" alt="Pré-Escolar" class="icon-svg-menu" onerror="this.style.display='none'">Pré-Escolar</a></li>
+        <li><a href="../../1"><img src="../../SVG/ano1.svg" alt="1º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 1º Ano</a></li>
+        <li><a href="../../2"><img src="../../SVG/ano2.svg" alt="2º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 2º Ano</a></li>
+        <li><a href="../../3"><img src="../../SVG/ano3.svg" alt="3º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 3º Ano</a></li>
+        <li><a href="../"><img src="../../SVG/ano4.svg" alt="4º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 4º Ano</a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="header-content">
+        <div class="nav-container">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="../" class="btn-voltar"><img src="../../SVG/voltar.svg" class="icon-svg-voltar" alt=""> Voltar</a>
+        </div>
+        
+        <h1><img src="../../SVG/em.svg" class="icon-svg-titulo" alt="">Estudo do Meio<img src="../../SVG/4.svg" class="icon-svg-titulo" alt=""></h1>
+        <div class="subtitulo">Escolhe o teu jogo. <span class="pincelada-dupla">Diverte-te!</span></div>
+    </div>
+</header>
+
+<main>
+    <div class="container-central">
+        
+        <!-- SECÇÃO DE DESTAQUES (Alinhada c/ a Grelha Principal) -->
+        <div class="destaques-grid">
+    
+    <!-- DESTAQUE PRINCIPAL (Especial, Fundo Azul) -->
+    <a href="reis" class="destaque-principal">
+        <div class="badge badge-novo"><img src="../../SVG/DESTAQUE.svg" class="icon-svg-menu"> Destaque</div>
+        <div class="icone-wrapper">
+            <!-- SUBSTITUÍDO AQUI -->
+            <img src="../icones/reis_portugal.png" alt="Reis de Portugal" class="img-destaque-grande">
+        </div>
+    </a>
+
+    <!-- DESTAQUES SECUNDÁRIOS -->
+    <a href="direitos-humanos" class="destaque-secundario">
+        <div class="badge badge-destaque"><img src="../../SVG/TOP.svg" class="icon-svg-menu"> Top</div>
+        <div class="icone-wrapper">
+            <!-- SUBSTITUÍDO AQUI -->
+            <img src="../icones/direitos_humanos.png" alt="Direitos Humanos" class="img-destaque-pequena">
+        </div>
+        <span class="nome-jogo">Direitos Humanos</span>
+    </a>
+            
+            
+    <a href="missao-espaco" class="destaque-secundario">
+        <div class="badge badge-destaque"><img src="../../SVG/NOVO.svg" class="icon-svg-menu"> Novo</div>
+        <div class="icone-wrapper">
+            <!-- SUBSTITUÍDO AQUI -->
+            <img src="../icones/missao_espaco.png" alt="Missão:Espaço" class="img-destaque-pequena">
+        </div>
+        <span class="nome-jogo">Missão: Espaço</span>
+    </a>
+    
+</div>
+
+        <!-- SEPARADOR -->
+        <div class="separador">
+			<span class="separador-texto">
+				Jogos de Estudo do Meio <img src="../../SVG/mao.svg" class="seta-animada icon-svg-seta" alt="">
+				<span class="separador-badge">Ainda há mais!</span>
+			</span>
+		</div>
+
+        <!-- GRELHA GERAL (Os restantes jogos) -->
+        <div class="grid-jogos">
+			
+			<div class="cartao-flip estudo-meio" onmouseleave="this.classList.remove('flipped')">
+					<div class="cartao-inner">
+						<!-- LADO DA FRENTE -->
+						<div class="cartao-frente">
+							<button class="btn-info" aria-label="Ver níveis" onclick="virarCartaoMobile(this)"></button>
+							<a href="sistemas" class="link-frente">
+								<div class="image-wrapper">
+									<img src="../icones/sistemas.png" alt="Sistemas do Corpo" class="icone-imagem">
+								</div>
+								<span class="nome-jogo">Sistemas do Corpo</span>
+							</a>
+						</div>
+						<!-- LADO DO VERSO -->
+						<div class="cartao-verso">
+							<h4 class="titulo-verso">Neste jogo tens:</h4>
+							<ul class="lista-minijogos">
+								<li>Sistema Digestivo</li>
+								<li>Sistema Respiratório</li>
+								<li>Sistema Circulatório</li>
+								<li>Sistema Reprodutor</li>
+							</ul>
+							<div class="botoes-verso">
+								<a href="sistemas" class="btn-jogar">▶ Jogar</a>
+								<button class="btn-voltar-verso" onclick="fecharCartaoMobile(this)">↩</button>
+							</div>
+						</div>
+				</div>
+			</div>
+			
+			
+			<div class="cartao-flip estudo-meio" onmouseleave="this.classList.remove('flipped')">
+					<div class="cartao-inner">
+						<!-- LADO DA FRENTE -->
+						<div class="cartao-frente">
+							<button class="btn-info" aria-label="Ver níveis" onclick="virarCartaoMobile(this)"></button>
+							<a href="sistemas-quiz" class="link-frente">
+								<div class="image-wrapper">
+									<img src="../icones/sistemas_quiz.png" alt="Quiz dos Sistemas" class="icone-imagem">
+								</div>
+								<span class="nome-jogo">Quiz dos Sistemas</span>
+							</a>
+						</div>
+						<!-- LADO DO VERSO -->
+						<div class="cartao-verso">
+							<h4 class="titulo-verso">Neste jogo vais:</h4>
+							<p class="texto-info">Provar o que sabes sobre:</p>
+							<ul class="lista-minijogos">
+								<li>Sistemas do Corpo Humano</li>
+							</ul>
+							<div class="botoes-verso">
+								<a href="sistemas-quiz" class="btn-jogar">▶ Jogar</a>
+								<button class="btn-voltar-verso" onclick="fecharCartaoMobile(this)">↩</button>
+							</div>
+						</div>
+				</div>
+			</div>
+			
+			<div class="cartao-flip estudo-meio" onmouseleave="this.classList.remove('flipped')">
+					<div class="cartao-inner">
+						<!-- LADO DA FRENTE -->
+						<div class="cartao-frente">
+							<button class="btn-info" aria-label="Ver níveis" onclick="virarCartaoMobile(this)"></button>
+							<a href="antes-portugal" class="link-frente">
+								<div class="image-wrapper">
+									<img src="../icones/antes_portugal.png" alt="Antes de Portugal" class="icone-imagem">
+								</div>
+								<span class="nome-jogo">Antes de Portugal</span>
+							</a>
+						</div>
+						<!-- LADO DO VERSO -->
+						<div class="cartao-verso">
+							<h4 class="titulo-verso">Neste jogo tens:</h4>
+							<ul class="lista-minijogos">
+								<li>Primeiros povos</li>
+								<li>Romanos e Muçulmanos</li>
+								<li>Reconquista Cristã</li>
+							</ul>
+							<div class="botoes-verso">
+								<a href="antes-portugal" class="btn-jogar">▶ Jogar</a>
+								<button class="btn-voltar-verso" onclick="fecharCartaoMobile(this)">↩</button>
+							</div>
+						</div>
+				</div>
+			</div>
+			
+			<div class="cartao-flip estudo-meio" onmouseleave="this.classList.remove('flipped')">
+					<div class="cartao-inner">
+						<!-- LADO DA FRENTE -->
+						<div class="cartao-frente">
+							<button class="btn-info" aria-label="Ver níveis" onclick="virarCartaoMobile(this)"></button>
+							<a href="dinastias" class="link-frente">
+								<div class="image-wrapper">
+									<img src="../icones/dinastias.png" alt="As Dinastias" class="icone-imagem">
+								</div>
+								<span class="nome-jogo">As Dinastias</span>
+							</a>
+						</div>
+						<!-- LADO DO VERSO -->
+						<div class="cartao-verso">
+							<h4 class="titulo-verso">Neste jogo tens:</h4>
+							<ul class="lista-minijogos">
+								<li>Dinastia Afonsina</li>
+								<li>Dinastia de Avis</li>
+								<li>Dinastia Filipina</li>
+								<li>Dinastia de Bragança</li>
+							</ul>
+							<div class="botoes-verso">
+								<a href="dinastias" class="btn-jogar">▶ Jogar</a>
+								<button class="btn-voltar-verso" onclick="fecharCartaoMobile(this)">↩</button>
+							</div>
+						</div>
+				</div>
+			</div>
+			
+			<div class="cartao-flip estudo-meio" onmouseleave="this.classList.remove('flipped')">
+					<div class="cartao-inner">
+						<!-- LADO DA FRENTE -->
+						<div class="cartao-frente">
+							<button class="btn-info" aria-label="Ver níveis" onclick="virarCartaoMobile(this)"></button>
+							<a href="portugal-seculo-xx" class="link-frente">
+								<div class="image-wrapper">
+									<img src="../icones/portugal_seculo_xx.png" alt="Portugal: O Século XX" class="icone-imagem">
+								</div>
+								<span class="nome-jogo">Portugal: O Século XX</span>
+							</a>
+						</div>
+						<!-- LADO DO VERSO -->
+						<div class="cartao-verso">
+							<h4 class="titulo-verso">Neste jogo tens:</h4>
+							<ul class="lista-minijogos">
+								<li>O Fim da Monarquia</li>
+								<li>A Ditadura</li>
+								<li>O 25 de Abril</li>
+								<li>Grande Quiz</li>
+							</ul>
+							<div class="botoes-verso">
+								<a href="portugal-seculo-xx" class="btn-jogar">▶ Jogar</a>
+								<button class="btn-voltar-verso" onclick="fecharCartaoMobile(this)">↩</button>
+							</div>
+						</div>
+				</div>
+			</div>
+			<div class="cartao-flip estudo-meio" onmouseleave="this.classList.remove('flipped')">
+					<div class="cartao-inner">
+						<!-- LADO DA FRENTE -->
+						<div class="cartao-frente">
+							<button class="btn-info" aria-label="Ver níveis" onclick="virarCartaoMobile(this)"></button>
+							<a href="uniao-europeia" class="link-frente">
+								<div class="image-wrapper">
+									<img src="../icones/uniao_europeia.png" alt="União Europeia" class="icone-imagem">
+								</div>
+								<span class="nome-jogo">União Europeia</span>
+							</a>
+						</div>
+						<!-- LADO DO VERSO -->
+						<div class="cartao-verso">
+							<h4 class="titulo-verso">Neste jogo vais:</h4>
+							<p class="texto-info">Responder a questões sobre:</p>
+							<ul class="lista-minijogos">
+								<li>A União Europeia</li>
+							</ul>
+							<div class="botoes-verso">
+								<a href="uniao-europeia" class="btn-jogar">▶ Jogar</a>
+								<button class="btn-voltar-verso" onclick="fecharCartaoMobile(this)">↩</button>
+							</div>
+						</div>
+				</div>
+			</div>
+			
+			<div class="cartao-flip estudo-meio" onmouseleave="this.classList.remove('flipped')">
+					<div class="cartao-inner">
+						<!-- LADO DA FRENTE -->
+						<div class="cartao-frente">
+							<button class="btn-info" aria-label="Ver níveis" onclick="virarCartaoMobile(this)"></button>
+							<a href="datas" class="link-frente">
+								<div class="image-wrapper">
+									<img src="../icones/datas.png" alt="Datas Históricas" class="icone-imagem">
+								</div>
+								<span class="nome-jogo">Datas Históricas</span>
+							</a>
+						</div>
+						<!-- LADO DO VERSO -->
+						<div class="cartao-verso">
+							<h4 class="titulo-verso">Neste jogo tens:</h4>
+							<ul class="lista-minijogos">
+								<li>Datas da nossa História</li>
+							</ul>
+							<div class="botoes-verso">
+								<a href="datas" class="btn-jogar">▶ Jogar</a>
+								<button class="btn-voltar-verso" onclick="fecharCartaoMobile(this)">↩</button>
+							</div>
+						</div>
+				</div>
+			</div>
+			
+			<div class="cartao-flip estudo-meio" onmouseleave="this.classList.remove('flipped')">
+					<div class="cartao-inner">
+						<!-- LADO DA FRENTE -->
+						<div class="cartao-frente">
+							<button class="btn-info" aria-label="Ver níveis" onclick="virarCartaoMobile(this)"></button>
+							<a href="terra-viva" class="link-frente">
+								<div class="image-wrapper">
+									<img src="../icones/terra_viva.png" alt="Terra Viva" class="icone-imagem">
+								</div>
+								<span class="nome-jogo">Terra Viva</span>
+							</a>
+						</div>
+						<!-- LADO DO VERSO -->
+						<div class="cartao-verso">
+							<h4 class="titulo-verso">Neste jogo tens:</h4>
+							<ul class="lista-minijogos">
+								<li>Sismos e Vulcões</li>
+								<li>Rochas e Solos</li>
+							</ul>
+							<div class="botoes-verso">
+								<a href="terra-viva" class="btn-jogar">▶ Jogar</a>
+								<button class="btn-voltar-verso" onclick="fecharCartaoMobile(this)">↩</button>
+							</div>
+						</div>
+				</div>
+			</div>
+			
+			<div class="cartao-flip estudo-meio" onmouseleave="this.classList.remove('flipped')">
+					<div class="cartao-inner">
+						<!-- LADO DA FRENTE -->
+						<div class="cartao-frente">
+							<button class="btn-info" aria-label="Ver níveis" onclick="virarCartaoMobile(this)"></button>
+							<a href="sopa-letras" class="link-frente">
+								<div class="image-wrapper">
+									<img src="../icones/sopa_letras.png" alt="Sopa de Letras" class="icone-imagem">
+								</div>
+								<span class="nome-jogo">Sopa de Letras</span>
+							</a>
+						</div>
+						<!-- LADO DO VERSO -->
+						<div class="cartao-verso">
+							<h4 class="titulo-verso">Neste jogo tens:</h4>
+							<ul class="lista-minijogos">
+								<li>Sistemas do Corpo Humano</li>
+								<li>História de Portugal</li>
+								<li>Cidadania e UE</li>
+								<li>Universo e Terra</li>
+							</ul>
+							<div class="botoes-verso">
+								<a href="sopa-letras" class="btn-jogar">▶ Jogar</a>
+								<button class="btn-voltar-verso" onclick="fecharCartaoMobile(this)">↩</button>
+							</div>
+						</div>
+				</div>
+			</div>
+			
+			<div class="cartao-flip estudo-meio" onmouseleave="this.classList.remove('flipped')">
+					<div class="cartao-inner">
+						<!-- LADO DA FRENTE -->
+						<div class="cartao-frente">
+							<button class="btn-info" aria-label="Ver níveis" onclick="virarCartaoMobile(this)"></button>
+							<a href="sopa-letras-tec" class="link-frente">
+								<div class="image-wrapper">
+									<img src="../icones/sopa_letras_tec.png" alt="Sopa de Letras" class="icone-imagem">
+								</div>
+								<span class="nome-jogo">Sopa de Letras</span>
+							</a>
+						</div>
+						<!-- LADO DO VERSO -->
+						<div class="cartao-verso">
+							<h4 class="titulo-verso">Neste jogo tens:</h4>
+							<ul class="lista-minijogos">
+								<li>Tecnologia</li>
+								<li>Meios de Comunicação</li>
+							</ul>
+							<div class="botoes-verso">
+								<a href="sopa-letras-tec" class="btn-jogar">▶ Jogar</a>
+								<button class="btn-voltar-verso" onclick="fecharCartaoMobile(this)">↩</button>
+							</div>
+						</div>
+				</div>
+			</div>
+			
+			
+			
+		</div>
+</main>
+
+<footer>
+    <p><span id="ano-atual"> </span><img src="../../SVG/4_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
+</footer>
+
+<script>
+    document.getElementById('ano-atual').innerText = new Date().getFullYear();
+    
+    function toggleMenu() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const hamburger = document.getElementById('hamburgerBtn');
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+        hamburger.classList.toggle('open');
+    }
+
+    // AS NOVAS FUNÇÕES QUE ADICIONAS AGORA AQUI POR BAIXO:
+
+    // Vira o cartão e desvira automaticamente após 3 segundos no mobile
+    function virarCartaoMobile(btn) {
+        const cartao = btn.closest('.cartao-flip');
+        cartao.classList.add('flipped');
+        
+        // 5000 ms = 5 segundos (muda este número se quiseres mais ou menos tempo)
+        setTimeout(() => {
+            cartao.classList.remove('flipped');
+        }, 5000); 
+    }
+
+    // Botão ↩ no verso para fechar o cartão imediatamente
+    function fecharCartaoMobile(btn) {
+        const cartao = btn.closest('.cartao-flip');
+        cartao.classList.remove('flipped');
+    }
+
+
+</script>
+</body>
+</html>
+
