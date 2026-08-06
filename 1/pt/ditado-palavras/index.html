@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1º Ano - Ditado de Palavras 🔊</title>
+    
+    <link rel="icon" type="image/png" href="../../logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+   
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        
+        /* =========================================
+           CSS DO TEMPLATE BASE (1º ANO)
+           ========================================= */
+        :root {
+            --bg-body: #f0f7ff;
+            --azul-vibrante: #0091ff; 
+            --cor-1ano: #0091ff;     
+            --cor-1ano-dark: #0070c5;
+            --cor-borda: #0091ff;            
+            --bg-header: #e3f2fd;    
+            --azul-escuro: #0d47a1;
+			--azul-vibrante: #0091ff;					  
+            --text-main: #455a64;
+            --borda-cartao: #ced6e0;
+            --cor-pt: #ff6b6b;
+            --cor-mat: #4dabf7;
+            --cor-em: #51cf66;
+
+            /* NOVAS CORES DO MENU INICIAL (Referência da Imagem) */
+            --cor-btn-azul: #61A0FF;
+            --cor-btn-verde: #5DD279;
+            --cor-btn-amarelo: #FBC531;
+            --cor-btn-vermelho: #FF6B6B;
+            --cor-btn-roxo: #A55EEA;
+            --cor-btn-laranja: #FA983A;
+            
+            /* Cores de Feedback (Vibrantes) */
+            --cor-sucesso: #2ed573;
+            --cor-sucesso-dark: #219d53;
+            --cor-erro: #ff4757;
+            --cor-erro-dark: #d0303f;
+        }
+
+        body { font-family: 'Roboto', sans-serif; text-align: center; background-color: var(--bg-body); background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px); background-size: 25px 25px; margin: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; touch-action: pan-y; }
+        
+        @media (min-width: 769px) and (min-height: 600px) { body { height: 100vh; overflow-y: auto; } }
+
+        header { background-color: var(--bg-header); padding: 25px 20px; border-bottom: 1px solid var(--azul-vibrante); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; flex-shrink: 0; z-index: 100; }
+        .header-content { max-width: 1200px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; }
+        
+        .nav-container { width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 15px; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; }
+        
+        .hamburger { cursor: pointer; background: rgba(255, 255, 255, 0.4); border: none; display: flex; flex-direction: column; gap: 4px; padding: 10px; border-radius: 8px; transition: background 0.4s ease; touch-action: manipulation; }
+        @media (hover: hover) { .hamburger:hover { background: #fff9c4; } }
+        .hamburger span { display: block; width: 20px; height: 2px; background: var(--azul-escuro); transition: 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        
+        .btn-voltar { background: var(--cor-1ano); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; font-size: 0.9rem; box-shadow: 0 3px 0 var(--cor-1ano-dark); display: flex; align-items: center; gap: 8px; transition: 0.2s; cursor: pointer; touch-action: manipulation; }
+        @media (hover: hover) { .btn-voltar:hover { transform: scale(1.05); } }
+        
+        h1 {
+    color: var(--azul-escuro);
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    text-shadow: 
+        -2px -2px 0 #ffffff,  
+         2px -2px 0 #ffffff,
+        -2px  2px 0 #ffffff,
+         2px  2px 0 #ffffff, 
+         0px  6px 12px rgba(0, 0, 0, 0.15); 
+}
+        .subtitulo { color: var(--azul-escuro); font-size: clamp(0.85rem, 3vw, 1.1rem); font-weight: 500; opacity: 0.8; margin-top: 15px; }
+        
+        @media (max-width: 768px) {
+            header { padding: 15px 10px; }
+            .header-content { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+            .nav-container { position: relative; width: 100%; display: flex; justify-content: center; align-items: center; height: 40px; margin-bottom: 5px; transform: none; top: 0; }
+            .hamburger { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); }
+            .btn-voltar { margin: 0 auto; position: relative; z-index: 5; }
+            h1 { text-align: center; font-size: 1.8rem; }
+            .subtitulo { text-align: center; margin-top: 5px; }
+        }
+
+        .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: white; z-index: 200; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.1); text-align: left; }
+        .sidebar.active { left: 0; }
+        .sidebar .btn-fechar { background: #fff5f5; color: #ff4757; padding: 20px 25px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; border-bottom: 1px solid #ffebeb; }
+        .sidebar ul { list-style: none; padding: 15px; margin: 0; }
+        .sidebar li a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--text-main); background: #f8fafc; border-radius: 12px; margin-bottom: 8px; transition: 0.3s; }
+        @media (hover: hover) { .sidebar li a:hover { background: var(--cor-1ano); color: white; transform: translateX(8px); } }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 150; }
+        .overlay.active { display: block; }
+
+        main { flex: 1; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 25px 20px; width: 100%; box-sizing: border-box; }
+
+        .cartao-jogo-container { 
+            background: white; width: 100%; max-width: 950px; flex: 1; min-height: 450px;
+            padding: 25px 20px; border-radius: 30px; box-shadow: 0 4px 15px #ff6b6b91; 
+            border-top: 8px solid var(--cor-pt); display: flex; flex-direction: column; 
+            align-items: center; justify-content: flex-start; position: relative; box-sizing: border-box; 
+        }
+
+        footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--azul-vibrante); flex-shrink: 0; z-index: 10;}
+        footer p { font-size: 0.8rem; color: var(--azul-vibrante); margin: 0; }
+
+        /* =========================================
+           MENU INICIAL E ECRÃS
+           ========================================= */
+        .ecra { width: 100%; display: none; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.4s ease; box-sizing: border-box; flex: 1; }
+        .titulo-menu { font-size: 2rem; color: var(--azul-escuro); margin-bottom: 25px; font-weight: 900;}
+
+        /* =========================================
+           BARRA DE ESTADO DO JOGO (RIGOROSA AO TEMPLATE)
+           ========================================= */
+        .status-bar-jogo {
+            display: flex; align-items: center; justify-content: space-between; gap: 10px;
+            width: 100%; background: #fdf2f2; padding: 8px 12px;
+            border-radius: 20px; border: 2px solid var(--cor-pt); margin-bottom: 15px; box-sizing: border-box; flex-shrink: 0;
+        }
+
+        .btn-voltar-menu { background-color: white; color: var(--azul-escuro); border: 2px solid var(--cor-pt); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.2s; }
+        .btn-voltar-menu:hover { border-color: var(--azul-escuro); transform: scale(1.05); }
+        
+        .btn-dica { background-color: #fff9c4; border: 2px solid #fbc531; color: #b18500; padding: 6px 12px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.3s; }
+        .btn-dica:hover { border-color: #b18500; transform: scale(1.05); }
+        .btn-dica.esgotada { opacity: 0.5; pointer-events: none; filter: grayscale(100%); }
+
+        .badge-ronda { background: white; font-weight: 800; font-size: 1rem; border: 2px solid #219d53; color: #219d53; padding: 6px 12px; border-radius: 15px; white-space: nowrap; }
+        .badge-erros { background: white; border: 2px solid var(--cor-pt); color: var(--cor-mat); font-weight: 800; font-size: 0.9rem; padding: 6px 12px; border-radius: 15px; white-space: nowrap; }
+		.svg-icon { width: 1.2em; height: 1.2em; vertical-align: middle; margin-right: 5px; fill: currentColor; }
+
+        .progress-bg { background-color: #e2e8f0; border-radius: 20px; height: 35px; flex: 1; overflow: hidden; box-shadow: inset 0 3px 5px rgba(0,0,0,0.1); border: 2px solid white; margin: 0 10px; }
+        .progress-fill { height: 100%; width: 0%; border-radius: 20px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); background-color: var(--cor-1ano); background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent); background-size: 30px 30px; animation: moverRiscas 2s linear infinite; }
+        
+        @media (max-width: 850px) {
+            .status-bar-jogo { flex-wrap: wrap; justify-content: center; }
+            .btn-voltar-menu, .btn-dica { padding: 4px 8px; font-size: 0.8rem;}
+            .badge-ronda, .badge-erros { font-size: 0.9rem; padding: 4px 8px; }
+            .progress-bg { order: 6; min-width: 100%; margin-top: 5px; height: 25px; margin: 5px 0 0 0;}
+        }
+
+        /* =========================================
+           ÁREA DE JOGO LIVRE (Abaixo da status-bar)
+           ========================================= */
+        .area-jogo-custom {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: 100%; flex: 1; min-height: 0; background: #f8fafc; border: 2px dashed var(--cor-pt); border-radius: 20px; padding: 25px 15px; overflow-y: auto; gap: 50px;
+            position: relative; color: #94a3b8; font-weight: bold;
+        }
+
+        /* =========================================
+           CSS ESPECÍFICO DO JOGO: DITADO DE PALAVRAS
+           ========================================= */
+        
+        /* Animação Inicial Tutorial */
+        .animacao-tutorial {
+            position: relative; height: 280px; width: 100%; max-width: 450px; background: #f4faff;
+            border-radius: 20px; border: 3px dashed #bcdcff; margin: 0 auto 30px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; overflow: hidden;
+            box-shadow: inset 0 0 15px rgba(0,145,255,0.1); gap: 15px;
+        }
+
+        .tut-speaker {
+            width: 80px; height: 80px; background: var(--cor-1ano); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 0 var(--cor-1ano-dark); animation: tutPulse 3s infinite;
+        }
+        
+        .tut-speaker svg { width: 40px; height: 40px; fill: white; }
+
+        .tut-input-box {
+            width: 220px; height: 50px; border: 3px solid #ced6e0; border-radius: 12px; background: white;
+            display: flex; align-items: center; justify-content: center; font-size: 1.6rem; font-weight: bold; color: var(--azul-escuro);
+        }
+
+        .tut-text { display: inline-block; overflow: hidden; white-space: nowrap; animation: typing 3s steps(4, end) infinite; text-transform: lowercase; }
+        .tut-cursor { display: inline-block; animation: blinkCursor 0.5s step-end infinite alternate; margin-left: 2px; }
+
+        .tut-btn-verificar {
+            background-color: #2ed573; color: white; border: none; padding: 10px 25px; font-size: 1.1rem; font-weight: 700; border-radius: 12px; box-shadow: 0 4px 0 #219d53; text-transform: uppercase;
+            animation: pressBtnAnim 3s infinite;
+        }
+
+        @keyframes tutPulse {
+            0%, 20% { transform: scale(1); box-shadow: 0 6px 0 var(--cor-1ano-dark), 0 0 0 rgba(0,145,255,0); }
+            30% { transform: scale(1.1); box-shadow: 0 6px 0 var(--cor-1ano-dark), 0 0 20px rgba(0,145,255,0.5); }
+            40%, 100% { transform: scale(1); box-shadow: 0 6px 0 var(--cor-1ano-dark), 0 0 0 rgba(0,145,255,0); }
+        }
+        @keyframes typing { 0%, 40% { width: 0; } 65%, 85% { width: 4.5ch; } 100% { width: 0; } }
+        @keyframes blinkCursor { 50% { opacity: 0; } }
+        @keyframes pressBtnAnim { 0%, 75% { transform: translateY(0); box-shadow: 0 4px 0 #219d53; } 80%, 85% { transform: translateY(4px); box-shadow: 0 0px 0 transparent; } 90%, 100% { transform: translateY(0); box-shadow: 0 4px 0 #219d53; } }
+
+        /* Componentes de Jogo */
+        .media-container {
+            width: clamp(140px, 30vw, 200px);
+            height: clamp(140px, 30vw, 200px);
+            display: flex; align-items: center; justify-content: center;
+            position: relative; perspective: 1000px;
+        }
+
+        /* O botão de som (frente do cartão virtual) */
+        .btn-ouvir {
+            width: 100%; height: 100%; background-color: var(--cor-1ano); border: none; border-radius: 50%;
+            cursor: pointer; box-shadow: 0 8px 0 var(--cor-1ano-dark), 0 15px 25px rgba(0,0,0,0.15);
+            display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;
+            position: absolute; backface-visibility: hidden; z-index: 2;
+        }
+        .btn-ouvir img { width: 50%; height: 50%; object-fit: contain; pointer-events: none; filter: brightness(0) invert(1); }
+        .btn-ouvir:hover { background-color: var(--azul-vibrante); transform: scale(1.05); }
+        .btn-ouvir:active { transform: translateY(8px); box-shadow: 0 0px 0 var(--cor-1ano-dark), 0 5px 10px rgba(0,0,0,0.1); }
+        .btn-ouvir.playing { animation: pulse 1s infinite; pointer-events: none; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 8px 0 var(--cor-1ano-dark), 0 15px 25px rgba(0,0,0,0.15); }
+            50% { transform: scale(1.08); box-shadow: 0 8px 0 var(--cor-1ano-dark), 0 20px 35px rgba(0,145,255,0.4); }
+            100% { transform: scale(1); box-shadow: 0 8px 0 var(--cor-1ano-dark), 0 15px 25px rgba(0,0,0,0.15); }
+        }
+
+        /* A imagem revelada (trás do cartão virtual) */
+        .game-image {
+            width: 100%; height: 100%; object-fit: contain; border-radius: 20px; background-color: #ffffff;
+            padding: 15px; border: 4px solid #2ed573; box-shadow: 0 8px 25px rgba(46, 213, 115, 0.2); 
+            position: absolute; backface-visibility: hidden; transform: rotateY(180deg);
+            opacity: 0; transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1), opacity 0.6s;
+        }
+
+        /* Classes de transição (Flip) */
+        .media-container.revelado .btn-ouvir { transform: rotateY(180deg); opacity: 0; }
+        .media-container.revelado .game-image { transform: rotateY(0deg); opacity: 1; }
+
+        .input-area { display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%; }
+        
+        .word-input {
+            width: 100%; max-width: 300px; padding: 18px 20px; font-size: 1.8rem; text-align: center; text-transform: lowercase;
+            border: 3px solid #ced6e0; border-radius: 20px; color: var(--azul-escuro); font-weight: 900;
+            outline: none; transition: 0.3s; box-shadow: inset 0 3px 5px rgba(0,0,0,0.05); letter-spacing: 1px;
+        }
+        .word-input:focus { border-color: var(--azul-vibrante); box-shadow: 0 0 15px rgba(0, 145, 255, 0.2), inset 0 3px 5px rgba(0,0,0,0.05); }
+
+        .btn-verificar { background-color: #2ed573; color: white; border: none; padding: 15px 45px; font-size: 1.3rem; font-weight: 900; border-radius: 15px; cursor: pointer; box-shadow: 0 6px 0 #219d53; transition: all 0.1s; text-transform: uppercase; letter-spacing: 1px;}
+        .btn-verificar:active { transform: translateY(6px); box-shadow: 0 0px 0 transparent; }
+
+        /* Animações e Feedbacks */
+        .error-shake { animation: shakeError 0.4s ease-in-out; border-color: #ff4757 !important; background-color: #ffefef; color: #ff4757 !important; }
+        .success-bounce { border-color: #2ed573 !important; background-color: #eafff0; color: #219d53 !important; transform: scale(1.05); }
+
+        .dica-iluminada {
+            animation: piscarDicaInput 0.8s infinite alternate !important;
+            border-color: #fbc531 !important; color: #b18500 !important; background-color: #fff9c4 !important;
+        }
+        @keyframes piscarDicaInput {
+            from { box-shadow: 0 0 10px #fbc531, inset 0 3px 5px rgba(0,0,0,0.05); }
+            to { box-shadow: 0 0 25px #fbc531, inset 0 3px 5px rgba(0,0,0,0.05); }
+        }
+
+        /* =========================================
+           ECRÃ FIM E BOTÕES DE AÇÃO
+           ========================================= */
+        .end-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--azul-escuro); margin-bottom: 25px; }
+        .end-stats { font-size: 1.3rem; color: var(--text-main); margin-bottom: 40px; text-align: center; background: var(--bg-header); padding: 30px 20px; border-radius: 20px; border: 2px dashed var(--cor-pt); line-height: 1.5; }
+        
+        .btn-acao { 
+            background-color: var(--azul-escuro); color: white; border: none; padding: 15px 35px; 
+            font-size: 1.1rem; font-weight: 700; border-radius: 15px; cursor: pointer; 
+            box-shadow: 0 6px 0 #093273; display: flex; align-items: center; justify-content: center; 
+            gap: 10px; margin-bottom: 20px; width: 100%; max-width: 320px; 
+            transition: transform 0.2s, box-shadow 0.2s, filter 0.2s; 
+        }
+        @media (hover: hover) { .btn-acao:hover { transform: translateY(-3px); box-shadow: 0 9px 0 #093273; filter: brightness(1.15); } }
+        .btn-acao:active { transform: translateY(6px); box-shadow: 0 0px 0 transparent; }
+
+        @media (max-width: 768px) {
+            .word-input { font-size: 1.4rem; padding: 12px; max-width: 250px;}
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes shakeError { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px) rotate(-3deg); } 75% { transform: translateX(8px) rotate(3deg); } }
+        @keyframes moverRiscas { 0% { background-position: 0 0; } 100% { background-position: 30px 0; } }
+
+        #confetti-canvas {
+			position: absolute;
+			top: 0; left: 0;
+			width: 100%; height: 100%;
+			pointer-events: none;
+			z-index: 50;
+			border-radius: 30px; /* Para respeitar as bordas do cartão */
+		}
+        
+        /* Modal e Overlays Extras */
+        .toast-msg { position: absolute; top: 80px; left: 50%; transform: translateX(-50%) translateY(-10px); background: #fff9c4; border: 2px solid #fbc531; color: #b18500; padding: 8px 20px; border-radius: 20px; font-weight: 900; font-size: 1.1rem; opacity: 0; transition: 0.3s; pointer-events: none; z-index: 50; }
+        .toast-msg.active { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        body { scrollbar-gutter: stable; }
+
+        @media (max-height: 600px) {
+            body { height: auto !important; overflow-y: auto !important; }
+            main { justify-content: flex-start !important; padding-top: 15px; padding-bottom: 15px; overflow-y: visible !important; }
+            .cartao-jogo-container { margin: auto 0; }
+        }
+        @media (hover: none) and (pointer: coarse) {
+            body { height: auto !important; overflow-y: auto !important; }
+            main { justify-content: flex-start !important; overflow-y: visible !important; }
+            footer { margin-top: auto; }
+        }
+    .icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
+	.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
+	.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
+	.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+
+  
+	.icon-acao {
+		width: 1.4em;
+		height: 1.4em;
+		object-fit: contain;
+		flex-shrink: 0; 
+		pointer-events: none;
+		transition: transform 0.2s ease;
+	}
+	
+	/* =====================================================================
+           DANÇA DE VITÓRIA DA TAÇA (BRILHO DOURADO E BALANÇO RITMADO)
+           ===================================================================== */
+        
+        .taca-vitoria {
+            width: clamp(80px, 15vw, 130px); 
+            margin-bottom: 15px; 
+            object-fit: contain;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            
+            /* Encadeamento: corre o popIn uma vez e depois corre o tacaDanca infinitamente após 0.6s */
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
+                       tacaDanca 3s infinite 0.6s ease-in-out;
+        }
+
+        /* Keyframes da dança (Gera micro-saltos de comemoração e pulsação da sombra dourada) */
+        @keyframes tacaDanca {
+            0%, 100% { 
+                transform: translateY(0) scale(1) rotate(0deg); 
+                filter: drop-shadow(0 6px 12px rgba(251, 197, 49, 0.3)); /* Sombra dourada suave */
+            }
+            25% { 
+                transform: translateY(-10px) scale(1.06) rotate(-4deg); /* Salta e inclina para a esquerda */
+                filter: drop-shadow(0 14px 24px rgba(251, 197, 49, 0.65)); /* Brilho dourado forte */
+            }
+            50% { 
+                transform: translateY(0) scale(1) rotate(0deg); 
+                filter: drop-shadow(0 6px 12px rgba(251, 197, 49, 0.3));
+            }
+            75% { 
+                transform: translateY(-10px) scale(1.06) rotate(4deg); /* Salta e inclina para a direita */
+                filter: drop-shadow(0 14px 24px rgba(251, 197, 49, 0.65));
+            }
+        }
+		
+		.icon-svg-emoji {
+			width: 1.5em;
+			height: 1.5em;
+			vertical-align: middle;
+			margin-bottom: 0.15em;
+		}
+		
+		/* Animação para o botão de dica pulsar quando a criança erra 3 vezes */
+		@keyframes pulsarDicaAjuda {
+			0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 197, 49, 0.7); }
+			70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(251, 197, 49, 0); }
+			100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 197, 49, 0); }
+		}
+
+		.pulsar-ajuda {
+			animation: pulsarDicaAjuda 1.5s infinite !important;
+			border-color: #fbc531 !important;
+			background-color: #fff9c4 !important;
+		}
+
+		/* Tamanho do ícone de Rank no ecrã final */
+		.img-rank-final {
+			width: 120px;
+			height: 120px;
+			margin: 10px auto;
+			display: block;
+			filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+		}
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<nav class="sidebar" id="sidebar">
+    <div class="btn-fechar" onclick="toggleMenu()"><span>✕</span> Fechar</div>
+    <ul>
+        <li><a href="../../../"><img src="../../../SVG/home.svg" alt="Início" class="icon-svg-menu" onerror="this.style.display='none'">Início</a></li>
+        <li><a href="../../../pre"><img src="../../../SVG/pre.svg" alt="Pré-Escolar" class="icon-svg-menu" onerror="this.style.display='none'">Pré-Escolar</a></li>
+        <li><a href="../../"><img src="../../../SVG/ano1.svg" alt="1º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 1º Ano</a></li>
+        <li><a href="../../../2"><img src="../../../SVG/ano2.svg" alt="2º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 2º Ano</a></li>
+        <li><a href="../../../3"><img src="../../../SVG/ano3.svg" alt="3º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 3º Ano</a></li>
+        <li><a href="../../../4"><img src="../../../SVG/ano4.svg" alt="4º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 4º Ano</a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="header-content">
+        <div class="nav-container">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="../" class="btn-voltar"><img src="../../../SVG/voltar.svg" class="icon-svg-voltar" alt=""> Voltar</a>
+        </div>
+        
+        <h1>Ditado de Palavras <img src="../img-titulos/ditado-palavras.svg" class="icon-svg-titulo" alt=""></h1>
+        <div class="subtitulo">Ouve a palavra com atenção e escreve-a corretamente!</div>
+    </div>
+</header>
+
+<main>
+    <div class="cartao-jogo-container">
+        
+        <canvas id="confetti-canvas"></canvas>
+        <div class="toast-msg" id="toast-msg">Mensagem</div>
+
+        <!-- ECRÃ 1: MENU INICIAL -->
+        <div id="ecra-selecao" class="ecra" style="display: flex;">
+            <h2 class="titulo-menu">Como Jogar:</h2>
+            
+            <div class="animacao-tutorial">
+                <div class="tut-speaker">
+                    <!-- Ícone de som embutido no CSS ou SVG -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                </div>
+                <div class="tut-input-box">
+                    <span class="tut-text">gato</span><span class="tut-cursor">|</span>
+                </div>
+                <div class="tut-btn-verificar">VERIFICAR <img src="verificar.svg" class="icon-svg-emoji"></div>
+            </div>
+
+            <button class="btn-acao" onclick="iniciarJogo()" style="margin: 0 auto;">JOGAR AGORA <img src="../../../SVG/seta_direita.svg" class="icon-acao" alt=""></button>
+        </div>
+
+        <!-- ECRÃ 2: JOGO -->
+        <div id="ecra-jogo" class="ecra">
+            
+            <!-- BARRA DE ESTADO COM DICA -->
+            <div class="status-bar-jogo" id="status-bar" style="display: none;">
+                <button class="btn-voltar-menu" onclick="limparTudoEvoltar()" id="btn-home-svg"></button>
+                <button id="btn-dica" class="btn-dica" onclick="usarDica()"></button>
+				<div class="badge-ronda"><span id="badge-ronda-svg"></span><span id="val-progresso">1</span>/<span id="val-total">10</span></div> 
+                <div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
+                <div class="badge-erros"> <span id="icone-erro-svg"></span> <span id="val-erros">0</span></div>
+            </div>
+
+            <div class="area-jogo-custom" id="area-jogo">
+                
+                <!-- Recipiente Fixo para garantir a fluidez do UI e Animação de Flip -->
+                <div class="media-container" id="media-container">
+                    <!-- Frente: Botão de Áudio -->
+                    <button id="btn-ouvir" class="btn-ouvir" onclick="ouvirPalavraAtual()" aria-label="Ouvir palavra" title="Ouvir palavra">
+                        <img src="som.svg" alt="Som" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\'><polygon points=\'11 5 6 9 2 9 2 15 6 15 11 19 11 5\' fill=\'white\'></polygon><path d=\'M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07\' fill=\'none\' stroke=\'white\' stroke-width=\'2\'></path></svg>'">
+                    </button>
+                    
+                    <!-- Verso: Imagem Revelada (Prémio) -->
+                    <img id="game-image" class="game-image" src="" alt="Imagem revelada">
+                </div>
+                
+                <div class="input-area">
+                    <input type="text" id="word-input" class="word-input" placeholder="escreve aqui..." autocomplete="off" spellcheck="false">
+                    <button id="btn-verificar" class="btn-verificar">VERIFICAR <img src="verificar.svg" class="icon-svg-emoji"></button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ECRÃ 3: FIM -->
+        <div id="ecra-fim" class="ecra">
+            <div id="rank-container"></div>
+			<h2 class="titulo-menu" id="end-title-text" style="margin-bottom: 10px;">Missão Cumprida!</h2>
+            <div class="end-stats">
+                Escreveste <strong id="final-certas" style="color:#2ed573">0</strong> palavras certas.<br>
+                Tiveste <strong id="final-erros" style="color:#ff4757">0</strong> tentativas erradas.
+            </div>
+            <button class="btn-acao" onclick="iniciarJogo()" style="margin: 0 auto; margin-bottom: 10px;">JOGAR DE NOVO <img src="../../../SVG/jogar_novo.svg" class="icon-acao" alt=""></button>
+        </div>
+
+    </div>
+</main>
+
+<footer>
+    <p><span id="ano-atual"> </span><img src="../../../SVG/1_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
+</footer>
+
+<script>
+    document.getElementById('ano-atual').innerText = new Date().getFullYear();
+    
+	// ==========================================
+    // SVGs BARRA DE ESTADO
+    // ==========================================
+    const SVG_HOME = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" style="margin-right:4px; vertical-align:middle;"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5z" fill="#fff" stroke="#d35400" stroke-width="2" stroke-linejoin="round"/><rect x="10" y="12" width="4" height="10" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/></svg> Menu`;
+    const SVG_STAR = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="#f1c40f" stroke="#f39c12" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px; vertical-align:middle;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
+    const SVG_BULB = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px; vertical-align:middle;"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"></path></svg>`;
+    const SVG_ERRO = `<svg viewBox="0 0 14 14" width="0.8em" height="0.8em" style="margin-right: 5px; vertical-align: middle;"><path d="M2 2 L12 12 M12 2 L2 12" stroke="var(--cor-pt, #ff4757)" stroke-width="3" stroke-linecap="round" /></svg>`;
+
+
+	// Injeção visual na carga da página
+    document.addEventListener("DOMContentLoaded", () => {
+        const btnHome = document.getElementById('btn-home-svg');
+        const badgeRonda = document.getElementById('badge-ronda-svg');
+        const btnDica = document.getElementById('btn-dica');
+        const iconeErro = document.getElementById('icone-erro-svg');
+        
+        if(btnHome) btnHome.innerHTML = SVG_HOME;
+        if(btnDica) btnDica.innerHTML = SVG_BULB + ' Dica';
+        if(iconeErro) iconeErro.innerHTML = SVG_ERRO;
+        if(badgeRonda) badgeRonda.innerHTML = SVG_STAR;
+        
+    });
+	
+	function toggleMenu() { 
+        document.getElementById('sidebar').classList.toggle('active'); 
+        document.getElementById('overlay').classList.toggle('active'); 
+        document.getElementById('hamburgerBtn').classList.toggle('open'); 
+    }
+
+    function showToast(msg, isError = false) {
+        const toast = document.getElementById('toast-msg');
+        toast.textContent = msg;
+        toast.style.borderColor = isError ? "#ff4757" : "#fbc531";
+        toast.style.color = isError ? "#ff4757" : "#b18500";
+        toast.style.backgroundColor = isError ? "#ffefef" : "#fff9c4";
+        toast.classList.add('active');
+        setTimeout(() => toast.classList.remove('active'), 2500);
+    }
+
+    /* =========================================
+       DADOS DE PALAVRAS 
+       ========================================= */
+    const bancoPalavras = [
+        { palavra: "ábaco", ref: "abaco" },
+        { palavra: "água", ref: "agua" },
+        { palavra: "águia", ref: "aguia" },
+        { palavra: "alface", ref: "alface" },
+        { palavra: "alfinete", ref: "alfinete" },
+        { palavra: "algemas", ref: "algemas" },
+        { palavra: "alho", ref: "alho" },
+        { palavra: "almofada", ref: "almofada" },
+        { palavra: "árvore", ref: "arvore" },
+        { palavra: "asa", ref: "asa" },
+        { palavra: "ave", ref: "ave" },
+        { palavra: "bandeira", ref: "bandeira" },
+        { palavra: "bota", ref: "bota" },
+        { palavra: "casa", ref: "casa" },
+        { palavra: "cenoura", ref: "cenoura" },
+        { palavra: "chave", ref: "chave" },
+        { palavra: "dedo", ref: "dedo" },
+        { palavra: "ecoponto", ref: "ecoponto" },
+        { palavra: "égua", ref: "egua" },
+        { palavra: "erva", ref: "erva" },
+        { palavra: "flor", ref: "flor" },
+        { palavra: "galinha", ref: "galinha" },
+        { palavra: "girafa", ref: "girafa" },
+        { palavra: "hipopótamo", ref: "hipopotamo" },
+        { palavra: "iglu", ref: "iglu" },
+        { palavra: "igreja", ref: "igreja" },
+        { palavra: "iguana", ref: "iguana" },
+        { palavra: "ilha", ref: "ilha" },
+        { palavra: "iogurte", ref: "iogurte" },
+        { palavra: "janela", ref: "janela" },
+        { palavra: "marinheiro", ref: "marinheiro" },
+        { palavra: "menina", ref: "menina" },
+        { palavra: "navio", ref: "navio" },
+        { palavra: "óculos", ref: "oculos" },
+        { palavra: "ogre", ref: "ogre" },
+        { palavra: "orca", ref: "orca" },
+        { palavra: "osso", ref: "osso" },
+        { palavra: "ovelha", ref: "ovelha" },
+        { palavra: "palhaço", ref: "palhaco" },
+        { palavra: "peixe", ref: "peixe" },
+        { palavra: "professor", ref: "professor" },
+        { palavra: "rato", ref: "rato" },
+        { palavra: "televisão", ref: "televisao" },
+        { palavra: "telhado", ref: "telhado" },
+        { palavra: "um", ref: "um" },
+        { palavra: "umbigo", ref: "umbigo" },
+        { palavra: "unha", ref: "unha" },
+        { palavra: "unicórnio", ref: "unicornio" },
+        { palavra: "urso", ref: "urso" },
+        { palavra: "uvas", ref: "uvas" },
+        { palavra: "vaca", ref: "vaca" },
+        { palavra: "zebra", ref: "zebra" }
+    ];
+
+    /* =========================================
+       ESTADOS E VARIÁVEIS
+       ========================================= */
+    const MAX_PALAVRAS = 10;
+    let palavrasDoJogo = [];
+    let palavraAtualIndex = 0;
+    let rondaAtual = 1; // 1 to 10
+    let errosTotais = 0;
+    let isVerificando = false;
+	let somVozAtual = new Audio();
+	let errosNaPalavraAtual = 0;
+	let palavrasRestantesNoSaco = []; 
+
+    // Lógica das Dicas
+    let dicasUsadas = []; 
+
+    // DOM
+    const elStatus = document.getElementById('status-bar');
+    const elProgresso = document.getElementById('val-progresso');
+    const elErros = document.getElementById('val-erros');
+    const elValTotal = document.getElementById('val-total');
+    const elProgressFill = document.getElementById('progress-fill');
+    
+    const elGameScreen = document.getElementById('ecra-jogo');
+    const elEndScreen = document.getElementById('ecra-fim');
+    
+    const elMediaContainer = document.getElementById('media-container');
+    const elBtnOuvir = document.getElementById('btn-ouvir');
+    const elImage = document.getElementById('game-image');
+    
+    const elInput = document.getElementById('word-input');
+    const btnVerificar = document.getElementById('btn-verificar');
+    
+    function mostrarEcra(id) {
+        document.querySelectorAll('.ecra').forEach(e => e.style.display = 'none');
+        document.getElementById(id).style.display = 'flex';
+    }
+
+    function voltarAoMenu() {
+        if (typeof window.speechSynthesis !== 'undefined') window.speechSynthesis.cancel();
+
+        if (elStatus) elStatus.style.display = 'none';
+        mostrarEcra('ecra-selecao');
+    }
+
+    function atualizarPlacarUI() {
+        elProgresso.textContent = rondaAtual > MAX_PALAVRAS ? MAX_PALAVRAS : rondaAtual;
+        elErros.textContent = errosTotais;
+        elValTotal.textContent = MAX_PALAVRAS;
+        let percent = ((rondaAtual - 1) / MAX_PALAVRAS) * 100;
+        elProgressFill.style.width = `${percent}%`;
+    }
+
+    function atualizarDicasUI() {
+        const btnDica = document.getElementById('btn-dica');
+        const blocoAtual = Math.floor((rondaAtual - 1) / 5);
+        
+        if (!dicasUsadas[blocoAtual]) {
+            btnDica.classList.remove('esgotada');
+        } else {
+            btnDica.classList.add('esgotada');
+        }
+    }
+
+    /* =========================================
+       LÓGICA PRINCIPAL
+       ========================================= */
+    function iniciarJogo() {
+        limparConfetis(); 
+        if (typeof window.speechSynthesis !== 'undefined') window.speechSynthesis.cancel();
+
+        rondaAtual = 1;
+        palavraAtualIndex = 0;
+        errosTotais = 0;
+        isVerificando = false;
+        dicasUsadas = [];
+
+        // --- LÓGICA DE NÃO REPETIÇÃO ---
+        
+        // 1. Se o saco estiver vazio ou tiver menos de 10 palavras, voltamos a enchê-lo
+        if (palavrasRestantesNoSaco.length < MAX_PALAVRAS) {
+            console.log("A reencher o saco com todas as 52 palavras!");
+            palavrasRestantesNoSaco = [...bancoPalavras];
+            
+            // Baralhamos o saco mal o enchemos
+            palavrasRestantesNoSaco.sort(() => Math.random() - 0.5);
+        }
+
+        // 2. Tiramos as próximas 10 palavras do saco (e elas saem de lá!)
+        // O comando .splice(0, 10) remove os primeiros 10 itens do array original
+        palavrasDoJogo = palavrasRestantesNoSaco.splice(0, MAX_PALAVRAS);
+        
+        // ------------------------------
+
+        elStatus.style.display = 'flex';
+        atualizarPlacarUI();
+        atualizarDicasUI();
+        mostrarEcra('ecra-jogo');
+        
+        carregarPalavra();
+    }
+    
+	function getImagePath(ref) {
+        return `sons/${ref}.png`;
+    }
+	
+	function getAudioPath(ref) {
+        return `sons/${ref}.mp3`;
+    }
+
+	function carregarPalavra() {
+        errosNaPalavraAtual = 0; 
+		document.getElementById('btn-dica').classList.remove('pulsar-ajuda');
+		
+		isVerificando = false;
+        removerDestaquesDica();
+        atualizarDicasUI();
+
+        const palavraObj = palavrasDoJogo[palavraAtualIndex];
+        if (!palavraObj) return;
+        
+        elProgressFill.style.width = `${(palavraAtualIndex / MAX_PALAVRAS) * 100}%`;
+        
+        elMediaContainer.classList.remove('revelado');
+        elBtnOuvir.classList.remove('playing');
+        
+        // Atualiza a imagem usando a referência (ref)
+        setTimeout(() => {
+            elImage.src = getImagePath(palavraObj.ref);
+        }, 400);
+
+        elInput.value = '';
+        elInput.classList.remove('error-shake', 'success-bounce');
+        elInput.disabled = false;
+        
+        setTimeout(() => elInput.focus(), 100); 
+    }
+    
+	function ouvirPalavraAtual() {
+        if (isVerificando) return;
+        
+        // Garante que o áudio do sistema está acordado (útil para iOS)
+        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+
+        const palavraObj = palavrasDoJogo[palavraAtualIndex];
+        if (!palavraObj) return;
+
+        // 1. Para qualquer som que esteja a tocar e limpa os eventos antigos
+        somVozAtual.pause();
+        somVozAtual.onplay = null;
+        somVozAtual.onended = null;
+
+        // 2. Define o novo ficheiro
+        somVozAtual.src = getAudioPath(palavraObj.ref);
+        
+        // 3. Configura o que acontece quando o som começa e acaba
+        somVozAtual.onplay = () => elBtnOuvir.classList.add('playing');
+        somVozAtual.onended = () => {
+            elBtnOuvir.classList.remove('playing');
+            elInput.focus();
+        };
+
+        // 4. Toca o som
+        somVozAtual.play().catch(e => {
+            console.warn("Som bloqueado ou não encontrado:", palavraObj.ref);
+            elBtnOuvir.classList.remove('playing');
+        });
+    }
+
+    function verificarResposta() {
+        if (isVerificando) return;
+        
+        const respostaAluno = elInput.value.trim().toLowerCase();
+        // A comparação ignora maiúsculas mas mantém a sensibilidade aos acentos
+        const respostaCorreta = palavrasDoJogo[palavraAtualIndex].palavra.toLowerCase();
+
+        // Se o utilizador não escreveu nada, ouve a palavra de novo
+        if (respostaAluno === '') {
+            ouvirPalavraAtual();
+            return;
+        }
+
+        isVerificando = true;
+        removerDestaquesDica();
+
+        if (respostaAluno === respostaCorreta) {
+            // --- CASO ACERTE ---
+            tocarSom('acerto');
+            
+            elInput.value = respostaCorreta; // Garante a formatação visual
+            elInput.classList.add('success-bounce');
+            elInput.disabled = true;
+
+            // Para o som da voz imediatamente ao acertar
+            if (somVozAtual) {
+                somVozAtual.pause();
+                somVozAtual.currentTime = 0;
+            }
+
+            // ANIMAÇÃO PRÉMIO: Roda o cartão para mostrar a imagem!
+            elMediaContainer.classList.add('revelado');
+
+            // Espera 2 segundos para a criança festejar e ver a imagem
+            setTimeout(() => {
+                avancarRonda();
+            }, 2000); 
+            
+        } else {
+            // --- CASO ERRE ---
+            errosTotais++;
+            errosNaPalavraAtual++; // Incrementa erros desta palavra específica
+            atualizarPlacarUI();
+            tocarSom('erro');
+            
+            elInput.classList.add('error-shake');
+            
+            // LÓGICA DE SOCORRO: Se errar 3 vezes a mesma palavra, sugere a dica
+            if (errosNaPalavraAtual >= 3) {
+                const btnDica = document.getElementById('btn-dica');
+                // Só pulsa se a dica ainda não foi usada neste bloco de 5 palavras
+                if (btnDica && !btnDica.classList.contains('esgotada')) {
+                    btnDica.classList.add('pulsar-ajuda');
+                    showToast("Precisas de uma ajuda? Clica na lâmpada!");
+                }
+            }
+            
+            // Limpa o input para nova tentativa após a animação de "tremer"
+            setTimeout(() => {
+                elInput.classList.remove('error-shake');
+                elInput.value = ''; 
+                elInput.focus();
+                isVerificando = false;
+            }, 600);
+        }
+    }
+
+    /* --- DICA --- */
+    function usarDica() {
+        const btnDica = document.getElementById('btn-dica');
+        const blocoAtual = Math.floor((rondaAtual - 1) / 5);
+        
+        if(btnDica.classList.contains('esgotada') || dicasUsadas[blocoAtual]) return;
+
+        const respostaCorreta = palavrasDoJogo[palavraAtualIndex].palavra.toLowerCase();
+        
+        // Preenche com a palavra certa
+        elInput.value = respostaCorreta;
+        elInput.classList.add('dica-iluminada');
+        
+        dicasUsadas[blocoAtual] = true;
+        atualizarDicasUI();
+    }
+
+    function removerDestaquesDica() {
+        elInput.classList.remove('dica-iluminada');
+    }
+
+    /* --- EVENTOS INPUT E BOTÃO --- */
+    btnVerificar.addEventListener('click', verificarResposta);
+    elInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') { e.preventDefault(); verificarResposta(); }
+    });
+
+    /* --- GESTÃO GERAL --- */
+    function avancarRonda() {
+        palavraAtualIndex++;
+        rondaAtual++;
+        
+        if (rondaAtual > MAX_PALAVRAS) {
+            elProgressFill.style.width = `100%`;
+            document.getElementById('final-erros').textContent = errosTotais;
+            document.getElementById('final-certas').textContent = MAX_PALAVRAS;
+
+            const titleText = document.getElementById('end-title-text');
+            const rankContainer = document.getElementById('rank-container');
+            let imgRank = "";
+
+            if (errosTotais === 0) {
+                titleText.textContent = "DITADO PERFEITO!";
+                imgRank = "rank_ouro.svg"; // General da Escrita
+                tocarSom('vitoria'); dispararConfetis();
+            } else if (errosTotais <= 3) {
+                titleText.textContent = "MUITO BEM!";
+                imgRank = "rank_prata.svg"; // Capitão das Letras
+                tocarSom('vitoria'); dispararConfetis();
+            } else {
+                titleText.textContent = "BOM ESFORÇO!";
+                imgRank = "rank_bronze.svg"; // Recruta Esforçado
+                tocarSom('acerto'); 
+            }
+
+            // Injeta o SVG do Rank
+            rankContainer.innerHTML = `<img src="../../../SVG/${imgRank}" class="taca-vitoria" alt="Medalha de Vitória">`;
+
+            elStatus.style.display = 'none';
+            mostrarEcra('ecra-fim');
+        } 
+        else {
+            atualizarPlacarUI();
+            carregarPalavra();
+        }
+    }
+
+	/* =========================================
+       SISTEMA DE SOM E CONFETIS (VERSÃO SEGURA)
+       ========================================= */
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    let idAnimacaoConfete = null;
+    let confetesAtivos = false;
+    let confetis = [];
+
+    function initAudio() {
+        if (!audioCtx && AudioContextClass) audioCtx = new AudioContextClass();
+        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+    }
+
+    document.addEventListener('mousedown', initAudio, { once: true });
+    document.addEventListener('touchstart', initAudio, { once: true });
+
+    function tocarSom(tipo) {
+        initAudio();
+        if (!audioCtx) return;
+        const agora = audioCtx.currentTime;
+
+        if (tipo === 'acerto') {
+            const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+            osc.connect(gain); gain.connect(audioCtx.destination);
+            osc.type = 'sine'; osc.frequency.setValueAtTime(600, agora);
+            osc.frequency.exponentialRampToValueAtTime(1200, agora + 0.2);
+            gain.gain.setValueAtTime(0.1, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); osc.stop(agora + 0.3);
+        } else if (tipo === 'erro') {
+            const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+            osc.connect(gain); gain.connect(audioCtx.destination);
+            osc.type = 'triangle'; osc.frequency.setValueAtTime(250, agora);
+            osc.frequency.exponentialRampToValueAtTime(150, agora + 0.2);
+            gain.gain.setValueAtTime(0.15, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); osc.stop(agora + 0.3);
+        } else if (tipo === 'vitoria') {
+            const melodia = [
+                { freq: 523.25, tempo: 0.00, duracao: 0.15 }, 
+                { freq: 659.25, tempo: 0.15, duracao: 0.15 }, 
+                { freq: 783.99, tempo: 0.30, duracao: 0.20 }, 
+                { freq: 659.25, tempo: 0.50, duracao: 0.15 }, 
+                { freq: 1046.50, tempo: 0.65, duracao: 1.00 } 
+            ];
+            melodia.forEach(nota => {
+                const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                o.connect(g); g.connect(audioCtx.destination);
+                o.type = 'triangle'; o.frequency.setValueAtTime(nota.freq, agora + nota.tempo);
+                g.gain.setValueAtTime(0, agora + nota.tempo);
+                g.gain.linearRampToValueAtTime(0.2, agora + nota.tempo + 0.05);
+                g.gain.exponentialRampToValueAtTime(0.001, agora + nota.tempo + nota.duracao);
+                o.start(agora + nota.tempo); o.stop(agora + nota.tempo + nota.duracao);
+            });
+        }
+    }
+
+    function limparConfetis() {
+        confetesAtivos = false;
+        if (idAnimacaoConfete) cancelAnimationFrame(idAnimacaoConfete);
+        
+        // Silêncio total imediato
+        if (somVozAtual) {
+            somVozAtual.pause();
+            somVozAtual.src = ""; // Remove o rasto do ficheiro da memória
+        }
+
+        const canvas = document.getElementById('confetti-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    }
+
+    function dispararConfetis() {
+        const canvas = document.getElementById('confetti-canvas');
+        const container = document.querySelector('.cartao-jogo-container');
+        if (!canvas || !container) return;
+
+        const ctx = canvas.getContext('2d');
+        canvas.width = container.clientWidth; 
+        canvas.height = container.clientHeight; 
+        
+        confetis = []; 
+        confetesAtivos = true;
+        const cores = ['#0091ff', '#2ed573', '#ff4757', '#ffa502', '#eccc68'];
+        
+        for (let i = 0; i < 120; i++) {
+            confetis.push({ 
+                x: Math.random() * canvas.width, 
+                y: -20, 
+                w: Math.random() * 7 + 4, 
+                h: Math.random() * 7 + 4, 
+                cor: cores[Math.floor(Math.random() * cores.length)], 
+                velY: Math.random() * 2.5 + 1.5, 
+                velX: Math.random() * 2 - 1, 
+                rotacao: Math.random() * 360, 
+                velRotacao: Math.random() * 5 - 2.5 
+            });
+        }
+        
+		function animar() {
+            if (!confetesAtivos) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let aindaHaConfetes = false;
+            confetis.forEach(c => {
+                c.y += c.velY; c.x += c.velX; c.rotacao += c.velRotacao;
+                if (c.y < canvas.height) aindaHaConfetes = true;
+                ctx.save(); ctx.translate(c.x, c.y); ctx.rotate(c.rotacao * Math.PI / 180);
+                ctx.fillStyle = c.cor; ctx.fillRect(-c.w/2, -c.h/2, c.w, c.h); ctx.restore();
+            });
+            if (aindaHaConfetes) idAnimacaoConfete = requestAnimationFrame(animar);
+        }
+        animar();
+    }
+
+    function limparTudoEvoltar() {
+        limparConfetis();
+        
+        if (somVozAtual) {
+            somVozAtual.pause();
+            somVozAtual.currentTime = 0;
+        }
+
+        if (typeof window.speechSynthesis !== 'undefined') window.speechSynthesis.cancel();
+        
+        voltarAoMenu();
+    }
+
+	function preCarregarTudo() {
+		bancoPalavras.forEach(item => {
+			const img = new Image();
+			img.src = `sons/${item.ref}.png`;
+			const audio = new Audio();
+			audio.src = `sons/${item.ref}.mp3`;
+		});
+	}
+	window.onload = () => {
+		mostrarEcra('ecra-selecao');
+		preCarregarTudo();
+	};
+
+</script>
+</body>
+</html>

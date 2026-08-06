@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1º Ano - Cruzadas de Animais 🐾</title>
+    
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script src="dados.js"></script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        /* =========================================
+           CSS DO TEMPLATE BASE
+           ========================================= */
+        :root {
+            --bg-body: #f0f7ff;
+            --azul-vibrante: #0091ff; 
+            --cor-1ano: #0091ff;     
+            --cor-1ano-dark: #0070c5;
+            --cor-borda: #E3C40D;            
+            --bg-header: #e3f2fd;    
+            --azul-escuro: #0d47a1;
+			--azul-vibrante: #0091ff; 
+            --text-main: #455a64;
+            --borda-cartao: #ced6e0;
+            --cor-pt: #ff6b6b;
+            --cor-mat: #4dabf7;
+            --cor-em: #51cf66;
+        }
+
+        body { font-family: 'Roboto', sans-serif; text-align: center; background-color: var(--bg-body); margin: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; touch-action: pan-y; }
+        @media (min-width: 851px) and (min-height: 600px) { body { height: 100vh; overflow-y: hidden; } }
+
+        header { background-color: var(--bg-header); padding: 25px 20px; border-bottom: 1px solid var(--azul-vibrante); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; flex-shrink: 0; z-index: 100; }
+        .header-content { max-width: 1200px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; }
+        
+        .nav-container { width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 15px; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; }
+        
+        .hamburger { cursor: pointer; background: rgba(255, 255, 255, 0.4); border: none; display: flex; flex-direction: column; gap: 4px; padding: 10px; border-radius: 8px; transition: background 0.4s ease; touch-action: manipulation; }
+        @media (hover: hover) { .hamburger:hover { background: #fff9c4; } }
+        .hamburger span { display: block; width: 20px; height: 2px; background: var(--azul-escuro); transition: 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        
+        .btn-voltar { background: var(--cor-1ano); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; font-size: 0.9rem; box-shadow: 0 3px 0 var(--cor-1ano-dark); display: flex; align-items: center; gap: 8px; transition: 0.2s; cursor: pointer; touch-action: manipulation; }
+        @media (hover: hover) { .btn-voltar:hover { transform: scale(1.05); } }
+        
+        h1 {
+    color: var(--azul-escuro);
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    text-shadow: 
+        -2px -2px 0 #ffffff,  
+         2px -2px 0 #ffffff,
+        -2px  2px 0 #ffffff,
+         2px  2px 0 #ffffff, 
+         0px  6px 12px rgba(0, 0, 0, 0.15); 
+}
+        .subtitulo { color: var(--azul-escuro); font-size: clamp(0.85rem, 3vw, 1.1rem); font-weight: 500; opacity: 0.8; margin-top: 15px; }
+        
+        @media (max-width: 768px) {
+            header { padding: 15px 10px; }
+            .header-content { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+            .nav-container { position: relative; width: 100%; display: flex; justify-content: center; align-items: center; height: 35px; margin-bottom: 5px; transform: none; top: 0; }
+            .hamburger { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); }
+            .btn-voltar { margin: 0 auto; position: relative; z-index: 5; }
+            h1 { text-align: center; font-size: 1.6rem; }
+            .subtitulo { text-align: center; margin-top: 5px; }
+        }
+
+        .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: white; z-index: 200; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.1); text-align: left; }
+        .sidebar.active { left: 0; }
+        .sidebar .btn-fechar { background: #fff5f5; color: #ff4757; padding: 20px 25px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; border-bottom: 1px solid #ffebeb; }
+        .sidebar ul { list-style: none; padding: 15px; margin: 0; }
+        .sidebar li a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--text-main); background: #f8fafc; border-radius: 12px; margin-bottom: 8px; transition: 0.3s; }
+        @media (hover: hover) { .sidebar li a:hover { background: var(--cor-1ano); color: white; transform: translateX(8px); } }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 150; }
+        .overlay.active { display: block; }
+
+        main { flex: 1; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 20px; gap: 10px; }
+
+        .cartao-jogo-container { 
+            background: white; width: 100%; max-width: 1000px; flex: 1;
+            padding: 25px; border-radius: 30px; box-shadow: 0 4px 15px #ff6b6b91; 
+            border-top: 8px solid var(--cor-pt); display: flex; flex-direction: column; 
+            align-items: center; justify-content: flex-start; position: relative; overflow: hidden;
+            min-height: 0; 
+        }
+
+        footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--azul-vibrante); flex-shrink: 0; z-index: 10;}
+        footer p { font-size: 0.8rem; color: var(--azul-vibrante); margin: 0; }
+
+        /* =========================================
+           TUTORIAL ANIMADO & MENU INICIAL (NOVOS BOTÕES)
+           ========================================= */
+        .ecra { width: 100%; flex: 1; display: none; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.4s ease; min-height: 0; }
+        .titulo-menu { font-size: clamp(1.8rem, 5vw, 2.2rem); color: var(--azul-escuro); margin-bottom: 25px; font-weight: 900;}
+        
+        .animacao-tutorial {
+            position: relative; width: 100%; max-width: 350px; background: #f4faff;
+            border-radius: 20px; border: 3px dashed #bcdcff; margin: 0 auto 25px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px 15px;
+            box-shadow: inset 0 0 15px rgba(0,145,255,0.1); height: 160px; overflow: hidden;
+        }
+
+        .tut-cw { display: flex; gap: 6px; position: relative; }
+        .tut-cell { width: 45px; height: 45px; background: white; border: 3px solid #ced6e0; border-radius: 8px; font-size: 1.8rem; font-weight: 900; color: var(--azul-escuro); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 0 rgba(0,0,0,0.05); }
+        .tut-cell.filled { border-color: var(--azul-vibrante); background: #f0f7ff; }
+        .tut-cell.blink { position: relative; overflow: hidden; }
+        .tut-cell.blink::before {
+            content: 'O'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+            background: #eafff0; border: 3px solid #2ed573; border-radius: 5px; color: #219d53;
+            animation: showLetterTut 3s infinite; opacity: 0; z-index: 2;
+        }
+        
+        .tut-hand { position: absolute; font-size: 2.5rem; right: -15px; bottom: -30px; animation: tapKeyTut 3s infinite; z-index: 10; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.2));}
+
+        @keyframes showLetterTut { 0%, 45% { opacity: 0; transform: scale(0.5); } 55%, 90% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+        @keyframes tapKeyTut { 0%, 30% { transform: translate(30px, 30px); opacity: 0; } 40% { transform: translate(0, 0); opacity: 1; } 50% { transform: translate(0, -5px) scale(0.9); opacity: 1; } 60%, 100% { transform: translate(20px, 20px); opacity: 0; } }
+
+        /* NOVOS BOTÕES DE NÍVEL (Estilo Bloco Colorido) */
+        .grid-niveis {
+            display: flex; flex-direction: column; gap: 18px; width: 100%; max-width: 450px; margin-bottom: 20px;
+        }
+        
+        .btn-nivel-novo {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            border: 4px solid white;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+            box-shadow: 0 6px 0 #e2e8f0, 0 10px 15px rgba(0,0,0,0.08);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            touch-action: manipulation;
+            user-select: none;
+            text-align: left;
+        }
+
+        .nivel-icon-novo { font-size: 2.2rem; background: rgba(255,255,255,0.3); width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); text-shadow: none;}
+        .nivel-text-novo { display: flex; flex-direction: column; gap: 4px;}
+        .nivel-titulo-novo { font-size: 1.3rem; font-weight: 900; color: white; display: block;}
+        .nivel-desc-novo { font-size: 0.95rem; color: white; opacity: 0.95; font-weight: 600; text-shadow: none; display: block;}
+
+        .btn-n1 { background-color: #2ed573; } /* Verde */
+        .btn-n2 { background-color: #ffa502; } /* Amarelo/Laranja */
+        .btn-n3 { background-color: #ff4757; } /* Vermelho */
+
+        @media (hover: hover) { 
+            .btn-nivel-novo:hover { 
+                transform: translateY(-2px); 
+                box-shadow: 0 8px 0 #cbd5e1, 0 12px 20px rgba(0,0,0,0.12); 
+                filter: brightness(1.05); 
+            } 
+        }
+        
+        .btn-nivel-novo:active { 
+            transform: translateY(6px) !important; 
+            box-shadow: 0 0px 0 transparent, 0 0px 0 transparent !important; 
+        }
+
+        /* =========================================
+           BARRA DE PROGRESSO E SAÍDA
+           ========================================= */
+        #ecra-jogo { justify-content: flex-start; padding-top: 0; }
+
+        .status-bar { 
+            width: 100%; display: none; flex-direction: row; align-items: center; 
+            gap: 15px; margin-bottom: 20px; flex-shrink: 0;
+        }
+        
+        .btn-sair {
+            background-color: #fff; color: var(--azul-escuro); border: 2px solid var(--cor-em); padding: 8px 18px;
+            border-radius: 20px; font-size: 0.95rem; font-weight: 800; cursor: pointer;
+            display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 0 var(--cor-em);
+            transition: 0.2s; touch-action: manipulation; flex-shrink: 0;
+        }
+        @media (hover: hover) { .btn-sair:hover { background-color: #f2f5f3; transform: translateY(-2px); box-shadow: 0 6px 0 var(--cor-em); } }
+        .btn-sair:active { transform: translateY(4px); box-shadow: 0 0px 0 transparent; }
+
+        .progress-bg { 
+            background-color: #f5f5f5; border-radius: 20px; height: 35px; flex: 1; 
+            overflow: hidden; box-shadow: inset 0 3px 5px rgba(0,0,0,0.1); border: 2px solid rgba(0,145,255,0.4); margin: 0;
+        }
+        .progress-fill { 
+            height: 100%; width: 0%; border-radius: 20px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            background-color: var(--cor-1ano);
+            background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+            background-size: 30px 30px; animation: moverRiscas 2s linear infinite;
+        }
+
+        /* =========================================
+           NOVO LAYOUT DE DUAS COLUNAS (PC/TABLET HORIZONTAL)
+           ========================================= */
+        .game-layout-wrapper {
+            display: flex; flex-direction: row; width: 100%; flex: 1; gap: 20px; min-height: 0;
+        }
+
+        /* PAINEL ESQUERDO: Imagem Alvo e Teclado Otimizados */
+        .left-panel {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: clamp(220px, 25vw, 320px); flex-shrink: 0; gap: 40px; 
+        }
+
+        .alvo-container {
+            width: clamp(100px, 15vw, 160px); height: clamp(100px, 15vw, 160px); 
+            background: #fff; border: 4px solid #e3f2fd; border-radius: 25px;
+            display: flex; align-items: center; justify-content: center; padding: 15px;
+            box-shadow: 0 8px 20px rgba(0, 145, 255, 0.1);
+            transition: all 0.3s; flex-shrink: 0;
+        }
+        .alvo-container img { width: 90%; height: 90%; object-fit: contain; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05)); display: block; }
+        
+        .alvo-container.active-target {
+            border-color: var(--cor-1ano-dark); background: #e3f2fd;
+            box-shadow: 0 0 20px rgba(0,145,255,0.4); animation: pulseCell 1.5s infinite;
+        }
+
+        /* O TECLADO VIRTUAL ALFABÉTICO */
+        .keyboard-container {
+            display: flex; flex-direction: column; gap: clamp(4px, 1vh, 8px); width: 100%; 
+            flex-shrink: 0;
+        }
+        .kb-row { display: flex; justify-content: center; gap: clamp(3px, 0.8vw, 6px); width: 100%;}
+        
+        .kb-key {
+            flex: 1; min-width: 0; max-width: 45px; height: clamp(40px, 7vh, 55px);
+            background: white; border: 3px solid #ced6e0; border-radius: 10px;
+            font-size: clamp(1rem, 3vh, 1.4rem); font-weight: 900; color: var(--azul-escuro);
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 0 #ced6e0; transition: all 0.1s; touch-action: manipulation;
+            padding: 0; user-select: none; -webkit-tap-highlight-color: transparent;
+        }
+        
+        @media (hover: hover) { .kb-key:hover { background: #e3f2fd; border-color: var(--azul-vibrante); color: var(--azul-vibrante); transform: translateY(-2px); box-shadow: 0 6px 0 var(--azul-vibrante);} }
+        .kb-key:active, .kb-key.active-physical { transform: translateY(4px) !important; box-shadow: 0 0 0 transparent !important; border-color: var(--azul-vibrante) !important; color: var(--azul-vibrante) !important; background: #e3f2fd !important;}
+
+        .key-special { background: #f8fafc; }
+
+        /* PAINEL DIREITO: Quadro das Palavras-Cruzadas */
+        .right-panel {
+            flex: 1; display: flex; align-items: center; justify-content: center; 
+            background: #f8fafc; border: 3px dashed #ced6e0; border-radius: 20px; 
+            overflow: hidden; min-height: 0; padding: 10px;
+        }
+
+        .grid-scroll-wrapper {
+            width: 100%; max-width: 100%; max-height: 100%; overflow: auto; 
+            display: flex; align-items: center; justify-content: center; padding: 10px;
+            scrollbar-width: thin; scrollbar-color: var(--azul-vibrante) #e3f2fd;
+        }
+
+        .cw-grid {
+            display: grid; gap: clamp(3px, 1vw, 6px);
+            justify-content: center; align-content: center; margin: auto;
+        }
+
+        .cw-cell {
+            width: clamp(32px, 6vw, 55px); height: clamp(32px, 6vw, 55px);
+            background: white; border: 3px solid #ced6e0; border-radius: 10px;
+            font-size: clamp(1.2rem, 3.5vw, 2.2rem); font-weight: 900; color: var(--azul-escuro);
+            display: flex; align-items: center; justify-content: center;
+            position: relative; cursor: pointer; transition: all 0.2s;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.05); text-transform: uppercase;
+            user-select: none;
+        }
+        
+        .cw-cell.empty { background: transparent; border-color: transparent; box-shadow: none; pointer-events: none; }
+        
+        .cw-cell.active-word { border-color: var(--azul-vibrante); background: #f0f7ff; }
+        .cw-cell.active-cell { border-color: var(--cor-1ano-dark); background: #e3f2fd; box-shadow: 0 0 15px rgba(0,145,255,0.4); transform: scale(1.1); z-index: 10; animation: pulseCell 1.5s infinite; }
+        .cw-cell.locked { background: #eafff0; border-color: #2ed573; color: #219d53; pointer-events: none; }
+        .cw-cell.error { animation: shakeError 0.4s ease; border-color: #ff4757; background: #ffefef; color: #ff4757; }
+
+        .mini-avatar {
+            position: absolute; top: -12px; left: -12px;
+            width: clamp(20px, 4vw, 30px); height: clamp(20px, 4vw, 30px);
+            border-radius: 50%; border: 3px solid var(--azul-vibrante);
+            background: white; z-index: 5; object-fit: contain; padding: 2px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* =========================================
+           MÁGICA RESPONSIVA PARA MOBILE (Empilhamento Vertical)
+           ========================================= */
+        @media (max-width: 850px) {
+            .cartao-jogo-container { padding: 15px 10px; }
+            .game-layout-wrapper { flex-direction: column; display: flex; gap: 10px;}
+            
+            /* Usamos display:contents no left-panel para ordenar os seus filhos individualmente! */
+            .left-panel { display: contents; }
+            
+            /* A ordem desejada em mobile: 1º Imagem, 2º Grelha, 3º Teclado */
+            .alvo-container { order: 1; margin: 0 auto; width: clamp(80px, 20vw, 120px); height: clamp(80px, 20vw, 120px); border-width: 3px; padding: 10px; }
+            .right-panel { order: 2; border: 2px dashed #ced6e0; background: #f8fafc; min-height: 250px; padding: 5px; }
+            .keyboard-container { order: 3; margin-top: 5px; gap: 4px; max-width: 500px; margin-left: auto; margin-right: auto;}
+            
+            .hide-mobile { display: none; }
+            .status-bar { margin-bottom: 10px; gap: 10px; }
+            .btn-sair { padding: 6px 12px; font-size: 0.9rem;}
+            .kb-key { height: 40px; border-width: 2px; box-shadow: 0 3px 0 #ced6e0;}
+        }
+
+        /* =========================================
+           ECRÃ FIM E ANIMAÇÕES
+           ========================================= */
+        #ecra-fim { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; animation: fadeIn 0.5s ease; }
+        .end-title { font-size: clamp(2rem, 6vw, 3rem); color: var(--azul-escuro); margin-bottom: 10px; }
+        .end-stats { font-size: 1.5rem; color: var(--text-main); margin-bottom: 30px; text-align: center; background: #fff; padding: 25px; border-radius: 20px; border: 3px solid #e3f2fd;}
+        
+        .botoes-fim { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+        .btn-reiniciar { background-color: var(--cor-1ano); color: white; border: none; padding: 15px 30px; font-size: 1.2rem; font-weight: 700; border-radius: 15px; cursor: pointer; box-shadow: 0 5px 0 var(--cor-1ano-dark); display: flex; gap: 10px; touch-action: manipulation; transition: 0.2s;}
+        .btn-reiniciar:active { transform: translateY(5px); box-shadow: 0 0px 0 transparent; }
+        .btn-menu { background-color: #ced6e0; color: #2f3542; box-shadow: 0 5px 0 #a4b0be; }
+        .btn-menu:active { transform: translateY(5px); box-shadow: 0 0px 0 transparent; }
+
+        @keyframes pulseCell { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(0,145,255,0.6); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes shakeError { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+        @keyframes moverRiscas { 0% { background-position: 0 0; } 100% { background-position: 30px 0; } }
+
+        #confetti-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; }
+        body { scrollbar-gutter: stable; }
+		
+		/* =========================================
+		CORREÇÃO PARA PAINEIS E ECRÃS GRANDES ????
+		========================================= */
+		
+		@media (hover: none) and (pointer: coarse) {
+
+		  body {
+			height: auto !important;
+			overflow-y: auto !important;
+		  }
+
+		  main {
+			justify-content: flex-start !important;
+			overflow-y: visible !important;
+		  }
+
+		  footer {
+			margin-top: auto;
+		  }
+		}
+
+		
+		
+    .icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
+	.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
+	.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
+	.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+</style>
+
+<style>
+  body {
+    background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px);
+    background-size: 25px 25px;
+  }
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<nav class="sidebar" id="sidebar">
+    <div class="btn-fechar" onclick="toggleMenu()"><span>✕</span> Fechar</div>
+    <ul>
+        <li><a href="../../../"><img src="../../../SVG/home.svg" alt="Início" class="icon-svg-menu" onerror="this.style.display='none'">Início</a></li>
+        <li><a href="../../../pre"><img src="../../../SVG/pre.svg" alt="Pré-Escolar" class="icon-svg-menu" onerror="this.style.display='none'">Pré-Escolar</a></li>
+        <li><a href="../../"><img src="../../../SVG/ano1.svg" alt="1º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 1º Ano</a></li>
+        <li><a href="../../../2"><img src="../../../SVG/ano2.svg" alt="2º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 2º Ano</a></li>
+        <li><a href="../../../3"><img src="../../../SVG/ano3.svg" alt="3º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 3º Ano</a></li>
+        <li><a href="../../../4"><img src="../../../SVG/ano4.svg" alt="4º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 4º Ano</a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="header-content">
+        <div class="nav-container">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="../" class="btn-voltar"><img src="../../../SVG/voltar.svg" class="icon-svg-voltar" alt=""> Voltar</a>
+        </div>
+        
+        <h1>Cruzadas de Animais <img src="../img-titulos/cruzadas-animais.svg" class="icon-svg-titulo" alt=""></h1>
+        <div class="subtitulo">Descobre a palavra escondida!</div>
+    </div>
+</header>
+
+<main>
+    <div class="cartao-jogo-container">
+        
+        <!-- ECRÃ 1: MENU DE NÍVEIS -->
+        <div id="ecra-selecao" class="ecra" style="display: flex;">
+            <h2 class="titulo-menu">Como Jogar:</h2>
+            
+            <div class="animacao-tutorial">
+                <div class="tut-cw">
+                    <div class="tut-cell filled">G</div>
+                    <div class="tut-cell filled">A</div>
+                    <div class="tut-cell filled">T</div>
+                    <div class="tut-cell blink"></div>
+                    <div class="tut-hand">👆</div>
+                </div>
+            </div>
+            
+            <div class="grid-niveis">
+                <button class="btn-nivel-novo btn-n1" onclick="iniciarJogo(1)">
+                    <span class="nivel-icon-novo">🟢</span>
+                    <span class="nivel-text-novo">
+                        <span class="nivel-titulo-novo">Nível 1: Vogais</span>
+                        <span class="nivel-desc-novo">Usa o teclado para preencher as vogais.</span>
+                    </span>
+                </button>
+                <button class="btn-nivel-novo btn-n2" onclick="iniciarJogo(2)">
+                    <span class="nivel-icon-novo">🟡</span>
+                    <span class="nivel-text-novo">
+                        <span class="nivel-titulo-novo">Nível 2: Iniciais</span>
+                        <span class="nivel-desc-novo">Só tens a primeira letra para ajudar!</span>
+                    </span>
+                </button>
+                <button class="btn-nivel-novo btn-n3" onclick="iniciarJogo(3)">
+                    <span class="nivel-icon-novo">🔴</span>
+                    <span class="nivel-text-novo">
+                        <span class="nivel-titulo-novo">Nível 3: Mestre</span>
+                        <span class="nivel-desc-novo">A grelha está toda em branco. Força!</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ECRÃ 2: O JOGO -->
+        <div id="ecra-jogo" class="ecra">
+            
+            <!-- BARRA DE ESTADO (Limpa e Funcional) -->
+            <div class="status-bar" id="status-bar">
+                <button class="btn-sair" onclick="voltarAoMenu()"><span>🔄</span> <span class="hide-mobile">Outro Nível</span></button>
+                <div class="progress-bg">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- LAYOUT DUAS COLUNAS -->
+            <div class="game-layout-wrapper">
+                
+                <!-- PAINEL ESQUERDO: Imagem + Teclado Otimizados -->
+                <div class="left-panel">
+                    <div class="alvo-container" id="alvo-container">
+                        <img id="img-alvo" src="" alt="Animal">
+                    </div>
+                    
+                    <!-- TECLADO VIRTUAL ALFABÉTICO -->
+                    <div class="keyboard-container" id="keyboard">
+                        <div class="kb-row">
+                            <button class="kb-key">A</button><button class="kb-key">B</button><button class="kb-key">C</button><button class="kb-key">D</button><button class="kb-key">E</button><button class="kb-key">F</button><button class="kb-key">G</button>
+                        </div>
+                        <div class="kb-row">
+                            <button class="kb-key">H</button><button class="kb-key">I</button><button class="kb-key">J</button><button class="kb-key">K</button><button class="kb-key">L</button><button class="kb-key">M</button><button class="kb-key">N</button>
+                        </div>
+                        <div class="kb-row">
+                            <button class="kb-key">O</button><button class="kb-key">P</button><button class="kb-key">Q</button><button class="kb-key">R</button><button class="kb-key">S</button><button class="kb-key">T</button><button class="kb-key">U</button>
+                        </div>
+                        <div class="kb-row">
+                            <button class="kb-key">V</button><button class="kb-key">W</button><button class="kb-key">X</button><button class="kb-key">Y</button><button class="kb-key">Z</button><button class="kb-key key-special">Ç</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAINEL DIREITO: A Grelha de Palavras-Cruzadas -->
+                <div class="right-panel">
+                    <div class="grid-scroll-wrapper">
+                        <div class="cw-grid" id="cw-grid">
+                            <!-- Grelha gerada por JS -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+
+        <!-- ECRÃ 3: FIM -->
+        <div id="ecra-fim" class="ecra">
+            <h2 class="end-title" id="end-title-text">Missão Cumprida! 🎉</h2>
+            <div class="end-stats">
+                Completaste as 5 Rondas com sucesso!
+            </div>
+            <div class="botoes-fim">
+                <button class="btn-reiniciar" onclick="iniciarJogo(currentLevel)">JOGAR NOVAMENTE 🔄</button>
+                <button class="btn-reiniciar btn-menu" onclick="voltarAoMenu()">VOLTAR AO MENU 🏠</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<canvas id="confetti-canvas"></canvas>
+
+<footer>
+    <p><span id="ano-atual"> </span><img src="../../../SVG/1_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
+</footer>
+
+<script>
+    document.getElementById('ano-atual').innerText = new Date().getFullYear();
+    function toggleMenu() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const hamburger = document.getElementById('hamburgerBtn');
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+        hamburger.classList.toggle('open');
+    }
+
+    /* =========================================
+       DADOS E GERADOR DINÂMICO
+       ========================================= */
+    const fallbackAnimais =[
+        "vaca", "cão", "gato", "cavalo", "galinha", "coelho", "porco", "burro", "tartaruga", "urso", "zebra",
+        "ovelha", "cabra", "leão", "elefante", "tigre", "baleia", "golfinho", "macaco", "lobo", "raposa",
+        "águia", "girafa", "tubarão", "foca", "andorinha", "sapo", "pato", "rato", "cobra", "lobo", "peixe", "crocodilo", "abelha", "camelo"
+    ];
+
+    let bancoAnimais = [];
+    if (typeof palavras !== 'undefined' && palavras.length > 0) {
+        bancoAnimais = [...palavras]; 
+    } else {
+        bancoAnimais = fallbackAnimais.map(nome => ({
+            palavra: nome,
+            imagem: `img/${nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()}.png`
+        }));
+    }
+    if (bancoAnimais.length < 10) {
+        bancoAnimais = fallbackAnimais.map(nome => ({
+            palavra: nome,
+            imagem: `img/${nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()}.png`
+        }));
+    }
+
+    const TOTAL_RONDAS = 5;
+    let currentLevel = 1;
+    let rondaAtual = 1;
+    
+    let rondasGeradas =[];
+    let cwMatrix = [];
+    let palavrasRonda =[];
+    let activeWordIndex = -1;
+    let activeCell = { r: -1, c: -1 };
+
+    // DOM
+    const elStatus = document.getElementById('status-bar');
+    const elProgressFill = document.getElementById('progress-fill');
+    const cwGrid = document.getElementById('cw-grid');
+    const imgAlvo = document.getElementById('img-alvo');
+    const alvoContainer = document.getElementById('alvo-container');
+
+    function getImagePath(imgPath) {
+        if (!imgPath) return '';
+        return imgPath; 
+    }
+
+    function getFallbackSVGSrc() {
+        const svgStr = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100' fill='#f0f4f8' rx='20'/><text x='50' y='50' font-family='sans-serif' font-size='40' text-anchor='middle' dominant-baseline='central' fill='#a4b0be'>🐾</text></svg>";
+        return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgStr);
+    }
+    function getMiniFallbackSVGSrc() {
+        const svgStr = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100' fill='#f0f4f8' rx='50'/><text x='50' y='50' font-family='sans-serif' font-size='45' text-anchor='middle' dominant-baseline='central' fill='#a4b0be'>🐾</text></svg>";
+        return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgStr);
+    }
+
+    function mostrarEcra(id) {
+        document.querySelectorAll('.ecra').forEach(e => e.style.display = 'none');
+        document.getElementById(id).style.display = 'flex';
+    }
+
+    function voltarAoMenu() {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+        elStatus.style.display = 'none';
+        mostrarEcra('ecra-selecao');
+    }
+
+    /* =========================================
+       O ALGORITMO MÁGICO DE CRUZAMENTO
+       ========================================= */
+    function gerarRondas() {
+        rondasGeradas =[];
+        let usedWords = new Set(); 
+
+        let tentativasSeguranca = 0;
+
+        while (rondasGeradas.length < TOTAL_RONDAS && tentativasSeguranca < 1000) {
+            tentativasSeguranca++;
+            let lista = [...bancoAnimais].sort(() => Math.random() - 0.5);
+            let encontrou = false;
+
+            for (let i = 0; i < lista.length && !encontrou; i++) {
+                for (let j = i + 1; j < lista.length && !encontrou; j++) {
+                    let obj1 = lista[i];
+                    let obj2 = lista[j];
+                    let w1 = obj1.palavra.toUpperCase();
+                    let w2 = obj2.palavra.toUpperCase();
+                    
+                    if (usedWords.has(w1) || usedWords.has(w2)) continue;
+
+                    let intersection = null;
+                    for (let k = 0; k < w1.length; k++) {
+                        let char = w1[k];
+                        let idx2 = w2.indexOf(char);
+                        if (idx2 !== -1) {
+                            intersection = { i1: k, i2: idx2 };
+                            break;
+                        }
+                    }
+
+                    if (intersection) {
+                        let hWord, vWord, hObj, vObj, hInter, vInter;
+                        if (w1.length >= w2.length) {
+                            hWord = w1; vWord = w2; hObj = obj1; vObj = obj2;
+                            hInter = intersection.i1; vInter = intersection.i2;
+                        } else {
+                            hWord = w2; vWord = w1; hObj = obj2; vObj = obj1;
+                            hInter = intersection.i2; vInter = intersection.i1;
+                        }
+
+                        let cols = hWord.length;
+                        let rows = vWord.length;
+
+                        rondasGeradas.push({
+                            cols: cols,
+                            rows: rows,
+                            words:[
+                                { obj: hObj, text: hWord, dir: 'H', r: vInter, c: 0 },
+                                { obj: vObj, text: vWord, dir: 'V', r: 0, c: hInter }
+                            ]
+                        });
+                        usedWords.add(w1); usedWords.add(w2);
+                        encontrou = true;
+                    }
+                }
+            }
+        }
+    }
+
+    /* =========================================
+       FLUXO DO JOGO
+       ========================================= */
+    function iniciarJogo(nivel) {
+        currentLevel = nivel;
+        rondaAtual = 1;
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+
+        gerarRondas();
+        
+        elStatus.style.display = 'flex';
+        atualizarPlacar();
+        mostrarEcra('ecra-jogo');
+        
+        prepararRonda();
+    }
+
+    function atualizarPlacar() {
+        elProgressFill.style.width = `${((rondaAtual - 1) / TOTAL_RONDAS) * 100}%`;
+    }
+
+    function prepararRonda() {
+        const rondaData = rondasGeradas[rondaAtual - 1];
+        palavrasRonda = rondaData.words;
+        
+        construirMatriz(rondaData);
+        desenharGrelha(rondaData);
+        
+        focarPalavra(0);
+    }
+
+    function construirMatriz(data) {
+        cwMatrix =[];
+        for (let r = 0; r < data.rows; r++) {
+            cwMatrix[r] =[];
+            for (let c = 0; c < data.cols; c++) cwMatrix[r][c] = null;
+        }
+
+        const vogaisRegex = /[AEIOUÁÉÍÓÚÃÕÂÊ]/i;
+
+        data.words.forEach((wObj, wIdx) => {
+            let r = wObj.r;
+            let c = wObj.c;
+            
+            for (let i = 0; i < wObj.text.length; i++) {
+                let letter = wObj.text[i];
+                let isPreFilled = false;
+
+                if (currentLevel === 1) {
+                    if (!vogaisRegex.test(letter)) isPreFilled = true;
+                } else if (currentLevel === 2) {
+                    if (i === 0) isPreFilled = true;
+                }
+
+                if (!cwMatrix[r][c]) {
+                    cwMatrix[r][c] = { target: letter, words: [wIdx], value: isPreFilled ? letter : "", locked: isPreFilled };
+                } else {
+                    cwMatrix[r][c].words.push(wIdx);
+                    if (isPreFilled) {
+                        cwMatrix[r][c].value = letter;
+                        cwMatrix[r][c].locked = true;
+                    }
+                }
+                
+                if (wObj.dir === 'H') c++; else r++;
+            }
+        });
+    }
+
+    function desenharGrelha(data) {
+        cwGrid.innerHTML = '';
+        cwGrid.style.gridTemplateColumns = `repeat(${data.cols}, 1fr)`;
+        cwGrid.style.gridTemplateRows = `repeat(${data.rows}, 1fr)`;
+
+        for (let r = 0; r < data.rows; r++) {
+            for (let c = 0; c < data.cols; c++) {
+                let cellData = cwMatrix[r][c];
+                let cellDiv = document.createElement('div');
+                cellDiv.className = 'cw-cell empty';
+                cellDiv.id = `cell-${r}-${c}`;
+                
+                if (cellData) {
+                    cellDiv.className = 'cw-cell';
+                    cellDiv.textContent = cellData.value;
+                    if (cellData.locked) cellDiv.classList.add('locked');
+                    
+                    cellDiv.onclick = () => onCellClick(r, c);
+                }
+                
+                cwGrid.appendChild(cellDiv);
+            }
+        }
+
+        data.words.forEach((wObj, wIdx) => {
+            let startCell = document.getElementById(`cell-${wObj.r}-${wObj.c}`);
+            if (startCell) {
+                let img = document.createElement('img');
+                img.className = 'mini-avatar';
+                
+                img.onerror = function() {
+                    this.onerror = null;
+                    this.src = getMiniFallbackSVGSrc();
+                };
+                img.src = getImagePath(wObj.obj.imagem);
+                startCell.appendChild(img);
+            }
+        });
+    }
+
+    function onCellClick(r, c) {
+        const cellData = cwMatrix[r][c];
+        if (!cellData) return;
+
+        let nextWordIdx = cellData.words[0];
+        if (cellData.words.includes(activeWordIndex) && cellData.words.length > 1) {
+            nextWordIdx = cellData.words.find(w => w !== activeWordIndex);
+        }
+        
+        focarPalavra(nextWordIdx);
+        if (!cellData.locked) setCellActive(r, c);
+    }
+
+    function focarPalavra(wIdx) {
+        activeWordIndex = wIdx;
+        const wObj = palavrasRonda[wIdx];
+        
+        imgAlvo.onerror = function() {
+            this.onerror = null;
+            this.src = getFallbackSVGSrc();
+        };
+        imgAlvo.src = getImagePath(wObj.obj.imagem);
+        
+        alvoContainer.classList.remove('active-target');
+        void alvoContainer.offsetWidth; 
+        alvoContainer.classList.add('active-target');
+
+        document.querySelectorAll('.cw-cell').forEach(el => {
+            el.classList.remove('active-word', 'active-cell');
+        });
+
+        let r = wObj.r; let c = wObj.c;
+        let firstEmptyFound = false;
+
+        for (let i = 0; i < wObj.text.length; i++) {
+            let cellEl = document.getElementById(`cell-${r}-${c}`);
+            if (cellEl) cellEl.classList.add('active-word');
+            
+            if (!firstEmptyFound && !cwMatrix[r][c].locked) {
+                setCellActive(r, c);
+                firstEmptyFound = true;
+            }
+            if (wObj.dir === 'H') c++; else r++;
+        }
+        
+        if (!firstEmptyFound) activeCell = { r: -1, c: -1 };
+    }
+
+    function setCellActive(r, c) {
+        if (activeCell.r !== -1 && activeCell.c !== -1) {
+            let oldCell = document.getElementById(`cell-${activeCell.r}-${activeCell.c}`);
+            if (oldCell) oldCell.classList.remove('active-cell');
+        }
+        activeCell = { r, c };
+        let newCell = document.getElementById(`cell-${r}-${c}`);
+        if (newCell) newCell.classList.add('active-cell');
+    }
+
+    const autoAccentMap = {
+        'A':['A','Á','Ã','Â'], 'E':['E','É','Ê'], 'I': ['I','Í'], 
+        'O':['O','Ó','Õ','Ô'], 'U': ['U','Ú'], 'C':['C','Ç']
+    };
+
+    function isMatch(input, target) {
+        if (input === target) return true;
+        for (let base in autoAccentMap) {
+            if (input === base && autoAccentMap[base].includes(target)) return true;
+        }
+        return false;
+    }
+
+    function processarTecla(letra) {
+        if (activeCell.r === -1 || activeCell.c === -1) return;
+
+        let data = cwMatrix[activeCell.r][activeCell.c];
+        let el = document.getElementById(`cell-${activeCell.r}-${activeCell.c}`);
+
+        if (isMatch(letra, data.target)) {
+            data.value = data.target;
+            data.locked = true;
+            el.textContent = data.target;
+            el.classList.add('locked');
+            tocarSom('flip');
+            
+            let wObj = palavrasRonda[activeWordIndex];
+            if (activeCell.r === wObj.r && activeCell.c === wObj.c) {
+                let img = document.createElement('img');
+                img.className = 'mini-avatar';
+                img.onerror = function() {
+                    this.onerror = null;
+                    this.src = getMiniFallbackSVGSrc();
+                };
+                img.src = getImagePath(wObj.obj.imagem);
+                el.appendChild(img);
+            }
+
+            avancarCursor();
+            verificarPalavraConcluida();
+
+        } else {
+            tocarSom('erro');
+            el.classList.add('error');
+            setTimeout(() => el.classList.remove('error'), 400);
+        }
+    }
+
+    function avancarCursor() {
+        if (activeWordIndex === -1) return;
+        const wObj = palavrasRonda[activeWordIndex];
+        let r = wObj.r; let c = wObj.c;
+        
+        for (let i = 0; i < wObj.text.length; i++) {
+            if (!cwMatrix[r][c].locked) {
+                setCellActive(r, c);
+                return;
+            }
+            if (wObj.dir === 'H') c++; else r++;
+        }
+        activeCell = { r: -1, c: -1 };
+    }
+
+    function verificarPalavraConcluida() {
+        const wObj = palavrasRonda[activeWordIndex];
+        let r = wObj.r; let c = wObj.c;
+        let isComplete = true;
+        
+        for (let i = 0; i < wObj.text.length; i++) {
+            if (!cwMatrix[r][c].locked) isComplete = false;
+            if (wObj.dir === 'H') c++; else r++;
+        }
+
+        if (isComplete) {
+            tocarSom('acerto');
+            alvoContainer.classList.remove('active-target'); 
+            
+            let nextIdx = (activeWordIndex + 1) % palavrasRonda.length;
+            let otherWObj = palavrasRonda[nextIdx];
+            let otherComplete = true;
+            
+            let or = otherWObj.r; let oc = otherWObj.c;
+            for (let i = 0; i < otherWObj.text.length; i++) {
+                if (!cwMatrix[or][oc].locked) otherComplete = false;
+                if (otherWObj.dir === 'H') oc++; else or++;
+            }
+
+            if (!otherComplete) {
+                setTimeout(() => focarPalavra(nextIdx), 400);
+            } else {
+                setTimeout(() => {
+                    rondaAtual++;
+                    if (rondaAtual > TOTAL_RONDAS) finalizarJogo();
+                    else { atualizarPlacar(); prepararRonda(); }
+                }, 1500);
+            }
+        }
+    }
+
+    document.querySelectorAll('.kb-key').forEach(btn => {
+        btn.onclick = () => {
+            processarTecla(btn.textContent);
+            btn.classList.add('active-physical');
+            setTimeout(() => btn.classList.remove('active-physical'), 100);
+        };
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (document.getElementById('ecra-jogo').style.display === 'flex') {
+            const key = e.key.toUpperCase();
+            if (/^[A-ZÇ]$/.test(key)) {
+                const btn = Array.from(document.querySelectorAll('.kb-key')).find(b => b.textContent === key);
+                if (btn) { btn.classList.add('active-physical'); setTimeout(() => btn.classList.remove('active-physical'), 100); }
+                processarTecla(key);
+            }
+        }
+    });
+
+    function finalizarJogo() {
+        elProgressFill.style.width = `100%`;
+        elStatus.style.display = 'none';
+        mostrarEcra('ecra-fim');
+        
+        tocarSom('vitoria'); dispararConfetis();
+    }
+
+    /* =========================================
+       SISTEMA DE SOM E CONFETIS
+       ========================================= */
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function initAudio() {
+        if (!audioCtx) audioCtx = new AudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+    document.body.addEventListener('click', initAudio, { once: true });
+    document.body.addEventListener('touchstart', initAudio, { once: true });
+
+    function tocarSom(tipo) {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+        osc.connect(gain); gain.connect(audioCtx.destination); const agora = audioCtx.currentTime;
+
+        if (tipo === 'flip') {
+            osc.type = 'sine'; osc.frequency.setValueAtTime(400, agora); osc.frequency.exponentialRampToValueAtTime(800, agora + 0.1);
+            gain.gain.setValueAtTime(0.05, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.1); osc.start(agora); osc.stop(agora + 0.1);
+        }
+        else if (tipo === 'acerto') {
+            osc.type = 'sine'; osc.frequency.setValueAtTime(600, agora); osc.frequency.exponentialRampToValueAtTime(1200, agora + 0.2);
+            gain.gain.setValueAtTime(0.1, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3); osc.start(agora); osc.stop(agora + 0.3);
+        } 
+        else if (tipo === 'erro') {
+            osc.type = 'triangle'; osc.frequency.setValueAtTime(250, agora); osc.frequency.exponentialRampToValueAtTime(150, agora + 0.2);
+            gain.gain.setValueAtTime(0.1, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.2); osc.start(agora); osc.stop(agora + 0.2);
+        }
+        else if (tipo === 'vitoria') {
+            const notas =[523.25, 659.25, 783.99, 1046.50];
+            notas.forEach((freq, i) => {
+                const o = audioCtx.createOscillator(); const g = audioCtx.createGain(); o.connect(g); g.connect(audioCtx.destination);
+                o.type = 'sine'; o.frequency.value = freq; g.gain.setValueAtTime(0.1, agora + i * 0.15); g.gain.exponentialRampToValueAtTime(0.01, agora + i * 0.15 + 0.3); o.start(agora + i * 0.15); o.stop(agora + i * 0.15 + 0.3);
+            });
+        }
+    }
+
+    const canvasConfetti = document.getElementById('confetti-canvas');
+    const ctxConfetti = canvasConfetti.getContext('2d');
+    let confetis = [];
+
+    function redimensionarCanvas() { canvasConfetti.width = window.innerWidth; canvasConfetti.height = window.innerHeight; }
+    window.addEventListener('resize', redimensionarCanvas);
+
+    function dispararConfetis() {
+        redimensionarCanvas(); confetis =[]; const cores =['#0091ff', '#2ed573', '#ff4757', '#ffa502', '#eccc68'];
+        for (let i = 0; i < 100; i++) { confetis.push({ x: Math.random() * canvasConfetti.width, y: Math.random() * canvasConfetti.height - canvasConfetti.height, w: Math.random() * 10 + 5, h: Math.random() * 10 + 5, cor: cores[Math.floor(Math.random() * cores.length)], velY: Math.random() * 3 + 2, velX: Math.random() * 2 - 1, rotacao: Math.random() * 360, velRotacao: Math.random() * 5 - 2.5 }); }
+        animarConfetis();
+    }
+
+    function animarConfetis() {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); let ativos = false;
+        confetis.forEach(c => {
+            c.y += c.velY; c.x += c.velX; c.rotacao += c.velRotacao; if (c.y < canvasConfetti.height) ativos = true;
+            ctxConfetti.save(); ctxConfetti.translate(c.x, c.y); ctxConfetti.rotate(c.rotacao * Math.PI / 180);
+            ctxConfetti.fillStyle = c.cor; ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); ctxConfetti.restore();
+        });
+        if (ativos) requestAnimationFrame(animarConfetis);
+    }
+    
+    window.onload = () => mostrarEcra('ecra-selecao');
+</script>
+</body>
+</html>
