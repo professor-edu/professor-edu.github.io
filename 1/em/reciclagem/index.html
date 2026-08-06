@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1º Ano - Mestres da Reciclagem ♻️</title>
+    
+    <link rel="icon" type="image/png" href="../../logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Script para o Arrastar funcionar em ecrãs táteis -->
+    <script src="https://cdn.jsdelivr.net/npm/mobile-drag-drop@2.3.0-rc.2/index.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mobile-drag-drop@2.3.0-rc.2/default.css">
+    
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        /* =========================================
+           CSS DO TEMPLATE BASE ORIGINAL (VERDE / EM)
+           ========================================= */
+        :root {
+            --bg-body: #f0f7ff;
+            --azul-vibrante: #0091ff; 
+            --cor-1ano: #0091ff;     
+            --cor-1ano-dark: #0070c5;
+            --cor-borda: #0091ff;            
+            --bg-header: #e3f2fd;    
+            --azul-escuro: #0d47a1;
+            --text-main: #455a64;
+            --cor-em: #51cf66;
+			--cor-pt: #ff6b6b;
+            --cor-mat: #4dabf7;
+
+            --cor-btn-verde: #5DD279;
+            --cor-btn-laranja: #FA983A;
+            --cor-sucesso: #2ed573;
+            --cor-erro: #ff4757;
+            
+            /* Cores dos Ecopontos */
+            --eco-azul: #3498db;
+            --eco-amarelo: #f1c40f;
+            --eco-verde: #2ecc71;
+            --eco-vermelho: #e74c3c;
+        }
+
+        body { 
+            font-family: 'Roboto', sans-serif; text-align: center; 
+            background-color: var(--bg-body); margin: 0; 
+            display: flex; flex-direction: column; min-height: 100vh; 
+            overflow-x: hidden; touch-action: pan-y; scrollbar-gutter: stable;
+        }
+        
+        @media (min-width: 769px) { body { height: 100vh; overflow-y: auto; } }
+        
+        /* HEADER E NAVEGAÇÃO */
+        header { background-color: var(--bg-header); padding: 25px 20px; border-bottom: 1px solid var(--azul-vibrante); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; flex-shrink: 0; z-index: 100; }
+        .header-content { max-width: 1200px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; }
+        .nav-container { width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 15px; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; }
+        
+        .hamburger { cursor: pointer; background: rgba(255, 255, 255, 0.4); border: none; display: flex; flex-direction: column; gap: 4px; padding: 10px; border-radius: 8px; transition: 0.3s; touch-action: manipulation; }
+        @media (hover: hover) { .hamburger:hover { background: #fff9c4; } }
+        .hamburger span { display: block; width: 20px; height: 2px; background: var(--azul-escuro); transition: 0.3s; transform-origin: center; }
+        .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        
+        .btn-voltar { background: var(--cor-1ano); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; font-size: 0.9rem; box-shadow: 0 3px 0 var(--cor-1ano-dark); display: flex; align-items: center; gap: 8px; transition: 0.2s; cursor: pointer; touch-action: manipulation; }
+        @media (hover: hover) { .btn-voltar:hover { transform: scale(1.05); } }
+        
+        h1 {
+    color: var(--azul-escuro);
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    text-shadow: 
+        -2px -2px 0 #ffffff,  
+         2px -2px 0 #ffffff,
+        -2px  2px 0 #ffffff,
+         2px  2px 0 #ffffff, 
+         0px  6px 12px rgba(0, 0, 0, 0.15); 
+}
+        .subtitulo { color: var(--azul-escuro); font-size: clamp(0.85rem, 3vw, 1.1rem); font-weight: 500; opacity: 0.8; margin-top: 15px; }
+        
+        @media (max-width: 768px) {
+            header { padding: 15px 10px; }
+            .header-content { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+            .nav-container { position: relative; width: 100%; display: flex; justify-content: center; align-items: center; height: 40px; margin-bottom: 5px; transform: none; top: 0; }
+            .hamburger { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); }
+            .btn-voltar { margin: 0 auto; position: relative; z-index: 5; }
+            h1 { text-align: center; font-size: 1.8rem; }
+            .subtitulo { text-align: center; margin-top: 5px; }
+        }
+
+        .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: white; z-index: 200; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.1); text-align: left; }
+        .sidebar.active { left: 0; }
+        .sidebar .btn-fechar { background: #fff5f5; color: #ff4757; padding: 20px 25px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; border-bottom: 1px solid #ffebeb; }
+        .sidebar ul { list-style: none; padding: 15px; margin: 0; }
+        .sidebar li a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--text-main); background: #f8fafc; border-radius: 12px; margin-bottom: 8px; transition: 0.3s; }
+        @media (hover: hover) { .sidebar li a:hover { background: var(--cor-1ano); color: white; transform: translateX(8px); } }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 150; }
+        .overlay.active { display: block; }
+
+        /* CARTÃO PRINCIPAL (VERDE EM) */
+        main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 25px 20px; width: 100%; box-sizing: border-box; }
+
+        .cartao-jogo-container { 
+            background: white; width: 100%; max-width: 950px; flex: 1;
+            padding: 25px 20px; border-radius: 30px; 
+            box-shadow: 0 4px 15px #45b06285; /* Sombra Verde Estudo Meio */
+            border-top: 8px solid var(--cor-em); /* Borda Verde Estudo Meio */
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; box-sizing: border-box; overflow: hidden;
+        }
+
+        footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--azul-vibrante); margin-top: auto; flex-shrink: 0;}
+        footer p { font-size: 0.8rem; color: var(--azul-vibrante); margin: 0; }
+        
+        /* =========================================
+           ECRÃS E MENU INICIAL
+           ========================================= */
+        .ecra { width: 100%; flex: 1; display: none; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.4s ease; box-sizing: border-box; position: relative; z-index: 2;}
+        #ecra-inicial { display: flex; }
+        #ecra-jogo { justify-content: flex-start; }
+        
+        .titulo-destaque { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--azul-escuro); margin-bottom: 10px; font-weight: 900; margin-top: 0;}
+        .texto-intro { font-size: clamp(1rem, 3vw, 1.2rem); color: var(--cor-1ano-dark); margin-bottom: 25px; line-height: 1.5; max-width: 600px;}
+        
+        /* =========================================
+           ANIMAÇÃO ESPETACULAR (ECRÃ INICIAL)
+           ========================================= */
+        .animacao-tutorial {
+            width: 100%; max-width: 450px; height: 160px;
+            background: #f4faff; border: 3px dashed #bcdcff; border-radius: 20px;
+            margin: 0 auto 25px; display: flex; align-items: center; justify-content: center;
+            box-shadow: inset 0 0 15px rgba(0,145,255,0.05); color: var(--azul-vibrante); font-size: 1.2rem; font-weight: 900;
+            overflow: hidden;
+        }
+        
+        .demo-trash {
+            font-size: 3rem; position: relative; z-index: 10;
+            animation: trashMoveDemo 3s infinite cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        .demo-bin {
+            width: 80px; height: 90px; background: white; border: 4px solid var(--eco-amarelo); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; font-size: 3rem;
+            position: relative; animation: binCatchDemo 3s infinite cubic-bezier(0.25, 1, 0.5, 1);
+            border-bottom: 8px solid var(--eco-amarelo);
+        }
+
+        @keyframes trashMoveDemo {
+            0%, 15% { transform: translate(-60px, 0) scale(1) rotate(-15deg); opacity: 0; }
+            20% { transform: translate(-60px, 0) scale(1) rotate(-15deg); opacity: 1; }
+            45% { transform: translate(30px, -40px) scale(1.1) rotate(15deg); opacity: 1; } /* Dragging up */
+            60% { transform: translate(60px, 10px) scale(0.5) rotate(0deg); opacity: 0; } /* Sucked in */
+            100% { opacity: 0; }
+        }
+
+        @keyframes binCatchDemo {
+            0%, 55% { transform: scale(1); box-shadow: none; }
+            60% { transform: scale(1.15) translateY(-5px); box-shadow: 0 0 20px rgba(241, 196, 15, 0.5); } /* Jump & Glow */
+            70%, 100% { transform: scale(1); box-shadow: none; }
+        }
+
+        /* =========================================
+           BARRA DE ESTADO DO JOGO
+           ========================================= */
+        .status-bar-jogo {
+            display: flex; align-items: center; justify-content: space-between; gap: 10px;
+            width: 100%; background: #eaf1eb; /* VERDE CLARO ORIGINAL */
+            padding: 8px 12px; border-radius: 20px; 
+            border: 2px solid var(--cor-em); /* BORDA VERDE ORIGINAL */
+            margin-bottom: 15px; box-sizing: border-box; flex-shrink: 0; max-width: 900px;
+        }
+		
+        .btn-voltar-menu { background-color: white; color: var(--azul-escuro); border: 2px solid var(--cor-em); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.2s; touch-action: manipulation;}
+        @media (hover: hover) { .btn-voltar-menu:hover { border-color: var(--azul-escuro); transform: scale(1.05); } }
+
+        .btn-dica { background-color: #fff9c4; border: 2px solid #fbc531; color: #b18500; padding: 6px 12px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.3s;}
+        @media (hover: hover) { .btn-dica:hover:not(.esgotada) { border-color: #b18500; transform: scale(1.05); } }
+        .btn-dica.esgotada { opacity: 0.6; pointer-events: none; filter: grayscale(80%); background-color: #f1f2f6; border-color: #ced6e0; color: #747d8c;}
+
+        .badge-ronda, .badge-erros { background: white; font-weight: 800; font-size: 1rem; padding: 6px 12px; border-radius: 15px; white-space: nowrap; display: flex; align-items: center; gap: 5px;}
+        .badge-ronda { border: 2px solid #219d53; color: #219d53; }
+        .badge-erros { border: 2px solid var(--cor-erro); color: var(--cor-erro); }
+
+        /* O Ícone de Cruz em CSS Puro */
+        .icone-erro { display: inline-block; width: 14px; height: 14px; position: relative; vertical-align: middle; }
+        .icone-erro::before, .icone-erro::after { content: ''; position: absolute; top: 50%; left: 50%; width: 100%; height: 3px; background-color: var(--cor-erro); border-radius: 2px; }
+        .icone-erro::before { transform: translate(-50%, -50%) rotate(45deg); }
+        .icone-erro::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+        .progress-bg { background-color: #e2e8f0; border-radius: 20px; height: 35px; flex: 1; overflow: hidden; box-shadow: inset 0 3px 5px rgba(0,0,0,0.1); border: 2px solid white; margin: 0 10px; }
+        .progress-fill { height: 100%; width: 0%; border-radius: 20px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); background-color: var(--cor-1ano); background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent); background-size: 30px 30px; animation: moverRiscas 2s linear infinite; }
+        
+        @media (max-width: 700px) {
+            .status-bar-jogo { flex-wrap: wrap; justify-content: center; gap: 8px; padding: 8px; }
+            .btn-voltar-menu, .btn-dica { padding: 4px 8px; font-size: 0.8rem;}
+            .badge-ronda, .badge-erros { font-size: 0.9rem; padding: 4px 8px; flex: 1; justify-content: center;}
+            .progress-bg { order: 5; min-width: 100%; margin: 5px 0 0 0; }
+        }
+
+        /* =========================================
+           ÁREA DE JOGO CUSTOM (O QUADRO TRACEJADO)
+           ========================================= */
+        .area-jogo-custom {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: 100%; flex: 1; min-height: 0; background: #f8fafc; border: 2px dashed var(--cor-em); border-radius: 20px; padding: 25px; gap: 35px;
+            position: relative; color: #94a3b8; font-weight: bold; overflow: hidden;
+        }
+
+        .instrucao-jogo { font-size: clamp(1.2rem, 4vw, 1.5rem); color: var(--azul-escuro); font-weight: 900; text-align: center;}
+
+        /* Palco Central (O Lixo) */
+        .palco-central {
+            height: clamp(120px, 20vh, 160px); display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; width: 100%;
+        }
+
+        .item-arrastavel {
+            width: clamp(75px, 15vw, 160px); height: clamp(75px, 15vw, 160px);
+            border: 4px solid var(--azul-vibrante); border-radius: 20px; background: white;
+            cursor: grab; display: flex; justify-content: space-evenly; align-items: center;
+            box-shadow: 0 6px 0 var(--azul-vibrante); transition: all 0.2s;
+            position: relative; z-index: 20; touch-action: none;
+        }
+        
+        .item-arrastavel img { width: 85%; height: 85%; object-fit: contain; pointer-events: none; }
+        .item-fallback { font-size: clamp(2.5rem, 6vw, 4rem); pointer-events: none; line-height: 1; }
+
+        .item-arrastavel:active { transform: translateY(6px); box-shadow: 0 0px 0 transparent; cursor: grabbing; }
+        .item-arrastavel.dragging { opacity: 0.5; transform: scale(0.9); }
+        .item-sucesso { transform: scale(0) !important; opacity: 0; transition: all 0.4s cubic-bezier(0.5, -0.5, 0.5, 1.5); }
+
+        /* Híbrido: Selecionado */
+        .item-arrastavel.selected-item {
+            border-color: var(--cor-sucesso);
+            box-shadow: 0 0 0 5px rgba(46,213,115,0.4), 0 6px 0 var(--cor-sucesso-dark);
+            transform: scale(1.1) translateY(-4px); z-index: 30;
+        }
+
+        .nome-item { font-size: clamp(1.1rem, 3vw, 1.4rem); font-weight: 900; color: var(--azul-escuro); margin-top: 10px; transition: 0.3s; }
+
+        /* Contentores (Ecopontos) */
+        .contentores-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(10px, 2vw, 20px); width: 100%; max-width: 800px;
+        }
+
+        .bin-card {
+            background: white; border: 4px solid #ced6e0; border-radius: 20px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 15px 10px; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            cursor: pointer; touch-action: manipulation; position: relative;
+        }
+
+        /* Cores Específicas por Tipo */
+        .bin-card[data-tipo="papelao"] { border-bottom: 8px solid var(--eco-azul); }
+        .bin-card[data-tipo="embalao"] { border-bottom: 8px solid var(--eco-amarelo); }
+        .bin-card[data-tipo="vidrao"] { border-bottom: 8px solid var(--eco-verde); }
+        .bin-card[data-tipo="pilhao"] { border-bottom: 8px solid var(--eco-vermelho); }
+
+        .bin-img { width: clamp(50px, 10vw, 80px); height: clamp(50px, 10vw, 80px); object-fit: contain; margin-bottom: 8px; pointer-events: none; }
+        .bin-label { font-size: clamp(0.9rem, 2vw, 1.1rem); font-weight: 800; color: var(--text-main); pointer-events: none; }
+
+        .bin-card.drag-over { transform: scale(1.1) translateY(-5px); border-color: var(--cor-1ano); }
+        .bin-card.bounce { animation: binCatchDemo 0.4s ease; }
+
+        /* Animação do Botão de Dica */
+        .hint-glow { animation: pulseHint 1s infinite !important; border-color: #fbc531 !important; }
+        @keyframes pulseHint { 0%, 100% { box-shadow: 0 0 0 0 rgba(251, 197, 49, 0.7); transform: scale(1); } 50% { box-shadow: 0 0 20px 10px rgba(251, 197, 49, 0.4); transform: scale(1.05); } }
+
+        /* Feedback Visual Erro */
+        .error-shake { animation: shakeError 0.4s ease; border-color: var(--cor-erro) !important; background-color: #ffefef !important; }
+		
+		#val-erros {
+			font-size: 1rem;       /* Exemplo: destacar bem o número */
+			font-weight: 900;        /* Exemplo: deixá-lo mais carregado */
+			color: var(--cor-mat);          /* Exemplo: forçar um vermelho mais escuro */
+		}
+
+        /* =========================================
+           ECRÃ FIM E BOTÕES FINAIS
+           ========================================= */
+        .end-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--azul-escuro); margin-bottom: 10px; }
+        .end-stats { font-size: 1.5rem; color: var(--text-main); margin-bottom: 30px; text-align: center; background: var(--bg-header); padding: 20px; border-radius: 20px; border: 2px dashed var(--cor-em);}
+        
+        .btn-acao { 
+            border: 4px solid white; color: white; padding: 15px 40px; 
+            font-size: 1.3rem; font-weight: 900; border-radius: 30px; cursor: pointer; 
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px; 
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); touch-action: manipulation; 
+            text-transform: uppercase; width: 100%; max-width: 350px;
+            background-color: var(--cor-btn-verde); box-shadow: 0 6px 0 #45b062; margin-bottom: 15px;
+        }
+        @media (hover: hover) { .btn-acao:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #45b062; filter: brightness(1.05); } }
+        .btn-acao:active { transform: translateY(6px) !important; box-shadow: 0 0px 0 transparent !important; }
+        .btn-acao.btn-menu { background-color: var(--cor-btn-laranja); box-shadow: 0 6px 0 #d97d2c; }
+
+        @media (max-width: 600px) {
+            .contentores-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .bin-card { padding: 10px 5px; border-width: 3px; border-bottom-width: 6px; }
+            .area-jogo-custom { padding: 10px; }
+        }
+
+        @keyframes moverRiscas { 0% { background-position: 0 0; } 100% { background-position: 30px 0; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes shakeError { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px) rotate(-2deg); } 75% { transform: translateX(6px) rotate(2deg); } }
+
+        #confetti-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; }
+    .icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
+	.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
+	.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
+	.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+</style>
+
+<style>
+  body {
+    background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px);
+    background-size: 25px 25px;
+  }
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<nav class="sidebar" id="sidebar">
+    <div class="btn-fechar" onclick="toggleMenu()"><span>✕</span> Fechar</div>
+    <ul>
+        <li><a href="../../../"><img src="../../../SVG/home.svg" alt="Início" class="icon-svg-menu" onerror="this.style.display='none'">Início</a></li>
+        <li><a href="../../../pre"><img src="../../../SVG/pre.svg" alt="Pré-Escolar" class="icon-svg-menu" onerror="this.style.display='none'">Pré-Escolar</a></li>
+        <li><a href="../../"><img src="../../../SVG/ano1.svg" alt="1º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 1º Ano</a></li>
+        <li><a href="../../../2"><img src="../../../SVG/ano2.svg" alt="2º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 2º Ano</a></li>
+        <li><a href="../../../3"><img src="../../../SVG/ano3.svg" alt="3º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 3º Ano</a></li>
+        <li><a href="../../../4"><img src="../../../SVG/ano4.svg" alt="4º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 4º Ano</a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="header-content">
+        <div class="nav-container">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="../" class="btn-voltar"><img src="../../../SVG/voltar.svg" class="icon-svg-voltar" alt=""> Voltar</a>
+        </div>
+        
+        <h1>Mestres da Reciclagem <img src="../img-titulos/reciclagem.svg" class="icon-svg-titulo" alt=""></h1>
+        <div class="subtitulo">Coloca o lixo no contentor certo!</div>
+    </div>
+</header>
+
+<main>
+    <div class="cartao-jogo-container">
+        
+        <!-- ECRÃ 1: INÍCIO -->
+        <div id="ecra-inicial" class="ecra">
+            <h2 class="titulo-destaque" style="margin-bottom: 5px;">Vamos Limpar o Planeta!</h2>
+            
+            <div class="animacao-tutorial">
+                <div class="demo-trash">🥤</div>
+                <div class="demo-bin">🟨</div>
+            </div>
+
+            <p class="texto-intro">Podes <strong>arrastar</strong> o lixo para o ecoponto certo, ou <strong>clicar no lixo</strong> e depois <strong>clicar no ecoponto</strong>!</p>
+            <button class="btn-acao" onclick="iniciarJogo()">JOGAR ▶️</button>
+        </div>
+
+        <!-- ECRÃ 2: O JOGO -->
+        <div id="ecra-jogo" class="ecra">
+            
+            <!-- BARRA DE ESTADO PREMIUM -->
+            <div class="status-bar-jogo">
+                <button class="btn-voltar-menu" onclick="voltarAoMenu()" id="btn-home-svg"></button>
+                <button id="btn-ajuda" class="btn-dica" onclick="usarDica()">Dica</button>
+                <div class="badge-ronda" id="badge-ronda-svg"></div>
+                <div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
+                <div class="badge-erros"> <span class="icone-erro"></span> <span id="val-erros">0</span></div>
+            </div>
+
+            <!-- QUADRO DE JOGO CUSTOM -->
+            <div class="area-jogo-custom">
+                <div class="instrucao-jogo">Para onde vai este objeto?</div>
+
+                <!-- PALCO CENTRAL (OBJETO) -->
+                <div class="palco-central" id="palco-central">
+                    <!-- O item é gerado via JavaScript -->
+                </div>
+                
+                <!-- CONTENTORES DE RECICLAGEM -->
+                <div class="contentores-grid">
+                    <div class="bin-card" data-tipo="papelao">
+                        <img src="img/contentor_papel.png" class="bin-img" alt="Ecoponto Azul" onerror="this.outerHTML='<div class=\\'item-fallback\\' style=\\'color:#3498db;\\'>🟦</div>'">
+                        <div class="bin-label">Papelão</div>
+                    </div>
+                    
+                    <div class="bin-card" data-tipo="embalao">
+                        <img src="img/contentor_plastico.png" class="bin-img" alt="Ecoponto Amarelo" onerror="this.outerHTML='<div class=\\'item-fallback\\' style=\\'color:#f1c40f;\\'>🟨</div>'">
+                        <div class="bin-label">Embalão</div>
+                    </div>
+                    
+                    <div class="bin-card" data-tipo="vidrao">
+                        <img src="img/contentor_verde.png" class="bin-img" alt="Ecoponto Verde" onerror="this.outerHTML='<div class=\\'item-fallback\\' style=\\'color:#2ecc71;\\'>🟩</div>'">
+                        <div class="bin-label">Vidrão</div>
+                    </div>
+                    
+                    <div class="bin-card" data-tipo="pilhao">
+                        <img src="img/contentor_pilhas.png" class="bin-img" alt="Pilhão" onerror="this.outerHTML='<div class=\\'item-fallback\\' style=\\'color:#e74c3c;\\'>🟥</div>'">
+                        <div class="bin-label">Pilhão</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ECRÃ 3: FIM -->
+        <div id="ecra-fim" class="ecra">
+            <div style="font-size: 5rem; margin-bottom: 10px; line-height: 1;">🌍</div>
+            <h2 class="titulo-destaque" style="margin-bottom: 10px;">O Planeta Agradece!</h2>
+            <div class="end-stats">
+                Reciclaste 15 objetos!<br>
+                Tiveste <strong id="final-erros" style="color:var(--cor-erro);">0</strong> erros.
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 300px; margin: 0 auto;">
+                <button class="btn-acao" onclick="iniciarJogo()">JOGAR DE NOVO 🔄</button>
+                <button class="btn-acao btn-menu" onclick="voltarAoMenu()">MENU 🏠</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<canvas id="confetti-canvas"></canvas>
+
+<footer>
+    <p><span id="ano-atual"> </span><img src="../../../SVG/1_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
+</footer>
+
+<script>
+    // Ativa drag in touch devices
+    try { if (typeof MobileDragDrop !== 'undefined') { MobileDragDrop.polyfill({ holdToDrag: 0 }); } } catch(e) {}
+    document.getElementById('ano-atual').innerText = new Date().getFullYear();
+
+    // ==========================================
+    // SVGs UI
+    // ==========================================
+    const SVG_HOME = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" style="margin-right:4px; vertical-align:middle;"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5z" fill="#fff" stroke="#d35400" stroke-width="2" stroke-linejoin="round"/><rect x="10" y="12" width="4" height="10" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/></svg> Menu`;
+    const SVG_BULB = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:2px; vertical-align:middle;"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"></path></svg>`;
+    const SVG_STAR = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="#f1c40f" stroke="#f39c12" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
+    
+    document.getElementById('btn-home-svg').innerHTML = SVG_HOME;
+    document.getElementById('badge-ronda-svg').innerHTML = `${SVG_STAR} <span id="val-progresso" style="margin-left:5px;">0</span>/15`;
+
+    function toggleMenu() {
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
+        document.getElementById('hamburgerBtn').classList.toggle('open');
+    }
+
+    /* =========================================
+       DADOS DO LIXO (Com Emojis de Fallback)
+       ========================================= */
+    const bancoLixo =[
+        // Papelão (Azul)
+        { id: "caixa_ovos", nome: "Caixa de Ovos", tipo: "papelao", emo: "🥚" },
+        { id: "caixa_papelao", nome: "Caixa de Cartão", tipo: "papelao", emo: "📦" },
+        { id: "jornal", nome: "Jornal", tipo: "papelao", emo: "📰" },
+        { id: "papel_amarrotado", nome: "Papel", tipo: "papelao", emo: "📄" },
+        { id: "sacos_papel", nome: "Sacos de Papel", tipo: "papelao", emo: "🛍️" },
+        
+        // Embalão (Amarelo)
+        { id: "esferovite", nome: "Esferovite", tipo: "embalao", emo: "🥡" },
+        { id: "garrafa_agua", nome: "Garrafa de Plástico", tipo: "embalao", emo: "🚰" },
+        { id: "garrafao_agua", nome: "Garrafão", tipo: "embalao", emo: "💧" },
+        { id: "garrafas_plastico", nome: "Garrafas de Sumo", tipo: "embalao", emo: "🥤" },
+        { id: "iogurte", nome: "Copo de Iogurte", tipo: "embalao", emo: "🥛" },
+        { id: "lata_aluminio", nome: "Lata de Alumínio", tipo: "embalao", emo: "🥫" },
+        { id: "lata_atum", nome: "Lata de Conserva", tipo: "embalao", emo: "🐟" },
+        { id: "pacote_leite", nome: "Pacote de Leite", tipo: "embalao", emo: "🥛" },
+        { id: "pacote_sumo", nome: "Pacote de Sumo", tipo: "embalao", emo: "🧃" },
+        { id: "refrigerante", nome: "Lata de Sumo", tipo: "embalao", emo: "🥤" },
+        { id: "saco_plastico", nome: "Saco de Plástico", tipo: "embalao", emo: "🛍️" },
+        
+        // Vidrão (Verde)
+        { id: "frasco_vidro", nome: "Frasco de Vidro", tipo: "vidrao", emo: "🫙" },
+        { id: "garrafa_vidro", nome: "Garrafa de Vidro", tipo: "vidrao", emo: "🍾" },
+        
+        // Pilhão (Vermelho)
+        { id: "bateria", nome: "Bateria", tipo: "pilhao", emo: "🔋" },
+        { id: "pilha", nome: "Pilha", tipo: "pilhao", emo: "🔋" },
+        { id: "pilhas", nome: "Pilhas Médias", tipo: "pilhao", emo: "🔋" },
+        { id: "pilhas_a4", nome: "Pilhas Pequenas", tipo: "pilhao", emo: "🔋" }
+    ];
+
+    /* =========================================
+       VARIÁVEIS GLOBAIS E ESTADO
+       ========================================= */
+    const TOTAL_RONDAS = 15;
+    let rondaAtual = 1;
+    let errorsCount = 0;
+    let isTransitioning = false;
+    
+    let draggedElement = null; // Drag & Drop
+    let selectedElement = null; // Click Híbrido
+    
+    let rondasParaDica = 0; // Começa disponível
+    let itensDaPartida =[];
+
+    // DOM
+    const elProgresso = document.getElementById('val-progresso');
+    const elErros = document.getElementById('val-erros');
+    const elProgressFill = document.getElementById('progress-fill');
+    const palcoCentral = document.getElementById('palco-central');
+    const binCards = document.querySelectorAll('.bin-card');
+    const btnDica = document.getElementById('btn-ajuda');
+
+    function mostrarEcra(id) {
+        document.querySelectorAll('.ecra').forEach(e => e.style.display = 'none');
+        document.getElementById(id).style.display = 'flex';
+    }
+
+    function voltarAoMenu() {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+        mostrarEcra('ecra-inicial');
+    }
+
+    /* =========================================
+       SISTEMA DE DICA (A cada 5 rondas)
+       ========================================= */
+    function atualizarBotaoDica() {
+        if (!btnDica) return;
+        if (rondasParaDica <= 0) {
+            btnDica.classList.remove('esgotada');
+            btnDica.innerHTML = SVG_BULB + ' Dica';
+        } else {
+            btnDica.classList.add('esgotada');
+            btnDica.innerHTML = `⏳ ${rondasParaDica}`;
+        }
+    }
+
+    function usarDica() {
+        if(rondasParaDica > 0 || isTransitioning) return;
+        
+        const itemAtual = document.querySelector('.item-arrastavel');
+        if(!itemAtual) return;
+
+        tocarSom('flip');
+        const targetTipo = itemAtual.dataset.tipo;
+        const targetBin = document.querySelector(`.bin-card[data-tipo="${targetTipo}"]`);
+        
+        if(targetBin) {
+            targetBin.classList.add('hint-glow');
+            setTimeout(() => targetBin.classList.remove('hint-glow'), 2000);
+            
+            rondasParaDica = 5; // Reseta o Cooldown para 5 rondas
+            atualizarBotaoDica();
+        }
+    }
+
+    /* =========================================
+       LÓGICA PRINCIPAL DO JOGO
+       ========================================= */
+    function iniciarJogo() {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+        rondaAtual = 1;
+        errorsCount = 0;
+        rondasParaDica = 0;
+        selectedElement = null;
+        
+        itensDaPartida = [...bancoLixo].sort(() => Math.random() - 0.5).slice(0, TOTAL_RONDAS);
+        
+        // Adicionar eventos aos Ecopontos (Garante que não duplica)
+        document.querySelectorAll('.bin-card').forEach(bin => {
+            const novoBin = bin.cloneNode(true);
+            bin.replaceWith(novoBin);
+            novoBin.addEventListener('dragover', handleDragOver);
+            novoBin.addEventListener('dragleave', handleDragLeave);
+            novoBin.addEventListener('drop', handleDropSlot);
+            novoBin.addEventListener('click', handleBinClick); // Híbrido
+        });
+
+        atualizarPlacar();
+        atualizarBotaoDica();
+        mostrarEcra('ecra-jogo');
+        
+        prepararRonda();
+    }
+
+    function atualizarPlacar() {
+        elErros.textContent = errorsCount;
+        elProgresso.textContent = rondaAtual;
+        elProgressFill.style.width = `${((rondaAtual - 1) / TOTAL_RONDAS) * 100}%`;
+    }
+
+    function prepararRonda() {
+        isTransitioning = false;
+        selectedElement = null;
+        palcoCentral.innerHTML = '';
+
+        const itemAtual = itensDaPartida[rondaAtual - 1];
+
+        // Cria o Lixo Arrastável
+        const divItem = document.createElement('div');
+        divItem.className = 'item-arrastavel';
+        divItem.dataset.tipo = itemAtual.tipo;
+        divItem.draggable = true;
+        
+        divItem.innerHTML = `<img src="img/${itemAtual.id}.png" alt="${itemAtual.nome}" onerror="this.outerHTML='<div class=\\'item-fallback\\'>${itemAtual.emo}</div>'">`;
+        
+        // Eventos do Lixo (Híbridos)
+        divItem.addEventListener('dragstart', handleDragStart);
+        divItem.addEventListener('dragend', handleDragEnd);
+        divItem.addEventListener('click', handleItemClick);
+
+        const txtNome = document.createElement('div');
+        txtNome.className = 'nome-item';
+        txtNome.textContent = itemAtual.nome;
+
+        palcoCentral.appendChild(divItem);
+        palcoCentral.appendChild(txtNome);
+        
+        divItem.style.animation = 'fadeIn 0.3s ease-out';
+    }
+
+    /* =========================================
+       LÓGICA HÍBRIDA: CLICAR E ARRASTAR
+       ========================================= */
+    
+    // CLIQUE NO ITEM
+    function handleItemClick(e) {
+        if(isTransitioning || draggedElement) return;
+        const item = e.target.closest('.item-arrastavel');
+        if(!item) return;
+
+        tocarSom('flip');
+        
+        if (selectedElement === item) {
+            selectedElement = null;
+            item.classList.remove('selected-item');
+        } else {
+            selectedElement = item;
+            item.classList.add('selected-item');
+        }
+    }
+
+    // CLIQUE NO ECOPONTO
+    function handleBinClick(e) {
+        if(isTransitioning || !selectedElement) return;
+        const bin = e.target.closest('.bin-card');
+        processarEncaixe(bin, selectedElement);
+    }
+
+    // ARRASTAR ORIGINAL
+    function handleDragStart(e) {
+        if(isTransitioning) return;
+        draggedElement = e.target.closest('.item-arrastavel');
+        
+        if(selectedElement) {
+            selectedElement.classList.remove('selected-item');
+            selectedElement = null;
+        }
+
+        draggedElement.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        tocarSom('flip');
+    }
+
+    function handleDragEnd(e) {
+        if(draggedElement) draggedElement.classList.remove('dragging');
+        draggedElement = null;
+    }
+
+    function handleDragOver(e) {
+        e.preventDefault(); 
+        const bin = e.target.closest('.bin-card');
+        if (bin) bin.classList.add('drag-over');
+    }
+    
+    function handleDragLeave(e) {
+        const bin = e.target.closest('.bin-card');
+        if (bin) bin.classList.remove('drag-over');
+    }
+
+    function handleDropSlot(e) {
+        e.preventDefault();
+        const bin = e.target.closest('.bin-card');
+        processarEncaixe(bin, draggedElement);
+        draggedElement = null;
+    }
+
+    // PROCESSAMENTO COMUM (Clicar ou Arrastar)
+    function processarEncaixe(bin, item) {
+        if (!bin || !item) {
+            if(bin) bin.classList.remove('drag-over');
+            return;
+        }
+        
+        bin.classList.remove('drag-over');
+
+        const tipoLixo = item.dataset.tipo;
+        const tipoContentor = bin.dataset.tipo;
+
+        if (tipoLixo === tipoContentor) {
+            // ACERTOU
+            isTransitioning = true;
+            tocarSom('acerto');
+            
+            bin.classList.add('bounce');
+            setTimeout(() => bin.classList.remove('bounce'), 400);
+
+            item.classList.add('item-sucesso');
+            document.querySelector('.nome-item').style.opacity = '0';
+            
+            // Lógica do Cooldown da Dica
+            if(rondasParaDica > 0) rondasParaDica--;
+            atualizarBotaoDica();
+            
+            setTimeout(() => {
+                rondaAtual++;
+                if (rondaAtual > TOTAL_RONDAS) {
+                    finalizarJogo();
+                } else {
+                    atualizarPlacar();
+                    prepararRonda();
+                }
+            }, 800); 
+            
+        } else {
+            // ERROU
+            errorsCount++;
+            atualizarPlacar();
+            tocarSom('erro');
+            
+            item.classList.add('error-shake');
+            
+            setTimeout(() => {
+                item.classList.remove('error-shake');
+            }, 400);
+        }
+    }
+
+    /* =========================================
+       FIM DO JOGO E CONFETIS
+       ========================================= */
+    function finalizarJogo() {
+        elProgressFill.style.width = `100%`;
+        mostrarEcra('ecra-fim');
+        
+        document.getElementById('final-erros').textContent = errorsCount;
+        tocarSom('vitoria'); 
+        dispararConfetis();
+    }
+
+    /* =========================================
+       SISTEMA DE SOM
+       ========================================= */
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const audioCtx = new AudioContext();
+    
+    function tocarSom(tipo) {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        const agora = audioCtx.currentTime;
+
+        if (tipo === 'flip') {
+            osc.type = 'sine'; osc.frequency.setValueAtTime(300, agora); osc.frequency.exponentialRampToValueAtTime(600, agora + 0.1);
+            gain.gain.setValueAtTime(0.05, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.1);
+            osc.start(agora); osc.stop(agora + 0.1);
+        }
+        else if (tipo === 'acerto') {
+            osc.type = 'sine'; osc.frequency.setValueAtTime(600, agora); osc.frequency.exponentialRampToValueAtTime(1200, agora + 0.2);
+            gain.gain.setValueAtTime(0.1, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); osc.stop(agora + 0.3);
+        } 
+        else if (tipo === 'erro') {
+            osc.type = 'triangle'; osc.frequency.setValueAtTime(250, agora); osc.frequency.exponentialRampToValueAtTime(150, agora + 0.2);
+            gain.gain.setValueAtTime(0.1, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); osc.stop(agora + 0.3);
+        }
+        else if (tipo === 'vitoria') {
+            const notas =[523.25, 659.25, 783.99, 1046.50];
+            notas.forEach((freq, i) => {
+                const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                o.connect(g); g.connect(audioCtx.destination); o.type = 'sine'; o.frequency.value = freq;
+                g.gain.setValueAtTime(0.1, agora + i * 0.15); g.gain.exponentialRampToValueAtTime(0.01, agora + i * 0.15 + 0.3);
+                o.start(agora + i * 0.15); o.stop(agora + i * 0.15 + 0.3);
+            });
+        }
+    }
+
+    /* =========================================
+       CONFETIS
+       ========================================= */
+    const canvasConfetti = document.getElementById('confetti-canvas');
+    const ctxConfetti = canvasConfetti.getContext('2d');
+    let confetis =[];
+
+    function redimensionarCanvas() { canvasConfetti.width = window.innerWidth; canvasConfetti.height = window.innerHeight; }
+    window.addEventListener('resize', redimensionarCanvas);
+
+    function dispararConfetis() {
+        redimensionarCanvas(); confetis =[]; const cores =['#0091ff', '#2ed573', '#ff4757', '#eab308', '#3b82f6'];
+        for (let i = 0; i < 100; i++) {
+            confetis.push({ x: Math.random() * canvasConfetti.width, y: Math.random() * canvasConfetti.height - canvasConfetti.height, w: Math.random() * 10 + 5, h: Math.random() * 10 + 5, cor: cores[Math.floor(Math.random() * cores.length)], velY: Math.random() * 3 + 2, velX: Math.random() * 2 - 1, rotacao: Math.random() * 360, velRotacao: Math.random() * 5 - 2.5 });
+        }
+        animarConfetis();
+    }
+
+    function animarConfetis() {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); let ativos = false;
+        confetis.forEach(c => {
+            c.y += c.velY; c.x += c.velX; c.rotacao += c.velRotacao; if (c.y < canvasConfetti.height) ativos = true;
+            ctxConfetti.save(); ctxConfetti.translate(c.x, c.y); ctxConfetti.rotate(c.rotacao * Math.PI / 180);
+            ctxConfetti.fillStyle = c.cor; ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); ctxConfetti.restore();
+        });
+        if (ativos) requestAnimationFrame(animarConfetis);
+    }
+    
+    window.onload = () => mostrarEcra('ecra-inicial');
+</script>
+</body>
+</html>
