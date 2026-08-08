@@ -232,7 +232,7 @@
            MECÂNICA: FASE 2
            ========================================= */
         .fase2-alvo-container {
-            width: clamp(140px, 35vw, 200px); height: clamp(90px, 20vw, 120px);
+            width: clamp(180px, 35vw, 200px); height: clamp(90px, 20vw, 120px);
             background: #fff; border: 5px dashed var(--cor-1ano); border-radius: 30px;
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 10px 20px rgba(0, 145, 255, 0.1); margin-bottom: 35px;
@@ -307,7 +307,7 @@
         .btn-acao:active { transform: translateY(6px); box-shadow: 0 0px 0 transparent; }
 
         @media (max-width: 600px) {
-            .fase1-alvo-container, .fase2-alvo-container { border-width: 4px; padding: 10px; margin-bottom: 15px;}
+            .fase1-alvo-container, .fase2-alvo-container { border-width: 4px; padding: 10px; }
             .btn-vogal, .btn-imagem { border-width: 3px; box-shadow: 0 4px 0 #cbd5e1; border-radius: 15px;}
             .btn-vogal:active, .btn-imagem:active { transform: translateY(4px); box-shadow: 0 0px 0 transparent; border-color: var(--cor-1ano);}
             .palavra-revelada { font-size: 1.8rem; padding: 8px 15px; }
@@ -332,6 +332,15 @@
 
         #confetti-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; overflow: hidden; }
         body { scrollbar-gutter: stable; }
+		
+		@media (max-width: 768px) {
+		  .fase2-imagens-container {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr); /* Cria 2 colunas de tamanho igual */
+			justify-items: center; /* Centra os elementos dentro das suas colunas */
+			margin: 0 auto;
+		  }
+		}
 
         @media (max-height: 600px) {
             body { height: auto !important; overflow-y: auto !important; }
