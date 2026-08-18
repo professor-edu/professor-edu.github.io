@@ -803,40 +803,46 @@
             .cartao-ano.ano4 { grid-column: 4 / 6; }
         }
 /* =========================================
-   LÓGICA RESPONSIVA (MOBILE CÁPSULAS SEM SCROLL)
+   LÓGICA RESPONSIVA (MOBILE CÁPSULAS SEM SCROLL E ANTI-TRANSBORDO)
    ========================================= */
 @media (max-width: 600px) {
     
-    /* Variáveis dinâmicas para associar as cores a cada ano */
+    /* Configuração das cores de cada ano para usarmos de forma dinâmica */
     .cartao-ano.pre  { --ano-cor: var(--cor-pre); }
     .cartao-ano.ano1 { --ano-cor: var(--cor-1ano); }
     .cartao-ano.ano2 { --ano-cor: var(--cor-2ano); }
     .cartao-ano.ano3 { --ano-cor: var(--cor-3ano); }
     .cartao-ano.ano4 { --ano-cor: var(--cor-4ano); }
 
+    /* CORREÇÃO DO CONTENTOR PAI:
+       Reduzimos o padding lateral de 15px para 8px para libertar 14px cruciais de largura útil */
+    .galeria-container {
+        padding: clamp(10px, 2vh, 15px) 8px !important;
+    }
+
     .grelha-cartoes { 
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 16px; 
         padding: 10px 5px;
     }
 
+    /* A CÁPSULA COMPACTA HORIZONTAL */
     .cartao-ano { 
         flex-direction: row; 
         justify-content: flex-start; 
-        height: 68px;
+        height: 68px; 
         aspect-ratio: auto !important; 
-        border-radius: 35px;
-        padding: 6px 12px;
+        border-radius: 35px; 
+        padding: 6px 8px;
         box-sizing: border-box;
         
         background-color: white;
         border: 4px solid var(--ano-cor);
         box-shadow: 0 6px 12px rgba(13, 71, 161, 0.04);
         
-        padding-right: 60px; 
+        padding-right: 48px; 
     }
 
-    /* Anula as posições e grelhas específicas do mobile antigo */
     .cartao-ano.pre, .cartao-ano.ano1, .cartao-ano.ano2, .cartao-ano.ano3, .cartao-ano.ano4 { 
         grid-column: span 1 !important; 
         width: 100% !important; 
@@ -844,7 +850,7 @@
         aspect-ratio: auto !important; 
     }
 
-    /* OCULTA AS IMAGENS 3D DO DESKTOP NO TELEMÓVEL */
+    /* Oculta as imagens do PC */
     .img-ano {
         display: none !important;
     }
@@ -852,8 +858,8 @@
     .cartao-ano::before {
         content: "";
         display: block;
-        width: 52px;
-        height: 52px;
+        width: clamp(38px, 12vw, 52px); 
+        height: clamp(38px, 12vw, 52px);
         border-radius: 50%;
         background-color: var(--ano-cor);
         
@@ -861,49 +867,49 @@
         background-position: center;
         background-size: 65%;
         
-        flex-shrink: 0;
-        border: 2.5px solid white;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.06);
+        flex-shrink: 0; /* Impede achatamento */
+        border: 2px solid white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.06);
     }
 
+    /* Associação dos SVGS */
     .cartao-ano.pre::before  { background-image: url("SVG/pre.svg"); }
     .cartao-ano.ano1::before { background-image: url("SVG/ano1.svg"); }
     .cartao-ano.ano2::before { background-image: url("SVG/ano2.svg"); }
     .cartao-ano.ano3::before { background-image: url("SVG/ano3.svg"); }
     .cartao-ano.ano4::before { background-image: url("SVG/ano4.svg"); }
 
-    /* TÍTULO DO ANO AO CENTRO */
     .titulo-ano {
         color: var(--ano-cor);
         font-family: 'Fredoka', 'Roboto', sans-serif;
         font-weight: 900;
-        font-size: 1.15rem; /* Letra ligeiramente maior e mais visível devido à nova altura */
+        font-size: clamp(0.68rem, 3.4vw, 0.95rem); /* Encolhe até 0.68rem (11px) em ecrãs ultra-pequenos */
         text-shadow: none; 
         margin-bottom: 0;
         flex-grow: 1; 
         text-align: center;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        padding: 0 8px;
+        padding: 0 5px;
         box-sizing: border-box;
         white-space: nowrap; 
     }
 
     .badge-jogos {
         position: absolute;
-        right: 10px;
+        right: 8px; /* Encostado de forma segura à direita */
         top: 50%;
         transform: translateY(-50%) !important;
         
-        width: 38px;
-        height: 38px;
+        width: 34px;  /* Reduzido de 38px para 34px */
+        height: 34px; /* Reduzido de 38px para 34px */
         border-radius: 50%;
         
         background-color: var(--ano-cor) !important;
         color: white !important;
-        font-size: 0.85rem !important;
+        font-size: 0.8rem !important; /* Letra ligeiramente mais compacta */
         font-weight: 900 !important;
-        border: 2.5px solid white !important;
+        border: 2px solid white !important;
         box-shadow: 0 3px 6px rgba(13, 71, 161, 0.08) !important;
         
         display: flex;
@@ -913,7 +919,6 @@
         padding: 0 !important;
     }
 
-    /* Força a palavra "Jogos" a desaparecer de vez no mobile */
     .badge-jogos .txt {
         display: none !important; 
     }
