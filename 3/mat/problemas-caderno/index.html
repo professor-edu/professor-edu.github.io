@@ -1990,7 +1990,7 @@ footer p { font-size: 0.8rem; color: var(--cor-3ano-dark); margin: 0; }
             <div id="rank-container"></div>
             <h2 class="end-title" id="end-title-text">Problema Resolvido!</h2>
             <div class="end-stats" style="border-color: var(--cor-sucesso); padding: 20px 15px;">
-                <span style="color: var(--cor-em); font-weight: 900; font-size: 1.4rem;">✓ Excelente Trabalho!</span><br>
+                <span style="color: var(--cor-em); font-weight: 900; font-size: 1.3rem;">✓ Excelente Trabalho!</span><br>
                 Concluíste este enigma com sucesso no teu caderno.
             </div>
             <div class="botoes-acao-container">
@@ -2149,7 +2149,7 @@ footer p { font-size: 0.8rem; color: var(--cor-3ano-dark); margin: 0; }
 	   2. ZONA DE EDIÇÃO EXCLUSIVA DO JOGO (BASE DE DADOS DOS PROBLEMAS)
 	   ===================================================================== */
 
-	// --- A. BASE DE DADOS DOS PROBLEMAS (Placeholder - Vazio para poupar espaço) ---
+	// --- A. BASE DE DADOS DOS PROBLEMAS ---
 const POOL_PROBLEMAS = [
     {
         titulo: "O Mealheiro da Ana",
@@ -2279,12 +2279,12 @@ const POOL_PROBLEMAS = [
     },
     {
         titulo: "As Maçãs da Cesta",
-        texto: "Uma cesta de piquenique tinha 40 maçãs vermelhas. Para o lanche, os amigos usaram metade (1/2) das maçãs para fazer sumo e comeram um quarto (1/4) das maçãs.<br><br><span class='destaque-fundo'>Quantas maçãs restaram na cesta?</span>",
+        texto: "Uma cesta de piquenique tinha 40 maçãs vermelhas. Para o lanche, os amigos usaram metade (1/2) das maçãs para fazer sumo e comeram um quarto (1/4) das maçãs restantes.<br><br><span class='destaque-fundo'>Quantas maçãs ficaram na cesta?</span>",
         fraseAntes: "Na cesta de piquenique restaram exatamente ",
         fraseDepois: " maçãs.",
-        resposta: "10",
+        resposta: "15",
         imagem: "img/prob_15.png",
-        dica: "Calcula por partes no caderno:<br>1. Quantas maçãs foram usadas para o sumo? Calcula metade de 40 (divide 40 por 2).<br>2. Quantas maçãs foram comidas? Calcula um quarto de 40 (divide 40 por 4).<br>3. Soma as maçãs gastas e retira o resultado às 40 maçãs iniciais."
+        dica: "Calcula por partes no caderno:<br>1. Quantas maçãs foram usadas para o sumo? Calcula metade de 40 (divide 40 por 2).<br>2. Quantas maçãs foram comidas? Calcula um quarto de 20 (divide 20 por 4).<br>3. Soma as maçãs gastas e retira o resultado às 40 maçãs iniciais."
     },
     {
         titulo: "As Árvores do Parque",
@@ -2871,10 +2871,7 @@ function renderizarCarrossel() {
 			rank.innerHTML = `<img src="../../../SVG/taca.svg" class="taca-vitoria" style="width:120px;" alt="Vitória">`;
 		}
 		
-		const endTitle = document.getElementById('end-title-text');
-		if (endTitle) {
-			endTitle.innerHTML = `Parabéns!<br><small style="font-size:1.1rem; font-weight:700; color:var(--text-main); line-height:1.4;">Conseguiste resolver este problema no teu caderno!</small>`;
-		}
+		
 
 		tocarSom('vitoria'); 
 		dispararConfetis();

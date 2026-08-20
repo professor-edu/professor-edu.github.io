@@ -415,7 +415,7 @@
                 Encontraste todos os pares e tens uma memória incrível!<br>
                 <span class="end-time-msg">⏱️ <span id="tempo-final-texto">00:00</span></span>
             </div>
-            <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 300px; margin: 0 auto;">
+            <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 350px; margin: 0 auto;">
                 <button class="btn-acao" onclick="iniciarJogo()">JOGAR DE NOVO 🔄</button>
                 <button class="btn-acao secundario" onclick="voltarAsInstrucoes()">MENU 🏠</button>
             </div>
@@ -541,13 +541,7 @@
         
         mostrarEcra('ecra-jogo');
         document.getElementById('confetti-container').innerHTML = '';
-        
-        // Desbloqueia o Sintetizador de Voz em iOS (requer iteração do user)
-        if ('speechSynthesis' in window) {
-            let u = new SpeechSynthesisUtterance("");
-            u.volume = 0; // Silencioso
-            window.speechSynthesis.speak(u);
-        }
+
     }
 
     function gerarCartas() {
@@ -556,7 +550,7 @@
 
         paresCorpo.forEach(item => {
             baralho.push({ type: 'img', word: item.palavra, src: item.img, emoji: item.emoji });
-            baralho.push({ type: 'audio', word: item.palavra });
+            baralho.push({ type: 'audio', word: item.palavra, src: item.img });
         });
 
         baralho.sort(() => Math.random() - 0.5);
@@ -566,13 +560,14 @@
             cardEl.classList.add('memory-card');
             cardEl.dataset.word = carta.word; 
             cardEl.dataset.type = carta.type;
+			cardEl.dataset.src = carta.src; 																		   
 
             let faceHTML = '';
             if (carta.type === 'img') {
                 // Injeta a imagem. Se falhar, substitui-se a si mesma pelo Emoji do fallback via onerror.
                 faceHTML = `<img src="img/${carta.src}.png" class="card-img" alt="${carta.word}" onerror="this.outerHTML='<div class=\\'card-fallback\\'>${carta.emoji}</div>'">`;
             } else {
-                faceHTML = `<div class="card-sound" onclick="replayAudio(event, '${carta.word}')">🔊</div>`;
+                faceHTML = `<div class="card-sound" onclick="replayAudio(event, '${carta.src}')">🔊</div>`;
             }
 
             cardEl.innerHTML = `
@@ -599,7 +594,7 @@
         tocarSom('flip');
 
         if (this.dataset.type === 'audio') {
-            dizerPalavra(this.dataset.word);
+            dizerPalavra(this.dataset.src);
         }
 
         if (!hasFlippedCard) {
@@ -652,7 +647,7 @@
     }
 
     /* =========================================
-       CRONÓMETRO E SINTETIZADOR DE VOZ
+       CRONÓMETRO E REPRODUTOR DE ÁUDIO MP3
        ========================================= */
     function iniciarCronometro() {
         segundos = 0;
@@ -672,21 +667,34 @@
         timerDisplay.textContent = `${m}:${s}`;
     }
 
-    function dizerPalavra(palavra) {
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.cancel(); // Para se algo estiver a tocar
-            const utterance = new SpeechSynthesisUtterance(palavra);
-            utterance.lang = 'pt-PT';
-            utterance.rate = 0.9; 
-            utterance.pitch = 1.2; 
-            utterance.volume = 1;
-            window.speechSynthesis.speak(utterance);
+    let audioPalavraAtual = null;
+
+    function dizerPalavra(nomeFicheiro) {
+        if (!nomeFicheiro) return;
+
+        // Se houver algum áudio de palavra a tocar, interrompe-o imediatamente
+        if (audioPalavraAtual) {
+            audioPalavraAtual.pause();
+            audioPalavraAtual.currentTime = 0;
+        }
+
+        try {
+            // Inicializa a reprodução do ficheiro .mp3 a partir da pasta img/
+            audioPalavraAtual = new Audio(`img/${nomeFicheiro}.mp3`);
+            
+            // Executa a reprodução protegendo o browser contra restrições de interação
+            const playPromise = audioPalavraAtual.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(erro => console.warn("Erro ao reproduzir áudio:", erro));
+            }
+        } catch (e) {
+            console.error("Falha ao carregar o áudio correspondente.", e);
         }
     }
     
-    window.replayAudio = function(event, palavra) {
+    window.replayAudio = function(event, src) {
         event.stopPropagation(); // Evita que a carta rode/desrode se já estiver matched
-        dizerPalavra(palavra);
+        dizerPalavra(src);
         const icon = event.target;
         icon.style.transform = "scale(0.85)";
         setTimeout(() => icon.style.transform = "scale(1)", 150);
