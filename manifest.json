@@ -1,0 +1,21 @@
+{
+  "short_name": "Brincar e Aprender",
+  "name": "Vamos Brincar e Aprender - Portal de Jogos da EB1/PE da Marinheira",
+  "start_url": "./index.html",
+  "background_color": "#f0f7ff",
+  "theme_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "logo-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
