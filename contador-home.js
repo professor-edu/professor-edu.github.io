@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-// Configuração do Firebase (Substitui pelos teus dados)
+// Configuração do Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCIigMWzyJ16yfayXHItv5lpgDS0W6FkbA",
   authDomain: "brincar-e-aprender-ecdf6.firebaseapp.com",
@@ -17,7 +17,7 @@ const db = getDatabase(app);
 
 // Ícone SVG: Taça/Troféu
 const iconeTacaSVG = `
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2b4c7e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2b4c7e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block; flex-shrink: 0;">
   <path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/>
   <path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/>
   <path d="M4 22h16"/>
@@ -26,13 +26,27 @@ const iconeTacaSVG = `
   <path d="M18 2H6v7a6 6 0 0 0 12 0V2z" fill="#d0e1fd"/>
 </svg>`;
 
-// Escuta em tempo real o total global no Firebase
-const totalGeralRef = ref(db, "estatisticas/total_geral");
+// Lê a pasta de todos os jogos para calcular a soma total real
+const jogosRef = ref(db, "estatisticas/jogos");
 
-onValue(totalGeralRef, (snapshot) => {
-  const total = snapshot.val() || 0;
+onValue(jogosRef, (snapshot) => {
+  const dadosJogos = snapshot.val();
+  let totalHistorico = 0;
+
+  if (dadosJogos) {
+    // Percorre todos os jogos registados e soma as respetivas visitas
+    Object.values(dadosJogos).forEach((jogo) => {
+      if (jogo && jogo.visitas) {
+        totalHistorico += Number(jogo.visitas);
+      }
+    });
+  }
+
+  // Sincroniza o valor somado com a nova chave 'total_geral' no Firebase
+  set(ref(db, "estatisticas/total_geral"), totalHistorico);
+
+  // Injeta o resultado na página inicial
   const contentor = document.getElementById("contentor-total-jogadas");
-
   if (contentor) {
     contentor.innerHTML = `
       <div style="
@@ -51,7 +65,7 @@ onValue(totalGeralRef, (snapshot) => {
         user-select: none;
       ">
         ${iconeTacaSVG}
-        <span>${total.toLocaleString('pt-PT')} jogadas no site</span>
+        <span>${totalHistorico.toLocaleString('pt-PT')} jogadas no site</span>
       </div>
     `;
   }
