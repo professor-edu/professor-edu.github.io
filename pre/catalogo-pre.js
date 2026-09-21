@@ -51,6 +51,7 @@ const todosOsJogos =[
 	{ nome: "O Ratinho Comilão"},
 	{ nome: "O Polvo Pintor"},
 	{ nome: "Esquerda ou Direita?"},
-	{ nome: "Nomes e Tamanhos"},
+	{ nome: "Tamanhos dos Nomes"},
+	{ nome: "Oceano dos Números"},
 	{ nome: "O Radar"}
 ];

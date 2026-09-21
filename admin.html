@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Gestão - Estatísticas dos Jogos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+      padding: 30px;
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+    .resumo-card {
+      background: #007bff;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      text-align: left;
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f8f9fa;
+      color: #495057;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+    .posicao {
+      font-weight: bold;
+      color: #888;
+      width: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>📊 Painel de Tráfego dos Jogos</h1>
+  <div class="resumo-card">
+    Total Global de Jogadas: <span id="total-global">0</span>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="posicao">#</th>
+        <th>Nome do Jogo</th>
+        <th>Total de Visitas</th>
+      </tr>
+    </thead>
+    <tbody id="tabela-jogos">
+      <tr>
+        <td colspan="3">A carregar dados do Firebase...</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+  // SUAS CHAVES DO FIREBASE
+  const firebaseConfig = {
+    apiKey: "AIzaSyCIigMWzyJ16yfayXHItv5lpgDS0W6FkbA",
+    authDomain: "brincar-e-aprender-ecdf6.firebaseapp.com",
+    databaseURL: "https://brincar-e-aprender-ecdf6-default-rtdb.europe-west1.firebasedatabase.app/",
+    projectId: "brincar-e-aprender-ecdf6",
+    storageBucket: "brincar-e-aprender-ecdf6.firebasestorage.app",
+    messagingSenderId: "654754093179",
+    appId: "1:654754093179:web:ce6eb9539865fa16b5aade"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  async function carregarEstatisticas() {
+    const tabela = document.getElementById("tabela-jogos");
+    const totalGlobalEl = document.getElementById("total-global");
+
+    try {
+      const snapshot = await get(ref(db, "estatisticas/jogos"));
+
+      if (!snapshot.exists()) {
+        tabela.innerHTML = `<tr><td colspan="3">Nenhum registo encontrado.</td></tr>`;
+        return;
+      }
+
+      const dados = snapshot.val();
+      let listaJogos = [];
+      let somaTotal = 0;
+
+      // Converter objeto do Firebase para Array
+      Object.keys(dados).forEach(key => {
+        const visitas = dados[key].visitas || 0;
+        somaTotal += visitas;
+        listaJogos.push({ nome: key, visitas: visitas });
+      });
+
+      // Ordenar do maior para o menor número de visitas
+      listaJogos.sort((a, b) => b.visitas - a.visitas);
+
+      totalGlobalEl.textContent = somaTotal.toLocaleString('pt-PT');
+      tabela.innerHTML = "";
+
+      // Construir as linhas da tabela
+      listaJogos.forEach((jogo, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td class="posicao">${index + 1}</td>
+          <td><strong>${jogo.nome}</strong></td>
+          <td>${jogo.visitas.toLocaleString('pt-PT')}</td>
+        `;
+        tabela.appendChild(tr);
+      });
+
+    } catch (erro) {
+      console.error("Erro ao carregar dados:", erro);
+      tabela.innerHTML = `<tr><td colspan="3">Erro ao carregar dados. Verifique a consola.</td></tr>`;
+    }
+  }
+
+  carregarEstatisticas();
+</script>
+
+</body>
+</html>
