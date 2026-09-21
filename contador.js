@@ -7,15 +7,15 @@ import { getDatabase, ref, runTransaction } from "https://www.gstatic.com/fireba
 const CONFIG_POSICAO = {
   // Telemóvel Vertical (Portrait)
   vertical: {
-    top: '12px',
+    top: '15px',
     right: '12px',
     bottom: 'auto',
     left: 'auto'
   },
   // Ecrã Horizontal / PC Largo (Landscape)
   horizontal: {
-    top: '20px',      // Ajusta a distância do topo
-    right: '25px',    // Ajusta a distância da direita
+    top: '45px',      // Ajusta a distância do topo
+    right: '50px',    // Ajusta a distância da direita
     bottom: 'auto',   // Usa '15px' se quiseres encostar em baixo
     left: 'auto'      // Usa '15px' se quiseres encostar à esquerda
   }
