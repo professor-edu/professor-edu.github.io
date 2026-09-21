@@ -1913,5 +1913,5 @@ function reiniciarJogo() { prepararJogo(sistemaAtivo); limparConfetis(); }
 function baralharArray(a) { for(let i=a.length-1; i>0; i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 function showToast(m) { const t = document.getElementById('toast-msg'); t.textContent = m; t.classList.add('active'); setTimeout(()=>t.classList.remove('active'), 4000); }
 </script>
-</body>
+<script type="module" src="/contador.js"></script></body>
 </html>
