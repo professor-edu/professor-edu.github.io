@@ -782,6 +782,28 @@
 		object-fit: contain;
 		display: inline-block;
 	}
+	
+	/* Estilos para a assinatura no final da modal */
+		.modal-autor {
+			text-align: center;
+			margin-top: 25px;
+			padding-top: 15px;
+			border-top: 1px dashed #e0e0e0; /* Linha subtil a separar das legendas */
+			display: flex;
+			flex-direction: column;
+			gap: 3px;
+		}
+
+		.autor-nome {
+			font-weight: 600;
+			font-size: 0.85rem;
+			color: #2c3e50; /* Cor escura e discreta */
+		}
+
+		.autor-cargo {
+			font-size: 0.8rem;
+			color: #666666;
+		}
 
 	/* =========================================
 	   RESPONSIVIDADE DO MODAL (MOBILE)
@@ -1041,15 +1063,15 @@
     <div class="modal-caixa">
         <button class="btn-fechar-modal" id="btn-fechar-info" aria-label="Fechar">&times;</button>
         <h3 class="modal-titulo">
-			Informação Pedagógica 
-			<img src="SVG/puzzle.svg" class="icon-svg-modal-titulo" alt="Puzzle">
-		</h3>
+            Informação Pedagógica 
+            <img src="SVG/puzzle.svg" class="icon-svg-modal-titulo" alt="Puzzle">
+        </h3>
         
         <div class="modal-corpo">
             <p>Este portal é um projeto de iniciativa pessoal, desenvolvido de forma amadora e sem fins lucrativos, com o objetivo de partilhar recursos digitais educativos e lúdicos para a Educação Pré-Escolar e 1º Ciclo.</p>
             <p>Sendo um projeto independente de desenvolvimento pessoal nos tempos livres, agradeço que se detetar qualquer erro de programação ou imprecisão pedagógica, entre em contacto para podermos retificar.</p>
             <p>Foi feito um esforço de design para tornar o portal responsivo, procurando a melhor compatibilidade com telemóveis, tablets, computadores e quadros interativos.</p>
-			<p>Por norma, cada jogo pode ser constituído por vários minijogos. Tentou-se que não houvesse repetições mesmo jogando várias vezes seguidas.</p>
+            <p>Por norma, cada jogo pode ser constituído por vários minijogos. Tentou-se que não houvesse repetições mesmo jogando várias vezes seguidas.</p>
             
             <hr class="modal-divisoria">
             
@@ -1079,6 +1101,15 @@
                 </div>
                 
             </div>
+
+            <!-- Assinatura / Autor no final -->
+            <div class="modal-autor">
+                <a href="https://eduardosoeiro.info/" target="_blank" rel="noopener noreferrer" class="autor-nome">
+        Professor Eduardo
+    </a>
+                <span class="autor-cargo">Coordenador TIC - EB1/PE da Marinheira</span>
+            </div>
+
         </div>
     </div>
 </div>
