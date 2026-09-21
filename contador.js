@@ -15,13 +15,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// Ícone SVG limpo (Comando de jogo em vetor)
+// Ícone SVG limpo (Comando de jogo)
 const iconeJogoSVG = `
-<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2c3e50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle;">
   <rect x="2" y="6" width="20" height="12" rx="5"/>
   <path d="M6 12h4M8 10v4"/>
-  <circle cx="15" cy="13" r="1" fill="#2c3e50"/>
-  <circle cx="18" cy="11" r="1" fill="#2c3e50"/>
+  <circle cx="15" cy="13" r="1" fill="currentColor"/>
+  <circle cx="18" cy="11" r="1" fill="currentColor"/>
 </svg>`;
 
 // 2. Extrai o nome do jogo a partir da tag <title>
@@ -44,59 +44,80 @@ function obterNomeJogo() {
   return ultimoSegmento;
 }
 
-// 3. Injeta o indicador com SVG e comportamento inteligente
-function injetarBadgeVisual(totalVisitas) {
+// 3. Injeta o contador dentro do menu inicial (com suporte para todos os layouts)
+function injetarContadorNoMenu(totalVisitas) {
   const desenhar = () => {
-    let badge = document.getElementById("badge-contador-flutuante");
-    
-    if (!badge) {
-      badge = document.createElement("div");
-      badge.id = "badge-contador-flutuante";
+    if (document.getElementById("contador-inline-game")) return;
 
-      // Estilo elegante e responsivo
-      Object.assign(badge.style, {
-        position: "fixed",
-        top: "12px",
-        right: "16px",
-        zIndex: "99999",
-        backgroundColor: "rgba(255, 255, 255, 0.95)",
-        color: "#2c3e50",
-        padding: "5px 12px",
-        borderRadius: "20px",
-        fontFamily: "Arial, sans-serif",
-        fontSize: "12px",
-        fontWeight: "bold",
-        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
-        border: "1px solid rgba(0, 0, 0, 0.08)",
-        display: "flex",
-        alignItems: "center",
-        gap: "6px",
-        pointerEvents: "none",
-        transition: "opacity 0.4s ease, transform 0.4s ease"
-      });
+    const badge = document.createElement("div");
+    badge.id = "contador-inline-game";
 
-      document.body.appendChild(badge);
-
-      // DESAPARECER AO INICIAR O JOGO:
-      // Ouve cliques na página. Se o utilizador clicar em botões/elementos de início, esconde o balão
-      document.addEventListener("click", (e) => {
-        const elementoClicado = e.target;
-        // Se clicar num botão, num cartão com ação ou num elemento de menu/nível
-        if (
-          elementoClicado.tagName === "BUTTON" ||
-          elementoClicado.closest("button") ||
-          elementoClicado.getAttribute("onclick") ||
-          elementoClicado.closest("[onclick]") ||
-          elementoClicado.classList.contains("btn")
-        ) {
-          badge.style.opacity = "0";
-          badge.style.transform = "translateY(-10px)";
-          setTimeout(() => { badge.style.display = "none"; }, 400);
-        }
-      });
-    }
+    Object.assign(badge.style, {
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "8px",
+      margin: "15px auto 10px auto",
+      padding: "6px 16px",
+      backgroundColor: "rgba(255, 255, 255, 0.90)",
+      border: "1px solid rgba(0, 0, 0, 0.08)",
+      borderRadius: "20px",
+      color: "var(--text-main, #2c3e50)",
+      fontFamily: "inherit",
+      fontSize: "0.95rem",
+      fontWeight: "600",
+      boxShadow: "0 2px 6px rgba(0, 0, 0, 0.06)",
+      transition: "opacity 0.3s ease"
+    });
 
     badge.innerHTML = `${iconeJogoSVG} <span>${totalVisitas.toLocaleString('pt-PT')} jogadas</span>`;
+
+    // Lista de seletores para encontrar o menu de qualquer jogo
+    const seletoresCandidatos = [
+      ".grid-niveis",
+      "#ecra-selecao",
+      ".ecra-selecao",
+      "#cartao-jogo",
+      ".cartao-jogo-container",
+      "#menu-principal",
+      "#start-screen",
+      ".start-screen",
+      "#menu",
+      ".menu-container",
+      "main",
+      "#game-container",
+      ".container"
+    ];
+
+    let elementoEncontrado = null;
+    let seletorUsado = "";
+
+    for (const seletor of seletoresCandidatos) {
+      const el = document.querySelector(seletor);
+      if (el) {
+        elementoEncontrado = el;
+        seletorUsado = seletor;
+        break;
+      }
+    }
+
+    if (elementoEncontrado) {
+      if (seletorUsado === ".grid-niveis") {
+        elementoEncontrado.insertAdjacentElement("afterend", badge);
+      } else {
+        elementoEncontrado.appendChild(badge);
+      }
+    } else {
+      // Fallback: se não encontrar nenhuma das estruturas, coloca no canto inferior
+      Object.assign(badge.style, {
+        position: "fixed",
+        bottom: "15px",
+        right: "15px",
+        margin: "0",
+        zIndex: "99999"
+      });
+      document.body.appendChild(badge);
+    }
   };
 
   if (document.body) {
@@ -106,7 +127,7 @@ function injetarBadgeVisual(totalVisitas) {
   }
 }
 
-// 4. Executa a contagem
+// 4. Registo e atualização no Firebase
 const idJogo = obterNomeJogo();
 
 if (idJogo) {
@@ -116,7 +137,7 @@ if (idJogo) {
     return (valorAtual || 0) + 1;
   }).then((result) => {
     if (result.committed) {
-      injetarBadgeVisual(result.snapshot.val());
+      injetarContadorNoMenu(result.snapshot.val());
     }
   }).catch((error) => {
     console.error("Erro ao comunicar com o Firebase:", error);
