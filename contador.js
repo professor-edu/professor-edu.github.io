@@ -15,13 +15,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// Ícone SVG nítido (Comando de jogo)
-const iconeJogoSVG = `
-<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2c3e50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;">
-  <rect x="2" y="6" width="20" height="12" rx="5"/>
-  <path d="M6 12h4M8 10v4"/>
-  <circle cx="15" cy="13" r="1" fill="#2c3e50"/>
-  <circle cx="18" cy="11" r="1" fill="#2c3e50"/>
+// Ícone SVG: Taça/Troféu (Opção 3) adaptada às cores suaves (Opção 1)
+const iconeTacaSVG = `
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2b4c7e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;">
+  <path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/>
+  <path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/>
+  <path d="M4 22h16"/>
+  <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+  <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+  <path d="M18 2H6v7a6 6 0 0 0 12 0V2z" fill="#d0e1fd"/>
 </svg>`;
 
 // 2. Extrai o nome do jogo a partir da tag <title>
@@ -44,7 +46,7 @@ function obterNomeJogo() {
   return ultimoSegmento;
 }
 
-// 3. Injeta o indicador flutuante sem afetar a altura ou o layout do jogo
+// 3. Injeta o indicador flutuante personalizado
 function injetarBadgeFlutuante(totalVisitas) {
   const desenhar = () => {
     let badge = document.getElementById("badge-contador-flutuante");
@@ -58,25 +60,26 @@ function injetarBadgeFlutuante(totalVisitas) {
         top: "12px",
         right: "16px",
         zIndex: "99999",
-        backgroundColor: "rgba(255, 255, 255, 0.95)",
-        color: "#2c3e50",
-        padding: "5px 12px",
-        borderRadius: "20px",
-        fontFamily: "Arial, sans-serif",
-        fontSize: "12px",
-        fontWeight: "bold",
-        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
-        border: "1px solid rgba(0, 0, 0, 0.08)",
+        backgroundColor: "#ffffff",
+        color: "#2b4c7e",
+        padding: "6px 14px",
+        borderRadius: "12px", // Cantos da Opção 3
+        fontFamily: "'Segoe UI', Roboto, Arial, sans-serif",
+        fontSize: "13px",
+        fontWeight: "700",
+        boxShadow: "0 3px 10px rgba(43, 76, 126, 0.12)", // Sombra da Opção 1
+        border: "2px solid #d0e1fd",                      // Borda da Opção 1
         display: "flex",
         alignItems: "center",
-        gap: "6px",
-        pointerEvents: "none", // Não bloqueia cliques nos botões do jogo
+        gap: "8px",
+        pointerEvents: "none",                           // Não afeta cliques nem scroll
+        userSelect: "none",
         transition: "opacity 0.4s ease, transform 0.4s ease"
       });
 
       document.body.appendChild(badge);
 
-      // Desaparece assim que o jogador interage/clica no ecrã inicial
+      // Esconde suavemente ao primeiro clique no ecrã
       document.addEventListener("click", () => {
         if (badge) {
           badge.style.opacity = "0";
@@ -86,7 +89,7 @@ function injetarBadgeFlutuante(totalVisitas) {
       }, { once: true });
     }
 
-    badge.innerHTML = `${iconeJogoSVG} <span>${totalVisitas.toLocaleString('pt-PT')} jogadas</span>`;
+    badge.innerHTML = `${iconeTacaSVG} <span>${totalVisitas.toLocaleString('pt-PT')} jogadas</span>`;
   };
 
   if (document.body) {
@@ -96,7 +99,7 @@ function injetarBadgeFlutuante(totalVisitas) {
   }
 }
 
-// 4. Registo no Firebase
+// 4. Registo e atualização no Firebase
 const idJogo = obterNomeJogo();
 
 if (idJogo) {
