@@ -15,19 +15,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// 2. Função que obtém o nome do jogo a partir da tag <title>
-// Função atualizada no contador.js
+// 2. Função para ler o nome do jogo a partir da tag <title>
 function obterNomeJogo() {
-  // 1. Lê a tag <title> do HTML
   let titulo = document.title ? document.title.trim() : "";
 
-  // 2. Se a tag <title> existir e não for "inicio" ou "home"
   if (titulo && titulo.toLowerCase() !== "inicio" && titulo.toLowerCase() !== "home") {
-    // Apenas limpa os carateres proibidos pelo Firebase: . # $ [ ] /
     return titulo.replace(/[.#$\[\]\/]/g, "").trim();
   }
 
-  // Fallback (caso a tag <title> esteja vazia)
   let caminho = window.location.pathname.replace(/\/$/, ""); 
   let partes = caminho.split('/').filter(Boolean);
   if (partes.length === 0) return 'inicio';
@@ -40,7 +35,53 @@ function obterNomeJogo() {
   return ultimoSegmento;
 }
 
-// 3. Registo de visita
+// 3. Função que cria e injeta o elemento visual discreto no ecrã
+function mostrarContadorNoEcra(totalVisitas) {
+  // Se já existir no HTML um elemento <span id="contador-jogo">, atualiza-o
+  const elExistente = document.getElementById("contador-jogo");
+  if (elExistente) {
+    elExistente.textContent = totalVisitas.toLocaleString('pt-PT');
+    return;
+  }
+
+  // Se o badge dinâmico ainda não foi criado, cria-o agora
+  let badge = document.getElementById("badge-contador-flutuante");
+  if (!badge) {
+    badge = document.createElement("div");
+    badge.id = "badge-contador-flutuante";
+
+    // Aplicar estilos CSS diretamente via JavaScript (sem mexer em ficheiros .css)
+    Object.assign(badge.style, {
+      position: "fixed",
+      top: "14px",
+      right: "20px",
+      zIndex: "99999",
+      backgroundColor: "rgba(255, 255, 255, 0.92)",
+      backdropFilter: "blur(4px)",
+      color: "#2c3e50",
+      padding: "6px 14px",
+      borderRadius: "20px",
+      fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+      fontSize: "13px",
+      fontWeight: "600",
+      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.10)",
+      border: "1px solid rgba(0, 0, 0, 0.08)",
+      display: "flex",
+      alignItems: "center",
+      gap: "6px",
+      pointerEvents: "none",
+      userSelect: "none",
+      transition: "opacity 0.3s ease"
+    });
+
+    document.body.appendChild(badge);
+  }
+
+  // Define o conteúdo com ícone e número formatado
+  badge.innerHTML = `🎮 <span>${totalVisitas.toLocaleString('pt-PT')} jogadas</span>`;
+}
+
+// 4. Registo no Firebase
 const idJogo = obterNomeJogo();
 
 if (idJogo) {
@@ -50,10 +91,8 @@ if (idJogo) {
     return (valorAtual || 0) + 1;
   }).then((result) => {
     if (result.committed) {
-      const elementoContador = document.getElementById("contador-jogo");
-      if (elementoContador) {
-        elementoContador.textContent = result.snapshot.val().toLocaleString('pt-PT');
-      }
+      const totalVisitas = result.snapshot.val();
+      mostrarContadorNoEcra(totalVisitas);
     }
   }).catch((error) => {
     console.error("Erro ao registar visita:", error);
