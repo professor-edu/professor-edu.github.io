@@ -17,14 +17,10 @@ const db = getDatabase(app);
 
 // Ícone SVG: Taça/Troféu
 const iconeTacaSVG = `
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2b4c7e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block; flex-shrink: 0;">
-  <path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/>
-  <path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/>
-  <path d="M4 22h16"/>
-  <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
-  <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
-  <path d="M18 2H6v7a6 6 0 0 0 12 0V2z" fill="#d0e1fd"/>
-</svg>`;
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+            <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-3.05 11a22.35 22.35 0 0 1-3.95 2z"/>
+          </svg>`;
 
 // Lê a pasta de todos os jogos para calcular a soma total real
 const jogosRef = ref(db, "estatisticas/jogos");
@@ -65,7 +61,7 @@ onValue(jogosRef, (snapshot) => {
         user-select: none;
       ">
         ${iconeTacaSVG}
-        <span>${totalHistorico.toLocaleString('pt-PT')} jogadas no site</span>
+        <span>${totalHistorico.toLocaleString('pt-PT')} jogos realizados</span>
       </div>
     `;
   }
