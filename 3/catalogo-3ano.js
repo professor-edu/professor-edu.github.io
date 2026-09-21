@@ -16,7 +16,7 @@ const todosOsJogos =[
 	{ nome: "Acentuação", icone: "icones/acentuacao.png", link: "pt/acentuacao/", cat: "pt" },
 	{ nome: "O Mistério dos Sinais", icone: "icones/sinais.png", link: "pt/sinais/", cat: "pt" },
 	{ nome: "Quantificadores Numerais", icone: "icones/quantificadores_numerais.png", link: "pt/quantificadores-numerais/", cat: "pt" },
-	{ nome: "A Viagem dos Verbos", icone: "icones/viagem_verbos.png", link: "pt/viagem_verbos/", cat: "pt" },
+	{ nome: "A Viagem dos Verbos", icone: "icones/viagem_verbos.png", link: "pt/viagem-verbos/", cat: "pt" },
 	{ nome: "Grupos nas Frases", icone: "icones/grupos_frases.png", link: "pt/grupos-frases/", cat: "pt" },
 	{ nome: "Advérbios", icone: "icones/adverbios.png", link: "pt/adverbios/", cat: "pt" },
 	{ nome: "Conectores Discursivos", icone: "icones/conectores_discursivos.png", link: "pt/conectores-discursivos/", cat: "pt" },
@@ -42,7 +42,7 @@ const todosOsJogos =[
 	{ nome: "Detetive das Coordenadas", icone: "icones/coordenadas.png", link: "mat/coordenadas/", cat: "mat" },
 	{ nome: "O Robô do Ábaco", icone: "icones/abaco.png", link: "mat/abaco/", cat: "mat" },
 	{ nome: "O Chefe das Frações", icone: "icones/fracoes.png", link: "mat/fracoes/", cat: "mat" },
-    { nome: "Fábrica de Cálculos", icone: "icones/fabrica_calculo.png", link: "mat/fabrica_calculo/", cat: "mat" },
+    { nome: "Fábrica de Cálculos", icone: "icones/fabrica_calculo.png", link: "mat/fabrica-calculo/", cat: "mat" },
 	{ nome: "O Sapo saltador", icone: "icones/sapo_saltador.png", link: "mat/sapo-saltador/", cat: "mat" },
 	{ nome: "Perímetro e Área", icone: "icones/perimetro_area.png", link: "mat/perimetro-area/", cat: "mat" },
 	{ nome: "Numeração Romana", icone: "icones/numeracao_romana.png", link: "mat/numeracao-romana/", cat: "mat" },
@@ -62,7 +62,7 @@ const todosOsJogos =[
 	{ nome: "A Máquina do Tempo", icone: "icones/maquina_tempo.png", link: "em/maquina-tempo/", cat: "em" },
 	{ nome: "Portugal e a Europa", icone: "icones/portugal_europa.png", link: "em/portugal-europa/", cat: "em" },
 	{ nome: "A Teia da Vida", icone: "icones/teia_vida.png", link: "em/teia-vida/", cat: "em" },
-	{ nome: "Terra, Lua e Luz", icone: "icones/terra_lua_luz.png", link: "em/terra_lua_luz/", cat: "em" },
+	{ nome: "Terra, Lua e Luz", icone: "icones/terra_lua_luz.png", link: "em/terra-lua-luz/", cat: "em" },
 	{ nome: "Relevo e Rios", icone: "icones/relevo.png", link: "em/relevo/", cat: "em" },
 	{ nome: "Continentes e Oceanos", icone: "icones/continentes_oceanos.png", link: "em/continentes-oceanos/", cat: "em" }
 
