@@ -1428,6 +1428,9 @@
 	let rondasSorteadas = [];
 	let nivelAtualAtivo = 'nivel1';
 	let timerImpaciencia = null;
+	let aguardandoProximaRonda = false;
+	
+	const COOLDOWN_DICA = 2;
 
 	// MEMÓRIA ANTI-REPETIÇÃO IMEDIATA (Evita textos repetidos)
 	let l3UltimoTemplate = null;
@@ -1468,6 +1471,7 @@
 	}
 
 	function iniciarJogoLogica(nivelKey, tituloNivel) {
+		aguardandoProximaRonda = false;
 		erradas = 0;
 		desafioAtual = 0;
 		rondasParaDica = 0;
@@ -1501,6 +1505,7 @@
 		carregarRonda();
 	}
 	function carregarRonda() {
+		aguardandoProximaRonda = false;
 		const area = document.getElementById('game-area');
 		if (!area) return;
 		area.innerHTML = '';
@@ -1560,43 +1565,66 @@
 	}
 
 	function verificarEquacao() {
-		const ronda = rondasSorteadas[desafioAtual];
-		const inputField = document.getElementById('input-resposta-equacao');
-		if (!inputField) return;
+    // Se já estiver no tempo de transição, ignora novos cliques/Enter
+    if (aguardandoProximaRonda) return;
 
-		inputField.className = 'input-resposta-equacao';
-		const val = parseInt(inputField.value.trim(), 10);
+    const ronda = rondasSorteadas[desafioAtual];
+    const inputField = document.getElementById('input-resposta-equacao');
+    
+    if (!inputField) return;
 
-		if (val === ronda.resposta) {
-			inputField.classList.add('correto');
-			tocarSom('acerto');
-			atualizarMascote('contente', `Excelente cálculo! A resposta certa era mesmo ${ronda.resposta}!`, 3000);
+    inputField.className = 'input-resposta-equacao';
 
-			setTimeout(() => {
-				desafioAtual++;
-				
-				if (rondasParaDica > 0) rondasParaDica--;
-				atualizarBotaoDica();
+    // 1. OBTÉM O TEXTO SEM ESPAÇOS
+    const textoInput = inputField.value.trim();
 
-				atualizarPlacar();
-				if (desafioAtual < totalDesafiosNivel) {
-					carregarRonda();
-				} else {
-					finalizarJogo();
-				}
-			}, 2200);
-		} else {
-			inputField.classList.add('incorreto');
-			tocarSom('erro');
-			erradas++;
-			atualizarPlacar();
-			atualizarMascote('triste', "Cálculo incorreto! Tenta rever as contas ou usa uma dica se precisares!", 4500);
-			
-			setTimeout(() => {
-				inputField.classList.remove('incorreto');
-			}, 800);
-		}
-	}
+    // 2. VALIDAÇÃO DE CAMPO VAZIO (NOVO BLOC0)
+    if (textoInput === '') {
+        inputField.focus();
+        falarMascote("Escreve primeiro um número para responder!", 3000);
+        return; // Sai da função sem contar erro nem somar pontos
+    }
+
+    // 3. CONVERTE APENAS QUANDO GARANTIMOS QUE EXISTE UM TEXTO
+    const val = parseInt(textoInput, 10);
+
+    if (val === ronda.resposta) {
+        // Bloqueia interações adicionais instantaneamente
+        aguardandoProximaRonda = true;
+        inputField.disabled = true;
+
+        const btnVerificar = inputField.nextElementSibling;
+        if (btnVerificar) btnVerificar.disabled = true;
+
+        inputField.classList.add('correto');
+        tocarSom('acerto');
+        atualizarMascote('contente', `Excelente cálculo! A resposta certa era mesmo ${ronda.resposta}!`, 3000);
+
+        setTimeout(() => {
+            desafioAtual++;
+            
+            if (rondasParaDica > 0) rondasParaDica--;
+            atualizarBotaoDica();
+
+            atualizarPlacar();
+            if (desafioAtual < totalDesafiosNivel) {
+                carregarRonda();
+            } else {
+                finalizarJogo();
+            }
+        }, 2200);
+    } else {
+        inputField.classList.add('incorreto');
+        tocarSom('erro');
+        erradas++;
+        atualizarPlacar();
+        atualizarMascote('triste', "Cálculo incorreto! Tenta rever as contas ou usa uma dica se precisares!", 4500);
+        
+        setTimeout(() => {
+            inputField.classList.remove('incorreto');
+        }, 800);
+    }
+}
 
 	/* =========================================================================
 	   NÍVEL 4: ÁRVORE DA SABEDORIA (Quiz de Desafios Visuais) [3]
@@ -1628,47 +1656,53 @@
 	}
 
 	function submeterQuiz(opcaoEscolhida, botao) {
-		const ronda = rondasSorteadas[desafioAtual];
+    // Se já estiver a transitar de ronda, ignora outros cliques
+    if (aguardandoProximaRonda) return;
 
-		if (opcaoEscolhida === ronda.correta) {
-			document.querySelectorAll('.btn-opcao-quiz').forEach(b => {
-				b.style.pointerEvents = 'none';
-			});
+    const ronda = rondasSorteadas[desafioAtual];
 
-			botao.classList.add('sucesso-vibrante');
-			tocarSom('acerto');
+    if (opcaoEscolhida === ronda.correta) {
+        aguardandoProximaRonda = true; // Ativa o bloqueio imediato
 
-			atualizarMascote('contente', "Excelente! Acertaste na resposta da Árvore!", 4000);
+        document.querySelectorAll('.btn-opcao-quiz').forEach(b => {
+            b.style.pointerEvents = 'none';
+            b.disabled = true;
+        });
 
-			setTimeout(() => {
-				desafioAtual++;
-				
-				if (rondasParaDica > 0) rondasParaDica--;
-				atualizarBotaoDica();
+        botao.classList.add('sucesso-vibrante');
+        tocarSom('acerto');
 
-				atualizarPlacar();
-				if (desafioAtual < totalDesafiosNivel) {
-					carregarRonda();
-				} else {
-					finalizarJogo();
-				}
-			}, 2200);
+        atualizarMascote('contente', "Excelente! Acertaste na resposta da Árvore!", 4000);
 
-		} else {
-			botao.classList.add('erro-vibrante');
-			tocarSom('erro');
-			erradas++;
-			atualizarPlacar();
+        setTimeout(() => {
+            desafioAtual++;
+            
+            if (rondasParaDica > 0) rondasParaDica--;
+            atualizarBotaoDica();
 
-			atualizarMascote('triste', "Cálculo incorreto! Analisa o desafio com cuidado!", 4500);
+            atualizarPlacar();
+            if (desafioAtual < totalDesafiosNivel) {
+                carregarRonda();
+            } else {
+                finalizarJogo();
+            }
+        }, 2200);
 
-			setTimeout(() => {
-				botao.classList.remove('erro-vibrante');
-			}, 400);
+    } else {
+        botao.classList.add('erro-vibrante');
+        tocarSom('erro');
+        erradas++;
+        atualizarPlacar();
 
-			resetTimerImpaciencia();
-		}
-	}
+        atualizarMascote('triste', "Cálculo incorreto! Analisa o desafio com cuidado!", 4500);
+
+        setTimeout(() => {
+            botao.classList.remove('erro-vibrante');
+        }, 400);
+
+        resetTimerImpaciencia();
+    }
+}
 
 	/* =========================================================================
 	   ANALISADOR E CONVERSOR DE PNG DO DADOS [2]
