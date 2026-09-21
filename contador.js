@@ -156,19 +156,24 @@ function injetarBadgeFlutuante(totalVisitas) {
   }
 }
 
-// 4. Registo e atualização no Firebase
+// 4. Registo e atualização no Firebase (Jogo individual + Total do site)
 const idJogo = obterNomeJogo();
 
 if (idJogo) {
-  const contadorRef = ref(db, `estatisticas/jogos/${idJogo}/visitas`);
+  const contadorJogoRef = ref(db, `estatisticas/jogos/${idJogo}/visitas`);
+  const totalGeralRef = ref(db, `estatisticas/total_geral`);
 
-  runTransaction(contadorRef, (valorAtual) => {
+  // Incrementa o contador do jogo individual
+  runTransaction(contadorJogoRef, (valorAtual) => {
     return (valorAtual || 0) + 1;
   }).then((result) => {
     if (result.committed) {
       injetarBadgeFlutuante(result.snapshot.val());
     }
-  }).catch((error) => {
-    console.error("Erro ao comunicar com o Firebase:", error);
+  });
+
+  // Incrementa o total acumulado do site
+  runTransaction(totalGeralRef, (valorAtual) => {
+    return (valorAtual || 0) + 1;
   });
 }
