@@ -16,23 +16,18 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 // 2. Função que obtém o nome do jogo a partir da tag <title>
+// Função atualizada no contador.js
 function obterNomeJogo() {
-  // Lê a tag <title> do HTML
+  // 1. Lê a tag <title> do HTML
   let titulo = document.title ? document.title.trim() : "";
 
-  // Se os seus títulos tiverem algo como "Memória Mágica - Nome do Site",
-  // a linha abaixo limpa o "- Nome do Site" mantendo apenas "Memória Mágica"
-  if (titulo.includes(" - ")) {
-    titulo = titulo.split(" - ")[0].trim();
-  }
-
-  // Se a tag <title> existir e não for vazia nem "inicio"
+  // 2. Se a tag <title> existir e não for "inicio" ou "home"
   if (titulo && titulo.toLowerCase() !== "inicio" && titulo.toLowerCase() !== "home") {
-    // Limpa carateres proibidos pelo Firebase: . # $ [ ] /
+    // Apenas limpa os carateres proibidos pelo Firebase: . # $ [ ] /
     return titulo.replace(/[.#$\[\]\/]/g, "").trim();
   }
 
-  // Fallback (caso a tag <title> esteja vazia): usa o nome da pasta ou ficheiro
+  // Fallback (caso a tag <title> esteja vazia)
   let caminho = window.location.pathname.replace(/\/$/, ""); 
   let partes = caminho.split('/').filter(Boolean);
   if (partes.length === 0) return 'inicio';
