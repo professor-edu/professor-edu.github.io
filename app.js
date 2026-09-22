@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       gridContainer.innerHTML = `
         <p class="loading-texto">
-          A carregar os campeões... <img src="SVG/top.svg" alt="Top" class="icon-svg">
+          A carregar os campeões... <img src="SVG/TOP.svg" alt="Top" class="icon-svg">
         </p>`;
 
       // 1. Ler estatísticas reais do nó 'estatisticas/jogos' no Firebase
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="badge-ranking" style="background-color: ${badgeColor};">
             #${posicao}
           </span>
-          <img src="${jogo.icone}" alt="${jogo.nome}" class="capa-jogo" onerror="this.src='SVG/top.svg'">
+          <img src="${jogo.icone}" alt="${jogo.nome}" class="capa-jogo" onerror="this.src='SVG/TOP.svg'">
           <div class="titulo-jogo">${jogo.nome}</div>
           <div class="visitas-jogo">${jogo.cliques} jogadas</div>
         </a>
