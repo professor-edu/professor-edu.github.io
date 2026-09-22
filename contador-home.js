@@ -17,9 +17,8 @@ const db = getDatabase(app);
 
 // Ícone SVG: Taça/Troféu
 const iconeTacaSVG = `
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
-            <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-3.05 11a22.35 22.35 0 0 1-3.95 2z"/>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="#ffffff" stroke="#ffffff" stroke-width="1">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
           </svg>`;
 
 // Lê a pasta de todos os jogos para calcular a soma total real
@@ -47,18 +46,18 @@ onValue(jogosRef, (snapshot) => {
     contentor.innerHTML = `
       <div style="
         display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        background-color: #ffffff;
-        color: #2b4c7e;
-        padding: 8px 18px;
-        border-radius: 12px;
-        font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-        font-size: 15px;
-        font-weight: 700;
-        box-shadow: 0 4px 12px rgba(43, 76, 126, 0.12);
-        border: 2px solid #d0e1fd;
-        user-select: none;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #ff7b00 0%, #ffae00 100%);
+      color: #ffffff;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(255, 123, 0, 0.3);
+      border: 3px solid #ffffff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+      user-select: none;
       ">
         ${iconeTacaSVG}
         <span>${totalHistorico.toLocaleString('pt-PT')} jogos realizados</span>
