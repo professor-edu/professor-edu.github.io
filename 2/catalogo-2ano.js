@@ -12,7 +12,7 @@ const todosOsJogos =[
     { nome: "Singular e Plural", icone: "icones/numero.png", link: "pt/numero", cat: "pt" },
 	{ nome: "Sinónimos", icone: "icones/sinonimos.png", link: "pt/sinonimos", cat: "pt" },
 	{ nome: "Antónimos", icone: "icones/antonimos.png", link: "pt/antonimos", cat: "pt" },
-	{ nome: "Sinónimos e Antónimos", icone: "icones/sinonimos_antonimos".png, link: "pt/sinonimos-antonimos", cat: "pt" },
+	{ nome: "Sinónimos e Antónimos", icone: "icones/sinonimos_antonimos.png", link: "pt/sinonimos-antonimos", cat: "pt" },
 	{ nome: "Pontos e Acentos", icone: "icones/pontos_acentos.png", link: "pt/pontos-acentos", cat: "pt" },
     { nome: "Chuva de Palavras", icone: "icones/chuva_palavras.png", link: "pt/classes", cat: "pt" },
 	{ nome: "Construtor de Frases", icone: "icones/construtor_frases.png", link: "pt/ordenar-frases", cat: "pt" },
