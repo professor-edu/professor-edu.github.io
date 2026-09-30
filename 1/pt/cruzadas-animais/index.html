@@ -341,22 +341,21 @@
 		CORREÇÃO PARA PAINEIS E ECRÃS GRANDES ????
 		========================================= */
 		
-		@media (hover: none) and (pointer: coarse) {
-
-		  body {
-			height: auto !important;
-			overflow-y: auto !important;
-		  }
-
-		  main {
-			justify-content: flex-start !important;
-			overflow-y: visible !important;
-		  }
-
-		  footer {
-			margin-top: auto;
-		  }
-		}
+		/* Ativa o scroll APENAS se o ecrã for verticalmente pequeno (ex: telemóveis) */
+@media (max-height: 600px) {
+    body {
+        height: auto !important;
+        min-height: 100dvh !important;
+        overflow-y: auto !important;
+    }
+    main {
+        justify-content: flex-start !important;
+        overflow-y: visible !important;
+    }
+    footer {
+        margin-top: auto;
+    }
+}
 
 		
 		
