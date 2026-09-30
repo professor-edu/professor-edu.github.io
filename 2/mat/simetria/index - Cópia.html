@@ -36,22 +36,9 @@
             margin: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden;
         }
         
-        /* =========================================
-		   CORREÇÃO DE SCROLL 
-		   ========================================= */
-
-		/* Permite scroll na área principal sempre que o conteúdo ultrapassar o ecrã */
-		main {
-			overflow-y: auto;
-		}
-
-		/* Remove o bloqueio rígido do body */
-		@media (min-width: 769px) and (min-height: 600px) { 
-			body { 
-				min-height: 100vh; 
-				/* Removido o height: 100vh e overflow-y: hidden */
-			} 
-		}
+        @media (min-width: 769px) and (min-height: 600px) { 
+            body { height: 100vh; overflow-y: hidden; } 
+        }
         
         header { background-color: var(--bg-header); padding: 25px 20px; border-bottom: 1px solid var(--cor-2ano-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; flex-shrink: 0; z-index: 100; }
         .header-content { max-width: 1200px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; }
@@ -160,12 +147,10 @@
            O ESPELHO MÁGICO (CSS ESPECÍFICO)
            ========================================= */
         .area-jogo-custom {
-			display: flex; flex-direction: column; align-items: center; justify-content: center;
-			width: 100%; flex: 1; min-height: 0; background: #f8fafc; 
-			border: 2px dashed var(--cor-mat); border-radius: 20px; padding: 20px 15px; gap: 15px;
-			position: relative; color: #94a3b8; font-weight: bold; 
-			overflow: visible; /* Alterado de 'hidden' para 'visible' */
-		}
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: 100%; flex: 1; min-height: 0; background: #f8fafc; border: 2px dashed var(--cor-mat); border-radius: 20px; padding: 25px; gap: 15px;
+            position: relative; color: #94a3b8; font-weight: bold; overflow: hidden;
+        }
 
         /* Ecrã de Seleção com os 3 Cartões Quadrados */
         .titulo-menu { font-size: 1.8rem; color: var(--azul-escuro); margin-bottom: 25px; font-weight: 900;}
@@ -224,7 +209,6 @@
             height: 100%; 
             position: relative;
             transition: all 0.5s ease;
-			touch-action: manipulation;
         }
 
         .celula-pixel {
@@ -268,98 +252,27 @@
             100% { transform: scale(1); }
         }
 
-/* 3. A PALETA DE CORES */
+        /* 3. A PALETA DE CORES */
         .area-controlos {
-            display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%; flex-wrap: wrap;
+            display: flex; align-items: center; justify-content: center; gap: 20px; width: 100%; flex-wrap: wrap;
         }
         
         .paleta-cores {
-            display: flex; gap: 10px; padding: 10px 15px; background: white;
+            display: flex; gap: 15px; padding: 10px 20px; background: white;
             border: 4px solid var(--borda-cartao); border-radius: 30px; box-shadow: 0 4px 0 var(--borda-cartao);
-            flex-wrap: wrap; justify-content: center; max-width: 100%;
         }
 
         .btn-cor {
             width: 40px; height: 40px; border-radius: 50%; border: 4px solid white;
-            cursor: pointer; transition: 0.2s; box-shadow: 0 0 0 2px #ced6e0; flex-shrink: 0;
+            cursor: pointer; transition: 0.2s; box-shadow: 0 0 0 2px #ced6e0;
         }
-        .btn-cor.ativo { transform: scale(1.15); box-shadow: 0 0 0 3px var(--azul-vibrante), 0 0 15px rgba(0, 145, 255, 0.5); }
+        .btn-cor.ativo { transform: scale(1.2); box-shadow: 0 0 0 3px var(--azul-vibrante), 0 0 15px rgba(0, 145, 255, 0.5); }
         @media (hover: hover) { .btn-cor:hover { transform: scale(1.1); } }
 
         .btn-apagar-cor {
-            background: white; border-color: #ced6e0; color: #ff4757; font-weight: 900;
+            background: white; border-color: #ced6e0 !important; color: #ff4757; font-weight: 900;
             display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
         }
-		
-		
-		
-		/* ==========================================
-		   BOTÃO SECUNDÁRIO 
-		   ========================================== */
-		.btn-secundario {
-			/* Layout & Alinhamento Base */
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			gap: 6px;
-			
-			/* Espaçamento e Tamanho Tátil (ideal para tablets/Surface) */
-			padding: 8px 16px;
-			min-width: 64px;
-			min-height: 48px;
-			
-			/* Tipografia */
-			font-family: inherit;
-			font-size: 0.95rem;
-			font-weight: 700;
-			color: #4a5568;
-			
-			/* Cores e Moldura estilo "Lúdico / Botão 3D Subtil" */
-			background-color: #ffffff;
-			border: 2px solid #cbd5e0;
-			border-bottom: 4px solid #cbd5e0; /* Efeito 3D para parecer clicável */
-			border-radius: 12px;
-			
-			/* Animações e Interação */
-			cursor: pointer;
-			user-select: none;
-			touch-action: manipulation; /* Evita zooms acidentais no toque */
-			transition: all 0.15s ease;
-		}
-
-		/* Efeito ao passar o rato (Hover) */
-		.btn-secundario:hover {
-			background-color: #f7fafc;
-			border-color: #a0aec0;
-			border-bottom-color: #a0aec0;
-			color: #2d3748;
-			transform: translateY(-1px);
-		}
-
-		/* Efeito ao clicar / tocar no ecrã (Active) */
-		.btn-secundario:active {
-			transform: translateY(2px); /* Efeito de ser pressionado para baixo */
-			border-bottom-width: 2px;   /* Achata a borda 3D */
-			background-color: #edf2f7;
-		}
-
-		/* Variante: Disposição Vertical (Ícone em cima, Texto em baixo) */
-		.btn-secundario.btn-vertical {
-			flex-direction: column;
-			gap: 2px;
-			padding: 6px 12px;
-			font-size: 0.85rem;
-		}
-
-		/* Estado Desativado / Esgotado (para quando a dica se esgota) */
-		.btn-secundario.esgotada,
-		.btn-secundario:disabled {
-			opacity: 0.5;
-			cursor: not-allowed;
-			transform: none !important;
-			border-bottom-width: 2px !important;
-			background-color: #edf2f7;
-		}
 
         .btn-verificar {
             background: var(--cor-mat); color: white; border: none; padding: 12px 30px;
@@ -374,17 +287,12 @@
         .error-shake { animation: shakeGame 0.4s ease !important; border-color: var(--cor-erro) !important; }
         @keyframes shakeGame { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px) rotate(-2deg); } 75% { transform: translateX(6px) rotate(2deg); } }
 
-        /* Nomes das Obras (Animação Suave Corrigida) */
-        .nome-obra { 
-            font-size: 2rem; font-weight: 900; color: var(--azul-escuro); 
-            opacity: 0; max-height: 0; overflow: hidden; transition: all 0.5s ease;
-        }
-        .nome-obra.mostrar { 
-            opacity: 1; max-height: 100px; margin-top: 10px; animation: bounceNuvem 2s infinite;
-        }
+        /* Nomes das Obras */
+        .nome-obra { font-size: 2rem; font-weight: 900; color: var(--azul-escuro); opacity: 0; transition: 0.5s; height: 0; overflow: hidden;}
+        .nome-obra.mostrar { opacity: 1; height: auto; margin-top: 10px; animation: bounceNuvem 2s infinite;}
         @keyframes bounceNuvem { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
-        /* Overlay Níveis */
+        /* Overlay Niveis */
         .overlay-nivel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); z-index: 50; display: none; flex-direction: column; justify-content: center; align-items: center; border-radius: 20px; animation: fadeIn 0.3s; }
         .overlay-nivel h2 { color: var(--cor-2ano-dark); font-size: 2.5rem; margin-bottom: 10px; text-align: center;}
         .overlay-nivel p { font-size: 1.2rem; color: var(--text-main); font-weight: bold; text-align: center; padding: 0 20px;}
@@ -398,63 +306,75 @@
         .btn-acao.secundario { background-color: #ced6e0; color: #2d3436; box-shadow: 0 5px 0 #a4b0be; }
 
         /* =========================================
-           ADAPTAÇÃO UNIVERSAL DE SCROLL (MOBILE, TABLETS E SURFACE)
+           CORREÇÃO PARA TELEMÓVEIS NA HORIZONTAL
            ========================================= */
-        @media (max-height: 700px), (max-width: 900px) {
-            body { 
-                height: auto !important; 
-                min-height: 100vh;
-                overflow-y: auto !important; 
-            }
-            main { 
-                justify-content: flex-start !important; 
-                padding-top: 15px; 
-                padding-bottom: 15px; 
-                overflow-y: visible !important; 
-            }
-            .cartao-jogo-container { margin: 0 auto; }
+        @media (max-height: 600px) {
+            body { height: auto !important; overflow-y: auto !important; }
+            main { justify-content: flex-start !important; padding-top: 15px; padding-bottom: 15px; overflow-y: visible !important; }
+            .cartao-jogo-container { margin: auto 0; }
         }
+		
+		/* =========================================
+		CORREÇÃO PARA PAINEIS E ECRÃS GRANDES ????
+		========================================= */
+		
+		@media (hover: none) and (pointer: coarse) {
 
-        /* Ícones e SVG */
-        .icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
-        .icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
-        .icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
-        .icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+		  body {
+			height: auto !important;
+			overflow-y: auto !important;
+		  }
 
-        /* Fundo com Padrão */
-        body {
-            background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px);
-            background-size: 25px 25px;
-        }
-    </style>
+		  main {
+			justify-content: flex-start !important;
+			overflow-y: visible !important;
+		  }
+
+		  footer {
+			margin-top: auto;
+		  }
+		}		
+		
+		
+    .icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
+	.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
+	.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
+	.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+</style>
+
+<style>
+  body {
+    background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px);
+    background-size: 25px 25px;
+  }
+</style>
 </head>
 <body>
-
 
 <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
 <nav class="sidebar" id="sidebar">
     <div class="btn-fechar" onclick="toggleMenu()"><span>✕</span> Fechar</div>
     <ul>
-        <li><a href="../../../"><img src="../../../SVG/home.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'">Início</a></li>
-        <li><a href="../../../pre"><img src="../../../SVG/pre.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'">Pré-Escolar</a></li>
-        <li><a href="../../../1"><img src="../../../SVG/ano1.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'"> 1º Ano</a></li>
-        <li><a href="../../"><img src="../../../SVG/ano2.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'"> 2º Ano</a></li>
-        <li><a href="../../../3"><img src="../../../SVG/ano3.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'"> 3º Ano</a></li>
-        <li><a href="../../../4"><img src="../../../SVG/ano4.svg" alt="" class="icon-svg-menu" onerror="this.style.display='none'"> 4º Ano</a></li>
+        <li><a href="../../../"><img src="../../../SVG/home.svg" alt="Início" class="icon-svg-menu" onerror="this.style.display='none'">Início</a></li>
+        <li><a href="../../../pre"><img src="../../../SVG/pre.svg" alt="Pré-Escolar" class="icon-svg-menu" onerror="this.style.display='none'">Pré-Escolar</a></li>
+        <li><a href="../../../1"><img src="../../../SVG/ano1.svg" alt="1º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 1º Ano</a></li>
+        <li><a href="../../"><img src="../../../SVG/ano2.svg" alt="2º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 2º Ano</a></li>
+        <li><a href="../../../3"><img src="../../../SVG/ano3.svg" alt="3º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 3º Ano</a></li>
+        <li><a href="../../../4"><img src="../../../SVG/ano4.svg" alt="4º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 4º Ano</a></li>
     </ul>
 </nav>
 
 <header>
     <div class="header-content">
         <div class="nav-container">
-            <button type="button" class="hamburger" id="hamburgerBtn" onclick="toggleMenu()" aria-label="Abrir Menu">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
             </button>
-            <a href="../" class="btn-voltar"><img src="../../../SVG/voltar.svg" class="icon-svg-voltar" alt=""> Voltar</a>
+			<a href="../" class="btn-voltar"><img src="../../../SVG/voltar.svg" class="icon-svg-voltar" alt=""> Voltar</a>
         </div>
         
-        <h1>Simetria <img src="../img-titulos/simetria.svg" class="icon-svg-titulo" alt="Simetria"></h1>
+        <h1>Simetria <img src="../img-titulos/simetria.svg" class="icon-svg-titulo" alt=""></h1>
         <div class="subtitulo">Reflete a imagem para revelar o desenho!</div>
     </div>
 </header>
@@ -467,21 +387,21 @@
         <div id="ecra-selecao" class="ecra">
             <h2 class="titulo-menu">Escolhe a dificuldade:</h2>
             <div class="grelha-3-cartoes">
-                <button type="button" class="cartao-quadrado" onclick="iniciarJogo(1)">
+                <button class="cartao-quadrado" onclick="iniciarJogo(1)">
                     <div class="icone" style="background:#eaf2f8;">🟥</div>
                     <div class="texto">
                         <span class="titulo">O Aprendiz</span>
                         <span class="desc">Grelha 6x6 (1 Cor)</span>
                     </div>
                 </button>
-                <button type="button" class="cartao-quadrado" onclick="iniciarJogo(2)">
+                <button class="cartao-quadrado" onclick="iniciarJogo(2)">
                     <div class="icone" style="background:#fdedec;">🟩</div>
                     <div class="texto">
                         <span class="titulo">O Feiticeiro</span>
                         <span class="desc">Grelha 8x8 (2 Cores)</span>
                     </div>
                 </button>
-                <button type="button" class="cartao-quadrado" onclick="iniciarJogo(3)">
+                <button class="cartao-quadrado" onclick="iniciarJogo(3)">
                     <div class="icone" style="background:#fef9e7;">🟪</div>
                     <div class="texto">
                         <span class="titulo">O Mestre</span>
@@ -495,11 +415,11 @@
         <div id="ecra-jogo" class="ecra">
             
             <div class="status-bar-jogo">
-                <button type="button" class="btn-voltar-menu" onclick="voltarAoMenu()" id="btn-home-svg">🏠 Menu</button>
-                <button type="button" id="btn-dica" class="btn-dica" onclick="usarDica()">💡 Dica</button>
-                <div class="badge-ronda"><span id="badge-ronda-svg"></span><span id="val-ronda">1</span>/<span id="val-total-rondas">5</span></div> 
-                <div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
-                <div class="badge-erros"> <span id="icone-erro-svg">❌</span> <span id="val-erros">0</span></div>
+                <button class="btn-voltar-menu" onclick="voltarAoMenu()" id="btn-home-svg"></button>
+				<button id="btn-dica" class="btn-dica" onclick="usarDica()"></button>
+				<div class="badge-ronda"><span id="badge-ronda-svg"></span><span id="val-ronda">1</span>/<span id="val-total-rondas">5</span></div> 
+				<div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
+                <div class="badge-erros"> <span id="icone-erro-svg"></span> <span id="val-erros">0</span></div>
             </div>
 
             <div class="toast-msg" id="toast-msg">Aviso!</div>
@@ -521,16 +441,9 @@
 
                 <div class="area-controlos" id="controlos">
                     <div class="paleta-cores" id="paleta">
-                        <!-- Botões de cor gerados via JS -->
+                        <!-- Botões de cor gerados aqui -->
                     </div>
-					<button type="button" class="btn-secundario btn-vertical" onclick="limparGrelhaUtilizador()">
-						<svg viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<polyline points="3 6 5 6 21 6"></polyline>
-							<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-						</svg>
-						<span>Limpar</span>
-					</button>
-                    <button type="button" class="btn-verificar" onclick="verificarSimetria()">Verificar</button>
+                    <button class="btn-verificar" onclick="verificarSimetria()">Verificar</button>
                 </div>
 
             </div>
@@ -543,36 +456,29 @@
                 Desbloqueaste todas as obras de arte!<br>
                 Tiveste <strong id="final-erros" style="color:#ff4757">0</strong> erros.
             </div>
-            <button type="button" class="btn-acao" onclick="reiniciarJogo()">JOGAR DE NOVO 🔄</button>
-            <button type="button" class="btn-acao secundario" onclick="voltarAoMenu()">MENU 🏠</button>
+            <button class="btn-acao" onclick="reiniciarJogo()">JOGAR DE NOVO 🔄</button>
+            <button class="btn-acao secundario" onclick="voltarAoMenu()">MENU 🏠</button>
         </div>
     </div>
 </main>
 
 <footer>
-    <p><span id="ano-atual"></span> <img src="../../../SVG/2_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" rel="noopener" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
+    <p><span id="ano-atual"> </span><img src="../../../SVG/2_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
 </footer>
 
 <script>
-    // ==========================================
-    // VARIÁVEIS GLOBAIS DE CONTROLO DE TEMPO
-    // ==========================================
-    let revealTimer = null;
-    let toastTimer = null;
-    let audioCtx = null;
+    document.getElementById('ano-atual').innerText = new Date().getFullYear();
 
-    // Inicialização segura após o DOM estar carregado
+	// ==========================================
+    // SVGs BARRA DE ESTADO
+    // ==========================================
+    const SVG_HOME = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" style="margin-right:4px; vertical-align:middle;"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5z" fill="#fff" stroke="#d35400" stroke-width="2" stroke-linejoin="round"/><rect x="10" y="12" width="4" height="10" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/></svg> Menu`;
+    const SVG_STAR = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="#f1c40f" stroke="#f39c12" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px; vertical-align:middle;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
+    const SVG_BULB = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px; vertical-align:middle;"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"></path></svg>`;
+    const SVG_ERRO = `<svg viewBox="0 0 14 14" width="0.8em" height="0.8em" style="margin-right: 5px; vertical-align: middle;"><path d="M2 2 L12 12 M12 2 L2 12" stroke="var(--cor-pt, #ff4757)" stroke-width="3" stroke-linecap="round" /></svg>`;
+    
+    // Injeção visual na carga da página
     document.addEventListener("DOMContentLoaded", () => {
-        // Correção do Bug #1: Atribuição segura do ano
-        const elAno = document.getElementById('ano-atual');
-        if (elAno) elAno.textContent = new Date().getFullYear();
-
-        // SVGs BARRA DE ESTADO
-        const SVG_HOME = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" style="margin-right:4px; vertical-align:middle;"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5z" fill="#fff" stroke="#d35400" stroke-width="2" stroke-linejoin="round"/><rect x="10" y="12" width="4" height="10" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/></svg> Menu`;
-        const SVG_STAR = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="#f1c40f" stroke="#f39c12" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px; vertical-align:middle;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
-        const SVG_BULB = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px; vertical-align:middle;"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"></path></svg>`;
-        const SVG_ERRO = `<svg viewBox="0 0 14 14" width="0.8em" height="0.8em" style="margin-right: 5px; vertical-align: middle;"><path d="M2 2 L12 12 M12 2 L2 12" stroke="var(--cor-pt, #ff4757)" stroke-width="3" stroke-linecap="round" /></svg>`;
-        
         const btnHome = document.getElementById('btn-home-svg');
         const badgeRonda = document.getElementById('badge-ronda-svg');
         const btnAjuda = document.getElementById('btn-dica');
@@ -582,16 +488,9 @@
         if(btnAjuda) btnAjuda.innerHTML = SVG_BULB + ' Dica';
         if(iconeErro) iconeErro.innerHTML = SVG_ERRO;
         if(badgeRonda) badgeRonda.innerHTML = SVG_STAR;
-
-        mostrarEcra('ecra-selecao');
+        
     });
 
-    // Correção Bug #3: Ativação de áudio para Rato e Ecrã Tátil (Surface/iPads)
-    function initAudio() {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-    }
-    ['click', 'touchstart'].forEach(evt => document.addEventListener(evt, initAudio, { once: true }));
 
     function toggleMenu() {
         document.getElementById('sidebar').classList.toggle('active');
@@ -600,27 +499,28 @@
     }
 
     function mostrarEcra(id) {
-        // Cancela temporizadores pendentes ao mudar de ecrã
-        if (revealTimer) { clearTimeout(revealTimer); revealTimer = null; }
         document.querySelectorAll('.ecra').forEach(e => e.style.display = 'none');
         document.getElementById(id).style.display = 'flex';
     }
 
-    // Correção Bug #4: Controlo de tempo das mensagens Toast
     function showToast(msg, isError = false) {
         const toast = document.getElementById('toast-msg');
-        if (!toast) return;
         toast.textContent = msg;
         toast.style.borderColor = isError ? "var(--cor-erro)" : "#fbc531";
         toast.style.color = isError ? "var(--cor-erro)" : "#b18500";
         toast.style.backgroundColor = isError ? "#ffefef" : "#fff9c4";
         toast.classList.add('active');
-        
-        if (toastTimer) clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.remove('active'), 3000);
+        setTimeout(() => toast.classList.remove('active'), 3000);
     }
 
     // Sons (Web Audio API)
+    let audioCtx;
+    function initAudio() {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+    document.addEventListener('click', initAudio, { once: true });
+
     function tocarSom(tipo) {
         if (!audioCtx) initAudio();
         if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -634,14 +534,15 @@
             osc.type = 'triangle'; osc.frequency.setValueAtTime(250, agora); osc.frequency.exponentialRampToValueAtTime(150, agora + 0.2);
             gain.gain.setValueAtTime(0.3, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3); osc.start(agora); osc.stop(agora + 0.3);
         } else if (tipo === 'vitoria' || tipo === 'ronda') {
-            const notas = tipo === 'vitoria' ? [523.25, 659.25, 783.99, 1046.50] : [440, 554.37, 659.25];
+            const notas = tipo === 'vitoria' ?[523.25, 659.25, 783.99, 1046.50] :[440, 554.37, 659.25];
             notas.forEach((freq, i) => {
                 const o = audioCtx.createOscillator(); const g = audioCtx.createGain(); o.connect(g); g.connect(audioCtx.destination);
                 o.type = 'sine'; o.frequency.value = freq; g.gain.setValueAtTime(0.2, agora + i * 0.15); g.gain.exponentialRampToValueAtTime(0.01, agora + i * 0.15 + 0.3);
                 o.start(agora + i * 0.15); o.stop(agora + i * 0.15 + 0.3);
             });
         } else if (tipo === 'magia') {
-            const arp = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98];
+            // Efeito cintilante para a Revelação do Desenho
+            const arp =[523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98];
             arp.forEach((freq, i) => {
                 const o = audioCtx.createOscillator(); const g = audioCtx.createGain(); o.connect(g); g.connect(audioCtx.destination);
                 o.type = 'sine'; o.frequency.value = freq; 
@@ -653,8 +554,7 @@
 
     function lancarConfetis() {
         const container = document.getElementById('confetti-layer');
-        if (!container) return;
-        const colors = ['#e7d83f', '#0091ff', '#51cf66', '#ff6b6b'];
+        const colors =['#e7d83f', '#0091ff', '#51cf66', '#ff6b6b'];
         for (let i = 0; i < 60; i++) {
             let conf = document.createElement('div');
             conf.className = 'confetti';
@@ -666,20 +566,19 @@
             container.appendChild(conf);
         }
     }
-    
-    function limparConfetis() { 
-        const container = document.getElementById('confetti-layer');
-        if (container) container.innerHTML = ''; 
-    }
+    function limparConfetis() { document.getElementById('confetti-layer').innerHTML = ''; }
 
-    // BASE DE DADOS DOS PIXEL ARTS
+	// =========================================
+    // BASE DE DADOS DOS PIXEL ARTS (METADE ESQUERDA)
+    // Cores: 0=Vazio, 1,2,3,4 mapeiam para a palette do nivel
+    // =========================================
     function parseMatrix(strArray) { return strArray.map(row => row.split('').map(Number)); }
     function sortear(array) { return array.sort(() => Math.random() - 0.5); }
 
     const dbPuzzles = {
         1: { // Nível 1: Grelha 6x6, 1 Cor
-            cols: 6, colors: ['#eb4d4b'], 
-            puzzles: [
+            cols: 6, colors:['#eb4d4b'], 
+            puzzles:[
                 { name: "Coração 💖", left: parseMatrix(['011', '111', '111', '011', '001', '000']) },
                 { name: "Espada 🗡️", left: parseMatrix(['001', '011', '001', '111', '011', '001']) },
                 { name: "Árvore 🌲", left: parseMatrix(['001', '011', '111', '001', '001', '000']) },
@@ -691,8 +590,8 @@
             ]
         },
         2: { // Nível 2: Grelha 8x8, 3 Cores
-            cols: 8, colors: ['#be2edd', '#ff7979', '#f0932b'], 
-            puzzles: [
+            cols: 8, colors:['#be2edd', '#ff7979', '#f0932b'], 
+            puzzles:[
                 { name: "Borboleta 🦋", left: parseMatrix(['0110', '1221', '0110', '1221', '1221', '0110', '0010', '0000']) },
                 { name: "Cogumelo 🍄", left: parseMatrix(['0111', '1121', '1211', '1111', '0033', '0033', '0033', '0000']) },
                 { name: "Coroa 👑", left: parseMatrix(['1001', '1011', '1111', '1221', '1221', '1111', '0000', '0000']) },
@@ -703,9 +602,9 @@
                 { name: "Espada Épica ⚔️", left: parseMatrix(['0001', '0012', '0121', '1210', '3100', '1300', '0000', '0000']) }
             ]
         },
-        3: { // Nível 3: Grelha 10x10, 4 Cores
-            cols: 10, colors: ['#2bcbba', '#9c88ff', '#f1c40f', '#2f3640'], 
-            puzzles: [
+        3: { // Nível 3: Grelha 10x10, 4 Cores (Substituí o Branco por Amarelo!)
+            cols: 10, colors:['#2bcbba', '#9c88ff', '#f1c40f', '#2f3640'], // Verde, Roxo, Amarelo, Preto
+            puzzles:[
                 { name: "Monstrinho 👾", left: parseMatrix(['00111', '01121', '11341', '11111', '01111', '01221', '01111', '11011', '10001', '00000']) },
                 { name: "Robô 🤖", left: parseMatrix(['00111', '01221', '01111', '00440', '11111', '13111', '11111', '00110', '01110', '01110']) },
                 { name: "Castelo 🏰", left: parseMatrix(['10101', '11111', '22222', '22322', '22222', '22222', '24442', '24442', '24442', '22222']) },
@@ -718,17 +617,19 @@
         }
     };
 
+// =========================================
     // LÓGICA DO JOGO
+    // =========================================
     let nivelSelecionado = 1;
     let puzzleIndex = 0;
     const TOTAL_RONDAS = 5;
     let errosTotais = 0;
     
-    let puzzlesSorteados = []; 
+    let puzzlesSorteados =[]; // Variável nova para guardar os 5 escolhidos!
     let puzzleData = null; 
     let configLevel = null; 
     
-    let userGrid = []; 
+    let userGrid =[]; 
     let selectedColorIndex = 1; 
 
     function atualizarPlacar() {
@@ -740,11 +641,11 @@
 
     function iniciarJogo(nivel) {
         initAudio();
-        if (revealTimer) { clearTimeout(revealTimer); revealTimer = null; }
         nivelSelecionado = nivel;
         puzzleIndex = 0;
         errosTotais = 0;
         
+        // A MAGIA ACONTECE AQUI: Copia os desenhos do nível, baralha, e escolhe os 5 primeiros!
         let todosDoNivel = [...dbPuzzles[nivelSelecionado].puzzles];
         puzzlesSorteados = sortear(todosDoNivel).slice(0, TOTAL_RONDAS);
 
@@ -755,17 +656,13 @@
     }
 
     function carregarPuzzle() {
-        if (revealTimer) { clearTimeout(revealTimer); revealTimer = null; }
-        
-        const btnDica = document.getElementById('btn-dica');
-        if (btnDica) btnDica.classList.remove('esgotada');
-        
+        document.getElementById('btn-dica').classList.remove('esgotada');
         document.getElementById('nome-obra').classList.remove('mostrar');
         document.getElementById('moldura').classList.remove('revelado');
         document.getElementById('controlos').style.display = 'flex';
         
         configLevel = dbPuzzles[nivelSelecionado];
-        puzzleData = puzzlesSorteados[puzzleIndex]; 
+        puzzleData = puzzlesSorteados[puzzleIndex]; // Puxa da nossa lista baralhada!
         
         const coresUsadas = configLevel.colors;
         selectedColorIndex = 1;
@@ -796,6 +693,7 @@
                     cell.classList.add('fixo');
                     const corVal = puzzleData.left[r][c];
                     
+                    // CORREÇÃO: O fundo agora é 'white' em vez de 'transparent'
                     if (corVal > 0) cell.style.backgroundColor = coresUsadas[corVal - 1];
                     else cell.style.backgroundColor = "white"; 
                     
@@ -814,19 +712,17 @@
     function escolherCor(idx) {
         selectedColorIndex = idx;
         document.querySelectorAll('.btn-cor').forEach(b => b.classList.remove('ativo'));
-        const elCor = document.getElementById(`cor-${idx}`);
-        if (elCor) elCor.classList.add('ativo');
+        document.getElementById(`cor-${idx}`).classList.add('ativo');
     }
 
     function pintarPixel(r, cVirtual) {
         userGrid[r][cVirtual] = selectedColorIndex;
         const cell = document.getElementById(`pixel-${r}-${cVirtual}`);
-        if (!cell) return;
         
-        cell.classList.remove('anim-dica'); 
+        cell.classList.remove('anim-dica'); // Limpa dica se pintar por cima
 
         if (selectedColorIndex === 0) {
-            cell.style.backgroundColor = "white"; 
+            cell.style.backgroundColor = "white"; // "Apaga" simulando o fundo branco da célula
         } else {
             cell.style.backgroundColor = configLevel.colors[selectedColorIndex - 1];
         }
@@ -834,8 +730,9 @@
 
     function usarDica() {
         const btn = document.getElementById('btn-dica');
-        if(!btn || btn.classList.contains('esgotada')) return;
+        if(btn.classList.contains('esgotada')) return;
         
+        // Procura o primeiro pixel que não bate certo com o espelho
         const rows = puzzleData.left.length;
         const colMeio = puzzleData.left[0].length;
         
@@ -843,13 +740,13 @@
 
         for(let r = 0; r < rows; r++) {
             for(let cVirtual = 0; cVirtual < colMeio; cVirtual++) {
+                // A posição na matriz esquerda que corresponde a este pixel (espelhado)
                 let cEsq = colMeio - 1 - cVirtual;
                 let valEsq = puzzleData.left[r][cEsq];
                 let valDir = userGrid[r][cVirtual];
 
                 if (valEsq !== valDir) {
-                    const cellToHighlight = document.getElementById(`pixel-${r}-${cVirtual}`);
-                    if (cellToHighlight) cellToHighlight.classList.add('anim-dica');
+                    document.getElementById(`pixel-${r}-${cVirtual}`).classList.add('anim-dica');
                     encontrouErro = true;
                     break;
                 }
@@ -864,22 +761,6 @@
             showToast("Tudo certo até agora! Continua a pintar.", false);
         }
     }
-	
-	function limparGrelhaUtilizador() {
-		if (!puzzleData) return;
-		
-		// 1. Reseta a matriz de dados do utilizador para 0
-		const colMeio = configLevel.cols / 2;
-		userGrid = userGrid.map(row => row.fill(0));
-
-		// 2. Limpa visualmente as células da direita e remove animações de dica
-		document.querySelectorAll('.celula-pixel:not(.fixo)').forEach(cell => {
-			cell.style.backgroundColor = 'white';
-			cell.classList.remove('anim-dica');
-		});
-
-		tocarSom('erro'); // Opcional: som subtil de ação/cancelar
-	}
 
     function verificarSimetria() {
         const rows = puzzleData.left.length;
@@ -906,40 +787,35 @@
             atualizarPlacar();
             tocarSom('erro');
             const moldura = document.getElementById('moldura');
-            if (moldura) {
-                moldura.classList.add('error-shake');
-                setTimeout(() => moldura.classList.remove('error-shake'), 400);
-            }
+            moldura.classList.add('error-shake');
             showToast("Ainda não está igual ao espelho!", true);
+            setTimeout(() => moldura.classList.remove('error-shake'), 400);
         }
     }
 
     function animacaoReveal() {
-        tocarSom('magia'); 
+        tocarSom('magia'); // Som cintilante de revelação
         document.getElementById('controlos').style.display = 'none';
         
         const moldura = document.getElementById('moldura');
-        if (moldura) moldura.classList.add('revelado');
+        moldura.classList.add('revelado');
 
+        // Limpa os fundos brancos (vazios) para ficarem transparentes e realçar o desenho
         document.querySelectorAll('.celula-pixel').forEach(c => {
             if (c.style.backgroundColor === "white" || c.style.backgroundColor === "") {
                 c.style.backgroundColor = "transparent";
             }
         });
 
+        // Revela o Título da Obra
         const titulo = document.getElementById('nome-obra');
-        if (titulo) {
-            titulo.textContent = `Desbloqueaste: ${puzzleData.name}`;
-            titulo.classList.add('mostrar');
-        }
+        titulo.textContent = `Desbloqueaste: ${puzzleData.name}`;
+        titulo.classList.add('mostrar');
 
-        // Correção Bug #2: Controlo estrito do temporizador
-        if (revealTimer) clearTimeout(revealTimer);
-        revealTimer = setTimeout(avancarRonda, 3500); 
+        setTimeout(avancarRonda, 3500); // Dá tempo para a criança admirar o desenho
     }
 
     function avancarRonda() {
-        revealTimer = null;
         puzzleIndex++;
         atualizarPlacar();
         
@@ -951,7 +827,6 @@
     }
 
     function finalizarJogo() {
-        if (revealTimer) { clearTimeout(revealTimer); revealTimer = null; }
         document.getElementById('progress-fill').style.width = `100%`;
         document.getElementById('final-erros').textContent = errosTotais;
         mostrarEcra('ecra-fim');
@@ -961,6 +836,9 @@
 
     function reiniciarJogo() { iniciarJogo(nivelSelecionado); }
     function voltarAoMenu() { mostrarEcra('ecra-selecao'); }
+
+    window.onload = () => mostrarEcra('ecra-selecao');
+
 </script>
 <script type="module" src="/contador.js"></script></body>
 </html>
