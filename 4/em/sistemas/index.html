@@ -2329,17 +2329,17 @@
 	}
 
 	function prepararJogo(sistema) {
+		// Limpa a pilha de sessão apenas ao mudar de sistema
+		if (sistemaAtivo !== sistema) {
+			poolRestantesSessao = [];
+		}
+
 		sistemaAtivo = sistema;
 		erradas = 0; desafioAtual = 0; podeInteragir = true;
-		
-		// CORREÇÃO: Limpa a pilha de exclusão anterior ao mudar de sistema 
-		// para que perguntas de sistemas diferentes nunca se misturem na mesma partida!
-		poolRestantesSessao = [];
 
 		let base = [];
 		let nomeSistema = "";
 
-		// Seleção dinâmica da base de dados e do título do cabeçalho em conformidade com o sistema clicado
 		if (sistema === 'digestivo') {
 			base = BD_DIGESTIVO;
 			nomeSistema = "Sistema Digestivo";
@@ -2355,51 +2355,51 @@
 		}
 		
 		if (base.length >= 10) {
-			// 1. Isola as duas primeiras perguntas obrigatórias (Mapa e Ligar)
-			const obrig_mapa = base[0]; // tipo 'mapa'
-			const obrig_ligar = base[1]; // tipo 'ligar'
+			// 1. Isola TODOS os mapas existentes no sistema (1 no Digestivo/Circ/Resp, 2 no Reprodutor)
+			const mapasObrigatorios = base.filter(q => q.tipo === 'mapa');
+			const questoesSemMapa = base.filter(q => q.tipo !== 'mapa');
 			
-			// 2. Se a pilha de sessão estiver vazia ou com menos de 8 perguntas, recarrega e baralha
-			if (poolRestantesSessao.length < 8) {
-				// Carrega o resto das perguntas (excluindo as duas primeiras obrigatórias)
-				poolRestantesSessao = baralharArray(base.slice(2));
+			// Calcula quantas perguntas faltam para completar o total de 10
+			const numRestantesNecessarias = 10 - mapasObrigatorios.length;
+
+			// 2. Se a pilha de sessão tiver menos do que as necessárias, recarrega com o resto das questões
+			if (poolRestantesSessao.length < numRestantesNecessarias) {
+				poolRestantesSessao = baralharArray(questoesSemMapa);
 			}
 			
-			// 3. Retira (extrai e remove) exatamente 8 perguntas da pilha de sessão
-			const restantesSorteadas = poolRestantesSessao.splice(0, 8);
+			// 3. Extrai as questões rotativas da pilha da sessão
+			const restantesSorteadas = poolRestantesSessao.splice(0, numRestantesNecessarias);
 			
-			// 4. Garante que temos pelo menos 1 pergunta de cada um dos outros 4 tipos em falta no conjunto final
-			let poolFinal = [obrig_mapa, obrig_ligar, ...restantesSorteadas];
+			// 4. Junta os mapas obrigatórios + as restantes questões
+			let poolFinal = [...mapasObrigatorios, ...restantesSorteadas];
 			
-			const tiposGarantir = ['multipla', 'clicar', 'arrastar', 'lacunas'];
+			// 5. Garante a variedade de tipos no conjunto final
+			const tiposGarantir = ['multipla', 'verdadeiro-falso', 'arrastar', 'lacunas', 'ligar'];
 			let tiposPresentes = poolFinal.map(q => q.tipo);
 			
 			tiposGarantir.forEach(tipo => {
 				if (!tiposPresentes.includes(tipo)) {
-					// Se faltar um tipo na seleção, procura-o na base de dados restante e troca por um comum
-					const questaoSubstituta = base.slice(2).find(q => q.tipo === tipo);
+					const questaoSubstituta = questoesSemMapa.find(q => q.tipo === tipo);
 					if (questaoSubstituta) {
-						// Substitui o último elemento aleatório por este tipo em falta
+						// Substitui a última pergunta sorteada por esta em falta
 						poolFinal[poolFinal.length - 1] = questaoSubstituta;
 						tiposPresentes = poolFinal.map(q => q.tipo);
 					}
 				}
 			});
 			
-			// 5. Baralha o conjunto de 10 final para o aluno!
+			// 6. Baralha o conjunto de 10 final para espalhar os mapas aleatoriamente pelas 10 rondas
 			perguntasSorteadas = baralharArray(poolFinal);
 		} else {
-			// Salvaguarda caso a base de dados seja menor
 			perguntasSorteadas = baralharArray(base).slice(0, 10);
 		}
 		
 		const fog = document.getElementById('foguetao-feedback');
-		if(fog) { 
+		if (fog) { 
 			fog.style.display = "flex"; 
 			animarFoguetao('normal'); 
 		}
 		
-		// CORREÇÃO: Define o subtítulo do cabeçalho de forma totalmente dinâmica!
 		document.getElementById('subtitulo-header').textContent = nomeSistema;
 
 		rondasParaDica = 0;
@@ -2846,8 +2846,11 @@
 
 				ronda.coords.linhas.forEach(linhaObj => {
 				const path = document.createElementNS(svgNS, "path");
-				path.setAttribute("d", linhaObj.d); // Lê o trajeto d
-				path.setAttribute("stroke", linhaObj.cor || "#0091ff"); // Lê a cor individual definida ou usa azul por padrão
+				const dVal = typeof linhaObj === 'string' ? linhaObj : linhaObj.d;
+				const corVal = typeof linhaObj === 'string' ? "#0091ff" : (linhaObj.cor || "#0091ff");
+				
+				path.setAttribute("d", dVal);
+				path.setAttribute("stroke", corVal);
 				path.setAttribute("stroke-width", "0.6");
 				path.setAttribute("fill", "none");
 				svg.appendChild(path);
