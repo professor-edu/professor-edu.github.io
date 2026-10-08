@@ -1716,7 +1716,6 @@
         <div id="ecra-selecao" class="ecra" style="display: flex;">
                         
             <!-- ANIMAÇÃO/TUTORIAL RESERVADO (MÓDULO DE INTRODUÇÃO) -->
-            <!-- ANIMAÇÃO/TUTORIAL RESERVADO (ESQUERDA OU DIREITA? - DOUBLE-MATCH AUTO-EXPLICATIVO) -->
             <div class="animacao-tutorial" id="animacao-tutorial">
                 <div class="tuto-wrapper">
                     
@@ -1998,6 +1997,13 @@
        SECÇÃO 3: FUNÇÕES UTILITÁRIAS GERAIS E CONTROLO DE FLUXO
     ===================================================================== */
     
+	// Controlo de abertura do Menu Lateral (Hamburger)
+    function toggleMenu() { 
+        document.getElementById('sidebar').classList.toggle('active'); 
+        document.getElementById('overlay').classList.toggle('active'); 
+        document.getElementById('hamburgerBtn').classList.toggle('open'); 
+    }
+	
     let reservatorioPerguntas = {};
 
     function prepararPerguntasPartida(idJogo, limite) {
