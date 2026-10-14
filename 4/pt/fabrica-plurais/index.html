@@ -2136,12 +2136,12 @@ footer p { font-size: 0.8rem; color: var(--cor-4ano-dark); margin: 0; }
 				'barril': 'Singular',
 				'répteis': 'Plural',
 				'funil': 'Singular',
-				'fóssil': 'Singular',   // Nova (Grave - Singular)
-				'canis': 'Plural',      // Nova (Aguda - Plural)
-				'útil': 'Singular',     // Nova (Grave - Singular)
-				'difíceis': 'Plural',   // Nova (Grave - Plural)
-				'sutis': 'Plural',      // Nova (Aguda - Plural)
-				'projetil': 'Singular'  // Nova (Aguda - Singular)
+				'fóssil': 'Singular',   
+				'canis': 'Plural',      
+				'útil': 'Singular',     
+				'difíceis': 'Plural',   
+				'sutis': 'Plural',      
+				'projetil': 'Singular'  
 			},
 			dica: 'As palavras terminadas em -il estão no singular. No plural, mudam para -is (se forem agudas) ou -eis (se forem graves).'
 		},
@@ -2976,10 +2976,9 @@ footer p { font-size: 0.8rem; color: var(--cor-4ano-dark); margin: 0; }
 			let totalItens = ronda.itens.length;
 
 			// DETEÇÃO DINÂMICA DE CATEGORIAS DA BASE DE DADOS
-			// Extrai as duas categorias únicas definidas na propriedade "pares" da pergunta ativa!
 			const categoriasUnicas = Array.from(new Set(Object.values(ronda.pares)));
-			const cat1 = categoriasUnicas[0]; // Ex: "Singular" ou "Singular ou Invariável"
-			const cat2 = categoriasUnicas[1]; // Ex: "Plural"
+			const cat1 = categoriasUnicas[0]; 
+			const cat2 = categoriasUnicas[1]; 
 
 			const zona = document.createElement('div');
 			zona.className = 'painel-fabrica-plurais';
@@ -3002,13 +3001,13 @@ footer p { font-size: 0.8rem; color: var(--cor-4ano-dark); margin: 0; }
 				colPalavras.appendChild(b);
 			});
 
-			// Contentor 1 (Lê dinamicamente o nome cat1)
+			// Contentor 1
 			const depSingular = document.createElement('div');
 			depSingular.className = 'deposito-palavras deposito-singular';
 			depSingular.innerHTML = `<div class="deposito-titulo">${cat1}</div>`;
 			depSingular.onclick = () => { processarClassificacao(cat1, depSingular); };
 
-			// Contentor 2 (Lê dinamicamente o nome cat2)
+			// Contentor 2
 			const depPlural = document.createElement('div');
 			depPlural.className = 'deposito-palavras deposito-plural';
 			depPlural.innerHTML = `<div class="deposito-titulo">${cat2}</div>`;
@@ -3026,7 +3025,28 @@ footer p { font-size: 0.8rem; color: var(--cor-4ano-dark); margin: 0; }
 				const tag = document.createElement('div');
 				tag.className = 'destaque-fundo';
 				tag.style.margin = '4px';
+				tag.style.cursor = 'pointer'; // Feedback visual de item clicável
 				tag.textContent = palavra;
+
+				// PERMITIR RETIRAR A OPÇÃO AO CLICAR NA PALAVRA
+				tag.onclick = (e) => {
+					e.stopPropagation(); // Evita despoletar o clique do contentor
+					if (!podeInteragir) return;
+
+					tocarSom('flip');
+					delete selecoesArrastar[palavra];
+					tag.remove();
+
+					// Reativa o botão correspondente na grelha do topo
+					colPalavras.querySelectorAll('button').forEach(btn => {
+						if (btn.textContent === palavra) {
+							btn.disabled = false;
+							btn.style.opacity = '1';
+							btn.classList.remove('selecionado');
+						}
+					});
+				};
+
 				elementoDep.appendChild(tag);
 
 				arrastoAtivo.btn.style.opacity = '0.3';
