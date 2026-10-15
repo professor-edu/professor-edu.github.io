@@ -426,6 +426,12 @@
             background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px);
             background-size: 25px 25px;
         }
+		
+		#grelha {
+			touch-action: none;
+			user-select: none;
+			-webkit-user-select: none;
+		}
     </style>
 </head>
 <body>
@@ -555,11 +561,12 @@
 
 <script>
     // ==========================================
-    // VARIÁVEIS GLOBAIS DE CONTROLO DE TEMPO
+    // VARIÁVEIS GLOBAIS DE CONTROLO DE TEMPO E INTERAÇÃO
     // ==========================================
     let revealTimer = null;
     let toastTimer = null;
     let audioCtx = null;
+    let isMouseDown = false; // Controla o estado de arrasto em PC e Mobile
 
     // Inicialização segura após o DOM estar carregado
     document.addEventListener("DOMContentLoaded", () => {
@@ -583,6 +590,27 @@
         if(iconeErro) iconeErro.innerHTML = SVG_ERRO;
         if(badgeRonda) badgeRonda.innerHTML = SVG_STAR;
 
+        // Cancelar o arrasto se o utilizador soltar o clique/toque em qualquer ponto da página
+        window.addEventListener('mouseup', () => { isMouseDown = false; });
+        window.addEventListener('touchend', () => { isMouseDown = false; });
+        window.addEventListener('touchcancel', () => { isMouseDown = false; });
+
+        // Suporte para arrasto contínuo em ecras táteis (Mobile/Tablets)
+        const grelha = document.getElementById('grelha');
+        if (grelha) {
+            grelha.addEventListener('touchmove', (e) => {
+                if (!isMouseDown) return;
+                e.preventDefault(); // Evita que a página faça scroll ao pintar
+                const touch = e.touches[0];
+                const target = document.elementFromPoint(touch.clientX, touch.clientY);
+                if (target && target.dataset && target.dataset.r !== undefined && target.dataset.c !== undefined) {
+                    const r = parseInt(target.dataset.r, 10);
+                    const cVirtual = parseInt(target.dataset.c, 10);
+                    pintarPixel(r, cVirtual);
+                }
+            }, { passive: false });
+        }
+
         mostrarEcra('ecra-selecao');
     });
 
@@ -600,7 +628,6 @@
     }
 
     function mostrarEcra(id) {
-        // Cancela temporizadores pendentes ao mudar de ecrã
         if (revealTimer) { clearTimeout(revealTimer); revealTimer = null; }
         document.querySelectorAll('.ecra').forEach(e => e.style.display = 'none');
         document.getElementById(id).style.display = 'flex';
@@ -803,7 +830,30 @@
                 } else {
                     let colVirtualRight = c - colMeio;
                     cell.id = `pixel-${r}-${colVirtualRight}`;
-                    cell.onclick = () => pintarPixel(r, colVirtualRight);
+                    
+                    // Atributos data para rápida identificação nos eventos de toque/arrasto
+                    cell.dataset.r = r;
+                    cell.dataset.c = colVirtualRight;
+
+                    // Eventos de clique e arrasto para Rato (PC)
+                    cell.onmousedown = (e) => {
+                        e.preventDefault();
+                        isMouseDown = true;
+                        pintarPixel(r, colVirtualRight);
+                    };
+
+                    cell.onmouseenter = () => {
+                        if (isMouseDown) {
+                            pintarPixel(r, colVirtualRight);
+                        }
+                    };
+
+                    // Evento de toque inicial para Mobile
+                    cell.ontouchstart = (e) => {
+                        e.preventDefault();
+                        isMouseDown = true;
+                        pintarPixel(r, colVirtualRight);
+                    };
                 }
                 
                 grelha.appendChild(cell);
@@ -864,22 +914,20 @@
             showToast("Tudo certo até agora! Continua a pintar.", false);
         }
     }
-	
-	function limparGrelhaUtilizador() {
-		if (!puzzleData) return;
-		
-		// 1. Reseta a matriz de dados do utilizador para 0
-		const colMeio = configLevel.cols / 2;
-		userGrid = userGrid.map(row => row.fill(0));
+    
+    function limparGrelhaUtilizador() {
+        if (!puzzleData) return;
+        
+        const colMeio = configLevel.cols / 2;
+        userGrid = userGrid.map(row => row.fill(0));
 
-		// 2. Limpa visualmente as células da direita e remove animações de dica
-		document.querySelectorAll('.celula-pixel:not(.fixo)').forEach(cell => {
-			cell.style.backgroundColor = 'white';
-			cell.classList.remove('anim-dica');
-		});
+        document.querySelectorAll('.celula-pixel:not(.fixo)').forEach(cell => {
+            cell.style.backgroundColor = 'white';
+            cell.classList.remove('anim-dica');
+        });
 
-		tocarSom('erro'); // Opcional: som subtil de ação/cancelar
-	}
+        tocarSom('erro');
+    }
 
     function verificarSimetria() {
         const rows = puzzleData.left.length;
@@ -933,7 +981,6 @@
             titulo.classList.add('mostrar');
         }
 
-        // Correção Bug #2: Controlo estrito do temporizador
         if (revealTimer) clearTimeout(revealTimer);
         revealTimer = setTimeout(avancarRonda, 3500); 
     }
