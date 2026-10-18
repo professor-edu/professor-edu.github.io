@@ -43,6 +43,7 @@ const todosOsJogos =[
 	{ nome: "O Ritmo das Palavras", icone: "icones/ritmo_palavras.png", link: "pt/ritmo-palavras", cat: "pt" },
 	{ nome: "Ditongos", icone: "icones/ditongos.png", link: "pt/ditongos/", cat: "pt" },
 	{ nome: "Letra P", icone: "icones/letra_p.png", link: "pt/letra-p/", cat: "pt" },
+	{ nome: "Letra T", icone: "icones/letra_t.png", link: "pt/letra-t/", cat: "pt" },
     
     // ------------------------------------
     // MATEMÁTICA (cat: "mat") 
