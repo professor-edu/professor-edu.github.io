@@ -91,6 +91,7 @@ export const CATALOGO_JOGOS = [
 	{ nome: "Monstro das Imagens", icone: "1/icones/monstro_imagens.png", link: "1/pt/monstro-imagens", ano: "1º Ano" },
 	{ nome: "O Ritmo das Palavras", icone: "1/icones/ritmo_palavras.png", link: "1/pt/ritmo-palavras", ano: "1º Ano" },
 	{ nome: "Ditongos", icone: "1/icones/ditongos.png", link: "1/pt/ditongos", ano: "1º Ano" },
+	{ nome: "Letra P", icone: "1/icones/letra_p.png", link: "1/pt/letra-p", ano: "1º Ano" },
 
 	// Matemática (mat)
 	{ nome: "Vamos Contar!", icone: "1/icones/vamos_contar.png", link: "1/mat/contagens/", ano: "1º Ano" },
