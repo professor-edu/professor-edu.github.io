@@ -96,6 +96,7 @@ export const CATALOGO_JOGOS = [
 	{ nome: "Letra L", icone: "1/icones/letra_l.png", link: "1/pt/letra-l", ano: "1º Ano" },
 	{ nome: "Letra D", icone: "1/icones/letra_d.png", link: "1/pt/letra-d", ano: "1º Ano" },
 	{ nome: "Letra M", icone: "1/icones/letra_m.png", link: "1/pt/letra-m", ano: "1º Ano" },
+	{ nome: "Letras PTLDM", icone: "1/icones/letras.png", link: "1/pt/letras", ano: "1º Ano" },
 
 	// Matemática (mat)
 	{ nome: "Vamos Contar!", icone: "1/icones/vamos_contar.png", link: "1/mat/contagens/", ano: "1º Ano" },

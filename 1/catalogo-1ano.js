@@ -47,6 +47,7 @@ const todosOsJogos =[
 	{ nome: "Letra L", icone: "icones/letra_l.png", link: "pt/letra-l/", cat: "pt" },
 	{ nome: "Letra D", icone: "icones/letra_d.png", link: "pt/letra-d/", cat: "pt" },
 	{ nome: "Letra M", icone: "icones/letra_m.png", link: "pt/letra-m/", cat: "pt" },
+	{ nome: "Letras PTLDM", icone: "icones/letras.png", link: "pt/letras/", cat: "pt" },
     
     // ------------------------------------
     // MATEMÁTICA (cat: "mat") 
