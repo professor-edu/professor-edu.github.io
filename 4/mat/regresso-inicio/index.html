@@ -1958,7 +1958,7 @@ function criarSetasLigar(tipo, op) {
 
     const seta = document.createElement('span');
     seta.className = `esquema-seta ${tipo}`;
-    seta.textContent = tipo === 'direta' ? '🡆' : '🡄';
+    seta.textContent = tipo === 'direta' ? '►' : '◄';
     container.appendChild(seta);
 
     // Só cria e anexa o texto da operação se ele realmente existir!
