@@ -158,7 +158,7 @@ const palavras = [
   { palavra: "tigre", imagem: "img/tigre.png", num: 2, divisao: "TI-GRE" },
   { palavra: "tomate", imagem: "img/tomate.png", num: 3, divisao: "TO-MA-TE" },
   { palavra: "urso", imagem: "img/urso.png", num: 2, divisao: "UR-SO" },
-  { palavra: "uva", imagem: "img/uva.png", num: 2, divisao: "U-VA" },
+  { palavra: "uvas", imagem: "img/uvas.png", num: 2, divisao: "U-VAS" },
   { palavra: "vaca", imagem: "img/vaca.png", num: 2, divisao: "VA-CA" },
   { palavra: "vassoura", imagem: "img/vassoura.png", num: 3, divisao: "VA-SSOU-RA" },
   { palavra: "vela", imagem: "img/vela.png", num: 2, divisao: "VE-LA" },
