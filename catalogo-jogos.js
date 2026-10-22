@@ -120,6 +120,7 @@ export const CATALOGO_JOGOS = [
 	{ nome: "Sólidos e Figuras", icone: "1/icones/solidos_figuras.png", link: "1/mat/solidos-figuras", ano: "1º Ano" },
 	{ nome: "O Ábaco Mágico", icone: "1/icones/abaco.png", link: "1/mat/abaco", ano: "1º Ano" },
 	{ nome: "Mistérios na Quinta", icone: "1/icones/misterios_quinta.png", link: "1/mat/misterios-quinta", ano: "1º Ano" },
+	{ nome: "O Robô das Contas", icone: "1/icones/robo_contas.png", link: "1/mat/robo-contas", ano: "1º Ano" },
 
 	// Estudo do Meio (em)
 	{ nome: "Reciclagem", icone: "1/icones/reciclagem.png", link: "1/em/reciclagem/", ano: "1º Ano" }, 
