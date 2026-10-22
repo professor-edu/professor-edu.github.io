@@ -241,6 +241,7 @@ export const CATALOGO_JOGOS = [
 	{ nome: "Grelha das Tabuadas", icone: "3/icones/grelha_tabuadas.png", link: "3/mat/grelha-tabuadas/", ano: "3º Ano" },
 	{ nome: "Cálculo Mental", icone: "3/icones/calculo_mental.png", link: "3/mat/calculo-mental/", ano: "3º Ano" },
 	{ nome: "Problemas no Caderno", icone: "3/icones/problemas_caderno.png", link: "3/mat/problemas-caderno/", ano: "3º Ano" },
+	{ nome: "O Robô das Tabuadas", icone: "3/icones/robo_tabuadas.png", link: "3/mat/robo-tabuadas/", ano: "3º Ano" },
 
 	// Estudo do Meio (em)
 	{ nome: "Direitos da Criança", icone: "3/icones/direitos_crianca.png", link: "3/em/direitos-crianca/", ano: "3º Ano" },

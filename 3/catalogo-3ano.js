@@ -51,6 +51,7 @@ const todosOsJogos =[
 	{ nome: "Grelha das Tabuadas", icone: "icones/grelha_tabuadas.png", link: "mat/grelha-tabuadas/", cat: "mat" },
 	{ nome: "Cálculo Mental", icone: "icones/calculo_mental.png", link: "mat/calculo-mental/", cat: "mat" },
 	{ nome: "Problemas no Caderno", icone: "icones/problemas_caderno.png", link: "mat/problemas-caderno/", cat: "mat" },
+	{ nome: "O Robô das Tabuadas", icone: "icones/robo_tabuadas.png", link: "mat/robo-tabuadas/", cat: "mat" },
 	
     
     // ------------------------------------

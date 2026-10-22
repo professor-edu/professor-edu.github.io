@@ -1,0 +1,2356 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3º Ano - O Robô das Tabuadas 🤖</title>
+    
+    <link rel="icon" type="image/png" href="../../logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        /* =========================================
+           CSS DO TEMPLATE BASE (CORES E ESTRUTURA)
+           ========================================= */
+		   
+        :root {
+            --bg-body: #f0f7ff;
+            --azul-vibrante: #0091ff; 
+            --cor-3ano: #ffabab;     
+            --cor-3ano-dark: #ff8a8a;
+            --cor-borda: #ff8a8a;
+			--cor-btn-fundo: #fffde7;
+            --bg-header: #fff0f0;    
+            --azul-escuro: #0d47a1;
+            --text-main: #5c8699;
+            --borda-cartao: #ced6e0;
+            --cor-pt: #ff6b6b;
+            --cor-mat: #4dabf7;
+            --cor-em: #51cf66;
+
+            /* NOVAS CORES DO MENU INICIAL */
+            --cor-btn-azul: #61A0FF;
+            --cor-btn-verde: #5DD279;
+            --cor-btn-amarelo: #FBC531;
+            --cor-btn-vermelho: #FF6B6B;
+            --cor-btn-roxo: #A55EEA;
+            --cor-btn-laranja: #FA983A;
+			--cor-btn-rosa: #e04d8c;
+			--cor-btn-turquesa: #139ea3;
+            
+            /* Cores de Feedback (Vibrantes) */
+            --cor-sucesso: #2ed573;
+            --cor-sucesso-dark: #219d53;
+            --cor-erro: #ff4757;
+            --cor-erro-dark: #d0303f;
+        }
+
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            text-align: center; 
+            background-color: var(--bg-body);
+			background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px);
+			background-size: 25px 25px;			
+            margin: 0; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100dvh; 
+            overflow-x: hidden; 
+        }
+		
+		*:focus-visible {
+			outline: 4px solid var(--cor-btn-amarelo);
+			border-radius: 8px;
+		}
+        
+        @media (min-width: 769px) and (min-height: 600px) { body { height: 100vh; overflow-y: auto; } }
+		
+        
+		/* =========================================
+           HEADER E NAVEGAÇÃO
+        ========================================= */
+		
+        header { background-color: var(--bg-header); padding: 25px 20px; border-bottom: 1px solid var(--cor-3ano-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; flex-shrink: 0; z-index: 100; }
+        .header-content { max-width: 1200px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; }
+        
+        .nav-container { width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 15px; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; }
+        .hamburger { cursor: pointer; background: rgba(255,255,255,0.3); border: none; display: flex; flex-direction: column; gap: 4px; padding: 10px; border-radius: 8px; transition: background 0.4s ease; }
+        @media (hover: hover) { .hamburger:hover { background: #fff9c4; } }
+        .hamburger span { display: block; width: 20px; height: 2px; background: var(--azul-escuro); transition: 0.3s; transform-origin: center; }        
+        .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        
+        h1 {
+    color: var(--azul-escuro);
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    text-shadow: 
+        -2px -2px 0 #ffffff,  
+         2px -2px 0 #ffffff,
+        -2px  2px 0 #ffffff,
+         2px  2px 0 #ffffff, 
+         0px  6px 12px rgba(0, 0, 0, 0.15); 
+}
+        .subtitulo { color: var(--azul-escuro); font-size: clamp(0.85rem, 3vw, 1.1rem); font-weight: 500; opacity: 0.8; margin-top: 15px; }
+
+        .btn-voltar { background: var(--cor-3ano); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; font-size: 0.9rem; box-shadow: 0 3px 0 var(--cor-3ano-dark); display: flex; align-items: center; gap: 8px; transition: 0.2s; cursor: pointer;}
+        @media (hover: hover) { .btn-voltar:hover { transform: scale(1.05); } }
+
+        @media (max-width: 768px) {
+            header { padding: 15px 10px; }
+            .header-content { display: grid; grid-template-columns: 50px 1fr 50px; grid-template-rows: auto auto; gap: 5px; }
+            .nav-container { position: static; transform: none; grid-column: 1 / -1; display: grid; grid-template-columns: 50px 1fr 50px; width: 100%; margin-bottom: 10px; }
+            .hamburger { grid-column: 1; justify-self: start; }
+            .btn-voltar { grid-column: 2; justify-self: center; width: fit-content; }
+            h1, .subtitulo { grid-column: 2; text-align: center; }
+            main { padding: 15px 10px; gap: 10px; } 
+            .cartao-jogo-container { padding: 15px; }
+        }
+
+        /* =========================================
+           SIDEBAR
+        ========================================= */
+		
+        .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: white; z-index: 200; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.1); text-align: left; }
+        .sidebar.active { left: 0; }
+        .sidebar .btn-fechar { background: #fff5f5; color: #ff4757; padding: 20px 25px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; border-bottom: 1px solid #ffebeb; }
+        .sidebar ul { list-style: none; padding: 15px; margin: 0; }
+        .sidebar li a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--text-main); background: #f8fafc; border-radius: 12px; margin-bottom: 8px; transition: 0.3s; }
+        @media (hover: hover) { .sidebar li a:hover { background: var(--cor-3ano); color: white; transform: translateX(8px); } }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 150; }
+        .overlay.active { display: block; }
+
+        /* =========================================
+           CARTÃO PRINCIPAL
+        ========================================= */
+        main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 25px 20px; width: 100%; box-sizing: border-box; }
+        
+        .cartao-jogo-container { 
+            background: white; width: 100%; max-width: 950px; 
+            flex: 1; min-height: 0; 
+            padding: 25px 20px; border-radius: 30px; box-shadow: 0 4px 15px var(--cor-mat);  
+            border-top: 8px solid var(--cor-mat); 
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; box-sizing: border-box;
+        }
+
+        /* =========================================
+           CONFETIS
+        ========================================= */
+        .confetti-container { position: absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; pointer-events:none; border-radius:30px; z-index: 10; }
+		
+		/* Confetis Limitados ao Container */
+        .confetti { 
+            position: absolute; 
+            width: 12px; 
+            height: 12px; 
+            border-radius: 2px;
+            opacity: 0; 
+            animation: fall linear forwards; 
+            pointer-events: none;
+            z-index: 15;
+        }
+        @keyframes fall { 
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; } 
+            80% { opacity: 1; }
+            100% { transform: translateY(1000px) rotate(720deg); opacity: 0; } 
+        }
+		
+		/* =========================================
+           FOOTER
+        ========================================= */
+        footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--cor-3ano); margin-top: auto; flex-shrink: 0;}
+        footer p { font-size: 0.8rem; color: var(--cor-3ano); margin: 0; }
+        
+        /* =========================================
+           ECRÃS E MENUS
+           ========================================= */
+        .ecra { width: 100%; flex: 1; min-height: 0; display: none !important; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.4s ease; box-sizing: border-box; position: relative; z-index: 2;}
+        .ecra.ativo {
+			display: flex !important;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
+		}
+		#ecra-selecao { display: flex; }
+        #ecra-jogo { justify-content: flex-start; }
+        .titulo-menu { font-size: clamp(1.4rem, 4vw, 1.8rem); color: var(--azul-escuro); margin-bottom: 40px; font-weight: 900;}
+
+
+       /* =========================================
+		   CONTAINER DA ANIMAÇÃO TUTORIAL (BLOCADO)
+		========================================= */
+		.animacao-tutorial {
+			width: 100%;
+			max-width: 400px;
+			height: 180px;
+			background: #f4faff;
+			border: 3px dashed #bcdcff;
+			border-radius: 20px;
+			margin: 0 auto 30px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: inset 0 0 15px rgba(0,145,255,0.05);
+			color: var(--azul-vibrante);
+			font-size: 1.2rem;
+			font-weight: 900;
+			
+			/* SEGREDOS PARA EVITAR A FUGA DE ELEMENTOS */
+			position: relative !important;
+			overflow: hidden !important;
+			box-sizing: border-box !important;
+			padding: 0 !important;
+		}
+		
+		
+/* =========================================
+   TUTORIAL 2.º ANO (CONTAS DE 3 DÍGITOS)
+   ========================================= */
+.tutorial-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    overflow: hidden;
+}
+
+.tut-robo-container {
+    position: relative;
+    height: 165px;
+    width: 165px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tut-robo-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+/* Transição de Expressão do Robô */
+.tut-img-neutro { opacity: 1; }
+.tut-img-acerto { 
+    opacity: 0; 
+    animation: animExpressaoRobo 12s infinite ease-in-out;
+}
+
+/* VISOR DO PEITO DO ROBÔ */
+.tut-visor {
+    position: absolute;
+    top: 54.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36%;
+    height: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.tut-txt {
+    position: absolute;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 900;
+    /* Reduzido e ajustado para não sair do ecrã do peito */
+    font-size: 0.72rem;
+    letter-spacing: -0.5px;
+    color: #0d47a1;
+    opacity: 0;
+    white-space: nowrap;
+}
+
+/* ESFERAS E POSICIONAMENTO */
+.tut-grupo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.tut-esfera {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 20%;
+    height: 20%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 900;
+    /* Reduzido e ajustado para caberem 3 dígitos dentro do cristal */
+    font-size: 0.68rem;
+    letter-spacing: -0.5px;
+    color: #0b3c7a;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+/* Posições exatas sobre o robô */
+.tut-tl { top: 20%; left: 18%; }
+.tut-tr { top: 20%; left: 82%; }
+.tut-bl { top: 59%; left: 15%; }
+.tut-br { top: 59%; left: 85%; }
+
+/* MÃOZINHA INTERATIVA */
+.tut-mao {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 20;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    animation: animMaoDupla 12s infinite ease-in-out;
+}
+
+/* =========================================
+   ANIMATION TIMELINES (CICLO DE 12 SEGUNDOS)
+   ========================================= */
+
+/* 1. Troca de Texto no Visor */
+.tut-c1 { animation: animTxtC1 12s infinite ease-in-out; }
+.tut-s1 { animation: animTxtS1 12s infinite ease-in-out; color: #2ed573; font-size: 0.85rem; }
+.tut-c2 { animation: animTxtC2 12s infinite ease-in-out; }
+.tut-s2 { animation: animTxtS2 12s infinite ease-in-out; color: #2ed573; font-size: 0.85rem; }
+
+@keyframes animTxtC1 { 0%, 20% { opacity: 1; transform: scale(1); } 23%, 46% { opacity: 0; transform: scale(0.5); } 48%, 100% { opacity: 0; } }
+@keyframes animTxtS1 { 0%, 21% { opacity: 0; transform: scale(0.5); } 23%, 44% { opacity: 1; transform: scale(1.15); } 47%, 100% { opacity: 0; transform: scale(0.5); } }
+@keyframes animTxtC2 { 0%, 49% { opacity: 0; transform: scale(0.5); } 51%, 70% { opacity: 1; transform: scale(1); } 73%, 94% { opacity: 0; transform: scale(0.5); } 96%, 100% { opacity: 0; } }
+@keyframes animTxtS2 { 0%, 71% { opacity: 0; transform: scale(0.5); } 73%, 92% { opacity: 1; transform: scale(1.15); } 95%, 100% { opacity: 0; transform: scale(0.5); } }
+
+/* 2. Alternância dos Grupos de Esferas */
+.tut-ronda1 { animation: animRonda1 12s infinite ease-in-out; }
+.tut-ronda2 { animation: animRonda2 12s infinite ease-in-out; }
+
+@keyframes animRonda1 { 0%, 46% { opacity: 1; } 48%, 100% { opacity: 0; } }
+@keyframes animRonda2 { 0%, 48% { opacity: 0; } 50%, 95% { opacity: 1; } 97%, 100% { opacity: 0; } }
+
+/* 3. Brilho Néon de Acerto nas Esferas Corretas */
+.tut-certa1 { animation: animAcertoE1 12s infinite ease-in-out; }
+.tut-certa2 { animation: animAcertoE2 12s infinite ease-in-out; }
+
+@keyframes animAcertoE1 {
+    0%, 21% { color: #0b3c7a; text-shadow: none; filter: none; }
+    23%, 44% { color: #fff; text-shadow: 0 0 8px #2ed573, 0 0 15px #2ed573; filter: drop-shadow(0 0 10px #2ed573); }
+    46%, 100% { color: #0b3c7a; text-shadow: none; filter: none; }
+}
+
+@keyframes animAcertoE2 {
+    0%, 71% { color: #0b3c7a; text-shadow: none; filter: none; }
+    73%, 92% { color: #fff; text-shadow: 0 0 8px #2ed573, 0 0 15px #2ed573; filter: drop-shadow(0 0 10px #2ed573); }
+    95%, 100% { color: #0b3c7a; text-shadow: none; filter: none; }
+}
+
+/* 4. Mudança de Expressão do Robô */
+@keyframes animExpressaoRobo {
+    0%, 21% { opacity: 0; }
+    23%, 44% { opacity: 1; }
+    46%, 71% { opacity: 0; }
+    73%, 92% { opacity: 1; }
+    94%, 100% { opacity: 0; }
+}
+
+/* 5. Movimento da Mãozinha (Alinhado à Esfera Superior-Direita e Inferior-Esquerda) */
+@keyframes animMaoDupla {
+    0% { opacity: 0; transform: translate(50px, 50px) scale(1); }
+    6% { opacity: 1; transform: translate(50px, 50px) scale(1); }
+    19% { transform: translate(36px, -52px) scale(1); }       /* Esfera 380 (Topo Direita) */
+    22% { transform: translate(36px, -52px) scale(0.75); }    /* Clique */
+    25% { transform: translate(36px, -52px) scale(1); }
+    33% { opacity: 0; transform: translate(50px, 50px) scale(1); }
+    
+    50% { opacity: 0; transform: translate(-50px, 50px) scale(1); }
+    56% { opacity: 1; transform: translate(-50px, 50px) scale(1); }
+    69% { transform: translate(-68px, 15px) scale(1); }       /* Esfera 550 (Baixo Esquerda) */
+    72% { transform: translate(-68px, 15px) scale(0.75); }    /* Clique */
+    75% { transform: translate(-68px, 15px) scale(1); }
+    83%, 100% { opacity: 0; transform: translate(-50px, 50px) scale(1); }
+}
+
+		
+		/* =========================================
+           MENU INICIAL (ANIMAÇÃO GRELHA 2x2
+        ========================================= */
+
+        /* Grelha adaptada para 2x2 cartões alinhados */
+        .grid-niveis {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        @media (max-width: 500px) {
+            .grid-niveis {
+                grid-template-columns: 1fr;
+                max-width: 320px;
+            }
+        }
+
+/* =========================================
+   DESIGN DOS BOTÕES DE NÍVEL (UNIFICADO)
+   ========================================= */
+.btn-nivel-novo {
+    position: relative !important; /* Ponto de ancoragem para as estrelas */
+    width: 100%;
+    padding: 15px 20px !important;
+    border-radius: 20px;
+    border: 4px solid white;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 900;
+    cursor: pointer;
+    
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    gap: 15px !important;
+
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    box-shadow: 0 6px 0 #e2e8f0, 0 10px 15px rgba(0,0,0,0.08);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    touch-action: manipulation;
+    user-select: none;
+}
+
+@media (hover: hover) {
+    .btn-nivel-novo:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 0 #cbd5e1, 0 12px 20px rgba(0,0,0,0.12);
+        filter: brightness(1.05);
+    }
+}
+
+.btn-nivel-novo:active {
+    transform: translateY(6px) !important;
+    box-shadow: 0 0px 0 transparent, 0 0px 0 transparent !important;
+}
+
+/* =========================================
+   ESTRELAS FIXAS NO CANTO INFERIOR DIREITO
+   ========================================= */
+.btn-nivel-novo .estrelas-nivel {
+    position: absolute !important;
+    bottom: 8px !important;
+    right: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Tamanho de cada estrela no menu */
+.btn-nivel-novo .estrelas-nivel svg {
+    width: 18px !important;
+    height: 18px !important;
+    display: inline-block !important;
+    opacity: 1 !important;
+}
+
+/* ESTRELA GANHA (Amarelo Dourado Ouro) */
+.btn-nivel-novo .estrelas-nivel svg.ganha polygon {
+    fill: #ffd700 !important;
+    stroke: #d97706 !important;
+    stroke-width: 1.5px !important;
+    opacity: 1 !important;
+}
+
+/* ESTRELA VAZIA (Branco translúcido legível) */
+.btn-nivel-novo .estrelas-nivel svg.vazia polygon {
+    fill: rgba(255, 255, 255, 0.35) !important;
+    stroke: #ffffff !important;
+    stroke-width: 1.5px !important;
+    opacity: 1 !important;
+}
+
+        /* Classes Utilitárias de Cor para os Botões */
+        .bg-azul { background-color: var(--cor-btn-azul); }
+        .bg-verde { background-color: var(--cor-btn-verde); }
+        .bg-amarelo { background-color: var(--cor-btn-amarelo); }
+        .bg-vermelho { background-color: var(--cor-btn-vermelho); }
+        .bg-roxo { background-color: var(--cor-btn-roxo); }
+        .bg-laranja { background-color: var(--cor-btn-laranja); }
+		.bg-rosa { background-color: var(--cor-btn-rosa); }
+		.bg-turquesa { background-color: var(--cor-btn-turquesa); }
+        
+        /* =========================================
+           BARRA DE ESTADO DO JOGO (status-bar-jogo) E SVGs
+        ========================================= */
+        .status-bar-jogo {
+            display: flex; align-items: center; justify-content: space-between; gap: 10px;
+            width: 100%; background: #e0ecf3; padding: 8px 12px;
+            border-radius: 20px; border: 2px solid var(--cor-mat); margin-bottom: 15px; box-sizing: border-box; flex-shrink: 0;
+            max-width: 900px;
+        }
+		
+        /* =========================================
+           BOTÕES DA BARRA DE ESTADO (ZOOM SUBTIL DO ÍCONE)
+        ========================================= */
+        
+        /* --- BOTÃO MENU --- */
+        .btn-voltar-menu { 
+            background-color: white; color: var(--azul-escuro); border: 2px solid var(--cor-mat); 
+            padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: 800; cursor: pointer; 
+            display: flex; align-items: center; gap: 5px; 
+            transition: border-color 0.2s ease; /* Anima APENAS a cor da borda */
+            touch-action: manipulation;
+        }
+        
+        /* Prepara o SVG do botão Menu */
+        .btn-voltar-menu svg {
+            transition: transform 0.2s ease; /* Transição mais suave e curta */
+        }
+
+        @media (hover: hover) { 
+            .btn-voltar-menu:hover { border-color: var(--azul-escuro); } 
+            /* Apenas um ligeiro zoom no ícone */
+            .btn-voltar-menu:hover svg { transform: scale(1.15); }
+        }
+        
+        
+        /* --- BOTÃO DICA --- */
+        .btn-dica { 
+            background-color: #fff9c4; border: 2px solid #fbc531; color: #b18500; 
+            padding: 6px 12px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; cursor: pointer; 
+            display: flex; align-items: center; gap: 5px; 
+            transition: border-color 0.2s ease; /* Anima APENAS a cor da borda */
+            touch-action: manipulation;
+        }
+        
+        /* Prepara o SVG do botão Dica */
+        .btn-dica svg {
+            transition: transform 0.2s ease; /* Transição mais suave e curta */
+        }
+
+        @media (hover: hover) { 
+            .btn-dica:hover:not(.esgotada) { border-color: #b18500; } 
+            /* Exatamente o mesmo zoom sutil do Menu */
+            .btn-dica:hover:not(.esgotada) svg { transform: scale(1.15); }
+        }
+        
+        .btn-dica.esgotada { opacity: 0.5; pointer-events: none; filter: grayscale(100%); }
+		
+		/* =========================================
+           DICA IMPACIENTE (pulsa ao fim de 15 segundos)
+        ========================================= */
+        .btn-dica.dica-impaciente:not(.esgotada) {
+            animation: chamarAtencaoDica 1.5s infinite ease-in-out;
+            border-color: #f39c12;
+            background-color: #fffde7;
+        }
+
+        @keyframes chamarAtencaoDica {
+            0%, 100% { transform: scale(1) translateY(0); box-shadow: 0 0 0 transparent; }
+            50% { 
+                transform: scale(1.1) translateY(-3px); 
+                box-shadow: 0 5px 15px rgba(243, 156, 18, 0.5); 
+            }
+        }
+
+		/* =========================================
+           BADGE DA RONDA
+        ========================================= */
+        .badge-ronda { 
+            background: white; 
+            font-weight: 800; 
+            font-size: 0.9rem; 
+            padding: 6px 12px; 
+            border-radius: 15px; 
+            white-space: nowrap; 
+            border: 2px solid #219d53; 
+            color: #219d53; 
+            
+            /* Alinhamento Perfeito (Flexbox) */
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 6px; 
+        }
+
+        /* Doma o SVG injetado na Ronda */
+        .badge-ronda svg {
+            margin: 0 !important; 
+            width: 1.1em !important; 
+            height: 1.1em !important;
+            display: block;
+        }
+
+        /* =========================================
+           BADGE DE ERROS 
+        ========================================= */
+        .badge-erros { 
+            background: white; 
+            border: 2px solid var(--cor-pt); 
+            color: var(--cor-mat); 
+            font-weight: 800; 
+            font-size: 0.9rem; 
+            line-height: 1; /* Retira o ar extra em volta do número */
+            padding: 6px 12px; 
+            border-radius: 15px; 
+            white-space: nowrap; 
+            
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 6px; 
+        }
+
+        .badge-erros svg {
+            margin: 0 !important; 
+            width: 0.85em !important;
+            height: 0.85em !important;
+            display: block;
+        }
+
+        /* =========================================
+           BARRA DE PROGRESSO
+        ========================================= */
+        .progress-bg { 
+            background-color: #e2e8f0; 
+            border-radius: 20px; 
+            height: 35px; 
+            flex: 1 1 0%; /* Cresce, Encolhe, e começa a contar do 0%. Força o encaixe perfeito! */
+            min-width: 50px; /* Nunca desaparece de vez */
+            margin: 0; /* Removemos a margem porque o contentor pai já tem 'gap: 10px' */
+            overflow: hidden; 
+            box-shadow: inset 0 3px 5px rgba(0,0,0,0.1); 
+            border: 2px solid white; 
+        }
+
+        /* 🛡️ SEGURANÇA MÁXIMA PARA OS BOTÕES/BADGES */
+        /* Diz ao Flexbox: "Proibido esmagar estes elementos" */
+        .btn-voltar-menu, .btn-dica, .badge-ronda, .badge-erros {
+            flex-shrink: 0;
+        }
+        .progress-fill { height: 100%; width: 0%; border-radius: 20px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); background-color: var(--cor-3ano); background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent); background-size: 30px 30px; animation: moverRiscas 2s linear infinite; }
+		
+		/* BARRA DE ESTADO DE JOGO EM MOBILE VERTICAL (2 LINHAS) */
+		
+        @media (max-width: 600px) {
+            .status-bar-jogo { 
+                /* Trocamos a Grid Rígida por um Flexbox Maleável */
+                display: flex;
+                flex-wrap: wrap; /* O Segredo: permite arrumar noutra linha se não couber! */
+                justify-content: center; /* Centra tudo de forma harmoniosa */
+                align-items: center;
+                gap: 8px 6px; 
+                padding: 10px 8px;
+            }
+            
+            /* A barra de progresso vai obrigatoriamente para a última linha */
+            .progress-bg { 
+                order: 10; /* Força o elemento a ir para o fim */
+                width: 100%; 
+                margin: 4px 0 0 0; 
+                height: 25px; /* Altura elegante para mobile */
+            }
+
+            /* Botões e Badges compactos mas protegidos de esmagamentos */
+            .btn-voltar-menu, .btn-dica, .badge-ronda, .badge-erros { 
+                padding: 4px 8px; 
+                font-size: 0.8rem; 
+                gap: 4px;
+                white-space: nowrap; /* Garante que o texto não se parte a meio */
+                flex-shrink: 0; /* Impede os ícones de ficarem esmagados */
+            }
+        }
+	
+		.icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
+		.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
+		.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
+		.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+		.svg-icon { width: 1.2em; height: 1.2em; vertical-align: middle; margin-right: 5px; fill: currentColor; }
+		
+		/* Estilo para os SVGs dentro dos botões do ecrã inicial */
+		.icon-btn-nivel {
+			width: 55px;       /* Tamanho ideal para botões grandes */
+			height: 55px;      /* Mantém o rácio quadrado */
+			object-fit: contain;
+			filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2)); /* Dá a mesma profundidade do texto */
+			pointer-events: none; /* Evita que o clique no ícone interfira com o botão */
+		}
+
+		/* Ajuste Mobile: Se o ecrã for pequeno, reduzimos o ícone */
+		@media (max-width: 600px) {
+			.icon-btn-nivel {
+				width: 40px;
+				height: 40px;
+			}
+			.btn-nivel-novo {
+				padding: 15px;
+				font-size: 1.2rem;
+			}
+		}
+
+        /* =========================================
+   ÁREA DE JOGO SEM SCROLL E RESPONSIVA
+   ========================================= */
+.area-jogo-custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    background: #f8fafc;
+    border: 2px dashed var(--cor-mat);
+    border-radius: 20px;
+    padding: 10px;
+    position: relative;
+    overflow: hidden; /* Elimina o scroll */
+    box-sizing: border-box;
+}
+
+/* PALCO DO ROBÔ (Limita a altura à janela visível) */
+.robo-stage {
+    position: relative;
+    width: 100%;
+    /* Garante que o robô nunca ultrapassa a altura disponível do ecrã */
+    max-width: min(100%, 55vh, 480px);
+    aspect-ratio: 1 / 1;
+    margin: auto;
+    container-type: inline-size; /* Permite fontes fluidas cqw */
+}
+
+.img-robo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* VISOR DA CONTA NO PEITO DO ROBÔ */
+.visor-conta {
+    position: absolute;
+    top: 56%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 34%;
+    height: 24%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.9rem, 5.5cqw, 1.7rem) !important;
+    font-weight: 900;
+    color: #0d47a1;
+    text-shadow: 1px 1px 0px #ffffff;
+    pointer-events: none;
+    user-select: none;
+    z-index: 5;
+}
+
+/* BOTÕES DE RESPOSTA (NAS 4 ESFERAS DOS BRAÇOS) */
+.btn-bola {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 20%;
+    height: 20%;
+    border-radius: 50%;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    
+    color: #0b3c7a;
+    /* Reduzido para o número ficar bem centrado na esfera azul */
+    font-size: clamp(0.85rem, 4.8cqw, 1.5rem) !important;
+    font-weight: 900;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                color 0.2s ease, 
+                filter 0.2s ease;
+                
+    z-index: 10;
+    touch-action: manipulation;
+    user-select: none;
+    
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9),
+                 0 -1px 2px rgba(255, 255, 255, 0.9),
+                 1px 0 2px rgba(255, 255, 255, 0.9),
+                 -1px 0 2px rgba(255, 255, 255, 0.9);
+}
+
+@media (hover: hover) {
+    .btn-bola:hover:not(.btn-disabled) {
+        /* Aumenta apenas 12% em vez de 25% */
+        transform: translate(-50%, -50%) scale(1.12) !important;
+        color: #ffffff !important;
+        text-shadow: 0 0 8px #00d2ff, 
+                     0 0 15px #00d2ff;
+        filter: drop-shadow(0 0 10px #00d2ff);
+    }
+}
+
+.btn-bola:active:not(.btn-disabled) {
+    transform: translate(-50%, -50%) scale(0.95);
+}
+
+/* COORDENADAS EXATAS DAS 4 ESFERAS DO ROBÔ */
+.bola-tl { top: 21%; left: 17%; }
+.bola-tr { top: 21%; left: 83%; }
+.bola-bl { top: 60%; left: 14%; }
+.bola-br { top: 60%; left: 85%; }
+
+/* FEEDBACK VISUAL DE ACERTO E ERRO NAS ESFERAS */
+.btn-bola.sucesso-vibrante {
+    color: #ffffff !important;
+    text-shadow: 0 0 12px #2ed573, 0 0 25px #2ed573 !important;
+    filter: drop-shadow(0 0 18px #2ed573) !important;
+    transform: translate(-50%, -50%) scale(1.3) !important;
+}
+
+@keyframes shakeErrorBola {
+    0%, 100% { 
+        transform: translate(-50%, -50%) rotate(0deg); 
+    }
+    20% { 
+        transform: translate(calc(-50% - 6px), -50%) rotate(-4deg); 
+    }
+    40% { 
+        transform: translate(calc(-50% + 6px), -50%) rotate(4deg); 
+    }
+    60% { 
+        transform: translate(calc(-50% - 4px), -50%) rotate(-2deg); 
+    }
+    80% { 
+        transform: translate(calc(-50% + 4px), -50%) rotate(2deg); 
+    }
+}
+
+.btn-bola.erro-vibrante {
+    color: #ffffff !important;
+    text-shadow: 0 0 12px #ff4757, 0 0 25px #ff4757 !important;
+    filter: drop-shadow(0 0 18px #ff4757) !important;
+    animation: shakeErrorBola 0.4s ease !important;
+}
+
+        .pergunta-texto { font-size: clamp(1.4rem, 4vw, 1.8rem); color: var(--azul-escuro); font-weight: bold; text-align: center; margin: 0 0 20px 0; animation: fadeIn 0.4s ease;}
+        
+        .opcoes-container { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; width: 100%; animation: fadeIn 0.4s ease;}
+        
+        /* Botões de Resposta Padrão */
+        .btn-opcao { background: var(--bg-header); border: 3px solid var(--cor-pt); border-radius: 15px; padding: 15px 35px; font-size: 1.9rem; font-weight: bold; color: var(--azul-vibrante); gap: 15px; cursor: pointer; transition: 0.2s; box-shadow: 0 5px 0 var(--cor-pt); display: flex; align-items: center; justify-content: center; min-width: 100px; touch-action: manipulation;}
+        @media (hover: hover) { .btn-opcao:hover:not(.btn-disabled):not(.sucesso-vibrante):not(.erro-vibrante) { transform: translateY(-3px); box-shadow: 0 8px 0 var(--cor-pt); } }
+        .btn-opcao:active:not(.btn-disabled) { transform: translateY(3px); box-shadow: 0 0 0 transparent; }
+        .btn-disabled { pointer-events: none; }
+		
+		.icon-certo {
+			/* Define o tamanho proporcional ao texto de 2rem */
+			width: 1.1em; 
+			height: 1.1em;
+			object-fit: contain;
+			/* Melhora o alinhamento visual com fontes negritadas */
+			vertical-align: middle; 
+		}
+		.icon-errado {
+			/* Define o tamanho proporcional ao texto de 2rem */
+			width: 1em; 
+			height: 1em;
+			object-fit: contain;
+			/* Melhora o alinhamento visual com fontes negritadas */
+			vertical-align: middle; 
+		}
+		
+        /* VIBRANT FEEDBACK BUTTONS */
+        .btn-opcao.sucesso-vibrante { 
+            background-color: var(--cor-sucesso) !important; 
+            color: white !important; 
+            border-color: var(--cor-sucesso-dark) !important; 
+            box-shadow: 0 6px 0 var(--cor-sucesso-dark) !important; 
+            transform: translateY(3px) !important; 
+        }
+
+        .btn-opcao.erro-vibrante { 
+            animation: shakeError 0.4s ease; 
+            border-color: var(--cor-erro) !important; 
+            background-color: #ffefef !important; 
+            color: var(--cor-erro) !important; 
+            box-shadow: 0 6px 0 var(--cor-erro) !important;
+        }
+		
+        /* =========================================
+           TIPOS DE EXERCÍCIOS
+        ========================================= */		
+		
+		.selecionado {
+			outline: 4px solid var(--cor-btn-amarelo);
+			transform: scale(1.05);
+		}
+		
+		.btn-opcao[disabled] {
+			background-color: #e2e8f0;
+			cursor: not-allowed;
+		}
+		
+		.bloco-arrastar {
+            min-width: 100px;
+			padding: 12px 20px;
+            background: white;
+            border: 3px solid var(--azul-vibrante);
+            border-radius: 15px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            touch-action: manipulation;
+        }
+		
+		.bloco-arrastar:not(.selecionado):not([disabled]) {
+            animation: respirarBloco 2s infinite ease-in-out;
+        }
+		
+		@keyframes respirarBloco {
+            0%, 100% { transform: translateY(0); box-shadow: 0 4px 0 var(--azul-vibrante); }
+            50% { transform: translateY(-4px); box-shadow: 0 8px 15px rgba(0, 145, 255, 0.25); }
+        }
+		
+		/*O alvo pisca a pedir a palavra que a criança selecionou */
+        .alvo-arrastar.pronto-receber {
+            border-color: var(--cor-btn-amarelo) !important;
+            background-color: #fffde7;
+            animation: pulseAlvo 0.8s infinite alternate;
+            cursor: pointer;
+        }
+
+        @keyframes pulseAlvo {
+            from { box-shadow: inset 0 0 0 transparent, 0 0 0 transparent; }
+            to { box-shadow: inset 0 0 10px rgba(251, 197, 49, 0.2), 0 0 15px rgba(251, 197, 49, 0.4); }
+        }
+		
+		.btn-opcao img {
+			max-width: 100px;
+			height: auto;
+		}
+		
+		.highlight-correto {
+			position: relative;
+			outline: 4px solid var(--cor-btn-verde);
+			outline-offset: 4px;
+			animation: pulseHighlight 1.4s infinite;
+			z-index: 2;
+		}
+		
+		.highlight-correto::after {
+			content: "✅";
+			position: absolute;
+			top: -16px;
+			right: -16px;
+			background: var(--cor-btn-verde);
+			color: white;
+			border-radius: 50%;
+			width: 28px;
+			height: 28px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1rem;
+			box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+			animation: bounceCheck 1s infinite alternate;
+		}
+		
+		@keyframes pulseHighlight {
+			0%   { box-shadow: 0 0 0 0 rgba(93, 210, 121, 0.6); }
+			70%  { box-shadow: 0 0 0 12px rgba(93, 210, 121, 0); }
+			100% { box-shadow: 0 0 0 0 rgba(93, 210, 121, 0); }
+		}
+		
+		
+		@keyframes bounceCheck {
+			from {
+				transform: scale(1);
+			}
+			to {
+				transform: scale(1.2);
+			}
+		}
+
+
+        /* =========================================
+           ECRÃ FIM, TRANSIÇÃO E BOTÕES DE AÇÃO 
+        ========================================= */
+        .end-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--azul-escuro); margin-bottom: 25px; display: flex; align-items: center; justify-content: center; gap: 15px; }
+		.icon-end-title {
+			/* O tamanho 1.2em garante que o ícone acompanhe o crescimento do clamp */
+			width: 1.2em; 
+			height: 1.2em;
+			object-fit: contain;
+			/* Um leve drop-shadow para dar profundidade, combinando com o estilo de jogo */
+			filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+		}
+
+		/* Ajuste para ecrãs muito pequenos */
+		@media (max-width: 480px) {
+			.end-title {
+				flex-direction: column; /* No telemóvel, o ícone fica em cima do texto */
+				gap: 10px;
+			}
+		}
+        
+        .end-stats { 
+            font-size: 1.3rem; color: var(--text-main); margin-bottom: 40px; 
+            text-align: center; background: var(--bg-header); padding: 30px 20px; 
+            border-radius: 20px; border: 2px dashed var(--cor-mat); line-height: 1.5; 
+        }
+
+        .botoes-acao-container { display: flex; flex-direction: column; align-items: center; gap: 35px; width: 100%; }
+        
+
+        /* Botões de Ação Final/Feedback (Adaptados ao Tema) */
+        .btn-acao { 
+            border: 4px solid white; color: white; padding: 15px 30px; 
+            font-size: 1.2rem; font-weight: 900; border-radius: 20px; cursor: pointer; 
+            display: flex; align-items: center; justify-content: center; gap: 12px; 
+            width: 100%; max-width: 320px; transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); touch-action: manipulation; 
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        @media (hover: hover) { .btn-acao:hover { transform: translateY(-2px); filter: brightness(1.05); } }
+        .btn-acao:active { transform: translateY(6px) !important; box-shadow: 0 0px 0 transparent !important; }
+
+        /* Variantes de Cor para os Botões de Ação */
+        .btn-acao.primario { background-color: var(--cor-btn-verde); box-shadow: 0 6px 0 #45b062, 0 10px 15px rgba(0,0,0,0.1); }
+        @media (hover: hover) { .btn-acao.primario:hover { box-shadow: 0 8px 0 #45b062, 0 12px 20px rgba(0,0,0,0.15); } }
+        
+        .btn-acao.secundario { background-color: var(--cor-btn-laranja); box-shadow: 0 6px 0 #d97d2c, 0 10px 15px rgba(0,0,0,0.1); }
+        @media (hover: hover) { .btn-acao.secundario:hover { box-shadow: 0 8px 0 #d97d2c, 0 12px 20px rgba(0,0,0,0.15); } }
+        
+        .btn-acao.terciario { background-color: var(--cor-btn-azul); box-shadow: 0 6px 0 #4a8deb, 0 10px 15px rgba(0,0,0,0.1); }
+        @media (hover: hover) { .btn-acao.terciario:hover { box-shadow: 0 8px 0 #4a8deb, 0 12px 20px rgba(0,0,0,0.15); } }
+		
+		.icon-acao {
+			width: 1.4em;
+			height: 1.4em;
+			object-fit: contain;
+			flex-shrink: 0; 
+			pointer-events: none;
+			transition: transform 0.2s ease;
+		}
+
+		/* Ajuste específico para a seta à direita se quiseres um efeito de movimento */
+		.primario:hover .icon-acao, 
+		.secundario:hover .icon-acao,
+		.terciario:hover .icon-acao	{
+			transform: translateX(4px);
+		}
+		
+        /* Modal Ajuda */
+        .modal-ajuda-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			background-color: rgba(0, 0, 0, 0.65);
+			display: none;
+			justify-content: center;
+			align-items: center;
+			z-index: 10000 !important; /* Coloca a modal no topo absoluto */
+			padding: 20px;
+			box-sizing: border-box;
+		}
+		.modal-ajuda-overlay.ativo,
+		.modal-ajuda-overlay.active {
+			display: flex !important;
+		}
+        .modal-ajuda-box { background: white; width: 100%; max-width: 450px; border-radius: 25px; padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; border-top: 8px solid var(--cor-3ano);}
+        .btn-fechar-modal { position: absolute; top: 15px; right: 15px; background: #ffebeb; color: #ff4757; border: none; width: 35px; height: 35px; border-radius: 50%; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: 0.2s;}
+        .btn-fechar-modal:hover { background: #ff4757; color: white;}
+        .ajuda-icone { font-size: 4rem; margin-bottom: 10px; }
+        .ajuda-texto { font-size: 1.2rem; color: var(--text-main); line-height: 1.5; font-weight: 500;}
+
+        /* Animações Globais e Feedback Visual */
+        .toast-msg { position: absolute; top: 80px; left: 50%; transform: translateX(-50%) translateY(-10px); background: #fff9c4; border: 2px solid #fbc531; color: #b18500; padding: 8px 20px; border-radius: 20px; font-weight: 900; font-size: 1.1rem; opacity: 0; transition: 0.3s; pointer-events: none; z-index: 50; }
+        .toast-msg.active { opacity: 1; transform: translateX(-50%) translateY(0); }
+        
+        @keyframes shakeError { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px) rotate(-2deg); } 75% { transform: translateX(6px) rotate(2deg); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes moverRiscas { 0% { background-position: 0 0; } 100% { background-position: 30px 0; } }
+
+        
+        /* =========================================
+        CORREÇÃO PARA TELEMÓVEIS NA HORIZONTAL
+        ========================================= */
+        @media (max-height: 600px) {
+            body { height: auto !important; overflow-y: auto !important; }
+            main { justify-content: flex-start !important; padding-top: 15px; padding-bottom: 15px; overflow-y: visible !important; }
+            .cartao-jogo-container { margin: auto 0; }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+          body { height: auto !important; overflow-y: auto !important; }
+          main { justify-content: flex-start !important; overflow-y: visible !important; }
+          footer { margin-top: auto; }
+        }
+
+		/* =========================================
+		   NOVO DESIGN DOS BOTÕES DO MENU INICIAL (HORIZONTAL)
+		   ========================================= */
+
+
+
+		/* Garante que a imagem do nível mantém as proporções e não encolhe */
+		.icon-btn-nivel-novo {
+			width: 55px;
+			height: 55px;
+			flex-shrink: 0;
+		}
+
+		/* Contentor de texto para empilhar Título e Subtítulo */
+		.btn-nivel-text-container {
+			display: flex;
+			flex-direction: column;
+			gap: 3px;
+			pointer-events: none; /* Protege contra interferência de clique */
+		}
+
+		/* Estilo para a linha do Título (Superior) */
+		.btn-nivel-titulo {
+			font-size: 1.1rem;
+			font-weight: 900;
+			color: white;
+			text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+			line-height: 1.2;
+		}
+
+		/* Estilo para a linha do Subtítulo (Inferior) */
+		.btn-nivel-subtitulo {
+			font-size: 0.85rem;
+			font-weight: 500;
+			color: rgba(255, 255, 255, 0.9);
+			text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+			line-height: 1.2;
+		}
+
+		/* Otimização para telemóveis mais pequenos */
+		@media (max-width: 480px) {
+			.btn-nivel-novo {
+				padding: 12px 15px !important;
+				gap: 10px !important;
+			}
+			.icon-btn-nivel {
+				width: 45px;
+				height: 45px;
+			}
+			.btn-nivel-titulo {
+				font-size: 1rem;
+			}
+			.btn-nivel-subtitulo {
+				font-size: 0.75rem;
+			}
+		}		
+
+/* =========================================
+   CARTÃO DE NARRATIVA E BALÃO DE FALA
+   ========================================= */
+.card-narrativa {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #e3f1ff;
+    border: 3px solid #bcdcff;
+    border-radius: 20px;
+    padding: 12px 18px;
+    margin: 20px auto 30px;
+    width: 100%;
+    max-width: 460px;
+    box-shadow: 0 8px 20px rgba(0, 145, 255, 0.08);
+    position: relative;
+    box-sizing: border-box;
+}
+
+.avatar-narrativa img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
+    flex-shrink: 0;
+    animation: flutuarAvatar 3s infinite ease-in-out;
+}
+
+.balao-fala {
+    text-align: left;
+    color: #2c3e50;
+    font-size: 0.9rem;
+    line-height: 1.35;
+}
+
+.balao-fala .titulo-fala {
+    display: block;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 900;
+    font-size: 1.05rem;
+    color: #0d47a1;
+    margin-bottom: 3px;
+}
+
+.balao-fala p {
+    margin: 0;
+    font-weight: 600;
+    color: #4a6572;
+}
+
+/* Animação suave para o avatar do robô */
+@keyframes flutuarAvatar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Ajuste Responsivo em Telemóveis */
+@media (max-width: 480px) {
+    .card-narrativa {
+        padding: 10px 14px;
+        gap: 10px;
+    }
+    .avatar-narrativa img {
+        width: 50px;
+        height: 50px;
+    }
+    .balao-fala {
+        font-size: 0.82rem;
+    }
+    .balao-fala .titulo-fala {
+        font-size: 0.95rem;
+    }
+}
+
+/* =========================================
+   BOTÃO DE ÁUDIO DA NARRATIVA
+   ========================================= */
+.btn-audio-narrativa {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #FBC531;
+    border: 2px solid #bcdcff;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0d47a1;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 2px 6px rgba(0, 145, 255, 0.12);
+    outline: none;
+    padding: 0;
+    z-index: 5;
+}
+
+@media (hover: hover) {
+    .btn-audio-narrativa:hover {
+        background: #00d2ff;
+        color: #ffffff;
+        border-color: #00d2ff;
+        transform: scale(1.12);
+        box-shadow: 0 0 12px rgba(0, 210, 255, 0.5);
+    }
+}
+
+.btn-audio-narrativa:active {
+    transform: scale(0.92);
+}
+
+/* Efeito pulsante verde enquanto o MP3 está a tocar */
+.btn-audio-narrativa.a-tocar {
+    background: #2ed573 !important;
+    color: #ffffff !important;
+    border-color: #2ed573 !important;
+    animation: pulseAudioNarrativa 1.2s infinite ease-in-out;
+}
+
+@keyframes pulseAudioNarrativa {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(46, 213, 115, 0.6);
+    }
+    50% {
+        transform: scale(1.15);
+        box-shadow: 0 0 12px 4px rgba(46, 213, 115, 0.4);
+    }
+}
+
+/* =========================================
+   ESTRELAS SVG NO ECRÃ FINAL
+   ========================================= */
+.estrelas-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: -10px; /* Puxa as estrelas para junto da caixa do resumo */
+    margin-bottom: 4px;
+}
+
+.mensagem-final {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: #0d47a1;
+    margin-bottom: 25px; /* Cria uma margem confortável antes do botão verde */
+    text-align: center;
+    padding: 0 10px;
+}
+
+.estrela-wrapper {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-estrela {
+    width: 100%;
+    height: 100%;
+    fill: #d1d8e0; /* Estado Apagado (Cinzento Claro) */
+    stroke: #a5b1c2;
+    stroke-width: 1.5;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), fill 0.3s ease, filter 0.3s ease;
+}
+
+/* Estado Ativo (Amarelo Dourado Animado) */
+.estrela-wrapper.ativa .icon-estrela {
+    fill: #f1c40f !important;
+    stroke: #f39c12 !important;
+    filter: drop-shadow(0 0 10px #f1c40f);
+    animation: popEstrela 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popEstrela {
+    0% { transform: scale(0) rotate(-45deg); }
+    80% { transform: scale(1.3) rotate(10deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+
+
+/* =========================================
+   DICA VISUAL E CONCRETA NO MODAL
+   ========================================= */
+.dica-visual-box {
+    text-align: center;
+    padding: 10px 5px;
+}
+
+.dica-titulo-modal {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: #0d47a1;
+    margin-bottom: 15px;
+}
+
+.dica-subtitulo-modal {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #475569;
+    margin-top: 15px;
+}
+
+/* GRUPO DE ESFERAS */
+.grupo-esferas-dica {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+
+.subgrupo-esferas {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 220px;
+}
+
+.sinal-dica {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #0d47a1;
+}
+
+/* ESFERAS DESENHADAS EM CSS PURO */
+.esfera-dica {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: inset 0 -2px 4px rgba(0,0,0,0.2), 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.esfera-dica.azul {
+    background: radial-gradient(circle at 30% 30%, #74b9ff, #0984e3);
+}
+
+.esfera-dica.vermelha {
+    background: radial-gradient(circle at 30% 30%, #ff7675, #d63031);
+}
+
+/* ESFERA RETIRADA NA SUBTRAÇÃO (CINZENTA COM X) */
+.esfera-dica.retirada {
+    background: #cbd5e1;
+    position: relative;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+.esfera-dica.retirada::after {
+    content: '×';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -52%);
+    color: #ef4444;
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+/* DECOMPOSIÇÃO (NÍVEIS 50 E 100) */
+.decomposicao-grid {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.card-dec {
+    flex: 1;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-dec.dez { border-color: #93c5fd; background: #eff6ff; }
+.card-dec.uni { border-color: #fca5a5; background: #fef2f2; }
+
+.dec-lbl {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #64748b;
+}
+
+.dec-val {
+    font-size: 1rem;
+    color: #1e293b;
+}
+
+/* =========================================
+   ESTILO DO MODAL DE AJUDA
+   ========================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-container {
+    background: #ffffff;
+    border: 3px solid #bcdcff;
+    border-radius: 24px;
+    padding: 24px 20px 20px;
+    max-width: 420px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    transform: scale(0.9);
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay.active .modal-container {
+    transform: scale(1);
+}
+
+.btn-fechar-modal {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: #f1f5f9;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 22px;
+    font-weight: 900;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-fechar-modal:hover {
+    background: #ef4444;
+    color: #ffffff;
+}
+
+/* =========================================
+   DESTAQUE DA CONTA NO MODAL DE AJUDA
+   ========================================= */
+.expressao-dica-destaque {
+    display: inline-block;
+    background: #e0f2fe;
+    color: #0284c7;
+    border: 2px solid #bae6fd;
+    border-radius: 12px;
+    padding: 6px 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin: 4px auto 14px auto;
+    box-shadow: 0 2px 6px rgba(2, 132, 199, 0.08);
+}
+
+/* Redução automática para números de 3 dígitos (ex: 850) */
+.btn-bola.digitos-3 {
+    font-size: clamp(0.75rem, 3.8cqw, 1.3rem) !important;
+    letter-spacing: -0.5px;
+}
+
+/* Redução automática para o número 1000 (4 dígitos) */
+.btn-bola.digitos-4 {
+    font-size: clamp(0.65rem, 3.2cqw, 1.1rem) !important;
+    letter-spacing: -1px;
+}
+
+/* Redução para expressões longas no visor do peito (ex: 450 + 380 =) */
+.visor-conta.conta-longa {
+    font-size: clamp(0.75rem, 4.2cqw, 1.35rem) !important;
+    letter-spacing: -0.5px;
+}
+
+.container-botao-unico {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.btn-destaque-tabuadas {
+    max-width: 420px;
+    width: 100%;
+    padding: 16px 20px;
+}
+
+
+
+    </style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<nav class="sidebar" id="sidebar">
+    <div class="btn-fechar" onclick="toggleMenu()"><span>✕</span> Fechar</div>
+    <ul>
+        <li><a href="../../../"><img src="../../../SVG/home.svg" alt="Início" class="icon-svg-menu" onerror="this.style.display='none'">Início</a></li>
+        <li><a href="../../../pre"><img src="../../../SVG/pre.svg" alt="Pré-Escolar" class="icon-svg-menu" onerror="this.style.display='none'">Pré-Escolar</a></li>
+        <li><a href="../../../1"><img src="../../../SVG/ano1.svg" alt="1º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 1º Ano</a></li>
+        <li><a href="../../../2"><img src="../../../SVG/ano2.svg" alt="2º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 2º Ano</a></li>
+        <li><a href="../.."><img src="../../../SVG/ano3.svg" alt="3º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 3º Ano</a></li>
+        <li><a href="../../../4"><img src="../../../SVG/ano4.svg" alt="4º Ano" class="icon-svg-menu" onerror="this.style.display='none'"> 4º Ano</a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="header-content">
+        <div class="nav-container">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="../" class="btn-voltar"><img src="../../../SVG/voltar.svg" class="icon-svg-voltar" alt=""> Voltar</a>
+        </div>
+        
+        <h1>O Robô das Tabuadas<img src="../img-titulos/robo_tabuadas.svg" class="icon-svg-titulo" alt=""></h1>
+        <div class="subtitulo" id="subtitulo-header">Sabes as tabuadas? Prova-o!</div>
+    </div>
+</header>
+
+<main>
+    <div class="cartao-jogo-container" id="cartao-jogo">
+        
+        <!-- Contentor para os confetis -->
+        <div id="confetti-container" class="confetti-container"></div>
+
+        <!-- =========================================
+             1. ECRÃ DE SELEÇÃO DE NÍVEIS (MENU ÚNICO)
+             ========================================= -->
+        <div id="ecra-selecao" class="ecra ativo">
+            
+            <!-- ANIMAÇÃO TUTORIAL (ADAPTADA ÀS TABUADAS) -->
+            <div class="animacao-tutorial" id="tutorial-container">
+                <div class="tutorial-stage">
+                    <div class="tut-robo-container">
+                        <!-- Expressões do Robô -->
+                        <img src="./img/robo_neutro.png" class="tut-robo-img tut-img-neutro" alt="Robô">
+                        <img src="./img/robo_acerto.png" class="tut-robo-img tut-img-acerto" alt="Robô Feliz">
+
+                        <!-- Visor do Peito do Robô (Tabuadas) -->
+                        <div class="tut-visor">
+                            <span class="tut-txt tut-c1">3 x 4 =</span>
+                            <span class="tut-txt tut-s1">12</span>
+                            <span class="tut-txt tut-c2">6 x 7 =</span>
+                            <span class="tut-txt tut-s2">42</span>
+                        </div>
+
+                        <!-- Grupo de Esferas 1: 3 x 4 = 12 -->
+                        <div class="tut-grupo tut-ronda1">
+                            <div class="tut-esfera tut-tl">10</div>
+                            <div class="tut-esfera tut-tr tut-certa1">12</div>
+                            <div class="tut-esfera tut-bl">15</div>
+                            <div class="tut-esfera tut-br">16</div>
+                        </div>
+
+                        <!-- Grupo de Esferas 2: 6 x 7 = 42 -->
+                        <div class="tut-grupo tut-ronda2">
+                            <div class="tut-esfera tut-tl">40</div>
+                            <div class="tut-esfera tut-tr">48</div>
+                            <div class="tut-esfera tut-bl tut-certa2">42</div>
+                            <div class="tut-esfera tut-br">36</div>
+                        </div>
+
+                        <!-- Cursor de Mãozinha Interativa em SVG -->
+                        <div class="tut-mao">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="#1e90ff" stroke="#ffffff" stroke-width="1.5">
+                                <path d="M9 11V4.5a1.5 1.5 0 0 1 3 0V10M12 10V3.5a1.5 1.5 0 0 1 3 0V10M15 10V5.5a1.5 1.5 0 0 1 3 0V12.5c0 4.5-3.5 8-8 8s-7-2.5-7-6.5V11a1.5 1.5 0 0 1 3 0V10"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BALÃO DE NARRATIVA DO ROBÔ -->
+            <div class="card-narrativa">
+                <button class="btn-audio-narrativa" id="btn-audio-narrativa" onclick="tocarAudioNarrativa()" title="Ouvir mensagem" aria-label="Ouvir narrativa">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                </button>
+
+                <div class="avatar-narrativa">
+                    <img src="./img/robo_neutro.png" alt="Robô das Tabuadas">
+                </div>
+                <div class="balao-fala">
+                    <span class="titulo-fala">
+                        <svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="#f1c40f" stroke="#e67e22" stroke-width="1.5" style="vertical-align:-2px; margin-right:4px;">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                        Missão: Recarregar o Robô!
+                    </span>
+                    <p>Olá, Campeão! As minhas 4 esferas ficaram sem energia. Resolve as tabuadas do meu ecrã e clica na esfera correta para recarregar a minha bateria!</p>
+                </div>
+            </div>
+
+            <!-- MENU ÚNICO DE INÍCIO -->
+            <div class="container-botao-unico">
+                <button class="btn-nivel-novo bg-verde btn-destaque-tabuadas" onclick="iniciarJogo('todas')">
+                    <img src="../img-titulos/seta_direita.svg" class="icon-btn-nivel-novo" alt="" onerror="this.style.display='none'">
+                    <div class="btn-nivel-text-container">
+                        <span class="btn-nivel-titulo">Todas as Tabuadas</span>
+                        <span class="btn-nivel-subtitulo">Desafio Geral (do 1 ao 10)</span>
+                        <div class="estrelas-nivel" id="estrelas-nivel-todas"></div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- =========================================
+             2. ECRÃ DE JOGO (ROBÔ + CONTA)
+             ========================================= -->
+        <div id="ecra-jogo" class="ecra">
+            <div class="status-bar-jogo">
+                <button class="btn-voltar-menu" onclick="voltarAoMenu()" id="btn-home-svg" aria-label="Voltar ao menu"></button>
+                <button id="btn-dica" class="btn-dica" onclick="usarDica()" aria-label="Usar dica"></button>
+                <div class="badge-ronda"><span id="badge-ronda-svg"></span><span id="val-progresso">1</span>/<span id="val-total">10</span></div>
+                <div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
+                <div class="badge-erros"><span id="icone-erro-svg"></span><span id="val-erros">0</span></div>
+            </div>
+
+            <div class="area-jogo-custom" id="game-area">
+                <div class="robo-stage">
+                    <img id="img-robo" src="./img/robo_neutro.png" alt="Robô das Tabuadas" class="img-robo">
+                    <div id="visor-conta" class="visor-conta">--</div>
+                    <div id="container-bolas"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================
+             3. ECRÃ DE TRANSIÇÃO
+             ========================================= -->
+        <div id="ecra-transicao" class="ecra">
+            <h2 class="end-title" id="transicao-title-text">Nível Completo!<img src="../../../SVG/estrela.svg" class="icon-end-title" alt=""></h2>
+            <div class="end-stats">
+                <p>Estás a ir muito bem!</p>
+            </div>
+            
+            <div class="botoes-acao-container">
+                <button class="btn-acao primario" onclick="proximoNivel()">
+                    PRÓXIMO NÍVEL 
+                    <img src="../../../SVG/proximo_nivel.svg" class="icon-acao" alt="">
+                </button>
+                <button class="btn-acao terciario" onclick="voltarAoMenu()">
+                    <img src="../../../SVG/home.svg" class="icon-acao" alt=""> 
+                    VOLTAR AO MENU
+                </button>
+            </div>
+        </div>
+
+        <!-- =========================================
+             4. ECRÃ DE FIM DE JOGO
+             ========================================= -->
+        <div id="ecra-fim" class="ecra">
+            <h2 class="end-title" id="end-title-text">Missão Cumprida!<img src="../../../SVG/confeti.svg" class="icon-end-title" alt=""></h2>
+            
+            <div class="end-stats">
+                Completaste os desafios!<br><br>
+                Tiveste <strong id="final-erros" style="color:var(--cor-erro); font-size:2rem;">0</strong> erros.
+            </div>
+            
+            <div class="estrelas-container" id="estrelas-container">
+                <div class="estrela-wrapper" id="estrela-1">
+                    <svg viewBox="0 0 24 24" class="icon-estrela">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                </div>
+                <div class="estrela-wrapper" id="estrela-2">
+                    <svg viewBox="0 0 24 24" class="icon-estrela">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                </div>
+                <div class="estrela-wrapper" id="estrela-3">
+                    <svg viewBox="0 0 24 24" class="icon-estrela">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="mensagem-final" id="mensagem-final">Incrível!</div>
+
+            <div class="botoes-acao-container">
+                <button class="btn-acao primario" onclick="reiniciarJogo()">JOGAR DE NOVO<img src="../../../SVG/jogar_novo.svg" class="icon-acao" alt=""></button>
+                <button class="btn-acao terciario" onclick="voltarAoMenu()">VOLTAR AO MENU<img src="../../../SVG/home.svg" class="icon-acao" alt=""></button>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+
+<footer>
+    <p><span id="ano-atual"> </span><img src="../../../SVG/3_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
+</footer>
+
+<script>
+/* ==========================================
+   CONSTANTES E SVGS GLOBAIS
+   ========================================== */
+const SVG_HOME = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" style="margin-right:4px; vertical-align:middle;"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5z" fill="#fff" stroke="#d35400" stroke-width="2"/><rect x="10" y="12" width="4" height="10" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/></svg> Menu`;
+const SVG_BULB = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px; vertical-align:middle;"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"></path></svg>`;
+const SVG_ERRO = `<svg viewBox="0 0 14 14" width="0.8em" height="0.8em" style="margin-right:5px; vertical-align:middle;"><path d="M2 2 L12 12 M12 2 L2 12" stroke="var(--cor-pt,#ff4757)" stroke-width="3" stroke-linecap="round"/></svg>`;
+const SVG_STAR = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="#f1c40f" stroke="#f39c12" stroke-width="1.5" style="vertical-align:-2px; margin-right:4px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+
+/* ==========================================
+   ESTADO GLOBAL
+   ========================================== */
+let erradas = 0;
+let desafioAtual = 0;
+let totalDesafiosNivel = 10;
+let rondasParaDica = 0;
+const COOLDOWN_DICA = 3;
+let timerImpaciencia = null;
+let nivelAtual = 'todas';
+let listaContasPartida = [];
+let contaAtualObj = null;
+
+const CHAVE_STORAGE = 'robo_tabuadas_progresso';
+
+window.pararAudioNarrativa = function() {
+    if (audioNarrativaObj && !audioNarrativaObj.paused) {
+        audioNarrativaObj.pause();
+        audioNarrativaObj.currentTime = 0; // Repõe o áudio no início
+    }
+    const btn = document.getElementById('btn-audio-narrativa');
+    if (btn) btn.classList.remove('a-tocar');
+};
+
+/* ==========================================
+   FUNÇÕES DE NAVEGAÇÃO E JOGO (GLOBALMENTE ACESSÍVEIS)
+   ========================================== */
+   function toggleMenu() {
+    document.getElementById('sidebar').classList.toggle('active');
+    document.getElementById('overlay').classList.toggle('active');
+}   
+   
+   
+window.numeroAleatorio = function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+window.baralharArray = function(array) {
+    return array.sort(() => Math.random() - 0.5);
+};
+
+window.mostrarEcra = function(idEcra) {
+    document.querySelectorAll('.ecra').forEach(e => e.classList.remove('ativo'));
+    const alvo = document.getElementById(idEcra);
+    if (alvo) alvo.classList.add('ativo');
+};
+
+
+
+window.gerarContaMatematica = function() {
+    const num1 = window.numeroAleatorio(1, 10);
+    const num2 = window.numeroAleatorio(1, 10);
+    const resultado = num1 * num2;
+    const expressao = `${num1} x ${num2} =`;
+
+    let opcoesIncorretas = new Set();
+    let desvios = [-num1, num1, -1, 1, -2, 2, -10, 10];
+
+    let tentativas = 0;
+    while (opcoesIncorretas.size < 3 && tentativas < 100) {
+        tentativas++;
+        let desvio = desvios[Math.floor(Math.random() * desvios.length)];
+        let opErrada = resultado + desvio;
+
+        if (opErrada > 0 && opErrada <= 100 && opErrada !== resultado) {
+            opcoesIncorretas.add(opErrada);
+        }
+    }
+
+    while (opcoesIncorretas.size < 3) {
+        let randVal = window.numeroAleatorio(1, 100);
+        if (randVal !== resultado) {
+            opcoesIncorretas.add(randVal);
+        }
+    }
+
+    return {
+        conta: expressao,
+        correta: resultado,
+        opcoes: window.baralharArray([resultado, ...Array.from(opcoesIncorretas)])
+    };
+};
+
+window.gerarPartidaCompleta = function() {
+    let contas = [];
+    let expressoesUsadas = new Set();
+    let tentativas = 0;
+
+    while (contas.length < 10 && tentativas < 300) {
+        tentativas++;
+        let novaConta = window.gerarContaMatematica();
+        if (!expressoesUsadas.has(novaConta.conta)) {
+            expressoesUsadas.add(novaConta.conta);
+            contas.push(novaConta);
+        }
+    }
+    return contas;
+};
+
+window.atualizarBotaoDica = function() {
+    const btn = document.getElementById('btn-dica');
+    if (!btn) return;
+
+    if (rondasParaDica <= 0) {
+        btn.classList.remove('esgotada');
+        btn.disabled = false;
+        btn.innerHTML = (typeof SVG_BULB !== 'undefined' ? SVG_BULB : '💡') + ' Dica';
+    } else {
+        btn.classList.add('esgotada');
+        btn.disabled = true;
+        btn.innerHTML = `⏳ ${rondasParaDica}`;
+    }
+};
+
+window.iniciarJogo = function(nivel = 'todas') {
+    window.pararAudioNarrativa();
+	nivelAtual = nivel;
+    desafioAtual = 0;
+    erradas = 0;
+	rondasParaDica = 0;
+    listaContasPartida = window.gerarPartidaCompleta();
+
+    const valErros = document.getElementById('val-erros');
+    if (valErros) valErros.textContent = '0';
+
+    window.mostrarEcra('ecra-jogo');
+    window.carregarRonda();
+};
+
+window.reiniciarJogo = function() {
+    window.limparConfetis();
+    window.iniciarJogo(nivelAtual);
+};
+
+window.voltarAoMenu = function() {
+    window.pararTimerImpaciencia();
+    window.limparConfetis();
+    window.limparDestaques();
+    window.atualizarEstrelasMenu();
+    window.mostrarEcra('ecra-selecao');
+};
+
+window.carregarRonda = function() {
+    window.resetTimerImpaciencia();
+    window.limparDestaques();
+    window.tocarSom('bipboop');
+
+    // Decrementa cooldown da dica
+    if (typeof rondasParaDica !== 'undefined' && rondasParaDica > 0) {
+        rondasParaDica--;
+    }
+    
+    // Executa a atualização da dica de forma segura
+    if (typeof window.atualizarBotaoDica === 'function') {
+        window.atualizarBotaoDica();
+    }
+
+    const imgRobo = document.getElementById('img-robo');
+    if (imgRobo) imgRobo.src = "./img/robo_neutro.png";
+
+    contaAtualObj = listaContasPartida[desafioAtual];
+    if (!contaAtualObj) return;
+
+    // Atualiza o progresso na barra
+    const valProg = document.getElementById('val-progresso');
+    if (valProg) valProg.textContent = desafioAtual + 1;
+
+    const fill = document.getElementById('progress-fill');
+    if (fill) fill.style.width = `${((desafioAtual) / 10) * 100}%`;
+
+    // Visor da conta (agora volta a carregar!)
+    const visor = document.getElementById('visor-conta');
+    if (visor) visor.textContent = contaAtualObj.conta;
+
+    // Desenhar as 4 esferas com as opções
+    const posicoesBolas = ['bola-tl', 'bola-tr', 'bola-bl', 'bola-br'];
+    const container = document.getElementById('container-bolas');
+
+    if (container) {
+        container.innerHTML = '';
+        contaAtualObj.opcoes.forEach((opcaoVal, index) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = `btn-bola ${posicoesBolas[index]}`;
+            btn.dataset.valor = opcaoVal;
+            btn.textContent = opcaoVal;
+            btn.onclick = () => window.verificarResposta(opcaoVal, btn);
+            container.appendChild(btn);
+        });
+    }
+};
+window.verificarResposta = function(opcaoVal, btn) {
+    const imgRobo = document.getElementById('img-robo');
+
+    if (opcaoVal === contaAtualObj.correta) {
+        btn.classList.add('correta');
+        if (imgRobo) imgRobo.src = "./img/robo_acerto.png";
+        window.tocarSom('acerto');
+
+        setTimeout(() => {
+            desafioAtual++;
+            if (desafioAtual < 10) {
+                window.carregarRonda();
+            } else {
+                window.finalizarJogo();
+            }
+        }, 1000);
+    } else {
+        btn.classList.add('errada');
+        erradas++;
+
+        const valErros = document.getElementById('val-erros');
+        if (valErros) valErros.textContent = erradas;
+
+        if (imgRobo) imgRobo.src = "./img/robo_erro.png";
+        window.tocarSom('erro');
+
+        setTimeout(() => {
+            btn.classList.remove('errada');
+            if (imgRobo) imgRobo.src = "./img/robo_neutro.png";
+        }, 800);
+        window.resetTimerImpaciencia();
+    }
+};
+
+window.finalizarJogo = function() {
+    const fill = document.getElementById('progress-fill');
+    if (fill) fill.style.width = '100%';
+
+    setTimeout(() => {
+        window.mostrarEcra('ecra-fim');
+
+        const finalErros = document.getElementById('final-erros');
+        if (finalErros) finalErros.textContent = erradas;
+
+        let numEstrelas = 3;
+        let msgText = "";
+
+        if (erradas === 0) {
+            numEstrelas = 3;
+            msgText = "Perfeito! Dominas todas as tabuadas!";
+        } else if (erradas <= 2) {
+            numEstrelas = 2;
+            msgText = "Muito bem! Quase sem erros!";
+        } else {
+            numEstrelas = 1;
+            msgText = "Bom esforço! Continua a praticar as tabuadas!";
+        }
+
+        const msgEl = document.getElementById('mensagem-final');
+        if (msgEl) msgEl.textContent = msgText;
+
+        for (let i = 1; i <= 3; i++) {
+            const el = document.getElementById(`estrela-${i}`);
+            if (el) {
+                el.classList.remove('ativa');
+                if (i <= numEstrelas) {
+                    setTimeout(() => {
+                        el.classList.add('ativa');
+                        window.tocarSom('flip');
+                    }, i * 350);
+                }
+            }
+        }
+
+        window.guardarEstrelasNivel('todas', numEstrelas);
+        window.tocarSom('vitoria');
+        window.dispararConfetis();
+    }, 500);
+};
+
+window.guardarEstrelasNivel = function(nivel, numEstrelas) {
+    const progresso = JSON.parse(localStorage.getItem(CHAVE_STORAGE) || '{}');
+    if (!progresso[nivel] || numEstrelas > progresso[nivel]) {
+        progresso[nivel] = numEstrelas;
+        localStorage.setItem(CHAVE_STORAGE, JSON.stringify(progresso));
+    }
+    window.atualizarEstrelasMenu();
+};
+
+window.atualizarEstrelasMenu = function() {
+    const progresso = JSON.parse(localStorage.getItem(CHAVE_STORAGE) || '{}');
+    const container = document.getElementById('estrelas-nivel-todas');
+    if (!container) return;
+
+    const qtd = progresso['todas'] || 0;
+    let html = '';
+
+    for (let i = 1; i <= 3; i++) {
+        const eGanha = i <= qtd;
+        const corPreenchimento = eGanha ? '#ffd700' : 'rgba(255, 255, 255, 0.3)';
+        const corContorno = eGanha ? '#d97706' : '#ffffff';
+
+        html += `
+            <svg viewBox="0 0 24 24" class="estrela-menu" style="width:18px; height:18px; display:inline-block; vertical-align:middle;">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                         fill="${corPreenchimento}" 
+                         stroke="${corContorno}" 
+                         stroke-width="1.5"/>
+            </svg>
+        `;
+    }
+    container.innerHTML = html;
+};
+
+window.usarDica = function() {
+
+    if (rondasParaDica > 0 || !contaAtualObj) return;
+
+    const conteudo = window.gerarDicaVisualHTML(contaAtualObj);
+    const modalConteudo = document.getElementById('modal-dica-conteudo');
+    if (modalConteudo) modalConteudo.innerHTML = conteudo;
+
+    const modal = document.getElementById('modal-ajuda');
+    if (modal) {
+        modal.classList.add('ativo');
+        modal.classList.add('active');
+    }
+
+    rondasParaDica = COOLDOWN_DICA;
+    window.atualizarBotaoDica();
+
+    window.tocarSom('dica');
+};
+
+window.fecharModalDica = function() {
+    const modal = document.getElementById('modal-ajuda');
+    if (modal) {
+        modal.classList.remove('ativo');
+        modal.classList.remove('active');
+    }
+};
+
+window.gerarDicaVisualHTML = function(contaObj) {
+    if (!contaObj) return '';
+
+    const partes = contaObj.conta.replace('=', '').trim().split('x');
+    const f1 = parseInt(partes[0]);
+    const f2 = parseInt(partes[1]);
+
+    // Decompõe a multiplicação numa soma de parcelas iguais
+    const termos = Array(f1).fill(f2).join(' + ');
+
+    let html = `<div class="dica-visual-box">`;
+    html += `<div class="dica-titulo-modal">A multiplicação é uma adição repetida!</div>`;
+    html += `<div class="expressao-dica-destaque" style="font-size:1.8rem; font-weight:bold; color:#1e90ff; margin:10px 0;">${f1} x ${f2}</div>`;
+    html += `<p class="dica-explicacao">É o mesmo que somar o número <strong>${f2}</strong> exatamente <strong>${f1}</strong> vezes:</p>`;
+    html += `<div class="card-soma-repetida" style="background:#eef2ff; padding:12px; border-radius:8px; font-size:1.3rem; word-break:break-word; margin-top:8px;">${termos} = <strong style="color:#e74c3c; font-size:1.5rem;">?</strong></div>`;
+    html += `</div>`;
+
+    return html;
+};
+
+let audioNarrativaObj = null;
+window.tocarAudioNarrativa = function() {
+    const btn = document.getElementById('btn-audio-narrativa');
+    if (!audioNarrativaObj) {
+        audioNarrativaObj = new Audio("./audio/narrativa_robo.mp3");
+        audioNarrativaObj.onended = () => { if (btn) btn.classList.remove('a-tocar'); };
+        audioNarrativaObj.onerror = () => { if (btn) btn.classList.remove('a-tocar'); };
+    }
+
+    if (!audioNarrativaObj.paused) {
+        audioNarrativaObj.pause();
+        audioNarrativaObj.currentTime = 0;
+        if (btn) btn.classList.remove('a-tocar');
+    } else {
+        audioNarrativaObj.play().then(() => {
+            if (btn) btn.classList.add('a-tocar');
+        }).catch(err => {
+            if (btn) btn.classList.remove('a-tocar');
+        });
+    }
+};
+
+window.dispararConfetis = function() {
+    const c = document.getElementById('confetti-container');
+    if (!c) return;
+    const cores = ['#ff4757','#2ed573','#0091ff','#ffa502','#9b59b6'];
+
+    for (let i = 0; i < 100; i++) {
+        const d = document.createElement('div');
+        d.className = 'confetti';
+        d.style.left = Math.random() * 100 + '%';
+        d.style.backgroundColor = cores[Math.floor(Math.random() * cores.length)];
+        const escala = Math.random() * 0.8 + 0.4;
+        const duracao = Math.random() * 2 + 2.5;
+        const atraso = Math.random() * 1.5;
+
+        d.style.animationDuration = duracao + 's';
+        d.style.animationDelay = atraso + 's';
+        d.style.transform = `scale(${escala})`;
+
+        c.appendChild(d);
+        setTimeout(() => d.remove(), (duracao + atraso) * 1000);
+    }
+};
+
+window.limparConfetis = function() {
+    const container = document.getElementById('confetti-container');
+    if (container) container.innerHTML = '';
+};
+
+const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+let audioCtx = null;
+
+function initAudio() {
+    if (!AudioContextClass) return;
+    if (!audioCtx) audioCtx = new AudioContextClass();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+}
+document.addEventListener('click', initAudio, { once: true });
+document.addEventListener('touchstart', initAudio, { once: true });
+
+window.tocarSom = function(tipo) {
+    initAudio();
+    if (!audioCtx) return;
+
+    const agora = audioCtx.currentTime;
+
+    if (tipo === 'flip') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.frequency.setValueAtTime(400, agora);
+        osc.frequency.exponentialRampToValueAtTime(600, agora + 0.1);
+        gain.gain.setValueAtTime(0.05, agora);
+        osc.start(agora); osc.stop(agora + 0.1);
+
+    } else if (tipo === 'bipboop') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, agora);
+        osc.frequency.exponentialRampToValueAtTime(1046.50, agora + 0.07);
+        gain.gain.setValueAtTime(0.06, agora);
+        gain.gain.exponentialRampToValueAtTime(0.001, agora + 0.07);
+        osc.start(agora); osc.stop(agora + 0.07);
+
+    } else if (tipo === 'acerto') {
+        const notas = [783.99, 1046.50];
+        notas.forEach((freq, i) => {
+            const o = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            o.connect(g); g.connect(audioCtx.destination);
+            o.type = 'sine';
+            o.frequency.value = freq;
+            g.gain.setValueAtTime(0, agora + i * 0.12);
+            g.gain.linearRampToValueAtTime(0.1, agora + i * 0.12 + 0.02);
+            g.gain.exponentialRampToValueAtTime(0.001, agora + i * 0.12 + 0.3);
+            o.start(agora + i * 0.12); o.stop(agora + i * 0.12 + 0.3);
+        });
+
+    } else if (tipo === 'erro') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(250, agora);
+        osc.frequency.exponentialRampToValueAtTime(100, agora + 0.3);
+        gain.gain.setValueAtTime(0.1, agora);
+        osc.start(agora); osc.stop(agora + 0.4);
+
+    } else if (tipo === 'vitoria') {
+        const melodia = [
+            { freq: 523.25, tempo: 0.00, duracao: 0.15 },
+            { freq: 659.25, tempo: 0.15, duracao: 0.15 },
+            { freq: 783.99, tempo: 0.30, duracao: 0.20 },
+            { freq: 659.25, tempo: 0.50, duracao: 0.15 },
+            { freq: 1046.50, tempo: 0.65, duracao: 0.80 }
+        ];
+
+        melodia.forEach(nota => {
+            const o = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            o.connect(g); g.connect(audioCtx.destination);
+            o.type = 'triangle';
+            o.frequency.value = nota.freq;
+            g.gain.setValueAtTime(0, agora + nota.tempo);
+            g.gain.linearRampToValueAtTime(0.1, agora + nota.tempo + 0.02);
+            g.gain.exponentialRampToValueAtTime(0.001, agora + nota.tempo + nota.duracao);
+            o.start(agora + nota.tempo); o.stop(agora + nota.tempo + nota.duracao);
+        });
+    }
+};
+
+window.resetTimerImpaciencia = function() {
+    clearTimeout(timerImpaciencia);
+    const btnDica = document.getElementById('btn-dica');
+    if (btnDica) btnDica.classList.remove('dica-impaciente');
+
+    timerImpaciencia = setTimeout(() => {
+        if (btnDica) btnDica.classList.add('dica-impaciente');
+    }, 15000);
+};
+
+window.pararTimerImpaciencia = function() {
+    clearTimeout(timerImpaciencia);
+    const btnDica = document.getElementById('btn-dica');
+    if (btnDica) btnDica.classList.remove('dica-impaciente');
+};
+
+window.limparDestaques = function() {
+    document.querySelectorAll('.highlight-correto').forEach(el => {
+        el.classList.remove('highlight-correto');
+    });
+};
+
+
+
+/* ==========================================
+   ARRANQUE
+   ========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    window.mostrarEcra('ecra-selecao');
+    window.atualizarEstrelasMenu();
+
+    const ano = document.getElementById('ano-atual');
+    if (ano) ano.textContent = new Date().getFullYear();
+
+    const btnHome = document.getElementById('btn-home-svg');
+    if (btnHome) btnHome.innerHTML = SVG_HOME;
+
+    const badgeRonda = document.getElementById('badge-ronda-svg');
+    if (badgeRonda) badgeRonda.innerHTML = SVG_STAR;
+
+    const btnDica = document.getElementById('btn-dica');
+    if (btnDica) btnDica.innerHTML = SVG_BULB + ' Dica';
+
+    const iconeErro = document.getElementById('icone-erro-svg');
+    if (iconeErro) iconeErro.innerHTML = SVG_ERRO;
+});
+</script>
+
+
+<script type="module" src="/contador.js"></script>
+<div id="modal-ajuda" class="modal-overlay">
+    <div class="modal-container">
+        <button class="btn-fechar-modal" onclick="fecharModalDica()" aria-label="Fechar ajuda">&times;</button>
+        <div id="modal-dica-conteudo">
+            <!-- O JS insere aqui a dica visual -->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
