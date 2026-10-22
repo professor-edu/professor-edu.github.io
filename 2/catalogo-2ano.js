@@ -55,6 +55,7 @@ const todosOsJogos =[
 	{ nome: "Super Quiz", icone: "icones/quiz_matematica.png", link: "mat/quiz/", cat: "mat" },
 	{ nome: "Enigmas da Selva", icone: "icones/enigmas_selva.png", link: "mat/enigmas-selva/", cat: "mat" },
 	{ nome: "Problemas no Caderno", icone: "icones/problemas_caderno.png", link: "mat/problemas-caderno/", cat: "mat" },
+	{ nome: "O Robô das Contas", icone: "icones/robo_contas.png", link: "mat/robo-contas/", cat: "mat" },
 	
 	
     

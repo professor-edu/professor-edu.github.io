@@ -183,6 +183,7 @@ export const CATALOGO_JOGOS = [
 	{ nome: "Super Quiz", icone: "2/icones/quiz_matematica.png", link: "2/mat/quiz/", ano: "2º Ano" },
 	{ nome: "Enigmas da Selva", icone: "2/icones/enigmas_selva.png", link: "2/mat/enigmas-selva/", ano: "2º Ano" },
 	{ nome: "Problemas no Caderno", icone: "2/icones/problemas_caderno.png", link: "2/mat/problemas-caderno/", ano: "2º Ano" },
+	{ nome: "O Robô das Contas", icone: "2/icones/robo_contas.png", link: "2/mat/robo-contas/", ano: "2º Ano" },
 
 	// Estudo do Meio (em)
 	{ nome: "Animais", icone: "2/icones/animais.png", link: "2/em/animais/", ano: "2º Ano" },
