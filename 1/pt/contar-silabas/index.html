@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     
     <!-- Importação do ficheiro de dados externo -->
-    <script src="../dados.js"></script>
+    <script src="dados.js"></script>
     
     <style>
         *, *::before, *::after {
@@ -40,6 +40,7 @@
             --cor-btn-vermelho: #FF6B6B;
             --cor-btn-roxo: #A55EEA;
             --cor-btn-laranja: #FA983A;
+			--cor-btn-turquesa: #139ea3;
             
             /* Cores de Feedback (Vibrantes) */
             --cor-sucesso: #2ed573;
@@ -122,8 +123,112 @@
            MENU INICIAL E ECRÃS
            ========================================= */
         .ecra { width: 100%; display: none; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.4s ease; box-sizing: border-box; flex: 1; }
-        .titulo-menu { font-size: 2rem; color: var(--azul-escuro); margin-bottom: 25px; font-weight: 900;}
+		.titulo-menu { 
+			font-size: 2rem; 
+			color: var(--azul-escuro); 
+			margin-bottom: 25px; 
+			font-weight: 900;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 12px;
+		}
+
+		/* Botão de Som das Instruções */
+		.btn-som-instrucoes {
+			width: 42px;
+			height: 42px;
+			border-radius: 50%;
+			background-color: var(--cor-btn-amarelo, #fbc531);
+			border: 3px solid #ffffff;
+			color: #5c4100;
+			cursor: pointer;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+			transition: transform 0.2s ease, background-color 0.2s ease;
+			outline: none;
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		@media (hover: hover) {
+			.btn-som-instrucoes:hover {
+				transform: scale(1.1);
+				background-color: #ffea00;
+				box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+			}
+		}
+
+		.btn-som-instrucoes:active {
+			transform: scale(0.92);
+		}
+
+		/* Responsividade Mobile */
+		@media (max-width: 420px) {
+			.titulo-menu {
+				font-size: 1.6rem;
+				gap: 8px;
+				margin-bottom: 18px;
+			}
+			.btn-som-instrucoes {
+				width: 36px;
+				height: 36px;
+			}
+			.btn-som-instrucoes svg {
+				width: 18px;
+				height: 18px;
+			}
+			
+			.img-wrapper {
+				width: 140px;
+				height: 140px;
+				border-width: 3px;
+				border-radius: 16px;
+				padding: 10px;
+			}
+
+			.word-display {
+				font-size: 1.35rem;
+				height: 34px;
+			}
+			.word-display.word-success {
+				font-size: 1.6rem !important;
+			}
+			
+			
+			
+			
+		}
         #ecra-jogo { justify-content: flex-start; }
+		
+		/* Contentor central do jogo */
+		.area-jogo-custom {
+			display: flex; 
+			flex-direction: column; 
+			align-items: center; 
+			justify-content: center;
+			width: 100%; 
+			flex: 1; 
+			min-height: 0; 
+			background: #f8fafc; 
+			border: 2px dashed var(--cor-pt); 
+			border-radius: 20px; 
+			padding: 25px; 
+			gap: 35px;
+			position: relative; 
+			color: #94a3b8; 
+			font-weight: bold; 
+			overflow: hidden;
+		}
+
+		/* Remover margens inferiores antigas para o 'gap' controlar o espaçamento */
+		.area-jogo-custom .game-image {
+			margin-bottom: 0;
+		}
+		.area-jogo-custom .word-display {
+			margin-bottom: 0;
+		}
 
         /* =========================================
            BARRA DE ESTADO DO JOGO E DICA
@@ -156,74 +261,456 @@
             .progress-bg { order: 6; min-width: 100%; margin-top: 5px; height: 25px; }
         }
 
+
+        
         /* =========================================
-           CSS ESPECÍFICO DO JOGO: CONTAR SÍLABAS
-           ========================================= */
-        
-        /* Animação Inicial Tutorial */
-        .animacao-tutorial {
-            position: relative; height: 230px; width: 100%; max-width: 400px; background: #f4faff;
-            border-radius: 20px; border: 3px dashed #bcdcff; margin: 0 auto 30px;
-            display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 15px; overflow: hidden;
-            box-shadow: inset 0 0 15px rgba(0,145,255,0.1);
-        }
-        
-        .tut-img-alvo { font-size: 50px; background: white; padding: 5px; border-radius: 15px; border: 3px solid #e3f2fd; box-shadow: 0 5px 10px rgba(0,0,0,0.05); margin-bottom: 10px; }
-        
-        .tut-word { font-size: 1.5rem; font-weight: 900; color: var(--azul-escuro); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .tut-word span { animation: pulseClap 2s infinite; }
-        
-        @keyframes pulseClap {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
+   ANIMAÇÃO TUTORIAL DUPLA (Gato & Tartaruga)
+   ========================================= */
 
-        .tut-boxes { display: flex; gap: 10px; z-index: 2; }
-        .tut-box {
-            width: 50px; height: 50px; border: 3px solid var(--azul-vibrante); border-radius: 10px; background: white;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; color: var(--azul-vibrante);
-            box-shadow: 0 4px 0px #b1dcfb; transition: all 0.3s; position: relative;
-        }
+.animacao-tutorial {
+    position: relative; 
+    height: 230px; 
+    width: 100%; 
+    max-width: 420px; 
+    background: #f4faff;
+    border-radius: 20px; 
+    border: 3px dashed #bcdcff; 
+    margin: 20px auto 45px;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: space-evenly; 
+    padding: 12px; 
+    overflow: hidden;
+    box-shadow: inset 0 0 15px rgba(0, 145, 255, 0.08);
+}
 
-        .tut-box.correta { animation: pressOptionAnim 3s infinite ease-in-out; }
+/* Wrapper dos Cartões sobrepostos */
+.tut-cards-wrapper {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        @keyframes pressOptionAnim {
-            0%, 40% { transform: translateY(0); box-shadow: 0 4px 0 #b1dcfb; background: white; color: var(--azul-vibrante); border-color: var(--azul-vibrante);}
-            45%, 55% { transform: translateY(4px); box-shadow: 0 0px 0 transparent; background: #2ed573; color: white; border-color: #219d53;}
-            60%, 100% { transform: translateY(0); box-shadow: 0 4px 0 #b1dcfb; background: white; color: var(--azul-vibrante); border-color: var(--azul-vibrante);}
-        }
+.tut-card {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #ffffff;
+    padding: 6px 16px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    border: 2px solid #e2e8f0;
+    transition: opacity 0.4s ease;
+}
 
-        /* Imagem Alvo do Jogo */
-        .game-image { 
-            height: 200px; width: 200px; object-fit: contain; margin-bottom: 20px; 
-            border-radius: 20px; background-color: #ffffff; padding: 15px; 
-            border: 4px solid var(--cor-1ano); box-shadow: 0 8px 25px rgba(0, 145, 255, 0.15), 0 4px 10px rgba(0,0,0,0.05); 
-            transition: transform 0.3s ease, box-shadow 0.3s ease; 
-        }
+.tut-card-gato { animation: toggleGato 8s infinite ease-in-out; }
+.tut-card-tartaruga { animation: toggleTartaruga 8s infinite ease-in-out; }
 
-        @media (hover: hover) {
-            .game-image:hover {
-                transform: scale(1.05) translateY(-3px); 
-                box-shadow: 0 12px 30px rgba(0, 145, 255, 0.25), 0 6px 15px rgba(0,0,0,0.08);
-            }
-        }
+.tut-img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.tut-word {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: var(--azul-escuro);
+}
+
+.tut-silaba {
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+/* --- Iluminação das Sílabas --- */
+.sil-gato-1 { animation: silGato1 8s infinite ease-in-out; }
+.sil-gato-2 { animation: silGato2 8s infinite ease-in-out; }
+
+.sil-tar-1 { animation: silTar1 8s infinite ease-in-out; }
+.sil-tar-2 { animation: silTar2 8s infinite ease-in-out; }
+.sil-tar-3 { animation: silTar3 8s infinite ease-in-out; }
+.sil-tar-4 { animation: silTar4 8s infinite ease-in-out; }
+
+/* --- Área Interativa dos Botões --- */
+.tut-interaction {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.tut-boxes {
+    display: flex;
+    gap: 10px;
+}
+
+.tut-box {
+    width: 46px;
+    height: 46px;
+    font-size: 1.4rem;
+    font-weight: 900;
+    border-radius: 12px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.tut-box.b1 { background-color: var(--cor-btn-vermelho); box-shadow: 0 4px 0 #d04646; }
+.tut-box.b2 { background-color: var(--cor-btn-laranja); box-shadow: 0 4px 0 #d8761e; animation: pressB2 8s infinite ease-in-out; }
+.tut-box.b3 { background-color: var(--cor-btn-amarelo); box-shadow: 0 4px 0 #c79612; color: #5c4100; }
+.tut-box.b4 { background-color: var(--cor-btn-turquesa); box-shadow: 0 4px 0 #0e7276; animation: pressB4 8s infinite ease-in-out; }
+
+/* --- Mão / Cursor --- */
+.tut-hand {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    color: var(--cor-btn-amarelo);
+    z-index: 10;
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.2));
+    animation: moveHand 8s infinite ease-in-out;
+}
+
+/* =========================================
+   KEYFRAMES DA ANIMAÇÃO (Ciclo de 8s)
+   ========================================= */
+
+/* Alternância dos Cartões */
+@keyframes toggleGato {
+    0%, 42% { opacity: 1; transform: scale(1); }
+    48%, 94% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes toggleTartaruga {
+    0%, 44% { opacity: 0; transform: scale(0.95); }
+    50%, 92% { opacity: 1; transform: scale(1); }
+    98%, 100% { opacity: 0; transform: scale(0.95); }
+}
+
+/* Iluminação Sílabas Gato */
+@keyframes silGato1 {
+    4%, 14% { background-color: var(--cor-btn-amarelo); color: #5c4100; }
+    20%, 100% { background-color: transparent; color: var(--azul-escuro); }
+}
+@keyframes silGato2 {
+    0%, 14% { background-color: transparent; color: var(--azul-escuro); }
+    18%, 28% { background-color: var(--cor-btn-amarelo); color: #5c4100; }
+    34%, 100% { background-color: transparent; color: var(--azul-escuro); }
+}
+
+/* Iluminação Sílabas Tartaruga */
+@keyframes silTar1 { 50%, 58% { background-color: var(--cor-btn-amarelo); color: #5c4100; } 64%, 100% { background-color: transparent; } }
+@keyframes silTar2 { 58%, 66% { background-color: var(--cor-btn-amarelo); color: #5c4100; } 72%, 100% { background-color: transparent; } }
+@keyframes silTar3 { 66%, 74% { background-color: var(--cor-btn-amarelo); color: #5c4100; } 80%, 100% { background-color: transparent; } }
+@keyframes silTar4 { 74%, 82% { background-color: var(--cor-btn-amarelo); color: #5c4100; } 88%, 100% { background-color: transparent; } }
+
+/* Cliques nos Botões */
+@keyframes pressB2 {
+    0%, 22% { transform: translateY(0); background-color: var(--cor-btn-laranja); box-shadow: 0 4px 0 #d8761e; }
+    26%, 36% { transform: translateY(4px); background-color: #2ed573; box-shadow: 0 0 0 transparent; color: white; }
+    42%, 100% { transform: translateY(0); background-color: var(--cor-btn-laranja); box-shadow: 0 4px 0 #d8761e; }
+}
+
+@keyframes pressB4 {
+    0%, 72% { transform: translateY(0); background-color: var(--cor-btn-verde); box-shadow: 0 4px 0 #3fa657; }
+    76%, 86% { transform: translateY(4px); background-color: #2ed573; box-shadow: 0 0 0 transparent; color: white; }
+    92%, 100% { transform: translateY(0); background-color: var(--cor-btn-verde); box-shadow: 0 4px 0 #3fa657; }
+}
+
+/* Movimento da Mão entre o Botão 2 e o Botão 4 */
+@keyframes moveHand {
+    0% { transform: translate(60px, 30px); opacity: 0; }
+    15% { transform: translate(-28px, 0); opacity: 1; } /* Sobre o Botão 2 */
+    26%, 34% { transform: translate(-28px, -4px) scale(0.88); opacity: 1; } /* Clica no 2 */
+    42% { transform: translate(-28px, 20px); opacity: 0; }
+    
+    48% { transform: translate(60px, 30px); opacity: 0; }
+    65% { transform: translate(84px, 0); opacity: 1; } /* Sobre o Botão 4 (Ajustado) */
+    76%, 84% { transform: translate(84px, -4px) scale(0.88); opacity: 1; } /* Clica no 4 (Ajustado) */
+    92%, 100% { transform: translate(84px, 20px); opacity: 0; }
+}
+
+/* Ajuste de animação exclusivo para Mobile Vertical */
+@media (max-width: 420px) {
+    .animacao-tutorial { height: 200px; }
+    .tut-card { padding: 4px 10px; gap: 8px; }
+    .tut-img { width: 34px; height: 34px; }
+    .tut-word { font-size: 1.05rem; }
+    .tut-box { width: 38px; height: 38px; font-size: 1.15rem; }
+    .tut-hand { 
+        width: 26px; 
+        height: 26px; 
+        animation: moveHandMobile 8s infinite ease-in-out; /* Ativa animação ajustada para Mobile */
+    }
+}
+
+/* Movimento da Mão no Mobile (Distâncias para botões de 38px) */
+@keyframes moveHandMobile {
+    0% { transform: translate(50px, 25px); opacity: 0; }
+    15% { transform: translate(-24px, 0); opacity: 1; } /* Sobre o Botão 2 */
+    26%, 34% { transform: translate(-24px, -4px) scale(0.88); opacity: 1; } /* Clica no 2 */
+    42% { transform: translate(-24px, 20px); opacity: 0; }
+    
+    48% { transform: translate(50px, 25px); opacity: 0; }
+    65% { transform: translate(70px, 0); opacity: 1; } /* Sobre o Botão 4 */
+    76%, 84% { transform: translate(70px, -4px) scale(0.88); opacity: 1; } /* Clica no 4 */
+    92%, 100% { transform: translate(70px, 20px); opacity: 0; }
+}
         
-        .word-display { font-size: 2.5rem; font-weight: 900; color: var(--azul-escuro); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; min-height: 50px; transition: color 0.3s; }
-        .numbers-container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; width: 100%; max-width: 600px;}
-        
-        .num-btn { 
-            background-color: white; color: var(--azul-vibrante); border: 4px solid var(--azul-vibrante); 
-            width: 80px; height: 80px; font-size: 2.5rem; font-weight: 900; border-radius: 20px; 
-            cursor: pointer; box-shadow: 0 6px 0 #b1dcfb; transition: all 0.2s; 
-            display: flex; align-items: center; justify-content: center; font-family: 'Roboto', sans-serif; 
-            user-select: none; -webkit-tap-highlight-color: transparent;
-        }
-        @media (hover: hover) { .num-btn:hover { background-color: #e3f2fd; transform: translateY(-3px); box-shadow: 0 9px 0 #b1dcfb;} }
-        .num-btn:active { transform: translateY(6px); box-shadow: 0 0px 0 transparent !important; }
+		
+		/* =========================================
+		   BOTÕES NUMERADOS (Coloridos & Responsivos)
+		   ========================================= */
+
+		.numbers-container { 
+			display: flex; 
+			gap: 15px; 
+			justify-content: center; 
+			align-items: center;
+			flex-wrap: wrap; 
+			width: 100%; 
+			max-width: 600px;
+		}
+
+		.num-btn { 
+			width: 80px; 
+			height: 80px; 
+			font-size: 2.5rem; 
+			font-weight: 900; 
+			border-radius: 22px; 
+			border: none;
+			color: white;
+			cursor: pointer; 
+			display: flex; 
+			align-items: center; 
+			justify-content: center; 
+			font-family: 'Roboto', sans-serif; 
+			user-select: none; 
+			-webkit-tap-highlight-color: transparent;
+			transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.2s ease;
+		}
+
+		/* Cores individuais com relevo 3D (1 a 5) */
+		.num-btn:nth-child(1) { background-color: var(--cor-btn-vermelho); box-shadow: 0 7px 0 #d04646; }
+		.num-btn:nth-child(2) { background-color: var(--cor-btn-laranja); box-shadow: 0 7px 0 #d8761e; }
+		.num-btn:nth-child(3) { background-color: var(--cor-btn-amarelo); box-shadow: 0 7px 0 #c79612; color: #ffffff; }
+		.num-btn:nth-child(4) { background-color: var(--cor-btn-turquesa); box-shadow: 0 7px 0 #0e7276; }
+		.num-btn:nth-child(5) { background-color: var(--cor-btn-roxo); box-shadow: 0 7px 0 #7b3eb8; }
+
+		/* Efeito Hover (Desktop) */
+		@media (hover: hover) { 
+			.num-btn:hover { 
+				transform: translateY(-4px); 
+				filter: brightness(1.08); 
+			} 
+			.num-btn:nth-child(1):hover { box-shadow: 0 10px 0 #d04646; }
+			.num-btn:nth-child(2):hover { box-shadow: 0 10px 0 #d8761e; }
+			.num-btn:nth-child(3):hover { box-shadow: 0 10px 0 #c79612; }
+			.num-btn:nth-child(4):hover { box-shadow: 0 10px 0 #0e7276; }
+			.num-btn:nth-child(5):hover { box-shadow: 0 10px 0 #7b3eb8; }
+		}
+
+		/* Efeito ao Clicar / Pressionar */
+		.num-btn:active { 
+			transform: translateY(6px) !important; 
+			box-shadow: 0 1px 0 transparent !important; 
+		}
+
+		/* =========================================
+		   RESPONSIVIDADE (Tablets e Telemóveis)
+		   ========================================= */
+
+		@media (max-width: 768px) {
+			.numbers-container {
+				gap: 10px;
+			}
+			.num-btn { 
+				width: 65px; 
+				height: 65px; 
+				font-size: 2rem; 
+				border-radius: 18px; 
+			}
+			.num-btn:nth-child(1) { box-shadow: 0 5px 0 #d04646; }
+			.num-btn:nth-child(2) { box-shadow: 0 5px 0 #d8761e; }
+			.num-btn:nth-child(3) { box-shadow: 0 5px 0 #c79612; }
+			.num-btn:nth-child(4) { box-shadow: 0 5px 0 #3fa657; }
+			.num-btn:nth-child(5) { box-shadow: 0 5px 0 #7b3eb8; }
+		}
+
+		@media (max-width: 420px) {
+			.numbers-container {
+				gap: 8px;
+			}
+			.num-btn { 
+				width: 52px; 
+				height: 52px; 
+				font-size: 1.6rem; 
+				border-radius: 14px; 
+			}
+			.num-btn:nth-child(1) { box-shadow: 0 4px 0 #d04646; }
+			.num-btn:nth-child(2) { box-shadow: 0 4px 0 #d8761e; }
+			.num-btn:nth-child(3) { box-shadow: 0 4px 0 #c79612; }
+			.num-btn:nth-child(4) { box-shadow: 0 4px 0 #3fa657; }
+			.num-btn:nth-child(5) { box-shadow: 0 4px 0 #7b3eb8; }
+		}
+		
+		/* =========================================
+		   BOTÃO DE SOM NA IMAGEM
+		   ========================================= */
+		.img-wrapper {
+			position: relative;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			background: #ffffff;
+			border: 4px solid var(--azul-vibrante, #2196f3);
+			border-radius: 24px;
+			padding: 16px;
+			box-shadow: 0 10px 25px rgba(0, 145, 255, 0.12);
+			transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease;
+			width: 210px;
+			height: 210px;
+			max-width: 100%;
+			user-select: none;
+		}
+		
+		@media (hover: hover) {
+			.img-wrapper:hover {
+				transform: translateY(-5px) scale(1.02);
+				box-shadow: 0 15px 30px rgba(0, 145, 255, 0.22);
+			}
+		}
+		
+		.game-image {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			border-radius: 12px;
+		}
+
+		/* Botão de Som sobre o Cartão */
+		.btn-som-imagem {
+			position: absolute;
+			top: 3px;
+			right: 3px;
+			width: 38px;
+			height: 38px;
+			border-radius: 50%;
+			background-color: var(--cor-btn-amarelo, #fbc531);
+			border: 3px solid #ffffff;
+			color: #5c4100;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+			z-index: 10;
+			transition: transform 0.2s ease, background-color 0.2s ease;
+			outline: none;
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		@media (hover: hover) {
+			.btn-som-imagem:hover {
+				transform: scale(1.12);
+				background-color: #2ed573;
+			}
+		}
+
+		.btn-som-imagem:active {
+			transform: scale(0.92);
+		}
+		
+		
+		/* =========================================
+		   ESTADO DO BOTÃO DE SOM EM REPRODUÇÃO (A Tocar)
+		   ========================================= */
+
+		.btn-som-instrucoes.a-tocar {
+			background-color: #2ed573 !important; /* Verde vibrante para indicar ação ativa */
+			color: #ffffff !important;
+			border-color: #ffffff !important;
+			animation: pulseAudio 1.2s infinite ease-in-out;
+		}
+
+		/* Animação de Pulso com Auréola */
+		@keyframes pulseAudio {
+			0% {
+				transform: scale(1);
+				box-shadow: 0 0 0 0 rgba(46, 213, 115, 0.7);
+			}
+			50% {
+				transform: scale(1.12);
+				box-shadow: 0 0 0 10px rgba(46, 213, 115, 0);
+			}
+			100% {
+				transform: scale(1);
+				box-shadow: 0 0 0 0 rgba(46, 213, 115, 0);
+			}
+		}		
+
+		/* Responsividade do Botão de Som */
+		@media (max-width: 768px) {
+			.btn-som-imagem {
+				width: 36px;
+				height: 36px;
+				top: 3px;
+				right: 3px;
+			}
+			.btn-som-imagem svg {
+				width: 18px;
+				height: 18px;
+			}
+		}
+
+		@media (max-width: 420px) {
+			.btn-som-imagem {
+				width: 32px;
+				height: 32px;
+				top: 3px;
+				right: 3px;
+			}
+			.btn-som-imagem svg {
+				width: 16px;
+				height: 16px;
+			}
+		}		
 
         /* Animações e Feedbacks */
-        .error-shake { animation: shakeError 0.4s ease-in-out; border-color: #ff4757 !important; background-color: #ffefef !important; color: #ff4757 !important; box-shadow: 0 6px 0 #d0303f !important; transform: none !important;}
-        .success-bounce { border-color: #2ed573 !important; background-color: #2ed573 !important; color: white !important; box-shadow: 0 6px 0 #219d53 !important; transform: scale(1.1) translateY(-2px) !important; }
+        .error-shake { 
+			animation: shakeError 0.4s ease-in-out; 
+			background-color: #ff4757 !important; 
+			color: #ffffff !important; 
+			box-shadow: 0 7px 0 #b32b37 !important; 
+			border: none !important;
+		}
+
+		/* Responsividade da sombra do erro */
+		@media (max-width: 768px) {
+			.error-shake { 
+				box-shadow: 0 5px 0 #b32b37 !important; 
+			}
+		}
+
+		@media (max-width: 420px) {
+			.error-shake { 
+				box-shadow: 0 4px 0 #b32b37 !important; 
+			}
+		}
+		.success-bounce { border-color: #2ed573 !important; background-color: #2ed573 !important; color: white !important; box-shadow: 0 6px 0 #219d53 !important; transform: scale(1.1) translateY(-2px) !important; }
         .word-success { color: #2ed573 !important; transform: scale(1.1); transition: 0.3s; }
 
         .dica-iluminada {
@@ -239,20 +726,145 @@
            ECRÃ FIM E BOTÕES DE AÇÃO
            ========================================= */
         .end-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--azul-escuro); margin-bottom: 25px; }
+
+
+
+/* =========================================
+   TEXTO DA PALAVRA E ESTADO DE ACERTO
+   ========================================= */
+
+.word-display {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--azul-escuro, #0f3875);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 4px 0;
+    text-align: center;
+    
+    /* Reservar altura e linha fixas para garantir layout imutável */
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estado de Acerto: Altera a cor e faz zoom apenas visual (transform) */
+.word-display.word-success {
+    color: #2ed573 !important;
+    letter-spacing: 4px;
+    text-shadow: 0 4px 12px rgba(46, 213, 115, 0.35);
+    animation: popSuccess 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popSuccess {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+    100% { transform: scale(1.15); }
+}
+
+
         
-        .btn-acao { 
-            background-color: var(--azul-escuro); color: white; border: none; padding: 15px 35px; 
-            font-size: 1.1rem; font-weight: 700; border-radius: 15px; cursor: pointer; 
-            box-shadow: 0 6px 0 #093273; display: flex; align-items: center; justify-content: center; 
-            gap: 10px; margin-bottom: 20px; width: 100%; max-width: 320px; 
-            transition: transform 0.2s, box-shadow 0.2s, filter 0.2s; 
-        }
-        @media (hover: hover) { .btn-acao:hover { transform: translateY(-3px); box-shadow: 0 9px 0 #093273; filter: brightness(1.15); } }
-        .btn-acao:active { transform: translateY(6px); box-shadow: 0 0px 0 transparent; }
+/* =========================================
+   BOTÃO DE AÇÃO / MENU INICIAL (Estilo Cartão Azul da Imagem)
+   ========================================= */
+
+.btn-acao { 
+    background-color: var(--cor-btn-azul, #61a0ff); 
+    color: #ffffff; 
+    border: 4px solid #ffffff; 
+    padding: 16px 36px; 
+    font-size: 1.3rem; 
+    font-weight: 900; 
+    border-radius: 22px; 
+    cursor: pointer; 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(97, 160, 255, 0.35); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 12px; 
+    margin-bottom: 20px; 
+    width: 100%; 
+    max-width: 320px; 
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease; 
+}
+
+/* Ícone SVG interno (força tom branco para combinar) */
+.icon-btn-acao {
+    width: 1.2em;
+    height: 1.2em;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: transform 0.2s ease;
+}
+
+/* Efeito Hover (Desktop) */
+@media (hover: hover) { 
+    .btn-acao:hover { 
+        transform: translateY(-4px) scale(1.02); 
+        background-color: #4b8eff;
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12), 0 6px 16px rgba(97, 160, 255, 0.5); 
+    } 
+    .btn-acao:hover .icon-btn-acao {
+        transform: translateX(4px);
+    }
+}
+
+/* Efeito ao Clicar / Pressionar */
+.btn-acao:active { 
+    transform: translateY(2px) scale(0.98) !important; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important; 
+}
+
+/* =========================================
+   RESPONSIVIDADE (Tablets e Telemóveis)
+   ========================================= */
+
+@media (max-width: 768px) {
+    .btn-acao {
+        padding: 14px 28px;
+        font-size: 1.15rem;
+        max-width: 280px;
+        border-radius: 18px;
+        border-width: 3px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), 0 3px 10px rgba(97, 160, 255, 0.3);
+    }
+}
+
+@media (max-width: 420px) {
+    .btn-acao {
+        padding: 12px 22px;
+        font-size: 1.05rem;
+        max-width: 250px;
+        border-radius: 16px;
+        border-width: 3px;
+        gap: 8px;
+    }
+    .icon-btn-acao {
+        width: 1.1em;
+        height: 1.1em;
+    }
+}
 
         @media (max-width: 768px) {
             .game-image { height: 160px; width: 160px; margin-bottom: 10px; }
-            .word-display { font-size: 2rem; margin-bottom: 20px; }
+			.img-wrapper {
+				width: 170px;
+				height: 170px;
+				border-width: 3px;
+				border-radius: 20px;
+				padding: 12px;
+			}
+
+			.word-display {
+				font-size: 1.6rem;
+				height: 40px;
+			}
+			.word-display.word-success {
+				font-size: 1.9rem !important;
+			}
             .num-btn { width: 65px; height: 65px; font-size: 2rem; border-width: 3px; box-shadow: 0 4px 0 #b1dcfb;}
             .num-btn:active { transform: translateY(4px); box-shadow: 0 0 0 transparent !important; }
             .success-bounce { box-shadow: 0 4px 0 #219d53 !important; }
@@ -284,7 +896,7 @@
     .icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
 	.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
 	.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
-	.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+	.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; margin-left: 6px;}
 </style>
 
 <style>
@@ -332,55 +944,114 @@
 
         <!-- ECRÃ 1: MENU INICIAL -->
         <div id="ecra-selecao" class="ecra" style="display: flex;">
-            <h2 class="titulo-menu">Como Jogar:</h2>
+            <h2 class="titulo-menu">
+				<button id="btn-som-instrucoes" class="btn-som-instrucoes" onclick="tocarInstrucoes()" title="Ouvir instruções" aria-label="Ouvir instruções">
+					<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+						<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+					</svg>
+				</button>
+			Como Jogar?
+			</h2>
             
             <div class="animacao-tutorial">
-                <div class="tut-img-alvo">🐱</div>
-                <div class="tut-word">GA - TO <span>👏 👏</span></div>
-                <div class="tut-boxes">
-                    <div class="tut-box">1</div>
-                    <div class="tut-box correta">2</div>
-                    <div class="tut-box">3</div>
-                </div>
-            </div>
 
-            <button class="btn-acao" onclick="iniciarJogo()" style="margin: 0 auto;">JOGAR AGORA ▶️</button>
+			<div class="tut-cards-wrapper">
+				
+				<!-- Cartão 1: Gato (2 Sílabas) -->
+				<div class="tut-card tut-card-gato">
+					<img src="img/gato.png" class="tut-img" alt="Gato" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' width=\'40\' height=\'40\' fill=\'%230091ff\'><path d=\'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z\'/></svg>'">
+					<div class="tut-word">
+						<span class="tut-silaba sil-gato-1">GA</span>
+						<span class="tut-hifen">-</span>
+						<span class="tut-silaba sil-gato-2">TO</span>
+					</div>
+				</div>
+
+				<!-- Cartão 2: Tartaruga (4 Sílabas) -->
+				<div class="tut-card tut-card-tartaruga">
+					<img src="img/tartaruga.png" class="tut-img" alt="Tartaruga" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' width=\'40\' height=\'40\' fill=\'%230091ff\'><path d=\'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z\'/></svg>'">
+					<div class="tut-word">
+						<span class="tut-silaba sil-tar-1">TAR</span>
+						<span class="tut-hifen">-</span>
+						<span class="tut-silaba sil-tar-2">TA</span>
+						<span class="tut-hifen">-</span>
+						<span class="tut-silaba sil-tar-3">RU</span>
+						<span class="tut-hifen">-</span>
+						<span class="tut-silaba sil-tar-4">GA</span>
+					</div>
+				</div>
+
+			</div>
+
+			<!-- Zona de Botões (1 a 4) e Cursor Animado -->
+			<div class="tut-interaction">
+				<div class="tut-boxes">
+					<div class="tut-box b1">1</div>
+					<div class="tut-box b2">2</div>
+					<div class="tut-box b3">3</div>
+					<div class="tut-box b4">4</div>
+				</div>
+				
+				<!-- Ícone SVG da Mão -->
+				<svg class="tut-hand" viewBox="0 0 24 24" fill="currentColor">
+					<path d="M9 11.24V7.5a1.5 1.5 0 0 1 3 0v3.74a3 3 0 0 1 1-2.24 1.5 1.5 0 0 1 2.25 1.98 3 3 0 0 1 1-1.24 1.5 1.5 0 0 1 2.25 1.98v5.52a6 6 0 0 1-6 6h-1.5a6 6 0 0 1-5.6-3.88l-1.86-4.96a1.5 1.5 0 0 1 2.82-1.06L8 16.5V11.24a1.5 1.5 0 0 1 1-1.5z"/>
+				</svg>
+			</div>
+		</div>
+
+            <button class="btn-acao" onclick="iniciarJogo()" style="margin: 0 auto;">
+				JOGAR AGORA 
+				<img src="../../../SVG/seta_direita.svg" class="icon-btn-acao" alt="">
+			</button>
         </div>
+
 
         <!-- ECRÃ 2: JOGO -->
-        <div id="ecra-jogo" class="ecra">
-            
-            <!-- BARRA DE ESTADO COM DICA -->
-            <div class="status-bar-jogo" id="status-bar" style="display: none;">
+		<div id="ecra-jogo" class="ecra">
+			
+			<!-- BARRA DE ESTADO (Permanece no topo) -->
+			<div class="status-bar-jogo" id="status-bar" style="display: none;">
 				<button class="btn-voltar-menu" onclick="voltarAoMenu()" id="btn-home-svg"></button>
-                <button id="btn-dica" class="btn-dica" onclick="usarDica()"></button>
+				<button id="btn-dica" class="btn-dica" onclick="usarDica()"></button>
 				<div class="badge-ronda"><span id="badge-ronda-svg"></span><span id="val-progresso">1</span>/<span id="val-total">10</span></div> 
-                <div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
+				<div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
 				<div class="badge-erros"> <span id="icone-erro-svg"></span> <span id="val-erros">0</span></div>
-            </div>
+			</div>
 
-            <img id="game-image" class="game-image" src="" alt="Imagem secreta">
-            
-            <div id="word-display" class="word-display">PALAVRA</div>
-            
-            <div class="numbers-container">
-                <button class="num-btn" id="btn-num-1" onclick="verificarResposta(1, this)">1</button>
-                <button class="num-btn" id="btn-num-2" onclick="verificarResposta(2, this)">2</button>
-                <button class="num-btn" id="btn-num-3" onclick="verificarResposta(3, this)">3</button>
-                <button class="num-btn" id="btn-num-4" onclick="verificarResposta(4, this)">4</button>
-                <button class="num-btn" id="btn-num-5" onclick="verificarResposta(5, this)">5</button>
-            </div>
+			<!-- ÁREA DE JOGO PERSONALIZADA (Centrada) -->
+			<div class="area-jogo-custom">
+				<div class="img-wrapper">
+					<img id="game-image" class="game-image" src="" alt="Imagem secreta">
+					
+					<!-- BOTÃO DE SOM SOBRE A IMAGEM -->
+					<button id="btn-som-palavra" class="btn-som-imagem" onclick="tocarSomPalavra()" title="Ouvir palavra" aria-label="Ouvir palavra">
+						<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+							<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+						</svg>
+					</button>
+				</div>
+				
+				<div id="word-display" class="word-display">PALAVRA</div>
+				
+				<div class="numbers-container">
+					<button class="num-btn" id="btn-num-1" onclick="verificarResposta(1, this)">1</button>
+					<button class="num-btn" id="btn-num-2" onclick="verificarResposta(2, this)">2</button>
+					<button class="num-btn" id="btn-num-3" onclick="verificarResposta(3, this)">3</button>
+					<button class="num-btn" id="btn-num-4" onclick="verificarResposta(4, this)">4</button>
+					<button class="num-btn" id="btn-num-5" onclick="verificarResposta(5, this)">5</button>
+				</div>
+			</div>
 
-        </div>
+		</div>
 
         <!-- ECRÃ 3: FIM -->
         <div id="ecra-fim" class="ecra">
-            <div style="font-size: 5rem; margin-bottom: 15px; line-height: 1;">🏆</div>
-            <h2 class="titulo-menu" id="end-title-text" style="margin-bottom: 10px;">Missão Cumprida!</h2>
+            <h2 class="end-title" id="end-title-text">Missão Cumprida!<img src="../../../SVG/confeti.svg" class="icon-end-title" alt=""></h2>
+
             <p style="font-size: 1.2rem; color: var(--text-main); font-weight: bold;">Completaste todas as palavras!</p>
             <div style="font-size: 1.3rem; color: #ff4757; font-weight: bold; margin-bottom: 25px; padding: 10px 25px; border: 2px solid #ff4757; border-radius: 15px;">Erros: <span id="final-erros">0</span></div>
-            <button class="btn-acao" onclick="iniciarJogo()" style="margin: 0 auto; margin-bottom: 10px;">JOGAR DE NOVO 🔄</button>
-            
+            <button class="btn-acao" onclick="iniciarJogo()" style="margin: 0 auto;">JOGAR DE NOVO <img src="../../../SVG/jogar_novo.svg" class="icon-btn-acao" alt="">
+			</button>
         </div>
 
     </div>
@@ -459,6 +1130,82 @@
     function removerAcentos(palavra) {
         return palavra.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     }
+	
+	
+		let audioPalavra = null;
+
+	// Obtém o caminho do áudio (propriedade 'som' do objeto ou convenção por nome)
+	function getAudioPath(palavraObj) {
+		if (!palavraObj) return '';
+		if (palavraObj.som) return palavraObj.som; // retrocompatibilidade
+		return `som/${palavraObj.id}.mp3`;
+	}
+
+	// Reproduz o ficheiro mp3
+	function tocarSomPalavra() {
+		if (!palavrasDoJogo || !palavrasDoJogo[palavraAtualIndex]) return;
+		
+		const palavraObj = palavrasDoJogo[palavraAtualIndex];
+		const caminhoAudio = getAudioPath(palavraObj);
+
+		if (audioPalavra) {
+			audioPalavra.pause();
+			audioPalavra.currentTime = 0;
+		}
+
+		audioPalavra = new Audio(caminhoAudio);
+		
+		const btnSom = document.getElementById('btn-som-palavra');
+		if (btnSom) btnSom.style.transform = 'scale(1.2)';
+
+		audioPalavra.play()
+			.then(() => {
+				setTimeout(() => { if (btnSom) btnSom.style.transform = ''; }, 300);
+			})
+			.catch(err => {
+				console.warn('Ficheiro de áudio não encontrado:', caminhoAudio);
+				if (btnSom) btnSom.style.transform = '';
+			});
+	}
+	
+	let audioInstrucoes = null;
+
+	function tocarInstrucoes() {
+		const btn = document.getElementById('btn-som-instrucoes');
+		const caminhoAudio = 'som/instrucoes.mp3';
+
+		if (audioInstrucoes && !audioInstrucoes.paused) {
+			pararInstrucoes();
+			return;
+		}
+
+		audioInstrucoes = new Audio(caminhoAudio);
+
+		audioInstrucoes.onended = function() {
+			if (btn) btn.classList.remove('a-tocar');
+		};
+
+
+		audioInstrucoes.play()
+			.then(() => {
+				if (btn) btn.classList.add('a-tocar'); 
+			})
+			.catch(err => {
+				console.warn('Ficheiro de instruções não encontrado:', caminhoAudio);
+				if (btn) btn.classList.remove('a-tocar');
+			});
+	}
+	
+	
+	function pararInstrucoes() {
+		if (audioInstrucoes) {
+			audioInstrucoes.pause();
+			audioInstrucoes.currentTime = 0;
+		}
+		const btn = document.getElementById('btn-som-instrucoes');
+		if (btn) btn.classList.remove('a-tocar');
+	}
+	
 
     /* =========================================
        ESTADOS E VARIÁVEIS
@@ -491,11 +1238,11 @@
         document.getElementById(id).style.display = 'flex';
     }
 
-    function voltarAoMenu() {
-        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
-        elStatus.style.display = 'none';
-        mostrarEcra('ecra-selecao');
-    }
+function voltarAoMenu() {
+    limparConfetis(); // Substitui a limpeza manual por limparConfetis()
+    elStatus.style.display = 'none';
+    mostrarEcra('ecra-selecao');
+}
 
     function atualizarPlacarUI() {
         elProgresso.textContent = rondaAtual > MAX_PALAVRAS ? MAX_PALAVRAS : rondaAtual;
@@ -519,90 +1266,96 @@
     /* =========================================
        LÓGICA PRINCIPAL
        ========================================= */
-    function iniciarJogo() {
-        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
-        rondaAtual = 1;
-        palavraAtualIndex = 0;
-        errosTotais = 0;
-        isVerificando = false;
-        dicasUsadas = [];
-        
-        // Misturar o banco
-        let embaralhadas = [...bancoPalavras].sort(() => Math.random() - 0.5);
-        
-        // Prevenir erro se a lista fosse menor
-        while (embaralhadas.length < MAX_PALAVRAS) {
-            embaralhadas = embaralhadas.concat([...bancoPalavras].sort(() => Math.random() - 0.5));
-        }
-        
-        palavrasDoJogo = embaralhadas.slice(0, MAX_PALAVRAS);
-        
-        elStatus.style.display = 'flex';
-        atualizarPlacarUI();
-        atualizarDicasUI();
-        mostrarEcra('ecra-jogo');
-        
-        carregarPalavra();
-    }
+	let baralhoDisponivel = [];
+	
+	function iniciarJogo() {
+		pararInstrucoes();
+		limparConfetis();
+		
+		rondaAtual = 1;
+		palavraAtualIndex = 0;
+		errosTotais = 0;
+		isVerificando = false;
+		dicasUsadas = [];
 
-    function getImagePath(imgPath) {
-        if (!imgPath) return '';
-        if (imgPath.startsWith('../') || imgPath.startsWith('http')) return imgPath;
-        return '../' + imgPath;
-    }
+		// Se o baralho estiver vazio ou com poucas palavras, recarrega e baralha
+		if (baralhoDisponivel.length < MAX_PALAVRAS) {
+			baralhoDisponivel = [...bancoPalavras].sort(() => Math.random() - 0.5);
+		}
+
+		// Retira 10 palavras do baralho disponível (sem repetição com o jogo anterior)
+		palavrasDoJogo = baralhoDisponivel.splice(0, MAX_PALAVRAS);
+
+		elStatus.style.display = 'flex';
+		atualizarPlacarUI();
+		atualizarDicasUI();
+		mostrarEcra('ecra-jogo');
+
+		carregarPalavra();
+	}
+
+    function getImagePath(palavraObj) {
+		if (!palavraObj) return '';
+		if (palavraObj.imagem) return palavraObj.imagem; // retrocompatibilidade
+		return `img/${palavraObj.id}.png`;
+	}
 
     function carregarPalavra() {
-        isVerificando = false;
-        removerDestaquesDica();
-        atualizarDicasUI();
+		isVerificando = false;
+		removerDestaquesDica();
+		atualizarDicasUI();
 
-        const palavraObj = palavrasDoJogo[palavraAtualIndex];
-        
-        // Configurar Imagem
-        elImage.src = getImagePath(palavraObj.imagem);
-        elImage.onerror = () => { elImage.src = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100' fill='%23eee'/><text x='50' y='50' font-family='sans-serif' font-size='14' text-anchor='middle' dominant-baseline='middle' fill='%23999'>${palavraObj.palavra}</text></svg>`; };
+		const palavraObj = palavrasDoJogo[palavraAtualIndex];
+		
+		// Caminho dinâmico para a imagem
+		elImage.src = getImagePath(palavraObj);
+		elImage.onerror = () => { 
+			elImage.src = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100' fill='%23eee'/><text x='50' y='50' font-family='sans-serif' font-size='14' text-anchor='middle' dominant-baseline='middle' fill='%23999'>${palavraObj.palavra}</text></svg>`; 
+		};
 
-        elWordDisplay.textContent = palavraObj.palavra;
-        
-        elWordDisplay.classList.remove('word-success');
-        botoes.forEach(b => {
-            b.classList.remove('success-bounce', 'error-shake', 'dica-iluminada');
-            b.style.pointerEvents = 'auto';
-        });
-    }
+		elWordDisplay.textContent = palavraObj.palavra;
+		
+		elWordDisplay.classList.remove('word-success');
+		botoes.forEach(b => {
+			b.classList.remove('success-bounce', 'error-shake', 'dica-iluminada');
+			b.style.pointerEvents = 'auto';
+		});
+	}
 
-    function verificarResposta(respostaAluno, btnClicado) {
-        if (isVerificando) return;
-        removerDestaquesDica();
-        
-        const respostaCorreta = palavrasDoJogo[palavraAtualIndex];
+	function verificarResposta(numEscolha, elementoBotao) {
+		if (isVerificando) return;
 
-        if (respostaAluno === respostaCorreta.num) {
-            isVerificando = true;
-            tocarSom('acerto');
-            
-            btnClicado.classList.add('success-bounce');
-            botoes.forEach(b => b.style.pointerEvents = 'none');
-            
-            elWordDisplay.textContent = respostaCorreta.divisao;
-            elWordDisplay.classList.add('word-success');
+		const palavraObj = palavrasDoJogo[palavraAtualIndex];
 
-            setTimeout(() => {
-                avancarRonda();
-            }, 1500);
-            
-        } else {
-            errosTotais++;
-            atualizarPlacarUI();
-            tocarSom('erro');
-            
-            btnClicado.classList.add('error-shake');
-            
-            setTimeout(() => {
-                btnClicado.classList.remove('error-shake');
-            }, 500);
-        }
-    }
+		if (numEscolha === palavraObj.num) {
+			isVerificando = true;
+
+			// 1. Mostra a palavra com divisão silábica (ex: "BAN - CO")
+			elWordDisplay.textContent = palavraObj.divisao || palavraObj.palavra;
+
+			// 2. Ativa o estilo verde, maior e com destaque
+			elWordDisplay.classList.add('word-success');
+
+			// 3. Animação no botão selecionado e som
+			elementoBotao.classList.add('success-bounce');
+			tocarSom('acerto');
+
+			// 4. Avança para a próxima ronda após a pausa
+			setTimeout(() => {
+				avancarRonda();
+			}, 1600);
+		} else {
+			// Trata erro
+			errosTotais++;
+			atualizarPlacarUI();
+			elementoBotao.classList.add('error-shake');
+			tocarSom('erro');
+
+			setTimeout(() => {
+				elementoBotao.classList.remove('error-shake');
+			}, 500);
+		}
+	}
 
     /* --- DICA --- */
     function usarDica() {
@@ -627,33 +1380,36 @@
 
     /* --- GESTÃO GERAL --- */
     function avancarRonda() {
-        palavraAtualIndex++;
-        rondaAtual++;
-        
-        if (rondaAtual > MAX_PALAVRAS) {
-            elProgressFill.style.width = `100%`;
-            document.getElementById('final-erros').textContent = errosTotais;
-            
-            const titleText = document.getElementById('end-title-text');
-            if (errosTotais === 0) {
-                titleText.textContent = "PERFEITO! 🏆";
-                tocarSom('vitoria'); dispararConfetis();
-            } else if (errosTotais <= 3) {
-                titleText.textContent = "MUITO BEM! 🎉";
-                tocarSom('vitoria'); dispararConfetis();
-            } else {
-                titleText.textContent = "BOM ESFORÇO! 💪";
-                tocarSom('acerto'); 
-            }
+    palavraAtualIndex++;
+    rondaAtual++;
 
-            elStatus.style.display = 'none';
-            mostrarEcra('ecra-fim');
-        } 
-        else {
-            atualizarPlacarUI();
-            carregarPalavra();
+    if (rondaAtual > MAX_PALAVRAS) {
+        elProgressFill.style.width = `100%`;
+        document.getElementById('final-erros').textContent = errosTotais;
+
+        const titleText = document.getElementById('end-title-text');
+
+        if (errosTotais === 0) {
+            titleText.innerHTML = `PERFEITO! <img src="../../../SVG/rank_ouro.svg" class="icon-svg-titulo" alt="Ouro">`;
+            tocarSom('vitoria'); 
+            dispararConfetis();
+        } else if (errosTotais <= 3) {
+            titleText.innerHTML = `MUITO BEM! <img src="../../../SVG/rank_prata.svg" class="icon-svg-titulo" alt="Prata">`;
+            tocarSom('vitoria'); 
+            dispararConfetis();
+        } else {
+            titleText.innerHTML = `BOM ESFORÇO! <img src="../../../SVG/rank_bronze.svg" class="icon-svg-titulo" alt="Bronze">`;
+            tocarSom('acerto'); 
         }
+
+        elStatus.style.display = 'none';
+        mostrarEcra('ecra-fim');
+    } 
+    else {
+        atualizarPlacarUI();
+        carregarPalavra();
     }
+}
 
     /* =========================================
        SISTEMA DE SOM E CONFETIS
@@ -694,33 +1450,82 @@
         }
     }
 
-    const canvasConfetti = document.getElementById('confetti-canvas');
-    const ctxConfetti = canvasConfetti.getContext('2d');
-    let confetis = [];
+const canvasConfetti = document.getElementById('confetti-canvas');
+const ctxConfetti = canvasConfetti.getContext('2d');
+let confetis = [];
+let confettiAnimationId = null;
 
-    function redimensionarCanvas() { 
+function redimensionarCanvas() { 
+    if (canvasConfetti && document.querySelector('.cartao-jogo-container')) {
         canvasConfetti.width = document.querySelector('.cartao-jogo-container').clientWidth; 
         canvasConfetti.height = document.querySelector('.cartao-jogo-container').clientHeight; 
     }
-    window.addEventListener('resize', redimensionarCanvas);
+}
+window.addEventListener('resize', redimensionarCanvas);
 
-    function dispararConfetis() {
-        redimensionarCanvas(); confetis = []; const cores = ['#0091ff', '#2ed573', '#ff4757', '#ffa502', '#eccc68'];
-        for (let i = 0; i < 150; i++) {
-            confetis.push({ x: Math.random() * canvasConfetti.width, y: Math.random() * canvasConfetti.height - canvasConfetti.height, w: Math.random() * 10 + 5, h: Math.random() * 10 + 5, cor: cores[Math.floor(Math.random() * cores.length)], velY: Math.random() * 3 + 2, velX: Math.random() * 2 - 1, rotacao: Math.random() * 360, velRotacao: Math.random() * 5 - 2.5 });
-        }
-        animarConfetis();
-    }
-
-    function animarConfetis() {
-        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); let ativos = false;
-        confetis.forEach(c => {
-            c.y += c.velY; c.x += c.velX; c.rotacao += c.velRotacao; if (c.y < canvasConfetti.height) ativos = true;
-            ctxConfetti.save(); ctxConfetti.translate(c.x, c.y); ctxConfetti.rotate(c.rotacao * Math.PI / 180);
-            ctxConfetti.fillStyle = c.cor; ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); ctxConfetti.restore();
+function dispararConfetis() {
+    limparConfetis(); // Garante que não há animações anteriores a correr
+    redimensionarCanvas(); 
+    confetis = []; 
+    const cores = ['#0091ff', '#2ed573', '#ff4757', '#ffa502', '#eccc68'];
+    
+    for (let i = 0; i < 150; i++) {
+        confetis.push({ 
+            x: Math.random() * canvasConfetti.width, 
+            y: Math.random() * canvasConfetti.height - canvasConfetti.height, 
+            w: Math.random() * 10 + 5, 
+            h: Math.random() * 10 + 5, 
+            cor: cores[Math.floor(Math.random() * cores.length)], 
+            velY: Math.random() * 3 + 2, 
+            velX: Math.random() * 2 - 1, 
+            rotacao: Math.random() * 360, 
+            velRotacao: Math.random() * 5 - 2.5 
         });
-        if (ativos) requestAnimationFrame(animarConfetis);
     }
+    animarConfetis();
+}
+
+function animarConfetis() {
+    ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); 
+    let ativos = false;
+    
+    confetis.forEach(c => {
+        c.y += c.velY; 
+        c.x += c.velX; 
+        c.rotacao += c.velRotacao; 
+        if (c.y < canvasConfetti.height) ativos = true;
+        
+        ctxConfetti.save(); 
+        ctxConfetti.translate(c.x, c.y); 
+        ctxConfetti.rotate(c.rotacao * Math.PI / 180);
+        ctxConfetti.fillStyle = c.cor; 
+        ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); 
+        ctxConfetti.restore();
+    });
+
+    // CORREÇÃO CRÍTICA: Guarda o ID para permitir o cancelAnimationFrame
+    if (ativos) {
+        confettiAnimationId = requestAnimationFrame(animarConfetis);
+    }
+}
+	
+
+
+function limparConfetis() {
+    // 1. Interrompe a animação em curso
+    if (confettiAnimationId) {
+        cancelAnimationFrame(confettiAnimationId);
+        confettiAnimationId = null;
+    }
+
+    // 2. Esvazia a lista de partículas
+    confetis = [];
+
+    // 3. Limpa a tela do canvas
+    if (ctxConfetti && canvasConfetti) {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+    }
+}
 
     // Arranca no menu
     window.onload = () => mostrarEcra('ecra-selecao');
