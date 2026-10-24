@@ -183,25 +183,60 @@
 
 
 
+	/* =========================================
+	   BARRA DE ESTADO (DESKTOP: 1 LINHA / MOBILE: 2 LINHAS)
+	   ========================================= */
 
-        /* =========================================
-           BARRA DE ESTADO DO JOGO
-           ========================================= */
-        .status-bar-jogo {
-			display: flex;
+	/* 1. ECRÃS LARGOS / DESKTOP (Tudo em 1 linha) */
+	.status-bar-jogo {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 10px;
+		width: 100%;
+		max-width: 900px;
+		background: #eaf1eb;
+		padding: 8px 12px;
+		border-radius: 20px;
+		border: 2px solid var(--cor-em);
+		box-sizing: border-box;
+		flex-shrink: 0;
+		margin-bottom: 15px;
+	}
+
+	/* Em Desktop, ignora as divs das linhas para ficarem todos os elementos em fila */
+	.status-linha-1, 
+	.status-linha-2 {
+		display: contents;
+	}
+
+	.status-grupo-botoes {
+		display: flex;
+		gap: 10px;
+		align-items: center;
+	}
+
+	/* Ajusta a ordem no Desktop: Menu/Dica -> Rondas -> Barra de Progresso -> Tempo */
+	.progress-bg {
+		flex: 1;
+		height: 35px;
+		margin: 0 10px;
+		order: 3;
+	}
+
+	.status-linha-2 .badge-tempo {
+		order: 4;
+	}
+
+	/* 2. ECRÃS PEQUENOS / MOBILE VERTICAL (Dividido em 2 linhas) */
+	@media (max-width: 650px) {
+		.status-bar-jogo {
 			flex-direction: column;
-			gap: 8px;
-			width: 100%;
-			max-width: 900px;
-			background: #eaf1eb;
-			padding: 10px 12px;
-			border-radius: 20px;
-			border: 2px solid var(--cor-em);
-			box-sizing: border-box;
-			flex-shrink: 0;
-			margin-bottom: 15px;
+			gap: 6px;
+			padding: 8px 10px;
 		}
 
+		/* Reativa a estrutura de 2 linhas no Mobile */
 		.status-linha-1 {
 			display: flex;
 			justify-content: space-between;
@@ -209,24 +244,40 @@
 			width: 100%;
 		}
 
-		.status-grupo-botoes {
-			display: flex;
-			gap: 8px;
-			align-items: center;
-		}
-
 		.status-linha-2 {
 			display: flex;
 			align-items: center;
-			gap: 10px;
+			gap: 8px;
 			width: 100%;
 		}
 
-		.status-linha-2 .progress-bg {
-			flex: 1;
-			margin: 0;
-			height: 28px;
+		.status-grupo-botoes {
+			gap: 5px;
 		}
+
+		/* Ajusta a ordem no Mobile: Tempo à esquerda (1) -> Barra à direita (2) */
+		.status-linha-2 .badge-tempo {
+			order: 1;
+		}
+
+		.progress-bg {
+			order: 2;
+			margin: 0;
+			height: 24px;
+		}
+
+		.btn-voltar-menu, 
+		.btn-dica, 
+		.badge-ronda, 
+		.badge-tempo {
+			padding: 4px 8px;
+			font-size: 0.8rem;
+			height: 32px;
+			display: inline-flex;
+			align-items: center;
+		}
+	}
+
 		
         .btn-voltar-menu { background-color: white; color: var(--azul-escuro); border: 2px solid var(--cor-em); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.2s; touch-action: manipulation;}
         @media (hover: hover) { .btn-voltar-menu:hover { border-color: var(--azul-escuro); transform: scale(1.05); } }
