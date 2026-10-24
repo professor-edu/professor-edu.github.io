@@ -1073,11 +1073,22 @@
 			color-mix(in srgb, var(--ano-cor) 15%, white) 100%
 		  ) !important;
 		  border: 2.5px solid var(--ano-cor) !important;
+		  flex-direction: row !important;
+		  align-items: center !important;
+		  justify-content: flex-start !important;
 		}
+		
+		.cartao-ano::before {
+			flex-shrink: 0 !important;
+		}
+		
 		.titulo-ano {
 		  color: color-mix(in srgb, var(--ano-cor) 70%, #0d47a1 30%) !important;
 		  font-weight: 900 !important;
 		  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8) !important;
+		  margin: 0 !important;
+		flex-grow: 1 !important;
+		text-align: center !important;
 		}
 		
 		
@@ -1106,7 +1117,6 @@
 			padding: 10px 5px;
 		}
 
-		/* A CÁPSULA COMPACTA HORIZONTAL */
 		.cartao-ano { 
 			flex-direction: row; 
 			justify-content: flex-start; 
@@ -1224,10 +1234,10 @@
 	
 
 /* ==========================================================================
-   AJUSTES PARA MOBILE VERTICAL (Portrait)
+   AJUSTES PARA MOBILE VERTICAL (Portrait) - BLOCO COMPLETO E UNIFICADO
    ========================================================================== */
 @media (max-width: 600px) and (orientation: portrait) {
-  
+
   /* 1. Junta o contador e o botão Top Jogos na mesma linha lado a lado */
   .contentor-botoes-topo {
     display: flex !important;
@@ -1258,25 +1268,49 @@
     font-size: 0.8rem !important;
   }
 
-  /* 2. Esconde do 6º jogo em diante no modal (mostra apenas o TOP 6) */
+  .galeria-container {
+    padding: 4px 8px !important;
+    justify-content: center;
+  }
+
+  .grelha-cartoes { 
+    grid-template-columns: 1fr;
+    gap: clamp(14px, 2.5vh, 24px) !important; /* Espaço dinâmico entre cartões */
+    width: 92%;
+    padding: 2px 5px !important;
+    margin: auto;
+  }
+
+  .cartao-ano {
+    height: clamp(52px, 7.5vh, 60px) !important; 
+    padding: 4px 10px !important;
+    padding-right: 48px !important;
+  }
+
+  .cartao-ano::before {
+    width: clamp(34px, 5.5vh, 42px) !important;
+    height: clamp(34px, 5.5vh, 42px) !important;
+  }
+
+  /* 3. Esconde do 6º jogo em diante no modal (mostra apenas o TOP 6) */
   .card-top-jogo:nth-child(n+7) {
     display: none !important;
   }
 
-  /* 3. Ajusta a caixa do modal para caber no ecrã sem scroll */
+  /* 4. Ajusta a caixa do modal para caber no ecrã sem scroll */
   .modal-container {
     padding: 16px;
     max-height: 90vh;
     overflow-y: hidden;
   }
 
-  /* 4. Organiza os 6 jogos numa grelha compacta 2x2 */
+  /* 5. Organiza os 6 jogos numa grelha compacta 2x2 */
   .grid-top-jogos {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
 
-  /* 5. Compacta os cartões para ajuste sem scroll */
+  /* 6. Compacta os cartões para ajuste sem scroll */
   .card-top-jogo {
     padding: 8px;
     border-radius: 12px;
@@ -1306,7 +1340,7 @@
     font-size: 1.1rem;
   }
 
-  /* 6. Reduz margens gerais do cabeçalho da página */
+  /* 7. Reduz margens gerais do cabeçalho da página */
   h1, .titulo-principal {
     font-size: 1.25rem !important;
     margin-bottom: 2px !important;
@@ -1317,7 +1351,7 @@
     margin-bottom: 6px !important;
   }
 
-  /* 7. Compactação dos cartões dos Anos Escolares no Home */
+  /* 8. Compactação dos cartões dos Anos Escolares no Home */
   .card-ano, 
   .botao-ano-escolar {
     padding: 6px 10px !important;
@@ -1335,7 +1369,7 @@
     margin-top: 6px !important;
     font-size: 0.7rem !important;
   }
-  
+
   /* Esconde a palavra "Jogos", deixando apenas o ícone e "Top" */
   .btn-top-populares .texto-extra-botao {
     display: none !important;
