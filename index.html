@@ -1067,6 +1067,20 @@
 	   ========================================= */
 	@media (max-width: 600px) {
 		
+		.cartao-ano {
+		  background: linear-gradient(90deg, 
+			color-mix(in srgb, var(--ano-cor) 65%, white) 0%, 
+			color-mix(in srgb, var(--ano-cor) 15%, white) 100%
+		  ) !important;
+		  border: 2.5px solid var(--ano-cor) !important;
+		}
+		.titulo-ano {
+		  color: color-mix(in srgb, var(--ano-cor) 70%, #0d47a1 30%) !important;
+		  font-weight: 900 !important;
+		  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8) !important;
+		}
+		
+		
 		/* Configuração das cores de cada ano para usarmos de forma dinâmica */
 		.cartao-ano.pre  { --ano-cor: var(--cor-pre); }
 		.cartao-ano.ano1 { --ano-cor: var(--cor-1ano); }
@@ -1081,7 +1095,6 @@
 		}
 
 		/* CORREÇÃO DO CONTENTOR PAI:
-		   Reduzimos o padding lateral de 15px para 8px para libertar 14px cruciais de largura útil */
 		.galeria-container {
 			padding: clamp(10px, 2vh, 15px) 8px !important;
 		}
@@ -1138,6 +1151,8 @@
 			border: 2px solid white;
 			box-shadow: 0 2px 4px rgba(0,0,0,0.4);
 		}
+		
+		
 
 		/* Associação dos SVGS */
 		.cartao-ano.pre::before  { background-image: url("SVG/pre.svg"); }
@@ -1150,7 +1165,7 @@
 			color: var(--ano-cor);
 			font-family: 'Fredoka', 'Roboto', sans-serif;
 			font-weight: 900;
-			font-size: clamp(0.75rem, 3.6vw, 1.1rem);
+			font-size: clamp(0.75rem, 4.6vw, 1.1rem);
 			text-shadow: none; 
 			margin-bottom: 0;
 			flex-grow: 1; 
@@ -1364,6 +1379,73 @@
 		padding: 6px 12px !important;
 		font-size: 0.8rem !important;
 	  }
+	  
+	  
+	  .zona-topo-unificada {
+		display: flex !important;
+		flex-direction: row !important;
+		align-items: center !important;
+		justify-content: center !important;
+		gap: 8px !important;
+		margin: 20px 0 20px 0 !important;
+		width: 100%;
+		flex-shrink: 0;
+	  }
+
+	  /* Sub-contentor dos botões (Laranja e Roxo) */
+	  .contentor-botoes-topo {
+		display: flex !important;
+		flex-direction: row !important;
+		align-items: center !important;
+		gap: 8px !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		width: auto !important;
+	  }
+
+	  .top-jogos-wrapper {
+		display: flex !important;
+		align-items: center !important;
+		margin: 0 !important;
+	  }
+
+	  .badge-total-jogos,
+	  .btn-top-populares,
+	  #contentor-total-jogadas div {
+		margin: 0 !important;
+		height: 32px !important; /* Altura idêntica para os 3 fiquem na mesma linha */
+		display: inline-flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+		padding: 0 12px !important;
+		font-size: 0.75rem !important;
+		box-sizing: border-box !important;
+	  }
+
+	  /* Mantém o texto "Top Jogos" visível */
+	  .btn-top-populares .texto-extra-botao {
+		display: inline !important;
+	  }
+
+	  .galeria-container {
+		padding-top: 12px !important;
+	  }
+
+	  /* Compactação do cabeçalho */
+	  header {
+		padding: 4px 10px !important;
+	  }
+
+	  header h1 {
+		font-size: 1.05rem !important;
+	  }
+
+	  header p.subtitulo {
+		display: none !important;
+	  }
+	  
+	  
+	  
 	}
 	
 		
@@ -1389,23 +1471,21 @@
     </div>
 </header>
 
-<div class="badge-total-jogos" id="badge-total-container">
-    <img src="SVG/confeti.svg" class="icon-svg-badge" alt="Confeti">
-    <span class="txt-badge">Temos <strong id="total-geral-num">0</strong> jogos divertidos para ti!</span>
-</div>
+<!-- BLOCO DE TOPO UNIFICADO -->
+<div class="zona-topo-unificada">
+    <div class="badge-total-jogos" id="badge-total-container">
+        <img src="SVG/confeti.svg" class="icon-svg-badge" alt="Confeti">
+        <span class="txt-badge">Temos <strong id="total-geral-num">0</strong> jogos divertidos para ti!</span>
+    </div>
 
-
-
-<div class="contentor-botoes-topo">
-  
-  <div id="contentor-total-jogadas"></div>
-	
-  <div class="top-jogos-wrapper">
-    <button id="btn-top-jogos" class="btn-top-populares">
-      <img src="SVG/taca.svg" alt="Taça" class="icon-svg"> Top<span class="texto-extra-botao">Jogos</span>
-    </button>
-  </div>
-
+    <div class="contentor-botoes-topo">
+        <div id="contentor-total-jogadas"></div>
+        <div class="top-jogos-wrapper">
+            <button id="btn-top-jogos" class="btn-top-populares">
+                <img src="SVG/taca.svg" alt="Taça" class="icon-svg"> Top<span class="texto-extra-botao"> Jogos</span>
+            </button>
+        </div>
+    </div>
 </div>
 
 <script type="module" src="contador-home.js"></script>
