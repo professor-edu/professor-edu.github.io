@@ -226,7 +226,7 @@
            GRELHA DO JOGO E CARTAS 3D
            ========================================= */
         .memory-grid {
-            display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; width: 100%; max-width: 700px; margin: 0 auto; perspective: 1000px;
+            display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; width: 100%; max-width: 700px; margin: auto 0; perspective: 1000px;
         }
 
         .memory-card { width: 100%; aspect-ratio: 1 / 1; cursor: pointer; position: relative; }
@@ -255,7 +255,11 @@
         .card-sound:active { transform: scale(0.85); }
 
         @media (max-width: 600px) {
-            .memory-grid { gap: 8px; } 
+            .memory-grid {
+				grid-template-columns: repeat(4, 1fr);
+				max-width: 420px;
+				gap: 8px;
+			} 
             .card-front { font-size: 1.5rem; border-width: 2px;}
             .card-back { border-width: 2px; }
             .card-sound { font-size: 2rem; }
@@ -281,6 +285,13 @@
 	.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
 	.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
 	.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+	.icon-svg-nivel {
+		width: 2.5rem;
+		height: 2.5rem;
+		object-fit: contain;
+		vertical-align: middle;
+	}
+	
 </style>
 
 <style>
@@ -344,20 +355,24 @@
             <p class="texto-intro" style="margin-bottom: 25px;">Memoriza as imagens e ouve o som para fazeres os pares corretos!</p>
 
             <button class="btn-nivel-menu" onclick="iniciarJogo('domesticos')" style="border-color: #2ed573; box-shadow: 0 6px 0 #2ed573;">
-                <span class="nivel-icon">🐶</span>
-                <span class="nivel-text">
-                    <span class="nivel-titulo" style="color: #219d53;">Animais Domésticos</span>
-                    <span class="nivel-desc">Vaca, cão, gato, cavalo...</span>
-                </span>
-            </button>
-            
-            <button class="btn-nivel-menu" onclick="iniciarJogo('selvagens')" style="border-color: #ffa502; box-shadow: 0 6px 0 #ffa502;">
-                <span class="nivel-icon">🦁</span>
-                <span class="nivel-text">
-                    <span class="nivel-titulo" style="color: #e69500;">Animais Selvagens</span>
-                    <span class="nivel-desc">Leão, elefante, tubarão...</span>
-                </span>
-            </button>
+				<span class="nivel-icon">
+					<img src="../img-titulos/domesticos.svg" class="icon-svg-nivel" alt="Animais Domésticos">
+				</span>
+				<span class="nivel-text">
+					<span class="nivel-titulo" style="color: #219d53;">Animais Domésticos</span>
+					<span class="nivel-desc">Vaca, cão, gato, cavalo...</span>
+				</span>
+			</button>
+
+			<button class="btn-nivel-menu" onclick="iniciarJogo('selvagens')" style="border-color: #ffa502; box-shadow: 0 6px 0 #ffa502;">
+				<span class="nivel-icon">
+					<img src="../img-titulos/selvagens.svg" class="icon-svg-nivel" alt="Animais Selvagens">
+				</span>
+				<span class="nivel-text">
+					<span class="nivel-titulo" style="color: #e69500;">Animais Selvagens</span>
+					<span class="nivel-desc">Leão, elefante, tubarão...</span>
+				</span>
+			</button>
         </div>
 
         <!-- ECRÃ 2: O JOGO -->
@@ -371,7 +386,7 @@
                 <div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
                 <div style="display:flex; gap:10px;">
                     <div class="badge-ronda" id="badge-ronda-svg"></div>
-                    <div class="badge-tempo">⏱️ <span id="timer-display">00:00</span></div>
+                    <div class="badge-tempo"><img src="../../../SVG/tempo.svg" class="icon-svg-voltar" alt=""> <span id="timer-display">00:00</span></div>
                 </div>
             </div>
 
@@ -383,14 +398,14 @@
 
         <!-- ECRÃ 3: FIM DO JOGO -->
         <div id="ecra-fim" class="ecra">
-            <h2 class="titulo-destaque" style="color: #2ed573;">Muito Bem! 🎉</h2>
+            <h2 class="titulo-destaque" style="color: #2ed573;">Muito Bem! <img src="../../../SVG/confeti.svg" class="icon-svg-voltar" alt=""></h2>
             <div class="end-stats">
                 Encontraste os animais todos!<br>
-                <span class="end-time-msg">⏱️ <span id="tempo-final-texto">00:00</span></span>
+                <span class="end-time-msg"><img src="../../../SVG/tempo.svg" class="icon-svg-voltar" alt=""><span id="tempo-final-texto">00:00</span></span>
             </div>
             <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 350px; margin: 0 auto;">
-                <button class="btn-acao" onclick="iniciarJogo(nivelAtualId)">JOGAR DE NOVO 🔄</button>
-                <button class="btn-acao secundario" onclick="voltarAoMenu()">MUDAR DE NÍVEL 🏠</button>
+                <button class="btn-acao" onclick="iniciarJogo(nivelAtualId)">JOGAR DE NOVO <img src="../../../SVG/jogar_novo.svg" class="icon-svg-voltar" alt=""></button>
+                <button class="btn-acao secundario" onclick="voltarAoMenu()">MUDAR DE NÍVEL <img src="../../../SVG/menu_principal.svg" class="icon-svg-voltar" alt=""></button>
             </div>
         </div>
     </div>

@@ -217,11 +217,45 @@
            BARRA DE ESTADO DO JOGO
            ========================================= */
         .status-bar-jogo {
-            display: flex; align-items: center; justify-content: space-between; gap: 10px;
-            width: 100%; background: #eaf1eb; padding: 8px 12px;
-            border-radius: 20px; border: 2px solid var(--cor-em); margin-bottom: 15px; box-sizing: border-box; flex-shrink: 0;
-            max-width: 900px;
-        }
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+			width: 100%;
+			max-width: 900px;
+			background: #eaf1eb;
+			padding: 10px 12px;
+			border-radius: 20px;
+			border: 2px solid var(--cor-em);
+			box-sizing: border-box;
+			flex-shrink: 0;
+			margin-bottom: 15px;
+		}
+
+		.status-linha-1 {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+		}
+
+		.status-grupo-botoes {
+			display: flex;
+			gap: 8px;
+			align-items: center;
+		}
+
+		.status-linha-2 {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			width: 100%;
+		}
+
+		.status-linha-2 .progress-bg {
+			flex: 1;
+			margin: 0;
+			height: 28px;
+		}
 		
         .btn-voltar-menu { background-color: white; color: var(--azul-escuro); border: 2px solid var(--cor-em); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.2s; touch-action: manipulation;}
         @media (hover: hover) { .btn-voltar-menu:hover { border-color: var(--azul-escuro); transform: scale(1.05); } }
@@ -237,11 +271,30 @@
         .progress-fill { height: 100%; width: 0%; border-radius: 20px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); background-color: var(--cor-1ano); background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent); background-size: 30px 30px; animation: moverRiscas 2s linear infinite; }
         
         @media (max-width: 650px) {
-            .status-bar-jogo { flex-wrap: wrap; justify-content: center; gap: 8px; padding: 8px; }
-            .btn-voltar-menu, .btn-dica { padding: 4px 8px; font-size: 0.8rem;}
-            .badge-ronda, .badge-tempo { font-size: 0.9rem; padding: 4px 8px; flex: 1; justify-content: center;}
-            .progress-bg { order: 5; min-width: 100%; margin: 5px 0 0 0; }
-        }
+			.status-bar-jogo {
+				padding: 8px 10px;
+				gap: 6px;
+			}
+
+			.btn-voltar-menu, 
+			.btn-dica, 
+			.badge-ronda, 
+			.badge-tempo {
+				padding: 4px 8px;
+				font-size: 0.8rem;
+				height: 32px;
+				display: inline-flex;
+				align-items: center;
+			}
+
+			.status-grupo-botoes {
+				gap: 5px;
+			}
+
+			.status-linha-2 .progress-bg {
+				height: 35px;
+			}
+		}
 
         /* =========================================
            GRELHA DO JOGO E CARTAS 3D
@@ -252,7 +305,7 @@
             gap: 12px;
             width: 100%;
             max-width: 700px;
-            margin: 0 auto;
+            margin: auto 0;
             perspective: 1000px;
         }
 
@@ -288,7 +341,11 @@
         .card-sound:active { transform: scale(0.85); }
 
         @media (max-width: 600px) {
-            .memory-grid { gap: 8px; } 
+            .memory-grid {
+				grid-template-columns: repeat(4, 1fr);
+				max-width: 420px;
+				gap: 8px;
+			}
             .card-front { font-size: 1.5rem; border-width: 2px;}
             .card-back { border-width: 2px; }
             .card-sound { font-size: 2rem; }
@@ -384,23 +441,27 @@
                 Clica nas cartas para as virar.<br>
                 Usa o <strong>som</strong> para ouvir a palavra e encontra a <strong>parte do corpo</strong> correspondente!
             </p>
-            <button class="btn-acao1" onclick="iniciarJogo()">Começar o Jogo ▶️</button>
+            <button class="btn-acao1" onclick="iniciarJogo()">
+				Começar o Jogo <img src="../../../SVG/seta_direita.svg" class="icon-svg-voltar" alt="">
+			</button>
         </div>
 
         <!-- ECRÃ DE JOGO -->
         <div id="ecra-jogo" class="ecra">
             
             <div class="status-bar-jogo">
-                <div style="display:flex; gap:10px;">
-                    <button class="btn-voltar-menu" onclick="voltarAsInstrucoes()" id="btn-home-svg"></button>
-                    <button id="btn-ajuda" class="btn-dica" onclick="usarDica()"></button>
-                </div>
-				<div class="badge-ronda" id="badge-ronda-svg"></div>
-                <div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
-                <div style="display:flex; gap:10px;">
-                    <div class="badge-tempo">⏱️ <span id="timer-display">00:00</span></div>
-                </div>
-            </div>
+				<div class="status-linha-1">
+					<div class="status-grupo-botoes">
+						<button class="btn-voltar-menu" onclick="voltarAsInstrucoes()" id="btn-home-svg"></button>
+						<button id="btn-ajuda" class="btn-dica" onclick="usarDica()"></button>
+					</div>
+					<div class="badge-ronda" id="badge-ronda-svg"></div>
+				</div>
+				<div class="status-linha-2">
+					<div class="badge-tempo"><img src="../../../SVG/tempo.svg" class="icon-svg-voltar" alt=""> <span id="timer-display">00:00</span></div>
+					<div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
+				</div>
+			</div>
 			
             <div class="memory-grid" id="memory-grid">
                 <!-- Cartas injetadas via Javascript -->
@@ -410,14 +471,14 @@
 
         <!-- ECRÃ DE FIM -->
         <div id="ecra-fim" class="ecra">
-            <h2 class="titulo-destaque" style="color: #2ed573;">Muito Bem! 🎉</h2>
+            <h2 class="titulo-destaque" style="color: #2ed573;">Muito Bem! <img src="../../../SVG/confeti.svg" class="icon-svg-voltar" alt=""></h2>
             <div class="end-stats">
                 Encontraste todos os pares e tens uma memória incrível!<br>
-                <span class="end-time-msg">⏱️ <span id="tempo-final-texto">00:00</span></span>
+                <span class="end-time-msg"><img src="../../../SVG/tempo.svg" class="icon-svg-voltar" alt=""><span id="tempo-final-texto">00:00</span></span>
             </div>
             <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 350px; margin: 0 auto;">
-                <button class="btn-acao" onclick="iniciarJogo()">JOGAR DE NOVO 🔄</button>
-                <button class="btn-acao secundario" onclick="voltarAsInstrucoes()">MENU 🏠</button>
+                <button class="btn-acao" onclick="iniciarJogo()">JOGAR DE NOVO <img src="../../../SVG/jogar_novo.svg" class="icon-svg-voltar" alt=""></button>
+                <button class="btn-acao secundario" onclick="voltarAsInstrucoes()">VOLTAR AO MENU <img src="../../../SVG/menu_principal.svg" class="icon-svg-voltar" alt=""></button>
             </div>
         </div>
     </div>
