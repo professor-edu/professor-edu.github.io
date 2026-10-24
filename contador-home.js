@@ -54,7 +54,7 @@ onValue(jogosRef, (snapshot) => {
       border-radius: 50px;
       font-weight: 800;
       font-size: 0.9rem;
-      box-shadow: 0 4px 12px rgba(255, 123, 0, 0.3);
+      box-shadow: 0 4px 12px rgba(255, 123, 0, 0.5);
       border: 3px solid #ffffff;
       text-shadow: 0 1px 2px rgba(0,0,0,0.15);
       user-select: none;
