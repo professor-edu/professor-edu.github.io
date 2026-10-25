@@ -121,7 +121,7 @@
 
         /* Jogo: Cabeçalho com Crachá Centrado e Controlos Alinhados */
         .header-jogo-controles { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; width: 100%; max-width: 650px; margin-bottom: 30px; }
-        .btn-mudar-letra { justify-self: start; background: #f0f4f8; color: var(--text-main); border: none; padding: 8px 15px; border-radius: 15px; font-weight: bold; cursor: pointer; transition: 0.2s; font-size: 0.9rem; }
+        .btn-mudar-letra { justify-self: start; background: var(--bg-header); color: var(--text-main); border: none; padding: 8px 10px; border-radius: 15px; font-weight: bold; cursor: pointer; transition: 0.2s; font-size: 0.9rem; }
         .btn-mudar-letra:hover { background: #e3f2fd; color: var(--azul-escuro); }
         .progresso-texto { justify-self: end; font-weight: bold; color: var(--text-main); font-size: 1rem; }
         
@@ -240,7 +240,7 @@
         <!-- ECRÃ 2: ÁREA DE JOGO -->
         <div id="ecra-jogo">
             <div class="header-jogo-controles">
-                <button class="btn-mudar-letra" onclick="voltarParaSelecao()">🔄 Escolher outra letra</button>
+                <button class="btn-mudar-letra" onclick="voltarParaSelecao()"><img src="../../../SVG/jogar_novo_1.svg" class="icon-svg-voltar" alt=""> Mudar de letra</button>
                 
                 <div class="cracha-letra">
                     <img id="cracha-img" class="cracha-img" src="" alt="Emoji">
@@ -261,13 +261,13 @@
 
         <!-- ECRÃ 3: FIM DO DESAFIO -->
         <div id="ecra-fim">
-            <h2 class="end-title">Parabéns! 🎉</h2>
+            <h2 class="end-title">Parabéns! <img src="../../../SVG/confeti.svg" class="icon-svg-voltar" alt=""></h2>
             <p style="font-size: 1.2rem; color: var(--text-main); margin-bottom: 10px;">Copiaste na perfeição todas as frases desta letra!</p>
-            <img src="https://openmoji.org/data/color/svg/1F3C6.svg" style="width:120px; margin-bottom: 10px;">
+            <img src="../../../SVG/taca.svg" style="width:120px; margin-bottom: 10px;">
             
             <div class="botoes-fim">
                 <button id="btn-proxima" class="btn-acao">Avançar para a próxima ➔</button>
-                <button class="btn-secundario" onclick="voltarParaSelecao()">🔠 Escolher outra letra</button>
+                <button class="btn-secundario" onclick="voltarParaSelecao()"><img src="../../../SVG/letras.svg" class="icon-svg-voltar" alt=""> Escolher outra letra</button>
             </div>
         </div>
 
@@ -351,53 +351,53 @@
     // ==========================================
     // SELEÇÃO DE LETRAS E PROGRESSO
     // ==========================================
-    function atualizarTextoMotivacional() {
-        const concluidas = letrasCompletadas.length;
-        const total = pages.length;
-        if (concluidas === 0) {
-            txtMotivacional.innerHTML = "Estás pronto para começar o desafio?";
-        } else if (concluidas === total) {
-            txtMotivacional.innerHTML = "Uau! Completaste todas as letras! És incrível! 🏆";
-        } else {
-            txtMotivacional.innerHTML = `Já completaste <b style="color:var(--azul-vibrante);">${concluidas} de ${total}</b> letras! Continua! ⭐`;
-        }
-    }
+	function atualizarTextoMotivacional() {
+		const concluidas = letrasCompletadas.length;
+		const total = pages.length;
+		if (concluidas === 0) {
+			txtMotivacional.innerHTML = "Estás pronto para começar o desafio?";
+		} else if (concluidas === total) {
+			txtMotivacional.innerHTML = 'Uau! Completaste todas as letras! És incrível! <img src="../../../SVG/trofeu.svg" class="icon-svg-voltar" alt="">';
+		} else {
+			txtMotivacional.innerHTML = `Já completaste <b style="color:var(--azul-vibrante);">${concluidas} de ${total}</b> letras! Continua! <img src="../../../SVG/estrela.svg" class="icon-svg-voltar" alt="">`;
+		}
+	}
 
-    function inicializarGrelha() {
-        const grid = document.getElementById('letters-grid');
-        grid.innerHTML = '';
-        
-        atualizarTextoMotivacional();
+	function inicializarGrelha() {
+		const grid = document.getElementById('letters-grid');
+		grid.innerHTML = '';
+		
+		atualizarTextoMotivacional();
 
-        pages.forEach((page, index) => {
-            const btn = document.createElement('div');
-            btn.className = 'letter-card';
-            
-            // Fundo Pastel Dinâmico
-            const corFundo = coresPastel[index % coresPastel.length];
-            btn.style.background = `linear-gradient(to bottom, #ffffff, ${corFundo})`;
+		pages.forEach((page, index) => {
+			const btn = document.createElement('div');
+			btn.className = 'letter-card';
+			
+			// Fundo Pastel Dinâmico
+			const corFundo = coresPastel[index % coresPastel.length];
+			btn.style.background = `linear-gradient(to bottom, #ffffff, ${corFundo})`;
 
-            // Verificar se já concluiu
-            if (letrasCompletadas.includes(page.letter)) {
-                btn.classList.add('completada');
-            }
+			// Verificar se já concluiu
+			if (letrasCompletadas.includes(page.letter)) {
+				btn.classList.add('completada');
+			}
 
-            btn.innerHTML = `
-                ${page.letter}
-                <span class="estrela-conclusao">⭐</span>
-            `;
-            btn.onclick = () => iniciarJogoDaLetra(index);
-            grid.appendChild(btn);
-        });
+			btn.innerHTML = `
+				${page.letter}
+				<span class="estrela-conclusao"><img src="../../../SVG/estrela_pulsante.svg" class="icon-svg-voltar" alt=""></span>
+			`;
+			btn.onclick = () => iniciarJogoDaLetra(index);
+			grid.appendChild(btn);
+		});
 
-        // Verificar URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const letraEscolhida = urlParams.get("letra");
-        if (letraEscolhida) {
-            const pos = pages.findIndex(p => p.letter.toUpperCase() === letraEscolhida.toUpperCase());
-            if (pos !== -1) iniciarJogoDaLetra(pos);
-        }
-    }
+		// Verificar URL
+		const urlParams = new URLSearchParams(window.location.search);
+		const letraEscolhida = urlParams.get("letra");
+		if (letraEscolhida) {
+			const pos = pages.findIndex(p => p.letter.toUpperCase() === letraEscolhida.toUpperCase());
+			if (pos !== -1) iniciarJogoDaLetra(pos);
+		}
+	}
 
     function guardarProgresso(letra) {
         if (!letrasCompletadas.includes(letra)) {
