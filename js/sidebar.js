@@ -8,10 +8,12 @@
         document.head.appendChild(link);
     }
 
-    // 2. Deteta a cor do ano isolando a primeira pasta da URL (evita falsos positivos em nomes de jogos como "jogo-2")
+    // 2. Deteta a cor do ano isolando a primeira pasta da URL
     const pathSegments = window.location.pathname.split('/').filter(Boolean);
     const primeiraPasta = pathSegments[0] || '';
-    let corHoverAtual = 'var(--cor-inicio, #ff4757)'; // Cor padrão (Início)
+    
+    // Cor padrão para a Página Inicial (#0091ff)
+    let corHoverAtual = 'var(--cor-inicio, #0091ff)';
 
     if (primeiraPasta === 'pre') {
         corHoverAtual = 'var(--cor-pre, #f368e0)';
@@ -27,10 +29,41 @@
 
     // 3. Injeta o HTML do Menu e da Modal
     document.addEventListener("DOMContentLoaded", function() {
-        const sidebarHTML = `
+        // Deteta se estamos na página inicial (raiz ou index.html)
+        const caminho = window.location.pathname;
+        const ePaginaInicial = caminho === '/' || caminho.endsWith('/index.html') || caminho === '';
+
+        // HTML da Modal de Pesquisa (com a variável de cor temática)
+        const modalHTML = `
+            <div id="modal-pesquisa" class="modal-pesquisa-overlay" style="--cor-hover: ${corHoverAtual};" onclick="fecharPesquisaFora(event)">
+                <div class="modal-pesquisa-container">
+                    <div class="modal-pesquisa-header">
+                        <div class="input-pesquisa-container">
+                            <svg class="icon-lupa-pesquisa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            <input type="text" id="input-pesquisa" placeholder="O que queres jogar hoje?" autocomplete="off">
+                            <button id="btn-limpar-pesquisa" class="btn-limpar-texto" onclick="limparPesquisa()" title="Apagar texto" type="button">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <button class="btn-fechar-pesquisa" onclick="fecharPesquisa()" title="Fechar janela">✕</button>
+                    </div>
+                    <div id="resultados-pesquisa" class="resultados-pesquisa">
+                        <p class="pesquisa-vazia">Escreve o que queres brincar e aprender...</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // HTML da Sidebar (Menu Lateral)
+        const sidebarMenuHTML = `
             <nav class="sidebar" id="sidebar" style="--cor-hover: ${corHoverAtual};">
                 <div class="btn-fechar" onclick="toggleMenu()"><span>✕</span> Fechar</div>
-                
                 <ul>
                     <li><a href="/"><img src="/SVG/home.svg" alt="Início" class="icon-svg-menu" style="width:24px; height:24px;" onerror="this.style.display='none'">Início</a></li>
                     <li><a href="/pre"><img src="/SVG/pre.svg" alt="Pré-Escolar" class="icon-svg-menu" style="width:24px; height:24px;" onerror="this.style.display='none'">Pré-Escolar</a></li>
@@ -39,47 +72,18 @@
                     <li><a href="/3"><img src="/SVG/ano3.svg" alt="3º Ano" class="icon-svg-menu" style="width:24px; height:24px;" onerror="this.style.display='none'">3º Ano</a></li>
                     <li><a href="/4"><img src="/SVG/ano4.svg" alt="4º Ano" class="icon-svg-menu" style="width:24px; height:24px;" onerror="this.style.display='none'">4º Ano</a></li>
                 </ul>
-
                 <div class="sidebar-search-box">
                     <button class="btn-sidebar-pesquisa" onclick="abrirPesquisa()">
-                        <img src="/SVG/ano3.svg" alt="" class="icon-svg-menu" style="width:24px; height:24px;" onerror="this.style.display='none'">
+                        <img src="/SVG/lupa.svg" alt="" class="icon-svg-menu" style="width:24px; height:24px;" onerror="this.style.display='none'">
                         <span>Pesquisar jogo...</span>
                     </button>
                 </div>
             </nav>
-
-            <div id="modal-pesquisa" class="modal-pesquisa-overlay" onclick="fecharPesquisaFora(event)">
-                <div class="modal-pesquisa-container">
-                    <div class="modal-pesquisa-header">
-					<div class="input-pesquisa-container">
-						<!-- Ícone de Lupa / Pesquisa -->
-						<svg class="icon-lupa-pesquisa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-							<circle cx="11" cy="11" r="8"></circle>
-							<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-						</svg>
-
-						<input type="text" id="input-pesquisa" placeholder="O que queres jogar hoje?" autocomplete="off">
-
-						<!-- Mini botão "X" para apagar texto (aparece apenas quando há texto) -->
-						<button id="btn-limpar-pesquisa" class="btn-limpar-texto" onclick="limparPesquisa()" title="Apagar texto" type="button">
-							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-								<line x1="18" y1="6" x2="6" y2="18"></line>
-								<line x1="6" y1="6" x2="18" y2="18"></line>
-							</svg>
-						</button>
-					</div>
-
-					<!-- Botão principal de fechar a modal -->
-					<button class="btn-fechar-pesquisa" onclick="fecharPesquisa()" title="Fechar janela">✕</button>
-				</div>
-                    <div id="resultados-pesquisa" class="resultados-pesquisa">
-                        <p class="pesquisa-vazia">Digita algo para procurares nos jogos...</p>
-                    </div>
-                </div>
-            </div>
         `;
 
-        document.body.insertAdjacentHTML('beforeend', sidebarHTML);
+        // Se NÃO for a página inicial, injeta a sidebar. A modal injeta SEMPRE.
+        const htmlFinal = (ePaginaInicial ? '' : sidebarMenuHTML) + modalHTML;
+        document.body.insertAdjacentHTML('beforeend', htmlFinal);
     });
 })();
 
@@ -105,7 +109,6 @@ async function carregarCatalogo() {
     }
 }
 
-// Função para remover acentos e maiúsculas (ex: "Atenção" -> "atencao")
 function normalizarTexto(texto) {
     return texto
         .toLowerCase()
@@ -119,7 +122,7 @@ function limparPesquisa() {
     if (input) {
         input.value = '';
         input.focus();
-        pesquisarJogos(); // Atualiza os resultados (volta ao estado inicial)
+        pesquisarJogos();
     }
 }
 
@@ -130,7 +133,6 @@ function pesquisarJogos() {
     const btnLimpar = document.getElementById('btn-limpar-pesquisa');
     if (!input || !containerResultados) return;
 
-    // Mostra o mini "X" se houver texto, esconde se estiver vazio
     if (btnLimpar) {
         btnLimpar.style.display = input.value.trim().length > 0 ? 'flex' : 'none';
     }
@@ -138,7 +140,7 @@ function pesquisarJogos() {
     const termo = normalizarTexto(input.value.trim());
 
     if (termo === '') {
-        containerResultados.innerHTML = '<p class="pesquisa-vazia">Digita algo para procurares nos jogos...</p>';
+        containerResultados.innerHTML = '<p class="pesquisa-vazia">Escreve o que queres brincar e aprender...</p>';
         return;
     }
 
@@ -165,20 +167,28 @@ function pesquisarJogos() {
 
 function renderizarResultados(lista) {
     const container = document.getElementById('resultados-pesquisa');
+    const input = document.getElementById('input-pesquisa');
+    if (!container) return;
 
     if (lista.length === 0) {
-        container.innerHTML = '<p class="pesquisa-vazia">Nenhum jogo encontrado com esse termo. 🔍</p>';
+        container.innerHTML = `
+            <p class="pesquisa-vazia">
+                Nenhum jogo encontrado com esse termo!
+                <img src="/SVG/sem_resultados.svg" alt="Sem resultados" class="icon-pesquisa-vazia">
+            </p>
+        `;
         return;
     }
 
-    // Cabeçalho com o total de jogos
+    const termoOriginal = input ? input.value.trim() : '';
+
+    // Cabeçalho com o contador e o termo destacados com a cor do tema atual
     const totalHTML = `
-        <div class="pesquisa-resumo-topo" style="grid-column: 1 / -1; margin-bottom: 5px; font-size: 0.85rem; color: #64748b; font-weight: 600;">
-            Encontrados ${lista.length} jogo${lista.length > 1 ? 's' : ''}:
+        <div class="pesquisa-resumo-topo" style="grid-column: 1 / -1; margin-bottom: 8px; font-size: 0.9rem; color: #64748b; font-weight: 600;">
+            Encontrados <span style="color: var(--cor-hover, #0091ff); font-weight: bold;">${lista.length}</span> jogo${lista.length > 1 ? 's' : ''}${termoOriginal ? ` para "<span style="color: var(--cor-hover, #0091ff); font-weight: bold;">${termoOriginal}</span>"` : ''}
         </div>
     `;
 
-    // Placas dos jogos
     const cartoesHTML = lista.map(jogo => `
         <a href="${jogo.link}" class="item-resultado-jogo">
             <img src="${jogo.icone}" alt="${jogo.nome}" class="thumb-jogo" onerror="this.src='/SVG/home.svg'">
@@ -194,7 +204,6 @@ function renderizarResultados(lista) {
 
     container.innerHTML = totalHTML + cartoesHTML;
 }
-
 
 function abrirPesquisa() {
     const sidebar = document.getElementById('sidebar');

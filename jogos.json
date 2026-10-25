@@ -7,8 +7,7 @@
         "disciplina":  "Pré-Escolar",
         "tags":  [
                      "contagens",
-                     "contar",
-                     "pré-escolar"
+                     "contar"
                  ]
     },
     {
@@ -17,11 +16,8 @@
         "link":  "/pre/super-cores/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  [
-                     "super",
-                     "cores",
-                     "pré-escolar"
-                 ]
+        "tags":  "cores"
+                 
     },
     {
         "nome":  "Diferenças",
@@ -29,10 +25,8 @@
         "link":  "/pre/diferencas/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  [
-					"diferenças",
-					"pré-escolar"
-				 ]
+        "tags": "diferenças"
+
     },
     {
         "nome":  "Memória Mágica",
@@ -40,11 +34,9 @@
         "link":  "/pre/memoria/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  [
-                     "memória",
-                     "mágica",
-                     "pré-escolar"
-                 ]
+        "tags": "memória"
+
+                 
     },
     {
         "nome":  "Sombras",
@@ -52,7 +44,7 @@
         "link":  "/pre/sombras/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  "sombraspré-escolar"
+        "tags":  "sombras"
     },
     {
         "nome":  "Detetive",
@@ -60,7 +52,10 @@
         "link":  "/pre/procurar/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  "detetivepré-escolar"
+        "tags":  [
+                     "detetive",
+                     "procurar"
+                 ]
     },
     {
         "nome":  "Super Detetive",
@@ -69,9 +64,8 @@
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
         "tags":  [
-                     "super",
                      "detetive",
-                     "pré-escolar"
+                     "procurar"
                  ]
     },
     {
@@ -80,7 +74,7 @@
         "link":  "/pre/sequencias/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  "sequênciaspré-escolar"
+        "tags":  "sequências"
     },
     {
         "nome":  "Frente e Trás",
@@ -91,7 +85,7 @@
         "tags":  [
                      "frente",
                      "trás",
-                     "pré-escolar"
+					 "lateralidade"
                  ]
     },
     {
@@ -100,7 +94,11 @@
         "link":  "/pre/rimas/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  "rimaspré-escolar"
+        "tags":  [
+                     "rimas",
+                     "fonologia",
+					 "consciência fonológica"
+                 ]
     },
     {
         "nome":  "Reciclagem",
@@ -108,7 +106,10 @@
         "link":  "/pre/reciclagem/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  "reciclagempré-escolar"
+        "tags":  [
+                     "reciclagem",
+                     "ambiente"
+                 ]
     },
     {
         "nome":  "Super Memória",
@@ -116,11 +117,9 @@
         "link":  "/pre/super-memoria/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  [
-                     "super",
-                     "memória",
-                     "pré-escolar"
-                 ]
+        "tags":  "memória"
+
+                 
     },
     {
         "nome":  "Contar Sílabas",
@@ -131,7 +130,7 @@
         "tags":  [
                      "contar",
                      "sílabas",
-                     "pré-escolar"
+                     "consciência fonológica"
                  ]
     },
     {
@@ -140,7 +139,12 @@
         "link":  "/pre/vogais/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  "vogaispré-escolar"
+        "tags":  [
+                     "vogais",
+                     "letras",
+                     "consciência fonológica",
+					 "som"
+                 ]
     },
     {
         "nome":  "Vamos Contar!",
@@ -149,9 +153,9 @@
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
         "tags":  [
-                     "vamos",
+                     "contagens",
                      "contar!",
-                     "pré-escolar"
+                     "números até 10"
                  ]
     },
     {
@@ -162,8 +166,8 @@
         "disciplina":  "Pré-Escolar",
         "tags":  [
                      "vogais",
-                     "faladas",
-                     "pré-escolar"
+                     "som",
+                     "letras"
                  ]
     },
     {
@@ -172,7 +176,11 @@
         "link":  "/pre/labirintos/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  "labirintospré-escolar"
+        "tags":  [
+                     "labirintos",
+                     "orientação espacial",
+                     "lateralidade"
+                 ]
     },
     {
         "nome":  "Sem Par",
@@ -180,11 +188,9 @@
         "link":  "/pre/sem-par/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  [
-                     "sem",
-                     "par",
-                     "pré-escolar"
-                 ]
+        "tags": "pares"
+
+                 
     },
     {
         "nome":  "Puzzles Mágicos",
@@ -194,8 +200,7 @@
         "disciplina":  "Pré-Escolar",
         "tags":  [
                      "puzzles",
-                     "mágicos",
-                     "pré-escolar"
+                     "imagens"
                  ]
     },
     {
@@ -204,11 +209,9 @@
         "link":  "/pre/numeros-cores/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  [
-                     "números",
-                     "coloridos",
-                     "pré-escolar"
-                 ]
+        "tags": "números"
+
+                 
     },
     {
         "nome":  "Dados Mágicos",
@@ -218,8 +221,9 @@
         "disciplina":  "Pré-Escolar",
         "tags":  [
                      "dados",
-                     "mágicos",
-                     "pré-escolar"
+                     "números até 10",
+                     "contagens",
+					 "contar"
                  ]
     },
     {
@@ -230,9 +234,7 @@
         "disciplina":  "Pré-Escolar",
         "tags":  [
                      "sons",
-                     "dos",
-                     "bichos",
-                     "pré-escolar"
+                     "animais"
                  ]
     },
     {
@@ -242,10 +244,8 @@
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
         "tags":  [
-                     "quem",
-                     "sou",
-                     "eu?",
-                     "pré-escolar"
+                     "sons",
+                     "animais"
                  ]
     },
     {
@@ -255,9 +255,8 @@
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
         "tags":  [
-                     "robô",
-                     "construtor",
-                     "pré-escolar"
+                     "puzzles",
+                     "imagens"
                  ]
     },
     {
@@ -267,9 +266,11 @@
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
         "tags":  [
-                     "pixel",
-                     "art",
-                     "pré-escolar"
+                     "pixel art",
+                     "imagens",
+					 "cores",
+					 "colorir",
+                     "pintura"
                  ]
     },
     {
@@ -279,9 +280,10 @@
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
         "tags":  [
-                     "vamos",
+                     "cores",
                      "colorir",
-                     "pré-escolar"
+                     "imagens",
+					 "pintura"
                  ]
     },
     {
@@ -292,8 +294,11 @@
         "disciplina":  "Pré-Escolar",
         "tags":  [
                      "memória",
-                     "falada",
-                     "pré-escolar"
+                     "som",
+                     "vogais",
+					 "números",
+					 "cores",
+					 "formas"
                  ]
     },
     {
@@ -302,7 +307,7 @@
         "link":  "/pre/metades/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  "metadespré-escolar"
+        "tags":  "metades"
     },
     {
         "nome":  "Som Inicial",
@@ -312,8 +317,9 @@
         "disciplina":  "Pré-Escolar",
         "tags":  [
                      "som",
-                     "inicial",
-                     "pré-escolar"
+                     "sílabas",
+					 "sílaba inicial",
+                     "consciência fonológica"
                  ]
     },
     {
@@ -325,7 +331,7 @@
         "tags":  [
                      "ouvir",
                      "descobrir",
-                     "pré-escolar"
+                     "som"
                  ]
     },
     {
@@ -337,7 +343,8 @@
         "tags":  [
                      "ouvir",
                      "resolver",
-                     "pré-escolar"
+                     "som",
+					 "números até 10"
                  ]
     },
     {
@@ -347,10 +354,9 @@
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
         "tags":  [
-                     "magia",
-                     "dos",
-                     "números",
-                     "pré-escolar"
+                     "ligar",
+                     "números até 20",
+                     "números até 10"
                  ]
     },
     {
@@ -360,9 +366,8 @@
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
         "tags":  [
-                     "magia",
-                     "musical",
-                     "pré-escolar"
+                     "som",
+                     "música"
                  ]
     },
     {
@@ -372,9 +377,9 @@
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
         "tags":  [
-                     "cestos",
-                     "leo",
-                     "pré-escolar"
+                     "alimentação",
+                     "saúde",
+                     "alimentos"
                  ]
     },
     {
@@ -383,12 +388,8 @@
         "link":  "/pre/monstro-formas/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  [
-                     "monstro",
-                     "das",
-                     "formas",
-                     "pré-escolar"
-                 ]
+        "tags":  "formas geométricas"
+
     },
     {
         "nome":  "A Cidade dos Sentidos",
@@ -396,12 +397,8 @@
         "link":  "/pre/cidade-sentidos/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  [
-                     "cidade",
-                     "dos",
-                     "sentidos",
-                     "pré-escolar"
-                 ]
+        "tags":  "5 sentidos"
+
     },
     {
         "nome":  "O Monstro das Emoções",
@@ -409,12 +406,7 @@
         "link":  "/pre/monstro-emocoes/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  [
-                     "monstro",
-                     "das",
-                     "emoções",
-                     "pré-escolar"
-                 ]
+        "tags":  "emoções"
     },
     {
         "nome":  "A Roleta Maluca",
@@ -424,8 +416,8 @@
         "disciplina":  "Pré-Escolar",
         "tags":  [
                      "roleta",
-                     "maluca",
-                     "pré-escolar"
+                     "grupo",
+                     "divertido"
                  ]
     },
     {
@@ -437,7 +429,7 @@
         "tags":  [
                      "animal",
                      "favorito",
-                     "pré-escolar"
+                     "som"
                  ]
     },
     {
@@ -448,9 +440,8 @@
         "disciplina":  "Pré-Escolar",
         "tags":  [
                      "casa",
-                     "dos",
-                     "animais",
-                     "pré-escolar"
+                     "som",
+                     "animais"
                  ]
     },
     {
@@ -460,9 +451,8 @@
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
         "tags":  [
-                     "nossos",
-                     "heróis",
-                     "pré-escolar"
+                     "profissões",
+                     "som"
                  ]
     },
     {
@@ -474,7 +464,7 @@
         "tags":  [
                      "detetives",
                      "planeta",
-                     "pré-escolar"
+                     "ambiente"
                  ]
     },
     {
@@ -485,8 +475,7 @@
         "disciplina":  "Pré-Escolar",
         "tags":  [
                      "ratinho",
-                     "comilão",
-                     "pré-escolar"
+                     "atenção"
                  ]
     },
     {
@@ -496,9 +485,9 @@
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
         "tags":  [
-                     "polvo",
-                     "pintor",
-                     "pré-escolar"
+                     "cores",
+                     "memória",
+                     "som"
                  ]
     },
     {
@@ -510,7 +499,7 @@
         "tags":  [
                      "esquerda",
                      "direita?",
-                     "pré-escolar"
+                     "lateralidade"
                  ]
     },
     {
@@ -520,10 +509,9 @@
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
         "tags":  [
-                     "tamanhos",
-                     "dos",
-                     "nomes",
-                     "pré-escolar"
+                     "fonologia",
+                     "som",
+                     "consciência fonológica"
                  ]
     },
     {
@@ -533,10 +521,8 @@
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
         "tags":  [
-                     "oceano",
-                     "dos",
-                     "números",
-                     "pré-escolar"
+                     "números até 5",
+                     "cores"
                  ]
     },
     {
@@ -545,7 +531,11 @@
         "link":  "/pre/radar/",
         "ano":  "Pré-Escolar",
         "disciplina":  "Pré-Escolar",
-        "tags":  "radarpré-escolar"
+        "tags":  [
+                     "som",
+                     "lateralidade",
+					 "animais"
+                 ]
     },
     {
         "nome":  "O Meu Teclado",
@@ -554,9 +544,9 @@
         "ano":  "1º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "meu",
+                     "rapidez",
                      "teclado",
-                     "português"
+                     "letras"
                  ]
     },
     {
@@ -567,8 +557,7 @@
         "disciplina":  "Português",
         "tags":  [
                      "palavra",
-                     "certa",
-                     "português"
+                     "leitura"
                  ]
     },
     {
@@ -579,8 +568,7 @@
         "disciplina":  "Português",
         "tags":  [
                      "letras",
-                     "falta",
-                     "português"
+                     "leitura"
                  ]
     },
     {
@@ -590,9 +578,9 @@
         "ano":  "1º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "contar",
+                     "fonologia",
                      "sílabas",
-                     "português"
+                     "consciência fonológica"
                  ]
     },
     {
@@ -601,7 +589,11 @@
         "link":  "/1/pt/rimas/",
         "ano":  "1º Ano",
         "disciplina":  "Português",
-        "tags":  "rimasportuguês"
+        "tags":  [
+                     "fonologia",
+                     "rimas",
+                     "consciência fonológica"
+                 ]
     },
     {
         "nome":  "Comboio das Letras",
@@ -609,12 +601,7 @@
         "link":  "/1/pt/comboio-letras/",
         "ano":  "1º Ano",
         "disciplina":  "Português",
-        "tags":  [
-                     "comboio",
-                     "das",
-                     "letras",
-                     "português"
-                 ]
+        "tags":  "letras"
     },
     {
         "nome":  "Código Secreto",
@@ -623,21 +610,21 @@
         "ano":  "1º Ano",
         "disciplina":  "Português",
         "tags":  [
+                     "divertido",
                      "código",
-                     "secreto",
-                     "português"
+                     "leitura"
                  ]
     },
     {
-        "nome":  "Sílaba Inicial",
+        "nome":  "Primeira Sílaba",
         "icone":  "/1/icones/primeira_silaba.png",
         "link":  "/1/pt/primeira-silaba/",
         "ano":  "1º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "sílaba",
-                     "inicial",
-                     "português"
+                     "sílabas",
+                     "fonologia",
+                     "consciência fonológica"
                  ]
     },
     {
@@ -646,7 +633,12 @@
         "link":  "/1/pt/28-palavras/",
         "ano":  "1º Ano",
         "disciplina":  "Português",
-        "tags":  "palavrasportuguês"
+        "tags":  [
+                     "28 palavras",
+                     "método",
+                     "consciência fonológica",
+					 "leitura"
+                 ]
     },
     {
         "nome":  "Comboio das Sílabas",
@@ -654,12 +646,7 @@
         "link":  "/1/pt/comboio-silabas/",
         "ano":  "1º Ano",
         "disciplina":  "Português",
-        "tags":  [
-                     "comboio",
-                     "das",
-                     "sílabas",
-                     "português"
-                 ]
+        "tags":  "sílabas"
     },
     {
         "nome":  "Memória de Imagens",
@@ -669,8 +656,7 @@
         "disciplina":  "Português",
         "tags":  [
                      "memória",
-                     "imagens",
-                     "português"
+                     "imagens"
                  ]
     },
     {
@@ -682,7 +668,7 @@
         "tags":  [
                      "palavras",
                      "imagens",
-                     "português"
+                     "memória"
                  ]
     },
     {
@@ -694,7 +680,7 @@
         "tags":  [
                      "ordenar",
                      "sílabas",
-                     "português"
+                     "leitura"
                  ]
     },
     {
@@ -706,7 +692,8 @@
         "tags":  [
                      "escrever",
                      "sílabas",
-                     "português"
+                     "leitura",
+					 "escrita"
                  ]
     },
     {
@@ -716,9 +703,9 @@
         "ano":  "1º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "bolhas",
-                     "sabão",
-                     "português"
+                     "sílabas",
+                     "imagens",
+                     "leitura"
                  ]
     },
     {
@@ -728,10 +715,10 @@
         "ano":  "1º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "monstro",
-                     "das",
+                     "arrastar",
+                     "leitura",
                      "sílabas",
-                     "português"
+                     "associação"
                  ]
     },
     {
@@ -742,8 +729,7 @@
         "disciplina":  "Português",
         "tags":  [
                      "escrever",
-                     "palavras",
-                     "português"
+                     "palavras"
                  ]
     },
     {
@@ -755,7 +741,8 @@
         "tags":  [
                      "ditado",
                      "palavras",
-                     "português"
+                     "escrever",
+					 "som"
                  ]
     },
     {
@@ -767,7 +754,10 @@
         "tags":  [
                      "sopa",
                      "letras",
-                     "português"
+                     "animais",
+					 "guloseimas",
+					 "escola",
+					 "casa"
                  ]
     },
     {
@@ -779,7 +769,7 @@
         "tags":  [
                      "copiar",
                      "frases",
-                     "português"
+                     "escrita"
                  ]
     },
     {
@@ -789,9 +779,8 @@
         "ano":  "1º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "lanterna",
-                     "mágica",
-                     "português"
+                     "leitura",
+                     "divertido"
                  ]
     },
     {
@@ -803,7 +792,7 @@
         "tags":  [
                      "verdadeiro",
                      "falso",
-                     "português"
+                     "leitura"
                  ]
     },
     {
@@ -814,8 +803,8 @@
         "disciplina":  "Português",
         "tags":  [
                      "palavra",
-                     "flash",
-                     "português"
+                     "leitura",
+                     "rapidez"
                  ]
     },
     {
@@ -825,10 +814,9 @@
         "ano":  "1º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "caixa",
-                     "das",
-                     "adivinhas",
-                     "português"
+                     "leitura",
+                     "divertido",
+                     "adivinhas"
                  ]
     },
     {
@@ -837,11 +825,7 @@
         "link":  "/1/pt/forca",
         "ano":  "1º Ano",
         "disciplina":  "Português",
-        "tags":  [
-                     "jogo",
-                     "forca",
-                     "português"
-                 ]
+        "tags":  "jogo da forca"
     },
     {
         "nome":  "Puzzle das Sílabas",
@@ -851,9 +835,7 @@
         "disciplina":  "Português",
         "tags":  [
                      "puzzle",
-                     "das",
-                     "sílabas",
-                     "português"
+                     "sílabas"
                  ]
     },
     {
@@ -862,7 +844,7 @@
         "link":  "/1/pt/vogais",
         "ano":  "1º Ano",
         "disciplina":  "Português",
-        "tags":  "vogaisportuguês"
+        "tags":  "vogais"
     },
     {
         "nome":  "Cruzadas de Animais",
@@ -871,9 +853,8 @@
         "ano":  "1º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "cruzadas",
-                     "animais",
-                     "português"
+                     "palavras cruzadas",
+                     "animais"
                  ]
     },
     {
@@ -883,9 +864,9 @@
         "ano":  "1º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "roda",
+                     "leitura",
                      "frase",
-                     "português"
+                     "ordenar"
                  ]
     },
     {
@@ -895,9 +876,8 @@
         "ano":  "1º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "ordem",
-                     "alfabética",
-                     "português"
+                     "alfabeto",
+                     "letras"
                  ]
     },
     {
@@ -908,8 +888,7 @@
         "disciplina":  "Português",
         "tags":  [
                      "ligar",
-                     "letras",
-                     "português"
+                     "letras"
                  ]
     },
     {
@@ -920,9 +899,8 @@
         "disciplina":  "Português",
         "tags":  [
                      "monstro",
-                     "das",
-                     "imagens",
-                     "português"
+                     "leitura",
+                     "imagens"
                  ]
     },
     {
@@ -932,10 +910,10 @@
         "ano":  "1º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "ritmo",
-                     "das",
+                     "fonologia",
+                     "sílabas",
                      "palavras",
-                     "português"
+                     "som"
                  ]
     },
     {
@@ -944,7 +922,7 @@
         "link":  "/1/pt/ditongos",
         "ano":  "1º Ano",
         "disciplina":  "Português",
-        "tags":  "ditongosportuguês"
+        "tags":  "ditongos"
     },
     {
         "nome":  "Letra P",
@@ -952,7 +930,11 @@
         "link":  "/1/pt/letra-p",
         "ano":  "1º Ano",
         "disciplina":  "Português",
-        "tags":  "letraportuguês"
+        "tags":  [
+                     "letra P",
+                     "letras",
+					 "consoantes"
+                 ]
     },
     {
         "nome":  "Letra T",
@@ -960,7 +942,11 @@
         "link":  "/1/pt/letra-t",
         "ano":  "1º Ano",
         "disciplina":  "Português",
-        "tags":  "letraportuguês"
+        "tags":  [
+                     "letra T",
+                     "letras",
+					 "consoantes"
+                 ]
     },
     {
         "nome":  "Letra L",
@@ -968,7 +954,11 @@
         "link":  "/1/pt/letra-l",
         "ano":  "1º Ano",
         "disciplina":  "Português",
-        "tags":  "letraportuguês"
+        "tags":  [
+                     "letra L",
+                     "letras",
+					 "consoantes"
+                 ]
     },
     {
         "nome":  "Letra D",
@@ -976,7 +966,11 @@
         "link":  "/1/pt/letra-d",
         "ano":  "1º Ano",
         "disciplina":  "Português",
-        "tags":  "letraportuguês"
+        "tags":  [
+                     "letra D",
+                     "letras",
+					 "consoantes"
+                 ]
     },
     {
         "nome":  "Letra M",
@@ -984,7 +978,11 @@
         "link":  "/1/pt/letra-m",
         "ano":  "1º Ano",
         "disciplina":  "Português",
-        "tags":  "letraportuguês"
+        "tags":  [
+                     "letra M",
+                     "letras",
+					 "consoantes"
+                 ]
     },
     {
         "nome":  "Letras PTLDM",
@@ -995,7 +993,7 @@
         "tags":  [
                      "letras",
                      "ptldm",
-                     "português"
+					 "consoantes"
                  ]
     },
     {
@@ -1005,9 +1003,10 @@
         "ano":  "1º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "vamos",
-                     "contar!",
-                     "matemática"
+                     "contagens",
+                     "contar",
+                     "números até 10",
+					 "números até 20"
                  ]
     },
     {
@@ -1016,7 +1015,13 @@
         "link":  "/1/mat/detetive/",
         "ano":  "1º Ano",
         "disciplina":  "Matemática",
-        "tags":  "detetivematemática"
+        "tags":  [
+                     "contagens",
+                     "contar",
+                     "números até 10",
+					 "números até 20",
+					 "números até 50"
+                 ]
     },
     {
         "nome":  "Camião de Carga",
@@ -1025,9 +1030,12 @@
         "ano":  "1º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "camião",
-                     "carga",
-                     "matemática"
+                     "contagens",
+                     "contar",
+                     "números até 10",
+					 "números até 20",
+					 "números até 50",
+					 "números até 100"
                  ]
     },
     {
@@ -1037,9 +1045,8 @@
         "ano":  "1º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "sapo",
-                     "saltitão",
-                     "matemática"
+                     "sequências",
+                     "números"
                  ]
     },
     {
@@ -1048,7 +1055,7 @@
         "link":  "/1/mat/graficos/",
         "ano":  "1º Ano",
         "disciplina":  "Matemática",
-        "tags":  "gráficosmatemática"
+        "tags":  "gráficos"
     },
     {
         "nome":  "Ligar Quantidades",
@@ -1059,7 +1066,10 @@
         "tags":  [
                      "ligar",
                      "quantidades",
-                     "matemática"
+                     "ábaco",
+					 "números até 10",
+					 "números até 20",
+					 "números até 50"
                  ]
     },
     {
@@ -1068,11 +1078,7 @@
         "link":  "/1/mat/quiz/",
         "ano":  "1º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "desafio",
-                     "final",
-                     "matemática"
-                 ]
+        "tags":  "desafio"
     },
     {
         "nome":  "Memória de Números",
@@ -1083,7 +1089,9 @@
         "tags":  [
                      "memória",
                      "números",
-                     "matemática"
+					 "números até 10",
+					 "números até 20",
+					 "números até 50"
                  ]
     },
     {
@@ -1093,9 +1101,12 @@
         "ano":  "1º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "máquina",
+                     "adição",
                      "somar",
-                     "matemática"
+                     "números até 10",
+					 "números até 20",
+					 "números até 50",
+					 "números até 100"
                  ]
     },
     {
@@ -1105,9 +1116,12 @@
         "ano":  "1º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "máquina",
+                     "subtração",
                      "subtrair",
-                     "matemática"
+                     "números até 10",
+					 "números até 20",
+					 "números até 50",
+					 "números até 100"
                  ]
     },
     {
@@ -1117,10 +1131,8 @@
         "ano":  "1º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "comboio",
-                     "das",
                      "sequências",
-                     "matemática"
+					 "números"
                  ]
     },
     {
@@ -1130,9 +1142,11 @@
         "ano":  "1º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "missão",
-                     "espacial",
-                     "matemática"
+                     "maior",
+                     "menor",
+                     "igual",
+					 "números até 10",
+					 "números até 20"
                  ]
     },
     {
@@ -1142,9 +1156,12 @@
         "ano":  "1º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "torre",
-                     "blocos",
-                     "matemática"
+                     "maior",
+                     "menor",
+                     "igual",
+					 "números até 20",
+					 "números até 50",
+					 "números até 100"
                  ]
     },
     {
@@ -1154,9 +1171,9 @@
         "ano":  "1º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "monstro",
+                     "igualdade",
                      "balança",
-                     "matemática"
+                     "números"
                  ]
     },
     {
@@ -1166,10 +1183,9 @@
         "ano":  "1º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "viagem",
-                     "dos",
-                     "números",
-                     "matemática"
+                     "números pares",
+                     "números ímpares",
+                     "números"
                  ]
     },
     {
@@ -1180,9 +1196,10 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "cálculo",
-                     "por",
+                     "números",
                      "decomposição",
-                     "matemática"
+                     "adição",
+					 "subtração"
                  ]
     },
     {
@@ -1191,7 +1208,10 @@
         "link":  "/1/mat/amigos-10",
         "ano":  "1º Ano",
         "disciplina":  "Matemática",
-        "tags":  "amigosmatemática"
+        "tags":  [
+                     "amigos do 10",
+                     "números até 10"
+                 ]
     },
     {
         "nome":  "Grelha do 100",
@@ -1202,7 +1222,7 @@
         "tags":  [
                      "grelha",
                      "100",
-                     "matemática"
+                     "números"
                  ]
     },
     {
@@ -1213,8 +1233,7 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "sólidos",
-                     "figuras",
-                     "matemática"
+                     "figuras"
                  ]
     },
     {
@@ -1225,8 +1244,10 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "ábaco",
-                     "mágico",
-                     "matemática"
+					 "números até 10",
+                     "números até 20",
+					 "números até 50",
+					 "números até 100"
                  ]
     },
     {
@@ -1237,8 +1258,9 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "mistérios",
-                     "quinta",
-                     "matemática"
+                     "enigmas",
+                     "animais",
+					 "cálculo"
                  ]
     },
     {
@@ -1249,9 +1271,12 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "robô",
-                     "das",
+                     "cálculo mental",
                      "contas",
-                     "matemática"
+                     "números até 10",
+                     "números até 20",
+					 "números até 50",
+					 "números até 100"
                  ]
     },
     {
@@ -1260,7 +1285,10 @@
         "link":  "/1/em/reciclagem/",
         "ano":  "1º Ano",
         "disciplina":  "Estudo do Meio",
-        "tags":  "reciclagemestudo do meio"
+        "tags":  [
+                     "reciclagem",
+					 "ambiente"
+                 ]
     },
     {
         "nome":  "Profissões",
@@ -1268,7 +1296,7 @@
         "link":  "/1/em/profissoes/",
         "ano":  "1º Ano",
         "disciplina":  "Estudo do Meio",
-        "tags":  "profissõesestudo do meio"
+        "tags":  "profissões"
     },
     {
         "nome":  "Roupas e Estações",
@@ -1278,8 +1306,7 @@
         "disciplina":  "Estudo do Meio",
         "tags":  [
                      "roupas",
-                     "estações",
-                     "estudo do meio"
+                     "estações"
                  ]
     },
     {
@@ -1290,8 +1317,8 @@
         "disciplina":  "Estudo do Meio",
         "tags":  [
                      "memória",
-                     "corpo",
-                     "estudo do meio"
+                     "corpo humano",
+                     "som"
                  ]
     },
     {
@@ -1302,8 +1329,8 @@
         "disciplina":  "Estudo do Meio",
         "tags":  [
                      "memória",
-                     "saudável",
-                     "estudo do meio"
+                     "saúde",
+                     "som"
                  ]
     },
     {
@@ -1315,7 +1342,7 @@
         "tags":  [
                      "memória",
                      "vestuário",
-                     "estudo do meio"
+                     "som"
                  ]
     },
     {
@@ -1326,9 +1353,9 @@
         "disciplina":  "Estudo do Meio",
         "tags":  [
                      "memória",
-                     "dos",
+                     "alimentação",
                      "alimentos",
-                     "estudo do meio"
+                     "som"
                  ]
     },
     {
@@ -1339,9 +1366,8 @@
         "disciplina":  "Estudo do Meio",
         "tags":  [
                      "memória",
-                     "dos",
-                     "animais",
-                     "estudo do meio"
+                     "som",
+                     "animais"
                  ]
     },
     {
@@ -1353,7 +1379,8 @@
         "tags":  [
                      "memória",
                      "tempo",
-                     "estudo do meio"
+                     "estações",
+					 "som"
                  ]
     },
     {
@@ -1362,7 +1389,10 @@
         "link":  "/1/em/familia/",
         "ano":  "1º Ano",
         "disciplina":  "Estudo do Meio",
-        "tags":  "famíliaestudo do meio"
+        "tags":  [
+                     "família",
+					 "som"
+                 ]
     },
     {
         "nome":  "Masculino e Feminino",
@@ -1385,7 +1415,7 @@
         "tags":  [
                      "singular",
                      "plural",
-                     "português"
+                     "sopa de letras"
                  ]
     },
     {
@@ -1394,7 +1424,10 @@
         "link":  "/2/pt/sinonimos",
         "ano":  "2º Ano",
         "disciplina":  "Português",
-        "tags":  "sinónimosportuguês"
+        "tags":  [
+                     "sinónimos",
+                     "sopa de letras"
+                 ]
     },
     {
         "nome":  "Antónimos",
@@ -1402,7 +1435,10 @@
         "link":  "/2/pt/antonimos",
         "ano":  "2º Ano",
         "disciplina":  "Português",
-        "tags":  "antónimosportuguês"
+        "tags":  [
+                     "antónimos",
+                     "sopa de letras"
+                 ]
     },
     {
         "nome":  "Sinónimos e Antónimos",
@@ -1413,7 +1449,7 @@
         "tags":  [
                      "sinónimos",
                      "antónimos",
-                     "português"
+                     "sopa de letras"
                  ]
     },
     {
@@ -1423,9 +1459,8 @@
         "ano":  "2º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "pontos",
-                     "acentos",
-                     "português"
+                     "sinais de pontuação",
+                     "acentos"
                  ]
     },
     {
@@ -1435,9 +1470,10 @@
         "ano":  "2º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "chuva",
-                     "palavras",
-                     "português"
+                     "nomes próprios",
+                     "nomes comuns",
+                     "verbos",
+					 "adjetivos"
                  ]
     },
     {
@@ -1447,9 +1483,8 @@
         "ano":  "2º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "construtor",
-                     "frases",
-                     "português"
+                     "ordenar",
+                     "frases"
                  ]
     },
     {
@@ -1461,7 +1496,8 @@
         "tags":  [
                      "ler",
                      "copiar",
-                     "português"
+                     "escrita",
+					 "textos"
                  ]
     },
     {
@@ -1471,9 +1507,13 @@
         "ano":  "2º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "letras",
-                     "mágicas",
-                     "português"
+                     "casos de leitura",
+                     "sons do s",
+                     "sons do r",
+					 "sons do x",
+					 "sons do c",
+					 "sons do j",
+					 "dígrafos"
                  ]
     },
     {
@@ -1482,12 +1522,7 @@
         "link":  "/2/pt/aventura-sons",
         "ano":  "2º Ano",
         "disciplina":  "Português",
-        "tags":  [
-                     "aventura",
-                     "dos",
-                     "sons",
-                     "português"
-                 ]
+        "tags":  "casos de leitura"
     },
     {
         "nome":  "Missão dos Sons",
@@ -1495,12 +1530,7 @@
         "link":  "/2/pt/missao-sons",
         "ano":  "2º Ano",
         "disciplina":  "Português",
-        "tags":  [
-                     "missão",
-                     "dos",
-                     "sons",
-                     "português"
-                 ]
+        "tags":  "casos de leitura"
     },
     {
         "nome":  "Ditado de Frases",
@@ -1511,31 +1541,27 @@
         "tags":  [
                      "ditado",
                      "frases",
-                     "português"
+                     "escrita",
+					 "som"
                  ]
     },
     {
-        "nome":  "Palavras Cruzadas",
+        "nome":  "Mini Cruzadas",
         "icone":  "/2/icones/palavras_cruzadas.png",
         "link":  "/2/pt/cruzadas",
         "ano":  "2º Ano",
         "disciplina":  "Português",
-        "tags":  [
-                     "palavras",
-                     "cruzadas",
-                     "português"
-                 ]
+        "tags":  "palavras cruzadas"
     },
     {
-        "nome":  "Cruzadas de Animais",
-        "icone":  "/2/icones/cruzadas_animais.png",
-        "link":  "/2/pt/cruzadas-animais/",
+        "nome":  "Sopa de Animais",
+        "icone":  "/2/icones/sopa_animais.png",
+        "link":  "/2/pt/sopa-animais/",
         "ano":  "2º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "cruzadas",
-                     "animais",
-                     "português"
+                     "sopa de letras",
+                     "animais"
                  ]
     },
     {
@@ -1544,11 +1570,7 @@
         "link":  "/2/pt/sopa-letras/",
         "ano":  "2º Ano",
         "disciplina":  "Português",
-        "tags":  [
-                     "sopa",
-                     "letras",
-                     "português"
-                 ]
+        "tags":  "sopa de letras"
     },
     {
         "nome":  "Divisão Silábica",
@@ -1570,9 +1592,8 @@
         "disciplina":  "Português",
         "tags":  [
                      "palavras",
-                     "por",
-                     "minuto",
-                     "português"
+                     "escrita",
+                     "rapidez"
                  ]
     },
     {
@@ -1583,8 +1604,7 @@
         "disciplina":  "Português",
         "tags":  [
                      "super",
-                     "quiz",
-                     "português"
+                     "quiz"
                  ]
     },
     {
@@ -1595,8 +1615,7 @@
         "disciplina":  "Português",
         "tags":  [
                      "determinantes",
-                     "artigos",
-                     "português"
+                     "artigos"
                  ]
     },
     {
@@ -1605,12 +1624,7 @@
         "link":  "/2/mat/tabuadas/",
         "ano":  "2º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "máquina",
-                     "das",
-                     "tabuadas",
-                     "matemática"
-                 ]
+        "tags":  "tabuadas"
     },
     {
         "nome":  "Missão Matemática",
@@ -1619,8 +1633,10 @@
         "ano":  "2º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "missão",
-                     "matemática"
+                     "dinheiro",
+                     "sequências",
+					 "geometria",
+					 "tempo"
                  ]
     },
     {
@@ -1630,9 +1646,8 @@
         "ano":  "2º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "balança",
-                     "adição",
-                     "matemática"
+                     "igualdades",
+                     "adição"
                  ]
     },
     {
@@ -1642,9 +1657,8 @@
         "ano":  "2º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "balança",
-                     "subtração",
-                     "matemática"
+                     "igualdades",
+                     "subtração"
                  ]
     },
     {
@@ -1654,9 +1668,10 @@
         "ano":  "2º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "monstro",
-                     "guloso",
-                     "matemática"
+                     "igualdades",
+                     "maior",
+                     "menor",
+					 "igual"
                  ]
     },
     {
@@ -1666,9 +1681,10 @@
         "ano":  "2º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "construtor",
+                     "leitura de números",
                      "números",
-                     "matemática"
+                     "escrita de números",
+					 "decomposição"
                  ]
     },
     {
@@ -1678,9 +1694,8 @@
         "ano":  "2º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "trator",
-                     "mab",
-                     "matemática"
+                     "números",
+                     "mab"
                  ]
     },
     {
@@ -1691,8 +1706,7 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "problemas",
-                     "mágicos",
-                     "matemática"
+                     "cálculo mental"
                  ]
     },
     {
@@ -1701,11 +1715,7 @@
         "link":  "/2/mat/fracoes/",
         "ano":  "2º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "frações",
-                     "divertidas",
-                     "matemática"
-                 ]
+        "tags":  "frações"
     },
     {
         "nome":  "Cruzadas Numéricas",
@@ -1715,8 +1725,9 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "cruzadas",
-                     "numéricas",
-                     "matemática"
+                     "centenas",
+                     "dezenas",
+					 "unidades"
                  ]
     },
     {
@@ -1727,8 +1738,7 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "estratégias",
-                     "cálculo",
-                     "matemática"
+                     "cálculo"
                  ]
     },
     {
@@ -1739,8 +1749,7 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "tabuadas",
-                     "flash",
-                     "matemática"
+                     "rapidez"
                  ]
     },
     {
@@ -1751,8 +1760,7 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "sequências",
-                     "repetição",
-                     "matemática"
+                     "repetição"
                  ]
     },
     {
@@ -1763,8 +1771,7 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "sequências",
-                     "crescimento",
-                     "matemática"
+                     "crescimento"
                  ]
     },
     {
@@ -1773,12 +1780,7 @@
         "link":  "/2/mat/comboio-sequencias/",
         "ano":  "2º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "comboio",
-                     "das",
-                     "sequências",
-                     "matemática"
-                 ]
+        "tags":  "sequências"
     },
     {
         "nome":  "Revisão de Sequências",
@@ -1786,11 +1788,7 @@
         "link":  "/2/mat/sequencias-revisoes/",
         "ano":  "2º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "revisão",
-                     "sequências",
-                     "matemática"
-                 ]
+        "tags":  "sequências"
     },
     {
         "nome":  "Simetria",
@@ -1798,7 +1796,7 @@
         "link":  "/2/mat/simetria/",
         "ano":  "2º Ano",
         "disciplina":  "Matemática",
-        "tags":  "simetriamatemática"
+        "tags":  "simetria"
     },
     {
         "nome":  "Gráficos",
@@ -1806,7 +1804,7 @@
         "link":  "/2/mat/graficos/",
         "ano":  "2º Ano",
         "disciplina":  "Matemática",
-        "tags":  "gráficosmatemática"
+        "tags":  "gráficos"
     },
     {
         "nome":  "Figuras e Sólidos",
@@ -1817,7 +1815,7 @@
         "tags":  [
                      "figuras",
                      "sólidos",
-                     "matemática"
+                     "geometria"
                  ]
     },
     {
@@ -1828,8 +1826,7 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "super",
-                     "quiz",
-                     "matemática"
+                     "quiz"
                  ]
     },
     {
@@ -1840,8 +1837,8 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "enigmas",
-                     "selva",
-                     "matemática"
+                     "animais",
+                     "cálculo mental"
                  ]
     },
     {
@@ -1852,8 +1849,8 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "problemas",
-                     "caderno",
-                     "matemática"
+                     "revisões",
+                     "escrita"
                  ]
     },
     {
@@ -1863,10 +1860,13 @@
         "ano":  "2º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "robô",
-                     "das",
+                     "adição",
+                     "subtração",
                      "contas",
-                     "matemática"
+                     "números até 100",
+					 "números até 200",
+					 "números até 500",
+					 "números até 1000"
                  ]
     },
     {
@@ -1875,7 +1875,7 @@
         "link":  "/2/em/animais/",
         "ano":  "2º Ano",
         "disciplina":  "Estudo do Meio",
-        "tags":  "animaisestudo do meio"
+        "tags":  "animais"
     },
     {
         "nome":  "O Corpo Humano",
@@ -1885,8 +1885,7 @@
         "disciplina":  "Estudo do Meio",
         "tags":  [
                      "corpo",
-                     "humano",
-                     "estudo do meio"
+                     "humano"
                  ]
     },
     {
@@ -1897,8 +1896,7 @@
         "disciplina":  "Estudo do Meio",
         "tags":  [
                      "estados",
-                     "água",
-                     "estudo do meio"
+                     "água"
                  ]
     },
     {
@@ -1907,7 +1905,7 @@
         "link":  "/2/em/plantas/",
         "ano":  "2º Ano",
         "disciplina":  "Estudo do Meio",
-        "tags":  "plantasestudo do meio"
+        "tags":  "plantas"
     },
     {
         "nome":  "Sopa de Letras",
@@ -1916,9 +1914,11 @@
         "ano":  "2º Ano",
         "disciplina":  "Estudo do Meio",
         "tags":  [
-                     "sopa",
-                     "letras",
-                     "estudo do meio"
+                     "sopa de letras",
+                     "meios de comunicação",
+					 "instituições e serviços",
+					 "calendário",
+					 "estações"
                  ]
     },
     {
@@ -1928,9 +1928,9 @@
         "ano":  "2º Ano",
         "disciplina":  "Estudo do Meio",
         "tags":  [
-                     "máquina",
-                     "tempo",
-                     "estudo do meio"
+                     "máquina do tempo",
+                     "divertido",
+                     "ontem e hoje"
                  ]
     },
     {
@@ -1941,8 +1941,9 @@
         "disciplina":  "Estudo do Meio",
         "tags":  [
                      "flutua",
-                     "afunda?",
-                     "estudo do meio"
+                     "afunda",
+                     "materiais",
+					 "experiências"
                  ]
     },
     {
@@ -1951,7 +1952,10 @@
         "link":  "/2/em/5-sentidos/",
         "ano":  "2º Ano",
         "disciplina":  "Estudo do Meio",
-        "tags":  "sentidosestudo do meio"
+        "tags":  [
+                     "5 sentidos",
+                     "som"
+                 ]
     },
     {
         "nome":  "A Família",
@@ -1959,7 +1963,10 @@
         "link":  "/2/em/familia/",
         "ano":  "2º Ano",
         "disciplina":  "Estudo do Meio",
-        "tags":  "famíliaestudo do meio"
+        "tags":  [
+                     "família",
+                     "som"
+                 ]
     },
     {
         "nome":  "Super Quiz",
@@ -1970,7 +1977,7 @@
         "tags":  [
                      "super",
                      "quiz",
-                     "estudo do meio"
+					 "revisões"
                  ]
     },
     {
@@ -1982,7 +1989,7 @@
         "tags":  [
                      "determinantes",
                      "artigos",
-                     "português"
+                     "gramática"
                  ]
     },
     {
@@ -1994,7 +2001,7 @@
         "tags":  [
                      "sinónimos",
                      "antónimos",
-                     "português"
+                     "gramática"
                  ]
     },
     {
@@ -2005,9 +2012,8 @@
         "disciplina":  "Português",
         "tags":  [
                      "graus",
-                     "das",
                      "palavras",
-                     "português"
+                     "gramática"
                  ]
     },
     {
@@ -2016,7 +2022,14 @@
         "link":  "/3/pt/revisoes/",
         "ano":  "3º Ano",
         "disciplina":  "Português",
-        "tags":  "revisõesportuguês"
+        "tags":  [
+                     "revisões",
+                     "grau das palavras",
+					 "classe das palavras",
+					 "tipos de frases",
+					 "escrita",
+                     "gramática"
+                 ]
     },
     {
         "nome":  "Pronomes Pessoais",
@@ -2027,7 +2040,7 @@
         "tags":  [
                      "pronomes",
                      "pessoais",
-                     "português"
+                     "gramática"
                  ]
     },
     {
@@ -2036,7 +2049,7 @@
         "link":  "/3/pt/acentuacao/",
         "ano":  "3º Ano",
         "disciplina":  "Português",
-        "tags":  "acentuaçãoportuguês"
+        "tags":  "acentuação"
     },
     {
         "nome":  "O Mistério dos Sinais",
@@ -2044,12 +2057,7 @@
         "link":  "/3/pt/sinais/",
         "ano":  "3º Ano",
         "disciplina":  "Português",
-        "tags":  [
-                     "mistério",
-                     "dos",
-                     "sinais",
-                     "português"
-                 ]
+        "tags":  "sinais de pontuação"
     },
     {
         "nome":  "Quantificadores Numerais",
@@ -2059,8 +2067,7 @@
         "disciplina":  "Português",
         "tags":  [
                      "quantificadores",
-                     "numerais",
-                     "português"
+                     "numerais"
                  ]
     },
     {
@@ -2070,10 +2077,8 @@
         "ano":  "3º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "viagem",
-                     "dos",
                      "verbos",
-                     "português"
+                     "gramática"
                  ]
     },
     {
@@ -2083,10 +2088,10 @@
         "ano":  "3º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "grupos",
-                     "nas",
+                     "grupo nominal",
+					 "grupo verbal",
                      "frases",
-                     "português"
+                     "gramática"
                  ]
     },
     {
@@ -2095,7 +2100,10 @@
         "link":  "/3/pt/adverbios/",
         "ano":  "3º Ano",
         "disciplina":  "Português",
-        "tags":  "advérbiosportuguês"
+        "tags":  [
+                     "advérbios",
+                     "gramática"
+                 ]
     },
     {
         "nome":  "Conectores Discursivos",
@@ -2104,9 +2112,8 @@
         "ano":  "3º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "conectores",
-                     "discursivos",
-                     "português"
+                     "conectores discursivos",
+                     "gramática"
                  ]
     },
     {
@@ -2115,7 +2122,11 @@
         "link":  "/3/pt/determinantes/",
         "ano":  "3º Ano",
         "disciplina":  "Português",
-        "tags":  "determinantesportuguês"
+        "tags":  [
+                     "determinantes possessivos",
+                     "determinantes demonstrativos",
+					 "gramática"
+                 ]
     },
     {
         "nome":  "Fábrica das Palavras",
@@ -2124,10 +2135,10 @@
         "ano":  "3º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "fábrica",
-                     "das",
-                     "palavras",
-                     "português"
+                     "família de palavras",
+                     "radicais",
+                     "afixos",
+                     "gramática"
                  ]
     },
     {
@@ -2138,7 +2149,7 @@
         "disciplina":  "Português",
         "tags":  [
                      "mistérios",
-                     "português"
+                     "ortografia"
                  ]
     },
     {
@@ -2151,7 +2162,7 @@
                      "nomes",
                      "comuns",
                      "coletivos",
-                     "português"
+                     "gramática"
                  ]
     },
     {
@@ -2162,8 +2173,7 @@
         "disciplina":  "Português",
         "tags":  [
                      "escrita",
-                     "rápida",
-                     "português"
+                     "rapidez"
                  ]
     },
     {
@@ -2173,9 +2183,8 @@
         "ano":  "3º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "sopa",
-                     "letras",
-                     "português"
+                     "sopa de letras",
+                     "leitura"
                  ]
     },
     {
@@ -2184,11 +2193,7 @@
         "link":  "/3/mat/tabuadas-turbo/",
         "ano":  "3º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "tabuadas",
-                     "turbo",
-                     "matemática"
-                 ]
+        "tags":  "tabuadas"
     },
     {
         "nome":  "Desafios do Mar",
@@ -2198,8 +2203,7 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "desafios",
-                     "mar",
-                     "matemática"
+                     "cálculo mental"
                  ]
     },
     {
@@ -2208,7 +2212,10 @@
         "link":  "/3/mat/adicao/",
         "ano":  "3º Ano",
         "disciplina":  "Matemática",
-        "tags":  "adiçãomatemática"
+        "tags":  [
+                     "adição",
+                     "algoritmo"
+                 ]
     },
     {
         "nome":  "Subtração",
@@ -2216,7 +2223,10 @@
         "link":  "/3/mat/subtracao/",
         "ano":  "3º Ano",
         "disciplina":  "Matemática",
-        "tags":  "subtraçãomatemática"
+        "tags":  [
+                     "subtração",
+                     "algoritmo"
+                 ]
     },
     {
         "nome":  "Subtração com Milhares",
@@ -2225,10 +2235,9 @@
         "ano":  "3º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "subtração",
-                     "com",
-                     "milhares",
-                     "matemática"
+                     "subtração com empréstimo",
+                     "algoritmo",
+                     "subtração"
                  ]
     },
     {
@@ -2237,11 +2246,7 @@
         "link":  "/3/mat/jacare-comilao/",
         "ano":  "3º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "jacaré",
-                     "comilão",
-                     "matemática"
-                 ]
+        "tags":  "igualdades"
     },
     {
         "nome":  "Laboratório do Equilíbrio",
@@ -2249,11 +2254,7 @@
         "link":  "/3/mat/igualdades/",
         "ano":  "3º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "laboratório",
-                     "equilíbrio",
-                     "matemática"
-                 ]
+        "tags":  "igualdades"
     },
     {
         "nome":  "Detetive das Coordenadas",
@@ -2261,12 +2262,7 @@
         "link":  "/3/mat/coordenadas/",
         "ano":  "3º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "detetive",
-                     "das",
-                     "coordenadas",
-                     "matemática"
-                 ]
+        "tags":  "coordenadas"
     },
     {
         "nome":  "O Robô do Ábaco",
@@ -2274,11 +2270,7 @@
         "link":  "/3/mat/abaco/",
         "ano":  "3º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "robô",
-                     "ábaco",
-                     "matemática"
-                 ]
+        "tags":  "ábaco"
     },
     {
         "nome":  "O Chefe das Frações",
@@ -2286,12 +2278,7 @@
         "link":  "/3/mat/fracoes/",
         "ano":  "3º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "chefe",
-                     "das",
-                     "frações",
-                     "matemática"
-                 ]
+        "tags":  "frações"
     },
     {
         "nome":  "Fábrica de Cálculos",
@@ -2301,8 +2288,7 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "fábrica",
-                     "cálculos",
-                     "matemática"
+                     "cálculos"
                  ]
     },
     {
@@ -2312,9 +2298,8 @@
         "ano":  "3º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "sapo",
-                     "saltador",
-                     "matemática"
+                     "regularidades",
+                     "sequências"
                  ]
     },
     {
@@ -2325,8 +2310,7 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "perímetro",
-                     "área",
-                     "matemática"
+                     "área"
                  ]
     },
     {
@@ -2337,8 +2321,7 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "numeração",
-                     "romana",
-                     "matemática"
+                     "romana"
                  ]
     },
     {
@@ -2347,7 +2330,7 @@
         "link":  "/3/mat/horas/",
         "ano":  "3º Ano",
         "disciplina":  "Matemática",
-        "tags":  "horasmatemática"
+        "tags":  "horas"
     },
     {
         "nome":  "Arredondamentos",
@@ -2355,7 +2338,7 @@
         "link":  "/3/mat/arredondamentos/",
         "ano":  "3º Ano",
         "disciplina":  "Matemática",
-        "tags":  "arredondamentosmatemática"
+        "tags":  "arredondamentos"
     },
     {
         "nome":  "Grelha das Tabuadas",
@@ -2365,9 +2348,7 @@
         "disciplina":  "Matemática",
         "tags":  [
                      "grelha",
-                     "das",
-                     "tabuadas",
-                     "matemática"
+                     "tabuadas"
                  ]
     },
     {
@@ -2376,11 +2357,7 @@
         "link":  "/3/mat/calculo-mental/",
         "ano":  "3º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "cálculo",
-                     "mental",
-                     "matemática"
-                 ]
+        "tags":  "cálculo mental"
     },
     {
         "nome":  "Problemas no Caderno",
@@ -2388,11 +2365,7 @@
         "link":  "/3/mat/problemas-caderno/",
         "ano":  "3º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "problemas",
-                     "caderno",
-                     "matemática"
-                 ]
+        "tags":  "problemas matemáticos"
     },
     {
         "nome":  "O Robô das Tabuadas",
@@ -2400,12 +2373,7 @@
         "link":  "/3/mat/robo-tabuadas/",
         "ano":  "3º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "robô",
-                     "das",
-                     "tabuadas",
-                     "matemática"
-                 ]
+        "tags":  "tabuadas"
     },
     {
         "nome":  "Direitos da Criança",
@@ -2415,8 +2383,7 @@
         "disciplina":  "Estudo do Meio",
         "tags":  [
                      "direitos",
-                     "criança",
-                     "estudo do meio"
+                     "criança"
                  ]
     },
     {
@@ -2427,8 +2394,7 @@
         "disciplina":  "Estudo do Meio",
         "tags":  [
                      "saúde",
-                     "bem-estar",
-                     "estudo do meio"
+                     "bem-estar"
                  ]
     },
     {
@@ -2440,7 +2406,7 @@
         "tags":  [
                      "máquina",
                      "tempo",
-                     "estudo do meio"
+                     "unidades de tempo"
                  ]
     },
     {
@@ -2451,8 +2417,7 @@
         "disciplina":  "Estudo do Meio",
         "tags":  [
                      "portugal",
-                     "europa",
-                     "estudo do meio"
+                     "europa"
                  ]
     },
     {
@@ -2462,9 +2427,13 @@
         "ano":  "3º Ano",
         "disciplina":  "Estudo do Meio",
         "tags":  [
-                     "teia",
-                     "vida",
-                     "estudo do meio"
+                     "cadeia alimentar",
+                     "ciclo da vida",
+                     "clima",
+					 "solo",
+					 "migração",
+					 "reprodução",
+					 "hibernação"
                  ]
     },
     {
@@ -2477,7 +2446,9 @@
                      "terra,",
                      "lua",
                      "luz",
-                     "estudo do meio"
+					 "movimentos da Terra",
+					 "ímanes",
+					 "fases da lua"
                  ]
     },
     {
@@ -2488,8 +2459,7 @@
         "disciplina":  "Estudo do Meio",
         "tags":  [
                      "relevo",
-                     "rios",
-                     "estudo do meio"
+                     "rios"
                  ]
     },
     {
@@ -2500,8 +2470,7 @@
         "disciplina":  "Estudo do Meio",
         "tags":  [
                      "continentes",
-                     "oceanos",
-                     "estudo do meio"
+                     "oceanos"
                  ]
     },
     {
@@ -2511,10 +2480,8 @@
         "ano":  "4º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "fábrica",
-                     "dos",
                      "plurais",
-                     "português"
+                     "gramática"
                  ]
     },
     {
@@ -2524,10 +2491,8 @@
         "ano":  "4º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "fábrica",
-                     "dos",
-                     "femininos",
-                     "português"
+                     "feminino",
+                     "gramática"
                  ]
     },
     {
@@ -2538,9 +2503,8 @@
         "disciplina":  "Português",
         "tags":  [
                      "graus",
-                     "dos",
                      "adjetivos",
-                     "português"
+                     "gramática"
                  ]
     },
     {
@@ -2550,9 +2514,10 @@
         "ano":  "4º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "comboio",
-                     "passado",
-                     "português"
+                     "pretérito perfeito",
+                     "pretérito imperfeito",
+                     "verbos",
+					 "gramática"
                  ]
     },
     {
@@ -2562,9 +2527,10 @@
         "ano":  "4º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "máquina",
-                     "tempo",
-                     "português"
+                     "modo imperativo",
+                     "tempos verbais",
+					 "verbos",
+                     "gramática"
                  ]
     },
     {
@@ -2574,10 +2540,8 @@
         "ano":  "4º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "mistério",
-                     "das",
-                     "perguntas",
-                     "português"
+                     "determinantes interrogativos",
+                     "gramática"
                  ]
     },
     {
@@ -2587,10 +2551,8 @@
         "ano":  "4º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "mundo",
-                     "das",
                      "preposições",
-                     "português"
+                     "gramática"
                  ]
     },
     {
@@ -2600,9 +2562,9 @@
         "ano":  "4º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "truques",
+                     "ortografia",
                      "escrita",
-                     "português"
+                     "gramática"
                  ]
     },
     {
@@ -2614,7 +2576,7 @@
         "tags":  [
                      "expressões",
                      "idiomáticas",
-                     "português"
+					 "divertido"
                  ]
     },
     {
@@ -2627,7 +2589,8 @@
                      "nomes",
                      "comuns",
                      "coletivos",
-                     "português"
+					 "sopa de letras",
+                     "gramática"
                  ]
     },
     {
@@ -2637,10 +2600,10 @@
         "ano":  "4º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "comboio",
-                     "dos",
-                     "pronomes",
-                     "português"
+                     "pronomes pessoais",
+					 "pronomes possessivos",
+					 "pronomes demonstrativos",
+                     "gramática"
                  ]
     },
     {
@@ -2650,10 +2613,8 @@
         "ano":  "4º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "ponte",
-                     "dos",
-                     "conectores",
-                     "português"
+                     "conectores discursivos",
+                     "gramática"
                  ]
     },
     {
@@ -2663,10 +2624,9 @@
         "ano":  "4º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "oficina",
-                     "dos",
-                     "afixos",
-                     "português"
+                     "prefixos",
+                     "sufixos",
+					 "gramática"
                  ]
     },
     {
@@ -2676,10 +2636,8 @@
         "ano":  "4º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "mapa",
-                     "dos",
                      "advérbios",
-                     "português"
+                     "gramática"
                  ]
     },
     {
@@ -2689,9 +2647,8 @@
         "ano":  "4º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "polícia",
-                     "pontuação",
-                     "português"
+                     "sinais de pontuação",
+                     "pontuação"
                  ]
     },
     {
@@ -2701,10 +2658,9 @@
         "ano":  "4º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "montanha",
-                     "das",
-                     "sílabas",
-                     "português"
+                     "classificação de palavras",
+                     "EGA",
+                     "gramática"
                  ]
     },
     {
@@ -2714,10 +2670,8 @@
         "ano":  "4º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "detetive",
-                     "dos",
-                     "textos",
-                     "português"
+                     "lacunas",
+                     "textos"
                  ]
     },
     {
@@ -2727,10 +2681,9 @@
         "ano":  "4º Ano",
         "disciplina":  "Português",
         "tags":  [
-                     "hospital",
-                     "das",
+                     "ortografia",
                      "palavras",
-                     "português"
+                     "escrita"
                  ]
     },
     {
@@ -2739,11 +2692,7 @@
         "link":  "/4/mat/mestre-abaco/",
         "ano":  "4º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "mestre",
-                     "ábaco",
-                     "matemática"
-                 ]
+        "tags":  "ábaco"
     },
     {
         "nome":  "Detetive dos Números",
@@ -2752,10 +2701,8 @@
         "ano":  "4º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "detetive",
-                     "dos",
-                     "números",
-                     "matemática"
+                     "ábaco",
+                     "valor posicional"
                  ]
     },
     {
@@ -2764,12 +2711,7 @@
         "link":  "/4/mat/mestre-tabuadas/",
         "ano":  "4º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "mestre",
-                     "das",
-                     "tabuadas",
-                     "matemática"
-                 ]
+        "tags":  "tabuadas"
     },
     {
         "nome":  "Mestre dos Vizinhos",
@@ -2777,12 +2719,7 @@
         "link":  "/4/mat/mestre-vizinhos/",
         "ano":  "4º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "mestre",
-                     "dos",
-                     "vizinhos",
-                     "matemática"
-                 ]
+        "tags":  "números vizinhos"
     },
     {
         "nome":  "Missão Aterragem",
@@ -2790,11 +2727,7 @@
         "link":  "/4/mat/missao-aterragem/",
         "ano":  "4º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "missão",
-                     "aterragem",
-                     "matemática"
-                 ]
+        "tags":  "retas numéricas"
     },
     {
         "nome":  "Multiplicação X1",
@@ -2802,7 +2735,10 @@
         "link":  "/4/mat/multiplicacao-1/",
         "ano":  "4º Ano",
         "disciplina":  "Matemática",
-        "tags":  "multiplicaçãomatemática"
+        "tags":  [
+                     "multiplicação",
+                     "algoritmo"
+                 ]
     },
     {
         "nome":  "Multiplicação X2",
@@ -2810,7 +2746,10 @@
         "link":  "/4/mat/multiplicacao-2/",
         "ano":  "4º Ano",
         "disciplina":  "Matemática",
-        "tags":  "multiplicaçãomatemática"
+        "tags":  [
+                     "multiplicação",
+                     "algoritmo"
+                 ]
     },
     {
         "nome":  "Divisão",
@@ -2818,7 +2757,10 @@
         "link":  "/4/mat/divisao/",
         "ano":  "4º Ano",
         "disciplina":  "Matemática",
-        "tags":  "divisãomatemática"
+        "tags":  [
+                     "divisão",
+                     "algoritmo"
+                 ]
     },
     {
         "nome":  "Mestre das Ordens",
@@ -2827,10 +2769,10 @@
         "ano":  "4º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "mestre",
-                     "das",
-                     "ordens",
-                     "matemática"
+                     "classes de números",
+                     "leitura de números",
+					 "decomposição de números",
+                     "ordens de números"
                  ]
     },
     {
@@ -2839,11 +2781,7 @@
         "link":  "/4/mat/explorador-decimais/",
         "ano":  "4º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "explorador",
-                     "decimais",
-                     "matemática"
-                 ]
+        "tags":  "decimais"
     },
     {
         "nome":  "Super Mente Decimal",
@@ -2851,12 +2789,7 @@
         "link":  "/4/mat/mente-decimal/",
         "ano":  "4º Ano",
         "disciplina":  "Matemática",
-        "tags":  [
-                     "super",
-                     "mente",
-                     "decimal",
-                     "matemática"
-                 ]
+        "tags":  "números decimais"
     },
     {
         "nome":  "Regresso ao Início",
@@ -2865,9 +2798,8 @@
         "ano":  "4º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "regresso",
-                     "início",
-                     "matemática"
+                     "problemas matemáticos",
+                     "situações matemátcas"
                  ]
     },
     {
@@ -2877,9 +2809,8 @@
         "ano":  "4º Ano",
         "disciplina":  "Matemática",
         "tags":  [
-                     "problemas",
-                     "caderno",
-                     "matemática"
+                     "problemas matemáticos",
+                     "situações matemátcas"
                  ]
     },
     {
@@ -2890,8 +2821,7 @@
         "disciplina":  "Estudo do Meio",
         "tags":  [
                      "sistemas",
-                     "corpo",
-                     "estudo do meio"
+                     "corpo humano"
                  ]
     },
     {
@@ -2902,9 +2832,8 @@
         "disciplina":  "Estudo do Meio",
         "tags":  [
                      "quiz",
-                     "dos",
                      "sistemas",
-                     "estudo do meio"
+                     "corpo humano"
                  ]
     },
     {
@@ -2914,9 +2843,8 @@
         "ano":  "4º Ano",
         "disciplina":  "Estudo do Meio",
         "tags":  [
-                     "antes",
                      "portugal",
-                     "estudo do meio"
+                     "história"
                  ]
     },
     {
@@ -2925,7 +2853,12 @@
         "link":  "/4/em/dinastias/",
         "ano":  "4º Ano",
         "disciplina":  "Estudo do Meio",
-        "tags":  "dinastiasestudo do meio"
+        "tags":  [
+                     "portugal",
+                     "história",
+					 "dinastias",
+					 "reis"
+                 ]
     },
     {
         "nome":  "Portugal: O Século XX",
@@ -2934,9 +2867,9 @@
         "ano":  "4º Ano",
         "disciplina":  "Estudo do Meio",
         "tags":  [
-                     "portugal:",
-                     "século",
-                     "estudo do meio"
+                     "portugal",
+                     "século XX",
+                     "história"
                  ]
     },
     {
@@ -2948,7 +2881,8 @@
         "tags":  [
                      "reis",
                      "portugal",
-                     "estudo do meio"
+                     "história",
+					 "dinastias"
                  ]
     },
     {
@@ -2959,8 +2893,7 @@
         "disciplina":  "Estudo do Meio",
         "tags":  [
                      "datas",
-                     "históricas",
-                     "estudo do meio"
+                     "história"
                  ]
     },
     {
@@ -2969,11 +2902,7 @@
         "link":  "/4/em/direitos-humanos/",
         "ano":  "4º Ano",
         "disciplina":  "Estudo do Meio",
-        "tags":  [
-                     "direitos",
-                     "humanos",
-                     "estudo do meio"
-                 ]
+        "tags":  "direitos humanos"
     },
     {
         "nome":  "União Europeia",
@@ -2982,9 +2911,8 @@
         "ano":  "4º Ano",
         "disciplina":  "Estudo do Meio",
         "tags":  [
-                     "união",
-                     "europeia",
-                     "estudo do meio"
+                     "união europeia",
+                     "Europa"
                  ]
     },
     {
@@ -2994,9 +2922,11 @@
         "ano":  "4º Ano",
         "disciplina":  "Estudo do Meio",
         "tags":  [
-                     "missão:",
+                     "sol e planetas",
                      "espaço",
-                     "estudo do meio"
+                     "bússolas",
+					 "mapas",
+					 "sistema solar"
                  ]
     },
     {
@@ -3006,9 +2936,10 @@
         "ano":  "4º Ano",
         "disciplina":  "Estudo do Meio",
         "tags":  [
-                     "terra",
-                     "viva",
-                     "estudo do meio"
+                     "sismos",
+                     "vulcões",
+                     "rochas",
+					 "solos"
                  ]
     },
     {
@@ -3018,9 +2949,11 @@
         "ano":  "4º Ano",
         "disciplina":  "Estudo do Meio",
         "tags":  [
-                     "sopa",
-                     "letras",
-                     "estudo do meio"
+                     "sopa de letras",
+                     "sistemas",
+                     "história",
+					 "universo",
+					 "terra"
                  ]
     },
     {
@@ -3030,9 +2963,9 @@
         "ano":  "4º Ano",
         "disciplina":  "Estudo do Meio",
         "tags":  [
-                     "sopa",
-                     "letras",
-                     "estudo do meio"
+                     "sopa de letras",
+                     "tecnologia",
+                     "meios de comunicação"
                  ]
     }
 ]

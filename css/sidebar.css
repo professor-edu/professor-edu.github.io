@@ -54,13 +54,112 @@
 }
 
 .sidebar li a:hover {
-    background: var(--cor-hover, var(--cor-tema, #ff4757));
+    background: var(--cor-hover, var(--cor-tema, #0091ff));
     color: white;
     transform: translateX(8px);
 }
 
 /* =========================================
-   2. BOTÃO DE PESQUISA NA SIDEBAR
+   2. BOTÕES DE AÇÃO DO RODAPÉ (INFO + PESQUISA)
+   ========================================= */
+.botoes-footer {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-abrir-info,
+button.btn-pesquisa-header {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    border-radius: 50% !important;
+    background: #e3f2fd !important;
+    border: 2px solid #ffffff !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4) !important;
+    color: var(--azul-escuro, #1e3a8a) !important;
+    font-size: 0.75rem !important;
+    font-weight: 900 !important;
+    font-family: 'Fredoka', 'Roboto', sans-serif !important;
+    cursor: pointer;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+button.btn-pesquisa-header svg {
+    width: 11px !important;
+    height: 11px !important;
+    stroke: var(--azul-escuro, #1e3a8a) !important;
+    stroke-width: 3.5 !important;
+    flex-shrink: 0;
+    display: block;
+}
+
+.btn-abrir-info:hover,
+button.btn-pesquisa-header:hover {
+    background: var(--azul-vibrante, #0091ff) !important;
+    color: #ffffff !important;
+    transform: scale(1.15) rotate(15deg);
+    box-shadow: 0 4px 10px rgba(0, 145, 255, 0.3) !important;
+}
+
+button.btn-pesquisa-header:hover svg {
+    stroke: #ffffff !important;
+}
+
+/* =========================================
+   3. BALÕES EXPLICATIVOS (FIXOS, DIREITOS E SEM PULO)
+   ========================================= */
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    background: #1e293b;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+}
+
+/* ⬅️ Botão (i): Canto superior esquerdo */
+.btn-abrir-info[data-tooltip]::after {
+    right: 0;
+    left: auto;
+    transform: rotate(-15deg);
+    transform-origin: bottom right;
+}
+
+/* ➡️ Botão Lupa: Canto superior direito */
+button.btn-pesquisa-header[data-tooltip]::after {
+    left: 0;
+    right: auto;
+    transform: rotate(-15deg);
+    transform-origin: bottom left;
+}
+
+[data-tooltip]:hover::after {
+    opacity: 1;
+}
+
+/* =========================================
+   4. BOTÃO DE PESQUISA NA SIDEBAR
    ========================================= */
 .sidebar-search-box {
     padding: 15px 15px 5px 15px;
@@ -89,27 +188,39 @@
 }
 
 /* =========================================
-   3. MODAL POP-UP DE PESQUISA
+   5. MODAL POP-UP DE PESQUISA
    ========================================= */
 .modal-pesquisa-overlay {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(30, 39, 46, 0.7);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.6);
     backdrop-filter: blur(5px);
     display: none;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
-    padding-top: 80px;
-    z-index: 1000;
+    z-index: 9999;
+    padding: 20px 16px;
+    box-sizing: border-box;
 }
 
 .modal-pesquisa-container {
-    width: 90%;
+    width: 100%;
     max-width: 780px;
-    background: white;
-    border-radius: 20px;
+    background: #ffffff;
+    border-radius: 24px;
     padding: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+    /* Borda e Glow com fallback azul (#0091ff) */
+    border: 3px solid var(--cor-hover, #0091ff);
+
+    box-shadow: 
+        0 20px 45px -10px rgba(0, 0, 0, 0.3),
+        0 0 25px var(--cor-hover, rgba(0, 145, 255, 0.25));
+
+    transition: all 0.3s ease;
 }
 
 .modal-pesquisa-header {
@@ -118,20 +229,35 @@
     align-items: center;
 }
 
-.modal-pesquisa-header input {
+.input-pesquisa-container {
+    position: relative;
     flex: 1;
-    padding: 14px 18px;
-    border: 2px solid #dfe4ea;
+    display: flex;
+    align-items: center;
+}
+
+.icon-lupa-pesquisa {
+    position: absolute;
+    left: 14px;
+    width: 20px;
+    height: 20px;
+    color: #94a3b8;
+    pointer-events: none;
+}
+
+.modal-pesquisa-header input {
+    width: 100%;
+    padding: 12px 42px 12px 42px !important;
+    font-size: 1rem;
+    border: 2px solid #e2e8f0;
     border-radius: 14px;
-    font-size: 1.05rem;
     outline: none;
-    transition: 0.2s;
-    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .modal-pesquisa-header input:focus {
-    border-color: #ff4757;
-    box-shadow: 0 0 0 4px rgba(255, 71, 87, 0.15);
+    border-color: var(--cor-hover, #0091ff);
+    box-shadow: 0 0 0 4px var(--cor-hover-alpha, rgba(0, 145, 255, 0.15));
 }
 
 .btn-fechar-pesquisa {
@@ -148,25 +274,62 @@
 }
 
 .btn-fechar-pesquisa:hover {
-    background: #ff4757;
+    background: var(--cor-hover, #0091ff);
     color: white;
 }
 
+.btn-limpar-texto {
+    position: absolute;
+    right: 12px;
+    background: #cbd5e1;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.btn-limpar-texto:hover {
+    background: var(--cor-hover, #0091ff);
+    transform: scale(1.1);
+}
+
+.btn-limpar-texto svg {
+    width: 13px;
+    height: 13px;
+}
+
 .pesquisa-vazia {
-    text-align: center;
-    color: #a4b0be;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #64748b;
     font-size: 0.95rem;
-    margin: 30px 0;
+    font-weight: 600;
+    padding: 24px 0;
+}
+
+.icon-pesquisa-vazia {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
 }
 
 /* =========================================
-   CARTÕES DE RESULTADO DA PESQUISA
+   6. CARTÕES DE RESULTADO DA PESQUISA
    ========================================= */
 .resultados-pesquisa {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* 2 colunas no PC, 1 no Mobile */
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     margin-top: 15px;
-	gap: 12px;
+    gap: 12px;
     max-height: 60vh;
     overflow-y: auto;
     padding-right: 6px;
@@ -186,7 +349,7 @@
     gap: 12px;
     padding: 10px 12px;
     background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #cbd5e1;
     border-radius: 12px;
     text-decoration: none;
     color: inherit;
@@ -195,9 +358,9 @@
 
 .item-resultado-jogo:hover {
     background: #ffffff;
-    border-color: #ff4757;
+    border-color: var(--cor-hover, #0091ff);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06), 0 0 8px var(--cor-hover, rgba(0, 145, 255, 0.15));
 }
 
 .thumb-jogo {
@@ -254,79 +417,17 @@
     color: #636e72 !important;
 }
 
-/* Container da caixa de texto e ícones */
-.input-pesquisa-container {
-    position: relative;
-    flex: 1;
-    display: flex;
-    align-items: center;
-}
-
-/* Ícone de Lupa à esquerda */
-.icon-lupa-pesquisa {
-    position: absolute;
-    left: 14px;
-    width: 20px;
-    height: 20px;
-    color: #94a3b8;
-    pointer-events: none;
-}
-
-/* Ajustes no input para dar espaço aos ícones nas extremidades */
-.modal-pesquisa-header input {
-    width: 100%;
-    padding: 12px 42px 12px 42px !important; /* Espaço para a Lupa (esquerda) e Mini X (direita) */
-    font-size: 1rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 14px;
-    outline: none;
-    transition: border-color 0.2s ease;
-}
-
-.modal-pesquisa-header input:focus {
-    border-color: var(--cor-hover, #ff4757);
-}
-
-/* Mini botão "X" para limpar o texto dentro da caixa */
-.btn-limpar-texto {
-    position: absolute;
-    right: 12px;
-    background: #cbd5e1;
-    border: none;
-    border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    display: none; /* Controlado por JavaScript */
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    padding: 0;
-    color: #ffffff;
-    transition: all 0.2s ease;
-}
-
-.btn-limpar-texto:hover {
-    background: #ff4757;
-    transform: scale(1.1);
-}
-
-.btn-limpar-texto svg {
-    width: 13px;
-    height: 13px;
-}
-
 /* =========================================
-   AJUSTES RESPONSIVOS (MOBILE & LANDSCAPE)
+   7. AJUSTES RESPONSIVOS (MOBILE & LANDSCAPE)
    ========================================= */
 
-/* 1. Telemóveis em modo vertical (Portrait) */
 @media (max-width: 480px) {
     .sidebar {
-        width: min(280px, 85vw); /* Impede que a sidebar ocupe 100% do ecrã em telemóveis muito estreitos */
+        width: min(280px, 85vw);
     }
 
     .modal-pesquisa-overlay {
-        padding-top: 20px; /* Reduz o espaço no topo para dar mais área útil à modal */
+        padding-top: 20px;
     }
 
     .modal-pesquisa-container {
@@ -341,23 +442,36 @@
     }
 
     .resultados-pesquisa {
-        max-height: 55vh; /* Ajusta a altura da lista a 55% da altura visível do ecrã */
+        max-height: 55vh;
     }
 }
 
-/* 2. Telemóveis em modo horizontal (Landscape / ecrãs com pouca altura) */
 @media (max-height: 500px) {
     .modal-pesquisa-overlay {
         padding-top: 10px;
     }
 
     .resultados-pesquisa {
-        max-height: 45vh; /* Evita que a lista transborde a tela em ecrãs baixos */
+        max-height: 45vh;
     }
 }
 
 @media (max-width: 600px) {
+    .modal-pesquisa-overlay {
+        padding: 16px 12px;
+    }
+
+    .modal-pesquisa-container {
+        width: 100%;
+        padding: 14px;
+        border-radius: 20px;
+        max-height: 85vh;
+        display: flex;
+        flex-direction: column;
+    }
+
     .resultados-pesquisa {
         grid-template-columns: 1fr;
+        max-height: 60vh;
     }
 }

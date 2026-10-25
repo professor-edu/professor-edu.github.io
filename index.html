@@ -582,32 +582,98 @@
 		/* =========================================
 	   BOTÃO DE INFO DISCRETO NO FOOTER
 	   ========================================= */
-	.btn-abrir-info {
-		width: 22px;
-		height: 22px;
-		border-radius: 50%;
-		background: #e3f2fd;
-		border: 2px solid white;
-		box-shadow: 0 2px 5px rgba(0,0,0,0.4);
-		color: var(--azul-escuro);
-		font-size: 0.75rem;
-		font-weight: 900;
-		cursor: pointer;
-		font-family: 'Fredoka', 'Roboto', sans-serif;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		vertical-align: middle;
-		margin-left: 8px;
-		transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-	}
 
-	.btn-abrir-info:hover {
-		background: var(--azul-vibrante);
-		color: white;
-		transform: scale(1.15) rotate(15deg);
-		box-shadow: 0 4px 10px rgba(0, 145, 255, 0.2);
-	}
+
+/* Posição e Z-Index da área de rodapé */
+.zona-adicional-footer, footer {
+    position: relative;
+    z-index: 10;
+}
+
+/* Container do Footer com Flexbox e Gap */
+.zona-adicional-footer {
+    flex-shrink: 0;
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espaço constante entre o texto e o grupo de botões */
+    flex-wrap: wrap; /* Ajusta-se automaticamente em mobile vertical */
+    box-sizing: border-box;
+}
+
+/* Texto de Créditos */
+.zona-adicional-footer p {
+    font-size: 0.75rem;
+    color: var(--azul-escuro);
+    margin: 0;
+    opacity: 0.8;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.icon-svg-footer {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+/* Agrupamento dos Botões Circulares */
+.botoes-footer {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Espaço entre o (i) e a Lupa */
+}
+
+/* Estilo 100% Identico para Ambos os Botões */
+.btn-abrir-info,
+button.btn-pesquisa-header {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    border-radius: 50% !important;
+    background: #a2d1f3 !important;
+    border: 2px solid #ffffff !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4) !important;
+    color: var(--azul-escuro) !important;
+    font-size: 0.75rem !important;
+    font-weight: 900 !important;
+    font-family: 'Fredoka', 'Roboto', sans-serif !important;
+    cursor: pointer;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Ajuste da Lupa SVG */
+button.btn-pesquisa-header svg {
+    width: 11px !important;
+    height: 11px !important;
+    stroke: var(--azul-escuro) !important;
+    stroke-width: 3.5 !important;
+    flex-shrink: 0;
+    display: block;
+}
+
+/* Hover em Sincronia */
+.btn-abrir-info:hover,
+button.btn-pesquisa-header:hover {
+    background: var(--azul-vibrante) !important;
+    color: #ffffff !important;
+    transform: scale(1.15) rotate(15deg);
+    box-shadow: 0 4px 10px rgba(0, 145, 255, 0.3) !important;
+}
+
+button.btn-pesquisa-header:hover svg {
+    stroke: #ffffff !important;
+}
 
 	/* =========================================
 	   ESTRUTURA DA CAIXA MODAL
@@ -1026,6 +1092,32 @@
   margin-left: 4px;
 }
 
+
+.btn-pesquisa-home {
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #64748b;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.btn-pesquisa-home svg {
+    width: 22px;
+    height: 22px;
+}
+
+.btn-pesquisa-home:hover {
+    border-color: var(--cor-hover, #ff4757);
+    color: var(--cor-hover, #ff4757);
+    transform: scale(1.08);
+}
 
 	/* =========================================
 	   RESPONSIVIDADE DO MODAL (MOBILE)
@@ -1571,8 +1663,19 @@
     <p>
         <img src="SVG/edu.svg" class="icon-svg-footer" alt="Desenvolvedor"> 
         Desenvolvido por <strong>Professor Eduardo</strong>
-        <button class="btn-abrir-info" id="btn-info" aria-label="Informações Pedagógicas">i</button>
     </p>
+
+    <!-- Grupo com os dois botões juntos -->
+    <div class="botoes-footer">
+        <button class="btn-abrir-info" id="btn-info" data-tooltip="Informação" aria-label="Informações Pedagógicas">i</button>
+        
+        <button class="btn-pesquisa-header" onclick="abrirPesquisa()" data-tooltip="Pesquisar jogos" aria-label="Pesquisar Jogos" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+            </svg>
+        </button>
+    </div>
 </div>
 
 
@@ -1621,8 +1724,8 @@
 
             <div class="modal-autor">
                 <a href="https://eduardosoeiro.info/" target="_blank" rel="noopener noreferrer" class="autor-nome">
-        Professor Eduardo
-    </a>
+					Professor Eduardo
+				</a>
                 <span class="autor-cargo">Coordenador TIC - EB1/PE da Marinheira</span>
             </div>
 
@@ -1788,5 +1891,6 @@
   </div>
 </div>
 <script type="module" src="app.js"></script>
+<script src="/js/sidebar.js"></script>
 </body>
 </html>
