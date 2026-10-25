@@ -1297,8 +1297,8 @@
    ESTADO DO JOGO
    ========================================== */
 	let erradas = 0;
-	let desafioAtual = 0;
-	let totalDesafiosNivel = 5;
+	let desafioAtual = 1;
+	let totalDesafiosNivel = 10;
 	let rondasParaDica = 0;
 	let selecaoLigar = null;
 	let selecoesLigar = {};
@@ -1502,7 +1502,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		modoDeJogoAtual = modo;
 		erradas = 0;
-		desafioAtual = 0;
+		desafioAtual = 1;
 		rondasParaDica = 0;
 		totalDesafiosNivel = numQuestoes;
 
@@ -1549,12 +1549,13 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 	
 	function atualizarPlacar() {
-		const p = Math.min(desafioAtual , totalDesafiosNivel);
+		const p = Math.min(desafioAtual, totalDesafiosNivel);
 		document.getElementById('val-erros').textContent = erradas;
-		document.getElementById('val-progresso').textContent = p;
-		document.getElementById('val-total').textContent = totalDesafiosNivel;
+		document.getElementById('val-progresso').textContent = p; // Escreve 1
+		document.getElementById('val-total').textContent = totalDesafiosNivel; // Escreve 5
 		
-		const percentagem = (desafioAtual / totalDesafiosNivel) * 100;
+		// Mostra a percentagem da ronda atual (ex: Ronda 1 de 5 = 20%)
+		const percentagem = (p / totalDesafiosNivel) * 100;
 		document.getElementById('progress-fill').style.width = percentagem + '%';
 	}
 
