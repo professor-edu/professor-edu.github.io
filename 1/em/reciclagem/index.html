@@ -286,7 +286,7 @@
            ========================================= */
         .end-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--azul-escuro); margin-bottom: 10px; }
         .end-stats { font-size: 1.5rem; color: var(--text-main); margin-bottom: 30px; text-align: center; background: var(--bg-header); padding: 20px; border-radius: 20px; border: 2px dashed var(--cor-em);}
-        
+        .botoes-acao-container { display: flex; flex-direction: column; align-items: center; gap: 35px; width: 100%; }
         .btn-acao { 
             border: 4px solid white; color: white; padding: 15px 40px; 
             font-size: 1.3rem; font-weight: 900; border-radius: 30px; cursor: pointer; 
@@ -367,7 +367,7 @@
             </div>
 
             <p class="texto-intro">Podes <strong>arrastar</strong> o lixo para o ecoponto certo, ou <strong>clicar no lixo</strong> e depois <strong>clicar no ecoponto</strong>!</p>
-            <button class="btn-acao" onclick="iniciarJogo()">JOGAR ▶️</button>
+            <button class="btn-acao" onclick="iniciarJogo()">JOGAR <img src="../../../SVG/seta_direita.svg" class="icon-svg-voltar" alt=""></button>
         </div>
 
         <!-- ECRÃ 2: O JOGO -->
@@ -419,15 +419,15 @@
 
         <!-- ECRÃ 3: FIM -->
         <div id="ecra-fim" class="ecra">
-            <div style="font-size: 5rem; margin-bottom: 10px; line-height: 1;">🌍</div>
+            <div style="font-size: 5rem; margin-bottom: 10px; line-height: 1;"><img src="../img-titulos/reciclagem_1.svg" class="icon-svg-voltar" alt=""></div>
             <h2 class="titulo-destaque" style="margin-bottom: 10px;">O Planeta Agradece!</h2>
             <div class="end-stats">
                 Reciclaste 15 objetos!<br>
                 Tiveste <strong id="final-erros" style="color:var(--cor-erro);">0</strong> erros.
             </div>
-            <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 300px; margin: 0 auto;">
-                <button class="btn-acao" onclick="iniciarJogo()">JOGAR DE NOVO 🔄</button>
-                <button class="btn-acao btn-menu" onclick="voltarAoMenu()">MENU 🏠</button>
+            <div class="botoes-acao-container">
+                <button class="btn-acao" onclick="iniciarJogo()">JOGAR DE NOVO <img src="../../../SVG/jogar_novo.svg" class="icon-svg-voltar" alt=""></button>
+                <button class="btn-acao btn-menu" onclick="voltarAoMenu()">MENU <img src="../../../SVG/menu_principal.svg" class="icon-svg-voltar" alt=""></button>
             </div>
         </div>
     </div>

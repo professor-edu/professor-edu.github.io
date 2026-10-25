@@ -344,7 +344,7 @@
            ========================================= */
         .end-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--azul-escuro); margin-bottom: 10px; }
         .end-stats { font-size: 1.5rem; color: var(--text-main); margin-bottom: 30px; text-align: center; background: var(--bg-header); padding: 20px; border-radius: 20px; border: 2px dashed var(--cor-em);}
-        
+        .botoes-acao-container { display: flex; flex-direction: column; align-items: center; gap: 35px; width: 100%; }
         .btn-acao { 
             border: 4px solid white; color: white; padding: 15px 40px; 
             font-size: 1.3rem; font-weight: 900; border-radius: 30px; cursor: pointer; 
@@ -466,18 +466,18 @@
             <h2 class="titulo-menu">Como Jogar?</h2>
             
             <div class="animacao-tutorial">
-                <div class="demo-tool">🔨</div>
-                <div style="font-size: 2rem; color: var(--azul-vibrante);">➡️</div>
+                <div class="demo-tool"><img src="../img-titulos/profissoes_martelo.svg" class="icon-svg-voltar" alt=""></div>
+                <div style="font-size: 2rem; color: var(--azul-vibrante);"><img src="../../../SVG/proximo_nivel.svg" class="icon-svg-voltar" alt=""></div>
                 <div class="demo-prof">
-                    👷‍♂️
-                    <div class="demo-badge">🔨</div>
+                    <img src="../img-titulos/profissoes_profissional.svg" class="icon-svg-voltar" alt="">
+                    <div class="demo-badge"><img src="../img-titulos/profissoes_martelo.svg" class="icon-svg-voltar" alt=""></div>
                 </div>
             </div>
 
             <p class="texto-intro">Podes <strong>arrastar</strong> o objeto para a pessoa certa, ou simplesmente <strong>clicar no objeto</strong> e depois <strong>clicar no profissional</strong>!</p>
             
             <button class="btn-nivel-menu" onclick="iniciarJogo(1)">
-                <span class="nivel-icon">🛠️</span>
+                <span class="nivel-icon"><img src="../img-titulos/profissoes_menu1.svg" class="icon-svg-voltar" alt=""></span>
                 <span class="nivel-text">
                     <span class="nivel-titulo">Nível 1: As Ferramentas</span>
                     <span class="nivel-desc">Liga o objeto ao profissional correto.</span>
@@ -485,7 +485,7 @@
             </button>
             
             <button class="btn-nivel-menu" onclick="iniciarJogo(2)">
-                <span class="nivel-icon">🚒</span>
+                <span class="nivel-icon"><img src="../img-titulos/profissoes_menu2.svg" class="icon-svg-voltar" alt=""></span>
                 <span class="nivel-text">
                     <span class="nivel-titulo">Nível 2: Os Veículos</span>
                     <span class="nivel-desc">Liga o veículo ou local à profissão.</span>
@@ -493,7 +493,7 @@
             </button>
             
             <button class="btn-nivel-menu" onclick="iniciarJogo(3)">
-                <span class="nivel-icon">📖</span>
+                <span class="nivel-icon"><img src="../img-titulos/profissoes_menu3.svg" class="icon-svg-voltar" alt=""></span>
                 <span class="nivel-text">
                     <span class="nivel-titulo">Nível 3: Mestre da Leitura</span>
                     <span class="nivel-desc">Lê a palavra e arrasta o objeto.</span>
@@ -528,14 +528,14 @@
 
         <!-- ECRÃ 3: FIM -->
         <div id="ecra-fim" class="ecra">
-            <h2 class="end-title" id="end-title-text">Missão Cumprida! 🎉</h2>
+            <h2 class="end-title" id="end-title-text">Missão Cumprida! <img src="../../../SVG/confeti.svg" class="icon-svg-voltar" alt=""></h2>
             <div class="end-stats">
                 Completaste as 5 Rondas!<br>
                 Tiveste <strong id="final-erros" style="color:var(--cor-erro); font-size:2rem;">0</strong> erros.
             </div>
-            <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 300px; margin: 0 auto;">
-                <button class="btn-acao" onclick="iniciarJogo(currentLevel)">JOGAR DE NOVO 🔄</button>
-                <button class="btn-acao secundario" onclick="voltarAoMenu()">MENU 🏠</button>
+            <div class="botoes-acao-container">
+                <button class="btn-acao" onclick="iniciarJogo(currentLevel)">JOGAR DE NOVO <img src="../../../SVG/jogar_novo.svg" class="icon-svg-voltar" alt=""></button>
+                <button class="btn-acao secundario" onclick="voltarAoMenu()">MENU <img src="../../../SVG/menu_principal.svg" class="icon-svg-voltar" alt=""></button>
             </div>
         </div>
     </div>
@@ -648,7 +648,8 @@
     function atualizarPlacar() {
         elErros.textContent = errorsCount;
         elProgresso.textContent = rondaAtual;
-        elProgressFill.style.width = `${((rondaAtual - 1) / TOTAL_RONDAS) * 100}%`;
+		
+        elProgressFill.style.width = `${(rondaAtual / TOTAL_RONDAS) * 100}%`;
     }
 
     function prepararRonda() {
@@ -712,19 +713,18 @@
     /* =========================================
        LÓGICA HÍBRIDA: CLIQUE (NOVO) E DRAG
        ========================================= */
-    
-    // 1. Lógica do Clique no Item (Selecionar)
+
     function handleItemClick(e) {
-        if(isTransitioning || draggedElement) return; // Ignora se estiver a arrastar
+        if(isTransitioning || draggedElement) return;
         const item = e.target.closest('.drag-item');
-        if(!item || item.parentElement.classList.contains('prof-card')) return; // Ignora se já estiver colocado
+        if(!item || item.parentElement.classList.contains('prof-card')) return;
 
         tocarSom('flip');
         
-        // Remove seleção de todos
+
         document.querySelectorAll('.drag-item').forEach(el => el.classList.remove('selected-item'));
         
-        // Se clicar no mesmo, desseleciona
+
         if (selectedElement === item) {
             selectedElement = null;
         } else {
@@ -733,7 +733,7 @@
         }
     }
 
-    // 2. Lógica do Clique no Cartão (Largar)
+
     function handleCardClick(e) {
         if(isTransitioning || !selectedElement) return;
         const card = e.target.closest('.prof-card');
@@ -741,12 +741,12 @@
         processarEncaixe(card, selectedElement);
     }
 
-    // 3. Lógica do Arrastar Original
+
     function handleDragStart(e) {
         if(isTransitioning) return;
         draggedElement = e.target.closest('.drag-item');
         
-        // Limpa seleção por clique se houver
+
         if(selectedElement) {
             selectedElement.classList.remove('selected-item');
             selectedElement = null;
@@ -836,22 +836,22 @@
     }
 
     function finalizarJogo() {
-        elProgressFill.style.width = `100%`;
-        mostrarEcra('ecra-fim');
-        
-        document.getElementById('final-erros').textContent = errorsCount;
+		elProgressFill.style.width = `100%`;
+		mostrarEcra('ecra-fim');
+		
+		document.getElementById('final-erros').textContent = errorsCount;
 
-        if (errorsCount === 0) {
-            document.getElementById('end-title-text').textContent = "PERFEITO! 🏆";
-            tocarSom('vitoria'); dispararConfetis();
-        } else if (errorsCount <= 2) {
-            document.getElementById('end-title-text').textContent = "MUITO BEM! 🎉";
-            tocarSom('vitoria'); dispararConfetis();
-        } else {
-            document.getElementById('end-title-text').textContent = "BOM ESFORÇO! 💪";
-            tocarSom('acerto'); 
-        }
-    }
+		if (errorsCount === 0) {
+			document.getElementById('end-title-text').innerHTML = 'PERFEITO! <img src="../../../SVG/rank_ouro.svg" class="icon-svg-voltar" alt="">';
+			tocarSom('vitoria'); dispararConfetis();
+		} else if (errorsCount <= 2) {
+			document.getElementById('end-title-text').innerHTML = 'MUITO BEM! <img src="../../../SVG/rank_prata.svg" class="icon-svg-voltar" alt="">';
+			tocarSom('vitoria'); dispararConfetis();
+		} else {
+			document.getElementById('end-title-text').innerHTML = 'BOM ESFORÇO! <img src="../../../SVG/rank_bronze.svg" class="icon-svg-voltar" alt="">';
+			tocarSom('acerto'); 
+		}
+	}
 
     /* =========================================
        SISTEMA DE SOM E CONFETIS

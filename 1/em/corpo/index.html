@@ -411,6 +411,7 @@
             border-radius: 20px; border: 2px dashed var(--cor-em); line-height: 1.5; 
         }
         .end-time-msg { font-size: 2.5rem; font-weight: 900; color: var(--azul-vibrante); display: block; margin-top: 15px;}
+		.botoes-acao-container { display: flex; flex-direction: column; align-items: center; gap: 35px; width: 100%; }
 
         /* Animações Globais */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -528,7 +529,7 @@
                 Encontraste todos os pares e tens uma memória incrível!<br>
                 <span class="end-time-msg"><img src="../../../SVG/tempo.svg" class="icon-svg-voltar" alt=""><span id="tempo-final-texto">00:00</span></span>
             </div>
-            <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 350px; margin: 0 auto;">
+            <div class="botoes-acao-container">
                 <button class="btn-acao" onclick="iniciarJogo()">JOGAR DE NOVO <img src="../../../SVG/jogar_novo.svg" class="icon-svg-voltar" alt=""></button>
                 <button class="btn-acao secundario" onclick="voltarAsInstrucoes()">VOLTAR AO MENU <img src="../../../SVG/menu_principal.svg" class="icon-svg-voltar" alt=""></button>
             </div>

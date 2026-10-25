@@ -352,11 +352,7 @@
            GRELHA DO JOGO E CARTAS 3D
            ========================================= */
         .memory-grid {
-            .memory-grid {
-				grid-template-columns: repeat(4, 1fr);
-				max-width: 420px;
-				gap: 8px;
-			}
+            display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 12px;
             width: 100%;
@@ -397,7 +393,11 @@
         .card-sound:active { transform: scale(0.85); }
 
         @media (max-width: 600px) {
-            .memory-grid { gap: 8px; } 
+            .memory-grid {
+				grid-template-columns: repeat(4, 1fr);
+				max-width: 420px;
+				gap: 8px;
+			}
             .card-front { font-size: 1.5rem; border-width: 2px;}
             .card-back { border-width: 2px; }
             .card-sound { font-size: 2rem; }
