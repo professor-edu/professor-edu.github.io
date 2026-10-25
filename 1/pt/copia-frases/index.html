@@ -121,9 +121,9 @@
 
         /* Jogo: Cabeçalho com Crachá Centrado e Controlos Alinhados */
         .header-jogo-controles { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; width: 100%; max-width: 650px; margin-bottom: 30px; }
-        .btn-mudar-letra { justify-self: start; background: var(--bg-header); color: var(--text-main); border: none; padding: 8px 10px; border-radius: 15px; font-weight: bold; cursor: pointer; transition: 0.2s; font-size: 0.9rem; }
+        .btn-mudar-letra { justify-self: start; background: var(--bg-header); color: var(--text-main); border: 1px solid var(--azul-escuro); padding: 8px 10px; border-radius: 15px; font-weight: bold; cursor: pointer; transition: 0.2s; font-size: 0.9rem; }
         .btn-mudar-letra:hover { background: #e3f2fd; color: var(--azul-escuro); }
-        .progresso-texto { justify-self: end; font-weight: bold; color: var(--text-main); font-size: 1rem; }
+        .progresso-texto { justify-self: end; background: var(--bg-header); border: 1px solid var(--azul-escuro); border-radius: 15px; padding: 8px 10px; font-weight: bold; color: var(--text-main); font-size: 0.9rem; }
         
         .cracha-letra { justify-self: center; display: flex; align-items: center; gap: 15px; background: white; padding: 10px 30px; border-radius: 50px; border: 3px solid #e3f2fd; box-shadow: 0 8px 25px rgba(0, 145, 255, 0.15), 0 4px 10px rgba(0,0,0,0.05); margin: 0; }
         .cracha-img { width: 60px; height: 60px; object-fit: contain; }
@@ -155,6 +155,137 @@
 
         @keyframes slideUpFade { to { opacity: 1; transform: translateY(0); } }
         #confetti-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
+
+
+/* =========================================
+   MODAL DE CONFIRMAÇÃO
+   ========================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(30, 39, 46, 0.6);
+    backdrop-filter: blur(4px);
+    display: none; /* Controlado pelo JS */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    animation: fadeInModal 0.2s ease-out;
+}
+
+.modal-container {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 28px 24px;
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border: 3px solid #ffeaa7;
+    animation: popModal 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-icone {
+    width: 60px;
+    height: 60px;
+    background: #fff5cc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+}
+
+.icon-modal-svg {
+    width: 32px;
+    height: 32px;
+}
+
+.modal-titulo {
+    font-size: 1.35rem;
+    color: var(--azul-escuro, #1e272e);
+    margin-bottom: 8px;
+    font-weight: 900;
+}
+
+.modal-texto {
+    font-size: 0.95rem;
+    color: #636e72;
+    margin-bottom: 22px;
+    line-height: 1.4;
+}
+
+/* Botões da Modal */
+.modal-acoes {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-modal {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s ease;
+}
+
+.btn-cancelar {
+    background: #f1f2f6;
+    color: #57606f;
+}
+
+.btn-cancelar:hover {
+    background: #dfe4ea;
+    color: #2f3542;
+}
+
+.btn-confirmar {
+    background: #ff4757;
+    color: white;
+    box-shadow: 0 4px 0 #d0303f;
+}
+
+.btn-confirmar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #d0303f;
+}
+
+.btn-confirmar:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #d0303f;
+}
+
+/* Animações da Modal */
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes popModal {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Botão de abrir modal */
+.btn-limpar { 
+    background: none; 
+    border: none; 
+    color: #b2bec3; 
+    font-size: 0.85rem; 
+    text-decoration: underline; 
+    margin-top: 35px; 
+    cursor: pointer; 
+    transition: 0.2s; 
+}
+
+.btn-limpar:hover { 
+    color: #ff4757; 
+}
+
 
         /* Responsividade Telemóvel */
         @media (max-width: 768px) {
@@ -234,7 +365,7 @@
                 <!-- Letras geradas por JS -->
             </div>
 
-            <button class="btn-limpar" onclick="limparProgresso()">Limpar o meu progresso</button>
+            <button class="btn-limpar" onclick="abrirModalLimpar()">Limpar o meu progresso</button>
         </div>
 
         <!-- ECRÃ 2: ÁREA DE JOGO -->
@@ -274,7 +405,20 @@
         <canvas id="confetti-canvas"></canvas>
     </div>
 </main>
-
+<!-- MODAL DE CONFIRMAÇÃO DE LIMPEZA DE PROGRESSO -->
+<div id="modal-limpar" class="modal-overlay">
+    <div class="modal-container">
+        <div class="modal-icone">
+            <img src="../../../SVG/errado.svg" class="icon-modal-svg" alt="" onerror="this.onerror=null; this.src='../../../SVG/errado.svg';">
+        </div>
+        <h3 class="modal-titulo">Limpar o progresso?</h3>
+        <p class="modal-texto">Tens a certeza de que queres apagar todas as tuas estrelas e recomeçar do zero?</p>
+        <div class="modal-acoes">
+            <button class="btn-modal btn-cancelar" onclick="fecharModalLimpar()">Cancelar</button>
+            <button class="btn-modal btn-confirmar" onclick="confirmarLimparProgresso()">Sim, limpar!</button>
+        </div>
+    </div>
+</div>
 <footer>
     <p><span id="ano-atual"> </span><img src="../../../SVG/1_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
 </footer>
@@ -406,18 +550,25 @@
         }
     }
 
-    function limparProgresso() {
-        if(confirm("Queres mesmo limpar as estrelas e começar de novo?")) {
-            letrasCompletadas =[];
-            localStorage.removeItem('copiarFrasesProgresso');
-            inicializarGrelha();
-        }
-    }
+function abrirModalLimpar() {
+    document.getElementById('modal-limpar').style.display = 'flex';
+}
+
+function fecharModalLimpar() {
+    document.getElementById('modal-limpar').style.display = 'none';
+}
+
+function confirmarLimparProgresso() {
+    letrasCompletadas = [];
+    localStorage.removeItem('copiarFrasesProgresso');
+    inicializarGrelha();
+    fecharModalLimpar();
+}
 
     function voltarParaSelecao() {
         window.history.pushState({}, document.title, window.location.pathname);
         ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
-        inicializarGrelha(); // Atualiza a grelha para mostrar as estrelas ganhas
+        inicializarGrelha();
         mostrarEcra('ecra-selecao');
     }
 
