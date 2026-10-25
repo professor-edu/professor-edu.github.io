@@ -64,7 +64,7 @@ export const CATALOGO_JOGOS = [
 	{ nome: "Rimas", icone: "1/icones/rimas.png", link: "1/pt/rimas/", ano: "1º Ano" },
 	{ nome: "Comboio das Letras", icone: "1/icones/comboio_letras.png", link: "1/pt/comboio-letras/", ano: "1º Ano" },
 	{ nome: "Código Secreto", icone: "1/icones/codigo_secreto.png", link: "1/pt/codigo-secreto/", ano: "1º Ano" },
-	{ nome: "Sílaba Inicial", icone: "1/icones/primeira_silaba.png", link: "1/pt/primeira-silaba/", ano: "1º Ano" },
+	{ nome: "Primeira Sílaba", icone: "1/icones/primeira_silaba.png", link: "1/pt/primeira-silaba/", ano: "1º Ano" },
 	{ nome: "28 Palavras", icone: "1/icones/28_palavras.png", link: "1/pt/28-palavras/", ano: "1º Ano" }, 
 	{ nome: "Comboio das Sílabas", icone: "1/icones/comboio_silabas.png", link: "1/pt/comboio-silabas/", ano: "1º Ano" }, 
 	{ nome: "Memória de Imagens", icone: "1/icones/memoria_imagens.png", link: "1/pt/memoria-imagens", ano: "1º Ano" },

@@ -15,7 +15,7 @@ const todosOsJogos =[
     { nome: "Rimas", icone: "icones/rimas.png", link: "pt/rimas/", cat: "pt" },
     { nome: "Comboio das Letras", icone: "icones/comboio_letras.png", link: "pt/comboio-letras/", cat: "pt" },
     { nome: "Código Secreto", icone: "icones/codigo_secreto.png", link: "pt/codigo-secreto/", cat: "pt" },
-    { nome: "Sílaba Inicial", icone: "icones/primeira_silaba.png", link: "pt/primeira-silaba/", cat: "pt" },
+    { nome: "Primeira Sílaba", icone: "icones/primeira_silaba.png", link: "pt/primeira-silaba/", cat: "pt" },
     { nome: "28 Palavras", icone: "icones/28_palavras.png", link: "pt/28-palavras/", cat: "pt" }, 
     { nome: "Comboio das Sílabas", icone: "icones/comboio_silabas.png", link: "pt/comboio-silabas/", cat: "pt" }, 
     { nome: "Memória de Imagens", icone: "icones/memoria_imagens.png", link: "pt/memoria-imagens", cat: "pt" },
