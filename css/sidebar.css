@@ -331,12 +331,10 @@ button.btn-pesquisa-header[data-tooltip]::after {
    ========================================= */
 .resultados-pesquisa {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    margin-top: 15px;
-    gap: 12px;
-    max-height: 60vh;
-    overflow-y: auto;
-    padding-right: 6px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .resultados-pesquisa::-webkit-scrollbar {
@@ -422,14 +420,18 @@ button.btn-pesquisa-header[data-tooltip]::after {
 }
 
 
+
+
 /* =========================================
    BARRA DE FILTROS RÁPIDOS (PILLS)
    ========================================= */
 
 .pesquisa-filtros-container {
     display: flex;
-    flex-wrap: wrap; /* Quebra automaticamente para as linhas seguintes */
-    gap: 6px 8px; /* 6px de distância vertical entre linhas e 8px horizontal entre botões */
+    flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+    gap: 6px 8px;
     margin-top: 12px;
     margin-bottom: 4px;
 }
@@ -470,6 +472,79 @@ button.btn-pesquisa-header[data-tooltip]::after {
     border-color: var(--cor-hover, #0091ff) !important;
     box-shadow: 0 3px 10px var(--cor-hover-alpha, rgba(0, 145, 255, 0.3));
 }
+
+
+/* =========================================
+   SUGESTÕES DE PESQUISAS POPULARES
+   ========================================= */
+
+.pesquisa-vazia-container {
+    grid-column: 1 / -1 !important;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 12px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.pesquisa-vazia-titulo {
+    color: #64748b;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.pesquisas-populares-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
+}
+
+.btn-populares-tag {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    color: #334155;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 7px 14px;
+    border-radius: 18px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: inherit;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-populares-tag:hover {
+    border-color: var(--cor-hover, #0091ff);
+    color: var(--cor-hover, #0091ff);
+    background: color-mix(in srgb, var(--cor-hover, #0091ff) 6%, #ffffff);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.btn-populares-tag:active {
+    transform: translateY(0);
+}
+
+/* Dimensionamento dos ícones SVG nas Pesquisas Populares */
+.icon-popular-svg {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
 
 /* =========================================
    7. AJUSTES RESPONSIVOS (MOBILE & LANDSCAPE)
@@ -529,11 +604,36 @@ button.btn-pesquisa-header[data-tooltip]::after {
         flex-direction: column;
     }
 
-    /* O scroll passa a ser gerido apenas dentro da lista de resultados */
     .resultados-pesquisa {
-        flex: 1;
-        max-height: none !important;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
+        grid-template-columns: 1fr;
+        padding-right: 0;
+        width: 100%;
+    }
+	
+	.pesquisa-vazia-container {
+        width: 100%;
+        padding: 16px 0; 
+        box-sizing: border-box;
+    }
+	.pesquisas-populares-container {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+	
+	.pesquisa-resumo-topo {
+        grid-column: 1 / -1;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .pesquisa-vazia-titulo {
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+    }
+
+    .btn-populares-tag {
+        font-size: 0.78rem;
+        padding: 6px 12px;
     }
 }
