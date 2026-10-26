@@ -223,8 +223,8 @@
 	.btn-acao.primario { background-color: var(--cor-btn-verde); box-shadow: 0 6px 0 #45b062, 0 10px 15px rgba(0,0,0,0.1); }
 	@media (hover: hover) { .btn-acao.primario:hover { box-shadow: 0 8px 0 #45b062, 0 12px 20px rgba(0,0,0,0.15); } }
 
-	.btn-acao.secundario { background-color: var(--cor-btn-laranja); box-shadow: 0 6px 0 #d97d2c, 0 10px 15px rgba(0,0,0,0.1); }
-	@media (hover: hover) { .btn-acao.secundario:hover { box-shadow: 0 8px 0 #d97d2c, 0 12px 20px rgba(0,0,0,0.15); } }
+	.btn-acao.secundario { background-color: var(--cor-btn-azul); box-shadow: 0 6px 0 #115d9b, 0 10px 15px rgba(0,0,0,0.1); }
+	@media (hover: hover) { .btn-acao.secundario:hover { box-shadow: 0 8px 0 #4dabf7, 0 12px 20px rgba(0,0,0,0.15); } }
 
 	.btn-acao.terciario { background-color: var(--cor-btn-azul); box-shadow: 0 6px 0 #4a8deb, 0 10px 15px rgba(0,0,0,0.1); }
 	@media (hover: hover) { .btn-acao.terciario:hover { box-shadow: 0 8px 0 #4a8deb, 0 12px 20px rgba(0,0,0,0.15); } }
@@ -914,7 +914,7 @@
                     </div>
                     
                     <div class="col-direita" style="display: flex; align-items: center; gap: 10px;">
-                        <div class="info-nivel" id="info-contagem" style="font-weight: 900; font-size: 1rem;">0/5</div>
+                        <div class="info-nivel" id="info-contagem" style="font-weight: 900; font-size: 1rem;">1/5</div>
                         <button id="btn-dica" class="btn-dica" onclick="revelarDicaTemporaria()">
                             <img src="../../SVG/lampada.svg" alt="Dica">
                         </button>
@@ -1011,7 +1011,7 @@
         if(avatar) avatar.style.left = `${percentagem}%`;
         if(rasto) rasto.style.width = `${percentagem}%`;
         
-        if(contador) contador.textContent = `${rondaAtual}/${totalRondas}`;
+        if(contador) contador.textContent = `${rondaAtual + 1}/${totalRondas}`;
     }
 
     /* =====================================================================
@@ -1335,8 +1335,6 @@
         }, 12000);
     }
 
-    // Revela temporariamente a imagem completa esbatida a 35% por cima do puzzle
-    // Revela temporariamente a imagem completa 100% sólida (sem se confundir com a de baixo)
     function revelarDicaTemporaria() {
         if (isVerificando || dicasUsadasRonda >= 2 || document.getElementById('puzzle-grid').classList.contains('revealed')) return;
 
