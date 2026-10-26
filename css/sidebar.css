@@ -492,7 +492,7 @@ button.btn-pesquisa-header[data-tooltip]::after {
 
     .modal-pesquisa-header input {
         padding: 12px 14px;
-        font-size: 0.95rem;
+        font-size: 0.85rem;
     }
 
     .resultados-pesquisa {
