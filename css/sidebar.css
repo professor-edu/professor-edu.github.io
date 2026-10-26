@@ -510,22 +510,30 @@ button.btn-pesquisa-header[data-tooltip]::after {
     }
 }
 
+/* =========================================
+   FIX MOBILE VERTICAL: MODAL FIXA NO TOPO
+   ========================================= */
 @media (max-width: 600px) {
     .modal-pesquisa-overlay {
-        padding: 16px 12px;
+        align-items: flex-start !important; /* Fixa a janela no topo em vez de centrar */
+        padding-top: 12px !important;       /* Distância fixa em relação ao topo do ecrã */
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        padding-bottom: 10px !important;
     }
 
     .modal-pesquisa-container {
-        width: 100%;
-        padding: 14px;
-        border-radius: 20px;
-        max-height: 85vh;
+        margin-top: 0 !important;
+        max-height: calc(100dvh - 24px) !important;
         display: flex;
         flex-direction: column;
     }
 
+    /* O scroll passa a ser gerido apenas dentro da lista de resultados */
     .resultados-pesquisa {
-        grid-template-columns: 1fr;
-        max-height: 60vh;
+        flex: 1;
+        max-height: none !important;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 }
