@@ -321,6 +321,10 @@ button.btn-pesquisa-header[data-tooltip]::after {
     height: 28px;
     flex-shrink: 0;
 }
+/* Garante que a modal fechada fica completamente fora do fluxo da página */
+#modal-pesquisa.modal-pesquisa-overlay:not([style*="display: flex"]) {
+    display: none !important;
+}
 
 /* =========================================
    6. CARTÕES DE RESULTADO DA PESQUISA

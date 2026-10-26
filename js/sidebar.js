@@ -92,7 +92,7 @@
                 <div class="sidebar-search-box">
                     <button class="btn-sidebar-pesquisa" onclick="abrirPesquisa()">
                         <img src="/SVG/lupa.svg" alt="" class="icon-svg-menu" style="width:24px; height:24px;" onerror="this.style.display='none'">
-                        <span>Pesquisar jogo...</span>
+                        <span>Pesquisar jogos...</span>
                     </button>
                 </div>
             </nav>
@@ -198,7 +198,31 @@ function normalizarTexto(texto) {
         .replace(/[\u0300-\u036f]/g, "");
 }
 
-// Calcula a pontuação de relevância de um jogo para o termo pesquisado
+// Helper: Calcula o número de diferenças/erros entre duas palavras (Algoritmo de Levenshtein)
+function calcularDistanciaErros(a, b) {
+    if (a.length === 0) return b.length;
+    if (b.length === 0) return a.length;
+
+    const matriz = [];
+    for (let i = 0; i <= b.length; i++) matriz[i] = [i];
+    for (let j = 0; j <= a.length; j++) matriz[0][j] = j;
+
+    for (let i = 1; i <= b.length; i++) {
+        for (let j = 1; j <= a.length; j++) {
+            if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                matriz[i][j] = matriz[i - 1][j - 1];
+            } else {
+                matriz[i][j] = Math.min(
+                    matriz[i - 1][j - 1] + 1, // Substituição
+                    matriz[i][j - 1] + 1,     // Inserção
+                    matriz[i - 1][j] + 1      // Remoção
+                );
+            }
+        }
+    }
+    return matriz[b.length][a.length];
+}
+
 function calcularPontuacao(jogo, termo) {
     let pontos = 0;
     const nomeNorm = normalizarTexto(jogo.nome);
@@ -214,19 +238,54 @@ function calcularPontuacao(jogo, termo) {
 
     // Termo original + possíveis sinónimos
     const termosParaProcurar = [termo, ...(SINONIMOS_PESQUISA[termo] || [])];
+    const palavrasNome = nomeNorm.split(/\s+/);
 
     termosParaProcurar.forEach(t => {
         if (!t) return;
 
+        let encontrouNoNome = false;
+
         // 1. Relevância no NOME (Peso Máximo)
-        if (nomeNorm === t) pontos += 25;
-        else if (nomeNorm.startsWith(t)) pontos += 18;
-        else if (nomeNorm.includes(t)) pontos += 12;
+        if (nomeNorm === t) {
+            pontos += 25;
+            encontrouNoNome = true;
+        } else if (nomeNorm.startsWith(t)) {
+            pontos += 18;
+            encontrouNoNome = true;
+        } else if (nomeNorm.includes(t)) {
+            pontos += 12;
+            encontrouNoNome = true;
+        }
+
+        // 1b. Tolerância a Erros no NOME (Fuzzy Search - ativado para palavras >= 4 letras)
+        if (!encontrouNoNome && t.length >= 4) {
+            palavrasNome.forEach(palavra => {
+                if (palavra.length >= 4) {
+                    const erros = calcularDistanciaErros(palavra, t);
+                    if (erros === 1) pontos += 8;      // Ex: "adisaom" ➔ "adicao" (1 erro)
+                    else if (erros === 2) pontos += 4; // Ex: "alfavero" ➔ "alfabeto" (2 erros)
+                }
+            });
+        }
 
         // 2. Relevância nas TAGS (Peso Médio)
         tagsNorm.forEach(tag => {
-            if (tag === t) pontos += 10;
-            else if (tag.includes(t)) pontos += 5;
+            let encontrouNaTag = false;
+
+            if (tag === t) {
+                pontos += 10;
+                encontrouNaTag = true;
+            } else if (tag.includes(t)) {
+                pontos += 5;
+                encontrouNaTag = true;
+            }
+
+            // 2b. Tolerância a Erros nas TAGS
+            if (!encontrouNaTag && t.length >= 4 && tag.length >= 4) {
+                const erros = calcularDistanciaErros(tag, t);
+                if (erros === 1) pontos += 5;
+                else if (erros === 2) pontos += 2;
+            }
         });
 
         // 3. Relevância na DISCIPLINA
