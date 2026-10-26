@@ -417,6 +417,56 @@ button.btn-pesquisa-header[data-tooltip]::after {
     color: #636e72 !important;
 }
 
+
+/* =========================================
+   BARRA DE FILTROS RÁPIDOS (PILLS)
+   ========================================= */
+
+.pesquisa-filtros-container {
+    display: flex;
+    flex-wrap: wrap; /* Quebra automaticamente para as linhas seguintes */
+    gap: 6px 8px; /* 6px de distância vertical entre linhas e 8px horizontal entre botões */
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+
+/* Esconde a barra de scroll em navegadores modernos mantendo o deslize */
+.pesquisa-filtros-container::-webkit-scrollbar {
+    height: 4px;
+}
+.pesquisa-filtros-container::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 4px;
+}
+
+.btn-filtro-pill {
+    background: #f1f5f9;
+    border: 1.5px solid #cbd5e1;
+    color: #475569;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    line-height: 1.2;
+}
+
+.btn-filtro-pill:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+    border-color: #94a3b8;
+}
+
+/* Estado Ativo: Assume a cor do ano/home (--cor-hover) */
+.btn-filtro-pill.active {
+    background: var(--cor-hover, #0091ff) !important;
+    color: #ffffff !important;
+    border-color: var(--cor-hover, #0091ff) !important;
+    box-shadow: 0 3px 10px var(--cor-hover-alpha, rgba(0, 145, 255, 0.3));
+}
+
 /* =========================================
    7. AJUSTES RESPONSIVOS (MOBILE & LANDSCAPE)
    ========================================= */

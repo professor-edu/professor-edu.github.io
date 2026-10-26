@@ -53,6 +53,23 @@
                         </div>
                         <button class="btn-fechar-pesquisa" onclick="fecharPesquisa()" title="Fechar janela">✕</button>
                     </div>
+					
+					<div class="pesquisa-filtros-container">
+						<button type="button" class="btn-filtro-pill active" data-tipo="todos" onclick="selecionarFiltro('todos', 'todos', this)">Todos</button>
+						
+						<!-- Filtros de Ano (Escolhe no máximo 1) -->
+						<button type="button" class="btn-filtro-pill" data-tipo="ano" onclick="selecionarFiltro('ano', 'pre', this)">Pré</button>
+						<button type="button" class="btn-filtro-pill" data-tipo="ano" onclick="selecionarFiltro('ano', '1', this)">1º Ano</button>
+						<button type="button" class="btn-filtro-pill" data-tipo="ano" onclick="selecionarFiltro('ano', '2', this)">2º Ano</button>
+						<button type="button" class="btn-filtro-pill" data-tipo="ano" onclick="selecionarFiltro('ano', '3', this)">3º Ano</button>
+						<button type="button" class="btn-filtro-pill" data-tipo="ano" onclick="selecionarFiltro('ano', '4', this)">4º Ano</button>
+						
+						<!-- Filtros de Disciplina (Escolhe no máximo 1) -->
+						<button type="button" class="btn-filtro-pill" data-tipo="disciplina" onclick="selecionarFiltro('disciplina', 'matematica', this)">Matemática</button>
+						<button type="button" class="btn-filtro-pill" data-tipo="disciplina" onclick="selecionarFiltro('disciplina', 'portugues', this)">Português</button>
+						<button type="button" class="btn-filtro-pill" data-tipo="disciplina" onclick="selecionarFiltro('disciplina', 'estudo-meio', this)">Estudo do Meio</button>
+					</div>
+					
                     <div id="resultados-pesquisa" class="resultados-pesquisa">
                         <p class="pesquisa-vazia">Escreve o que queres brincar e aprender...</p>
                     </div>
@@ -109,11 +126,117 @@ async function carregarCatalogo() {
     }
 }
 
+// Dicionário de Sinónimos e Mapeamentos Escolares Ampliado
+const SINONIMOS_PESQUISA = {
+    // --- MATEMÁTICA ---
+    "somar": ["adicao", "soma", "mais", "juntar", "contas", "calcular"],
+    "soma": ["adicao", "somar", "mais", "juntar", "contas"],
+    "adicao": ["soma", "somar", "mais", "juntar"],
+    "subtrair": ["subtracao", "menos", "diferenca", "tirar", "contas"],
+    "subtracao": ["subtrair", "menos", "diferenca", "tirar"],
+    "multiplicar": ["multiplicacao", "vezes", "tabuada", "dobro", "triplo"],
+    "multiplicacao": ["multiplicar", "vezes", "tabuada", "dobro", "triplo"],
+    "tabuada": ["multiplicacao", "multiplicar", "vezes", "divisao", "contas"],
+    "dividir": ["divisao", "partilhar", "metade", "terco", "quarto"],
+    "divisao": ["dividir", "partilhar", "metade", "terco"],
+    "contas": ["matematica", "adicao", "subtracao", "multiplicacao", "divisao", "operacoes", "calculo"],
+    "numeros": ["algarismos", "contar", "ordens", "dezenas", "centenas", "unidades", "milhar"],
+    "algarismos": ["numeros", "contar", "posicional", "unidades", "dezenas"],
+    "horas": ["relogio", "tempo", "minutos", "segundos", "calendario"],
+    "relogio": ["horas", "tempo", "minutos"],
+    "dinheiro": ["euro", "euros", "moedas", "notas", "compras", "troco"],
+    "euro": ["dinheiro", "euros", "moedas", "notas"],
+    "fracoes": ["fracao", "metade", "quarto", "divisao", "partes"],
+    "formas": ["geometria", "figuras", "triangulo", "quadrado", "circulo", "retangulo"],
+    "solidos": ["geometria", "cubo", "esfera", "cilindro", "piramide", "cone", "paralelepipedo"],
+    "geometria": ["formas", "figuras", "solidos", "poligonos", "linhas"],
+    "problemas": ["raciocinio", "desafios", "calculo"],
+
+    // --- PORTUGUÊS ---
+    "abc": ["alfabeto", "letras", "portugues", "abecedario"],
+    "alfabeto": ["abc", "letras", "abecedario", "vogais", "consoantes"],
+    "letras": ["alfabeto", "abc", "vogais", "consoantes", "silabas", "palavras"],
+    "ler": ["leitura", "portugues", "texto", "palavras", "historias"],
+    "leitura": ["ler", "portugues", "texto", "palavras", "compreenso"],
+    "escrever": ["escrita", "ditado", "ortografia", "grafia"],
+    "silabas": ["silaba", "divisao silabica", "palavras", "acentuacao", "tonica"],
+    "gramatica": ["verbo", "substantivo", "nome", "adjetivo", "plural", "singular", "pontuacao"],
+    "nomes": ["substantivos", "gramatica", "proprio", "comum"],
+    "verbos": ["acao", "gramatica", "tempo verbal", "passado", "presente", "futuro"],
+    "opostos": ["antonimos", "contrario"],
+	"oposto": ["antonimos", "contrario"],
+	"mesmo": ["sinónimos", "igual"],
+    "antonimos": ["opostos", "contrario"],
+    "sinonimos": ["iguais", "semelhantes", "significado"],
+    "ditado": ["ortografia", "escrita", "palavras"],
+
+    // --- ESTUDO DO MEIO ---
+    "corpo": ["corpo humano", "orgaos", "esqueleto", "ossos", "sentidos", "saude", "higiene"],
+    "animais": ["bichos", "fauna", "vertebrados", "invertebrados", "mamiferos", "aves", "repteis"],
+    "plantas": ["flora", "arvores", "flores", "vegetacao", "raiz", "folhas"],
+    "mapa": ["portugal", "distritos", "geografia", "paises", "continentes"],
+    "portugal": ["mapa", "historia", "bandeira", "distritos", "freguesias", "concelhos"],
+    "transportes": ["meios de transporte", "transito", "veiculos", "seguranca rodoviaria"],
+    "profissoes": ["trabalho", "oficios", "servicos"],
+    "estacoes": ["primavera", "verao", "outono", "inverno", "tempo", "clima"],
+    "calendario": ["dias", "meses", "ano", "semana", "datas"],
+    "familia": ["arvore genealogica", "parentes"],
+
+    // --- PRÉ-ESCOLAR & LÚDICO ---
+    "cores": ["colors", "pintar", "desenhar", "colorir"],
+    "puzzles": ["quebra-cabecas", "puzzle", "peças"],
+    "memoria": ["jogo da memoria", "pares", "concentracao"],
+    "desenhar": ["pintar", "cores", "arte", "colorir"]
+};
+
+
 function normalizarTexto(texto) {
+    if (!texto) return "";
     return texto
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
+}
+
+// Calcula a pontuação de relevância de um jogo para o termo pesquisado
+function calcularPontuacao(jogo, termo) {
+    let pontos = 0;
+    const nomeNorm = normalizarTexto(jogo.nome);
+    const anoNorm = normalizarTexto(jogo.ano);
+    const discNorm = normalizarTexto(jogo.disciplina);
+
+    let tagsNorm = [];
+    if (Array.isArray(jogo.tags)) {
+        tagsNorm = jogo.tags.map(t => normalizarTexto(t));
+    } else if (typeof jogo.tags === 'string') {
+        tagsNorm = [normalizarTexto(jogo.tags)];
+    }
+
+    // Termo original + possíveis sinónimos
+    const termosParaProcurar = [termo, ...(SINONIMOS_PESQUISA[termo] || [])];
+
+    termosParaProcurar.forEach(t => {
+        if (!t) return;
+
+        // 1. Relevância no NOME (Peso Máximo)
+        if (nomeNorm === t) pontos += 25;
+        else if (nomeNorm.startsWith(t)) pontos += 18;
+        else if (nomeNorm.includes(t)) pontos += 12;
+
+        // 2. Relevância nas TAGS (Peso Médio)
+        tagsNorm.forEach(tag => {
+            if (tag === t) pontos += 10;
+            else if (tag.includes(t)) pontos += 5;
+        });
+
+        // 3. Relevância na DISCIPLINA
+        if (discNorm.includes(t)) pontos += 6;
+
+        // 4. Relevância no ANO
+        if (anoNorm.includes(t)) pontos += 4;
+    });
+
+    return pontos;
 }
 
 // Função para apagar o texto digitado
@@ -126,7 +249,56 @@ function limparPesquisa() {
     }
 }
 
-// Atualiza a função pesquisarJogos existente para gerir a visibilidade do botão limpar
+
+// Estado do filtro ativo
+let filtroAtivo = 'todos';
+let filtroAno = 'todos';
+let filtroDisciplina = 'todos';
+
+function selecionarFiltro(tipo, valor, elemento) {
+    if (tipo === 'todos') {
+        // Reseta ambos os filtros
+        filtroAno = 'todos';
+        filtroDisciplina = 'todos';
+        document.querySelectorAll('.btn-filtro-pill').forEach(btn => btn.classList.remove('active'));
+        elemento.classList.add('active');
+    } else if (tipo === 'ano') {
+        // Se clicar no ano que já está ativo, desativa-o
+        if (filtroAno === valor) {
+            filtroAno = 'todos';
+            elemento.classList.remove('active');
+        } else {
+            filtroAno = valor;
+            document.querySelectorAll('.btn-filtro-pill[data-tipo="ano"]').forEach(btn => btn.classList.remove('active'));
+            elemento.classList.add('active');
+        }
+    } else if (tipo === 'disciplina') {
+        // Se clicar na disciplina que já está ativa, desativa-a
+        if (filtroDisciplina === valor) {
+            filtroDisciplina = 'todos';
+            elemento.classList.remove('active');
+        } else {
+            filtroDisciplina = valor;
+            document.querySelectorAll('.btn-filtro-pill[data-tipo="disciplina"]').forEach(btn => btn.classList.remove('active'));
+            elemento.classList.add('active');
+        }
+    }
+
+    // Atualiza o estado visual do botão "Todos"
+    const btnTodos = document.querySelector('.btn-filtro-pill[data-tipo="todos"]');
+    if (filtroAno === 'todos' && filtroDisciplina === 'todos') {
+        document.querySelectorAll('.btn-filtro-pill').forEach(btn => btn.classList.remove('active'));
+        if (btnTodos) btnTodos.classList.add('active');
+    } else {
+        if (btnTodos) btnTodos.classList.remove('active');
+    }
+
+    // Executa a pesquisa/filtragem imediatamente
+    pesquisarJogos();
+}
+
+
+// Atualiza a função pesquisarJogos para integrar a filtragem por categoria
 function pesquisarJogos() {
     const input = document.getElementById('input-pesquisa');
     const containerResultados = document.getElementById('resultados-pesquisa');
@@ -139,29 +311,47 @@ function pesquisarJogos() {
 
     const termo = normalizarTexto(input.value.trim());
 
-    if (termo === '') {
+    // Se a barra estiver vazia E nenhum filtro estiver ativo, mostra a mensagem inicial
+    if (termo === '' && filtroAno === 'todos' && filtroDisciplina === 'todos') {
         containerResultados.innerHTML = '<p class="pesquisa-vazia">Escreve o que queres brincar e aprender...</p>';
         return;
     }
 
-    const resultados = catalogoJogos.filter(jogo => {
-        const nome = normalizarTexto(jogo.nome);
-        const ano = normalizarTexto(jogo.ano);
-        const disciplina = normalizarTexto(jogo.disciplina);
+    // 1. Começa com a lista completa do catálogo
+    let resultados = [...catalogoJogos];
 
-        let tags = [];
-        if (Array.isArray(jogo.tags)) {
-            tags = jogo.tags.map(t => normalizarTexto(t));
-        } else if (typeof jogo.tags === 'string') {
-            tags = [normalizarTexto(jogo.tags)];
-        }
+    // 2. Aplica Filtro de ANO (se ativo)
+    if (filtroAno !== 'todos') {
+        resultados = resultados.filter(jogo => {
+            const anoNorm = normalizarTexto(jogo.ano);
+            return anoNorm.includes(filtroAno);
+        });
+    }
 
-        return nome.includes(termo) || 
-               ano.includes(termo) || 
-               disciplina.includes(termo) || 
-               tags.some(tag => tag.includes(termo));
-    });
+    // 3. Aplica Filtro de DISCIPLINA (se ativa)
+    if (filtroDisciplina !== 'todos') {
+        resultados = resultados.filter(jogo => {
+            const discNorm = normalizarTexto(jogo.disciplina);
+            if (filtroDisciplina === 'matematica') return discNorm.includes('matematica') || discNorm.includes('mat');
+            if (filtroDisciplina === 'portugues') return discNorm.includes('portugues') || discNorm.includes('port');
+            if (filtroDisciplina === 'estudo-meio') return discNorm.includes('estudo') || discNorm.includes('meio');
+            return true;
+        });
+    }
 
+    // 4. Se houver TEXTO digitado, calcula relevância e ordena os resultados filtrados
+    if (termo !== '') {
+        resultados = resultados
+            .map(jogo => ({
+                jogo: jogo,
+                pontos: calcularPontuacao(jogo, termo)
+            }))
+            .filter(item => item.pontos > 0)
+            .sort((a, b) => b.pontos - a.pontos)
+            .map(item => item.jogo);
+    }
+
+    // Renderiza a lista final de jogos
     renderizarResultados(resultados);
 }
 
