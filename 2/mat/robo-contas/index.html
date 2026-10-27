@@ -1784,7 +1784,7 @@
 
     <div class="botoes-acao-container">
         <button class="btn-acao primario" onclick="reiniciarJogo()">JOGAR DE NOVO<img src="../../../SVG/jogar_novo.svg" class="icon-acao" alt=""></button>
-        <button class="btn-acao terciario" onclick="voltarAoMenu()">VOLTAR AO MENU<img src="../../../SVG/home.svg" class="icon-acao" alt=""></button>
+        <button class="btn-acao terciario" onclick="voltarAoMenu()">VOLTAR AO MENU<img src="../../../SVG/menu_principal.svg" class="icon-acao" alt=""></button>
     </div>
 </div>
 
@@ -1868,49 +1868,95 @@ function baralharArray(array) {
 }
 
 // Gera uma conta única respeitando as regras pedagógicas do nível
-	function gerarContaMatematica(limite, tipoOperacao) {
-		let num1, num2, resultado, expressao;
+function gerarContaMatematica(limite, tipoOperacao) {
+    let num1, num2, resultado;
+    const maxCentenas = Math.floor(limite / 100);
 
-		if (tipoOperacao === '+') {
-			num1 = numeroAleatorio(10, limite - 10);
-			num2 = numeroAleatorio(10, limite - num1);
-			resultado = num1 + num2;
-		} else {
-			num1 = numeroAleatorio(20, limite);
-			num2 = numeroAleatorio(10, num1);
-			resultado = num1 - num2;
-		}
+    if (tipoOperacao === '+') {
+        if (limite <= 100) {
+            let d1 = numeroAleatorio(1, 8);
+            let d2 = numeroAleatorio(1, 9 - d1); // d1 + d2 <= 9 (sem transporte)
+            let u1 = numeroAleatorio(1, 8);
+            let u2 = numeroAleatorio(1, 9 - u1); // u1 + u2 <= 9 (sem transporte)
 
-		expressao = `${num1} ${tipoOperacao} ${num2} =`;
+            num1 = d1 * 10 + u1;
+            num2 = d2 * 10 + u2;
+        } else {
+            // Garante que a soma das centenas fica estritamente abaixo do limite
+            // Ex: limite 200 -> c1 + c2 <= 1 (resultado na casa dos 100)
+            // Ex: limite 500 -> c1 + c2 <= 4 (resultado na casa dos 400)
+            let c1 = numeroAleatorio(1, maxCentenas - 1);
+            let c2 = numeroAleatorio(0, (maxCentenas - 1) - c1);
+            
+            let d1 = numeroAleatorio(0, 8);
+            let d2 = numeroAleatorio(0, 9 - d1);
+            let u1 = numeroAleatorio(1, 8);
+            let u2 = numeroAleatorio(1, 9 - u1);
 
-		// Desvios típicos de erros no 2.º Ano (erros de dezenas e centenas)
-		let opcoesIncorretas = new Set();
-		let desvios = [-100, 100, -10, 10, -2, 2, -1, 1, -20, 20];
-		
-		let tentativas = 0;
-		while (opcoesIncorretas.size < 3 && tentativas < 100) {
-			tentativas++;
-			let desvio = desvios[Math.floor(Math.random() * desvios.length)];
-			let opErrada = resultado + desvio;
-			
-			if (opErrada >= 0 && opErrada <= limite && opErrada !== resultado) {
-				opcoesIncorretas.add(opErrada);
-			}
-		}
+            num1 = c1 * 100 + d1 * 10 + u1;
+            num2 = c2 * 100 + d2 * 10 + u2;
+        }
+        resultado = num1 + num2;
 
-		while (opcoesIncorretas.size < 3) {
-			let randVal = numeroAleatorio(0, limite);
-			if (randVal !== resultado) {
-				opcoesIncorretas.add(randVal);
-			}
-		}
+    } else {
+        // SUBTRAÇÃO: num1 nunca pode ultrapassar (limite - 1)
+        if (limite <= 100) {
+            let d1 = numeroAleatorio(2, 9);
+            let d2 = numeroAleatorio(1, d1);     // d1 >= d2 (sem empréstimo)
+            let u1 = numeroAleatorio(1, 9);
+            let u2 = numeroAleatorio(0, u1);     // u1 >= u2 (sem empréstimo)
 
-		return {
-			conta: expressao,
-			correta: resultado,
-			opcoes: baralharArray([resultado, ...Array.from(opcoesIncorretas)])
-		};
-	}
+            num1 = d1 * 10 + u1;
+            num2 = d2 * 10 + u2;
+        } else {
+            // maxCentenas - 1 garante que num1 fica abaixo do limite (ex: < 200 ou < 500)
+            let c1 = numeroAleatorio(1, maxCentenas - 1);
+            let c2 = numeroAleatorio(0, c1);     // c1 >= c2
+
+            let d1 = numeroAleatorio(1, 9);
+            let d2 = numeroAleatorio(0, d1);     // d1 >= d2
+
+            let u1 = numeroAleatorio(1, 9);
+            let u2 = numeroAleatorio(0, u1);     // u1 >= u2
+
+            num1 = c1 * 100 + d1 * 10 + u1;
+            num2 = c2 * 100 + d2 * 10 + u2;
+        }
+
+        if (num1 === num2) num1 += 1;
+        resultado = num1 - num2;
+    }
+
+    const expressao = `${num1} ${tipoOperacao} ${num2} =`;
+
+    // Gerador de Opções Incorretas (Apenas valores válidos e positivos)
+    let opcoesIncorretas = new Set();
+    let desvios = [-100, 100, -20, 20, -10, 10, -2, 2, -1, 1];
+
+    let tentativas = 0;
+    while (opcoesIncorretas.size < 3 && tentativas < 100) {
+        tentativas++;
+        let desvio = desvios[Math.floor(Math.random() * desvios.length)];
+        let opErrada = resultado + desvio;
+
+        if (opErrada > 0 && opErrada <= limite && opErrada !== resultado) {
+            opcoesIncorretas.add(opErrada);
+        }
+    }
+
+    while (opcoesIncorretas.size < 3) {
+        let randVal = numeroAleatorio(1, limite);
+        if (randVal !== resultado) {
+            opcoesIncorretas.add(randVal);
+        }
+    }
+
+    return {
+        conta: expressao,
+        correta: resultado,
+        opcoes: baralharArray([resultado, ...Array.from(opcoesIncorretas)])
+    };
+}
 /* ==========================================
    GERADOR DE PARTIDA (GARANTE 10 CONTAS ÚNICAS)
    ========================================== */
@@ -2569,54 +2615,57 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ==========================================
    GERADOR DE DICA VISUAL E CONCRETA
    ========================================== */
-	function gerarDicaVisualHTML(contaObj) {
-		if (!contaObj) return '';
+function gerarDicaVisualHTML(contaObj) {
+    if (!contaObj) return '';
 
-		const partes = contaObj.conta.replace('=', '').trim().split(' ');
-		const num1 = parseInt(partes[0]);
-		const op = partes[1];
-		const num2 = parseInt(partes[2]);
+    const partes = contaObj.conta.replace('=', '').trim().split(' ');
+    const num1 = parseInt(partes[0]);
+    const op = partes[1];
+    const num2 = parseInt(partes[2]);
 
-		const cent1 = Math.floor(num1 / 100) * 100;
-		const dez1 = Math.floor((num1 % 100) / 10) * 10;
-		const uni1 = num1 % 10;
+    const cent1 = Math.floor(num1 / 100) * 100;
+    const dez1 = Math.floor((num1 % 100) / 10) * 10;
+    const uni1 = num1 % 10;
 
-		const cent2 = Math.floor(num2 / 100) * 100;
-		const dez2 = Math.floor((num2 % 100) / 10) * 10;
-		const uni2 = num2 % 10;
+    const cent2 = Math.floor(num2 / 100) * 100;
+    const dez2 = Math.floor((num2 % 100) / 10) * 10;
+    const uni2 = num2 % 10;
 
-		const resCent = op === '+' ? cent1 + cent2 : cent1 - cent2;
-		const resDez = op === '+' ? dez1 + dez2 : dez1 - dez2;
-		const resUni = op === '+' ? uni1 + uni2 : uni1 - uni2;
+    const resCent = op === '+' ? cent1 + cent2 : cent1 - cent2;
+    const resDez = op === '+' ? dez1 + dez2 : dez1 - dez2;
+    const resUni = op === '+' ? uni1 + uni2 : uni1 - uni2;
 
-		let html = `<div class="dica-visual-box">`;
-		html += `<div class="dica-titulo-modal">Calcula por partes:</div>`;
-		html += `<div class="expressao-dica-destaque">${num1} ${op} ${num2} = ?</div>`;
-		html += `<div class="decomposicao-grid">`;
-		
-		if (num1 >= 100 || num2 >= 100) {
-			html += `<div class="card-dec cent" style="border-color:#a7f3d0; background:#ecfdf5;">`;
-			html += `<span class="dec-lbl">Centenas</span>`;
-			html += `<span class="dec-val">${cent1} ${op} ${cent2} = <strong>${resCent}</strong></span>`;
-			html += `</div>`;
-		}
+    let html = `<div class="dica-visual-box">`;
+    html += `<div class="dica-titulo-modal">Calcula por partes:</div>`;
+    html += `<div class="expressao-dica-destaque">${num1} ${op} ${num2} = ?</div>`;
+    html += `<div class="decomposicao-grid">`;
 
-		html += `<div class="card-dec dez">`;
-		html += `<span class="dec-lbl">Dezenas</span>`;
-		html += `<span class="dec-val">${dez1} ${op} ${dez2} = <strong>${resDez}</strong></span>`;
-		html += `</div>`;
+    // Exibe centenas se existirem no nível
+    if (cent1 > 0 || cent2 > 0) {
+        html += `<div class="card-dec cent" style="border-color:#a7f3d0; background:#ecfdf5;">`;
+        html += `<span class="dec-lbl">Centenas</span>`;
+        html += `<span class="dec-val">${cent1} ${op} ${cent2} = <strong>${resCent}</strong></span>`;
+        html += `</div>`;
+    }
 
-		html += `<div class="card-dec uni">`;
-		html += `<span class="dec-lbl">Unidades</span>`;
-		html += `<span class="dec-val">${uni1} ${op} ${uni2} = <strong>${resUni}</strong></span>`;
-		html += `</div>`;
+    // Cartão de Dezenas
+    html += `<div class="card-dec dez">`;
+    html += `<span class="dec-lbl">Dezenas</span>`;
+    html += `<span class="dec-val">${dez1} ${op} ${dez2} = <strong>${resDez}</strong></span>`;
+    html += `</div>`;
 
-		html += `</div>`;
-		html += `<p class="dica-subtitulo-modal">Junta todos os resultados para obteres o total!</p>`;
-		html += `</div>`;
+    // Cartão de Unidades
+    html += `<div class="card-dec uni">`;
+    html += `<span class="dec-lbl">Unidades</span>`;
+    html += `<span class="dec-val">${uni1} ${op} ${uni2} = <strong>${resUni}</strong></span>`;
+    html += `</div>`;
 
-		return html;
-	}
+    html += `</div>`;
+    html += `<p class="dica-subtitulo-modal">Junta todos os resultados para obteres o total!</p>`;
+    html += `</div>`;
+
+    return html;
+}
 
 </script>
 <script type="module" src="/contador.js"></script>
