@@ -371,7 +371,7 @@ function pesquisarJogos() {
 						<img src="/SVG/animais.svg" alt="" class="icon-popular-svg" onerror="this.style.display='none'"> Animais
 					</button>
 					<button type="button" class="btn-populares-tag" onclick="pesquisarTermoPopular('Relógio')">
-						<img src="/SVG/relogio.svg" alt="" class="icon-popular-svg" onerror="this.style.display='none'"> Relógio
+						<img src="/SVG/relogio.svg" alt="" class="icon-popular-svg" onerror="this.style.display='none'"> Tempo
 					</button>
 					<button type="button" class="btn-populares-tag" onclick="pesquisarTermoPopular('Corpo Humano')">
 						<img src="/SVG/corpo.svg" alt="" class="icon-popular-svg" onerror="this.style.display='none'"> Corpo Humano

@@ -1607,6 +1607,16 @@
         "disciplina": "Matemática",
         "tags": ["ábaco", "números", "contar", "milhares", "ordens", "decomposição"]
     },
+	
+	{
+        "nome": "Ordens e Classes",
+        "icone": "/3/icones/ordens_classes.png",
+        "link": "/3/mat/ordens-classes/",
+        "ano": "3º Ano",
+        "disciplina": "Matemática",
+        "tags": ["classes de números", "leitura de números", "decomposição de números", "ordens de números", "milhares", "números", "dezena de milhar", "valor posicional"]
+    },
+	
     {
         "nome": "O Chefe das Frações",
         "icone": "/3/icones/fracoes.png",
