@@ -8,7 +8,6 @@ const palavras = [
   { palavra: "avião", imagem: "img/aviao.png", num: 3, divisao: "A-VI-ÃO" },
   { palavra: "baleia", imagem: "img/baleia.png", num: 3, divisao: "BA-LEI-A" },
   { palavra: "banana", imagem: "img/banana.png", num: 3, divisao: "BA-NA-NA" },
-  { palavra: "banco", imagem: "img/banco.png", num: 2, divisao: "BAN-CO" },
   { palavra: "bandeira", imagem: "img/bandeira.png", num: 3, divisao: "BAN-DEI-RA" },
   { palavra: "barco", imagem: "img/barco.png", num: 2, divisao: "BAR-CO" },
   { palavra: "batata", imagem: "img/batata.png", num: 3, divisao: "BA-TA-TA" },
