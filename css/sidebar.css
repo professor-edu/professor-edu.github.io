@@ -209,13 +209,16 @@ button.btn-pesquisa-header[data-tooltip]::after {
 .modal-pesquisa-container {
     width: 100%;
     max-width: 780px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
     background: #ffffff;
     border-radius: 24px;
     padding: 20px;
+    box-sizing: border-box;
 
     /* Borda e Glow com fallback azul (#0091ff) */
     border: 3px solid var(--cor-hover, #0091ff);
-
     box-shadow: 
         0 20px 45px -10px rgba(0, 0, 0, 0.3),
         0 0 25px var(--cor-hover, rgba(0, 145, 255, 0.25));
@@ -332,14 +335,20 @@ button.btn-pesquisa-header[data-tooltip]::after {
 .resultados-pesquisa {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    gap: 10px;
     width: 100%;
     box-sizing: border-box;
+    flex: 1; /* Ocupa todo o espaço vertical restante dentro da modal */
+    overflow-y: auto; /* Ativa a barra de scroll interna quando os cartões excedem a altura */
     overflow-x: hidden;
+    padding-right: 6px; /* Evita que a barra de scroll fique em cima dos cartões */
+    margin-top: 10px;
 }
 
 .resultados-pesquisa::-webkit-scrollbar {
     width: 6px;
 }
+
 .resultados-pesquisa::-webkit-scrollbar-thumb {
     background: #cbd5e1;
     border-radius: 4px;
@@ -419,7 +428,24 @@ button.btn-pesquisa-header[data-tooltip]::after {
     color: #636e72 !important;
 }
 
-
+/* =========================================
+   RESUMO DE RESULTADOS FIXO NO TOPO (STICKY)
+   ========================================= */
+.pesquisa-resumo-topo {
+    grid-column: 1 / -1 !important;
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    z-index: 10;
+    padding: 8px 0 10px 0;
+    margin: 0;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #64748b;
+    box-shadow: 0 4px 6px -2px rgba(255, 255, 255, 0.9);
+	border-bottom: 1px solid #e2e8f0;
+}
 
 
 /* =========================================
