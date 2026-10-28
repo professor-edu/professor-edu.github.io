@@ -97,6 +97,8 @@
             .btn-voltar { margin: 0 auto; position: relative; z-index: 5; }
             h1 { text-align: center; font-size: 1.8rem; }
             .subtitulo { text-align: center; margin-top: 5px; }
+			main { padding: 25px 20px; gap: 10px; } 
+            .cartao-jogo-container { padding: 15px; }
         }
 
         .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: white; z-index: 200; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.1); text-align: left; }
@@ -114,16 +116,17 @@
 			flex-direction: column; 
 			justify-content: center; 
 			align-items: center; 
-			padding: 20px 15px; 
+			padding: 25px 20px; 
 			width: 100%; 
 			box-sizing: border-box; 
 		}
 
-		.cartao-jogo-container { 
-            background: white; width: 100%; max-width: 950px; flex: 1; min-height: 0;
+        .cartao-jogo-container { 
+            background: white; width: 100%; max-width: 950px; 
+            flex: 1; min-height: 0; /* TRUQUE DO FLEXBOX PARA NÃO EMPURRAR O FOOTER */
             padding: 25px 20px; border-radius: 30px; box-shadow: 0 4px 15px #ff6b6b91; 
-            border-top: 8px solid var(--cor-pt); display: flex; flex-direction: column; 
-            align-items: center; justify-content: center; position: relative; box-sizing: border-box; 
+            border-top: 8px solid var(--cor-pt); 
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; box-sizing: border-box;
         }
 
         footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--azul-vibrante); flex-shrink: 0; z-index: 10;}
@@ -139,17 +142,27 @@
 			flex-direction: column; 
 			align-items: center; 
 			justify-content: flex-start; 
-			gap: 20px; /* Espaçamento uniforme entre os elementos */
+
 			animation: fadeIn 0.4s ease; 
 			box-sizing: border-box; 
 		}
-        .titulo-menu { 
-			font-size: 1.8rem; 
-			color: var(--azul-escuro); 
-			margin-top: 5px;
-			margin-bottom: 15px; 
-			font-weight: 900;
-		}
+#ecra-selecao {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto 0;
+	gap: 20px;
+}
+
+.titulo-menu {
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
+    color: var(--azul-escuro);
+    margin: 0;
+    font-weight: 900;
+}
 
         /* Botões Níveis Iniciais (Empilham no mobile) */
         .diff-container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; width: 100%; max-width: 800px; padding-bottom: 10px;}
@@ -177,6 +190,15 @@
             .btn-nivel-menu { width: 100%; max-width: 400px; }
         }
 
+#ecra-jogo {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 0;
+}
+
         /* =========================================
            BARRA DE ESTADO DO JOGO
            ========================================= */
@@ -184,7 +206,9 @@
             display: flex; align-items: center; justify-content: space-between; gap: 10px;
             width: 100%; background: #fdf2f2; padding: 8px 12px;
             border-radius: 20px; border: 2px solid var(--cor-pt); margin-bottom: 25px; box-sizing: border-box; flex-shrink: 0;
+            position: relative;
         }
+
 
         .btn-voltar-menu { background-color: white; color: var(--azul-escuro); border: 2px solid var(--cor-pt); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.2s; }
         .btn-voltar-menu:hover { border-color: var(--azul-escuro); transform: scale(1.05); }
@@ -203,7 +227,7 @@
         .progress-fill { height: 100%; width: 0%; border-radius: 20px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); background-color: var(--cor-1ano); background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent); background-size: 30px 30px; animation: moverRiscas 2s linear infinite; }
         
         @media (max-width: 850px) {
-            .status-bar-jogo { flex-wrap: wrap; justify-content: center; }
+            .status-bar-jogo { flex-wrap: wrap; justify-content: center; margin-bottom: 25px; }
             .btn-voltar-menu, .btn-dica { padding: 4px 8px; font-size: 0.85rem;}
             .badge-ronda, .badge-erros { font-size: 0.85rem; padding: 4px 8px; }
             .progress-bg { order: 6; min-width: 100%; margin-top: 5px; height: 20px; margin: 5px 0 0 0;}
@@ -213,11 +237,14 @@
            ÁREA DE JOGO LIVRE
            ========================================= */
         .area-jogo-custom {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
+  flex: 1;
+  min-height: 0;
   background: radial-gradient(
     ellipse at center,
     #ffffff 30%,
@@ -225,13 +252,14 @@
     color-mix(in srgb, var(--cor-pt) 6%, #ffffff) 100%
   );
   border-radius: 20px;
-  padding: 30px 20px;
-  overflow: visible;
-  gap: 25px;
+  padding: 25px 15px 15px 15px;
+  gap: clamp(8px, 1.5vh, 15px);
+  overflow-y: auto;
+  overflow: hidden;
   position: relative;
-  box-sizing: border-box;
-  box-shadow: inset 0 0 12px 2px rgba(255, 107, 107, 0.40), inset 0 0 25px 6px rgba(255, 107, 107, 0.15);
   color: #e03131;
+  font-weight: bold;
+  box-shadow: inset 0 0 12px 2px rgba(255, 107, 107, 0.40), inset 0 0 25px 6px rgba(255, 107, 107, 0.15);
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -374,7 +402,7 @@
         .pool-container {
             display: flex; justify-content: center; align-items: center; gap: clamp(8px, 2vw, 15px);
             width: 100%; max-width: 700px; padding: 20px 0; border-top: 3px dashed #e2e8f0;
-            flex-wrap: wrap; margin-top: 15px;
+            flex-wrap: wrap; margin-top: 15px; min-height: clamp(80px, 15vw, 110px); box-sizing: border-box;
         }
 
         /* Peças (As sílabas arrastáveis) */
@@ -591,8 +619,8 @@
             </div>
             
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; width: 100%; max-width: 500px; margin: 0 auto;">
-                <button class="btn-acao" onclick="reiniciarMesmoNivel()" style="margin: 0; flex: 1; min-width: 200px;">JOGAR DE NOVO 🔄</button>
-                <button class="btn-acao" onclick="voltarAoMenu()" style="margin: 0; flex: 1; min-width: 200px; background-color: #ced6e0; color: var(--text-main); box-shadow: 0 6px 0 #a4b0be;">MUDAR NÍVEL 🏠</button>
+                <button class="btn-acao" onclick="reiniciarMesmoNivel()" style="margin: 0; flex: 1; min-width: 200px;">JOGAR DE NOVO <img src="../../../SVG/jogar_novo.svg" class="icon-svg-menu" alt=""></button>
+                <button class="btn-acao" onclick="voltarAoMenu()" style="margin: 0; flex: 1; min-width: 200px; background-color: #ced6e0; color: var(--text-main); box-shadow: 0 6px 0 #a4b0be;">MUDAR NÍVEL <img src="../../../SVG/menu_principal_1.svg" class="icon-svg-menu" alt=""></button>
             </div>
         </div>
 
