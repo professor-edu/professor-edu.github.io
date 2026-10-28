@@ -356,6 +356,67 @@
 	.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
 	.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
 	.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+	
+/* =========================================================
+   DISPOSIÇÃO RESPONSIVA DAS LETRAS E OPÇÕES (MOBILE)
+   ========================================================= */
+@media (max-width: 600px) {
+
+    /* 1. PALAVRA EM CIMA: Sempre numa única linha sem quebra */
+    .word-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap !important; /* Força 1 linha única */
+        width: 100%;
+        max-width: 100%;
+        gap: clamp(2px, 1.2vw, 8px);
+        margin-bottom: 15px;
+    }
+
+    .letter-box {
+        flex: 1 1 0;
+        min-width: 0; /* Permite encolher abaixo do conteúdo em palavras longas */
+        max-width: 55px;
+        aspect-ratio: 1 / 1.15;
+        height: auto;
+        font-size: clamp(1.2rem, 5vw, 2.2rem);
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 2. OPÇÕES EM BAIXO: Base de alinhamento */
+    .options-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 8px;
+    }
+
+    /* 4 Opções: 1 Linha Única */
+    .options-container:has(> :nth-child(4):last-child) { flex-wrap: nowrap; }
+    .options-container:has(> :nth-child(4):last-child) .letter-btn {
+        width: clamp(52px, 18vw, 68px);
+        max-width: 68px;
+    }
+
+    /* 5 Opções: 2 Linhas (3 em cima, 2 em baixo centradas) */
+    .options-container:has(> :nth-child(5):last-child) { flex-wrap: wrap; }
+    .options-container:has(> :nth-child(5):last-child) .letter-btn {
+        flex: 0 0 calc(33.33% - 8px);
+        max-width: 65px;
+    }
+
+    /* 6 Opções: 2 Linhas (3 em cima, 3 em baixo) */
+    .options-container:has(> :nth-child(6):last-child) { flex-wrap: wrap; }
+    .options-container:has(> :nth-child(6):last-child) .letter-btn {
+        flex: 0 0 calc(33.33% - 8px);
+        max-width: 65px;
+    }
+}
 </style>
 
 <style>
@@ -702,8 +763,7 @@
         let disponiveisIntrusas = alfabeto.filter(l => !letrasFalta.includes(l));
         disponiveisIntrusas.sort(() => Math.random() - 0.5);
         
-        // Junta as que faltam com 3 a 5 intrusas (dependendo do nível) para fazer um teclado pequeno
-        let numIntrusas = 4;
+        let numIntrusas = 3;
         let opcoesFinais = [...letrasFalta, ...disponiveisIntrusas.slice(0, numIntrusas)];
         
         // Adiciona um fator aleatório para não serem sempre as mesmas
