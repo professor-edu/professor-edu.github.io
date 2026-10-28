@@ -207,10 +207,45 @@
            ÁREA DE JOGO CUSTOM (O QUADRO TRACEJADO)
            ========================================= */
         .area-jogo-custom {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            width: 100%; flex: 1; min-height: 0; background: #f8fafc; border: 2px dashed var(--cor-em); border-radius: 20px; padding: 25px; gap: 35px;
-            position: relative; color: #94a3b8; font-weight: bold; overflow: hidden;
-        }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  background: radial-gradient(
+    ellipse at center,
+    #ffffff 30%,
+    color-mix(in srgb, var(--cor-em) 4%, #ffffff) 70%,
+    color-mix(in srgb, var(--cor-em) 10%, #ffffff) 100%
+  );
+  border-radius: 20px;
+  padding: 25px;
+  gap: 35px;
+  position: relative;
+  color: #2b8a3e;
+  font-weight: bold;
+  overflow: hidden;
+  box-shadow: inset 0 0 12px 2px rgba(81, 207, 102, 0.40), inset 0 0 25px 6px rgba(81, 207, 102, 0.15);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.area-jogo-custom::after {
+  content: "🌱 ≈  𖤓 ";
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  letter-spacing: 3px;
+  color: #2b8a3e;
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 5;
+}
 
         .instrucao-jogo { font-size: clamp(1.2rem, 4vw, 1.5rem); color: var(--azul-escuro); font-weight: 900; text-align: center;}
 
@@ -303,7 +338,34 @@
         @media (max-width: 600px) {
             .contentores-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
             .bin-card { padding: 10px 5px; border-width: 3px; border-bottom-width: 6px; }
-            .area-jogo-custom { padding: 10px; }
+            .area-jogo-custom {
+  padding: 10px;
+  background: radial-gradient(
+    ellipse at center,
+    #ffffff 30%,
+    color-mix(in srgb, var(--cor-em) 4%, #ffffff) 70%,
+    color-mix(in srgb, var(--cor-em) 10%, #ffffff) 100%
+  );
+  box-shadow: inset 0 0 12px 2px rgba(81, 207, 102, 0.40), inset 0 0 25px 6px rgba(81, 207, 102, 0.15);
+  color: #2b8a3e;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.area-jogo-custom::after {
+  content: "🌱 ≈  𖤓 ";
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  letter-spacing: 3px;
+  color: #2b8a3e;
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 5;
+}
         }
 
         @keyframes moverRiscas { 0% { background-position: 0 0; } 100% { background-position: 30px 0; } }
