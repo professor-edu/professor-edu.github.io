@@ -812,7 +812,7 @@
 			justify-content: center;
 			gap: 15px;
 			width: 100%;
-			max-width: 800px;
+			max-width: 750px;
 			background: #ffffff;
 			border: 3px solid var(--cor-btn-verde);
 			border-radius: 25px;
@@ -1258,7 +1258,31 @@
 			box-shadow: 0 0px 0 transparent;
 		}
 
+/* =========================================
+	   ADAPTAÇÃO MOBILE VERTICAL 
+	   ========================================= */
+	@media (max-width: 600px) {
+		.seccao-resposta-equacao {
+			flex-direction: column; /* Empilha o input e o botão */
+			gap: 10px;
+			margin-top: 10px;
+		}
 
+		.input-resposta-equacao {
+			width: 100% !important; /* Anula a largura fixa de 160px do HTML */
+			max-width: 220px;       /* Garante que não fica gigante */
+			height: 48px;           /* Altura mais confortável para ecrãs pequenos */
+			font-size: 1.2rem;
+		}
+
+		/* Ajusta o botão para acompanhar a largura do caixa de texto */
+		.seccao-resposta-equacao button, 
+		.seccao-resposta-equacao .btn-opcao-lacuna {
+			width: 100% !important;
+			max-width: 220px;
+			padding: 10px 0 !important;
+		}
+	}
 
 		
 
