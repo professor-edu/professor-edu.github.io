@@ -337,13 +337,31 @@
             main { justify-content: flex-start !important; padding-top: 15px; padding-bottom: 15px; overflow-y: visible !important; }
             .cartao-jogo-container { margin: auto 0; }
 			.status-bar-jogo { 
-				display: flex;
-				flex-wrap: wrap; 
-				justify-content: center; 
-				align-items: center;
-				gap: 8px 6px; 
-				padding: 10px 8px;
-			}
+                /* Trocamos a Grid Rígida por um Flexbox Maleável */
+                display: flex;
+                flex-wrap: wrap; /* O Segredo: permite arrumar noutra linha se não couber! */
+                justify-content: center; /* Centra tudo de forma harmoniosa */
+                align-items: center;
+                gap: 8px 6px; 
+                padding: 10px 8px;
+            }
+            
+            /* A barra de progresso vai obrigatoriamente para a última linha */
+            .progress-bg { 
+                order: 10; /* Força o elemento a ir para o fim */
+                width: 100%; 
+                margin: 4px 0 0 0; 
+                height: 25px; /* Altura elegante para mobile */
+            }
+
+            /* Botões e Badges compactos mas protegidos de esmagamentos */
+            .btn-voltar-menu, .btn-dica, .badge-ronda, .badge-erros { 
+                padding: 4px 8px; 
+                font-size: 0.8rem; 
+                gap: 4px;
+                white-space: nowrap; /* Garante que o texto não se parte a meio */
+                flex-shrink: 0; /* Impede os ícones de ficarem esmagados */
+            }
         }
         @media (hover: none) and (pointer: coarse) {
             body { height: auto !important; overflow-y: auto !important; }
