@@ -131,11 +131,30 @@
         /* =========================================
            ÁREA DA MÁQUINA DO TEMPO
            ========================================= */
-        .area-jogo-custom { 
-            display: flex; flex-direction: column; width: 100%; flex: 1; min-height: 50vh; 
-            border-radius: 20px; padding: 0; position: relative; overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 2px solid #ced6e0;
-        }
+        .area-jogo-custom {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  min-height: 50vh;
+  border-radius: 20px;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 12px 2px rgba(81, 207, 102, 0.40), inset 0 0 25px 6px rgba(81, 207, 102, 0.15);
+  background: radial-gradient(
+    ellipse at center,
+    #ffffff 30%,
+    color-mix(in srgb, var(--cor-em) 4%, #ffffff) 70%,
+    color-mix(in srgb, var(--cor-em) 10%, #ffffff) 100%
+  );
+  color: #2b8a3e;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+
 
         .split-screen-container { display: flex; width: 100%; height: 100%; position: relative; flex: 1;}
 
@@ -251,7 +270,23 @@
 
         /* Ecrã Fim */
         .end-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--azul-escuro); margin-bottom: 25px; }
-        .end-stats { font-size: 1.3rem; color: var(--text-main); margin-bottom: 40px; text-align: center; background: #fff; padding: 30px 20px; border-radius: 20px; border: 2px solid #ffebeb; line-height: 1.5;}
+        .icon-end-title {
+			/* O tamanho 1.2em garante que o ícone acompanhe o crescimento do clamp */
+			width: 1.2em; 
+			height: 1.2em;
+			object-fit: contain;
+			/* Um leve drop-shadow para dar profundidade, combinando com o estilo de jogo */
+			filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+		}
+
+		/* Ajuste para ecrãs muito pequenos */
+		@media (max-width: 480px) {
+			.end-title {
+				flex-direction: column; /* No telemóvel, o ícone fica em cima do texto */
+				gap: 10px;
+			}
+		}
+		.end-stats { font-size: 1.3rem; color: var(--text-main); margin-bottom: 40px; text-align: center; background: #fff; padding: 30px 20px; border-radius: 20px; border: 2px solid #ffebeb; line-height: 1.5;}
         .btn-acao { background-color: var(--azul-escuro); color: white; border: none; padding: 15px 35px; font-size: 1.2rem; font-weight: 900; border-radius: 15px; cursor: pointer; box-shadow: 0 6px 0 #093273; transition: transform 0.2s, box-shadow 0.2s; }
         @media (hover: hover) { .btn-acao:hover { transform: translateY(-3px); box-shadow: 0 9px 0 #093273; } }
         .btn-acao:active { transform: translateY(6px); box-shadow: 0 0px 0 transparent; }
@@ -368,7 +403,7 @@
             <p style="color: var(--azul-escuro); font-size: 1.2rem; max-width: 600px; margin-bottom: 30px; font-weight: 500;">
                 Tens 12 objetos perdidos no tempo.</br> <b>Clica no lado correto</b> para os guardar na tua galeria do Passado ou Presente!
             </p>
-            <button class="btn-acao" onclick="iniciarJogo()">COMEÇAR A COLEÇÃO ▶️</button>
+            <button class="btn-acao" onclick="iniciarJogo()">COMEÇAR A COLEÇÃO <img src="../../../SVG/seta_direita.svg" class="icon-svg-menu" alt=""></button>
         </div>
 
         <!-- ECRÃ DE JOGO -->
@@ -408,12 +443,12 @@
 
         <!-- ECRÃ DE FIM -->
         <div id="ecra-fim" class="ecra">
-            <h2 class="end-title">Coleção Completa! 🎉</h2>
+            <h2 class="end-title" id="end-title-text">Coleção Completa!<img src="../../../SVG/confeti.svg" class="icon-end-title" alt=""></h2>
             <div class="end-stats">
                 Conseguiste arrumar todos os objetos no tempo certo!<br><br>
                 Cometeste <strong id="final-erros" style="color:#ff4757; font-size:2rem;">0</strong> erros.
             </div>
-            <button class="btn-acao" onclick="reiniciarJogo()">COLECIONAR DE NOVO 🔄</button>
+            <button class="btn-acao" onclick="reiniciarJogo()">COLECIONAR DE NOVO <img src="../../../SVG/jogar_novo.svg" class="icon-svg-menu" alt=""></button>
         </div>
     </div>
 </main>

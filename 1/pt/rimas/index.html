@@ -236,7 +236,24 @@
 }
 
         .end-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--azul-escuro); margin-bottom: 25px; }
-        .end-stats { font-size: 1.3rem; color: var(--text-main); margin-bottom: 40px; text-align: center; background: var(--bg-header); padding: 30px 20px; border-radius: 20px; border: 2px dashed var(--cor-pt); line-height: 1.5; }
+        .icon-end-title {
+			/* O tamanho 1.2em garante que o ícone acompanhe o crescimento do clamp */
+			width: 1.2em; 
+			height: 1.2em;
+			object-fit: contain;
+			/* Um leve drop-shadow para dar profundidade, combinando com o estilo de jogo */
+			filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+		}
+
+		/* Ajuste para ecrãs muito pequenos */
+		@media (max-width: 480px) {
+			.end-title {
+				flex-direction: column; /* No telemóvel, o ícone fica em cima do texto */
+				gap: 10px;
+			}
+		}
+		
+		.end-stats { font-size: 1.3rem; color: var(--text-main); margin-bottom: 40px; text-align: center; background: var(--bg-header); padding: 30px 20px; border-radius: 20px; border: 2px dashed var(--cor-pt); line-height: 1.5; }
         
         .btn-acao { background-color: var(--azul-escuro); color: white; border: none; padding: 15px 35px; font-size: 1.1rem; font-weight: 700; border-radius: 15px; cursor: pointer; box-shadow: 0 6px 0 #093273; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px; width: 100%; max-width: 320px; transition: transform 0.2s, box-shadow 0.2s, filter 0.2s; }
         @media (hover: hover) { .btn-acao:hover { transform: translateY(-3px); box-shadow: 0 9px 0 #093273; filter: brightness(1.15); } }
@@ -491,7 +508,7 @@
 
         <!-- ECRÃ DE FIM -->
         <div id="ecra-fim" class="ecra">
-            <h2 class="end-title" id="end-title-text">Missão Cumprida! 🎉</h2>
+            <h2 class="end-title" id="end-title-text">Missão Cumprida!<img src="../../../SVG/confeti.svg" class="icon-end-title" alt=""></h2>
             <div class="end-stats">
                 Acertaste <strong id="final-certas" style="color:#2ed573">0</strong> palavras<br>
                 Tiveste <strong id="final-erradas" style="color:#ff4757">0</strong> tentativas erradas.
