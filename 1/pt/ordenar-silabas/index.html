@@ -441,25 +441,45 @@
             margin: 20px 0; border-radius: 5px;
         }
 
-        .drag-container { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; min-height: 80px; width: 100%; }
+        .drag-container { 
+    display: flex; 
+    justify-content: center; 
+    gap: clamp(6px, 2vw, 10px); 
+    flex-wrap: wrap; 
+    min-height: 50px; /* Reduzido de 80px para não empurrar o layout */
+    width: 100%; 
+}
         .silaba-drag {
-            padding: 12px 20px; background-color: var(--cor-1ano); color: white; border-radius: 15px;
-            font-size: 28px; font-weight: 900; cursor: grab; box-shadow: 0 6px 0 var(--cor-1ano-dark);
-            user-select: none; touch-action: none; transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s; display: flex; align-items: center; justify-content: center;
-        }
-        
-        /* Efeito Hover nas Sílabas */
-        @media (hover: hover) {
-            .silaba-drag:hover:not(.arrastando) {
-                transform: translateY(-6px) scale(1.05);
-                box-shadow: 0 12px 15px rgba(0, 145, 255, 0.25);
-                background-color: var(--azul-vibrante);
-            }
-        }
-        
-        .silaba-drag:active { cursor: grabbing; }
-        .silaba-drag.arrastando { opacity: 0.5; }
-        .silaba-drag.escondida { visibility: hidden; opacity: 0; pointer-events: none; }
+    min-width: 52px;  /* Garante formato proporcional mesmo para 1 letra */
+    height: 48px;     /* Altura fixa bem mais compacta (era dependente de padding 12px) */
+    padding: 0 12px;  
+    background-color: var(--cor-1ano); 
+    color: white; 
+    border-radius: 12px;
+    font-size: 22px;   /* Reduzido de 28px para caber perfeitamente */
+    font-weight: 900; 
+    cursor: grab; 
+    box-shadow: 0 4px 0 var(--cor-1ano-dark); /* Reduzido de 6px */
+    user-select: none; 
+    -webkit-user-select: none;
+    touch-action: none; 
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+@media (hover: hover) {
+    .silaba-drag:hover:not(.arrastando) {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 8px 12px rgba(0, 145, 255, 0.25);
+        background-color: var(--azul-vibrante);
+    }
+}
+
+.silaba-drag:active { cursor: grabbing; }
+.silaba-drag.arrastando { opacity: 0.5; }
+.silaba-drag.escondida { visibility: hidden; opacity: 0; pointer-events: none; }
 
         .destaque-dica {
             animation: piscarDica 1s infinite alternate;
@@ -470,13 +490,37 @@
         @keyframes piscarDica { from { filter: brightness(1); } to { filter: brightness(1.2); } }
         @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 50% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
 
-        @media (max-width: 600px) {
-            .top-section { flex-direction: column; gap: 20px; }
-            .imagem-palavra-container { height: 140px; width: 140px; }
-            .drop-box { width: 60px; height: 60px; font-size: 26px; }
-            .silaba-drag { padding: 10px 15px; font-size: 24px; box-shadow: 0 4px 0 var(--cor-1ano-dark); }
-            .divisor-silabas { margin: 15px 0; }
-        }
+@media (max-width: 600px) {
+    .top-section { 
+        flex-direction: column; 
+        gap: 15px;
+    }
+
+    .imagem-palavra-container { 
+        height: 140px;
+        width: 140px; 
+    }
+
+    .drop-box { 
+        width: 50px;
+        height: 50px; 
+        font-size: 20px; 
+    }
+
+    /* Botões de sílaba otimizados para ecrãs estreitos */
+    .silaba-drag { 
+        min-width: 46px;
+        height: 42px;
+        padding: 0 8px; 
+        font-size: 16px; 
+        border-radius: 10px;
+        box-shadow: 0 3px 0 var(--cor-1ano-dark); 
+    }
+
+    .divisor-silabas { 
+        margin: 8px 0; /* Reduzido de 15px */
+    }
+}
 		
 		/* =========================================
 		CORREÇÃO PARA PAINEIS E ECRÃS GRANDES ????
