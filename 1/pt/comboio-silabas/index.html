@@ -544,22 +544,20 @@
 		========================================= */
 		
 		/* Ativa o scroll APENAS se o ecrã for verticalmente pequeno (ex: telemóveis) */
-@media (max-height: 600px) {
-    body {
-        height: auto !important;
-        min-height: 100dvh !important;
-        overflow-y: auto !important;
-    }
-    main {
-        justify-content: flex-start !important;
-        overflow-y: visible !important;
-    }
-    footer {
-        margin-top: auto;
-    }
-}
-		
-		@media (max-width: 600px) {
+		@media (max-height: 600px) {
+			body {
+				height: auto !important;
+				min-height: 100dvh !important;
+				overflow-y: auto !important;
+			}
+			main {
+				justify-content: flex-start !important;
+				overflow-y: visible !important;
+			}
+			footer {
+				margin-top: auto;
+			}
+
             .scenery {
                 height: 130px; /* Mais baixinho no telemóvel para não roubar espaço aos botões em baixo */
                 padding-bottom: 20px;
@@ -569,6 +567,15 @@
                 padding: 10px;
                 min-width: 55px; 
             }
+			
+			.status-bar-jogo { 
+				display: flex;
+				flex-wrap: wrap; 
+				justify-content: center; 
+				align-items: center;
+				gap: 8px 6px; 
+				padding: 10px 8px;
+			}
         }
 
 		
