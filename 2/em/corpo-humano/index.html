@@ -61,6 +61,48 @@
             h1, .subtitulo { grid-column: 2; text-align: center; }
             main { padding: 15px 10px; gap: 10px; } 
             .cartao-jogo-container { padding: 15px; }
+			
+			.status-bar-jogo {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between; /* Mantém os 4 botões distribuídos na Linha 1 */
+				align-items: center;
+				gap: 6px 2px;
+				padding: 6px 8px;
+			}
+
+			/* 1. LINHA 1: Os 4 elementos alinhados no topo */
+			.btn-voltar-menu,
+			.btn-dica,
+			.badge-ronda,
+			.badge-erros {
+				order: 1;
+				padding: 4px 6px !important;
+				font-size: 0.78rem !important;
+				gap: 3px !important;
+				flex: 0 1 auto;
+				white-space: nowrap;
+			}
+
+			/* Redução proporcional dos ícones sem alterar cores ou formas */
+			.btn-voltar-menu svg, 
+			.btn-dica svg, 
+			.badge-ronda svg, 
+			.badge-erros svg,
+			.svg-icon {
+				width: 14px !important;
+				height: 14px !important;
+			}
+
+			/* 2. LINHA 2: Barra de progresso isolada a 100% em baixo */
+			.progress-bg {
+				order: 2;
+				flex: 0 0 100% !important;
+				width: 100% !important;
+				min-width: 100% !important;
+				margin: 4px 0 0 0 !important;
+				height: 16px !important;
+			}
         }
 
         .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: white; z-index: 200; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.1); text-align: left; }
@@ -213,7 +255,7 @@
         .confetti { position: absolute; width: 10px; height: 10px; animation: fall linear forwards; pointer-events: none;}
         @keyframes fall { to { transform: translateY(600px) rotate(360deg); opacity: 0; } }
 
-    .icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
+    .icon-svg-menu { width: 24px; height: 24px; display: inline-block; vertical-align: middle; object-fit: contain; }
 	.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
 	.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
 	.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
@@ -263,7 +305,7 @@
                 Prepara-te para 12 perguntas sobre os órgãos, os ossos e os músculos do teu corpo. Estás preparado?
             </p>
 
-            <button class="btn-acao" onclick="iniciarJogo()">COMEÇAR O QUIZ ▶️</button>
+            <button class="btn-acao" onclick="iniciarJogo()">COMEÇAR O QUIZ <img src="../../../SVG/seta_direita.svg" class="icon-svg-menu" alt=""></button>
         </div>
 
         <!-- ECRÃ DE JOGO -->
@@ -286,14 +328,14 @@
                 <div class="zona-interativa">
                     
                     <div class="zona-botoes" id="zona-botoes">
-                        <button class="btn-vf" onclick="verificarResposta(true)">Verdadeiro ✔️</button>
-                        <button class="btn-vf" onclick="verificarResposta(false)">Falso ❌</button>
+                        <button class="btn-vf" onclick="verificarResposta(true)">Verdadeiro <img src="../../../SVG/certo.svg" class="icon-svg-menu" alt=""></button>
+                        <button class="btn-vf" onclick="verificarResposta(false)">Falso <img src="../../../SVG/errado.svg" class="icon-svg-menu" alt=""></button>
                     </div>
 
                     <div class="caixa-explicacao" id="caixa-explicacao">
                         <h4 class="titulo-expl" id="titulo-expl">Certo!</h4>
                         <p class="texto-expl" id="texto-expl">Explicação científica aqui.</p>
-                        <button class="btn-seguinte" onclick="avancarRonda()">Seguinte ➡️</button>
+                        <button class="btn-seguinte" onclick="avancarRonda()">Seguinte <img src="../../../SVG/proximo_nivel.svg" class="icon-svg-menu" alt=""></button>
                     </div>
 
                 </div>
@@ -307,7 +349,7 @@
                 És um especialista do corpo humano!<br><br>
                 Cometeste <strong id="final-erros" style="color:#ff4757; font-size:2rem;">0</strong> erros.
             </div>
-            <button class="btn-acao" onclick="reiniciarJogo()">JOGAR DE NOVO 🔄</button>
+            <button class="btn-acao" onclick="reiniciarJogo()">JOGAR DE NOVO <img src="../../../SVG/jogar_novo.svg" class="icon-svg-menu" alt=""></button>
         </div>
     </div>
 </main>
