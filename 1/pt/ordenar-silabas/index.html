@@ -789,14 +789,17 @@
     let indiceEsperado = 0;
     let silabaEmArrastamento = null;
 
-    function atualizarPlacarUI() {
-        document.getElementById('val-erros').textContent = errosTotais;
-        document.getElementById('val-progresso').textContent = rondaAtual > totalRondas ? totalRondas : rondaAtual;
-        document.getElementById('val-total').textContent = totalRondas;
-        
-        let perc = ((rondaAtual - 1) / totalRondas) * 100;
-        document.getElementById('progress-fill').style.width = `${perc}%`;
-    }
+function atualizarPlacarUI() {
+    let rondaDisplay = Math.min(rondaAtual, totalRondas);
+
+    document.getElementById('val-erros').textContent = errosTotais;
+    document.getElementById('val-progresso').textContent = rondaDisplay;
+    document.getElementById('val-total').textContent = totalRondas;
+    
+    // Usa rondaDisplay em vez de (rondaAtual - 1) para a barra começar preenchida na 1.ª ronda
+    let perc = (rondaDisplay / totalRondas) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+}
 
     function atualizarDicasUI() {
         const btnDica = document.getElementById('btn-dica');

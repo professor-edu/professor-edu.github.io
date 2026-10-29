@@ -776,20 +776,26 @@
         carregarPalavra();
     }
 
-    function atualizarPlacarUI() {
-        elValProgresso.textContent = rondaAtual > MAX_PALAVRAS ? MAX_PALAVRAS : rondaAtual;
-        elValErros.textContent = errosTotais;
-        let percent = ((rondaAtual - 1) / MAX_PALAVRAS) * 100;
-        elProgressFill.style.width = `${percent}%`;
+function atualizarPlacarUI() {
+    let rondaDisplay = Math.min(rondaAtual, MAX_PALAVRAS);
 
-        // Lógica da Dica: 1 a cada 5 rondas
-        const blocoAtual = Math.floor((rondaAtual - 1) / 5);
+    if (elValProgresso) elValProgresso.textContent = rondaDisplay;
+    if (elValErros) elValErros.textContent = errosTotais;
+    
+    // Usa rondaDisplay em vez de (rondaAtual - 1) para a barra começar preenchida na 1.ª ronda
+    let percent = (rondaDisplay / MAX_PALAVRAS) * 100;
+    if (elProgressFill) elProgressFill.style.width = `${percent}%`;
+
+    // Lógica da Dica: 1 a cada 5 rondas
+    const blocoAtual = Math.floor((rondaDisplay - 1) / 5);
+    if (btnDica) {
         if (!dicasUsadas[blocoAtual]) {
             btnDica.classList.remove('esgotada');
         } else {
             btnDica.classList.add('esgotada');
         }
     }
+}
 
     function carregarPalavra() {
         isTransitando = false;

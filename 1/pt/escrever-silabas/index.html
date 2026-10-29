@@ -554,13 +554,17 @@
         mostrarEcra('ecra-selecao');
     }
 
-    function atualizarPlacarUI() {
-        elProgresso.textContent = rondaAtual > MAX_PALAVRAS ? MAX_PALAVRAS : rondaAtual;
-        elErros.textContent = errosTotais;
-        elValTotal.textContent = MAX_PALAVRAS;
-        let percent = ((rondaAtual - 1) / MAX_PALAVRAS) * 100;
-        elProgressFill.style.width = `${percent}%`;
-    }
+function atualizarPlacarUI() {
+    let rondaDisplay = Math.min(rondaAtual, MAX_PALAVRAS);
+
+    if (elProgresso) elProgresso.textContent = rondaDisplay;
+    if (elErros) elErros.textContent = errosTotais;
+    if (elValTotal) elValTotal.textContent = MAX_PALAVRAS;
+    
+    // Usa rondaDisplay em vez de (rondaAtual - 1) para a barra começar preenchida na 1.ª ronda
+    let percent = (rondaDisplay / MAX_PALAVRAS) * 100;
+    if (elProgressFill) elProgressFill.style.width = `${percent}%`;
+}
 
     function atualizarDicasUI() {
         const btnDica = document.getElementById('btn-dica');

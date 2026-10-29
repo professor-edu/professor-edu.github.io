@@ -866,13 +866,17 @@
         mostrarEcra('ecra-selecao');
     }
 
-    function atualizarPlacarUI() {
-        elProgresso.textContent = rondaAtual > MAX_PALAVRAS ? MAX_PALAVRAS : rondaAtual;
-        elErros.textContent = erradas;
-        elValTotal.textContent = MAX_PALAVRAS;
-        let percent = ((rondaAtual - 1) / MAX_PALAVRAS) * 100;
-        elProgressFill.style.width = `${percent}%`;
-    }
+function atualizarPlacarUI() {
+    let rondaDisplay = Math.min(rondaAtual, MAX_PALAVRAS);
+
+    if (elProgresso) elProgresso.textContent = rondaDisplay;
+    if (elErros) elErros.textContent = erradas;
+    if (elValTotal) elValTotal.textContent = MAX_PALAVRAS;
+    
+    // Calcula a percentagem direta (ex: Ronda 1 de 10 = 10%)
+    let percent = (rondaDisplay / MAX_PALAVRAS) * 100;
+    if (elProgressFill) elProgressFill.style.width = `${percent}%`;
+}
 
     function atualizarDicasUI() {
         const blocoAtual = Math.floor((rondaAtual - 1) / 5);
@@ -935,7 +939,7 @@
         const stringDivisao = palavraObj.divisao ? palavraObj.divisao.toUpperCase() : palavraObj.palavra.toUpperCase();
         silabasAlvo = stringDivisao.split('-');
         
-        elProgressFill.style.width = `${(palavraAtualIndex / MAX_PALAVRAS) * 100}%`;
+
         
         // Animação da Imagem
         elImage.classList.remove('pop-in-anim');
