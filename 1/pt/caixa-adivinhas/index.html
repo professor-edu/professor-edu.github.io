@@ -688,13 +688,18 @@
         mostrarEcra('ecra-selecao');
     }
 
-    function atualizarPlacarUI() {
-        elProgresso.textContent = rondaAtual > MAX_PALAVRAS ? MAX_PALAVRAS : rondaAtual;
-        elErros.textContent = erradas;
-        elValTotal.textContent = adivinhasDoJogo.length;
-        let percent = ((rondaAtual - 1) / adivinhasDoJogo.length) * 100;
-        elProgressFill.style.width = `${percent}%`;
-    }
+function atualizarPlacarUI() {
+    const total = adivinhasDoJogo.length;
+    let rondaDisplay = Math.min(rondaAtual, total);
+
+    if (elProgresso) elProgresso.textContent = rondaDisplay;
+    if (elErros) elErros.textContent = erradas;
+    if (elValTotal) elValTotal.textContent = total;
+    
+    // Usa rondaDisplay diretamente para a barra começar preenchida na 1.ª ronda
+    let percent = total > 0 ? (rondaDisplay / total) * 100 : 0;
+    if (elProgressFill) elProgressFill.style.width = `${percent}%`;
+}
 
     function atualizarDicasUI() {
         const blocoAtual = Math.floor((rondaAtual - 1) / 5);
@@ -750,7 +755,6 @@
 
         const adivinhaAtual = adivinhasDoJogo[adivinhaAtualIndex];
         
-        elProgressFill.style.width = `${(adivinhaAtualIndex / adivinhasDoJogo.length) * 100}%`;
         
         // Escreve a adivinha no quadro suavemente
         textoAdivinha.style.opacity = 0;

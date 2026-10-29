@@ -860,11 +860,19 @@
             }
         },
 
-        atualizarPlacarUI: function () {
-            document.getElementById('val-progresso').textContent = this.rondaAtual + 1;
-            let perc = (this.rondaAtual / 15) * 100;
-            document.getElementById('progress-fill').style.width = `${perc}%`;
-        },
+atualizarPlacarUI: function () {
+        // Como this.rondaAtual é base 0, convertemos para base 1 (rondaDisplay) com limite em 15
+        const rondaDisplay = Math.min(this.rondaAtual + 1, 15);
+
+        const elProgresso = document.getElementById('val-progresso');
+        const elProgressFill = document.getElementById('progress-fill');
+
+        if (elProgresso) elProgresso.textContent = rondaDisplay;
+
+        // Usa rondaDisplay para a barra começar preenchida na 1.ª ronda
+        let perc = (rondaDisplay / 15) * 100;
+        if (elProgressFill) elProgressFill.style.width = `${perc}%`;
+    },
 
         finalizar: function() {
             document.getElementById('progress-fill').style.width = `100%`;
