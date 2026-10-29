@@ -992,12 +992,14 @@
             mostrarEcra('ecra-fim');
         },
 
-        atualizarPlacarUI: function () {
-            const rondaVisual = Math.min(this.rondaAtual + 1, this.totalRondas);
-            document.getElementById('val-progresso').textContent = rondaVisual;
-            const perc = (this.rondaAtual / this.totalRondas) * 100;
-            document.getElementById('progress-fill').style.width = `${perc}%`;
-        },
+atualizarPlacarUI: function () {
+    const rondaVisual = Math.min(this.rondaAtual + 1, this.totalRondas);
+    document.getElementById('val-progresso').textContent = rondaVisual;
+    
+    // Usa rondaVisual em vez de this.rondaAtual para a barra começar preenchida na 1.ª ronda
+    const perc = (rondaVisual / this.totalRondas) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+},
 
         reiniciarJogo: function() { 
             let dadosCompletos =[];

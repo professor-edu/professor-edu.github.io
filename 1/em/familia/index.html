@@ -1678,17 +1678,18 @@
 	/* ==========================================
 	   BARRA DE PROGRESSO E ESTADOS FINAIS
 	   ========================================== */
-	function atualizarPlacar() {
-		const p = Math.min(desafioAtual + 1, totalDesafiosNivel); 
-		document.getElementById('val-erros').textContent = erradas;
-		document.getElementById('val-progresso').textContent = p;
-		document.getElementById('val-total').textContent = totalDesafiosNivel;
+function atualizarPlacar() {
+    const p = Math.min(desafioAtual + 1, totalDesafiosNivel); 
+    document.getElementById('val-erros').textContent = erradas;
+    document.getElementById('val-progresso').textContent = p;
+    document.getElementById('val-total').textContent = totalDesafiosNivel;
 
-		const percentagem = ((desafioAtual) / totalDesafiosNivel) * 100;
-		document.getElementById('progress-fill').style.width = percentagem + '%';
-        
-        atualizarBotaoDica();
-	}
+    // Usa 'p' em vez de 'desafioAtual' para preencher a barra logo no 1.º desafio
+    const percentagem = (p / totalDesafiosNivel) * 100;
+    document.getElementById('progress-fill').style.width = percentagem + '%';
+    
+    atualizarBotaoDica();
+}
 
 	function finalizarJogo() {
         pararAudioRonda();

@@ -1876,13 +1876,17 @@
             mostrarEcra('ecra-fim');
         },
 
-        atualizarPlacarUI: function() {
-            document.getElementById('val-erros').textContent = this.errosTotais;
-            document.getElementById('val-progresso').textContent = this.rondaAtual;
-            document.getElementById('val-total').textContent = this.totalRondas;
-            let perc = ((this.rondaAtual - 1) / this.totalRondas) * 100;
-            document.getElementById('progress-fill').style.width = `${perc}%`;
-        },
+atualizarPlacarUI: function() {
+    let rondaDisplay = Math.min(this.rondaAtual, this.totalRondas);
+
+    document.getElementById('val-erros').textContent = this.errosTotais;
+    document.getElementById('val-progresso').textContent = rondaDisplay;
+    document.getElementById('val-total').textContent = this.totalRondas;
+    
+    // Usa rondaDisplay em vez de (this.rondaAtual - 1) para a barra começar preenchida na 1.ª ronda
+    let perc = (rondaDisplay / this.totalRondas) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+},
 
         reiniciarJogo: function() { this.iniciar(this.modoAtual); },
         voltarAoMenu: function() { mostrarEcra('ecra-selecao'); }

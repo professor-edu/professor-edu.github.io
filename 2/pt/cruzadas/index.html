@@ -785,11 +785,16 @@
             }
         },
 
-        atualizarPlacar: function() {
-            document.getElementById('val-progresso').textContent = this.rondaAtual + 1;
-            let perc = (this.rondaAtual / this.dadosBase.length) * 100;
-            document.getElementById('progress-fill').style.width = `${perc}%`;
-        },
+atualizarPlacar: function() {
+    let totalRondas = this.dadosBase.length;
+    let rondaDisplay = Math.min(this.rondaAtual + 1, totalRondas);
+
+    document.getElementById('val-progresso').textContent = rondaDisplay;
+    
+    // Usa rondaDisplay em vez de this.rondaAtual para a barra começar preenchida na 1.ª ronda
+    let perc = (rondaDisplay / totalRondas) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+},
 
         finalizar: function() {
             document.getElementById('progress-fill').style.width = `100%`;
