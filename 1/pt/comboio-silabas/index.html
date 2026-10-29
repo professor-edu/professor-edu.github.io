@@ -151,6 +151,48 @@
             .btn-voltar { margin: 0 auto; position: relative; z-index: 5; }
             h1 { text-align: center; font-size: 1.8rem; }
             .subtitulo { text-align: center; margin-top: 5px; }
+			
+			.status-bar-jogo {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between; /* Mantém os 4 botões distribuídos na Linha 1 */
+				align-items: center;
+				gap: 6px 2px;
+				padding: 6px 8px;
+			}
+
+			/* 1. LINHA 1: Os 4 elementos alinhados no topo */
+			.btn-voltar-menu,
+			.btn-dica,
+			.badge-ronda,
+			.badge-erros {
+				order: 1;
+				padding: 4px 6px !important;
+				font-size: 0.78rem !important;
+				gap: 3px !important;
+				flex: 0 1 auto;
+				white-space: nowrap;
+			}
+
+			/* Redução proporcional dos ícones sem alterar cores ou formas */
+			.btn-voltar-menu svg, 
+			.btn-dica svg, 
+			.badge-ronda svg, 
+			.badge-erros svg,
+			.svg-icon {
+				width: 14px !important;
+				height: 14px !important;
+			}
+
+			/* 2. LINHA 2: Barra de progresso isolada a 100% em baixo */
+			.progress-bg {
+				order: 2;
+				flex: 0 0 100% !important;
+				width: 100% !important;
+				min-width: 100% !important;
+				margin: 4px 0 0 0 !important;
+				height: 16px !important;
+			}
         }
 
         /* SIDEBAR DO TEMPLATE */
