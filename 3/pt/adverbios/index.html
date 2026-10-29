@@ -1290,6 +1290,7 @@
 
 			.area-jogo-custom {
 				padding-bottom: 20px !important;
+			}
 				
 			.triagem-grelha {
 				grid-template-columns: 1fr;
@@ -1324,6 +1325,47 @@
 				grid-template-columns: 1fr !important; /* --- Passa de 2 colunas para 1 coluna vertical! [2] */
 				gap: 12px;
 				margin-top: 12px;
+			}
+			.status-bar-jogo {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between; /* Mantém os 4 botões distribuídos na Linha 1 */
+				align-items: center;
+				gap: 6px 2px;
+				padding: 6px 8px;
+			}
+
+			/* 1. LINHA 1: Os 4 elementos alinhados no topo */
+			.btn-voltar-menu,
+			.btn-dica,
+			.badge-ronda,
+			.badge-erros {
+				order: 1;
+				padding: 4px 6px !important;
+				font-size: 0.78rem !important;
+				gap: 3px !important;
+				flex: 0 1 auto;
+				white-space: nowrap;
+			}
+
+			/* Redução proporcional dos ícones sem alterar cores ou formas */
+			.btn-voltar-menu svg, 
+			.btn-dica svg, 
+			.badge-ronda svg, 
+			.badge-erros svg,
+			.svg-icon {
+				width: 14px !important;
+				height: 14px !important;
+			}
+
+			/* 2. LINHA 2: Barra de progresso isolada a 100% em baixo */
+			.progress-bg {
+				order: 2;
+				flex: 0 0 100% !important;
+				width: 100% !important;
+				min-width: 100% !important;
+				margin: 4px 0 0 0 !important;
+				height: 16px !important;
 			}
 		}
 
@@ -1380,6 +1422,7 @@
 			line-height: 1.45;
 			font-weight: 500;
 		}
+
 		   
 		
 
@@ -1443,45 +1486,45 @@
 					2. Diários
 				</button>
 				
-				<!-- 3. Caixa de Explicação 1: Definição (Estática, Não Clickável) -->
-				<div class="caixa-informativa-menu borda-amarela">
-					<div class="topo-card-info">
-						<!-- SVG Ícone de Informação -->
-						<svg class="svg-info-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-							<circle cx="12" cy="12" r="10"></circle>
-							<line x1="12" y1="16" x2="12" y2="12"></line>
-							<line x1="12" y1="8" x2="12.01" y2="8"></line>
-						</svg>
-						<h3>O que é um Advérbio?</h3>
-					</div>
-					<p>É uma palavra invariável que serve para alterar, reforçar ou modificar o sentido de um verbo, de um adjetivo ou de toda uma frase!</p>
-				</div>
-				
-				<!-- 4. Caixa de Explicação 2: Tabela de Subclasses (Estática, Não Clickável) -->
-				<div class="caixa-informativa-menu borda-roxa">
-					<div class="topo-card-info">
-						<!-- SVG Ícone de Lâmpada de Dica -->
-						<svg class="svg-info-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M9 18h6M10 22h4"></path>
-							<path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"></path>
-						</svg>
-						<h3>As Subclasses</h3>
-					</div>
-					<div class="mini-tabela-teorica">
-						<div class="coluna-mini-tabela">
-							<span class="titulo-coluna-mini">Afirmação</span>
-							<span class="exemplo-coluna-mini">sim</span>
+				<!-- 3. Caixa de Explicação 1: Definição -->
+					<div class="caixa-informativa-menu borda-amarela">
+						<div class="topo-card-info">
+							<!-- SVG com tamanhos explícitos -->
+							<svg class="svg-info-card" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+								<circle cx="12" cy="12" r="10"></circle>
+								<line x1="12" y1="16" x2="12" y2="12"></line>
+								<line x1="12" y1="8" x2="12.01" y2="8"></line>
+							</svg>
+							<h3>O que é um Advérbio?</h3>
 						</div>
-						<div class="coluna-mini-tabela">
-							<span class="titulo-coluna-mini">Negação</span>
-							<span class="exemplo-coluna-mini">não</span>
+						<p>É uma palavra invariável que serve para alterar, reforçar ou modificar o sentido de um verbo, de um adjetivo ou de toda uma frase!</p>
+					</div>
+
+					<!-- 4. Caixa de Explicação 2: Tabela de Subclasses -->
+					<div class="caixa-informativa-menu borda-roxa">
+						<div class="topo-card-info">
+							<!-- SVG com tamanhos explícitos -->
+							<svg class="svg-info-card" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M9 18h6M10 22h4"></path>
+								<path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"></path>
+							</svg>
+							<h3>As Subclasses</h3>
 						</div>
-						<div class="coluna-mini-tabela">
-							<span class="titulo-coluna-mini">Quantidade/Grau</span>
-							<span class="exemplo-coluna-mini">muito, tão, bastante (...)</span>
+						<div class="mini-tabela-teorica">
+							<div class="coluna-mini-tabela">
+								<span class="titulo-coluna-mini">Afirmação</span>
+								<span class="exemplo-coluna-mini">sim</span>
+							</div>
+							<div class="coluna-mini-tabela">
+								<span class="titulo-coluna-mini">Negação</span>
+								<span class="exemplo-coluna-mini">não</span>
+							</div>
+							<div class="coluna-mini-tabela">
+								<span class="titulo-coluna-mini">Quantidade/Grau</span>
+								<span class="exemplo-coluna-mini">muito, tão, bastante (...)</span>
+							</div>
 						</div>
 					</div>
-				</div>
 
 			</div>
 		</div>
