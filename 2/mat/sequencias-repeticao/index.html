@@ -664,17 +664,21 @@
     let aguardarAnimacao = false;
     let dicasNesteNivel = 1;
 
-    function atualizarPlacar() {
-        document.getElementById('val-erros').textContent = errosTotais;
-        document.getElementById('val-ronda').textContent = globalIndex + 1 > TOTAL_RONDAS ? TOTAL_RONDAS : globalIndex + 1;
-        let perc = (globalIndex / TOTAL_RONDAS) * 100;
-        document.getElementById('progress-fill').style.width = `${perc}%`;
-        
-        // Atualiza UI da Dica
-       // document.getElementById('dica-cont').textContent = dicasNesteNivel;// COMENTEI ESTA LINHA
-        if (dicasNesteNivel > 0) document.getElementById('btn-dica').classList.remove('esgotada');
-        else document.getElementById('btn-dica').classList.add('esgotada');
-    }
+function atualizarPlacar() {
+    let rondaDisplay = globalIndex + 1 > TOTAL_RONDAS ? TOTAL_RONDAS : globalIndex + 1;
+
+    document.getElementById('val-erros').textContent = errosTotais;
+    document.getElementById('val-ronda').textContent = rondaDisplay;
+    
+    // Usa rondaDisplay em vez de globalIndex para preencher a barra logo no início
+    let perc = (rondaDisplay / TOTAL_RONDAS) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+    
+    // Atualiza UI da Dica
+    // document.getElementById('dica-cont').textContent = dicasNesteNivel;// COMENTEI ESTA LINHA
+    if (dicasNesteNivel > 0) document.getElementById('btn-dica').classList.remove('esgotada');
+    else document.getElementById('btn-dica').classList.add('esgotada');
+}
 
     function iniciarJogo() {
         initAudio();

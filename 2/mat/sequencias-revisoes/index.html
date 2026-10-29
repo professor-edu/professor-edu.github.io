@@ -819,15 +819,19 @@
     let mg2ActiveRow = 0;
     let mg2TotalRows = 3;
 
-    function atualizarPlacar() {
-        document.getElementById('val-erros').textContent = errosTotais;
-        document.getElementById('val-ronda').textContent = rondaIndex + 1 > TOTAL_RONDAS ? TOTAL_RONDAS : rondaIndex + 1;
-        let perc = (rondaIndex / TOTAL_RONDAS) * 100;
-        document.getElementById('progress-fill').style.width = `${perc}%`;
-        
-        if (dicasNesteModo > 0) document.getElementById('btn-dica').classList.remove('esgotada');
-        else document.getElementById('btn-dica').classList.add('esgotada');
-    }
+function atualizarPlacar() {
+    let rondaDisplay = rondaIndex + 1 > TOTAL_RONDAS ? TOTAL_RONDAS : rondaIndex + 1;
+
+    document.getElementById('val-erros').textContent = errosTotais;
+    document.getElementById('val-ronda').textContent = rondaDisplay;
+    
+    // Usa rondaDisplay em vez de rondaIndex para preencher a barra logo na 1.ª ronda
+    let perc = (rondaDisplay / TOTAL_RONDAS) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+    
+    if (dicasNesteModo > 0) document.getElementById('btn-dica').classList.remove('esgotada');
+    else document.getElementById('btn-dica').classList.add('esgotada');
+}
 
     function iniciarJogo(modo) {
         initAudio();

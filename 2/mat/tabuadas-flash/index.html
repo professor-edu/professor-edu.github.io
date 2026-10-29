@@ -624,24 +624,28 @@
         return poolFalsas.slice(0, 3);
     }
 
-    function atualizarPlacarUI() {
-		document.getElementById('val-erros').textContent = errosTotais;
-		document.getElementById('val-ronda').textContent = exIndex + 1 > totalExercicios ? totalExercicios : exIndex + 1;
-		document.getElementById('val-total-rondas').textContent = totalExercicios;
-		let perc = (exIndex / totalExercicios) * 100;
-		document.getElementById('progress-fill').style.width = `${perc}%`;
-		
-		// Atualiza o número no contador
-		document.getElementById('dica-cont').textContent = dicasAtuais;
+function atualizarPlacarUI() {
+    let exDisplay = exIndex + 1 > totalExercicios ? totalExercicios : exIndex + 1;
 
-		// Se dicasAtuais for 0, adiciona a classe .esgotada (que definimos no CSS acima)
-		const btnDica = document.getElementById('btn-dica');
-		if (dicasAtuais > 0) {
-			btnDica.classList.remove('esgotada');
-		} else {
-			btnDica.classList.add('esgotada');
-		}
-	}
+    document.getElementById('val-erros').textContent = errosTotais;
+    document.getElementById('val-ronda').textContent = exDisplay;
+    document.getElementById('val-total-rondas').textContent = totalExercicios;
+    
+    // Usa exDisplay em vez de exIndex para preencher a barra logo no 1.º exercício
+    let perc = (exDisplay / totalExercicios) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+    
+    // Atualiza o número no contador
+    document.getElementById('dica-cont').textContent = dicasAtuais;
+
+    // Se dicasAtuais for 0, adiciona a classe .esgotada (que definimos no CSS acima)
+    const btnDica = document.getElementById('btn-dica');
+    if (dicasAtuais > 0) {
+        btnDica.classList.remove('esgotada');
+    } else {
+        btnDica.classList.add('esgotada');
+    }
+}
 
     function iniciarJogo() {
         gerarContas();

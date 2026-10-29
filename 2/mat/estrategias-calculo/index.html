@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2º Ano - A Cascata dos Cálculos 🧮</title>
+    <title>2º Ano - Estratégias de Cálculo 🧮</title>
     
     <link rel="icon" type="image/png" href="../../logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -419,7 +419,7 @@
 		}		
 		
 
-    .icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
+    .icon-svg-menu { width: 26px; height: 26px; display: inline-block; vertical-align: middle; object-fit: contain; }
 	.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
 	.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
 	.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
@@ -447,8 +447,8 @@
 			<a href="../" class="btn-voltar"><img src="../../../SVG/voltar.svg" class="icon-svg-voltar" alt=""> Voltar</a>
         </div>
         
-        <h1>A Cascata dos Cálculos <img src="../img-titulos/estrategias-calculo.svg" class="icon-svg-titulo" alt=""></h1>
-        <div class="subtitulo">Resolve as contas passo a passo!</div>
+        <h1>Estratégias de Cálculo <img src="../img-titulos/estrategias-calculo.svg" class="icon-svg-titulo" alt=""></h1>
+        <div class="subtitulo">Resolve as operações passo a passo!</div>
     </div>
 </header>
 
@@ -456,8 +456,6 @@
     <div class="cartao-jogo-container" id="cartao-jogo">
         <div id="confetti-layer"></div>
         
-        <!-- ECRÃ DE SELEÇÃO -->
-        <!-- ECRÃ DE SELEÇÃO -->
         <div id="ecra-selecao" class="ecra">
             <h2 class="titulo-menu">Escolhe o teu desafio:</h2>
             
@@ -563,8 +561,8 @@
                 Dominaste as cascatas perfeitamente!<br>
                 Tiveste <strong id="final-erros" style="color:#ff4757">0</strong> erros.
             </div>
-            <button class="btn-acao" onclick="reiniciarJogo()">JOGAR DE NOVO 🔄</button>
-            <button class="btn-acao secundario" onclick="voltarAoMenu()">OUTRO NÍVEL 🏠</button>
+            <button class="btn-acao" onclick="reiniciarJogo()">JOGAR DE NOVO <img src="../../../SVG/jogar_novo.svg" class="icon-svg-menu" alt=""></button>
+            <button class="btn-acao secundario" onclick="voltarAoMenu()">OUTRO NÍVEL <img src="../../../SVG/menu_principal.svg" class="icon-svg-menu" alt=""></button>
         </div>
     </div>
 </main>
@@ -713,12 +711,16 @@
     let userInputs =[];
     let activeBoxIndex = 0;
 
-    function atualizarPlacar() {
-        document.getElementById('val-erros').textContent = errosTotais;
-        document.getElementById('val-ronda').textContent = rondaIndex + 1 > totalRondas ? totalRondas : rondaIndex + 1;
-        let perc = (rondaIndex / totalRondas) * 100;
-        document.getElementById('progress-fill').style.width = `${perc}%`;
-    }
+function atualizarPlacar() {
+    let rondaDisplay = rondaIndex + 1 > totalRondas ? totalRondas : rondaIndex + 1;
+
+    document.getElementById('val-erros').textContent = errosTotais;
+    document.getElementById('val-ronda').textContent = rondaDisplay;
+    
+    // Usa rondaDisplay em vez de rondaIndex para a barra começar preenchida na 1.ª ronda
+    let perc = (rondaDisplay / totalRondas) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+}
 
     function iniciarJogo(nivel) {
         nivelAtual = nivel;

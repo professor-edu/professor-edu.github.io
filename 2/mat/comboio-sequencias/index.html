@@ -717,12 +717,16 @@
     let inputUsuario = "";
     let aguardarAnimacao = false;
 
-    function atualizarPlacar() {
-        document.getElementById('val-erros').textContent = errosTotais;
-        document.getElementById('val-ronda').textContent = globalExIndex + 1 > TOTAL_EX ? TOTAL_EX : globalExIndex + 1;
-        let perc = (globalExIndex / TOTAL_EX) * 100;
-        document.getElementById('progress-fill').style.width = `${perc}%`;
-    }
+function atualizarPlacar() {
+    let exDisplay = globalExIndex + 1 > TOTAL_EX ? TOTAL_EX : globalExIndex + 1;
+
+    document.getElementById('val-erros').textContent = errosTotais;
+    document.getElementById('val-ronda').textContent = exDisplay;
+    
+    // Usa exDisplay em vez de globalExIndex para preencher a barra logo no início
+    let perc = (exDisplay / TOTAL_EX) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+}
 
     function iniciarViagem() {
         initAudio(); // Acorda o áudio imediatamente no clique
