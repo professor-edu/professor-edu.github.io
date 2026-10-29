@@ -437,12 +437,19 @@
         prepararRonda();
     }
 
-    function atualizarPlacarUI() {
-        document.getElementById('val-erros').textContent = errosTotais;
-        document.getElementById('val-progresso').textContent = rondaIndex + 1 > totalRondas ? totalRondas : rondaIndex + 1;
-        document.getElementById('val-total').textContent = totalRondas;
-        document.getElementById('progress-fill').style.width = `${(rondaIndex / totalRondas) * 100}%`;
-    }
+	function atualizarPlacarUI() {
+		// Calcula a ronda atual de 1 até totalRondas
+		const rondaVisual = Math.min(rondaIndex + 1, totalRondas);
+
+		document.getElementById('val-erros').textContent = errosTotais;
+		document.getElementById('val-progresso').textContent = rondaVisual;
+		document.getElementById('val-total').textContent = totalRondas;
+		
+		// Usa rondaVisual para a barra ficar preenchida logo na 1.ª ronda
+		document.getElementById('progress-fill').style.width = `${(rondaVisual / totalRondas) * 100}%`;
+	}
+
+
 
     function usarDica() {
         if (dicasDisponiveis <= 0) return;

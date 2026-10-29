@@ -1978,12 +1978,14 @@ window.carregarRonda = function() {
     contaAtualObj = listaContasPartida[desafioAtual];
     if (!contaAtualObj) return;
 
-    // Atualiza o progresso na barra
-    const valProg = document.getElementById('val-progresso');
-    if (valProg) valProg.textContent = desafioAtual + 1;
+// Atualiza o progresso na barra
+const progressoVisual = Math.min(desafioAtual + 1, 10);
 
-    const fill = document.getElementById('progress-fill');
-    if (fill) fill.style.width = `${((desafioAtual) / 10) * 100}%`;
+const valProg = document.getElementById('val-progresso');
+if (valProg) valProg.textContent = progressoVisual;
+
+const fill = document.getElementById('progress-fill');
+if (fill) fill.style.width = `${(progressoVisual / 10) * 100}%`;
 
     // Visor da conta (agora volta a carregar!)
     const visor = document.getElementById('visor-conta');

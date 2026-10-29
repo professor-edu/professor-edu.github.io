@@ -697,16 +697,21 @@
     }
 
     function atualizarPlacarUI() {
+		// Garante que o número exibido fica entre 1 e totalExercicios
+		const exVisual = Math.min(exIndex + 1, totalExercicios);
+
 		document.getElementById('val-erros').textContent = errosTotais;
-		document.getElementById('val-ronda').textContent = exIndex + 1 > totalExercicios ? totalExercicios : exIndex + 1;
+		document.getElementById('val-ronda').textContent = exVisual;
 		document.getElementById('val-total-rondas').textContent = totalExercicios;
-		let perc = (exIndex / totalExercicios) * 100;
-		document.getElementById('progress-fill').style.width = `${perc}%`;
 		
+		// Usa exVisual para preencher a barra logo no 1.º exercício
+		let perc = (exVisual / totalExercicios) * 100;
+		document.getElementById('progress-fill').style.width = `${perc}%`;
+
 		// Atualiza o número no contador
 		document.getElementById('dica-cont').textContent = dicasAtuais;
 
-		// Se dicasAtuais for 0, adiciona a classe .esgotada (que definimos no CSS acima)
+		// Se dicasAtuais for 0, adiciona a classe .esgotada
 		const btnDica = document.getElementById('btn-dica');
 		if (dicasAtuais > 0) {
 			btnDica.classList.remove('esgotada');

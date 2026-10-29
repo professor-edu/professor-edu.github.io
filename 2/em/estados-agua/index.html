@@ -523,12 +523,17 @@
         prepararRonda();
     }
 
-    function atualizarPlacarUI() {
-        document.getElementById('val-erros').textContent = errosTotais;
-        document.getElementById('val-progresso').textContent = rondaIndex + 1 > totalRondas ? totalRondas : rondaIndex + 1;
-        document.getElementById('val-total').textContent = totalRondas;
-        document.getElementById('progress-fill').style.width = `${(rondaIndex / totalRondas) * 100}%`;
-    }
+function atualizarPlacarUI() {
+    let rondaDisplay = (rondaIndex + 1) > totalRondas ? totalRondas : (rondaIndex + 1);
+
+    document.getElementById('val-erros').textContent = errosTotais;
+    document.getElementById('val-progresso').textContent = rondaDisplay;
+    document.getElementById('val-total').textContent = totalRondas;
+    
+    // Usa rondaDisplay em vez de rondaIndex para preencher a barra logo no início
+    let perc = (rondaDisplay / totalRondas) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+}
 
     function usarDica() {
         if (dicaUsada) return;

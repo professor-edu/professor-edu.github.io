@@ -711,15 +711,17 @@
     let totalRondas = 12; // Exigência do utilizador
     let errosTotais = 0;
 
-    function atualizarPlacarUI() {
-        document.getElementById('val-erros').textContent = errosTotais;
-        let rondaDisplay = (perguntaAtualIndex + 1) > totalRondas ? totalRondas : (perguntaAtualIndex + 1);
-        document.getElementById('val-progresso').textContent = rondaDisplay;
-        document.getElementById('val-total').textContent = totalRondas;
-        
-        let perc = (perguntaAtualIndex / totalRondas) * 100;
-        document.getElementById('progress-fill').style.width = `${perc}%`;
-    }
+function atualizarPlacarUI() {
+    document.getElementById('val-erros').textContent = errosTotais;
+    
+    let rondaDisplay = (perguntaAtualIndex + 1) > totalRondas ? totalRondas : (perguntaAtualIndex + 1);
+    document.getElementById('val-progresso').textContent = rondaDisplay;
+    document.getElementById('val-total').textContent = totalRondas;
+    
+    // Usa rondaDisplay para a barra preencher logo no 1.º exercício
+    let perc = (rondaDisplay / totalRondas) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+}
 
     // =========================================
     // LÓGICA DE JOGO

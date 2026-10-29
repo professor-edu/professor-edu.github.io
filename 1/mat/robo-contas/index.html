@@ -2150,8 +2150,8 @@ window.atualizarPlacar = function() {
     if (valTotal) valTotal.textContent = totalDesafiosNivel;
 
     if (fill) {
-        // A barra de preenchimento reflete as perguntas concluídas
-        const percentagem = (desafioAtual / totalDesafiosNivel) * 100;
+        // Usa rondaExibida para preencher a barra logo na 1.ª pergunta
+        const percentagem = (rondaExibida / totalDesafiosNivel) * 100;
         fill.style.width = percentagem + '%';
     }
 };
