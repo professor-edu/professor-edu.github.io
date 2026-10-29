@@ -154,14 +154,7 @@
   touch-action: manipulation;
 }
 
-.area-jogo-custom::after {
-  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='16' viewBox='0 0 64 16' fill='none' stroke='%232b8a3e' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' opacity='0.45'%3E%3C!-- Planta 🌱 --%3E%3Cg%3E%3Cpath d='M7 14 Q7 9 9 5'/%3E%3Cpath d='M8 10 C4 9 4 5 8 6 C8 8 8 9 8 10'/%3E%3Cpath d='M9 8 C13 7 13 3 9 4 C9 6 9 7 9 8'/%3E%3C/g%3E%3C!-- Onda ≈ --%3E%3Cg%3E%3Cpath d='M25 5 C27 3 30 3 32 5 C34 7 37 7 39 5'/%3E%3Cpath d='M25 10 C27 8 30 8 32 10 C34 12 37 12 39 10'/%3E%3C/g%3E%3C!-- Sol 𖤓 --%3E%3Cg%3E%3Ccircle cx='55' cy='8' r='3'/%3E%3Cpath d='M55 1v2.5M55 12.5V15M48 8h2.5M59.5 8H62M50 3l2 2M60 3l-2 2M50 13l2-2M60 13l-2 2'/%3E%3C/g%3E%3C/svg%3E");
-  position: absolute;
-  top: 14px;
-  right: 16px;
-  pointer-events: none;
-  z-index: 5;
-}
+
 
 
 
@@ -319,6 +312,48 @@
             .grid-jogos { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
             
             .badge { font-size: 0.7rem; padding: 4px 10px; top: 10px; left: 10px;}
+			
+			.status-bar-jogo {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between; /* Mantém os 4 botões distribuídos na Linha 1 */
+				align-items: center;
+				gap: 6px 2px;
+				padding: 6px 8px;
+			}
+
+			/* 1. LINHA 1: Os 4 elementos alinhados no topo */
+			.btn-voltar-menu,
+			.btn-dica,
+			.badge-ronda,
+			.badge-erros {
+				order: 1;
+				padding: 4px 6px !important;
+				font-size: 0.78rem !important;
+				gap: 3px !important;
+				flex: 0 1 auto;
+				white-space: nowrap;
+			}
+
+			/* Redução proporcional dos ícones sem alterar cores ou formas */
+			.btn-voltar-menu svg, 
+			.btn-dica svg, 
+			.badge-ronda svg, 
+			.badge-erros svg,
+			.svg-icon {
+				width: 14px !important;
+				height: 14px !important;
+			}
+
+			/* 2. LINHA 2: Barra de progresso isolada a 100% em baixo */
+			.progress-bg {
+				order: 2;
+				flex: 0 0 100% !important;
+				width: 100% !important;
+				min-width: 100% !important;
+				margin: 4px 0 0 0 !important;
+				height: 16px !important;
+			}
         }
 		
 		
