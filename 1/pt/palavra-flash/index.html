@@ -86,16 +86,6 @@
 }
         .subtitulo { color: var(--azul-escuro); font-size: clamp(0.85rem, 3vw, 1.1rem); font-weight: 500; opacity: 0.8; margin-top: 15px; }
         
-        @media (max-width: 768px) {
-            header { padding: 15px 10px; }
-            .header-content { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-            .nav-container { position: relative; width: 100%; display: flex; justify-content: center; align-items: center; height: 40px; margin-bottom: 5px; transform: none; top: 0; }
-            .hamburger { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); }
-            .btn-voltar { margin: 0 auto; position: relative; z-index: 5; }
-            h1 { text-align: center; font-size: 1.8rem; }
-            .subtitulo { text-align: center; margin-top: 5px; }
-        }
-
         .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: white; z-index: 200; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.1); text-align: left; }
         .sidebar.active { left: 0; }
         .sidebar .btn-fechar { background: #fff5f5; color: #ff4757; padding: 20px 25px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; border-bottom: 1px solid #ffebeb; }
@@ -250,7 +240,7 @@
         #fase-flash { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; }
         
         .palavra-gigante {
-            font-size: clamp(3.5rem, 10vw, 6rem); font-weight: 900; color: var(--azul-escuro);
+            font-size: clamp(2.5rem, 10vw, 6rem); font-weight: 900; color: var(--azul-escuro);
             text-transform: uppercase; letter-spacing: 4px; margin-bottom: 30px;
             animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center;
         }
@@ -331,50 +321,64 @@
         #confetti-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; overflow: hidden; }
         
         body { scrollbar-gutter: stable; }
-
-        @media (max-height: 600px) {
-            body { height: auto !important; overflow-y: auto !important; }
-            main { justify-content: flex-start !important; padding-top: 15px; padding-bottom: 15px; overflow-y: visible !important; }
-            .cartao-jogo-container { margin: auto 0; }
+        @media (max-width: 768px) {
+            header { padding: 15px 10px; }
+            .header-content { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+            .nav-container { position: relative; width: 100%; display: flex; justify-content: center; align-items: center; height: 40px; margin-bottom: 5px; transform: none; top: 0; }
+            .hamburger { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); }
+            .btn-voltar { margin: 0 auto; position: relative; z-index: 5; }
+            h1 { text-align: center; font-size: 1.8rem; }
+            .subtitulo { text-align: center; margin-top: 5px; }
+			
 			.status-bar-jogo {
 				display: flex;
 				flex-wrap: wrap;
-				justify-content: space-between; /* Espaça os 4 elementos de ponta a ponta na Linha 1 */
+				justify-content: space-between; /* Mantém os 4 botões distribuídos na Linha 1 */
 				align-items: center;
 				gap: 6px 2px;
 				padding: 6px 8px;
 			}
 
-			/* 1. LINHA 1: Ajuste compacto para caberem os 4 botões/badges na mesma linha */
+			/* 1. LINHA 1: Os 4 elementos alinhados no topo */
 			.btn-voltar-menu,
 			.btn-dica,
 			.badge-ronda,
 			.badge-erros {
 				order: 1;
-				padding: 4px 6px !important;    /* Reduz o enchimento interno */
-				font-size: 0.78rem !important;  /* Reduz o tamanho do texto */
-				gap: 3px !important;            /* Reduz o espaço entre o ícone e o texto */
-				flex: 0 1 auto;                 /* Permite encolher ligeiramente se o ecrã for muito estreito */
+				padding: 4px 6px !important;
+				font-size: 0.78rem !important;
+				gap: 3px !important;
+				flex: 0 1 auto;
 				white-space: nowrap;
 			}
 
-			/* Reduz proporcionalmente os ícones internos */
-			.btn-voltar-menu svg, .btn-dica svg, 
-			.badge-ronda svg, .badge-erros svg,
+			/* Redução proporcional dos ícones sem alterar cores ou formas */
+			.btn-voltar-menu svg, 
+			.btn-dica svg, 
+			.badge-ronda svg, 
+			.badge-erros svg,
 			.svg-icon {
 				width: 14px !important;
 				height: 14px !important;
 			}
 
-			/* 2. LINHA 2: Barra de progresso ocupa 100% da largura em baixo */
+			/* 2. LINHA 2: Barra de progresso isolada a 100% em baixo */
 			.progress-bg {
 				order: 2;
 				flex: 0 0 100% !important;
 				width: 100% !important;
+				min-width: 100% !important;
 				margin: 4px 0 0 0 !important;
 				height: 16px !important;
 			}
         }
+
+
+@media (max-height: 600px) {
+    body { height: auto !important; overflow-y: auto !important; }
+    main { justify-content: flex-start !important; padding-top: 15px; padding-bottom: 15px; overflow-y: visible !important; }
+    .cartao-jogo-container { margin: auto 0; }
+}
         @media (hover: none) and (pointer: coarse) {
             body { height: auto !important; overflow-y: auto !important; }
             main { justify-content: flex-start !important; overflow-y: visible !important; }
