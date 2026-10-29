@@ -758,11 +758,14 @@
         }
     }
 
-    function atualizarPlacarUI() {
-        document.getElementById('val-erros').textContent = errosTotais;
-        document.getElementById('val-progresso').textContent = rondaAtual > 10 ? 10 : rondaAtual;
-        document.getElementById('progress-fill').style.width = `${((rondaAtual - 1) / 10) * 100}%`;
-    }
+function atualizarPlacarUI() {
+    document.getElementById('val-erros').textContent = errosTotais;
+    document.getElementById('val-progresso').textContent = rondaAtual > 10 ? 10 : rondaAtual;
+    
+    // Removido o (- 1) para a barra começar preenchida na Ronda 1
+    const progressoLimitado = Math.min(rondaAtual, 10);
+    document.getElementById('progress-fill').style.width = `${(progressoLimitado / 10) * 100}%`;
+}
 
 	const TITULO_PADRAO = "Escolhe um dos desafios abaixo!"; // Escreve aqui o teu texto original
     const NOMES_DOS_JOGOS = ["", "O Comboio das Sílabas", "Ninja das Palavras", "Fábrica de Palavras", "Sapinho Saltitão"];

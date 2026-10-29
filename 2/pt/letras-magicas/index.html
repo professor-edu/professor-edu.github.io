@@ -1270,7 +1270,7 @@
             document.getElementById('val-progresso').textContent = rondaVisual;
             document.getElementById('val-total').textContent = this.totalRondas;
 
-            const perc = (this.rondaAtual / this.totalRondas) * 100;
+            const perc = (rondaVisual / this.totalRondas) * 100;
             document.getElementById('progress-fill').style.width = `${perc}%`;
         },
 

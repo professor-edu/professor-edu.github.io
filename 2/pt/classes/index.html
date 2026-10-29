@@ -448,8 +448,8 @@
                 Apanhaste as 12 palavras!<br>
                 Tiveste <strong id="final-erros" style="color:#ff4757">0</strong> erros.
             </div>
-            <button class="btn-acao" onclick="reiniciarJogo()">JOGAR DE NOVO 🔄</button>
-            <button class="btn-acao secundario" onclick="voltarAoMenu()">OUTRA CATEGORIA 🏠</button>
+            <button class="btn-acao" onclick="reiniciarJogo()">JOGAR DE NOVO <img src="../../../SVG/jogar_novo.svg" class="icon-svg-menu" alt=""></button>
+            <button class="btn-acao secundario" onclick="voltarAoMenu()">OUTRA CATEGORIA <img src="../../../SVG/menu_principal.svg" class="icon-svg-menu" alt=""></button>
         </div>
 
         <canvas id="confetti-canvas"></canvas>
@@ -585,13 +585,15 @@
 
     // Atualiza visualmente as barras
     function atualizarPlacarUI() {
-        document.getElementById('val-erros').textContent = errosTotais;
-        document.getElementById('val-progresso').textContent = rondaAtual;
-        document.getElementById('val-total').textContent = totalRondas;
-        
-        let perc = (rondaAtual / totalRondas) * 100;
-        document.getElementById('progress-fill').style.width = `${perc}%`;
-    }
+    const rondaExibida = Math.min(rondaAtual, totalRondas);
+
+    document.getElementById('val-erros').textContent = errosTotais;
+    document.getElementById('val-progresso').textContent = rondaExibida;
+    document.getElementById('val-total').textContent = totalRondas;
+    
+    let perc = (rondaExibida / totalRondas) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+}
 
     // =========================================
     // LÓGICA ESPECÍFICA DO JOGO ARCADE

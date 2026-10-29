@@ -724,10 +724,10 @@
     }
 
     function atualizarPlacar() {
-        elErros.textContent = errorsCount;
-        elProgresso.textContent = rondaAtual;
-        elProgressFill.style.width = `${((rondaAtual - 1) / TOTAL_RONDAS) * 100}%`;
-    }
+		elErros.textContent = errorsCount;
+		elProgresso.textContent = rondaAtual;
+		elProgressFill.style.width = `${(rondaAtual / TOTAL_RONDAS) * 100}%`;
+	}
 
     function prepararRonda() {
         acertosNaRonda = 0;
