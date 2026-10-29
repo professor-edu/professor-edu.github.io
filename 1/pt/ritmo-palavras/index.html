@@ -1172,13 +1172,13 @@
                     </svg>
                 </button>
 
-                <!-- Cartão Principal com Imagem e Texto da Palavra -->
+
                 <div class="card-palavra-silaba" id="card-palavra-container">
                     <img id="imagem-silaba" src="" alt="Palavra Ilustrada" onerror="this.src='../../../SVG/estrela.svg';">
                     <span id="texto-palavra">...</span>
                 </div>
 
-                <!-- Grelha Horizontal dos 5 Quadrados de Pintar (Abordagem B) -->
+
                 <div class="grelha-quadrados-silabas" id="grelha-silabas">
                     <button class="slot-silaba-pinta" data-index="1"></button>
                     <button class="slot-silaba-pinta" data-index="2"></button>
@@ -1187,7 +1187,7 @@
                     <button class="slot-silaba-pinta" data-index="5"></button>
                 </div>
 
-                <!-- Botão Confirmar/Validar (Abordagem B) -->
+
                 <button class="btn-validar-silaba" id="btn-validar" onclick="validarEscolhaSilaba()">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle; margin-right:6px;">
 						<path d="M20 6L9 17l-5-5"/>
@@ -1709,15 +1709,16 @@
 	/* ==========================================
 	   BARRA DE PROGRESSO E ESTADOS FINAIS
 	   ========================================== */
-	function atualizarPlacarSilabas() {
-		const p = Math.min(desafioAtual + 1, totalDesafiosNivel); 
-		document.getElementById('val-erros').textContent = erradas;
-		document.getElementById('val-progresso').textContent = p;
-		document.getElementById('val-total').textContent = totalDesafiosNivel;
+function atualizarPlacarSilabas() {
+    const p = Math.min(desafioAtual + 1, totalDesafiosNivel); 
+    document.getElementById('val-erros').textContent = erradas;
+    document.getElementById('val-progresso').textContent = p;
+    document.getElementById('val-total').textContent = totalDesafiosNivel;
 
-		const percentagem = ((desafioAtual) / totalDesafiosNivel) * 100;
-		document.getElementById('progress-fill').style.width = percentagem + '%';
-	}
+    // Usa p em vez de desafioAtual para a barra começar preenchida no 1.º desafio
+    const percentagem = (p / totalDesafiosNivel) * 100;
+    document.getElementById('progress-fill').style.width = percentagem + '%';
+}
 
 	function finalizarJogoSilaba() {
         pararAudioRonda();

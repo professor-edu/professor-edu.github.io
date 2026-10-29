@@ -698,18 +698,17 @@
         ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
         mostrarEcra('ecra-inicio');
     }
-
-    function atualizarScore() {
-		if (elCertas) elCertas.textContent = certas; // Só atualiza se o elemento existir
-		if (elErradas) elErradas.textContent = erradas; // Só atualiza se o elemento existir
-		
-		let p = paresFeitosNoNivel + 1;
-		if(p > QUESTOES_POR_NIVEL) p = QUESTOES_POR_NIVEL;
-		elProgresso.textContent = p;
-		elTotal.textContent = QUESTOES_POR_NIVEL;
-		elProgressFill.style.width = `${(paresFeitosNoNivel / QUESTOES_POR_NIVEL) * 100}%`;
-	}
-
+function atualizarScore() {
+    if (elCertas) elCertas.textContent = certas;
+    if (elErradas) elErradas.textContent = erradas;
+    
+    let p = Math.min(paresFeitosNoNivel + 1, QUESTOES_POR_NIVEL);
+    elProgresso.textContent = p;
+    elTotal.textContent = QUESTOES_POR_NIVEL;
+    
+    // Usa p em vez de paresFeitosNoNivel para a barra começar preenchida na 1.ª questão
+    elProgressFill.style.width = `${(p / QUESTOES_POR_NIVEL) * 100}%`;
+}
     function atualizarDicasUI() {
         // Dica a cada 5 rondas -> Temos 15 questoes -> Blocos: 0-4 (1), 5-9 (2), 10-14 (3)
         const blocoAtual = Math.floor(paresFeitosNoNivel / 5); 

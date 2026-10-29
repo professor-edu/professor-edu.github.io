@@ -699,12 +699,16 @@
         iniciarJogo(nivelAtual);
     }
 
-    function atualizarPlacar() {
-        elDesafios.textContent = Math.min(desafioAtual + 1, TOTAL_DESAFIOS);
-        elTotal.textContent = TOTAL_DESAFIOS;
-        elErros.textContent = erros;
-        elProgressFill.style.width = `${(desafioAtual / TOTAL_DESAFIOS) * 100}%`;
-    }
+function atualizarPlacar() {
+    let desafioDisplay = Math.min(desafioAtual + 1, TOTAL_DESAFIOS);
+
+    elDesafios.textContent = desafioDisplay;
+    elTotal.textContent = TOTAL_DESAFIOS;
+    elErros.textContent = erros;
+    
+    // Usa desafioDisplay em vez de desafioAtual para a barra começar preenchida no 1.º desafio
+    elProgressFill.style.width = `${(desafioDisplay / TOTAL_DESAFIOS) * 100}%`;
+}
 
     function gerarDesafio() {
         if (desafioAtual >= TOTAL_DESAFIOS) {

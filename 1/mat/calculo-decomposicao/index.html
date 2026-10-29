@@ -663,13 +663,17 @@
         mostrarEcra('ecra-selecao');
     }
 
-    function atualizarPlacar() { 
-        if (elErradas) elErradas.textContent = erradas;
-        if (elProgresso) elProgresso.textContent = Math.min(desafioAtual + 1, TOTAL_DESAFIOS);
-        if (elTotal) elTotal.textContent = TOTAL_DESAFIOS;
-        const percentagem = (desafioAtual / TOTAL_DESAFIOS) * 100;
-        if (elProgressFill) elProgressFill.style.width = percentagem + '%';
-    }
+function atualizarPlacar() { 
+    let desafioDisplay = Math.min(desafioAtual + 1, TOTAL_DESAFIOS);
+
+    if (elErradas) elErradas.textContent = erradas;
+    if (elProgresso) elProgresso.textContent = desafioDisplay;
+    if (elTotal) elTotal.textContent = TOTAL_DESAFIOS;
+    
+    // Usa desafioDisplay em vez de desafioAtual para a barra começar preenchida no 1.º desafio
+    const percentagem = (desafioDisplay / TOTAL_DESAFIOS) * 100;
+    if (elProgressFill) elProgressFill.style.width = percentagem + '%';
+}
 
     /* Geração Matemática Pedagógica */
     function gerarNumeros() {

@@ -591,13 +591,17 @@
         mostrarEcra('ecra-selecao');
     }
 
-    function atualizarProgresso() {
-        elProgresso.textContent = rondaGlobal > TOTAL_RONDAS ? TOTAL_RONDAS : rondaGlobal;
-        elErros.textContent = errosTotais;
-        elValTotal.textContent = TOTAL_RONDAS;
-        let percent = ((rondaGlobal - 1) / TOTAL_RONDAS) * 100;
-        elProgressFill.style.width = `${percent}%`;
-    }
+function atualizarProgresso() {
+    let rondaDisplay = Math.min(rondaGlobal, TOTAL_RONDAS);
+
+    elProgresso.textContent = rondaDisplay;
+    elErros.textContent = errosTotais;
+    elValTotal.textContent = TOTAL_RONDAS;
+    
+    // Usa rondaDisplay em vez de (rondaGlobal - 1) para a barra começar preenchida na 1.ª ronda
+    let percent = (rondaDisplay / TOTAL_RONDAS) * 100;
+    elProgressFill.style.width = `${percent}%`;
+}
 
     function atualizarDicasUI() {
         const btnDica = document.getElementById('btn-dica');

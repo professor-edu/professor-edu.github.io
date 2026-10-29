@@ -650,14 +650,17 @@
     const btnDica = document.getElementById('btn-dica');
     const elHintCount = document.getElementById('hint-count');
 
-    function atualizarPlacarUI() {
-        document.getElementById('val-erros').textContent = erradas;
-        document.getElementById('val-progresso').textContent = questoesFeitas + 1 > QUESTOES_POR_NIVEL ? QUESTOES_POR_NIVEL : questoesFeitas + 1;
-        document.getElementById('val-total').textContent = QUESTOES_POR_NIVEL;
-        
-        let perc = (questoesFeitas / QUESTOES_POR_NIVEL) * 100;
-        document.getElementById('progress-fill').style.width = `${perc}%`;
-    }
+function atualizarPlacarUI() {
+    let questaoDisplay = Math.min(questoesFeitas + 1, QUESTOES_POR_NIVEL);
+
+    document.getElementById('val-erros').textContent = erradas;
+    document.getElementById('val-progresso').textContent = questaoDisplay;
+    document.getElementById('val-total').textContent = QUESTOES_POR_NIVEL;
+    
+    // Usa questaoDisplay em vez de questoesFeitas para a barra começar preenchida na 1.ª questão
+    let perc = (questaoDisplay / QUESTOES_POR_NIVEL) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+}
 
     function atualizarDicasUI() {
         const blocoAtual = Math.min(1, Math.floor(questoesFeitas / 5)); // Bloco 0 (0-4) e Bloco 1 (5-9)

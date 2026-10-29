@@ -760,14 +760,17 @@
         else selecionarNivel(1);
     }
 
-    function atualizarPlacar() { 
-        if (elErradas) elErradas.textContent = erradas;
-        if (elProgresso) elProgresso.textContent = Math.min(questoesFeitas + 1, QUESTOES_POR_NIVEL);
-        if (elTotal) elTotal.textContent = QUESTOES_POR_NIVEL;
-        
-        const percentagem = (questoesFeitas / QUESTOES_POR_NIVEL) * 100;
-        if (elProgressFill) elProgressFill.style.width = percentagem + '%';
-    }
+function atualizarPlacar() { 
+    let questaoDisplay = Math.min(questoesFeitas + 1, QUESTOES_POR_NIVEL);
+
+    if (elErradas) elErradas.textContent = erradas;
+    if (elProgresso) elProgresso.textContent = questaoDisplay;
+    if (elTotal) elTotal.textContent = QUESTOES_POR_NIVEL;
+    
+    // Usa questaoDisplay em vez de questoesFeitas para a barra começar preenchida na 1.ª questão
+    const percentagem = (questaoDisplay / QUESTOES_POR_NIVEL) * 100;
+    if (elProgressFill) elProgressFill.style.width = percentagem + '%';
+}
 
     function novaSequencia() {
         isVerificando = false;

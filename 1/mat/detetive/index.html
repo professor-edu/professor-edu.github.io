@@ -681,14 +681,17 @@
         else selecionarNivel(1);
     }
 
-    function atualizarPlacarUI() {
-        if (elErradas) elErradas.textContent = erradas;
-        let p = questoesFeitas + 1;
-        if(p > QUESTOES_POR_NIVEL) p = QUESTOES_POR_NIVEL;
-        if (elProgresso) elProgresso.textContent = p;
-        if (elTotal) elTotal.textContent = QUESTOES_POR_NIVEL;
-        if (elProgressFill) elProgressFill.style.width = `${(questoesFeitas / QUESTOES_POR_NIVEL) * 100}%`;
-    }
+function atualizarPlacarUI() {
+    if (elErradas) elErradas.textContent = erradas;
+    
+    let p = Math.min(questoesFeitas + 1, QUESTOES_POR_NIVEL);
+    
+    if (elProgresso) elProgresso.textContent = p;
+    if (elTotal) elTotal.textContent = QUESTOES_POR_NIVEL;
+    
+    // Usa p em vez de questoesFeitas para a barra começar preenchida na 1.ª questão
+    if (elProgressFill) elProgressFill.style.width = `${(p / QUESTOES_POR_NIVEL) * 100}%`;
+}
 
     function atualizarDicasUI() {
         const blocoAtual = Math.floor(questoesFeitas / 5); 

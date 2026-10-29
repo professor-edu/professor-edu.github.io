@@ -717,13 +717,16 @@
         mostrarEcra('ecra-inicio');
     }
 
-    function atualizarPlacar() { 
-        if (elErros) elErros.textContent = errorsCount; 
-        if (elProgresso) elProgresso.textContent = Math.min(questionIndex + 1, TOTAL_QUESTIONS);
-        if (elTotal) elTotal.textContent = TOTAL_QUESTIONS;
-        if (elProgressFill) elProgressFill.style.width = `${(questionIndex / TOTAL_QUESTIONS) * 100}%`;
-    }
+function atualizarPlacar() { 
+    let questionDisplay = Math.min(questionIndex + 1, TOTAL_QUESTIONS);
 
+    if (elErros) elErros.textContent = errorsCount; 
+    if (elProgresso) elProgresso.textContent = questionDisplay;
+    if (elTotal) elTotal.textContent = TOTAL_QUESTIONS;
+    
+    // Usa questionDisplay em vez de questionIndex para a barra começar preenchida na 1.ª questão
+    if (elProgressFill) elProgressFill.style.width = `${(questionDisplay / TOTAL_QUESTIONS) * 100}%`;
+}
     function atualizarDicasUI() {
         // Dica a cada 5 rondas -> Temos 20 questoes -> Blocos: 0-4 (1), 5-9 (2), 10-14 (3), 15-19 (4)
         const blocoAtual = Math.floor(questionIndex / 5); 

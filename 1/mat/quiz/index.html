@@ -541,9 +541,13 @@
         const dadosNivel = quizDataJogo[nivelAtualIndex];
         const dadosP = dadosNivel.perguntas[perguntaAtualIndex];
 
-        // Atualizar Progresso
-        document.getElementById('val-progresso').textContent = Math.min(perguntaAtualIndex + 1, 10);
-        document.getElementById('progress-fill').style.width = `${(perguntaAtualIndex / 10) * 100}%`;
+// Atualizar Progresso
+let perguntaDisplay = Math.min(perguntaAtualIndex + 1, 10);
+
+document.getElementById('val-progresso').textContent = perguntaDisplay;
+
+// Usa perguntaDisplay em vez de perguntaAtualIndex para a barra começar preenchida na 1.ª pergunta
+document.getElementById('progress-fill').style.width = `${(perguntaDisplay / 10) * 100}%`;
 
         // Preencher Textos e Visuais
         txtPergunta.innerHTML = dadosP.q;

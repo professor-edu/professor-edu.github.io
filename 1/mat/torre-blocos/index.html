@@ -746,13 +746,18 @@
         aplicarTema(0); 
     }
 
-    function atualizarPlacar() { 
-        if (elErradas) elErradas.textContent = erradas;
-        if (elProgresso) elProgresso.textContent = Math.min(desafioAtual + 1, RONDAS_POR_NIVEL);
-        const percentagem = (desafioAtual / RONDAS_POR_NIVEL) * 100;
-        if (elProgressFill) elProgressFill.style.width = percentagem + '%';
-        atualizarBotaoDica();
-    }
+function atualizarPlacar() { 
+    let desafioDisplay = Math.min(desafioAtual + 1, RONDAS_POR_NIVEL);
+
+    if (elErradas) elErradas.textContent = erradas;
+    if (elProgresso) elProgresso.textContent = desafioDisplay;
+    
+    // Usa desafioDisplay em vez de desafioAtual para a barra começar preenchida no 1.º desafio
+    const percentagem = (desafioDisplay / RONDAS_POR_NIVEL) * 100;
+    if (elProgressFill) elProgressFill.style.width = percentagem + '%';
+    
+    atualizarBotaoDica();
+}
 
     // ==========================================
     // MECÂNICA DOS BLOCOS DA TORRE
