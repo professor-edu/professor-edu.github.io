@@ -1185,14 +1185,16 @@
 			}
 		},
 
-        atualizarPlacarUI: function() {
-            document.getElementById('val-progresso').textContent = this.rondaAtual + 1;
-            document.getElementById('val-total').textContent = this.totalRondas;
-            
-            // COMEÇAR COM A BARRA DE PROGRESSO VAZIA
-            let p = (this.rondaAtual / this.totalRondas) * 100;
-            document.getElementById('progress-fill').style.width = `${p}%`;
-        },
+atualizarPlacarUI: function() {
+    let rondaDisplay = (this.rondaAtual + 1) > this.totalRondas ? this.totalRondas : (this.rondaAtual + 1);
+
+    document.getElementById('val-progresso').textContent = rondaDisplay;
+    document.getElementById('val-total').textContent = this.totalRondas;
+    
+    // Usa rondaDisplay em vez de this.rondaAtual para a barra começar preenchida na 1.ª ronda
+    let p = (rondaDisplay / this.totalRondas) * 100;
+    document.getElementById('progress-fill').style.width = `${p}%`;
+},
 
         finalizar: function() {
             document.getElementById('progress-fill').style.width = `100%`;

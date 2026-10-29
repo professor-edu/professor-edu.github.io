@@ -1045,11 +1045,14 @@
             }
         },
 
-        atualizarPlacarUI: function() {
-            document.getElementById('val-progresso').textContent = this.rondaAtual + 1;
-            let perc = (this.rondaAtual / 15) * 100;
-            document.getElementById('progress-fill').style.width = `${perc}%`;
-        },
+atualizarPlacarUI: function() {
+    let rondaDisplay = Math.min(this.rondaAtual + 1, 15);
+
+    document.getElementById('val-progresso').textContent = rondaDisplay;
+    
+    let perc = (rondaDisplay / 15) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+},
 
         finalizarJogo: function() {
             document.getElementById('progress-fill').style.width = `100%`;

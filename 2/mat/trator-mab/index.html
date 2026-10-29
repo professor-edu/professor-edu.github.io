@@ -780,15 +780,16 @@
         iniciarJogo();
     }
 
-    function atualizarPlacarUI() {
-        document.getElementById('val-erros').textContent = errosTotais;
-        document.getElementById('lbl-ronda').textContent = rondaAtual;
-        document.getElementById('val-progresso').textContent = exercicioAtual;
-        
-        let exerciciosGlobais = ((rondaAtual - 1) * 5) + (exercicioAtual - 1);
-        let perc = (exerciciosGlobais / 15) * 100;
-        document.getElementById('progress-fill').style.width = `${perc}%`;
-    }
+function atualizarPlacarUI() {
+    document.getElementById('val-erros').textContent = errosTotais;
+    document.getElementById('lbl-ronda').textContent = rondaAtual;
+    document.getElementById('val-progresso').textContent = exercicioAtual;
+    
+    // Considera o exercício atual (sem subtrair 1) para a barra começar preenchida no 1.º exercício
+    let exerciciosGlobais = Math.min(((rondaAtual - 1) * 5) + exercicioAtual, 15);
+    let perc = (exerciciosGlobais / 15) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+}
 
     function usarDica() {
         if(document.getElementById('btn-dica').classList.contains('esgotada') || aAnimar) return;

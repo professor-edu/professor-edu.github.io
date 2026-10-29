@@ -451,13 +451,18 @@
 
     const areaJogo = document.getElementById('area-jogo');
 
-    function atualizarPlacar() {
-        document.getElementById('val-ronda').textContent = currentRound;
-        document.getElementById('val-erros').textContent = errorsCount;
-        
-        let progressoGeral = (((currentRound - 1) * EXERCICIOS_POR_RONDA) + (currentExercise - 1)) / (TOTAL_RONDAS * EXERCICIOS_POR_RONDA);
-        document.getElementById('progress-fill').style.width = `${progressoGeral * 100}%`;
-    }
+function atualizarPlacar() {
+    document.getElementById('val-ronda').textContent = currentRound;
+    document.getElementById('val-erros').textContent = errorsCount;
+    
+    let totalExercicios = TOTAL_RONDAS * EXERCICIOS_POR_RONDA;
+    let exercicioAtualGlobal = ((currentRound - 1) * EXERCICIOS_POR_RONDA) + currentExercise;
+    let exDisplay = Math.min(exercicioAtualGlobal, totalExercicios);
+
+    // Considera o exercício atual (sem subtrair 1) para a barra começar preenchida no 1.º exercício
+    let progressoGeral = (exDisplay / totalExercicios) * 100;
+    document.getElementById('progress-fill').style.width = `${progressoGeral}%`;
+}
 
     function iniciarJogo(gameId) {
         currentGameId = gameId;

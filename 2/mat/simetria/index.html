@@ -776,12 +776,16 @@
     let userGrid = []; 
     let selectedColorIndex = 1; 
 
-    function atualizarPlacar() {
-        document.getElementById('val-erros').textContent = errosTotais;
-        document.getElementById('val-ronda').textContent = puzzleIndex + 1 > TOTAL_RONDAS ? TOTAL_RONDAS : puzzleIndex + 1;
-        let perc = (puzzleIndex / TOTAL_RONDAS) * 100;
-        document.getElementById('progress-fill').style.width = `${perc}%`;
-    }
+function atualizarPlacar() {
+    let puzzleDisplay = puzzleIndex + 1 > TOTAL_RONDAS ? TOTAL_RONDAS : puzzleIndex + 1;
+
+    document.getElementById('val-erros').textContent = errosTotais;
+    document.getElementById('val-ronda').textContent = puzzleDisplay;
+    
+    // Usa puzzleDisplay em vez de puzzleIndex para a barra começar preenchida na 1.ª ronda
+    let perc = (puzzleDisplay / TOTAL_RONDAS) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+}
 
     function iniciarJogo(nivel) {
         initAudio();

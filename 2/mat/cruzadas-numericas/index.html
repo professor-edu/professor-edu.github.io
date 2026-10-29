@@ -736,12 +736,16 @@
     let inputAtualArray =[]; 
     let cursorPos = 0; // O MOTOR DO CURSOR MÁGICO
 
-    function atualizarPlacarUI() {
-        document.getElementById('val-erros').textContent = errosTotais;
-        document.getElementById('val-ronda').textContent = puzzleIndex + 1 > totalRondas ? totalRondas : puzzleIndex + 1;
-        let perc = (puzzleIndex / totalRondas) * 100;
-        document.getElementById('progress-fill').style.width = `${perc}%`;
-    }
+function atualizarPlacarUI() {
+    let puzzleDisplay = puzzleIndex + 1 > totalRondas ? totalRondas : puzzleIndex + 1;
+
+    document.getElementById('val-erros').textContent = errosTotais;
+    document.getElementById('val-ronda').textContent = puzzleDisplay;
+    
+    // Usa puzzleDisplay em vez de puzzleIndex para a barra começar preenchida na 1.ª ronda
+    let perc = (puzzleDisplay / totalRondas) * 100;
+    document.getElementById('progress-fill').style.width = `${perc}%`;
+}
 
     function iniciarJogo(nivel) {
         nivelSelecionado = nivel;
