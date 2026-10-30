@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="15 11 70 86" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bag-main" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#FF6B6B" />
+      <stop offset="70%" stop-color="#EE5253" />
+      <stop offset="100%" stop-color="#C0392B" />
+    </radialGradient>
+    <radialGradient id="pocket-grad" cx="40%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#FF9FF3" />
+      <stop offset="100%" stop-color="#F368E0" />
+    </radialGradient>
+    <linearGradient id="pencil-body" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FECA57" />
+      <stop offset="50%" stop-color="#FF9F43" />
+      <stop offset="100%" stop-color="#E67E22" />
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="50" cy="90" rx="35" ry="6.5" fill="rgba(0,0,0,0.2)" />
+
+  <!-- Alça da Mochila -->
+  <path d="M 36 28 C 36 14 64 14 64 28" fill="none" stroke="#C0392B" stroke-width="6" stroke-linecap="round" />
+  <path d="M 36 28 C 36 14 64 14 64 28" fill="none" stroke="#FF8E8E" stroke-width="2" stroke-linecap="round" />
+
+  <!-- Lápis Mágico -->
+  <g transform="translate(62, 16) rotate(18)">
+    <rect x="0" y="12" width="10" height="26" fill="url(#pencil-body)" />
+    <rect x="0" y="8" width="10" height="4" fill="#C0C0C0" />
+    <path d="M 0 8 C 0 3 10 3 10 8 Z" fill="#FF8E8E" />
+    <polygon points="0,38 10,38 5,46" fill="#F5CD79" />
+    <polygon points="3.5,43.5 6.5,43.5 5,46" fill="#2D3436" />
+  </g>
+
+  <!-- Corpo Principal da Mochila -->
+  <rect x="22" y="28" width="56" height="58" rx="18" fill="url(#bag-main)" />
+  <path d="M 28 32 C 38 29 62 29 72 32" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.4" />
+
+  <!-- Bolso Frontal 3D -->
+  <rect x="28" y="52" width="44" height="30" rx="10" fill="url(#pocket-grad)" />
+  <path d="M 28 52 L 72 52" stroke="#48DBFB" stroke-width="3" stroke-linecap="round" />
+  <circle cx="50" cy="52" r="3" fill="#FECA57" />
+
+  <!-- Emblema da Estrela -->
+  <circle cx="50" cy="67" r="6" fill="white" opacity="0.9" />
+  <path d="M 50 62 L 51.5 65.5 L 55 66 L 52.5 68.5 L 53 72 L 50 70 L 47 72 L 47.5 68.5 L 45 66 L 48.5 65.5 Z" fill="#FF9F43" />
+</svg>

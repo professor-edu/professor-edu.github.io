@@ -403,15 +403,18 @@
         /* =========================================
            ANIMAÇÃO PULSAR IMAGENS
            ========================================= */
-        .img-ano {          
-            width: 95%;             
-            flex: 1;            
-            min-height: 0;          
-            object-fit: contain;            
-            margin-bottom: 8px;         
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); 
-            animation: pulsarSuave 2.5s ease-in-out infinite;
-        }
+		.img-ano {          
+			width: 95%;             
+			max-height: 160px;     /* Impede que o SVG ultrapasse a altura do PNG */
+			aspect-ratio: 1 / 1;   /* Força a caixa da imagem a ser sempre quadrada */
+			flex: 1;            
+			min-height: 0;          
+			object-fit: contain;   /* Enquadra a ilustração SVG dentro da caixa 160x160 */
+			margin-bottom: 20px;
+			margin-top: 20px;			
+			filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); 
+			animation: pulsarSuave 2.5s ease-in-out infinite;
+		}
 
         .cartao-ano:nth-child(1) .img-ano { animation-delay: 0s; }
         .cartao-ano:nth-child(2) .img-ano { animation-delay: 0.4s; }
@@ -424,16 +427,63 @@
             50% { transform: scale(1.04); }
         }
 
-        .titulo-ano {
-            color: white;
-            font-weight: 700;
-            font-size: clamp(0.9rem, 2.5vw, 1.3rem);
-            text-shadow: 1px 2px 3px rgba(0,0,0,0.15);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-            flex-shrink: 0; 
-        }
+/* --- SUBSTANTIVAÇÃO DO TÍTULO EM BADGE FLUTUANTE --- */
+.titulo-ano {
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    background: #ffffff;
+    font-family: 'Fredoka', 'Roboto', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    
+    padding: 6px 18px;
+    border-radius: 50px;
+    
+    /* Sombra 3D suave que descola o badge do cartão */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    z-index: 5;
+    
+    /* Suavidade ao passar o rato */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Aumenta o destaque do badge ao fazer hover no cartão */
+.cartao-ano:hover .titulo-ano {
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* --- CORES E BORDAS PERSONALIZADAS POR ANO --- */
+.cartao-ano.pre .titulo-ano { 
+    border: 2.5px solid var(--cor-pre); 
+    color: var(--cor-pre); 
+}
+
+.cartao-ano.ano1 .titulo-ano { 
+    border: 2.5px solid var(--cor-1ano); 
+    color: var(--cor-1ano); 
+}
+
+.cartao-ano.ano2 .titulo-ano { 
+    border: 2.5px solid var(--cor-2ano); 
+    color: #d97706;
+}
+
+.cartao-ano.ano3 .titulo-ano { 
+    border: 2.5px solid var(--cor-3ano); 
+    color: #ed9090; 
+}
+
+.cartao-ano.ano4 .titulo-ano { 
+    border: 2.5px solid var(--cor-4ano); 
+    color: var(--cor-4ano); 
+}
 
         /* =========================================
            CORES DE FUNDO (COLOR-MIX)
@@ -1192,13 +1242,20 @@ button.btn-pesquisa-header:hover svg {
 			flex-shrink: 0 !important;
 		}
 		
-		.titulo-ano {
-		  color: color-mix(in srgb, var(--ano-cor) 70%, #0d47a1 30%) !important;
-		  font-weight: 900 !important;
-		  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8) !important;
-		  margin: 0 !important;
-		flex-grow: 1 !important;
-		text-align: center !important;
+		.cartao-ano .titulo-ano {
+			position: static !important;
+			bottom: auto !important;
+			left: auto !important;
+			right: auto !important;
+			top: auto !important;
+			transform: none !important;
+			font-size: clamp(0.8rem, 2.8vw, 0.95rem) !important;
+			position: static !important;
+			display: inline-block !important;
+			width: fit-content !important;
+			flex: 0 0 auto !important;
+			margin: 0 auto !important;
+			padding: 5px 14px !important;
 		}
 		
 		
@@ -1761,16 +1818,19 @@ button.btn-pesquisa-header:hover svg {
     document.getElementById('ano-atual').innerText = new Date().getFullYear();
     
     // Escolhe um set aleatório de imagens ao carregar a página
-    document.addEventListener("DOMContentLoaded", function() {
-        const numeroDeSets = 5;
-        const setEscolhido = Math.floor(Math.random() * numeroDeSets) + 1;
-        const namesBase = ["pre", "1_ano", "2_ano", "3_ano", "4_ano"];
-        const imagens = document.querySelectorAll(".cartao-ano .img-ano");
-        
-        imagens.forEach((img, index) => {
-            img.src = `img/${namesBase[index]}_v${setEscolhido}.png`;
-        });
-    });
+	document.addEventListener("DOMContentLoaded", function() {
+		const numeroDeSets = 6; // Atualizado para 6 sets
+		const setEscolhido = Math.floor(Math.random() * numeroDeSets) + 1;
+		const namesBase = ["pre", "1_ano", "2_ano", "3_ano", "4_ano"];
+		const imagens = document.querySelectorAll(".cartao-ano .img-ano");
+
+		// Se calhar o set 6 usa .svg, os restantes usam .png
+		const extensao = (setEscolhido === 6) ? "svg" : "png";
+
+		imagens.forEach((img, index) => {
+			img.src = `img/${namesBase[index]}_v${setEscolhido}.${extensao}`;
+		});
+	});
 	
 	// =========================================
 	// EFEITO DE CLIQUE NOS CARTÕES
