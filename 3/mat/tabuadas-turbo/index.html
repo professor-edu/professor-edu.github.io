@@ -84,6 +84,47 @@
             h1, .subtitulo { grid-column: 2; text-align: center; }
             main { padding: 10px; gap: 10px; overflow-y: auto;} 
             .cartao-jogo-container { padding: 20px 15px; min-height: 350px; }
+			.status-bar-jogo {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between; /* Mantém os 4 botões distribuídos na Linha 1 */
+				align-items: center;
+				gap: 6px 2px;
+				padding: 6px 8px;
+			}
+
+			/* 1. LINHA 1: Os 4 elementos alinhados no topo */
+			.btn-voltar-menu,
+			.btn-dica,
+			.badge-ronda,
+			.badge-erros {
+				order: 1;
+				padding: 4px 6px !important;
+				font-size: 0.78rem !important;
+				gap: 3px !important;
+				flex: 0 1 auto;
+				white-space: nowrap;
+			}
+
+			/* Redução proporcional dos ícones sem alterar cores ou formas */
+			.btn-voltar-menu svg, 
+			.btn-dica svg, 
+			.badge-ronda svg, 
+			.badge-erros svg,
+			.svg-icon {
+				width: 14px !important;
+				height: 14px !important;
+			}
+
+			/* 2. LINHA 2: Barra de progresso isolada a 100% em baixo */
+			.progress-bg {
+				order: 2;
+				flex: 0 0 100% !important;
+				width: 100% !important;
+				min-width: 100% !important;
+				margin: 4px 0 0 0 !important;
+				height: 16px !important;
+			}
         }
 
         .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: white; z-index: 200; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.1); text-align: left; }
@@ -409,20 +450,24 @@
 
 		/* Ajuste Mobile: Se o ecrã for pequeno, reduzimos o ícone */
 		@media (max-width: 600px) {
-			.icon-btn-nivel {
-				width: 40px;
-				height: 40px;
-			}
 			.btn-nivel-novo {
-				padding: 15px;
-				font-size: 1.2rem;
+				width: 85%;            /* Garante uma boa margem nas laterais */
+				max-width: 320px;      /* Evita que fique excessivamente grande em ecrãs verticais */
+				padding: 16px 20px;    /* Altura confortável para o toque dos dedos */
+				font-size: 1.1rem;     /* Reduz ligeiramente a fonte para prevenir quebras de texto */
+				gap: 6px;              /* Espaçamento reduzido entre o ícone e o texto */
+			}
+
+			.icon-btn-nivel {
+				width: 36px;
+				height: 36px;
 			}
 		}
 		
 		.btn-nivel-novo {
-            width: 90%; max-width: 400px; padding: 20px 40px; border-radius: 20px; border: 4px solid white;
+            width: 90%; max-width: 400px; padding: 20px 20px; border-radius: 20px; border: 4px solid white;
             color: white; font-size: 1.2rem; font-weight: 900; cursor: pointer; display: flex;
-            flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+            align-items: center; justify-content: center; gap: 8px;
             transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
             box-shadow: 0 6px 0 #e2e8f0, 0 10px 15px rgba(0,0,0,0.08); text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
             touch-action: manipulation; user-select: none; text-align: center;
