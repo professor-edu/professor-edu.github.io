@@ -31,7 +31,9 @@
         body { 
             font-family: 'Roboto', sans-serif; 
             text-align: center; 
-            background-color: var(--bg-body); 
+            background-color: var(--bg-body);
+			background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px);
+			background-size: 25px 25px;			
             margin: 0; 
             display: flex;
             flex-direction: column;
@@ -486,14 +488,109 @@
 		.icon-svg-dado { width: 1.1em; height: 1.1em; vertical-align: middle; object-fit: contain; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.2)); /* Uma sombrinha 3D para destacar! */ }
 		
     body { scrollbar-gutter: stable; }
+	
+			/* Importação da fonte infantil/arredondada 'Fredoka' */
+		@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700;800&display=swap');
+
+		/* Nome da disciplina oculto por defeito em Desktop/Landscape */
+		.nome-disciplina-mobile {
+			display: none;
+			font-family: 'Fredoka', 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+			font-size: 1.35rem;
+			font-weight: 800;
+			line-height: 1.1;
+			text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+		}
+
+		/* Cores específicas dos títulos em mobile */
+		.c-port .nome-disciplina-mobile { color: var(--cor-pt); }
+		.c-mat .nome-disciplina-mobile  { color: var(--cor-mat); }
+		.c-em .nome-disciplina-mobile   { color: var(--cor-em); }
+
+		/* Controlo das colunas do cartão em Desktop/Landscape */
+		.lado-esquerdo-card {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.lado-esquerdo-card picture {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.lado-direito-card {
+			display: contents; /* Em desktop não interfere no layout original */
+		}
+
+		/* =========================================
+		   BANNER HORIZONTAL EM MOBILE VERTICAL
+		   ========================================= */
+		@media (max-width: 768px) and (orientation: portrait) {
+			.grid-disciplinas {
+				flex-direction: column;
+				gap: 12px;
+			}
+
+			.cartao-disciplina {
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center;
+				aspect-ratio: auto !important; /* Remove proporção antiga */
+				min-height: 105px;
+				padding: 10px 18px 10px 10px;
+				box-sizing: border-box;
+			}
+
+			/* Imagem no lado esquerdo (500x370px mantendo a proporção) */
+			.lado-esquerdo-card {
+				width: 42%;
+				max-width: 140px;
+				height: auto;
+			}
+
+			.lado-esquerdo-card .imagem-fundo {
+				width: 100%;
+				height: auto;
+				max-height: 90px;
+				object-fit: contain;
+				margin-bottom: 0; /* Remove a margem original de desktop */
+			}
+
+			/* Conteúdo do lado direito (Título + Badge) */
+			.lado-direito-card {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				gap: 8px;
+				flex: 1;
+				text-align: center;
+			}
+
+			.nome-disciplina-mobile {
+				display: block; /* Revela o título em mobile vertical */
+			}
+
+			/* Reposicionamento do badge para ficar abaixo do título */
+			.badge-centro {
+				position: relative !important;
+				bottom: auto !important;
+				right: auto !important;
+				transform: none !important;
+				margin: 0;
+				font-size: 0.8rem;
+				padding: 4px 12px;
+			}
+		}
 </style>
 
-<style>
-  body {
-    background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px);
-    background-size: 25px 25px;
-  }
-</style>
+
 </head>
 <body>
 
@@ -515,25 +612,52 @@
 </header>
 
 <main>
-    <!-- ZONA SUPERIOR: DISCIPLINAS FIXAS -->
-    <div class="grid-disciplinas">
-        
-        <a href="pt/" class="cartao-disciplina c-port cartao-imagem">
-            <img src="../img/portugues.png" alt="Português" class="imagem-fundo">
-            <div class="badge-centro" id="contador-pt">0 Jogos</div>
-        </a>
-        
-        <a href="mat/" class="cartao-disciplina c-mat cartao-imagem">
-            <img src="../img/matematica.png" alt="Matemática" class="imagem-fundo">
-            <div class="badge-centro" id="contador-mat">0 Jogos</div>
-       </a>
-        
-        <a href="em/" class="cartao-disciplina c-em cartao-imagem">
-            <img src="../img/estudo_meio.png" alt="Estudo do Meio" class="imagem-fundo">
-            <div class="badge-centro" id="contador-em">0 Jogos</div>
-        </a>
-        
-    </div>
+
+	<div class="grid-disciplinas">
+		
+		<!-- PORTUGUÊS -->
+		<a href="pt/" class="cartao-disciplina c-port cartao-imagem">
+			<div class="lado-esquerdo-card">
+				<picture>
+					<source media="(max-width: 768px) and (orientation: portrait)" srcset="../img/portugues_p.png">
+					<img src="../img/portugues.png" alt="Português" class="imagem-fundo">
+				</picture>
+			</div>
+			<div class="lado-direito-card">
+				<span class="nome-disciplina-mobile">Português</span>
+				<div class="badge-centro" id="contador-pt"> Jogos</div>
+			</div>
+		</a>
+		
+		<!-- MATEMÁTICA -->
+		<a href="mat/" class="cartao-disciplina c-mat cartao-imagem">
+			<div class="lado-esquerdo-card">
+				<picture>
+					<source media="(max-width: 768px) and (orientation: portrait)" srcset="../img/matematica_p.png">
+					<img src="../img/matematica.png" alt="Matemática" class="imagem-fundo">
+				</picture>
+			</div>
+			<div class="lado-direito-card">
+				<span class="nome-disciplina-mobile">Matemática</span>
+				<div class="badge-centro" id="contador-mat"> Jogos</div>
+			</div>
+		</a>
+		
+		<!-- ESTUDO DO MEIO -->
+		<a href="em/" class="cartao-disciplina c-em cartao-imagem">
+			<div class="lado-esquerdo-card">
+				<picture>
+					<source media="(max-width: 768px) and (orientation: portrait)" srcset="../img/estudo_meio_p.png">
+					<img src="../img/estudo_meio.png" alt="Estudo do Meio" class="imagem-fundo">
+				</picture>
+			</div>
+			<div class="lado-direito-card">
+				<span class="nome-disciplina-mobile">Estudo do Meio</span>
+				<div class="badge-centro" id="contador-em"> Jogos</div>
+			</div>
+		</a>
+		
+	</div>
 
     <!-- SEPARADOR VISUAL -->
     <div class="separador">
@@ -543,9 +667,9 @@
 		</span>
 	</div>
 
-    <!-- ZONA INFERIOR: JOGOS DO DIA (Gerados via JS) -->
+
     <div class="grid-jogos-dia" id="jogos-dia-container">
-        <!-- Os cartões são injetados aqui -->
+
     </div>
 </main>
 
@@ -553,7 +677,7 @@
     <p><span id="ano-atual"> </span><img src="../SVG/4_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
 </footer>
 
-<!-- 1. IMPORTAMOS O CATÁLOGO DE JOGOS AQUI -->
+
 <script src="catalogo-4ano.js"></script>
 
 <script>
