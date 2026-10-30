@@ -209,9 +209,17 @@
             text-decoration: none; display: flex; flex-direction: column; align-items: center; 
             justify-content: center; gap: 12px; 
             border: 1px solid #eee; transition: 0.3s; position: relative;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .cartao-disciplina:hover { transform: translateY(-8px); }
         
+		.lado-esquerdo-card picture,
+		.imagem-fundo {
+			max-width: 100%;
+			max-height: 100%;
+			display: block;
+		}
+		
         .c-port { border-top: 8px solid var(--cor-pt); background: linear-gradient(180deg, #ffffff 0%, #fff0f0 100%); }
         .c-mat { border-top: 8px solid var(--cor-mat); background: linear-gradient(180deg, #ffffff 0%, #f0f8ff 100%); }
         .c-estudo { border-top: 8px solid var(--cor-em); background: linear-gradient(180deg, #ffffff 0%, #f0fff4 100%); }
@@ -489,25 +497,18 @@
 		
     body { scrollbar-gutter: stable; }
 	
-			/* Importação da fonte infantil/arredondada 'Fredoka' */
-		@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700;800&display=swap');
-
-		/* Nome da disciplina oculto por defeito em Desktop/Landscape */
 		.nome-disciplina-mobile {
 			display: none;
-			font-family: 'Fredoka', 'Comic Sans MS', 'Chalkboard SE', sans-serif;
 			font-size: 1.35rem;
 			font-weight: 800;
 			line-height: 1.1;
 			text-shadow: 0 2px 4px rgba(0,0,0,0.05);
 		}
 
-		/* Cores específicas dos títulos em mobile */
 		.c-port .nome-disciplina-mobile { color: var(--cor-pt); }
 		.c-mat .nome-disciplina-mobile  { color: var(--cor-mat); }
 		.c-em .nome-disciplina-mobile   { color: var(--cor-em); }
 
-		/* Controlo das colunas do cartão em Desktop/Landscape */
 		.lado-esquerdo-card {
 			width: 100%;
 			height: 100%;
@@ -525,7 +526,7 @@
 		}
 
 		.lado-direito-card {
-			display: contents; /* Em desktop não interfere no layout original */
+			display: contents;
 		}
 
 		/* =========================================
@@ -541,13 +542,12 @@
 				flex-direction: row;
 				justify-content: space-between;
 				align-items: center;
-				aspect-ratio: auto !important; /* Remove proporção antiga */
+				aspect-ratio: auto !important;
 				min-height: 105px;
 				padding: 10px 18px 10px 10px;
 				box-sizing: border-box;
 			}
 
-			/* Imagem no lado esquerdo (500x370px mantendo a proporção) */
 			.lado-esquerdo-card {
 				width: 42%;
 				max-width: 140px;
@@ -559,25 +559,23 @@
 				height: auto;
 				max-height: 90px;
 				object-fit: contain;
-				margin-bottom: 0; /* Remove a margem original de desktop */
+				margin-bottom: 0;
 			}
 
-			/* Conteúdo do lado direito (Título + Badge) */
 			.lado-direito-card {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
 				justify-content: center;
-				gap: 8px;
+				gap: 12px;
 				flex: 1;
 				text-align: center;
 			}
 
 			.nome-disciplina-mobile {
-				display: block; /* Revela o título em mobile vertical */
+				display: block;
 			}
 
-			/* Reposicionamento do badge para ficar abaixo do título */
 			.badge-centro {
 				position: relative !important;
 				bottom: auto !important;
