@@ -374,8 +374,6 @@
             border: 2px solid white; 
         }
 
-        /* 🛡️ SEGURANÇA MÁXIMA PARA OS BOTÕES/BADGES */
-        /* Diz ao Flexbox: "Proibido esmagar estes elementos" */
         .btn-voltar-menu, .btn-dica, .badge-ronda, .badge-erros {
             flex-shrink: 0;
         }
@@ -410,6 +408,55 @@
                 white-space: nowrap; /* Garante que o texto não se parte a meio */
                 flex-shrink: 0; /* Impede os ícones de ficarem esmagados */
             }
+			.area-jogo-custom, #game-area {
+				padding: 6px 4px !important;
+				gap: 6px !important;
+			}
+
+			/* 2. OTIMIZAR A GRELHA 11x11 PARA ECRÃS DE 360PX */
+			.grelha-tabuada-container {
+				width: 100% !important;
+				max-width: 320px !important;
+				gap: 1px !important;
+				padding: 2px !important;
+				border-width: 3px !important;
+				margin: 0 auto !important;
+			}
+
+			/* Ajuste do texto e tamanho de cada célula da grelha */
+			.grelha-tabuada-container > div,
+			.grelha-celula {
+				font-size: 0.65rem !important;
+				font-weight: 800 !important;
+				padding: 0 !important;
+				display: flex !important;
+				align-items: center !important;
+				justify-content: center !important;
+			}
+
+			/* 3. PERGUNTA DO TOPO COMPACTA */
+			#pergunta-texto, .pergunta-texto {
+				font-size: 0.9rem !important;
+				margin-bottom: 4px !important;
+			}
+
+			.explorador-agente {
+				display: none !important;
+			}
+
+			/* 5. TECLADO NUMÉRICO COMPACTO */
+			.teclado-container, .painel-teclado {
+				gap: 3px !important;
+				width: 100% !important;
+				max-width: 320px !important;
+				margin-top: 4px !important;
+			}
+
+			.btn-teclado, .teclado-container button {
+				padding: 6px 0 !important;
+				font-size: 1rem !important;
+				border-radius: 8px !important;
+			}
         }
 	
 		.icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
@@ -990,7 +1037,6 @@
 			40%, 80% { transform: translateX(8px) rotate(3deg); }
 		}
 
-		/* 🖥️ ESPECÍFICO PC HORIZONTAL: Personagem maior devido ao espaço do ecrã */
 		@media (min-width: 1024px) {
 			.explorador-agente {
 				width: 130px;
@@ -999,12 +1045,10 @@
 			}
 		}
 
-		/* 📱 Otimização mobile: Reduz tamanho para não sobrepor o visor digital */
+
 		@media (max-width: 480px) {
 			.explorador-agente {
-				width: 55px;
-				bottom: 8px;
-				right: 8px;
+				display: none;
 			}
 		}
 
@@ -1123,11 +1167,11 @@
 /* --- A GRELHA PITAGÓRICA PRINCIPAL DE JOGO (11x11) --- */
 .grelha-tabuada-container {
     display: grid;
-    grid-template-columns: repeat(11, 1fr); /* 11 colunas incluindo as cabeceiras */
+    grid-template-columns: repeat(11, 1fr);
     gap: 2px;
     width: 100%;
-    max-width: 340px; /* Largura otimizada para encaixar em mobile na vertical */
-    aspect-ratio: 1;  /* Grelha perfeitamente quadrada */
+    max-width: 400px;
+    aspect-ratio: 1;
     margin: 5px auto;
     background: #14221a; /* Fundo ardósia */
     border: 5px solid #4a3728; /* Moldura de madeira realista */
