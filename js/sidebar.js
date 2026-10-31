@@ -59,7 +59,7 @@
 
         // HTML base da Modal de Pesquisa
         const modalHTML = `
-            <div id="modal-pesquisa" class="modal-pesquisa-overlay" style="--cor-hover: ${corHoverAtual};" onclick="fecharPesquisaFora(event)">
+            <div id="modal-pesquisa" class="modal-pesquisa-overlay" style="display: none; --cor-hover: ${corHoverAtual};" onclick="fecharPesquisaFora(event)">
                 <div class="modal-pesquisa-container">
                     <div class="modal-pesquisa-header">
                         <div class="input-pesquisa-container">

@@ -1,6 +1,14 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
+const spanTexto = document.getElementById("texto-total-jogadas");
+
+// MOSTRA IMEDIATAMENTE O ÚLTIMO VALOR CONHECIDO (SEM ESPERAR PELO FIREBASE)
+const valorGuardado = localStorage.getItem("ultimo_total_jogadas");
+if (spanTexto && valorGuardado) {
+  spanTexto.textContent = `${Number(valorGuardado).toLocaleString('pt-PT')} jogos realizados`;
+}
+
 // Configuração do Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCIigMWzyJ16yfayXHItv5lpgDS0W6FkbA",
@@ -15,13 +23,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// Ícone SVG: Taça/Troféu
-const iconeTacaSVG = `
-<svg width="18" height="18" viewBox="0 0 24 24" fill="#ffffff" stroke="#ffffff" stroke-width="1">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>`;
-
-// Lê a pasta de todos os jogos para calcular a soma total real
 const jogosRef = ref(db, "estatisticas/jogos");
 
 onValue(jogosRef, (snapshot) => {
@@ -29,7 +30,6 @@ onValue(jogosRef, (snapshot) => {
   let totalHistorico = 0;
 
   if (dadosJogos) {
-    // Percorre todos os jogos registados e soma as respetivas visitas
     Object.values(dadosJogos).forEach((jogo) => {
       if (jogo && jogo.visitas) {
         totalHistorico += Number(jogo.visitas);
@@ -37,31 +37,11 @@ onValue(jogosRef, (snapshot) => {
     });
   }
 
-  // Sincroniza o valor somado com a nova chave 'total_geral' no Firebase
   set(ref(db, "estatisticas/total_geral"), totalHistorico);
 
-  // Injeta o resultado na página inicial
-  const contentor = document.getElementById("contentor-total-jogadas");
-  if (contentor) {
-    contentor.innerHTML = `
-<div style="
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: #ffffff;
-    padding: 6px 14px;
-    border-radius: 50px;
-    font-weight: 800;
-    font-size: 0.9rem;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.45);
-    border: 3px solid #ffffff;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
-    user-select: none;
-">
-        ${iconeTacaSVG}
-        <span>${totalHistorico.toLocaleString('pt-PT')} jogos realizados</span>
-      </div>
-    `;
+  // ATUALIZA APENAS O TEXTO E GUARDA PARA A PRÓXIMA VISITA
+  if (spanTexto) {
+    spanTexto.textContent = `${totalHistorico.toLocaleString('pt-PT')} jogos realizados`;
+    localStorage.setItem("ultimo_total_jogadas", totalHistorico);
   }
 });
