@@ -1,3 +1,25 @@
+// ========================================================
+// INJEÇÃO AUTOMÁTICA DE SEO NAS META TAGS
+// ========================================================
+(function() {
+    // 1. Meta Descrição para o Google
+    if (!document.querySelector('meta[name="description"]')) {
+        const metaDesc = document.createElement('meta');
+        metaDesc.name = 'description';
+        metaDesc.content = 'Portal de jogos didáticos e educativos para crianças do Pré-Escolar ao 4.º Ano. Aprende Matemática, Português e Estudo do Meio a brincar!';
+        document.head.appendChild(metaDesc);
+    }
+
+    // 2. Capa de Partilha para WhatsApp e Redes Sociais (og:image)
+    if (!document.querySelector('meta[property="og:image"]')) {
+        const metaOgImg = document.createElement('meta');
+        metaOgImg.setAttribute('property', 'og:image');
+        metaOgImg.content = window.location.origin + '/img/brincar_aprender.jpg';
+        document.head.appendChild(metaOgImg);
+    }
+})();
+
+
 (function() {
     // 1. Injeta o CSS automaticamente no <head>
     const cssPath = '/css/sidebar.css';
@@ -120,16 +142,60 @@ function toggleMenu() {
 // Variável global para armazenar o catálogo carregado
 let catalogoJogos = [];
 
-// Carrega o jogos.json apenas uma vez
+// Carrega o jogos.json apenas uma vez e comunica com o Google
 async function carregarCatalogo() {
     if (catalogoJogos.length === 0) {
         try {
             const resposta = await fetch('/jogos.json');
             catalogoJogos = await resposta.json();
+            injetarSchemaGoogle(); // <--- NOVA LINHA ADICIONADA AQUI
         } catch (erro) {
             console.error('Erro ao carregar o catálogo de jogos:', erro);
         }
     }
+}
+
+// Função expandida que ensina o Google sobre o portal e cada jogo didático individualmente
+function injetarSchemaGoogle() {
+    if (document.getElementById('schema-seo-google')) return;
+
+    // Converte os jogos do catalogoJogos num formato legível pelo Google Schema
+    const listaJogosSchema = catalogoJogos.map((jogo, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+            "@type": "SoftwareApplication",
+            "name": jogo.nome || jogo.titulo,
+            "applicationCategory": "EducationalApplication",
+            "operatingSystem": "Web",
+            "url": window.location.origin + (jogo.link.startsWith('/') ? jogo.link : '/' + jogo.link),
+            "keywords": jogo.tags && Array.isArray(jogo.tags) ? jogo.tags.join(', ') : 'jogos didáticos, jogos infantis'
+        }
+    }));
+
+    const schemaData = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "name": "Vamos Brincar e Aprender",
+                "alternateName": ["Brincar e Aprender", "Jogos Didáticos Brincar e Aprender"],
+                "url": window.location.origin,
+                "description": "Portal de jogos didáticos e educativos para crianças do Pré-Escolar ao 4.º Ano."
+            },
+            {
+                "@type": "ItemList",
+                "name": "Lista Completa de Jogos Didáticos",
+                "itemListElement": listaJogosSchema
+            }
+        ]
+    };
+
+    const script = document.createElement('script');
+    script.id = 'schema-seo-google';
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(schemaData);
+    document.head.appendChild(script);
 }
 
 // Dicionário de Sinónimos e Mapeamentos Escolares Ampliado
@@ -454,18 +520,25 @@ function renderizarResultados(lista) {
         </div>
     `;
 
-    const cartoesHTML = lista.map(jogo => `
-        <a href="${jogo.link}" class="item-resultado-jogo">
-            <img src="${jogo.icone}" alt="${jogo.nome || jogo.titulo}" class="thumb-jogo" onerror="this.src='/SVG/home.svg'">
-            <div class="info-jogo">
-                <h4>${jogo.nome || jogo.titulo}</h4>
-                <div class="pesquisa-badges-jogo">
-                    <span class="pesquisa-badge-ano">${jogo.ano || jogo.nivel || ''}</span>
-                    ${jogo.disciplina || jogo.categoria ? `<span class="pesquisa-badge-disciplina">${jogo.disciplina || jogo.categoria}</span>` : ''}
+    const cartoesHTML = lista.map(jogo => {
+        // Prepara as tags em texto limpo para o alt da imagem
+        const tagsTexto = jogo.tags && Array.isArray(jogo.tags) ? jogo.tags.join(', ') : 'jogos didáticos educativos';
+        const altSEO = `Jogo didático ${jogo.nome || jogo.titulo} (${jogo.ano || ''}) - ${tagsTexto}`;
+        const titleSEO = `Jogar ${jogo.nome || jogo.titulo} • ${jogo.ano || ''} ${jogo.disciplina || ''}`;
+
+        return `
+            <a href="${jogo.link}" class="item-resultado-jogo" title="${titleSEO}">
+                <img src="${jogo.icone}" alt="${altSEO}" class="thumb-jogo" onerror="this.src='/SVG/home.svg'">
+                <div class="info-jogo">
+                    <h4>${jogo.nome || jogo.titulo}</h4>
+                    <div class="pesquisa-badges-jogo">
+                        <span class="pesquisa-badge-ano">${jogo.ano || jogo.nivel || ''}</span>
+                        ${jogo.disciplina || jogo.categoria ? `<span class="pesquisa-badge-disciplina">${jogo.disciplina || jogo.categoria}</span>` : ''}
+                    </div>
                 </div>
-            </div>
-        </a>
-    `).join('');
+            </a>
+        `;
+    }).join('');
 
     container.innerHTML = totalHTML + cartoesHTML;
 }

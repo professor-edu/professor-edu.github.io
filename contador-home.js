@@ -44,21 +44,21 @@ onValue(jogosRef, (snapshot) => {
   const contentor = document.getElementById("contentor-total-jogadas");
   if (contentor) {
     contentor.innerHTML = `
-      <div style="
-        display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(135deg, #ff7b00 0%, #ffae00 100%);
-      color: #ffffff;
-      padding: 6px 14px;
-      border-radius: 50px;
-      font-weight: 800;
-      font-size: 0.9rem;
-      box-shadow: 0 4px 12px rgba(255, 123, 0, 0.5);
-      border: 3px solid #ffffff;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.15);
-      user-select: none;
-      ">
+<div style="
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.45);
+    border: 3px solid #ffffff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    user-select: none;
+">
         ${iconeTacaSVG}
         <span>${totalHistorico.toLocaleString('pt-PT')} jogos realizados</span>
       </div>

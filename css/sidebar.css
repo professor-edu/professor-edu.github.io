@@ -65,7 +65,7 @@
 .botoes-footer {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
 }
 
 .btn-abrir-info,
