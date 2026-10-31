@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="../../logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     
-    <style>
+<style>
         *, *::before, *::after { box-sizing: border-box; }
 
         /* =========================================
@@ -19,12 +19,12 @@
             --azul-vibrante: #0091ff; 
             --cor-2ano: #e7d83f;     
             --cor-2ano-dark: #E3C40D;
-			--cor-borda: #E3C40D;			
+            --cor-borda: #E3C40D;            
             --bg-header: #fff9c4;    
             --azul-escuro: #0d47a1;
             --text-main: #455a64;
             --borda-cartao: #ced6e0;
-			--cor-pt: #ff6b6b;
+            --cor-pt: #ff6b6b;
             --cor-em: #51cf66;
             --cor-mat: #4dabf7;
             
@@ -32,8 +32,8 @@
             --mab-unidade: #fde047; /* Amarelo */
             --mab-dezena: #f97316;  /* Laranja */
             --mab-centena: #3b82f6; /* Azul */
-			
-			/* NOVAS CORES DO MENU INICIAL (Referência da Imagem) */
+            
+            /* NOVAS CORES DO MENU INICIAL */
             --cor-btn-azul: #61A0FF;
             --cor-btn-verde: #5DD279;
             --cor-btn-amarelo: #FBC531;
@@ -41,18 +41,40 @@
             --cor-btn-roxo: #A55EEA;
             --cor-btn-laranja: #FA983A;
             
-            /* Cores de Feedback (Vibrantes) */
+            /* Cores de Feedback */
             --cor-sucesso: #2ed573;
             --cor-sucesso-dark: #219d53;
             --cor-erro: #ff4757;
             --cor-erro-dark: #d0303f;
-			
         }
 
-        body { font-family: 'Roboto', sans-serif; text-align: center; background-color: var(--bg-body); margin: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
-        @media (min-width: 769px) and (min-height: 600px) { body { height: 100vh; overflow-y: auto; } }
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            text-align: center; 
+            background-color: var(--bg-body); 
+            background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px); 
+            background-size: 25px 25px; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+            overflow-x: hidden; 
+        }
         
-        header { background-color: var(--bg-header); padding: 25px 20px; border-bottom: 1px solid var(--cor-2ano-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; flex-shrink: 0; z-index: 100; }
+        @media (min-width: 769px) and (min-height: 600px) { 
+            body { height: 100vh; overflow-y: auto; } 
+        }
+        
+        header { 
+            background-color: var(--bg-header); 
+            padding: 25px 20px; 
+            border-bottom: 1px solid var(--cor-2ano-dark); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+            position: relative; 
+            flex-shrink: 0; 
+            z-index: 100; 
+        }
+        
         .header-content { max-width: 1200px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; }
         .nav-container { width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 15px; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; }
         .hamburger { cursor: pointer; background: rgba(255,255,255,0.3); border: none; display: flex; flex-direction: column; gap: 4px; padding: 10px; border-radius: 8px; transition: background 0.4s ease; }
@@ -63,21 +85,20 @@
         .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
         
         h1 {
-    color: var(--azul-escuro);
-    font-size: clamp(1.4rem, 5vw, 2.2rem);
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-
-    text-shadow: 
-        -2px -2px 0 #ffffff,  
-         2px -2px 0 #ffffff,
-        -2px  2px 0 #ffffff,
-         2px  2px 0 #ffffff, 
-         0px  6px 12px rgba(0, 0, 0, 0.15); 
-}
+            color: var(--azul-escuro);
+            font-size: clamp(1.4rem, 5vw, 2.2rem);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-shadow: 
+                -2px -2px 0 #ffffff,  
+                 2px -2px 0 #ffffff,
+                -2px  2px 0 #ffffff,
+                 2px  2px 0 #ffffff, 
+                 0px  6px 12px rgba(0, 0, 0, 0.15); 
+        }
         .subtitulo { color: var(--azul-escuro); font-size: clamp(0.85rem, 3vw, 1.1rem); font-weight: 500; opacity: 0.8; margin-top: 15px; }
 
         .btn-voltar { background: var(--cor-2ano); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; font-size: 0.9rem; box-shadow: 0 3px 0 var(--cor-2ano-dark); display: flex; align-items: center; gap: 8px; transition: 0.2s; cursor: pointer;}
@@ -90,9 +111,8 @@
             .hamburger { grid-column: 1; justify-self: start; }
             .btn-voltar { grid-column: 2; justify-self: center; width: fit-content; }
             h1, .subtitulo { grid-column: 2; text-align: center; }
-            main { padding: 15px 10px; gap: 10px; } 
-            .cartao-jogo-container { padding: 20px 10px; min-height: 350px; }
-			
+            main { padding: 10px 8px; gap: 10px; } 
+            .cartao-jogo-container { padding: 15px 10px; min-height: 350px; }
 			.status-bar-jogo {
 				display: flex;
 				flex-wrap: wrap;
@@ -172,19 +192,33 @@
         .btn-dica.esgotada { opacity: 0.5; pointer-events: none; filter: grayscale(100%); }
         .badge-ronda { background: white; border: 2px solid #219d53; color: #219d53; font-weight: 800; font-size: 1rem; padding: 6px 12px; border-radius: 15px; white-space: nowrap; }
         .badge-erros { background: white; border: 2px solid var(--cor-pt); color: var(--cor-mat); font-weight: 800; font-size: 1rem; padding: 6px 12px; border-radius: 15px; white-space: nowrap; }
-		.svg-icon { width: 1.2em; height: 1.2em; vertical-align: middle; margin-right: 5px; fill: currentColor; }
+        .svg-icon { width: 1.2em; height: 1.2em; vertical-align: middle; margin-right: 5px; fill: currentColor; }
         .progress-bg { background-color: #e2e8f0; border-radius: 20px; height: 35px; flex: 1; overflow: hidden; box-shadow: inset 0 3px 5px rgba(0,0,0,0.1); border: 2px solid white; margin: 0 10px; }
-		.progress-fill { height: 100%; width: 0%; border-radius: 20px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); background-color: var(--cor-2ano); background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent); background-size: 30px 30px; animation: moverRiscas 2s linear infinite; }
-        
-        @media (max-width: 600px) {
-            .status-bar-jogo { flex-wrap: wrap; justify-content: center; }
-            .btn-voltar-menu, .btn-dica { padding: 4px 8px; font-size: 0.8rem;}
-            .badge-ronda, .badge-erros { font-size: 0.9rem; padding: 4px 8px; }
-            .progress-bg { order: 4; min-width: 100%; margin-top: 5px; }
-        }
+        .progress-fill { height: 100%; width: 0%; border-radius: 20px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); background-color: var(--cor-2ano); background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent); background-size: 30px 30px; animation: moverRiscas 2s linear infinite; }
 
-        .toast-msg { background: #fff9c4; border: 2px solid #fbc531; color: #b18500; padding: 8px 20px; border-radius: 20px; font-weight: 900; font-size: 1.1rem; margin-bottom: 10px; opacity: 0; transform: translateY(-10px); transition: 0.3s; pointer-events: none; z-index: 50; }
-        .toast-msg.active { opacity: 1; transform: translateY(0); }
+        .toast-msg {
+			position: absolute;
+			top: 70px;
+			left: 50%;
+			transform: translateX(-50%) translateY(-10px);
+			background: #fff9c4;
+			border: 2px solid #fbc531;
+			color: #b18500;
+			padding: 8px 20px;
+			border-radius: 20px;
+			font-weight: 900;
+			font-size: 1.1rem;
+			opacity: 0;
+			transition: 0.3s;
+			pointer-events: none;
+			z-index: 50;
+			white-space: nowrap;
+		}
+
+		.toast-msg.active {
+			opacity: 1;
+			transform: translateX(-50%) translateY(0);
+		}
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes moverRiscas { 0% { background-position: 0 0; } 100% { background-position: 30px 0; } }
 
@@ -192,43 +226,58 @@
            ÁREA DE JOGO LIVRE (O TRATOR MAB)
            ========================================= */
         .area-jogo-custom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  flex: 1;
-  min-height: 0;
-  background: radial-gradient(
-    ellipse at center,
-    #ffffff 30%,
-    color-mix(in srgb, var(--cor-mat) 4%, #ffffff) 70%,
-    color-mix(in srgb, var(--cor-mat) 10%, #ffffff) 100%
-  );
-  border-radius: 20px;
-  padding: 25px;
-  gap: 15px;
-  position: relative;
-  color: #1971c2;
-  font-weight: bold;
-  overflow: hidden;
-  box-shadow: inset 0 0 12px 2px rgba(77, 171, 247, 0.40), inset 0 0 25px 6px rgba(77, 171, 247, 0.15);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          flex: 1;
+          min-height: 0;
+          background: radial-gradient(
+            ellipse at center,
+            #ffffff 30%,
+            color-mix(in srgb, var(--cor-mat) 4%, #ffffff) 70%,
+            color-mix(in srgb, var(--cor-mat) 10%, #ffffff) 100%
+          );
+          border-radius: 20px;
+          padding: 25px;
+          gap: 15px;
+          position: relative;
+          color: #1971c2;
+          font-weight: bold;
+          overflow: hidden;
+          box-shadow: inset 0 0 12px 2px rgba(77, 171, 247, 0.40), inset 0 0 25px 6px rgba(77, 171, 247, 0.15);
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+        }
 
-.area-jogo-custom::after {
-  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='16' viewBox='0 0 64 16' fill='none' stroke='%231971c2' stroke-width='2' stroke-linecap='round' opacity='0.45'%3E%3C!-- Mais --%3E%3Cline x1='8' y1='4' x2='8' y2='12'/%3E%3Cline x1='4' y1='8' x2='12' y2='8'/%3E%3C!-- Menos --%3E%3Cline x1='20' y1='8' x2='28' y2='8'/%3E%3C!-- Multiplicação --%3E%3Cline x1='36' y1='4' x2='44' y2='12'/%3E%3Cline x1='44' y1='4' x2='36' y2='12'/%3E%3C!-- Divisão --%3E%3Cline x1='52' y1='8' x2='60' y2='8'/%3E%3Ccircle cx='56' cy='4' r='1' fill='%231971c2'/%3E%3Ccircle cx='56' cy='12' r='1' fill='%231971c2'/%3E%3C/svg%3E");
-  position: absolute;
-  top: 14px;
-  right: 16px;
-  pointer-events: none;
-  z-index: 5;
-}
+        .area-jogo-custom::after {
+          content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='16' viewBox='0 0 64 16' fill='none' stroke='%231971c2' stroke-width='2' stroke-linecap='round' opacity='0.45'%3E%3C!-- Mais --%3E%3Cline x1='8' y1='4' x2='8' y2='12'/%3E%3Cline x1='4' y1='8' x2='12' y2='8'/%3E%3C!-- Menos --%3E%3Cline x1='20' y1='8' x2='28' y2='8'/%3E%3C!-- Multiplicação --%3E%3Cline x1='36' y1='4' x2='44' y2='12'/%3E%3Cline x1='44' y1='4' x2='36' y2='12'/%3E%3C!-- Divisão --%3E%3Cline x1='52' y1='8' x2='60' y2='8'/%3E%3Ccircle cx='56' cy='4' r='1' fill='%231971c2'/%3E%3Ccircle cx='56' cy='12' r='1' fill='%231971c2'/%3E%3C/svg%3E");
+          position: absolute;
+          top: 14px;
+          right: 16px;
+          pointer-events: none;
+          z-index: 5;
+        }
 
-        .painel-alvo { background: white; border: 4px solid var(--azul-escuro); padding: 10px 30px; border-radius: 15px; font-size: 1.5rem; font-weight: 900; color: var(--text-main); box-shadow: 0 4px 0 var(--azul-escuro); z-index: 5;}
-        .painel-alvo span { color: var(--cor-mat); font-size: 2.2rem; display: inline-block; min-width: 60px;}
+        .painel-alvo {
+			background: white;
+			border: 4px solid var(--azul-escuro);
+			padding: 8px 24px;
+			border-radius: 15px;
+			font-size: 1.3rem;
+			font-weight: 900;
+			color: var(--text-main);
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+			
+			/* AJUSTES DE POSIÇÃO E EFEITO FLUTUANTE */
+			top: 30px;
+			margin-bottom: -15px;
+			position: relative;
+			z-index: 10;
+		}
+		.painel-alvo span { color: var(--cor-mat); font-size: 2.2rem; display: inline-block; min-width: 60px;}
 
         /* A ESTRADA E O TRATOR */
         .estrada-container {
@@ -252,49 +301,33 @@
             background-size: contain; padding-bottom: 40px;
         }
         
-        /* A NOVA GESTÃO DE ESPAÇO PARA ACABAR COM A SOBREPOSIÇÃO */
+        /* GESTÃO DE ESPAÇO DA CARGA */
         .carga-conteudo { 
             display: flex; justify-content: flex-end; align-items: flex-end; 
             width: 300px; height: 150px; position: absolute; bottom: 40px; right: 15px; gap: 20px;
             transition: transform 0.3s; transform-origin: bottom right;
         }
 
-        /* 3 Colunas perfeitamente isoladas para que nunca se choquem */
+        /* 3 Colunas perfeitamente isoladas */
         #col-centenas { position: relative; width: 85px; height: 100%; }
         #col-dezenas { display: flex; align-items: flex-end; gap: 2px; height: 100%; flex-shrink: 0;} 
         #col-unidades { display: flex; flex-direction: column-reverse; align-items: center; gap: 2px; height: 100%; flex-shrink: 0;}
 
-        @media (max-width: 480px){
-            .trator-svg { width: 100px; height: 90px; margin-right: -10px;}
-            .atrelado-svg { width: 250px; height: 90px; padding-bottom: 30px;}
-            /* Escala o conteúdo do atrelado em ecrãs pequenos para não rebentar os limites */
-            .carga-conteudo { transform: scale(0.7); right: 5px; bottom: 30px;} 
-            .painel-alvo { font-size: 1.2rem; padding: 8px 20px;}
-            .painel-alvo span { font-size: 1.8rem; }
-            .estrada-container { height: 210px; }
-        }
-
-        /* PEÇAS MAB REDESENHADAS */
+        /* PEÇAS MAB */
         .mab-peca { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
+        .mab-1 { width: 24px; height: 24px; background: var(--mab-unidade); border: 1px solid #ca8a04; border-radius: 2px; box-shadow: 1px 1px 2px rgba(0,0,0,0.2);}
+        .mab-10 { width: 18px; height: 80px; background: repeating-linear-gradient(to bottom, transparent, transparent 7px, rgba(0,0,0,0.2) 7px, rgba(0,0,0,0.2) 8px), var(--mab-dezena); border: 1px solid #c2410c; border-radius: 2px; box-shadow: 1px 1px 2px rgba(0,0,0,0.2);}
         
-        /* Unidades - Agora são empilhadas na coluna pelo Flexbox */
-        .mab-1 { width: 14px; height: 14px; background: var(--mab-unidade); border: 1px solid #ca8a04; border-radius: 2px; box-shadow: 1px 1px 2px rgba(0,0,0,0.2);}
-        
-        /* Dezenas - Lado a Lado */
-        .mab-10 { width: 14px; height: 80px; background: repeating-linear-gradient(to bottom, transparent, transparent 7px, rgba(0,0,0,0.2) 7px, rgba(0,0,0,0.2) 8px), var(--mab-dezena); border: 1px solid #c2410c; border-radius: 2px; box-shadow: 1px 1px 2px rgba(0,0,0,0.2);}
-        
-        /* Centenas - Placas finas vistas de frente com profundidade! (Posicionamento Absoluto SÓ dentro da sua coluna) */
         .mab-100-flat { 
             position: absolute; 
             width: 65px; height: 10px; 
             background: repeating-linear-gradient(to right, transparent, transparent 5.5px, rgba(0,0,0,0.3) 5.5px, rgba(0,0,0,0.3) 6.5px), var(--mab-centena); 
             border: 1px solid #1e3a8a; border-radius: 1px;
-            box-shadow: 2px -1px 3px rgba(0,0,0,0.4); /* Sombra mágica que dá a sensação de degrau */
+            box-shadow: 2px -1px 3px rgba(0,0,0,0.4);
         }
 
-        /* Centena no botão - Vista de Cima (Para o aluno perceber o que é) */
         .mab-100-topo {
-            width: 38px; height: 38px; 
+            width: 48px; height: 48px; 
             background: repeating-linear-gradient(to bottom, transparent, transparent 3px, rgba(0,0,0,0.2) 3px, rgba(0,0,0,0.2) 4px), repeating-linear-gradient(to right, transparent, transparent 3px, rgba(0,0,0,0.2) 3px, rgba(0,0,0,0.2) 4px), var(--mab-centena); 
             border: 1px solid #1d4ed8; border-radius: 2px;
         }
@@ -303,23 +336,23 @@
         .convert-flash { animation: convertFlash 0.5s ease; }
         @keyframes convertFlash { 0%, 100% { filter: brightness(1); transform: scale(1); } 50% { filter: brightness(2); transform: scale(1.1); } }
 
-        /* Controles Base 10 */
+        /* PAINEL DE CONTROLOS (DESKTOP BASE) */
         .painel-controlos { 
-			display: flex; 
-			flex-wrap: wrap; 
-			justify-content: center; 
-			align-items: center; /* Impede que os botões mais pequenos estiquem na vertical */
-			gap: 20px; /* Um ligeiro aumento para separar visualmente os botões MAB dos botões de ação */
-			width: 100%; 
-			z-index: 10;
-		}
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 20px; 
+            width: 100%; 
+            z-index: 10;
+        }
         .btn-mab { 
             background: white; border: 3px solid #cbd5e1; border-radius: 15px; padding: 10px 20px; 
             display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
             cursor: pointer; box-shadow: 0 4px 0 #cbd5e1; transition: 0.1s; min-width: 90px; touch-action: manipulation;
         }
         .btn-mab:active { transform: translateY(4px); box-shadow: 0 0px 0 #cbd5e1; }
-        .btn-mab .icone-mab { height: 50px; display: flex; align-items: center; justify-content: center; position: relative;}
+        .btn-mab .icone-mab { height: 60px; display: flex; align-items: center; justify-content: center; position: relative;}
         .btn-mab span { font-weight: 900; font-size: 1.2rem; color: var(--text-main);}
         
         .btn-mab.unidade:hover { border-color: var(--mab-unidade); }
@@ -327,14 +360,14 @@
         .btn-mab.centena:hover { border-color: var(--mab-centena); }
 
         .botoes-acao { 
-			display: flex; 
-			flex-wrap: wrap;
-			justify-content: center; 
-			align-items: center;
-			gap: 15px; 
-			width: auto; /* Removemos o 100% para não forçar a quebra de linha no desktop */
-			margin-top: 0; /* Removemos a margem do topo */
-		}
+            display: flex; 
+            flex-wrap: wrap;
+            justify-content: center; 
+            align-items: center;
+            gap: 15px; 
+            width: auto; 
+            margin-top: 0; 
+        }
         .btn-limpar { background: #f1f5f9; border: 3px solid #94a3b8; color: #475569; padding: 12px 20px; font-size: 1.1rem; font-weight: 900; border-radius: 15px; cursor: pointer; box-shadow: 0 4px 0 #94a3b8; transition: 0.1s;}
         .btn-limpar:active { transform: translateY(4px); box-shadow: none; }
         .btn-partir { background: var(--cor-em); border: 3px solid #2b8a3e; color: white; padding: 12px 30px; font-size: 1.3rem; font-weight: 900; border-radius: 15px; cursor: pointer; box-shadow: 0 4px 0 #2b8a3e; transition: 0.1s; text-transform: uppercase;}
@@ -343,10 +376,9 @@
         /* Menus / Transições */
         .intro-box { background: white; padding: 30px; border-radius: 20px; border: 4px solid var(--cor-2ano); max-width: 600px; box-shadow: 0 8px 0 var(--cor-2ano-dark); }
         .intro-box p { font-size: 1.2rem; color: var(--text-main); font-weight: 500; line-height: 1.5;}
-        .btn-acao { background-color: var(--azul-escuro); color: white; border: none; padding: 15px 35px; font-size: 1.2rem; font-weight: 900; border-radius: 15px; cursor: pointer; box-shadow: 0 5px 0 var(--cor-2ano-dark); display: inline-flex; align-items: center; justify-content: center; gap: 10px; margin-top: 15px; width: 100%; max-width: 300px; transition: 0.2s;}
+        .btn-acao { background-color: var(--azul-escuro); color: white; border: none; padding: 15px 35px; font-size: 1.2rem; font-weight: 900; border-radius: 15px; cursor: pointer; box-shadow: 0 5px 0 var(--cor-2ano-dark); display: inline-flex; align-items: center; justify-content: center; gap: 10px; margin-top: 15px; width: 100%; max-width: 400px; transition: 0.2s;}
         .btn-acao:active { transform: translateY(5px); box-shadow: none; }
         
-		/* Variantes de Cor para os Botões de Ação */
         .btn-acao.primario { background-color: var(--cor-btn-verde); box-shadow: 0 6px 0 #45b062, 0 10px 15px rgba(0,0,0,0.1); }
         @media (hover: hover) { .btn-acao.primario:hover { box-shadow: 0 8px 0 #45b062, 0 12px 20px rgba(0,0,0,0.15); } }
         
@@ -355,68 +387,189 @@
         
         .btn-acao.terciario { background-color: var(--cor-btn-azul); box-shadow: 0 6px 0 #4a8deb, 0 10px 15px rgba(0,0,0,0.1); }
         @media (hover: hover) { .btn-acao.terciario:hover { box-shadow: 0 8px 0 #4a8deb, 0 12px 20px rgba(0,0,0,0.15); } }
-		
-		
-		
-		.end-title { font-size: 2.5rem; color: var(--azul-escuro); margin-bottom: 10px; }
+        
+        .end-title { font-size: 2.5rem; color: var(--azul-escuro); margin-bottom: 10px; }
         .end-stats { font-size: 1.5rem; color: var(--text-main); margin-bottom: 30px; text-align: center; background: #fff; padding: 20px; border-radius: 20px; border: 2px solid #ffebeb;}
         
         .confetti { position: absolute; width: 10px; height: 10px; z-index: 10; animation: fall linear forwards; pointer-events: none;}
         @keyframes fall { to { transform: translateY(600px) rotate(360deg); opacity: 0; } }
-		
-		/* =========================================
-		CORREÇÃO PARA TELEMÓVEIS NA HORIZONTAL
-		========================================= */
-		@media (max-height: 600px) {
-			body {
-				height: auto !important;
-				overflow-y: auto !important;
+
+        /* =========================================================
+           OTIMIZAÇÕES ESPECÍFICAS PARA ECRÃS MÓVEIS (ATÉ 600PX)
+           ========================================================= */
+        @media (max-width: 600px) {
+            /* Compactação de molduras e padding geral */
+            .cartao-jogo-container {
+                padding: 12px 8px !important;
+                border-radius: 18px !important;
+            }
+            .area-jogo-custom {
+                padding: 10px 6px !important;
+                gap: 8px !important;
+                border-radius: 14px !important;
+            }
+            .painel-alvo {
+                padding: 6px 16px !important;
+                font-size: 1.1rem !important;
+                border-width: 3px !important;
+            }
+            .painel-alvo span {
+                font-size: 1.5rem !important;
+                min-width: 40px !important;
+            }
+
+            .estrada-container {
+                height: 170px !important;
+                min-height: 150px !important;
+            }
+            .trator-svg {
+                width: 90px !important;
+                height: 80px !important;
+                margin-right: -8px !important;
+            }
+            .atrelado-svg {
+                width: 220px !important;
+                height: 80px !important;
+                padding-bottom: 25px !important;
+            }
+            .carga-conteudo {
+                transform: scale(0.65);
+                transform-origin: bottom right;
+                right: 5px;
+                bottom: 25px;
+            }
+
+            .painel-controlos {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 8px !important;
+                width: 100% !important;
+            }
+
+            .painel-controlos > .btn-mab,
+            .grid-mab-botoes {
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 6px !important;
+                width: 100% !important;
+            }
+
+            .btn-mab {
+                min-width: 0 !important;
+                padding: 6px 4px !important;
+                gap: 4px !important;
+                border-radius: 10px !important;
+            }
+            .btn-mab .icone-mab {
+                height: 32px !important;
+            }
+            .btn-mab span {
+                font-size: 0.85rem !important;
+            }
+
+            .botoes-acao {
+                display: flex !important;
+                flex-direction: row !important;
+                width: 100% !important;
+                gap: 8px !important;
+            }
+            .btn-limpar {
+                flex: 1 !important;
+                padding: 10px 6px !important;
+                font-size: 0.9rem !important;
+                border-radius: 10px !important;
+            }
+            .btn-partir {
+                flex: 2 !important;
+                padding: 10px 8px !important;
+                font-size: 1rem !important;
+                border-radius: 10px !important;
+            }
+
+            .status-bar-jogo {
+                padding: 6px 8px !important;
+                gap: 4px !important;
+            }
+            .btn-voltar-menu, .btn-dica, .badge-ronda, .badge-erros {
+                padding: 4px 6px !important;
+                font-size: 0.78rem !important;
+            }
+            .progress-bg {
+                order: 2;
+                flex: 0 0 100% !important;
+                margin: 4px 0 0 0 !important;
+                height: 16px !important;
+            }
+			
+			.intro-box {
+				padding: 18px 15px !important;
+				border-width: 3px !important;
+				border-radius: 16px !important;
+				box-shadow: 0 5px 0 var(--cor-2ano-dark) !important;
+				width: 100% !important;
+				max-width: 100% !important;
 			}
-			main {
-				justify-content: flex-start !important; /* Evita que o topo do cartão desapareça */
-				padding-top: 15px;
-				padding-bottom: 15px;
-				overflow-y: visible !important;
+
+			.intro-box p {
+				font-size: 0.95rem !important;
+				line-height: 1.4 !important;
+				margin-top: 0 !important;
+				margin-bottom: 10px !important;
 			}
-			.cartao-jogo-container {
-				margin: auto 0; /* Centra perfeitamente se houver espaço, ou deixa fazer scroll se não houver */
+
+			.intro-box .btn-acao {
+				padding: 12px 20px !important;
+				font-size: 1rem !important;
+				margin-top: 20px !important;
+				margin-top: 20px !important;
 			}
-		} 
+			
+			body { height: auto !important; overflow-y: auto !important; }
+            main { justify-content: flex-start !important; padding-top: 15px; padding-bottom: 15px; overflow-y: visible !important; }
+            .cartao-jogo-container { margin: auto 0; }
+			.toast-msg {
+				font-size: 0.85rem !important;
+				padding: 4px 12px !important;
+				border-width: 2px !important;
+				margin-bottom: 6px !important;
+				max-width: 90% !important;
+			}
+			
+			.btn-mab .icone-mab {
+				height: 32px !important;
+			}
 
-		/* =========================================
-		CORREÇÃO PARA PAINEIS E ECRÃS GRANDES ????
-		========================================= */
-		
-		@media (hover: none) and (pointer: coarse) {
+			.btn-mab .mab-1 {
+				width: 12px !important;
+				height: 12px !important;
+			}
 
-		  body {
-			height: auto !important;
-			overflow-y: auto !important;
-		  }
+			.btn-mab .mab-10 {
+				width: 12px !important;
+				height: 32px !important;
+			}
 
-		  main {
-			justify-content: flex-start !important;
-			overflow-y: visible !important;
-		  }
+			.btn-mab .mab-100-topo {
+				width: 30px !important;
+				height: 30px !important;
+			}
+        }
 
-		  footer {
-			margin-top: auto;
-		  }
-		}
-		
 
-    .icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
-	.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
-	.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
-	.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
+        /* CORREÇÃO PARA PAINÉIS E ECRÃS TÁTEIS */
+        @media (hover: none) and (pointer: coarse) {
+            body { height: auto !important; overflow-y: auto !important; }
+            main { justify-content: flex-start !important; overflow-y: visible !important; }
+            footer { margin-top: auto; }
+        }
+
+        .icon-svg-menu { width: 20px; height: 20px; display: inline-block; vertical-align: middle; object-fit: contain; }
+		.icon-svg-menu-principal { width: 30px; height: 30px; display: inline-block; vertical-align: middle; object-fit: contain; }
+        .icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
+        .icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
+        .icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
 </style>
 
-<style>
-  body {
-    background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px);
-    background-size: 25px 25px;
-  }
-</style>
 </head>
 <body>
 
@@ -440,24 +593,26 @@
 <main>
     <div class="cartao-jogo-container" id="cartao-jogo">
         
+        <!-- ECRÃ INICIAL -->
         <div id="ecra-inicial" class="ecra">
             <div class="intro-box">
                 <h2 class="titulo-menu">Bem-vindo à Carga!</h2>
                 <p>O Trator precisa de transportar blocos do Material Multibásico (MAB).</p>
                 <p>Clica nos botões para adicionares <b>Unidades</b>, <b>Dezenas</b> e <b>Centenas</b> ao atrelado.</p>
-                <p>💡 <i>Dica Mágica: Sabias que se juntares 10 peças iguais, elas transformam-se na peça maior seguinte?</i></p>
-                <button class="btn-acao" onclick="iniciarJogo()">COMEÇAR A CARGA! 🚜</button>
+                <p><img src="lampada.svg" class="icon-svg-menu" alt="Dica"> <i>Dica Mágica: Sabias que se juntares 10 peças iguais, elas transformam-se na peça maior seguinte?</i></p>
+                <button class="btn-acao primario" onclick="iniciarJogo()">COMEÇAR A CARGA! <img src="trator.svg" style="transform: scaleX(-1);" class="icon-svg-menu-principal" alt="Trator"></button>
             </div>
         </div>
 
+        <!-- ECRÃ DE JOGO -->
         <div id="ecra-jogo" class="ecra">
             
             <div class="status-bar-jogo">
                 <button class="btn-voltar-menu" onclick="voltarAoMenu()" id="btn-home-svg"></button>
-				<button id="btn-dica" class="btn-dica" onclick="usarDica()"></button>
+                <button id="btn-dica" class="btn-dica" onclick="usarDica()"></button>
 
-				<div class="badge-ronda"><span id="badge-ronda-svg"></span><span id="lbl-ronda">1</span> | <span id="val-progresso">1</span>/5</div> 
-				<div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
+                <div class="badge-ronda"><span id="badge-ronda-svg"></span><span id="lbl-ronda">1</span> | <span id="val-progresso">1</span>/5</div> 
+                <div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
                 <div class="badge-erros"> <span id="icone-erro-svg"></span> <span id="val-erros">0</span></div>
             </div>
 
@@ -505,34 +660,34 @@
                         <div class="icone-mab"><div class="mab-100-topo" style="animation:none;"></div></div>
                         <span>+ 100</span>
                     </button>
-					<div class="botoes-acao">
-                    <button class="btn-limpar" onclick="limparAtrelado()">🗑️ Limpar</button>
-                    <button class="btn-partir" onclick="validarCarga()">PODE PARTIR! 🚜</button>
-					</div>
+                    <div class="botoes-acao">
+                        <button class="btn-limpar" onclick="limparAtrelado()"><img src="lixo.svg" class="icon-svg-menu" alt="Limpar"> Limpar</button>
+                        <button class="btn-partir" onclick="validarCarga()">PODE PARTIR! <img src="trator.svg" style="transform: scaleX(-1);" class="icon-svg-menu" alt="Trator"></button>
+                    </div>
                 </div>
-
-                
 
             </div>
         </div>
 
+        <!-- ECRÃ DE TRANSIÇÃO -->
         <div id="ecra-transicao" class="ecra">
             <div class="intro-box">
                 <h2 class="titulo-menu" id="transicao-titulo">Ronda Concluída!</h2>
                 <p id="transicao-texto">Estás a fazer um excelente trabalho de carga.</p>
                 <p>Nesta ronda tiveste <strong id="transicao-erros" style="color:#ff4757">0</strong> erros.</p>
-                <button class="btn-acao primario" id="btn-prox-ronda" onclick="iniciarRonda(rondaAtual + 1)">PRÓXIMA RONDA ➡️</button>
+                <button class="btn-acao primario" id="btn-prox-ronda" onclick="iniciarRonda(rondaAtual + 1)">PRÓXIMA RONDA <img src="../../../SVG/seta_direita.svg" class="icon-svg-menu" alt="Seta"></button>
             </div>
         </div>
 
+        <!-- ECRÃ FIM -->
         <div id="ecra-fim" class="ecra">
-            <h2 class="end-title" id="end-title-text">Cargas Entregues! 🎉</h2>
+            <h2 class="end-title" id="end-title-text">Cargas Entregues! <img src="../../../SVG/confeti.svg" class="icon-svg-menu" alt="Festa"></h2>
             <div class="end-stats">
                 Completaste os 3 níveis do Trator!<br>
                 Erros totais: <strong id="final-erros" style="color:#ff4757">0</strong>.
             </div>
-            <button class="btn-acao secundario" onclick="reiniciarJogoCompleto()">JOGAR DE NOVO 🔄</button>
-			<button class="btn-acao terciario" onclick="voltarAoMenu()">VOLTAR AO MENU 🏠</button>
+            <button class="btn-acao secundario" onclick="reiniciarJogoCompleto()">JOGAR DE NOVO <img src="../../../SVG/jogar_novo.svg" class="icon-svg-menu" alt="Repetir"></button>
+            <button class="btn-acao terciario" onclick="voltarAoMenu()">VOLTAR AO MENU <img src="../../../SVG/menu_principal_1.svg" class="icon-svg-menu" alt="Menu"></button>
         </div>
     </div>
 </main>
