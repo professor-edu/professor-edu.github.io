@@ -1274,11 +1274,19 @@
 
 .celula-grelha img[src*="robo"],
 .mini-robo-animado img {
-    filter: drop-shadow(2px 0 0 #0284c7) 
-            drop-shadow(-2px 0 0 #0284c7) 
-            drop-shadow(0 2px 0 #0284c7) 
-            drop-shadow(0 -2px 0 #0284c7)
-            drop-shadow(0 4px 6px rgba(0,0,0,0.15)) !important;
+    animation: pulsoRobo 1.8s infinite ease-in-out;
+}
+
+@keyframes pulsoRobo {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 4px 8px rgba(2, 132, 199, 0.4));
+    }
+    50% {
+        transform: scale(1.08); /* Ligeiro aumento de tamanho */
+        filter: drop-shadow(0 0 14px rgba(2, 132, 199, 0.95)) 
+                drop-shadow(0 0 4px rgba(56, 189, 248, 1)); /* Brilho neon azul */
+    }
 }
 
 /* =========================================
@@ -1409,6 +1417,7 @@
 
     .botoes-controlo-codigo {
         gap: 8px !important;
+		margin-bottom: 10px;
     }
 
     .btn-acao-codigo.apagar, 
@@ -1492,6 +1501,15 @@
     .placeholder-codigo {
         font-size: 0.75rem !important;
         margin-top: 4px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .pergunta-texto {
+        font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+        padding: 0 36px;
+        margin: 15px 0 12px 0;
+        box-sizing: border-box;
     }
 }
 

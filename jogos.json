@@ -1318,6 +1318,14 @@
         "disciplina": "Matemática",
         "tags": ["adição", "subtração", "contas", "somar", "subtrair", "números até 100", "números até 200", "números até 500", "números até 1000"]
     },
+	{
+		"nome": "O Robô Explorador",
+		"icone": "/2/icones/robo_explorador.png",
+		"link": "/2/mat/robo-explorador",
+		"ano": "2º Ano",
+		"disciplina": "Matemática",
+		"tags": ["robô", "orientação espacial", "programação", "pensamento computacional", "algoritmo", "esquerda e direita", "lateralidade", "cima e baixo", "grelha", "lógica"]
+	},
     {
         "nome": "Animais",
         "icone": "/2/icones/animais.png",

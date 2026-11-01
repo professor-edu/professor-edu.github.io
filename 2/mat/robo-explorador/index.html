@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1º Ano - O Robô Explorador 🤖</title>
+    <title>2º Ano - O Robô Explorador 🤖</title>
     
     <link rel="icon" type="image/png" href="../../logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -215,6 +215,31 @@
 			text-align: left;
 			box-sizing: border-box;
 		}
+		
+		
+		/* 1.º ANO - AZUL VIBRANTE (O Caminho do Robô) */
+.btn-ano-1 {
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #60a5fa 100%);
+    box-shadow: 0 8px 0 #1d4ed8, 0 12px 20px rgba(37, 99, 235, 0.35);
+}
+
+/* 2.º ANO - ROXO EXPLORADOR (O Robô Explorador) */
+.btn-ano-2 {
+    background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 50%, #a78bfa 100%);
+    box-shadow: 0 8px 0 #5b21b6, 0 12px 20px rgba(109, 40, 217, 0.35);
+}
+
+/* 3.º ANO - LARANJA VIBRANTE (Ciclos & Loops) */
+.btn-ano-3 {
+    background: linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%);
+    box-shadow: 0 8px 0 #c2410c, 0 12px 20px rgba(234, 88, 12, 0.35);
+}
+
+/* 4.º ANO - VERDE ESMERALDA (Limpeza & Missões) */
+.btn-ano-4 {
+    background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+    box-shadow: 0 8px 0 #047857, 0 12px 20px rgba(5, 150, 105, 0.35);
+}
 
 		/* Ícone da Personagem (Esquerda) */
 		.icon-btn-unico {
@@ -898,7 +923,7 @@
 		.btn-nivel-unico:hover {
 			transform: translateY(-4px) scale(1.02);
 			filter: brightness(1.08);
-			box-shadow: 0 12px 0 #1d4ed8, 0 16px 25px rgba(0, 0, 0, 0.2);
+
 			}
 		}
 
@@ -1356,13 +1381,20 @@
 
 .celula-grelha img[src*="robo"],
 .mini-robo-animado img {
-    filter: drop-shadow(2px 0 0 #0284c7) 
-            drop-shadow(-2px 0 0 #0284c7) 
-            drop-shadow(0 2px 0 #0284c7) 
-            drop-shadow(0 -2px 0 #0284c7)
-            drop-shadow(0 4px 6px rgba(0,0,0,0.15)) !important;
+    animation: pulsoRobo 1.8s infinite ease-in-out;
 }
 
+@keyframes pulsoRobo {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 4px 8px rgba(2, 132, 199, 0.4));
+    }
+    50% {
+        transform: scale(1.08); /* Ligeiro aumento de tamanho */
+        filter: drop-shadow(0 0 14px rgba(2, 132, 199, 0.95)) 
+                drop-shadow(0 0 4px rgba(56, 189, 248, 1)); /* Brilho neon azul */
+    }
+}
 /* =========================================
    5. RESPONSIVIDADE COMPLETA PARA MOBILE
    ========================================= */
@@ -1491,6 +1523,7 @@
 
     .botoes-controlo-codigo {
         gap: 8px !important;
+		margin-bottom: 10px;
     }
 
     .btn-acao-codigo.apagar, 
@@ -1576,6 +1609,17 @@
         margin-top: 4px !important;
     }
 }
+
+@media (max-width: 600px) {
+    .pergunta-texto {
+        font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+        padding: 0 36px;
+        margin: 15px 0 12px 0;
+        box-sizing: border-box;
+    }
+}
+
+
 
 
 @media (max-width: 380px) {
@@ -1687,12 +1731,12 @@
 			<h2 class="titulo-menu">Pronto para Começar?</h2>
 			
 			<div class="contentor-menu-unico">
-				<button class="btn-nivel-unico bg-azul" onclick="iniciarJogo(5, 'Guia o Robô até ao destino!', 1)">
+				<button class="btn-nivel-unico btn-ano-2" onclick="iniciarJogo(5, 'Guia o Robô até ao destino!', 1)">
 					<img src="img/robo.png" class="icon-btn-unico" alt="Robô" onerror="this.src='../img-titulos/MENU_1.svg'">
 					
 					<div class="btn-nivel-text-container">
 						<span class="btn-nivel-titulo">INICIAR PROGRAMA</span>
-						<span class="btn-nivel-subtitulo">Guia o Robô Aspirador até ao destino!</span>
+						<span class="btn-nivel-subtitulo">Evita os obstáculos num mapa 6x6!</span>
 					</div>
 
 					<img src="../../../SVG/seta_direita.svg" class="icon-svg-menu" alt="">
