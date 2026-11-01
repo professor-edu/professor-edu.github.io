@@ -1629,6 +1629,48 @@
 				
 				<div class="cartao-flip matematica" onmouseleave="this.classList.remove('flipped')">
 					<div class="cartao-inner">
+						
+						<!-- LADO DA FRENTE -->
+						<div class="cartao-frente">
+
+							<!-- Botão "+" (Canto Superior Direito) -->
+							<button class="btn-info" aria-label="Ver níveis" onclick="virarCartaoMobile(this)"></button>
+
+							<!-- Clicar na imagem/título vai direto para o jogo -->
+							<a href="caminho-robo" class="link-frente">
+								<div class="image-wrapper">
+									<img src="../icones/caminho_robo.png" alt="O Caminho do Robô" class="icone-imagem">
+								</div>
+								<span class="nome-jogo">O Caminho do Robô</span>
+							</a>
+							
+						</div>
+
+						<!-- LADO DO VERSO -->
+						<div class="cartao-verso">
+							
+							<!-- ESCOLHE O TÍTULO QUE QUERES E APAGA O OUTRO -->
+							<h4 class="titulo-verso">Neste jogo vais:</h4>
+							<!-- <h4 class="titulo-verso">Neste jogo vais:</h4> -->
+
+							<ul class="lista-minijogos">
+								<p class="texto-info">Pensar como um programador!</p>
+								<li>Orientação Espacial</li>
+								<li>Superar Obstáculos</li>
+								
+							</ul>
+							
+							<div class="botoes-verso">
+								<a href="caminho-robo" class="btn-jogar">▶ Jogar</a>
+								<button class="btn-voltar-verso" onclick="fecharCartaoMobile(this)">↩</button>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				
+				<div class="cartao-flip matematica" onmouseleave="this.classList.remove('flipped')">
+					<div class="cartao-inner">
 						<!-- LADO DA FRENTE -->
 						<div class="cartao-frente">
 							<button class="btn-info" aria-label="Ver níveis" onclick="virarCartaoMobile(this)"></button>

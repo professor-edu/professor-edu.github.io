@@ -883,6 +883,15 @@
         "tags": ["robô", "cálculo mental", "cálculo", "contas", "adição", "subtração", "números até 10", "números até 20", "números até 50", "números até 100"]
     },
 	
+	{
+		"nome": "O Caminho do Robô",
+		"icone": "/1/icones/caminho_robo.png",
+		"link": "/1/mat/caminho-robo",
+		"ano": "1º Ano",
+		"disciplina": "Matemática",
+		"tags": ["robô", "orientação espacial", "programação", "pensamento computacional", "algoritmo", "esquerda e direita", "lateralidade", "cima e baixo", "grelha", "lógica"]
+	},
+	
     {
         "nome": "Reciclagem",
         "icone": "/1/icones/reciclagem.png",

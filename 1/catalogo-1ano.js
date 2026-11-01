@@ -74,6 +74,7 @@ const todosOsJogos =[
 	{ nome: "O Ábaco Mágico", icone: "icones/abaco.png", link: "mat/abaco", cat: "mat" },
 	{ nome: "Mistérios na Quinta", icone: "icones/misterios_quinta.png", link: "mat/misterios-quinta", cat: "mat" },
 	{ nome: "O Robô das Contas", icone: "icones/robo_contas.png", link: "mat/robo-contas", cat: "mat" },
+	{ nome: "O Caminho do Robô", icone: "icones/caminho_robo.png", link: "mat/caminho-robo", cat: "mat" },
     
     // ------------------------------------
     // ESTUDO DO MEIO (cat: "em") 
