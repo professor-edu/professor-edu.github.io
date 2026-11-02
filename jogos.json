@@ -2044,6 +2044,14 @@
         "disciplina": "Matemática",
         "tags": ["problemas matemáticos", "situações matemáticas", "problemas", "cálculo", "revisões"]
     },
+	{
+		"nome": "Missão Limpeza",
+		"icone": "/4/icones/missao_limpeza.png",
+		"link": "/4/mat/missao-limpeza",
+		"ano": "4º Ano",
+		"disciplina": "Matemática",
+		"tags": ["robô", "orientação espacial", "programação", "pensamento computacional", "algoritmo", "esquerda e direita", "lateralidade", "cima e baixo", "grelha", "lógica"]
+	},
     {
         "nome": "Sistemas do Corpo",
         "icone": "/4/icones/sistemas.png",

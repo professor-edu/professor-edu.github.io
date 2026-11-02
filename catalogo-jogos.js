@@ -295,6 +295,7 @@ export const CATALOGO_JOGOS = [
 	{ nome: "Super Mente Decimal", icone: "4/icones/mente_decimal.png", link: "4/mat/mente-decimal/", ano: "4º Ano" },
 	{ nome: "Regresso ao Início", icone: "4/icones/regresso_inicio.png", link: "4/mat/regresso-inicio/", ano: "4º Ano" },
 	{ nome: "Problemas no Caderno", icone: "4/icones/problemas_caderno.png", link: "4/mat/problemas-caderno/", ano: "4º Ano" },
+	{ nome: "Missão Limpeza", icone: "4/icones/missao_limpeza.png", link: "4/mat/missao-limpeza/", ano: "4º Ano" },
 
 	// Estudo do Meio (em)
 	{ nome: "Sistemas do Corpo", icone: "4/icones/sistemas.png", link: "4/em/sistemas/", ano: "4º Ano" },

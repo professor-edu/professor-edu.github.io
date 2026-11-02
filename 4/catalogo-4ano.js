@@ -45,6 +45,7 @@ const todosOsJogos =[
 	{ nome: "Super Mente Decimal", icone: "icones/mente_decimal.png", link: "mat/mente-decimal/", cat: "mat" },
 	{ nome: "Regresso ao Início", icone: "icones/regresso_inicio.png", link: "mat/regresso-inicio/", cat: "mat" },
 	{ nome: "Problemas no Caderno", icone: "icones/problemas_caderno.png", link: "mat/problemas-caderno/", cat: "mat" },
+	{ nome: "Missão Limpeza", icone: "icones/missao_limpeza.png", link: "mat/missao-limpeza/", cat: "mat" },
 	
     
     // ------------------------------------

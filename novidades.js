@@ -34,9 +34,9 @@ const novidadesSite = [
         ano: "ano4",
         rotulo: "4º ANO",
 		disciplina: "MAT",
-        nome: "Divisão",
-        icone: "4/icones/divisao.png",
-        link: "4/mat/divisao/"
+        nome: "Missão Limpeza",
+        icone: "4/icones/missao_limpeza.png",
+        link: "4/mat/missao-limpeza/"
     }
 ];
 

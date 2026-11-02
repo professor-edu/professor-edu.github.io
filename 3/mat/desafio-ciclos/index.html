@@ -2074,7 +2074,7 @@
 			<h2 class="titulo-menu">Pronto para Começar?</h2>
 			
 			<div class="contentor-menu-unico">
-				<button class="btn-nivel-unico btn-ano-3" onclick="iniciarJogo(5, 'Guia o Robô até ao destino!', 1)">
+				<button class="btn-nivel-unico btn-ano-3" onclick="iniciarJogo(10, 'Guia o Robô até ao destino!', 1)">
 					<img src="img/robo.png" class="icon-btn-unico" alt="Robô" onerror="this.src='../img-titulos/MENU_1.svg'">
 					
 					<div class="btn-nivel-text-container">
@@ -2094,21 +2094,21 @@
             <div class="status-bar-jogo">
 				<button class="btn-voltar-menu" onclick="voltarAoMenu()" id="btn-home-svg" aria-label="Voltar ao menu"></button>
 				<button id="btn-dica" class="btn-dica" onclick="usarDica()" aria-label="Usar dica"></button>
-				<div class="badge-ronda"><span id="badge-ronda-svg"></span><span id="val-progresso">1</span>/<span id="val-total">??</span></div>
+				<div class="badge-ronda"><span id="badge-ronda-svg"></span><span id="val-progresso">1</span>/<span id="val-total">10</span></div>
                 <div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
 				<div class="badge-erros"> <span id="icone-erro-svg"></span><span id="val-erros">0</span></div>
             </div>
 
-	<div class="area-jogo-custom" id="game-area">
+			<div class="area-jogo-custom" id="game-area">
     
-    <div class="coluna-grelha-jogo">
-        <div class="pergunta-texto" id="instrucao-ronda">Guia o Robô até ao destino!</div>
-        <div class="grelha-programacao" id="grelha-jogo" style="--cols: 5; --rows: 5;">
+			<div class="coluna-grelha-jogo">
+				<div class="pergunta-texto" id="instrucao-ronda">Usa o bloco REPETIR!</div>
+				<div class="grelha-programacao" id="grelha-jogo" style="--cols: 5; --rows: 5;">
 
-        </div>
-    </div>
+				</div>
+			</div>
 
-    <div class="coluna-painel-jogo">
+		<div class="coluna-painel-jogo">
         
         <div class="linha-codigo-wrapper">
             <span class="label-linha">Sequência:</span>
@@ -2273,11 +2273,11 @@ grelhaEl.style.setProperty('--cols', TOTAL_COLUNAS); // 6
 grelhaEl.style.setProperty('--rows', TOTAL_LINHAS);  // 6
 
 /* ==========================================
-   2. ESTADO GLOBAL DO JOGO E DO MOTOR 5x5
+   2. ESTADO GLOBAL DO JOGO E DO MOTOR
    ========================================== */
 let erradas = 0;
 let desafioAtual = 0;
-let totalDesafiosNivel = 5;
+let totalDesafiosNivel = 10;
 let cooldownDica = 0;
 let rondaLivreDica = 1;
 let timerImpaciencia = null;
@@ -2308,6 +2308,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const iconeErro = document.getElementById('icone-erro-svg');
     if (iconeErro) iconeErro.innerHTML = SVG_ERRO;
+	
+	const elemTotal = document.getElementById('val-total');
+    if (elemTotal) elemTotal.textContent = totalDesafiosNivel;
 });
 
 function toggleMenu() {
@@ -2403,9 +2406,6 @@ function validarUsoDeLoops() {
     return true;
 }   
    
-   
-   
-// ABRIR / FECHAR POPOVER
 function abrirSeletorLoop() {
     const popover = document.getElementById('popover-loop');
     if (multiplicadorPendente > 1) {
@@ -2415,7 +2415,6 @@ function abrirSeletorLoop() {
     if (popover) popover.classList.toggle('hidden');
 }
 
-// Define o valor do multiplicador (3, 4 ou 5)
 function selecionarMultiplicador(valor) {
     multiplicadorPendente = valor;
 
@@ -2445,7 +2444,7 @@ function cancelarModoLoop() {
 }   
    
    
-function iniciarJogo(totalRondas = 5, titulo = 'Guia o Robô até ao destino!') {
+function iniciarJogo(totalRondas = 10, titulo = 'Guia o Robô até ao destino!', nivel = 1) {
     desafioAtual = 1;
     totalDesafiosNivel = totalRondas;
     erradas = 0;
@@ -2467,14 +2466,20 @@ function carregarRonda() {
     limparLinhaCodigoDOM();
     limparConfetis();
 
+    if (!desafioAtual || desafioAtual < 1) desafioAtual = 1;
+
     const elemProgresso = document.getElementById('val-progresso');
     if (elemProgresso) elemProgresso.textContent = desafioAtual;
 
+    const elemTotal = document.getElementById('val-total');
+    if (elemTotal) elemTotal.textContent = totalDesafiosNivel;
+
     const perc = (desafioAtual / totalDesafiosNivel) * 100;
     const progressFill = document.getElementById('progress-fill');
-    if (progressFill) progressFill.style.width = `${perc}%`;
+    if (progressFill) {
+        progressFill.style.width = `${perc}%`;
+    }
 
-    // Sorteia e GUARDA o mapa fixo desta ronda
     mapaAtual = obterMapaRonda(desafioAtual);
     posRobo = { ...mapaAtual.inicio };
     posDestino = { ...mapaAtual.destino };
@@ -2491,11 +2496,17 @@ function obterMapaRonda(ronda) {
         'gato.png', 
         'vaso.png', 
         'cadeira.png', 
-        'brinquedos.png'
+        'brinquedos.png',
+		'mesa.png',
+		'balanca.png',
+		'cao.png',
     ];
     
     let mapaValido = false;
     let mapaGerado = null;
+
+    // Número de obstáculos cresce gradualmente de 3 até 5/6 ao longo das 10 rondas
+    const numObstaculos = Math.min(6, 3 + Math.floor((ronda - 1) / 3));
 
     while (!mapaValido) {
         const inicio = { 
@@ -2512,7 +2523,6 @@ function obterMapaRonda(ronda) {
         } while (destino.x === inicio.x && destino.y === inicio.y);
 
         const obsTipos = baralharArray([...imagensObstaculos]);
-        const numObstaculos = Math.floor(Math.random() * 2) + 4;
         let obstaculosGerados = [];
 
         let tentativas = 0;
@@ -2544,7 +2554,6 @@ function obterMapaRonda(ronda) {
     return mapaGerado;
 }
 
-/* Algoritmo BFS para garantir que o mapa gerado é solúvel e tem <= 10 passos */
 function calcularMenorCaminho(inicio, destino, listaObstaculos) {
     let fila = [{ x: inicio.x, y: inicio.y, dist: 0 }];
     let visitados = new Set([`${inicio.x},${inicio.y}`]);
@@ -2589,7 +2598,6 @@ function renderizarGrelha() {
             if (x === posRobo.x && y === posRobo.y) {
                 celula.innerHTML = `<img src="img/robo.png" alt="Robô" id="elem-robo">`;
             } else if (x === posDestino.x && y === posDestino.y) {
-                // Adiciona a classe de destaque ao destino
                 celula.classList.add('celula-destino');
                 celula.innerHTML = `<img src="img/terra.png" alt="Destino (Sujidade)">`;
             } else {
@@ -2952,7 +2960,7 @@ function usarDica() {
             btnRepetir.classList.add('dica-destaque');
             setTimeout(() => btnRepetir.classList.remove('dica-destaque'), DURACAO_DESTAQUE);
         }
-        showToast(`Dica: Usa o REPETIR para dar ${passosSeguidos} passos!`);
+        showToast(`Usa o bloco REPETIR para dar ${passosSeguidos} passos!`);
     } else {
         // Se for 1 ou 2 passos -> Ilumina a seta direcional normal
         const seletorSeta = {
@@ -3061,7 +3069,16 @@ function tocarSom(tipo) {
         gain.gain.exponentialRampToValueAtTime(0.001, agora + 0.06);
         osc.start(agora);
         osc.stop(agora + 0.06);
-    } else if (tipo === 'flip') {
+		
+	} else if (tipo === 'clique') {
+		osc.type = 'sine';
+		osc.frequency.setValueAtTime(500, agora);
+		osc.frequency.exponentialRampToValueAtTime(700, agora + 0.04);
+		gain.gain.setValueAtTime(0.04, agora);
+		gain.gain.exponentialRampToValueAtTime(0.001, agora + 0.04);
+		osc.start(agora);
+		osc.stop(agora + 0.04);
+	} else if (tipo === 'flip') {
         osc.frequency.setValueAtTime(400, agora);
         osc.frequency.exponentialRampToValueAtTime(600, agora + 0.1);
         gain.gain.setValueAtTime(0.05, agora);
