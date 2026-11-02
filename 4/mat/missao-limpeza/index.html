@@ -22,7 +22,7 @@
 			--cor-4ano-dark: #8a72e0;
             --cor-borda: #8a72e0;
 			--cor-btn-fundo: #fffde7;            
-            --bg-header: #fff0f0;    
+            --bg-header: #f3f0ff;    
             --azul-escuro: #0d47a1;
             --text-main: #5c8699;
             --borda-cartao: #ced6e0;
@@ -735,7 +735,7 @@
 		.icon-svg-menu { width: 40px; height: 40px; display: inline-block; vertical-align: middle; object-fit: contain; }
 		.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
 		.icon-svg-footer { width: 2.3em; height: 2.3em; vertical-align: middle; margin-right:5px; margin-left: 7px; object-fit: contain; }
-		.icon-svg-titulo { width: 1.5em; height: 1.5em; vertical-align: middle; object-fit: contain; }
+		.icon-svg-titulo { width: 1em; height: 1em; vertical-align: middle; object-fit: contain; }
 		.svg-icon { width: 1.2em; height: 1.2em; vertical-align: middle; margin-right: 5px; fill: currentColor; }
 		
 		/* Estilo para os SVGs dentro dos botões do ecrã inicial */
@@ -2189,8 +2189,91 @@
         width: 20px !important;
         height: 20px !important;
     }
+}
+
+
+
+/* =========================================================
+   REGRAS DE FULLSCREEN COM ESCALA PERFEITA (PC/Desktop)
+   ========================================================= */
+
+/* Escondido por defeito em mobile e tablets */
+#btn-fullscreen {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    #btn-fullscreen {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        border: 2px solid #bae6fd;
+        border-radius: 12px;
+        padding: 6px;
+        cursor: pointer;
+        color: #0284c7;
+        transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    #btn-fullscreen:hover {
+        background: #e0f2fe;
+        transform: scale(1.08);
+    }
+}
+
+/* Regra do container em modo Fullscreen */
+.area-jogo-custom:fullscreen {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #f4faff !important;
 	
-	
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+
+    /* Aumenta todo o jogo em 38% recalculando os espaços reais (sem sobreposições) */
+    zoom: 1.38;
+}
+
+
+/* Escondido por defeito no modo normal */
+.btn-sair-fullscreen {
+    display: none;
+}
+
+/* Mostra apenas quando a .area-jogo-custom entra em Fullscreen */
+.area-jogo-custom:fullscreen .btn-sair-fullscreen {
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 1000;
+    background: #ffffff;
+    border: 2px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #475569;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+.area-jogo-custom:fullscreen .btn-sair-fullscreen:hover {
+    background: #fef2f2;
+    border-color: #f87171;
+    color: #dc2626;
+    transform: scale(1.05);
 }
 
 /* OTIMIZAÇÃO PARA DISPOSITIVOS DE TOQUE */
@@ -2237,55 +2320,55 @@
 
         <div id="ecra-selecao" class="ecra">
 								
-<div class="animacao-tutorial">
-    <div class="demo-tutorial-wrapper">
-        
-        <!-- Mini Grelha 3x2 -->
-        <div class="mini-grelha-demo">
-            <!-- Robô Animado -->
-            <div class="mini-robo-animado">
-                <img src="img/robo.png" alt="Robô">
-            </div>
+            <div class="animacao-tutorial">
+                <div class="demo-tutorial-wrapper">
+                    
+                    <!-- Mini Grelha 3x2 -->
+                    <div class="mini-grelha-demo">
+                        <!-- Robô Animado -->
+                        <div class="mini-robo-animado">
+                            <img src="img/robo.png" alt="Robô">
+                        </div>
 
-            <!-- Células da Grelha -->
-            <div class="mini-celula"></div>
-            <div class="mini-celula"></div>
-            <!-- Casa com Lixo na posição (2,0) -->
-            <div class="mini-celula celula-com-lixo">
-                <img src="img/terra.png" class="mini-img-lixo" alt="Lixo">
-            </div>
-            
-            <div class="mini-celula"><img src="img/cao.png" alt="Cão" class="mini-img-item"></div>
-            <div class="mini-celula"></div>
-            <div class="mini-celula"><img src="img/cadeira.png" alt="Cadeira" class="mini-img-item"></div>
-        </div>
+                        <!-- Células da Grelha -->
+                        <div class="mini-celula"></div>
+                        <div class="mini-celula"></div>
+                        <!-- Casa com Lixo na posição (2,0) -->
+                        <div class="mini-celula celula-com-lixo">
+                            <img src="img/terra.png" class="mini-img-lixo" alt="Lixo">
+                        </div>
+                        
+                        <div class="mini-celula"><img src="img/cao.png" alt="Cão" class="mini-img-item"></div>
+                        <div class="mini-celula"></div>
+                        <div class="mini-celula"><img src="img/cadeira.png" alt="Cadeira" class="mini-img-item"></div>
+                    </div>
 
-        <!-- Painel Lateral de Sequência e Sucesso -->
-        <div class="mini-painel-passos">
-            <div class="mini-linha-setas">
-                <!-- Passo 1: Direita -->
-                <div class="mini-step step-1 bg-laranja">
-                    <img src="img/seta_direita.svg" class="mini-img-seta" alt="Direita">
+                    <!-- Painel Lateral de Sequência e Sucesso -->
+                    <div class="mini-painel-passos">
+                        <div class="mini-linha-setas">
+                            <!-- Passo 1: Direita -->
+                            <div class="mini-step step-1 bg-laranja">
+                                <img src="img/seta_direita.svg" class="mini-img-seta" alt="Direita">
+                            </div>
+                            <!-- Passo 2: Direita -->
+                            <div class="mini-step step-2 bg-laranja">
+                                <img src="img/seta_direita.svg" class="mini-img-seta" alt="Direita">
+                            </div>
+                            <!-- Passo 3: APANHAR (Verde #117f5a) -->
+                            <div class="mini-step step-3 bg-apanhar">
+                                <img src="img/apanhar.svg" class="mini-img-seta" alt="Apanhar">
+                            </div>
+                        </div>
+
+                        <!-- Badge de Celebração de Limpeza -->
+                        <div class="mini-badge-vitoria">
+                            <img src="img/apanhar1.svg" class="mini-img-estrela" alt="">
+                            <span>TUDO LIMPO!</span>
+                        </div>
+                    </div>
+
                 </div>
-                <!-- Passo 2: Direita -->
-                <div class="mini-step step-2 bg-laranja">
-                    <img src="img/seta_direita.svg" class="mini-img-seta" alt="Direita">
-                </div>
-                <!-- Passo 3: APANHAR (Verde #117f5a) -->
-                <div class="mini-step step-3 bg-apanhar">
-                    <img src="img/apanhar.svg" class="mini-img-seta" alt="Apanhar">
-                </div>
             </div>
-
-            <!-- Badge de Celebração de Limpeza -->
-            <div class="mini-badge-vitoria">
-                <img src="img/apanhar1.svg" class="mini-img-estrela" alt="">
-                <span>TUDO LIMPO!</span>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 			<h2 class="titulo-menu">Pronto para Começar?</h2>
 			
@@ -2313,10 +2396,24 @@
 				<div class="badge-ronda"><span id="badge-ronda-svg"></span><span id="val-progresso">1</span>/<span id="val-total">10</span></div>
                 <div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
 				<div class="badge-erros"> <span id="icone-erro-svg"></span><span id="val-erros">0</span></div>
+				<!-- NOVO: BOTÃO FULLSCREEN -->
+				<button id="btn-fullscreen" onclick="toggleFullscreen()" title="Ecrã Inteiro" aria-label="Ecrã Inteiro">
+					<svg id="icon-fs-enter" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+						<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+					</svg>
+					<svg id="icon-fs-exit" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display:none;">
+						<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+					</svg>
+				</button>
             </div>
 
 			<div class="area-jogo-custom" id="game-area">
-    
+				<button class="btn-sair-fullscreen" onclick="toggleFullscreen()" title="Sair do Ecrã Inteiro (ESC)">
+						<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+							<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+						</svg>
+						<span>Sair (ESC)</span>
+				</button>    
 			<div class="coluna-grelha-jogo">
 				<!-- Barra de Instrução + Legenda dos Botões de Ação -->
 				<div class="instrucao-legenda-container" id="instrucao-ronda">
@@ -2387,6 +2484,7 @@
 			<img src="img/apanhar.svg" alt="Apanhar">
 		</button>
 	</div>
+	
 
     <!-- Popover de Seleção de Multiplicador (3x, 4x, 5x) -->
     <div id="popover-loop" class="popover-loop hidden">
@@ -2588,6 +2686,43 @@ function showToast(mensagem) {
         toast.classList.remove('active');
     }, 5000);
 }
+
+
+function toggleFullscreen() {
+    // Alvo: a área do jogo
+    const elem = document.querySelector('.area-jogo-custom');
+    if (!elem) return;
+
+    if (!document.fullscreenElement) {
+        // Entra em Fullscreen
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+        }
+    } else {
+        // Sai de Fullscreen
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+    }
+}
+
+// Escuta a alteração do estado para alternar os ícones do botão
+document.addEventListener('fullscreenchange', () => {
+    const iconEnter = document.getElementById('icon-fs-enter');
+    const iconExit = document.getElementById('icon-fs-exit');
+    
+    if (document.fullscreenElement) {
+        if (iconEnter) iconEnter.style.display = 'none';
+        if (iconExit) iconExit.style.display = 'inline-block';
+    } else {
+        if (iconEnter) iconEnter.style.display = 'inline-block';
+        if (iconExit) iconExit.style.display = 'none';
+    }
+});
 
 /* ==========================================
    4. CRONÓMETRO ANTI-FRUSTRAÇÃO E DICAS
