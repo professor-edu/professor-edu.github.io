@@ -1182,21 +1182,17 @@
     align-items: center;
 }
 
-/* LINHA DE CÓDIGO */
 .linha-codigo-wrapper {
-    width: 100% !important;
     display: flex !important;
-    align-items: flex-start !important;
+    flex-wrap: wrap !important;
     gap: 10px !important;
-    background: #f1f7fe;
+	background: #f1f7fe;
     border: 2px dashed #a5c7f9;
-    padding: 10px 14px !important;
-    border-radius: 16px;
-    box-sizing: border-box;
-    
-    /* Reservar espaço fixo para 2 linhas de blocos desde o arranque */
-    min-height: 104px !important; 
-    height: auto !important;
+	border-radius: 16px;
+    justify-content: flex-start !important;
+    align-content: flex-start !important;
+    min-height: 120px !important;
+    padding: 10px !important;
 }
 
 .label-linha {
@@ -1857,6 +1853,25 @@
     }
 }
 
+@media (max-width: 768px) {
+    .linha-codigo-wrapper {
+        min-height: 105px !important;
+        gap: 4px !important;
+        padding: 6px !important;
+    }
+
+    .bloco-comando-slot {
+        width: 32px !important;
+        height: 32px !important;
+        border-radius: 8px !important;
+    }
+
+    .bloco-comando-slot img {
+        width: 18px !important;
+        height: 18px !important;
+    }
+}
+
 @media (max-width: 480px) {
     .coluna-grelha-jogo,
     .coluna-painel-jogo {
@@ -2489,7 +2504,7 @@ const SVG_ERRO = `<svg viewBox="0 0 14 14" width="0.8em" height="0.8em" style="m
 /* Configuração da Grelha do 3.º Ano */
 const TOTAL_COLUNAS = 6;
 const TOTAL_LINHAS = 6;
-const MAX_COMANDOS = 12;
+const MAX_COMANDOS = 15;
 
 const grelhaEl = document.querySelector('.grelha-programacao');
 grelhaEl.style.setProperty('--cols', TOTAL_COLUNAS); // 6
@@ -2513,6 +2528,8 @@ let posDestino = { x: 4, y: 0 };
 let obstaculos = [];
 let sequenciaComandos = [];
 let emExecucao = false;
+
+const tiposLixo = ['terra.png', 'sumo.png', 'migalhas.png', 'folhas.png'];
 
 /* ==========================================
    3. ARRANQUE E NAVEGAÇÃO
@@ -2673,7 +2690,9 @@ function iniciarJogo(totalRondas = 10, titulo = 'Apanha todo o lixo!', nivel = 1
     totalDesafiosNivel = totalRondas;
     erradas = 0;
 
-    // Atualiza apenas o texto do título dentro do container, mantendo a legenda intacta
+    rondaLivreDica = 0; 
+    atualizarEstadoBotaoDica();
+
     const elemTitulo = document.querySelector('.instrucao-titulo');
     if (elemTitulo) elemTitulo.textContent = titulo;
 
@@ -2699,11 +2718,15 @@ function carregarRonda() {
     const progressFill = document.getElementById('progress-fill');
     if (progressFill) progressFill.style.width = `${perc}%`;
 
-    // Carrega o mapa e clona os lixos originais da ronda
+    // Carrega o mapa
     mapaAtual = obterMapaRonda(desafioAtual);
     posRobo = { ...mapaAtual.inicio };
     obstaculos = mapaAtual.obstaculos;
-    lixos = mapaAtual.lixos.map(l => ({ ...l }));
+
+    lixos = mapaAtual.lixos.map(l => ({ 
+        ...l,
+        img: l.img || tiposLixo[Math.floor(Math.random() * tiposLixo.length)]
+    }));
 
     renderizarGrelha();
     atualizarEstadoBotaoDica();
@@ -2826,15 +2849,14 @@ function renderizarGrelha() {
             celula.dataset.y = y;
 
             const ehRobo = (x === posRobo.x && y === posRobo.y);
-            const temLixo = lixos.some(l => l.x === x && l.y === y);
+            const lixo = lixos.find(l => l.x === x && l.y === y);
             const obs = obstaculos.find(o => o.x === x && o.y === y);
 
             if (ehRobo) {
                 celula.innerHTML = `<img src="img/robo.png" alt="Robô" id="elem-robo">`;
-            } else if (temLixo) {
-                // ADICIONA A CLASSE PARA FAZER A CÉLULA DO LIXO PISCAR/PULSAR
+            } else if (lixo) {
                 celula.classList.add('celula-lixo');
-                celula.innerHTML = `<img src="img/terra.png" class="icone-lixo-grelha" alt="Lixo">`;
+                celula.innerHTML = `<img src="img/${lixo.img}" class="icone-lixo-grelha" alt="Lixo">`;
             } else if (obs) {
                 celula.innerHTML = `<img src="img/${obs.img}" alt="Obstáculo">`;
             }
@@ -2849,7 +2871,7 @@ function adicionarComandoAcao(tipoAcao) {
     if (emExecucao) return;
 
     if (sequenciaComandos.length >= MAX_COMANDOS) {
-        showToast("Chegaste ao limite de 12 comandos!", true);
+        showToast("Chegaste ao limite de 15 comandos!", true);
         return;
     }
 
@@ -2867,7 +2889,7 @@ function adicionarComando(direcao) {
     if (emExecucao) return;
 
     if (sequenciaComandos.length >= MAX_COMANDOS) {
-        showToast("Chegaste ao limite de 12 comandos!", true);
+        showToast("Chegaste ao limite de 15 comandos!", true);
         cancelarModoLoop();
         return;
     }
@@ -2976,11 +2998,10 @@ function limparLinhaCodigoDOM() {
     
     container.innerHTML = '';
 
-    // Gera dinamicamente os 12 slots estáticos para evitar layout shift
     for (let i = 0; i < MAX_COMANDOS; i++) {
         const slot = document.createElement('div');
         slot.className = 'bloco-comando-slot';
-        slot.id = `slot-comando-${i}`;
+        slot.dataset.index = i;
         container.appendChild(slot);
     }
 }
@@ -3154,16 +3175,17 @@ function concluirRondaSucesso() {
    9. MODAL DE DICA E AÇÕES DE NAVEGAÇÃO
    ========================================== */
 function atualizarEstadoBotaoDica() {
-    const btnDica = document.getElementById('btn-dica');
+    const btnDica = document.getElementById('btn-dica'); // ou .btn-dica
     if (!btnDica) return;
 
-    btnDica.innerHTML = `${SVG_BULB} Dica`;
+    const estaBloqueado = desafioAtual < rondaLivreDica;
 
-    if (desafioAtual < rondaLivreDica) {
+    if (estaBloqueado) {
         btnDica.classList.add('desativado');
-        btnDica.classList.remove('dica-impaciente');
+        btnDica.disabled = true;
     } else {
         btnDica.classList.remove('desativado');
+        btnDica.disabled = false;
     }
 }
 
@@ -3178,17 +3200,58 @@ function limparDestaquesDica() {
 function usarDica() {
     if (desafioAtual < rondaLivreDica || emExecucao) return;
 
-    const proximaDirecao = obterProximoPassoCerto(posRobo, posDestino, obstaculos);
-    if (!proximaDirecao) return;
+    const DURACAO_DESTAQUE = 4500;
+
+    // 1. CASO O ROBÔ JÁ ESTEJA EM CIMA DE UM LIXO -> SUGERE APANHAR
+    const estaEmCimaDeLixo = lixos && lixos.some(l => l.x === posRobo.x && l.y === posRobo.y);
+    if (estaEmCimaDeLixo) {
+        pararTimerImpaciencia();
+        rondaLivreDica = desafioAtual + 2;
+        atualizarEstadoBotaoDica();
+
+        const btnApanhar = document.getElementById('btn-apanhar');
+        if (btnApanhar) {
+            btnApanhar.classList.add('dica-destaque');
+            setTimeout(() => btnApanhar.classList.remove('dica-destaque'), DURACAO_DESTAQUE);
+        }
+
+        const celulaRobo = document.querySelector(`.celula-grelha[data-x="${posRobo.x}"][data-y="${posRobo.y}"]`);
+        if (celulaRobo) {
+            celulaRobo.classList.add('celula-dica-proxima');
+            setTimeout(() => celulaRobo.classList.remove('celula-dica-proxima'), DURACAO_DESTAQUE);
+        }
+
+        showToast('Já estás no lixo! Usa o botão APANHAR.');
+        tocarSom('flip');
+        return;
+    }
+
+    // 2. SELEÇÃO DO LIXO MAIS PRÓXIMO ALCANÇÁVEL
+    if (!lixos || lixos.length === 0) return;
+
+    let alvoLixo = null;
+    let proximaDirecao = null;
+    let menorDistancia = Infinity;
+
+    for (const lixo of lixos) {
+        const dir = obterProximoPassoCerto(posRobo, lixo, obstaculos);
+        if (dir) {
+            const dist = Math.abs(posRobo.x - lixo.x) + Math.abs(posRobo.y - lixo.y);
+            if (dist < menorDistancia) {
+                menorDistancia = dist;
+                alvoLixo = lixo;
+                proximaDirecao = dir;
+            }
+        }
+    }
+
+    if (!proximaDirecao || !alvoLixo) return;
 
     pararTimerImpaciencia();
-
     rondaLivreDica = desafioAtual + 2;
     atualizarEstadoBotaoDica();
 
-    const DURACAO_DESTAQUE = 4500;
-
-    // 1. CALCULA QUANTOS PASSOS SEGUIDOS O ROBÔ DEVE DAR NA MESMA DIREÇÃO
+    // 3. CALCULA QUANTOS PASSOS SEGUIDOS O ROBÔ PODE DAR NESSA DIREÇÃO
     let passosSeguidos = 0;
     let xTemp = posRobo.x;
     let yTemp = posRobo.y;
@@ -3202,7 +3265,7 @@ function usarDica() {
         else if (proximaDirecao === 'esquerda') proxX--;
         else if (proximaDirecao === 'direita') proxX++;
 
-        // Para se sair da grelha ou encontrar obstáculo
+        // Para se sair da grelha ou encontrar um obstáculo
         if (proxX < 0 || proxX >= TOTAL_COLUNAS || proxY < 0 || proxY >= TOTAL_LINHAS) break;
         if (obstaculos.some(o => o.x === proxX && o.y === proxY)) break;
 
@@ -3210,17 +3273,16 @@ function usarDica() {
         yTemp = proxY;
         passosSeguidos++;
 
-        // Se chegou ao destino final, para
-        if (xTemp === posDestino.x && yTemp === posDestino.y) break;
+        // Para se a casa atingida tiver um lixo (o robô deve parar para apanhar)
+        if (lixos.some(l => l.x === xTemp && l.y === yTemp)) break;
 
-        // Se o caminho ideal mudar de direção na casa seguinte, para a contagem do ciclo
-        const proxDirNoCaminho = obterProximoPassoCerto({ x: xTemp, y: yTemp }, posDestino, obstaculos);
+        // Se o caminho mudar de direção na casa seguinte, para a contagem da reta
+        const proxDirNoCaminho = obterProximoPassoCerto({ x: xTemp, y: yTemp }, alvoLixo, obstaculos);
         if (proxDirNoCaminho !== proximaDirecao) break;
     }
 
-    // 2. DECIDE QUAL BOTÃO ILUMINAR
+    // 4. DECIDE QUAL BOTÃO ILUMINAR (REPETIR VS SETA DIRECIONAL)
     if (passosSeguidos >= 3) {
-        // Se for 3, 4 ou 5 passos -> Ilumina o botão REPETIR
         const btnRepetir = document.getElementById('btn-repetir');
         if (btnRepetir) {
             btnRepetir.classList.add('dica-destaque');
@@ -3228,7 +3290,6 @@ function usarDica() {
         }
         showToast(`Usa o bloco REPETIR para dar ${passosSeguidos} passos!`);
     } else {
-        // Se for 1 ou 2 passos -> Ilumina a seta direcional normal
         const seletorSeta = {
             'cima': '.btn-seta.bg-azul',
             'baixo': '.btn-seta.bg-turquesa',
@@ -3243,7 +3304,7 @@ function usarDica() {
         }
     }
 
-    // 3. ILUMINA A CÉLULA ONDE O ROBÔ VAI PARAR
+    // 5. ILUMINA A CÉLULA ONDE O ROBÔ VAI PARAR
     const celulaAlvo = document.querySelector(`.celula-grelha[data-x="${xTemp}"][data-y="${yTemp}"]`);
     if (celulaAlvo) {
         celulaAlvo.classList.add('celula-dica-proxima');

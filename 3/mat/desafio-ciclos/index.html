@@ -2290,6 +2290,8 @@ let obstaculos = [];
 let sequenciaComandos = [];
 let emExecucao = false;
 
+const tiposLixo = ['terra.png', 'sumo.png', 'migalhas.png', 'folhas.png'];
+
 /* ==========================================
    3. ARRANQUE E NAVEGAÇÃO
    ========================================== */
@@ -2482,7 +2484,13 @@ function carregarRonda() {
 
     mapaAtual = obterMapaRonda(desafioAtual);
     posRobo = { ...mapaAtual.inicio };
-    posDestino = { ...mapaAtual.destino };
+    
+    // ATUALIZADO: Clona a posição de destino e atribui uma imagem sorteada
+    posDestino = { 
+        ...mapaAtual.destino,
+        img: tiposLixo[Math.floor(Math.random() * tiposLixo.length)]
+    };
+    
     obstaculos = mapaAtual.obstaculos;
 
     renderizarGrelha();
@@ -2599,7 +2607,8 @@ function renderizarGrelha() {
                 celula.innerHTML = `<img src="img/robo.png" alt="Robô" id="elem-robo">`;
             } else if (x === posDestino.x && y === posDestino.y) {
                 celula.classList.add('celula-destino');
-                celula.innerHTML = `<img src="img/terra.png" alt="Destino (Sujidade)">`;
+                // ATUALIZADO: Carrega a imagem sorteada para esta ronda
+                celula.innerHTML = `<img src="img/${posDestino.img}" class="icone-lixo-grelha" alt="Destino (Sujidade)">`;
             } else {
                 const obs = obstaculos.find(o => o.x === x && o.y === y);
                 if (obs) {

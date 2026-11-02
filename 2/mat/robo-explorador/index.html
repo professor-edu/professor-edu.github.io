@@ -2089,6 +2089,8 @@ let obstaculos = [];
 let sequenciaComandos = [];
 let emExecucao = false;
 
+const tiposLixo = ['terra.png', 'sumo.png', 'migalhas.png', 'folhas.png'];
+
 /* ==========================================
    3. ARRANQUE E NAVEGAÇÃO
    ========================================== */
@@ -2188,10 +2190,14 @@ function carregarRonda() {
     const progressFill = document.getElementById('progress-fill');
     if (progressFill) progressFill.style.width = `${perc}%`;
 
-    // Sorteia e GUARDA o mapa fixo desta ronda
     mapaAtual = obterMapaRonda(desafioAtual);
     posRobo = { ...mapaAtual.inicio };
-    posDestino = { ...mapaAtual.destino };
+
+    posDestino = { 
+        ...mapaAtual.destino,
+        img: tiposLixo[Math.floor(Math.random() * tiposLixo.length)]
+    };
+
     obstaculos = mapaAtual.obstaculos;
 
     renderizarGrelha();
@@ -2305,7 +2311,8 @@ function renderizarGrelha() {
             } else if (x === posDestino.x && y === posDestino.y) {
                 // Adiciona a classe de destaque ao destino
                 celula.classList.add('celula-destino');
-                celula.innerHTML = `<img src="img/terra.png" alt="Destino (Sujidade)">`;
+                // ATUALIZADO: Carrega a imagem dinamicamente
+                celula.innerHTML = `<img src="img/${posDestino.img}" class="icone-lixo-grelha" alt="Destino (Sujidade)">`;
             } else {
                 const obs = obstaculos.find(o => o.x === x && o.y === y);
                 if (obs) {
