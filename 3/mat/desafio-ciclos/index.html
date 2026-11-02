@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2º Ano - O Robô Explorador 🤖</title>
+    <title>3º Ano - Desafio de Ciclos 🤖</title>
     
     <link rel="icon" type="image/png" href="../../logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -18,13 +18,13 @@
         :root {
             --bg-body: #f0f7ff;
             --azul-vibrante: #0091ff; 
-            --cor-2ano: #e7d83f;     
-            --cor-2ano-dark: #E3C40D;
-            --cor-borda: #E3C40D;
+            --cor-3ano: #ffabab;     
+            --cor-3ano-dark: #ff8a8a;
+            --cor-borda: #ff8a8a;
 			--cor-btn-fundo: #fffde7;            
-            --bg-header: #fff9c4;    
+            --bg-header: #fff0f0;    
             --azul-escuro: #0d47a1;
-            --text-main: #455a64;
+            --text-main: #5c8699;
             --borda-cartao: #ced6e0;
             --cor-pt: #ff6b6b;
             --cor-mat: #4dabf7;
@@ -74,7 +74,7 @@
 		
         header {
             background-color: var(--bg-header); padding: 25px 20px;
-            border-bottom: 1px solid var(--cor-2ano-dark);
+            border-bottom: 1px solid var(--cor-3ano-dark);
             box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; flex-shrink: 0; z-index: 100;
         }
         .header-content { max-width: 1200px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; }
@@ -105,7 +105,7 @@
 		}
         .subtitulo { color: var(--azul-escuro); font-size: clamp(0.85rem, 3vw, 1.1rem); font-weight: 500; opacity: 0.8; margin-top: 15px; }
 
-        .btn-voltar { background: var(--cor-2ano); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; font-size: 0.9rem; box-shadow: 0 3px 0 var(--cor-2ano-dark); display: flex; align-items: center; gap: 8px; transition: 0.2s; cursor: pointer;}
+        .btn-voltar { background: var(--cor-3ano); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; font-size: 0.9rem; box-shadow: 0 3px 0 var(--cor-3ano-dark); display: flex; align-items: center; gap: 8px; transition: 0.2s; cursor: pointer;}
         @media (hover: hover) { .btn-voltar:hover { transform: scale(1.05); } }
 
         @media (max-width: 768px) {
@@ -128,7 +128,7 @@
         .sidebar .btn-fechar { background: #fff5f5; color: #ff4757; padding: 20px 25px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; border-bottom: 1px solid #ffebeb; }
         .sidebar ul { list-style: none; padding: 15px; margin: 0; }
         .sidebar li a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--text-main); background: #f8fafc; border-radius: 12px; margin-bottom: 8px; transition: 0.3s; }
-        @media (hover: hover) { .sidebar li a:hover { background: var(--cor-2ano); color: white; transform: translateX(8px); } }
+        @media (hover: hover) { .sidebar li a:hover { background: var(--cor-3ano); color: white; transform: translateX(8px); } }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 150; }
         .overlay.active { display: block; }
 
@@ -170,13 +170,13 @@
 		/* =========================================
            FOOTER
         ========================================= */
-        footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--cor-2ano); margin-top: auto; flex-shrink: 0;}
+        footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--cor-3ano); margin-top: auto; flex-shrink: 0;}
         footer p { font-size: 0.8rem; color: var(--cor-borda); margin: 0; }
         
         /* =========================================
            ECRÃS E MENUS
            ========================================= */
-        .ecra { width: 100%; flex: 1; min-height: 0; display: none; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.4s ease; box-sizing: border-box; position: relative; z-index: 2;}
+        .ecra { width: 100%; flex: 1; min-height: 0; display: none; gap: 15px; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.4s ease; box-sizing: border-box; position: relative; z-index: 2;}
         #ecra-selecao { display: flex; }
         #ecra-jogo { justify-content: flex-start; }
         .titulo-menu {
@@ -283,7 +283,7 @@
 .mini-grelha-demo {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(3, 58px); /* Células maiores: 58px */
+    grid-template-columns: repeat(3, 58px);
     grid-template-rows: repeat(2, 58px);
     gap: 5px;
     background: #cbd5e1;
@@ -307,9 +307,10 @@
 }
 
 .mini-img-item {
-    width: 40px; /* Obstáculos e terra maiores */
-    height: 40px;
+    max-width: 80%;
+    max-height: 80%;
     object-fit: contain;
+    pointer-events: none;
 }
 
 /* Robô Animado Ampliado */
@@ -697,7 +698,7 @@
         .btn-voltar-menu, .btn-dica, .badge-ronda, .badge-erros {
             flex-shrink: 0;
         }
-        .progress-fill { height: 100%; width: 0%; border-radius: 20px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); background-color: var(--cor-2ano); background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent); background-size: 30px 30px; animation: moverRiscas 2s linear infinite; }
+        .progress-fill { height: 100%; width: 0%; border-radius: 20px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); background-color: var(--cor-3ano); background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent); background-size: 30px 30px; animation: moverRiscas 2s linear infinite; }
 		
 		.icon-svg-menu { width: 40px; height: 40px; display: inline-block; vertical-align: middle; object-fit: contain; }
 		.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
@@ -795,7 +796,7 @@
 			border-radius: 20px; 
 			border: 2px dashed var(--cor-mat, #3b82f6); 
 			line-height: 1.5; 
-			width: 800%;
+			width: 80%;
 			max-width: 450px;
 			box-sizing: border-box;
 		}
@@ -871,15 +872,43 @@
         /* Modal Ajuda */
         .modal-ajuda-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 300; align-items: center; justify-content: center; animation: fadeIn 0.3s ease; padding: 20px; box-sizing: border-box;}
         .modal-ajuda-overlay.active { display: flex; }
-        .modal-ajuda-box { background: white; width: 100%; max-width: 450px; border-radius: 25px; padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; border-top: 8px solid var(--cor-2ano);}
+        .modal-ajuda-box { background: white; width: 100%; max-width: 450px; border-radius: 25px; padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; border-top: 8px solid var(--cor-3ano);}
         .btn-fechar-modal { position: absolute; top: 15px; right: 15px; background: #ffebeb; color: #ff4757; border: none; width: 35px; height: 35px; border-radius: 50%; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: 0.2s;}
         .btn-fechar-modal:hover { background: #ff4757; color: white;}
         .ajuda-icone { font-size: 4rem; margin-bottom: 10px; }
         .ajuda-texto { font-size: 1.2rem; color: var(--text-main); line-height: 1.5; font-weight: 500;}
 
         /* Animações Globais e Feedback Visual */
-        .toast-msg { position: absolute; top: 80px; left: 50%; transform: translateX(-50%) translateY(-10px); background: #fff9c4; border: 2px solid #fbc531; color: #b18500; padding: 8px 20px; border-radius: 20px; font-weight: 900; font-size: 1.1rem; opacity: 0; transition: 0.3s; pointer-events: none; z-index: 50; }
-        .toast-msg.active { opacity: 1; transform: translateX(-50%) translateY(0); }
+/* 1. Garante que o cartão do jogo é a referência do posicionamento */
+#cartao-jogo, .cartao-jogo {
+    position: relative !important;
+}
+
+/* 2. Estilo da pílula de dica dentro do cartão */
+.toast-msg {
+    position: absolute !important;
+    top: 60px !important; /* Posiciona logo abaixo da barra superior de estrelas/menu */
+    left: 50% !important;
+    transform: translateX(-50%) translateY(-10px);
+    background: #fff9c4 !important;
+    border: 2px solid #fbc531 !important;
+    color: #b18500 !important;
+    padding: 6px 18px !important;
+    border-radius: 20px !important;
+    font-weight: 900 !important;
+    font-size: 0.95rem !important;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    pointer-events: none;
+    z-index: 500 !important;
+    white-space: nowrap;
+}
+
+/* Estado ativo (surgimento suave) */
+.toast-msg.active {
+    opacity: 1 !important;
+    transform: translateX(-50%) translateY(0) !important;
+}
         
         @keyframes shakeError { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px) rotate(-2deg); } 75% { transform: translateX(6px) rotate(2deg); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -1048,6 +1077,8 @@
     justify-content: center;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
     transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+	position: relative !important;
+    overflow: visible !important;
 }
 
 /* =========================================
@@ -1395,6 +1426,147 @@
                 drop-shadow(0 0 4px rgba(56, 189, 248, 1)); /* Brilho neon azul */
     }
 }
+
+
+
+/* =========================================
+   ESTRUTURA DO PAINEL DE SETAS + REPETIR
+   ========================================= */
+
+.painel-setas-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    position: relative;
+}
+
+/* Botão Repetir - Amarelo Escuro */
+.btn-seta.btn-repetir {
+    background-color: #e3c40d !important;
+    box-shadow: 0 5px 0 #b89e0a;
+    border-color: #ffffff;
+}
+
+.btn-seta.btn-repetir:active {
+    transform: translateY(3px) !important;
+    box-shadow: 0 1px 0 transparent !important;
+}
+
+/* Animação quando o modo Repetir está ativo */
+.btn-seta.btn-repetir.ativo {
+    animation: pulsoRepetir 1.2s infinite ease-in-out;
+    border-color: #ffffff !important;
+}
+
+@keyframes pulsoRepetir {
+    0%, 100% {
+        box-shadow: 0 5px 0 #b89e0a, 0 0 0px rgba(227, 196, 13, 0);
+    }
+    50% {
+        box-shadow: 0 5px 0 #b89e0a, 0 0 14px rgba(227, 196, 13, 0.9);
+        transform: scale(1.06);
+    }
+}
+
+
+
+/* Popover Flutuante */
+.popover-loop {
+    position: absolute;
+    right: 0;
+    top: -50px;
+    background: #ffffff;
+    border: 3px solid #e3c40d;
+    border-radius: 14px;
+    padding: 4px 6px;
+    display: flex;
+    gap: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    z-index: 20;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.popover-loop.hidden {
+    display: none;
+}
+
+.btn-opcao-loop {
+    background: #fef08a;
+    border: 2px solid #e3c40d;
+    color: #854d0e;
+    font-weight: 900;
+    font-size: 0.9rem;
+    padding: 4px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-opcao-loop:hover {
+    background: #e3c40d;
+    color: #ffffff;
+}
+
+/* Badge no Slot da Sequência */
+.badge-multiplicador {
+    position: absolute !important;
+    top: -6px !important;
+    left: -6px !important;
+    background: #e3c40d !important;
+    color: #ffffff !important;
+    font-size: 0.75rem !important;
+    font-weight: 900 !important;
+    padding: 1px 5px !important;
+    border-radius: 6px !important;
+    border: 2px solid #ffffff !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3) !important;
+    z-index: 10 !important;
+    line-height: 1 !important;
+    pointer-events: none;
+}
+
+.teclado-setas-cruz .btn-seta.aguardar-direcao {
+    animation: piscarSetaLoop 0.7s infinite alternate !important;
+    box-shadow: 0 0 14px #e3c40d, 0 0 6px #e3c40d !important;
+    border-color: #fef08a !important;
+}
+
+@keyframes piscarSetaLoop {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.12); filter: brightness(1.15); }
+}
+
+
+/* Container de Mensagens Toast (Garante que fica no topo) */
+#toast-container, .toast {
+    position: fixed !important;
+    top: 20px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    background-color: #ef4444 !important; /* Vermelho Alerta */
+    color: #ffffff !important;
+    padding: 12px 24px !important;
+    border-radius: 12px !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
+    z-index: 99999 !important; /* Fica por cima de TUDO */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    text-align: center;
+    max-width: 90%;
+}
+
+/* Animação para fazer tremer a barra de comandos quando houver erro de otimização */
+.abanar-erro {
+    animation: abanarSequencia 0.4s ease-in-out !important;
+}
+
+@keyframes abanarSequencia {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+
 /* =========================================
    5. RESPONSIVIDADE COMPLETA PARA MOBILE
    ========================================= */
@@ -1619,9 +1791,6 @@
     }
 }
 
-
-
-
 @media (max-width: 380px) {
     #grelha-jogo {
         gap: 2px;
@@ -1637,6 +1806,178 @@
         width: 17px;
         height: 17px;
     }
+}
+
+/* =========================================
+   6. RESPONSIVIDADE EXCLUSIVA PARA LANDSCAPE (HORIZONTAL)
+   ========================================= */
+
+@media (orientation: landscape) and (max-height: 500px) {
+
+    /* 1. Anula o empilhamento vertical e força 2 colunas lado a lado */
+    .area-jogo-custom {
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 4px 10px !important;
+        gap: 12px !important;
+    }
+
+
+	/* TESTAR COM E SEM ESTA REGRA
+    .cartao-jogo-container {
+        padding: 8px 10px !important;
+    }
+	
+	*/
+
+    .status-bar-jogo {
+        padding: 2px 6px !important;
+        margin-bottom: 2px !important;
+    }
+
+    /* 2. Redimensiona a Grelha (Esquerda) proporcionalmente à altura do ecrã (vh) */
+    .coluna-grelha-jogo {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        max-width: 52vh !important;
+    }
+
+    .grelha-programacao {
+        width: 52vh !important;
+        height: 52vh !important;
+        max-width: 52vh !important;
+        padding: 4px !important;
+        gap: 2px !important;
+    }
+
+    /* 3. Reduz a Coluna Direita (Painel) para caber nos ~320px de altura útil */
+    .coluna-painel-jogo {
+        flex: 1 1 auto !important;
+        width: auto !important;
+        max-width: 420px !important;
+        gap: 4px !important;
+        justify-content: center !important;
+    }
+
+    /* Caixa de Sequência (Redução de 104px para 52px) */
+    .linha-codigo-wrapper {
+        min-height: 52px !important;
+        padding: 4px 8px !important;
+    }
+
+    .label-linha, .placeholder-codigo {
+        font-size: 0.75rem !important;
+        margin-top: 0 !important;
+    }
+
+    .bloco-comando-slot,
+    .bloco-comando {
+        width: 24px !important;
+        height: 24px !important;
+        border-radius: 6px !important;
+    }
+
+    .bloco-comando-slot img,
+    .bloco-comando img {
+        width: 14px !important;
+        height: 14px !important;
+    }
+
+    /* Cruz de Setas (Redução dos botões de 56px para 36px) */
+    .painel-comandos {
+        gap: 4px !important;
+    }
+
+    .teclado-setas-cruz {
+        grid-template-columns: repeat(3, 36px) !important;
+        grid-template-rows: repeat(3, 36px) !important;
+        gap: 4px !important;
+    }
+
+    .btn-seta, 
+    .centro-robo-icone {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 8px !important;
+        border-width: 2px !important;
+    }
+
+    .btn-seta img {
+        width: 18px !important;
+        height: 18px !important;
+    }
+
+    .centro-robo-icone img {
+        width: 26px !important;
+        height: 26px !important;
+    }
+
+    /* Botões de Ação Inferiores (Redução de 90px para 42px) */
+    .botoes-controlo-codigo {
+        gap: 8px !important;
+    }
+
+    .btn-acao-codigo.apagar, 
+    .btn-acao-codigo.limpar {
+        width: 68px !important;
+        height: 42px !important;
+        padding: 2px !important;
+        font-size: 0.55rem !important;
+        border-radius: 10px !important;
+        border-width: 2px !important;
+        box-shadow: 0 3px 0 #d63031 !important;
+    }
+
+    .btn-acao-codigo.limpar {
+        box-shadow: 0 3px 0 #6a8f8c !important;
+    }
+
+    .btn-acao-codigo.apagar .icon-svg-btn, 
+    .btn-acao-codigo.limpar .icon-svg-btn {
+        width: 16px !important;
+        height: 16px !important;
+        margin-top: 0 !important;
+    }
+
+    .btn-acao-codigo.executar {
+        height: 42px !important;
+        font-size: 1rem !important;
+        padding: 0 10px !important;
+        border-radius: 10px !important;
+        border-width: 2px !important;
+        box-shadow: 0 3px 0 #27ae60 !important;
+        gap: 6px !important;
+    }
+
+    .btn-acao-codigo.executar .icon-svg-btn {
+        width: 20px !important;
+        height: 20px !important;
+    }
+	.pergunta-texto {
+        font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+        padding: 0 36px;
+        margin: 15px 0 12px 0;
+        box-sizing: border-box;
+    }
+	.painel-setas-wrapper {
+        gap: 8px !important;
+    }
+
+    .btn-seta.btn-repetir {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 8px !important;
+        border-width: 2px !important;
+        box-shadow: 0 3px 0 #b89e0a !important;
+    }
+
+    .btn-seta.btn-repetir img {
+        width: 20px !important;
+        height: 20px !important;
+    }
+	
+	
 }
 
 /* OTIMIZAÇÃO PARA DISPOSITIVOS DE TOQUE */
@@ -1671,8 +2012,8 @@
             <a href="../" class="btn-voltar"><img src="../../../SVG/voltar.svg" class="icon-svg-voltar" alt=""> Voltar</a>
         </div>
         
-        <h1>O Robô Explorador<img src="img/robo.png" class="icon-svg-titulo" alt=""></h1>
-        <div class="subtitulo" id="subtitulo-header">Ajuda o pequeno robô a limpar a casa!</div>
+        <h1>Desafio de Ciclos<img src="img/robo.png" class="icon-svg-titulo" alt=""></h1>
+        <div class="subtitulo" id="subtitulo-header">Usa repetições para otimizar o teu código!</div>
     </div>
 </header>
 
@@ -1690,9 +2031,11 @@
 				<div class="mini-grelha-demo">
 					<div class="mini-celula"></div>
 					<div class="mini-celula"></div>
-					<div class="mini-celula"></div>
 					<div class="mini-celula">
-						<img src="img/sofa.png" alt="Sofá" class="mini-img-item">
+						<img src="img/brinquedos.png" alt="Gato" class="mini-img-item">
+					</div>
+					<div class="mini-celula">
+						<img src="img/vaso.png" alt="Sofá" class="mini-img-item">
 					</div>
 					<div class="mini-celula"></div>
 					<div class="mini-celula mini-celula-destino">
@@ -1731,12 +2074,12 @@
 			<h2 class="titulo-menu">Pronto para Começar?</h2>
 			
 			<div class="contentor-menu-unico">
-				<button class="btn-nivel-unico btn-ano-2" onclick="iniciarJogo(5, 'Guia o Robô até ao destino!', 1)">
+				<button class="btn-nivel-unico btn-ano-3" onclick="iniciarJogo(5, 'Guia o Robô até ao destino!', 1)">
 					<img src="img/robo.png" class="icon-btn-unico" alt="Robô" onerror="this.src='../img-titulos/MENU_1.svg'">
 					
 					<div class="btn-nivel-text-container">
 						<span class="btn-nivel-titulo">INICIAR PROGRAMA</span>
-						<span class="btn-nivel-subtitulo">Evita os obstáculos num mapa 6x6!</span>
+						<span class="btn-nivel-subtitulo">Evita os obstáculos usando repetições!</span>
 					</div>
 
 					<img src="../../../SVG/seta_direita.svg" class="icon-svg-menu" alt="">
@@ -1777,30 +2120,44 @@
         <!-- Painel de Controlo (Teclado + Botões) -->
         <div class="painel-comandos">
             
-            <!-- Cruz de Setas 3x3 Ampliada -->
-            <div class="teclado-setas-cruz">
-                <div></div>
-                <button class="btn-seta cima bg-azul" onclick="adicionarComando('cima')" aria-label="Mover para Cima">
-                    <img src="img/seta_cima.svg" alt="Cima">
-                </button>
-                <div></div>
 
-                <button class="btn-seta esquerda bg-roxo" onclick="adicionarComando('esquerda')" aria-label="Mover para a Esquerda">
-                    <img src="img/seta_esquerda.svg" alt="Esquerda">
-                </button>
-                <div class="centro-robo-icone">
-                    <img src="img/robo.png" alt="Robô">
-                </div>
-                <button class="btn-seta direita bg-laranja" onclick="adicionarComando('direita')" aria-label="Mover para a Direita">
-                    <img src="img/seta_direita.svg" alt="Direita">
-                </button>
+		<div class="painel-setas-wrapper">
 
-                <div></div>
-                <button class="btn-seta baixo bg-turquesa" onclick="adicionarComando('baixo')" aria-label="Mover para Baixo">
-                    <img src="img/seta_baixo.svg" alt="Baixo">
-                </button>
-                <div></div>
-            </div>
+			<div class="teclado-setas-cruz">
+				<div></div>
+				<button class="btn-seta bg-azul" onclick="adicionarComando('cima')">
+					<img src="img/seta_cima.svg" alt="Cima">
+				</button>
+				<div></div>
+
+				<button class="btn-seta bg-roxo" onclick="adicionarComando('esquerda')">
+					<img src="img/seta_esquerda.svg" alt="Esquerda">
+				</button>
+				<div class="centro-robo-icone">
+					<img src="img/robo.png" alt="Robô">
+				</div>
+				<button class="btn-seta bg-laranja" onclick="adicionarComando('direita')">
+					<img src="img/seta_direita.svg" alt="Direita">
+				</button>
+
+				<div></div>
+				<button class="btn-seta bg-turquesa" onclick="adicionarComando('baixo')">
+					<img src="img/seta_baixo.svg" alt="Baixo">
+				</button>
+				<div></div>
+			</div>
+
+			<!-- Botão Repetir à Direita da Cruz -->
+			<button class="btn-seta btn-repetir" id="btn-repetir" onclick="abrirSeletorLoop()" title="Repetir movimento">
+				<img src="img/repetir.svg" alt="Repetir">
+			</button>
+			<!-- Popover de Seleção de Multiplicador (3x, 4x, 5x) -->
+			<div id="popover-loop" class="popover-loop hidden">
+				<button class="btn-opcao-loop" onclick="selecionarMultiplicador(3)">3×</button>
+				<button class="btn-opcao-loop" onclick="selecionarMultiplicador(4)">4×</button>
+				<button class="btn-opcao-loop" onclick="selecionarMultiplicador(5)">5×</button>
+			</div>
+		</div>
 
             <!-- Botões de Ação com Novas Cores e Ícones Encorpados -->
             <div class="botoes-controlo-codigo">
@@ -1881,7 +2238,7 @@
     </div>
 </div>
 <footer>
-    <p><span id="ano-atual"> </span><img src="../../../SVG/2_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
+    <p><span id="ano-atual"> </span><img src="../../../SVG/3_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
 </footer>
 
 <script>
@@ -1906,7 +2263,7 @@ const SVG_ERRO = `<svg viewBox="0 0 14 14" width="0.8em" height="0.8em" style="m
 <path d="M2 2 L12 12 M12 2 L2 12" stroke="var(--cor-pt,#ff4757)" stroke-width="3" stroke-linecap="round"/>
 </svg>`;
 
-/* Configuração da Grelha do 2.º Ano */
+/* Configuração da Grelha do 3.º Ano */
 const TOTAL_COLUNAS = 6;
 const TOTAL_LINHAS = 6;
 const MAX_COMANDOS = 12;
@@ -1925,7 +2282,7 @@ let cooldownDica = 0;
 let rondaLivreDica = 1;
 let timerImpaciencia = null;
 let mapaAtual = null;
-
+let multiplicadorPendente = 1;
 // Estado do Robô na Grelha
 let posRobo = { x: 0, y: 4 };
 let posDestino = { x: 4, y: 0 };
@@ -1966,15 +2323,26 @@ function mostrarEcra(id) {
     if (target) target.style.display = 'flex';
 }
 
-function showToast(msg, isError = false) {
-    const toast = document.getElementById('toast-msg');
-    if (!toast) return;
-    toast.textContent = msg;
-    toast.style.borderColor = isError ? "var(--cor-erro)" : "#fbc531";
-    toast.style.color = isError ? "var(--cor-erro)" : "#b18500";
-    toast.style.backgroundColor = isError ? "#ffefef" : "#fff9c4";
+
+function showToast(mensagem) {
+    let toast = document.getElementById('toast-msg');
+    
+    // Procura o contentor do cartão do jogo
+    const cartaoJogo = document.querySelector('#cartao-jogo') || document.querySelector('.cartao-jogo') || document.body;
+
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast-msg';
+        toast.className = 'toast-msg';
+        cartaoJogo.appendChild(toast); // Insere DENTRO do cartão
+    }
+
+    toast.innerText = mensagem;
     toast.classList.add('active');
-    setTimeout(() => toast.classList.remove('active'), 3000);
+
+    setTimeout(() => {
+        toast.classList.remove('active');
+    }, 5000);
 }
 
 /* ==========================================
@@ -2001,8 +2369,82 @@ function pararTimerImpaciencia() {
 }
 
 /* ==========================================
-   5. LÓGICA PRINCIPAL DO JOGO (1.º ANO)
+   5. LÓGICA PRINCIPAL DO JOGO
    ========================================== */
+   
+function validarUsoDeLoops() {
+    let contadorConsecutivo = 1;
+    let direcaoAnterior = null;
+
+    for (let i = 0; i < sequenciaComandos.length; i++) {
+        const cmd = sequenciaComandos[i];
+        const direcaoAtual = typeof cmd === 'object' ? cmd.direcao : cmd;
+        const count = typeof cmd === 'object' ? cmd.count : 1;
+
+        if (count === 1) {
+            if (direcaoAtual === direcaoAnterior) {
+                contadorConsecutivo++;
+            } else {
+                contadorConsecutivo = 1;
+                direcaoAnterior = direcaoAtual;
+            }
+        } else {
+            // Se usou o botão repetir, faz reset ao contador
+            contadorConsecutivo = 1;
+            direcaoAnterior = null;
+        }
+
+        // Se detetar 3 ou mais setas iguais seguidas sem usar o loop
+        if (contadorConsecutivo >= 3) {
+            return false;
+        }
+    }
+
+    return true;
+}   
+   
+   
+   
+// ABRIR / FECHAR POPOVER
+function abrirSeletorLoop() {
+    const popover = document.getElementById('popover-loop');
+    if (multiplicadorPendente > 1) {
+        cancelarModoLoop();
+        return;
+    }
+    if (popover) popover.classList.toggle('hidden');
+}
+
+// Define o valor do multiplicador (3, 4 ou 5)
+function selecionarMultiplicador(valor) {
+    multiplicadorPendente = valor;
+
+    const popover = document.getElementById('popover-loop');
+    if (popover) popover.classList.add('hidden');
+
+    const btnRepetir = document.getElementById('btn-repetir');
+    if (btnRepetir) btnRepetir.classList.add('ativo');
+
+    document.querySelectorAll('.teclado-setas-cruz .btn-seta').forEach(btn => {
+        btn.classList.add('aguardar-direcao');
+    });
+}
+
+function cancelarModoLoop() {
+    multiplicadorPendente = 1;
+
+    const popover = document.getElementById('popover-loop');
+    if (popover) popover.classList.add('hidden');
+
+    const btnRepetir = document.getElementById('btn-repetir');
+    if (btnRepetir) btnRepetir.classList.remove('ativo');
+
+    document.querySelectorAll('.teclado-setas-cruz .btn-seta').forEach(btn => {
+        btn.classList.remove('aguardar-direcao');
+    });
+}   
+   
+   
 function iniciarJogo(totalRondas = 5, titulo = 'Guia o Robô até ao destino!') {
     desafioAtual = 1;
     totalDesafiosNivel = totalRondas;
@@ -2168,16 +2610,53 @@ function renderizarGrelha() {
 function adicionarComando(direcao) {
     if (emExecucao) return;
 
-    // VERIFICAÇÃO ATUALIZADA: Utiliza a constante MAX_COMANDOS (12) em vez de 10
     if (sequenciaComandos.length >= MAX_COMANDOS) {
         showToast("Chegaste ao limite de 12 comandos!", true);
+        cancelarModoLoop();
         return;
     }
 
-    sequenciaComandos.push(direcao);
+    sequenciaComandos.push({
+        direcao: direcao,
+        count: multiplicadorPendente
+    });
+
     tocarSom('clique');
+
+    cancelarModoLoop();
+
     atualizarLinhaCodigoDOM();
     resetTimerImpaciencia();
+}
+
+
+function renderizarLinhaCodigo() {
+    const slots = document.querySelectorAll('.bloco-comando-slot');
+    
+    slots.forEach((slot, index) => {
+        slot.innerHTML = '';
+        slot.className = 'bloco-comando-slot'; // Reset de classes
+
+        if (index < sequenciaComandos.length) {
+            const cmd = sequenciaComandos[index];
+            slot.classList.add(`cmd-${cmd.direcao}`);
+
+            // Se for um movimento repetido (3x, 4x, 5x), desenha a badge
+            if (cmd.count > 1) {
+                slot.classList.add('tem-loop');
+                const badge = document.createElement('span');
+                badge.className = 'badge-multiplicador';
+                badge.innerText = `${cmd.count}×`;
+                slot.appendChild(badge);
+            }
+
+            // Seta do movimento
+            const img = document.createElement('img');
+            img.src = `img/seta_${cmd.direcao}.svg`;
+            img.alt = cmd.direcao;
+            slot.appendChild(img);
+        }
+    });
 }
 
 function removerUltimoComando() {
@@ -2195,28 +2674,39 @@ function limparCodigo() {
 }
 
 function atualizarLinhaCodigoDOM() {
-    for (let i = 0; i < MAX_COMANDOS; i++) {
-        const slot = document.getElementById(`slot-comando-${i}`);
-        if (!slot) continue;
-
-        // Limpa o conteúdo e remove as cores anteriores
+    const slots = document.querySelectorAll('.bloco-comando-slot');
+    
+    slots.forEach((slot, index) => {
+        // Limpa o conteúdo e repõe a classe base do slot
         slot.innerHTML = '';
-        slot.classList.remove('ocupado', 'ativo', 'cmd-cima', 'cmd-baixo', 'cmd-esquerda', 'cmd-direita');
+        slot.className = 'bloco-comando-slot'; 
 
-        if (i < sequenciaComandos.length) {
-            const direcao = sequenciaComandos[i];
+        if (index < sequenciaComandos.length) {
+            const item = sequenciaComandos[index];
             
-            // Inserção da imagem da seta
+            // Suporta tanto objetos { direcao, count } do 3º ano como strings simples
+            const direcao = typeof item === 'object' ? item.direcao : item;
+            const repeticoes = typeof item === 'object' ? item.count : 1;
+
+            // 1. Classe de cor da seta (ex: cmd-cima, cmd-direita)
+            slot.classList.add(`cmd-${direcao}`);
+
+            // 2. Se for um loop (3x, 4x, 5x), insere a badge no canto do slot
+            if (repeticoes > 1) {
+                slot.classList.add('tem-loop');
+                const badge = document.createElement('span');
+                badge.className = 'badge-multiplicador';
+                badge.innerText = `${repeticoes}×`;
+                slot.appendChild(badge);
+            }
+
+            // 3. Imagem da seta correta (ex: img/seta-cima.svg)
             const img = document.createElement('img');
             img.src = `img/seta_${direcao}.svg`;
             img.alt = direcao;
-            
             slot.appendChild(img);
-            
-            // Adiciona a classe de cor correspondente à direção
-            slot.classList.add('ocupado', `cmd-${direcao}`);
         }
-    }
+    });
 }
 
 function limparLinhaCodigoDOM() {
@@ -2253,6 +2743,23 @@ async function executarSequencia() {
         return;
     }
 
+    // 1. VALIDAÇÃO DE OTIMIZAÇÃO (3.º ANO)
+    if (!validarUsoDeLoops()) {
+        tocarSom('erro');
+        
+        // Exibe o aviso no topo do ecrã
+        showToast('Otimiza o código! Usa o botão REPETIR quando andares 3 ou mais vezes para a mesma direção.', true);
+        
+        // Foca visualmente o erro fazendo a barra da sequência abanar
+        const painelSequencia = document.querySelector('.contentor-linha-codigo') || document.querySelector('#cartao-jogo');
+        if (painelSequencia) {
+            painelSequencia.classList.add('abanar-erro');
+            setTimeout(() => painelSequencia.classList.remove('abanar-erro'), 400);
+        }
+        return;
+    }
+
+    // 2. SE PASSAR NA VALIDAÇÃO, INICIA O MOVIMENTO
     emExecucao = true;
     pararTimerImpaciencia();
 
@@ -2260,29 +2767,34 @@ async function executarSequencia() {
     let yAtual = posRobo.y;
 
     for (let i = 0; i < sequenciaComandos.length; i++) {
-        const cmd = sequenciaComandos[i];
+        const item = sequenciaComandos[i];
+        const direcao = typeof item === 'object' ? item.direcao : item;
+        const repeticoes = typeof item === 'object' ? item.count : 1;
+
         destacarBlocoAtivo(i);
 
-        if (cmd === 'cima') yAtual--;
-        else if (cmd === 'baixo') yAtual++;
-        else if (cmd === 'esquerda') xAtual--;
-        else if (cmd === 'direita') xAtual++;
+        for (let rep = 0; rep < repeticoes; rep++) {
+            if (direcao === 'cima') yAtual--;
+            else if (direcao === 'baixo') yAtual++;
+            else if (direcao === 'esquerda') xAtual--;
+            else if (direcao === 'direita') xAtual++;
 
-        if (xAtual < 0 || xAtual >= TOTAL_COLUNAS || yAtual < 0 || yAtual >= TOTAL_LINHAS) {
-            tratarErroExecucao('O Robô saiu da grelha!');
-            return;
+            if (xAtual < 0 || xAtual >= TOTAL_COLUNAS || yAtual < 0 || yAtual >= TOTAL_LINHAS) {
+                tratarErroExecucao('O Robô saiu da grelha!');
+                return;
+            }
+
+            if (obstaculos.some(o => o.x === xAtual && o.y === yAtual)) {
+                tratarErroExecucao('O Robô bateu num obstáculo!');
+                return;
+            }
+
+            posRobo = { x: xAtual, y: yAtual };
+            tocarSom('passo');
+            renderizarGrelha();
+
+            await new Promise(r => setTimeout(r, 400));
         }
-
-        if (obstaculos.some(o => o.x === xAtual && o.y === yAtual)) {
-            tratarErroExecucao('O Robô bateu num obstáculo!');
-            return;
-        }
-
-        posRobo = { x: xAtual, y: yAtual };
-        tocarSom('passo'); // Toca o som de passo a cada movimento do robô
-        renderizarGrelha();
-
-        await new Promise(r => setTimeout(r, 400));
     }
 
     if (posRobo.x === posDestino.x && posRobo.y === posDestino.y) {
@@ -2381,6 +2893,11 @@ function atualizarEstadoBotaoDica() {
     }
 }
 
+function limparDestaquesDica() {
+    document.querySelectorAll('.celula-dica').forEach(el => el.classList.remove('celula-dica'));
+    document.querySelectorAll('.btn-dica-destaque').forEach(el => el.classList.remove('btn-dica-destaque'));
+}
+
 /* ==========================================
    AÇÃO DE USAR A DICA VISUAL
    ========================================== */
@@ -2397,32 +2914,66 @@ function usarDica() {
 
     const DURACAO_DESTAQUE = 4500;
 
-    // Destaque da seta no painel de controlo
-    const seletorSeta = {
-        'cima': '.btn-seta.bg-azul',
-        'baixo': '.btn-seta.bg-turquesa',
-        'esquerda': '.btn-seta.bg-roxo',
-        'direita': '.btn-seta.bg-laranja'
-    }[proximaDirecao];
+    // 1. CALCULA QUANTOS PASSOS SEGUIDOS O ROBÔ DEVE DAR NA MESMA DIREÇÃO
+    let passosSeguidos = 0;
+    let xTemp = posRobo.x;
+    let yTemp = posRobo.y;
 
-    const btnSetaCerta = document.querySelector(seletorSeta);
-    if (btnSetaCerta) {
-        btnSetaCerta.classList.add('dica-destaque');
-        setTimeout(() => btnSetaCerta.classList.remove('dica-destaque'), DURACAO_DESTAQUE);
+    while (passosSeguidos < 5) {
+        let proxX = xTemp;
+        let proxY = yTemp;
+
+        if (proximaDirecao === 'cima') proxY--;
+        else if (proximaDirecao === 'baixo') proxY++;
+        else if (proximaDirecao === 'esquerda') proxX--;
+        else if (proximaDirecao === 'direita') proxX++;
+
+        // Para se sair da grelha ou encontrar obstáculo
+        if (proxX < 0 || proxX >= TOTAL_COLUNAS || proxY < 0 || proxY >= TOTAL_LINHAS) break;
+        if (obstaculos.some(o => o.x === proxX && o.y === proxY)) break;
+
+        xTemp = proxX;
+        yTemp = proxY;
+        passosSeguidos++;
+
+        // Se chegou ao destino final, para
+        if (xTemp === posDestino.x && yTemp === posDestino.y) break;
+
+        // Se o caminho ideal mudar de direção na casa seguinte, para a contagem do ciclo
+        const proxDirNoCaminho = obterProximoPassoCerto({ x: xTemp, y: yTemp }, posDestino, obstaculos);
+        if (proxDirNoCaminho !== proximaDirecao) break;
     }
 
-    // Destaque da próxima célula na grelha
-    let proxX = posRobo.x;
-    let proxY = posRobo.y;
-    if (proximaDirecao === 'cima') proxY--;
-    else if (proximaDirecao === 'baixo') proxY++;
-    else if (proximaDirecao === 'esquerda') proxX--;
-    else if (proximaDirecao === 'direita') proxX++;
+    // 2. DECIDE QUAL BOTÃO ILUMINAR
+    if (passosSeguidos >= 3) {
+        // Se for 3, 4 ou 5 passos -> Ilumina o botão REPETIR
+        const btnRepetir = document.getElementById('btn-repetir');
+        if (btnRepetir) {
+            btnRepetir.classList.add('dica-destaque');
+            setTimeout(() => btnRepetir.classList.remove('dica-destaque'), DURACAO_DESTAQUE);
+        }
+        showToast(`Dica: Usa o REPETIR para dar ${passosSeguidos} passos!`);
+    } else {
+        // Se for 1 ou 2 passos -> Ilumina a seta direcional normal
+        const seletorSeta = {
+            'cima': '.btn-seta.bg-azul',
+            'baixo': '.btn-seta.bg-turquesa',
+            'esquerda': '.btn-seta.bg-roxo',
+            'direita': '.btn-seta.bg-laranja'
+        }[proximaDirecao];
 
-    const celulaProx = document.querySelector(`.celula-grelha[data-x="${proxX}"][data-y="${proxY}"]`);
-    if (celulaProx) {
-        celulaProx.classList.add('celula-dica-proxima');
-        setTimeout(() => celulaProx.classList.remove('celula-dica-proxima'), DURACAO_DESTAQUE);
+        const btnSetaCerta = document.querySelector(seletorSeta);
+        if (btnSetaCerta) {
+            btnSetaCerta.classList.add('dica-destaque');
+            setTimeout(() => btnSetaCerta.classList.remove('dica-destaque'), DURACAO_DESTAQUE);
+        }
+    }
+
+    // 3. ILUMINA A CÉLULA ONDE O ROBÔ VAI PARAR
+    const celulaAlvo = document.querySelector(`.celula-grelha[data-x="${xTemp}"][data-y="${yTemp}"]`);
+    if (celulaAlvo) {
+        celulaAlvo.classList.add('celula-dica-proxima');
+        setTimeout(() => celulaAlvo.classList.remove('celula-dica-proxima'), DURACAO_DESTAQUE);
     }
 
     tocarSom('flip');

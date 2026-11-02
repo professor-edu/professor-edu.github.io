@@ -175,7 +175,7 @@
         /* =========================================
            ECRÃS E MENUS
            ========================================= */
-        .ecra { width: 100%; flex: 1; min-height: 0; display: none; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.4s ease; box-sizing: border-box; position: relative; z-index: 2;}
+        .ecra { width: 100%; flex: 1; min-height: 0; display: none; gap: 15px; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.4s ease; box-sizing: border-box; position: relative; z-index: 2;}
         #ecra-selecao { display: flex; }
         #ecra-jogo { justify-content: flex-start; }
         .titulo-menu {
@@ -203,7 +203,7 @@
 			border-radius: 24px;
 			border: 4px solid #ffffff;
 			background-color: #3b82f6;
-			box-shadow: 0 8px 0 #1d4ed8, 0 12px 20px rgba(0, 0, 0, 0.15);
+			box-shadow: 0 8px 0 var(--cor-1ano-dark), 0 12px 20px rgba(0, 0, 0, 0.15);
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
@@ -769,7 +769,7 @@
 			border-radius: 20px; 
 			border: 2px dashed var(--cor-mat, #3b82f6); 
 			line-height: 1.5; 
-			width: 800%;
+			width: 80%;
 			max-width: 450px;
 			box-sizing: border-box;
 		}
@@ -897,7 +897,7 @@
 		.btn-nivel-unico:hover {
 			transform: translateY(-4px) scale(1.02);
 			filter: brightness(1.08);
-			box-shadow: 0 12px 0 #1d4ed8, 0 16px 25px rgba(0, 0, 0, 0.2);
+			box-shadow: 0 12px 0 var(--cor-1ano-dark), 0 16px 25px rgba(0, 0, 0, 0.2);
 			}
 		}
 
@@ -1511,6 +1511,162 @@
         margin: 15px 0 12px 0;
         box-sizing: border-box;
     }
+}
+
+/* =========================================
+   6. RESPONSIVIDADE EXCLUSIVA PARA LANDSCAPE (HORIZONTAL)
+   ========================================= */
+
+@media (orientation: landscape) and (max-height: 500px) {
+
+    /* 1. Anula o empilhamento vertical e força 2 colunas lado a lado */
+    .area-jogo-custom {
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 4px 10px !important;
+        gap: 12px !important;
+    }
+
+
+	/* TESTAR COM E SEM ESTA REGRA
+    .cartao-jogo-container {
+        padding: 8px 10px !important;
+    }
+	
+	*/
+
+    .status-bar-jogo {
+        padding: 2px 6px !important;
+        margin-bottom: 2px !important;
+    }
+
+    /* 2. Redimensiona a Grelha (Esquerda) proporcionalmente à altura do ecrã (vh) */
+    .coluna-grelha-jogo {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        max-width: 52vh !important;
+    }
+
+    .grelha-programacao {
+        width: 52vh !important;
+        height: 52vh !important;
+        max-width: 52vh !important;
+        padding: 4px !important;
+        gap: 2px !important;
+    }
+
+    /* 3. Reduz a Coluna Direita (Painel) para caber nos ~320px de altura útil */
+    .coluna-painel-jogo {
+        flex: 1 1 auto !important;
+        width: auto !important;
+        max-width: 420px !important;
+        gap: 4px !important;
+        justify-content: center !important;
+    }
+
+    /* Caixa de Sequência (Redução de 104px para 52px) */
+    .linha-codigo-wrapper {
+        min-height: 52px !important;
+        padding: 4px 8px !important;
+    }
+
+    .label-linha, .placeholder-codigo {
+        font-size: 0.75rem !important;
+        margin-top: 0 !important;
+    }
+
+    .bloco-comando-slot,
+    .bloco-comando {
+        width: 24px !important;
+        height: 24px !important;
+        border-radius: 6px !important;
+    }
+
+    .bloco-comando-slot img,
+    .bloco-comando img {
+        width: 14px !important;
+        height: 14px !important;
+    }
+
+    /* Cruz de Setas (Redução dos botões de 56px para 36px) */
+    .painel-comandos {
+        gap: 4px !important;
+    }
+
+    .teclado-setas-cruz {
+        grid-template-columns: repeat(3, 36px) !important;
+        grid-template-rows: repeat(3, 36px) !important;
+        gap: 4px !important;
+    }
+
+    .btn-seta, 
+    .centro-robo-icone {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 8px !important;
+        border-width: 2px !important;
+    }
+
+    .btn-seta img {
+        width: 18px !important;
+        height: 18px !important;
+    }
+
+    .centro-robo-icone img {
+        width: 26px !important;
+        height: 26px !important;
+    }
+
+    /* Botões de Ação Inferiores (Redução de 90px para 42px) */
+    .botoes-controlo-codigo {
+        gap: 8px !important;
+    }
+
+    .btn-acao-codigo.apagar, 
+    .btn-acao-codigo.limpar {
+        width: 68px !important;
+        height: 42px !important;
+        padding: 2px !important;
+        font-size: 0.55rem !important;
+        border-radius: 10px !important;
+        border-width: 2px !important;
+        box-shadow: 0 3px 0 #d63031 !important;
+    }
+
+    .btn-acao-codigo.limpar {
+        box-shadow: 0 3px 0 #6a8f8c !important;
+    }
+
+    .btn-acao-codigo.apagar .icon-svg-btn, 
+    .btn-acao-codigo.limpar .icon-svg-btn {
+        width: 16px !important;
+        height: 16px !important;
+        margin-top: 0 !important;
+    }
+
+    .btn-acao-codigo.executar {
+        height: 42px !important;
+        font-size: 1rem !important;
+        padding: 0 10px !important;
+        border-radius: 10px !important;
+        border-width: 2px !important;
+        box-shadow: 0 3px 0 #27ae60 !important;
+        gap: 6px !important;
+    }
+
+    .btn-acao-codigo.executar .icon-svg-btn {
+        width: 20px !important;
+        height: 20px !important;
+    }
+	.pergunta-texto {
+        font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+        padding: 0 36px;
+        margin: 15px 0 12px 0;
+        box-sizing: border-box;
+    }
+	
+	
 }
 
 /* OTIMIZAÇÃO PARA DISPOSITIVOS DE TOQUE */

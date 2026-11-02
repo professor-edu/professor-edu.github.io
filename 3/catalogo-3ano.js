@@ -53,6 +53,7 @@ const todosOsJogos =[
 	{ nome: "Problemas no Caderno", icone: "icones/problemas_caderno.png", link: "mat/problemas-caderno/", cat: "mat" },
 	{ nome: "O Robô das Tabuadas", icone: "icones/robo_tabuadas.png", link: "mat/robo-tabuadas/", cat: "mat" },
 	{ nome: "Ordens e Classes", icone: "icones/ordens_classes.png", link: "mat/ordem-classes/", cat: "mat" },
+	{ nome: "Desafio de Ciclos", icone: "icones/desafio_ciclos.png", link: "mat/desafio-ciclos/", cat: "mat" },
 	
     
     // ------------------------------------

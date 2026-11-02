@@ -176,7 +176,7 @@
         /* =========================================
            ECRÃS E MENUS
            ========================================= */
-        .ecra { width: 100%; flex: 1; min-height: 0; display: none; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.4s ease; box-sizing: border-box; position: relative; z-index: 2;}
+        .ecra { width: 100%; flex: 1; min-height: 0; gap: 15px; display: none; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.4s ease; box-sizing: border-box; position: relative; z-index: 2;}
         #ecra-selecao { display: flex; }
         #ecra-jogo { justify-content: flex-start; }
         .titulo-menu {
@@ -283,7 +283,7 @@
 .mini-grelha-demo {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(3, 58px); /* Células maiores: 58px */
+    grid-template-columns: repeat(3, 58px);
     grid-template-rows: repeat(2, 58px);
     gap: 5px;
     background: #cbd5e1;
@@ -307,9 +307,10 @@
 }
 
 .mini-img-item {
-    width: 40px; /* Obstáculos e terra maiores */
-    height: 40px;
+    max-width: 80%;
+    max-height: 80%;
     object-fit: contain;
+    pointer-events: none;
 }
 
 /* Robô Animado Ampliado */
@@ -795,7 +796,7 @@
 			border-radius: 20px; 
 			border: 2px dashed var(--cor-mat, #3b82f6); 
 			line-height: 1.5; 
-			width: 800%;
+			width: 80%;
 			max-width: 450px;
 			box-sizing: border-box;
 		}
@@ -1843,9 +1844,11 @@
 				<div class="mini-grelha-demo">
 					<div class="mini-celula"></div>
 					<div class="mini-celula"></div>
-					<div class="mini-celula"></div>
 					<div class="mini-celula">
-						<img src="img/sofa.png" alt="Sofá" class="mini-img-item">
+						<img src="img/gato.png" alt="Gato" class="mini-img-item">
+					</div>
+					<div class="mini-celula">
+						<img src="img/cadeira.png" alt="Sofá" class="mini-img-item">
 					</div>
 					<div class="mini-celula"></div>
 					<div class="mini-celula mini-celula-destino">
@@ -2154,7 +2157,7 @@ function pararTimerImpaciencia() {
 }
 
 /* ==========================================
-   5. LÓGICA PRINCIPAL DO JOGO (1.º ANO)
+   5. LÓGICA PRINCIPAL DO JOGO
    ========================================== */
 function iniciarJogo(totalRondas = 5, titulo = 'Guia o Robô até ao destino!') {
     desafioAtual = 1;

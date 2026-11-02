@@ -1722,6 +1722,14 @@
         "disciplina": "Matemática",
         "tags": ["tabuadas", "tabuada", "multiplicação", "multiplicar", "vezes"]
     },
+	{
+		"nome": "Desafio de Ciclos",
+		"icone": "/3/icones/desafio_ciclos.png",
+		"link": "/3/mat/desafio-ciclos",
+		"ano": "3º Ano",
+		"disciplina": "Matemática",
+		"tags": ["robô", "orientação espacial", "programação", "pensamento computacional", "algoritmo", "esquerda e direita", "lateralidade", "cima e baixo", "grelha", "lógica"]
+	},
     {
         "nome": "Direitos da Criança",
         "icone": "/3/icones/direitos_crianca.png",
