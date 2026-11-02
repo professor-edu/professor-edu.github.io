@@ -250,10 +250,10 @@
 			filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 		}
 
-        /* =========================================
-           MENU INICIAL (ANIMAÇÃO GRELHA 2x2
-           ========================================= */
-        .animacao-tutorial {
+/* =========================================
+   ANIMAÇÃO TUTORIAL 4.º ANO (RECOLHA DE LIXO)
+   ========================================= */
+.animacao-tutorial {
             width: 100%; max-width: 400px; height: 180px;
             background: #f4faff; border: 3px dashed #bcdcff; border-radius: 20px;
             margin: 0 auto 25px; display: flex; align-items: center; justify-content: center;
@@ -261,25 +261,18 @@
             overflow: hidden;
         }
 
-
-
-
-/* =========================================
-   ANIMAÇÃO TUTORIAL EXPANDIDA (MAIOR IMPACTO VISUAL)
-   ========================================= */
-
 .demo-tutorial-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 24px; /* Mais espaço entre a grelha e as setas */
+    gap: 20px;
     width: 100%;
     height: 100%;
-    padding: 12px 20px;
+    padding: 10px 16px;
     box-sizing: border-box;
 }
 
-/* Mini Grelha 3x2 Ampliada */
+/* Mini Grelha 3x2 */
 .mini-grelha-demo {
     position: relative;
     display: grid;
@@ -299,13 +292,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
-.mini-celula-destino {
+/* Célula com Lixo e Animação de Desaparecimento */
+.celula-com-lixo {
     background: #fffde7;
-    border: 3px dashed #f1c40f;
+    border: 2px dashed #f1c40f;
 }
 
+.mini-img-lixo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    animation: desaparecerLixoDemo 7s infinite ease-in-out;
+}
 .mini-img-item {
     max-width: 80%;
     max-height: 80%;
@@ -313,7 +314,7 @@
     pointer-events: none;
 }
 
-/* Robô Animado Ampliado */
+/* Robô Animado */
 .mini-robo-animado {
     position: absolute;
     width: 58px;
@@ -324,37 +325,37 @@
     top: 6px;
     left: 6px;
     z-index: 5;
-    animation: moverRoboDemo 6s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    animation: moverRoboDemo 7s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
 .mini-robo-animado img {
-    width: 48px; /* Imagem do robô maior */
-    height: 48px;
+    width: 46px;
+    height: 46px;
     object-fit: contain;
     filter: drop-shadow(0 3px 6px rgba(0,0,0,0.2));
 }
 
-/* Painel de Sequência Ampliado */
+/* Painel de Sequência */
 .mini-painel-passos {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .mini-linha-setas {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     background: #ffffff;
-    padding: 8px 12px;
-    border-radius: 16px;
+    padding: 6px 10px;
+    border-radius: 14px;
     border: 2px solid #bae6fd;
     box-shadow: 0 4px 10px rgba(0,0,0,0.06);
 }
 
 .mini-step {
-    width: 38px; /* Botões das setas maiores */
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 10px;
     background: #94a3b8;
     display: flex;
@@ -363,112 +364,143 @@
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
+.bg-laranja { background: #ff9800 !important; }
+.bg-apanhar { background: #117f5a !important; }
+
 .mini-img-seta {
-    width: 24px; /* Setas maiores */
-    height: 24px;
+    width: 22px;
+    height: 22px;
     object-fit: contain;
 }
 
-/* Mensagem de Celebração */
+/* Badge de Celebração de Limpeza */
 .mini-badge-vitoria {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 900;
-    color: #16a34a;
-    background: #dcfce7;
-    padding: 6px 12px;
+    color: #0b573d;
+    background: #e6f4ea;
+    padding: 5px 10px;
     border-radius: 12px;
-    border: 2px solid #86efac;
+    border: 2px solid #a8dab5;
     opacity: 0;
     transform: scale(0.8);
-    animation: mostrarVitoriaDemo 6s infinite ease-in-out;
+    animation: mostrarVitoriaDemo 7s infinite ease-in-out;
 }
 
 .mini-img-estrela {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     object-fit: contain;
 }
 
 /* =========================================
-   KEYFRAMES AJUSTADOS ÀS NOVAS MEDIDAS
+   KEYFRAMES AJUSTADAS AO COMANDO APANHAR
    ========================================= */
 
+/* Movimento do Robô: (0,0) -> (1,0) -> (2,0) + Animação de Apanhar */
 @keyframes moverRoboDemo {
     /* Posição Inicial (0,0) */
-    0%, 15% {
+    0%, 12% {
         top: 6px;
         left: 6px;
-        transform: scale(1);
+        transform: scale(1) rotate(0deg);
     }
-    /* Passo 1: Direita -> (1,0) [6px + 63px = 69px] */
-    25%, 40% {
+    /* Passo 1: Anda para (1,0) */
+    22%, 35% {
         top: 6px;
         left: 69px;
-        transform: scale(1);
+        transform: scale(1) rotate(0deg);
     }
-    /* Passo 2: Baixo -> (1,1) [top 69px, left 69px] */
-    50%, 65% {
-        top: 69px;
-        left: 69px;
-        transform: scale(1);
-    }
-    /* Passo 3: Direita (Destino) -> (2,1) [69px + 63px = 132px] */
-    75%, 90% {
-        top: 69px;
+    /* Passo 2: Chega ao Lixo (2,0) */
+    45%, 55% {
+        top: 6px;
         left: 132px;
-        transform: scale(1.15);
+        transform: scale(1) rotate(0deg);
+    }
+    /* Passo 3: Executa a Ação APANHAR (Rodopio de limpeza no lixo) */
+    62%, 78% {
+        top: 6px;
+        left: 132px;
+        transform: scale(1.2) rotate(360deg);
+    }
+    /* Pausa de Vitória */
+    82%, 92% {
+        top: 6px;
+        left: 132px;
+        transform: scale(1) rotate(360deg);
     }
     /* Regresso ao Início */
     98%, 100% {
         top: 6px;
         left: 6px;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+/* O lixo desaparece quando o Robô executa o comando APANHAR */
+@keyframes desaparecerLixoDemo {
+    0%, 58% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    68%, 93% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    98%, 100% {
+        opacity: 1;
         transform: scale(1);
     }
 }
 
-.step-1 { animation: piscarSeta1 6s infinite; }
-.step-2 { animation: piscarSeta2 6s infinite; }
-.step-3 { animation: piscarSeta3 6s infinite; }
+/* Iluminação sequencial dos botões de comando */
+.step-1 { animation: piscarSeta1 7s infinite; }
+.step-2 { animation: piscarSeta2 7s infinite; }
+.step-3 { animation: piscarApanhar 7s infinite; }
 
 @keyframes piscarSeta1 {
-    18%, 35% { background: #3b82f6; transform: scale(1.18); box-shadow: 0 0 10px rgba(59,130,246,0.6); }
-    0%, 17%, 36%, 100% { background: #94a3b8; transform: scale(1); }
+    15%, 32% { background: #ff9800; transform: scale(1.18); box-shadow: 0 0 10px rgba(255, 152, 0, 0.7); }
+    0%, 14%, 33%, 100% { background: #94a3b8; transform: scale(1); }
 }
 
 @keyframes piscarSeta2 {
-    43%, 60% { background: #06b6d4; transform: scale(1.18); box-shadow: 0 0 10px rgba(6,182,212,0.6); }
-    0%, 42%, 61%, 100% { background: #94a3b8; transform: scale(1); }
+    38%, 52% { background: #ff9800; transform: scale(1.18); box-shadow: 0 0 10px rgba(255, 152, 0, 0.7); }
+    0%, 37%, 53%, 100% { background: #94a3b8; transform: scale(1); }
 }
 
-@keyframes piscarSeta3 {
-    68%, 85% { background: #3b82f6; transform: scale(1.18); box-shadow: 0 0 10px rgba(59,130,246,0.6); }
-    0%, 67%, 86%, 100% { background: #94a3b8; transform: scale(1); }
+@keyframes piscarApanhar {
+    58%, 78% { background: #117f5a; transform: scale(1.18); box-shadow: 0 0 12px rgba(17, 127, 90, 0.8); }
+    0%, 57%, 79%, 100% { background: #94a3b8; transform: scale(1); }
 }
 
+/* Aparecimento do Badge "TUDO LIMPO!" */
 @keyframes mostrarVitoriaDemo {
-    74% { opacity: 0; transform: scale(0.8); }
-    78%, 90% { opacity: 1; transform: scale(1.05); }
-    94%, 100% { opacity: 0; transform: scale(0.8); }
+    68% { opacity: 0; transform: scale(0.8); }
+    74%, 90% { opacity: 1; transform: scale(1.05); }
+    95%, 100% { opacity: 0; transform: scale(0.8); }
 }
 
+/* Responsividade Mobile ( 400px) */
 @media (max-width: 400px) {
-    .demo-tutorial-wrapper { gap: 12px; padding: 8px; }
+    .demo-tutorial-wrapper { gap: 10px; padding: 6px; }
     .mini-grelha-demo { grid-template-columns: repeat(3, 44px); grid-template-rows: repeat(2, 44px); gap: 4px; padding: 4px; }
     .mini-robo-animado { width: 44px; height: 44px; }
     .mini-robo-animado img { width: 34px; height: 34px; }
-    .mini-img-item { width: 30px; height: 30px; }
+	.mini-img-item { width: 30px; height: 30px; }
+    .mini-img-lixo { width: 26px; height: 26px; }
     .mini-step { width: 30px; height: 30px; }
     .mini-img-seta { width: 18px; height: 18px; }
 
     @keyframes moverRoboDemo {
-        0%, 15% { top: 4px; left: 4px; }
-        25%, 40% { top: 4px; left: 52px; }
-        50%, 65% { top: 52px; left: 52px; }
-        75%, 90% { top: 52px; left: 100px; }
-        98%, 100% { top: 4px; left: 4px; }
+        0%, 12% { top: 4px; left: 4px; transform: scale(1) rotate(0deg); }
+        22%, 35% { top: 4px; left: 52px; transform: scale(1) rotate(0deg); }
+        45%, 55% { top: 4px; left: 100px; transform: scale(1) rotate(0deg); }
+        62%, 78% { top: 4px; left: 100px; transform: scale(1.2) rotate(360deg); }
+        82%, 92% { top: 4px; left: 100px; transform: scale(1) rotate(360deg); }
+        98%, 100% { top: 4px; left: 4px; transform: scale(1) rotate(0deg); }
     }
 }
 
@@ -2190,52 +2222,55 @@
 
         <div id="ecra-selecao" class="ecra">
 								
-		<div class="animacao-tutorial">
-			<div class="demo-tutorial-wrapper">
-				
-				<!-- MINI GRELHA 3x2 -->
-				<div class="mini-grelha-demo">
-					<div class="mini-celula"></div>
-					<div class="mini-celula"></div>
-					<div class="mini-celula">
-						<img src="img/brinquedos.png" alt="Gato" class="mini-img-item">
-					</div>
-					<div class="mini-celula">
-						<img src="img/vaso.png" alt="Sofá" class="mini-img-item">
-					</div>
-					<div class="mini-celula"></div>
-					<div class="mini-celula mini-celula-destino">
-						<img src="img/terra.png" alt="Terra" class="mini-img-item">
-					</div>
+<div class="animacao-tutorial">
+    <div class="demo-tutorial-wrapper">
+        
+        <!-- Mini Grelha 3x2 -->
+        <div class="mini-grelha-demo">
+            <!-- Robô Animado -->
+            <div class="mini-robo-animado">
+                <img src="img/robo.png" alt="Robô">
+            </div>
 
-					<!-- Robô Animado (Navega na Grelha) -->
-					<div class="mini-robo-animado">
-						<img src="img/robo.png" alt="Robô">
-					</div>
-				</div>
+            <!-- Células da Grelha -->
+            <div class="mini-celula"></div>
+            <div class="mini-celula"></div>
+            <!-- Casa com Lixo na posição (2,0) -->
+            <div class="mini-celula celula-com-lixo">
+                <img src="img/terra.png" class="mini-img-lixo" alt="Lixo">
+            </div>
+            
+            <div class="mini-celula"><img src="img/cao.png" alt="Cão" class="mini-img-item"></div>
+            <div class="mini-celula"></div>
+            <div class="mini-celula"><img src="img/cadeira.png" alt="Cadeira" class="mini-img-item"></div>
+        </div>
 
-				<!-- SEQUÊNCIA DE SETAS E SUCESSO (COM SVGs) -->
-				<div class="mini-painel-passos">
-					<div class="mini-linha-setas">
-						<div class="mini-step step-1">
-							<img src="img/seta_direita.svg" alt="Direita" class="mini-img-seta">
-						</div>
-						<div class="mini-step step-2">
-							<img src="img/seta_baixo.svg" alt="Baixo" class="mini-img-seta">
-						</div>
-						<div class="mini-step step-3">
-							<img src="img/seta_direita.svg" alt="Direita" class="mini-img-seta">
-						</div>
-					</div>
-					<div class="mini-badge-vitoria">
-						<img src="../../../SVG/estrela.svg" alt="Estrela" class="mini-img-estrela">
-						<span>MUITO BEM!</span>
-						<img src="../../../SVG/estrela.svg" alt="Estrela" class="mini-img-estrela">
-					</div>
-				</div>
+        <!-- Painel Lateral de Sequência e Sucesso -->
+        <div class="mini-painel-passos">
+            <div class="mini-linha-setas">
+                <!-- Passo 1: Direita -->
+                <div class="mini-step step-1 bg-laranja">
+                    <img src="img/seta_direita.svg" class="mini-img-seta" alt="Direita">
+                </div>
+                <!-- Passo 2: Direita -->
+                <div class="mini-step step-2 bg-laranja">
+                    <img src="img/seta_direita.svg" class="mini-img-seta" alt="Direita">
+                </div>
+                <!-- Passo 3: APANHAR (Verde #117f5a) -->
+                <div class="mini-step step-3 bg-apanhar">
+                    <img src="img/apanhar.svg" class="mini-img-seta" alt="Apanhar">
+                </div>
+            </div>
 
-			</div>
-		</div>
+            <!-- Badge de Celebração de Limpeza -->
+            <div class="mini-badge-vitoria">
+                <img src="img/apanhar1.svg" class="mini-img-estrela" alt="">
+                <span>TUDO LIMPO!</span>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 			<h2 class="titulo-menu">Pronto para Começar?</h2>
 			
