@@ -1169,6 +1169,12 @@
 			display: inline-block;
 		}
 		
+		.btn-opcao-vibrante.opcao-eliminada {
+			opacity: 0.2 !important;
+			pointer-events: none !important;
+			cursor: not-allowed !important;
+		}
+		
 
     </style>
 </head>
@@ -1833,6 +1839,7 @@
 			const btn = document.createElement('button');
 			btn.className = `btn-opcao-vibrante ${classesCores[index]}`; // Garante uma cor única sem repetições
 			btn.innerHTML = opcao;
+			btn.dataset.opcao = opcao;
 			btn.onclick = () => verificarResposta(opcao, ronda.correto, btn);
 			opcoesGrid.appendChild(btn);
 		});
@@ -1941,7 +1948,8 @@
 		}
 	}
 
-	/* ==========================================
+
+/* ==========================================
 	   ALGORITMO DE DICA 50-50 (Elimina 1 opção)
 	   ========================================== */
 	function usarDica() {
@@ -1956,20 +1964,23 @@
 		let htmlDica = `<p>${ronda.dicaTexto}</p>`;
 		abrirModalDica(htmlDica);
 
-		// Esconde uma opção incorreta (50-50 focado em ecrã limpo)
-		let escondidas = 0;
-		document.querySelectorAll('.btn-opcao-vibrante').forEach(btn => {
-			if (btn.textContent.trim() !== ronda.correto && escondidas < 1) {
-				btn.style.opacity = '0.2';
-				btn.style.pointerEvents = 'none';
-				escondidas++;
-			}
+		// 1. Filtra APENAS os botões que são realmente incorretos e ainda não foram eliminados
+		const botoesIncorretos = Array.from(document.querySelectorAll('.btn-opcao-vibrante')).filter(btn => {
+			const valorOpcao = btn.dataset.opcao || btn.innerHTML;
+			return valorOpcao.trim() !== ronda.correto.trim() && !btn.classList.contains('opcao-eliminada');
 		});
+
+		// 2. Desativa o botão sorteado de forma permanente na ronda
+		if (botoesIncorretos.length > 0) {
+			const btnSorteado = botoesIncorretos[Math.floor(Math.random() * botoesIncorretos.length)];
+			btnSorteado.classList.add('opcao-eliminada');
+			btnSorteado.disabled = true;
+		}
 
 		rondasParaDica = COOLDOWN_DICA;
 		atualizarBotaoDica();
 	}
-
+	
 	function abrirModalDica(conteudoHTML) {
 		const modal = document.getElementById('modal-ajuda');
 		const conteudo = document.getElementById('modal-dica-conteudo');

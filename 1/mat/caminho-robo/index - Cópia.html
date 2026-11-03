@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4º Ano - Missão Limpeza 🤖</title>
+    <title>1º Ano - O Caminho do Robô 🤖</title>
     
     <link rel="icon" type="image/png" href="../../logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -18,13 +18,12 @@
         :root {
             --bg-body: #f0f7ff;
             --azul-vibrante: #0091ff; 
-            --cor-4ano: #a28cf2;     
-			--cor-4ano-dark: #8a72e0;
-            --cor-borda: #8a72e0;
-			--cor-btn-fundo: #fffde7;            
-            --bg-header: #f3f0ff;    
+            --cor-1ano: #0091ff;     
+            --cor-1ano-dark: #0070c5;
+            --cor-borda: #0091ff;            
+            --bg-header: #e3f2fd;    
             --azul-escuro: #0d47a1;
-            --text-main: #5c8699;
+            --text-main: #455a64;
             --borda-cartao: #ced6e0;
             --cor-pt: #ff6b6b;
             --cor-mat: #4dabf7;
@@ -74,7 +73,7 @@
 		
         header {
             background-color: var(--bg-header); padding: 25px 20px;
-            border-bottom: 1px solid var(--cor-4ano-dark);
+            border-bottom: 1px solid var(--azul-vibrante);
             box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; flex-shrink: 0; z-index: 100;
         }
         .header-content { max-width: 1200px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; }
@@ -105,7 +104,7 @@
 		}
         .subtitulo { color: var(--azul-escuro); font-size: clamp(0.85rem, 3vw, 1.1rem); font-weight: 500; opacity: 0.8; margin-top: 15px; }
 
-        .btn-voltar { background: var(--cor-4ano); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; font-size: 0.9rem; box-shadow: 0 3px 0 var(--cor-4ano-dark); display: flex; align-items: center; gap: 8px; transition: 0.2s; cursor: pointer;}
+        .btn-voltar { background: var(--cor-1ano); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; font-size: 0.9rem; box-shadow: 0 3px 0 var(--cor-1ano-dark); display: flex; align-items: center; gap: 8px; transition: 0.2s; cursor: pointer;}
         @media (hover: hover) { .btn-voltar:hover { transform: scale(1.05); } }
 
         @media (max-width: 768px) {
@@ -128,7 +127,7 @@
         .sidebar .btn-fechar { background: #fff5f5; color: #ff4757; padding: 20px 25px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; border-bottom: 1px solid #ffebeb; }
         .sidebar ul { list-style: none; padding: 15px; margin: 0; }
         .sidebar li a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--text-main); background: #f8fafc; border-radius: 12px; margin-bottom: 8px; transition: 0.3s; }
-        @media (hover: hover) { .sidebar li a:hover { background: var(--cor-4ano); color: white; transform: translateX(8px); } }
+        @media (hover: hover) { .sidebar li a:hover { background: var(--cor-1ano); color: white; transform: translateX(8px); } }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 150; }
         .overlay.active { display: block; }
 
@@ -170,8 +169,8 @@
 		/* =========================================
            FOOTER
         ========================================= */
-        footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--cor-4ano); margin-top: auto; flex-shrink: 0;}
-        footer p { font-size: 0.8rem; color: var(--cor-borda); margin: 0; }
+        footer { height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-top: 1px solid var(--cor-1ano); margin-top: auto; flex-shrink: 0;}
+        footer p { font-size: 0.8rem; color: var(--cor-1ano); margin: 0; }
         
         /* =========================================
            ECRÃS E MENUS
@@ -204,7 +203,7 @@
 			border-radius: 24px;
 			border: 4px solid #ffffff;
 			background-color: #3b82f6;
-			box-shadow: 0 8px 0 #1d4ed8, 0 12px 20px rgba(0, 0, 0, 0.15);
+			box-shadow: 0 8px 0 var(--cor-1ano-dark), 0 12px 20px rgba(0, 0, 0, 0.15);
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
@@ -215,31 +214,6 @@
 			text-align: left;
 			box-sizing: border-box;
 		}
-		
-		
-		/* 1.º ANO - AZUL VIBRANTE (O Caminho do Robô) */
-.btn-ano-1 {
-    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #60a5fa 100%);
-    box-shadow: 0 8px 0 #1d4ed8, 0 12px 20px rgba(37, 99, 235, 0.35);
-}
-
-/* 2.º ANO - ROXO EXPLORADOR (O Robô Explorador) */
-.btn-ano-2 {
-    background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 50%, #a78bfa 100%);
-    box-shadow: 0 8px 0 #5b21b6, 0 12px 20px rgba(109, 40, 217, 0.35);
-}
-
-/* 3.º ANO - LARANJA VIBRANTE (Ciclos & Loops) */
-.btn-ano-3 {
-    background: linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%);
-    box-shadow: 0 8px 0 #c2410c, 0 12px 20px rgba(234, 88, 12, 0.35);
-}
-
-/* 4.º ANO - VERDE ESMERALDA (Limpeza & Missões) */
-.btn-ano-4 {
-    background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
-    box-shadow: 0 8px 0 #047857, 0 12px 20px rgba(5, 150, 105, 0.35);
-}
 
 		/* Ícone da Personagem (Esquerda) */
 		.icon-btn-unico {
@@ -250,10 +224,10 @@
 			filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 		}
 
-/* =========================================
-   ANIMAÇÃO TUTORIAL 4.º ANO (RECOLHA DE LIXO)
-   ========================================= */
-.animacao-tutorial {
+        /* =========================================
+           MENU INICIAL (ANIMAÇÃO GRELHA 2x2
+           ========================================= */
+        .animacao-tutorial {
             width: 100%; max-width: 400px; height: 180px;
             background: #f4faff; border: 3px dashed #bcdcff; border-radius: 20px;
             margin: 0 auto 25px; display: flex; align-items: center; justify-content: center;
@@ -261,22 +235,29 @@
             overflow: hidden;
         }
 
+
+
+
+/* =========================================
+   ANIMAÇÃO TUTORIAL EXPANDIDA (MAIOR IMPACTO VISUAL)
+   ========================================= */
+
 .demo-tutorial-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 24px; /* Mais espaço entre a grelha e as setas */
     width: 100%;
     height: 100%;
-    padding: 10px 16px;
+    padding: 12px 20px;
     box-sizing: border-box;
 }
 
-/* Mini Grelha 3x2 */
+/* Mini Grelha 3x2 Ampliada */
 .mini-grelha-demo {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(3, 58px);
+    grid-template-columns: repeat(3, 58px); /* Células maiores: 58px */
     grid-template-rows: repeat(2, 58px);
     gap: 5px;
     background: #cbd5e1;
@@ -292,29 +273,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
-/* Célula com Lixo e Animação de Desaparecimento */
-.celula-com-lixo {
+.mini-celula-destino {
     background: #fffde7;
-    border: 2px dashed #f1c40f;
+    border: 3px dashed #f1c40f;
 }
 
-.mini-img-lixo {
-    width: 36px;
-    height: 36px;
-    object-fit: contain;
-    animation: desaparecerLixoDemo 7s infinite ease-in-out;
-}
 .mini-img-item {
-    max-width: 80%;
-    max-height: 80%;
+    width: 40px; /* Obstáculos e terra maiores */
+    height: 40px;
     object-fit: contain;
-    pointer-events: none;
 }
 
-/* Robô Animado */
+/* Robô Animado Ampliado */
 .mini-robo-animado {
     position: absolute;
     width: 58px;
@@ -325,37 +297,37 @@
     top: 6px;
     left: 6px;
     z-index: 5;
-    animation: moverRoboDemo 7s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    animation: moverRoboDemo 6s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
 .mini-robo-animado img {
-    width: 46px;
-    height: 46px;
+    width: 48px; /* Imagem do robô maior */
+    height: 48px;
     object-fit: contain;
     filter: drop-shadow(0 3px 6px rgba(0,0,0,0.2));
 }
 
-/* Painel de Sequência */
+/* Painel de Sequência Ampliado */
 .mini-painel-passos {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .mini-linha-setas {
     display: flex;
-    gap: 6px;
+    gap: 8px;
     background: #ffffff;
-    padding: 6px 10px;
-    border-radius: 14px;
+    padding: 8px 12px;
+    border-radius: 16px;
     border: 2px solid #bae6fd;
     box-shadow: 0 4px 10px rgba(0,0,0,0.06);
 }
 
 .mini-step {
-    width: 36px;
-    height: 36px;
+    width: 38px; /* Botões das setas maiores */
+    height: 38px;
     border-radius: 10px;
     background: #94a3b8;
     display: flex;
@@ -364,143 +336,112 @@
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.bg-laranja { background: #ff9800 !important; }
-.bg-apanhar { background: #117f5a !important; }
-
 .mini-img-seta {
-    width: 22px;
-    height: 22px;
+    width: 24px; /* Setas maiores */
+    height: 24px;
     object-fit: contain;
 }
 
-/* Badge de Celebração de Limpeza */
+/* Mensagem de Celebração */
 .mini-badge-vitoria {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 900;
-    color: #0b573d;
-    background: #e6f4ea;
-    padding: 5px 10px;
+    color: #16a34a;
+    background: #dcfce7;
+    padding: 6px 12px;
     border-radius: 12px;
-    border: 2px solid #a8dab5;
+    border: 2px solid #86efac;
     opacity: 0;
     transform: scale(0.8);
-    animation: mostrarVitoriaDemo 7s infinite ease-in-out;
+    animation: mostrarVitoriaDemo 6s infinite ease-in-out;
 }
 
 .mini-img-estrela {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     object-fit: contain;
 }
 
 /* =========================================
-   KEYFRAMES AJUSTADAS AO COMANDO APANHAR
+   KEYFRAMES AJUSTADOS ÀS NOVAS MEDIDAS
    ========================================= */
 
-/* Movimento do Robô: (0,0) -> (1,0) -> (2,0) + Animação de Apanhar */
 @keyframes moverRoboDemo {
     /* Posição Inicial (0,0) */
-    0%, 12% {
+    0%, 15% {
         top: 6px;
         left: 6px;
-        transform: scale(1) rotate(0deg);
+        transform: scale(1);
     }
-    /* Passo 1: Anda para (1,0) */
-    22%, 35% {
+    /* Passo 1: Direita -> (1,0) [6px + 63px = 69px] */
+    25%, 40% {
         top: 6px;
         left: 69px;
-        transform: scale(1) rotate(0deg);
+        transform: scale(1);
     }
-    /* Passo 2: Chega ao Lixo (2,0) */
-    45%, 55% {
-        top: 6px;
-        left: 132px;
-        transform: scale(1) rotate(0deg);
+    /* Passo 2: Baixo -> (1,1) [top 69px, left 69px] */
+    50%, 65% {
+        top: 69px;
+        left: 69px;
+        transform: scale(1);
     }
-    /* Passo 3: Executa a Ação APANHAR (Rodopio de limpeza no lixo) */
-    62%, 78% {
-        top: 6px;
+    /* Passo 3: Direita (Destino) -> (2,1) [69px + 63px = 132px] */
+    75%, 90% {
+        top: 69px;
         left: 132px;
-        transform: scale(1.2) rotate(360deg);
-    }
-    /* Pausa de Vitória */
-    82%, 92% {
-        top: 6px;
-        left: 132px;
-        transform: scale(1) rotate(360deg);
+        transform: scale(1.15);
     }
     /* Regresso ao Início */
     98%, 100% {
         top: 6px;
         left: 6px;
-        transform: scale(1) rotate(0deg);
-    }
-}
-
-/* O lixo desaparece quando o Robô executa o comando APANHAR */
-@keyframes desaparecerLixoDemo {
-    0%, 58% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    68%, 93% {
-        opacity: 0;
-        transform: scale(0);
-    }
-    98%, 100% {
-        opacity: 1;
         transform: scale(1);
     }
 }
 
-/* Iluminação sequencial dos botões de comando */
-.step-1 { animation: piscarSeta1 7s infinite; }
-.step-2 { animation: piscarSeta2 7s infinite; }
-.step-3 { animation: piscarApanhar 7s infinite; }
+.step-1 { animation: piscarSeta1 6s infinite; }
+.step-2 { animation: piscarSeta2 6s infinite; }
+.step-3 { animation: piscarSeta3 6s infinite; }
 
 @keyframes piscarSeta1 {
-    15%, 32% { background: #ff9800; transform: scale(1.18); box-shadow: 0 0 10px rgba(255, 152, 0, 0.7); }
-    0%, 14%, 33%, 100% { background: #94a3b8; transform: scale(1); }
+    18%, 35% { background: #3b82f6; transform: scale(1.18); box-shadow: 0 0 10px rgba(59,130,246,0.6); }
+    0%, 17%, 36%, 100% { background: #94a3b8; transform: scale(1); }
 }
 
 @keyframes piscarSeta2 {
-    38%, 52% { background: #ff9800; transform: scale(1.18); box-shadow: 0 0 10px rgba(255, 152, 0, 0.7); }
-    0%, 37%, 53%, 100% { background: #94a3b8; transform: scale(1); }
+    43%, 60% { background: #06b6d4; transform: scale(1.18); box-shadow: 0 0 10px rgba(6,182,212,0.6); }
+    0%, 42%, 61%, 100% { background: #94a3b8; transform: scale(1); }
 }
 
-@keyframes piscarApanhar {
-    58%, 78% { background: #117f5a; transform: scale(1.18); box-shadow: 0 0 12px rgba(17, 127, 90, 0.8); }
-    0%, 57%, 79%, 100% { background: #94a3b8; transform: scale(1); }
+@keyframes piscarSeta3 {
+    68%, 85% { background: #3b82f6; transform: scale(1.18); box-shadow: 0 0 10px rgba(59,130,246,0.6); }
+    0%, 67%, 86%, 100% { background: #94a3b8; transform: scale(1); }
 }
 
-/* Aparecimento do Badge "TUDO LIMPO!" */
 @keyframes mostrarVitoriaDemo {
-    68% { opacity: 0; transform: scale(0.8); }
-    74%, 90% { opacity: 1; transform: scale(1.05); }
-    95%, 100% { opacity: 0; transform: scale(0.8); }
+    74% { opacity: 0; transform: scale(0.8); }
+    78%, 90% { opacity: 1; transform: scale(1.05); }
+    94%, 100% { opacity: 0; transform: scale(0.8); }
 }
 
-/* Responsividade Mobile ( 400px) */
 @media (max-width: 400px) {
-    .demo-tutorial-wrapper { gap: 10px; padding: 6px; }
+    .demo-tutorial-wrapper { gap: 12px; padding: 8px; }
     .mini-grelha-demo { grid-template-columns: repeat(3, 44px); grid-template-rows: repeat(2, 44px); gap: 4px; padding: 4px; }
     .mini-robo-animado { width: 44px; height: 44px; }
     .mini-robo-animado img { width: 34px; height: 34px; }
-	.mini-img-item { width: 30px; height: 30px; }
-    .mini-img-lixo { width: 26px; height: 26px; }
+    .mini-img-item { width: 30px; height: 30px; }
     .mini-step { width: 30px; height: 30px; }
     .mini-img-seta { width: 18px; height: 18px; }
 
     @keyframes moverRoboDemo {
-        0%, 12% { top: 4px; left: 4px; transform: scale(1) rotate(0deg); }
-        22%, 35% { top: 4px; left: 52px; transform: scale(1) rotate(0deg); }
-        45%, 55% { top: 4px; left: 100px; transform: scale(1) rotate(0deg); }
-        62%, 78% { top: 4px; left: 100px; transform: scale(1.2) rotate(360deg); }
-        82%, 92% { top: 4px; left: 100px; transform: scale(1) rotate(360deg); }
-        98%, 100% { top: 4px; left: 4px; transform: scale(1) rotate(0deg); }
+        0%, 15% { top: 4px; left: 4px; }
+        25%, 40% { top: 4px; left: 52px; }
+        50%, 65% { top: 52px; left: 52px; }
+        75%, 90% { top: 52px; left: 100px; }
+        98%, 100% { top: 4px; left: 4px; }
     }
 }
 
@@ -730,7 +671,7 @@
         .btn-voltar-menu, .btn-dica, .badge-ronda, .badge-erros {
             flex-shrink: 0;
         }
-        .progress-fill { height: 100%; width: 0%; border-radius: 20px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); background-color: var(--cor-4ano); background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent); background-size: 30px 30px; animation: moverRiscas 2s linear infinite; }
+        .progress-fill { height: 100%; width: 0%; border-radius: 20px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); background-color: var(--cor-1ano); background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent); background-size: 30px 30px; animation: moverRiscas 2s linear infinite; }
 		
 		.icon-svg-menu { width: 40px; height: 40px; display: inline-block; vertical-align: middle; object-fit: contain; }
 		.icon-svg-voltar { width: 1.3em; height: 1.3em; vertical-align: middle; margin-right:0px; object-fit: contain; }
@@ -904,43 +845,15 @@
         /* Modal Ajuda */
         .modal-ajuda-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 300; align-items: center; justify-content: center; animation: fadeIn 0.3s ease; padding: 20px; box-sizing: border-box;}
         .modal-ajuda-overlay.active { display: flex; }
-        .modal-ajuda-box { background: white; width: 100%; max-width: 450px; border-radius: 25px; padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; border-top: 8px solid var(--cor-4ano);}
+        .modal-ajuda-box { background: white; width: 100%; max-width: 450px; border-radius: 25px; padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; border-top: 8px solid var(--cor-1ano);}
         .btn-fechar-modal { position: absolute; top: 15px; right: 15px; background: #ffebeb; color: #ff4757; border: none; width: 35px; height: 35px; border-radius: 50%; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: 0.2s;}
         .btn-fechar-modal:hover { background: #ff4757; color: white;}
         .ajuda-icone { font-size: 4rem; margin-bottom: 10px; }
         .ajuda-texto { font-size: 1.2rem; color: var(--text-main); line-height: 1.5; font-weight: 500;}
 
         /* Animações Globais e Feedback Visual */
-/* 1. Garante que o cartão do jogo é a referência do posicionamento */
-#cartao-jogo, .cartao-jogo {
-    position: relative !important;
-}
-
-/* 2. Estilo da pílula de dica dentro do cartão */
-.toast-msg {
-    position: absolute !important;
-    top: 60px !important; /* Posiciona logo abaixo da barra superior de estrelas/menu */
-    left: 50% !important;
-    transform: translateX(-50%) translateY(-10px);
-    background: #fff9c4 !important;
-    border: 2px solid #fbc531 !important;
-    color: #b18500 !important;
-    padding: 6px 18px !important;
-    border-radius: 20px !important;
-    font-weight: 900 !important;
-    font-size: 0.95rem !important;
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-    pointer-events: none;
-    z-index: 500 !important;
-    white-space: nowrap;
-}
-
-/* Estado ativo (surgimento suave) */
-.toast-msg.active {
-    opacity: 1 !important;
-    transform: translateX(-50%) translateY(0) !important;
-}
+        .toast-msg { position: absolute; top: 80px; left: 50%; transform: translateX(-50%) translateY(-10px); background: #fff9c4; border: 2px solid #fbc531; color: #b18500; padding: 8px 20px; border-radius: 20px; font-weight: 900; font-size: 1.1rem; opacity: 0; transition: 0.3s; pointer-events: none; z-index: 50; }
+        .toast-msg.active { opacity: 1; transform: translateX(-50%) translateY(0); }
         
         @keyframes shakeError { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px) rotate(-2deg); } 75% { transform: translateX(6px) rotate(2deg); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -984,7 +897,7 @@
 		.btn-nivel-unico:hover {
 			transform: translateY(-4px) scale(1.02);
 			filter: brightness(1.08);
-
+			box-shadow: 0 12px 0 var(--cor-1ano-dark), 0 16px 25px rgba(0, 0, 0, 0.2);
 			}
 		}
 
@@ -1045,15 +958,13 @@
 
 .grelha-programacao {
     display: grid;
-    grid-template-columns: repeat(var(--cols, 6), 1fr);
-    grid-template-rows: repeat(var(--rows, 6), 1fr);
-    gap: 4px;
+    grid-template-columns: repeat(var(--cols, 5), 1fr);
+    grid-template-rows: repeat(var(--rows, 5), 1fr);
+    gap: 6px;
     width: 100%;
-    max-width: clamp(300px, 82vmin, 440px);
-    aspect-ratio: 1 / 1;
-    margin: 0 auto;
+    aspect-ratio: 1 / 1; 
     background: linear-gradient(135deg, #0f2b48 0%, #005bb5 40%, #0091ff 100%);
-    border: 4px solid var(--azul-vibrante, #0091ff);
+    border: 4px solid var(--azul-vibrante);
     border-radius: 20px;
     padding: 6px;
     box-sizing: border-box;
@@ -1075,13 +986,6 @@
     transition: all 0.2s ease-in-out;
 }
 
-.celula-grelha.celula-lixo {
-    background: #fffde7 !important;
-    border: 3px solid #f1c40f !important;
-    box-shadow: inset 0 0 8px rgba(241, 196, 15, 0.5), 0 0 12px rgba(241, 196, 15, 0.6) !important;
-    animation: pulsarDestino 1.8s infinite ease-in-out;
-}
-
 .celula-grelha img {
     max-width: 82%;
     max-height: 82%;
@@ -1089,87 +993,6 @@
     position: absolute;
     pointer-events: none;
 }
-
-
-.linha-codigo-container {
-    display: flex;
-    flex-wrap: wrap; /* Permite organizar em 2 filas se necessário */
-    gap: 6px;
-    padding: 8px;
-    background: #f8fafc;
-    border: 2px dashed #93c5fd;
-    border-radius: 16px;
-    justify-content: center;
-    max-width: 440px;
-    margin: 0 auto;
-}
-
-
-.bloco-comando-slot {
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
-    background: #ffffff;
-    border: 2px solid #cbd5e1; /* Borda bem definida para dar o aspeto de caixa */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
-    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
-	position: relative !important;
-    overflow: visible !important;
-}
-
-/* =========================================
-   CORES ORIGINAIS DOS BOTÕES NA SEQUÊNCIA
-   ========================================= */
-
-/* Cima - Azul */
-.bloco-comando-slot.cmd-cima {
-    background: #3b82f6 !important;
-    border-color: #1d4ed8 !important;
-}
-
-/* Baixo - Verde Água / Teal */
-.bloco-comando-slot.cmd-baixo {
-    background: #0d9488 !important;
-    border-color: #0f766e !important;
-}
-
-/* Esquerda - Roxo */
-.bloco-comando-slot.cmd-esquerda {
-    background: #7e22ce !important;
-    border-color: #581c87 !important;
-}
-
-/* Direita - Laranja */
-.bloco-comando-slot.cmd-direita {
-    background: #ea580c !important;
-    border-color: #c2410c !important;
-}
-
-/* Seta branca bem visível sobre o fundo colorido */
-.bloco-comando-slot img {
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
-}
-
-.bloco-comando-slot img {
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
-}
-
-.bloco-comando-slot.ativo {
-    border: 2px solid #f1c40f !important;
-    box-shadow: 0 0 12px rgba(245, 158, 11, 0.95), 0 0 4px rgba(251, 191, 36, 1) !important;
-    transform: scale(1.12);
-    z-index: 2;
-}
-
 
 /* 3. COLUNA DIREITA: PAINEL DE COMANDOS */
 .coluna-painel-jogo {
@@ -1182,17 +1005,21 @@
     align-items: center;
 }
 
+/* LINHA DE CÓDIGO */
 .linha-codigo-wrapper {
+    width: 100% !important;
     display: flex !important;
-    flex-wrap: wrap !important;
+    align-items: flex-start !important;
     gap: 10px !important;
-	background: #f1f7fe;
+    background: #f1f7fe;
     border: 2px dashed #a5c7f9;
-	border-radius: 16px;
-    justify-content: flex-start !important;
-    align-content: flex-start !important;
-    min-height: 120px !important;
-    padding: 10px !important;
+    padding: 10px 14px !important;
+    border-radius: 16px;
+    box-sizing: border-box;
+    
+    /* Reservar espaço fixo para 2 linhas de blocos desde o arranque */
+    min-height: 104px !important; 
+    height: auto !important;
 }
 
 .label-linha {
@@ -1462,310 +1289,11 @@
     }
 }
 
-
-
-/* =========================================
-   ESTRUTURA DO PAINEL DE SETAS + REPETIR
-   ========================================= */
-
-.painel-setas-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    position: relative;
-}
-
-/* Botão Repetir - Amarelo Escuro */
-.btn-seta.btn-repetir {
-    background-color: #e3c40d !important;
-    box-shadow: 0 5px 0 #b89e0a;
-    border-color: #ffffff;
-}
-
-.btn-seta.btn-repetir:active {
-    transform: translateY(3px) !important;
-    box-shadow: 0 1px 0 transparent !important;
-}
-
-/* Animação quando o modo Repetir está ativo */
-.btn-seta.btn-repetir.ativo {
-    animation: pulsoRepetir 1.2s infinite ease-in-out;
-    border-color: #ffffff !important;
-}
-
-@keyframes pulsoRepetir {
-    0%, 100% {
-        box-shadow: 0 5px 0 #b89e0a, 0 0 0px rgba(227, 196, 13, 0);
-    }
-    50% {
-        box-shadow: 0 5px 0 #b89e0a, 0 0 14px rgba(227, 196, 13, 0.9);
-        transform: scale(1.06);
-    }
-}
-
-
-
-/* Popover Flutuante */
-.popover-loop {
-    position: absolute;
-    right: 0;
-    top: -50px;
-    background: #ffffff;
-    border: 3px solid #e3c40d;
-    border-radius: 14px;
-    padding: 4px 6px;
-    display: flex;
-    gap: 6px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-    z-index: 20;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.popover-loop.hidden {
-    display: none;
-}
-
-.btn-opcao-loop {
-    background: #fef08a;
-    border: 2px solid #e3c40d;
-    color: #854d0e;
-    font-weight: 900;
-    font-size: 0.9rem;
-    padding: 4px 10px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.btn-opcao-loop:hover {
-    background: #e3c40d;
-    color: #ffffff;
-}
-
-/* Badge no Slot da Sequência */
-.badge-multiplicador {
-    position: absolute !important;
-    top: -6px !important;
-    left: -6px !important;
-    background: #e3c40d !important;
-    color: #ffffff !important;
-    font-size: 0.75rem !important;
-    font-weight: 900 !important;
-    padding: 1px 5px !important;
-    border-radius: 6px !important;
-    border: 2px solid #ffffff !important;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3) !important;
-    z-index: 10 !important;
-    line-height: 1 !important;
-    pointer-events: none;
-}
-
-.teclado-setas-cruz .btn-seta.aguardar-direcao {
-    animation: piscarSetaLoop 0.7s infinite alternate !important;
-    box-shadow: 0 0 14px #e3c40d, 0 0 6px #e3c40d !important;
-    border-color: #fef08a !important;
-}
-
-@keyframes piscarSetaLoop {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.12); filter: brightness(1.15); }
-}
-
-
-/* Container de Mensagens Toast (Garante que fica no topo) */
-#toast-container, .toast {
-    position: fixed !important;
-    top: 20px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    background-color: #ef4444 !important; /* Vermelho Alerta */
-    color: #ffffff !important;
-    padding: 12px 24px !important;
-    border-radius: 12px !important;
-    font-size: 1rem !important;
-    font-weight: 700 !important;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
-    z-index: 99999 !important; /* Fica por cima de TUDO */
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    text-align: center;
-    max-width: 90%;
-}
-
-/* Animação para fazer tremer a barra de comandos quando houver erro de otimização */
-.abanar-erro {
-    animation: abanarSequencia 0.4s ease-in-out !important;
-}
-
-@keyframes abanarSequencia {
-    0%, 100% { transform: translateX(0); }
-    20%, 60% { transform: translateX(-8px); }
-    40%, 80% { transform: translateX(8px); }
-}
-
-/* Cor e Estilo do Botão APANHAR */
-.btn-seta.btn-apanhar, 
-#btn-apanhar {
-    width: 56px !important;
-    height: 56px !important;
-    background-color: #117f5a !important;
-    border: 3px solid #ffffff !important; /* Borda branca igual aos outros botões */
-    border-radius: 16px !important;
-    box-shadow: 0 5px 0 #0b573d !important; /* Sombra 3D tom verde escuro */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0 !important;
-    cursor: pointer;
-    transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease !important;
-}
-
-/* Efeito ao Clicar / Pressionar */
-.btn-seta.btn-apanhar:active, 
-#btn-apanhar:active {
-    transform: translateY(4px) !important;
-    box-shadow: 0 1px 0 #0b573d !important;
-}
-
-#btn-apanhar:hover {
-    background-color: #0e6b4b !important;
-}
-
-#btn-apanhar:active {
-    transform: scale(0.95);
-}
-
-#btn-apanhar img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-}
-
-/* Slot da Linha de Código quando contém a Ação APANHAR */
-.bloco-comando-slot.cmd-apanhar {
-    background-color: #117f5a !important;
-    border-color: #0b573d !important;
-}
-
-/* Animação do Espanador a Rodopiar na Célula */
-.anim-espanador {
-    width: 38px !important;
-    height: 38px !important;
-    object-fit: contain;
-	animation: rodarEspanador 0.5s ease-in-out forwards !important;
-}
-
-@keyframes rodarEspanador {
-    0% {
-        transform: scale(0.8) rotate(0deg);
-        opacity: 0.8;
-    }
-    50% {
-        transform: scale(1.25) rotate(180deg);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1) rotate(360deg);
-        opacity: 1;
-    }
-}
-
-/* Cor e Estilo 3D do Botão APANHAR */
-.bg-verde-apanhar, #btn-apanhar {
-    background-color: #117f5a !important;
-    box-shadow: 0 5px 0 #0b573d, 0 8px 15px rgba(0, 0, 0, 0.15) !important;
-    border: #ffffff;
-    border-radius: 16px !important;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.1s ease;
-}
-
-/* Efeito ao Clicar / Pressionar */
-.bg-verde-apanhar:active, #btn-apanhar:active {
-    transform: translateY(4px) !important;
-    box-shadow: 0 1px 0 #0b573d, 0 3px 6px rgba(0, 0, 0, 0.1) !important;
-}
-
-#btn-apanhar img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-}
-
-
-/* Agrupa os botões Repetir e Apanhar numa coluna vertical */
-.coluna-botoes-direita {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Espaçamento entre o botão Repetir e o botão Apanhar */
-    align-items: center;
-    justify-content: center;
-}
-
-
-/* Container Superior da Instrução e Legenda */
-.instrucao-legenda-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-	margin-top: 15px;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-}
-
-/* Título da Missão */
-.instrucao-titulo {
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    color: var(--azul-escuro, #1e3a8a);
-    font-weight: 800;
-}
-
-/* Agrupador dos Crachás de Legenda */
-.legenda-botoes {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-/* Estilo Base de Cada Crachá (Chip) */
-.chip-legenda {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.chip-legenda img {
-    width: 14px;
-    height: 14px;
-    object-fit: contain;
-}
-
-/* Cores Identificativas Iguais aos Botões */
-.chip-repetir {
-    background-color: #e3c40d;
-    border: 1px solid #b89e0a;
-}
-
-.chip-apanhar {
-    background-color: #117f5a;
-    border: 1px solid #0b573d;
-}
-
-
 /* =========================================
    5. RESPONSIVIDADE COMPLETA PARA MOBILE
    ========================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
     body {
         height: auto !important;
         min-height: 100vh;
@@ -1850,25 +1378,6 @@
         gap: 8px;
         border-width: 3px;
         border-radius: 14px;
-    }
-}
-
-@media (max-width: 768px) {
-    .linha-codigo-wrapper {
-        min-height: 105px !important;
-        gap: 4px !important;
-        padding: 6px !important;
-    }
-
-    .bloco-comando-slot {
-        width: 32px !important;
-        height: 32px !important;
-        border-radius: 8px !important;
-    }
-
-    .bloco-comando-slot img {
-        width: 18px !important;
-        height: 18px !important;
     }
 }
 
@@ -2001,23 +1510,6 @@
         padding: 0 36px;
         margin: 15px 0 12px 0;
         box-sizing: border-box;
-    }
-}
-
-@media (max-width: 380px) {
-    #grelha-jogo {
-        gap: 2px;
-        padding: 4px;
-    }
-    
-    .bloco-comando-slot {
-        width: 28px;
-        height: 28px;
-    }
-    
-    .bloco-comando-slot img {
-        width: 17px;
-        height: 17px;
     }
 }
 
@@ -2173,22 +1665,6 @@
         margin: 15px 0 12px 0;
         box-sizing: border-box;
     }
-	.painel-setas-wrapper {
-        gap: 8px !important;
-    }
-
-    .btn-seta.btn-repetir {
-        width: 36px !important;
-        height: 36px !important;
-        border-radius: 8px !important;
-        border-width: 2px !important;
-        box-shadow: 0 3px 0 #b89e0a !important;
-    }
-
-    .btn-seta.btn-repetir img {
-        width: 20px !important;
-        height: 20px !important;
-    }
 	
 	
 }
@@ -2225,8 +1701,8 @@
             <a href="../" class="btn-voltar"><img src="../../../SVG/voltar.svg" class="icon-svg-voltar" alt=""> Voltar</a>
         </div>
         
-        <h1>Missão Limpeza<img src="img/robo.png" class="icon-svg-titulo" alt=""></h1>
-        <div class="subtitulo" id="subtitulo-header">Apanha o lixo e limpa o mapa!</div>
+        <h1>O Caminho do Robô<img src="img/robo.png" class="icon-svg-titulo" alt=""></h1>
+        <div class="subtitulo" id="subtitulo-header">Ajuda o pequeno robô a fazer o seu trabalho!</div>
     </div>
 </header>
 
@@ -2237,65 +1713,60 @@
 
         <div id="ecra-selecao" class="ecra">
 								
-<div class="animacao-tutorial">
-    <div class="demo-tutorial-wrapper">
-        
-        <!-- Mini Grelha 3x2 -->
-        <div class="mini-grelha-demo">
-            <!-- Robô Animado -->
-            <div class="mini-robo-animado">
-                <img src="img/robo.png" alt="Robô">
-            </div>
+		<div class="animacao-tutorial">
+			<div class="demo-tutorial-wrapper">
+				
+				<!-- MINI GRELHA 3x2 -->
+				<div class="mini-grelha-demo">
+					<div class="mini-celula"></div>
+					<div class="mini-celula"></div>
+					<div class="mini-celula"></div>
+					<div class="mini-celula">
+						<img src="img/sofa.png" alt="Sofá" class="mini-img-item">
+					</div>
+					<div class="mini-celula"></div>
+					<div class="mini-celula mini-celula-destino">
+						<img src="img/sumo.png" alt="Sumo" class="mini-img-item">
+					</div>
 
-            <!-- Células da Grelha -->
-            <div class="mini-celula"></div>
-            <div class="mini-celula"></div>
-            <!-- Casa com Lixo na posição (2,0) -->
-            <div class="mini-celula celula-com-lixo">
-                <img src="img/terra.png" class="mini-img-lixo" alt="Lixo">
-            </div>
-            
-            <div class="mini-celula"><img src="img/cao.png" alt="Cão" class="mini-img-item"></div>
-            <div class="mini-celula"></div>
-            <div class="mini-celula"><img src="img/cadeira.png" alt="Cadeira" class="mini-img-item"></div>
-        </div>
+					<!-- Robô Animado (Navega na Grelha) -->
+					<div class="mini-robo-animado">
+						<img src="img/robo.png" alt="Robô">
+					</div>
+				</div>
 
-        <!-- Painel Lateral de Sequência e Sucesso -->
-        <div class="mini-painel-passos">
-            <div class="mini-linha-setas">
-                <!-- Passo 1: Direita -->
-                <div class="mini-step step-1 bg-laranja">
-                    <img src="img/seta_direita.svg" class="mini-img-seta" alt="Direita">
-                </div>
-                <!-- Passo 2: Direita -->
-                <div class="mini-step step-2 bg-laranja">
-                    <img src="img/seta_direita.svg" class="mini-img-seta" alt="Direita">
-                </div>
-                <!-- Passo 3: APANHAR (Verde #117f5a) -->
-                <div class="mini-step step-3 bg-apanhar">
-                    <img src="img/apanhar.svg" class="mini-img-seta" alt="Apanhar">
-                </div>
-            </div>
+				<!-- SEQUÊNCIA DE SETAS E SUCESSO (COM SVGs) -->
+				<div class="mini-painel-passos">
+					<div class="mini-linha-setas">
+						<div class="mini-step step-1">
+							<img src="img/seta_direita.svg" alt="Direita" class="mini-img-seta">
+						</div>
+						<div class="mini-step step-2">
+							<img src="img/seta_baixo.svg" alt="Baixo" class="mini-img-seta">
+						</div>
+						<div class="mini-step step-3">
+							<img src="img/seta_direita.svg" alt="Direita" class="mini-img-seta">
+						</div>
+					</div>
+					<div class="mini-badge-vitoria">
+						<img src="../../../SVG/estrela.svg" alt="Estrela" class="mini-img-estrela">
+						<span>MUITO BEM!</span>
+						<img src="../../../SVG/estrela.svg" alt="Estrela" class="mini-img-estrela">
+					</div>
+				</div>
 
-            <!-- Badge de Celebração de Limpeza -->
-            <div class="mini-badge-vitoria">
-                <img src="img/apanhar1.svg" class="mini-img-estrela" alt="">
-                <span>TUDO LIMPO!</span>
-            </div>
-        </div>
-
-    </div>
-</div>
+			</div>
+		</div>
 
 			<h2 class="titulo-menu">Pronto para Começar?</h2>
 			
 			<div class="contentor-menu-unico">
-				<button class="btn-nivel-unico btn-ano-4" onclick="iniciarJogo(10, 'Apanha todo o lixo!', 1)">
+				<button class="btn-nivel-unico bg-azul" onclick="iniciarJogo(5, 'Guia o Robô até ao destino!', 1)">
 					<img src="img/robo.png" class="icon-btn-unico" alt="Robô" onerror="this.src='../img-titulos/MENU_1.svg'">
 					
 					<div class="btn-nivel-text-container">
 						<span class="btn-nivel-titulo">INICIAR PROGRAMA</span>
-						<span class="btn-nivel-subtitulo">Evita os obstáculos e limpa tudo!</span>
+						<span class="btn-nivel-subtitulo">Guia o Robô Aspirador até ao destino!</span>
 					</div>
 
 					<img src="../../../SVG/seta_direita.svg" class="icon-svg-menu" alt="">
@@ -2310,32 +1781,21 @@
             <div class="status-bar-jogo">
 				<button class="btn-voltar-menu" onclick="voltarAoMenu()" id="btn-home-svg" aria-label="Voltar ao menu"></button>
 				<button id="btn-dica" class="btn-dica" onclick="usarDica()" aria-label="Usar dica"></button>
-				<div class="badge-ronda"><span id="badge-ronda-svg"></span><span id="val-progresso">1</span>/<span id="val-total">10</span></div>
+				<div class="badge-ronda"><span id="badge-ronda-svg"></span><span id="val-progresso">1</span>/<span id="val-total">??</span></div>
                 <div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
 				<div class="badge-erros"> <span id="icone-erro-svg"></span><span id="val-erros">0</span></div>
             </div>
 
-			<div class="area-jogo-custom" id="game-area">
+	<div class="area-jogo-custom" id="game-area">
     
-			<div class="coluna-grelha-jogo">
-				<!-- Barra de Instrução + Legenda dos Botões de Ação -->
-				<div class="instrucao-legenda-container" id="instrucao-ronda">
-					<span class="instrucao-titulo">Apanha todo o lixo!</span>
-					<div class="legenda-botoes">
-						<span class="chip-legenda chip-repetir">
-							<img src="img/repetir.svg" alt=""> Repetir
-						</span>
-						<span class="chip-legenda chip-apanhar">
-							<img src="img/apanhar.svg" alt=""> Apanhar
-						</span>
-					</div>
-				</div>
-				<div class="grelha-programacao" id="grelha-jogo" style="--cols: 5; --rows: 5;">
+    <div class="coluna-grelha-jogo">
+        <div class="pergunta-texto" id="instrucao-ronda">Guia o Robô até ao destino!</div>
+        <div class="grelha-programacao" id="grelha-jogo" style="--cols: 5; --rows: 5;">
 
-				</div>
-			</div>
+        </div>
+    </div>
 
-		<div class="coluna-painel-jogo">
+    <div class="coluna-painel-jogo">
         
         <div class="linha-codigo-wrapper">
             <span class="label-linha">Sequência:</span>
@@ -2347,55 +1807,30 @@
         <!-- Painel de Controlo (Teclado + Botões) -->
         <div class="painel-comandos">
             
+            <!-- Cruz de Setas 3x3 Ampliada -->
+            <div class="teclado-setas-cruz">
+                <div></div>
+                <button class="btn-seta cima bg-azul" onclick="adicionarComando('cima')" aria-label="Mover para Cima">
+                    <img src="img/seta_cima.svg" alt="Cima">
+                </button>
+                <div></div>
 
-<div class="painel-setas-wrapper">
+                <button class="btn-seta esquerda bg-roxo" onclick="adicionarComando('esquerda')" aria-label="Mover para a Esquerda">
+                    <img src="img/seta_esquerda.svg" alt="Esquerda">
+                </button>
+                <div class="centro-robo-icone">
+                    <img src="img/robo.png" alt="Robô">
+                </div>
+                <button class="btn-seta direita bg-laranja" onclick="adicionarComando('direita')" aria-label="Mover para a Direita">
+                    <img src="img/seta_direita.svg" alt="Direita">
+                </button>
 
-    <!-- Cruz de Setas (Esquerda) -->
-    <div class="teclado-setas-cruz">
-        <div></div>
-        <button class="btn-seta bg-azul" onclick="adicionarComando('cima')">
-            <img src="img/seta_cima.svg" alt="Cima">
-        </button>
-        <div></div>
-
-        <button class="btn-seta bg-roxo" onclick="adicionarComando('esquerda')">
-            <img src="img/seta_esquerda.svg" alt="Esquerda">
-        </button>
-        <div class="centro-robo-icone">
-            <img src="img/robo.png" alt="Robô">
-        </div>
-        <button class="btn-seta bg-laranja" onclick="adicionarComando('direita')">
-            <img src="img/seta_direita.svg" alt="Direita">
-        </button>
-
-        <div></div>
-        <button class="btn-seta bg-turquesa" onclick="adicionarComando('baixo')">
-            <img src="img/seta_baixo.svg" alt="Baixo">
-        </button>
-        <div></div>
-    </div>
-
-    <!-- Coluna de Ações à Direita (Repetir + Apanhar Empilhados) -->
-	<div class="coluna-botoes-direita">
-		<!-- Botão Repetir (Cima) -->
-		<button class="btn-seta btn-repetir" id="btn-repetir" onclick="abrirSeletorLoop()" title="Repetir movimento">
-			<img src="img/repetir.svg" alt="Repetir">
-		</button>
-
-		<!-- Botão APANHAR (Baixo) - Quadrado com a classe .btn-seta -->
-		<button class="btn-seta btn-apanhar" id="btn-apanhar" onclick="adicionarComandoAcao('apanhar')" aria-label="Apanhar Lixo" title="Apanhar Lixo">
-			<img src="img/apanhar.svg" alt="Apanhar">
-		</button>
-	</div>
-
-    <!-- Popover de Seleção de Multiplicador (3x, 4x, 5x) -->
-    <div id="popover-loop" class="popover-loop hidden">
-        <button class="btn-opcao-loop" onclick="selecionarMultiplicador(3)">3×</button>
-        <button class="btn-opcao-loop" onclick="selecionarMultiplicador(4)">4×</button>
-        <button class="btn-opcao-loop" onclick="selecionarMultiplicador(5)">5×</button>
-    </div>
-
-</div>
+                <div></div>
+                <button class="btn-seta baixo bg-turquesa" onclick="adicionarComando('baixo')" aria-label="Mover para Baixo">
+                    <img src="img/seta_baixo.svg" alt="Baixo">
+                </button>
+                <div></div>
+            </div>
 
             <!-- Botões de Ação com Novas Cores e Ícones Encorpados -->
             <div class="botoes-controlo-codigo">
@@ -2476,7 +1911,7 @@
     </div>
 </div>
 <footer>
-    <p><span id="ano-atual"> </span><img src="../../../SVG/4_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
+    <p><span id="ano-atual"> </span><img src="../../../SVG/1_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
 </footer>
 
 <script>
@@ -2501,26 +1936,20 @@ const SVG_ERRO = `<svg viewBox="0 0 14 14" width="0.8em" height="0.8em" style="m
 <path d="M2 2 L12 12 M12 2 L2 12" stroke="var(--cor-pt,#ff4757)" stroke-width="3" stroke-linecap="round"/>
 </svg>`;
 
-/* Configuração da Grelha do 3.º Ano */
-const TOTAL_COLUNAS = 6;
-const TOTAL_LINHAS = 6;
-const MAX_COMANDOS = 15;
-
-const grelhaEl = document.querySelector('.grelha-programacao');
-grelhaEl.style.setProperty('--cols', TOTAL_COLUNAS); // 6
-grelhaEl.style.setProperty('--rows', TOTAL_LINHAS);  // 6
+/* Configuração da Grelha do 1.º Ano */
+const TOTAL_COLUNAS = 5;
+const TOTAL_LINHAS = 5;
 
 /* ==========================================
-   2. ESTADO GLOBAL DO JOGO E DO MOTOR
+   2. ESTADO GLOBAL DO JOGO E DO MOTOR 5x5
    ========================================== */
 let erradas = 0;
 let desafioAtual = 0;
-let totalDesafiosNivel = 10;
+let totalDesafiosNivel = 5;
 let cooldownDica = 0;
 let rondaLivreDica = 1;
 let timerImpaciencia = null;
 let mapaAtual = null;
-let multiplicadorPendente = 1;
 
 // Estado do Robô na Grelha
 let posRobo = { x: 0, y: 4 };
@@ -2549,9 +1978,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const iconeErro = document.getElementById('icone-erro-svg');
     if (iconeErro) iconeErro.innerHTML = SVG_ERRO;
-	
-	const elemTotal = document.getElementById('val-total');
-    if (elemTotal) elemTotal.textContent = totalDesafiosNivel;
 });
 
 function toggleMenu() {
@@ -2567,26 +1993,15 @@ function mostrarEcra(id) {
     if (target) target.style.display = 'flex';
 }
 
-
-function showToast(mensagem) {
-    let toast = document.getElementById('toast-msg');
-    
-    // Procura o contentor do cartão do jogo
-    const cartaoJogo = document.querySelector('#cartao-jogo') || document.querySelector('.cartao-jogo') || document.body;
-
-    if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'toast-msg';
-        toast.className = 'toast-msg';
-        cartaoJogo.appendChild(toast); // Insere DENTRO do cartão
-    }
-
-    toast.innerText = mensagem;
+function showToast(msg, isError = false) {
+    const toast = document.getElementById('toast-msg');
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.style.borderColor = isError ? "var(--cor-erro)" : "#fbc531";
+    toast.style.color = isError ? "var(--cor-erro)" : "#b18500";
+    toast.style.backgroundColor = isError ? "#ffefef" : "#fff9c4";
     toast.classList.add('active');
-
-    setTimeout(() => {
-        toast.classList.remove('active');
-    }, 5000);
+    setTimeout(() => toast.classList.remove('active'), 3000);
 }
 
 /* ==========================================
@@ -2613,88 +2028,19 @@ function pararTimerImpaciencia() {
 }
 
 /* ==========================================
-   5. LÓGICA PRINCIPAL DO JOGO
+   5. LÓGICA PRINCIPAL DO JOGO (1.º ANO)
    ========================================== */
-   
-function validarUsoDeLoops() {
-    let contadorConsecutivo = 1;
-    let direcaoAnterior = null;
-
-    for (let i = 0; i < sequenciaComandos.length; i++) {
-        const cmd = sequenciaComandos[i];
-        const direcaoAtual = typeof cmd === 'object' ? cmd.direcao : cmd;
-        const count = typeof cmd === 'object' ? cmd.count : 1;
-
-        if (count === 1) {
-            if (direcaoAtual === direcaoAnterior) {
-                contadorConsecutivo++;
-            } else {
-                contadorConsecutivo = 1;
-                direcaoAnterior = direcaoAtual;
-            }
-        } else {
-            // Se usou o botão repetir, faz reset ao contador
-            contadorConsecutivo = 1;
-            direcaoAnterior = null;
-        }
-
-        // Se detetar 3 ou mais setas iguais seguidas sem usar o loop
-        if (contadorConsecutivo >= 3) {
-            return false;
-        }
-    }
-
-    return true;
-}   
-   
-function abrirSeletorLoop() {
-    const popover = document.getElementById('popover-loop');
-    if (multiplicadorPendente > 1) {
-        cancelarModoLoop();
-        return;
-    }
-    if (popover) popover.classList.toggle('hidden');
-}
-
-function selecionarMultiplicador(valor) {
-    multiplicadorPendente = valor;
-
-    const popover = document.getElementById('popover-loop');
-    if (popover) popover.classList.add('hidden');
-
-    const btnRepetir = document.getElementById('btn-repetir');
-    if (btnRepetir) btnRepetir.classList.add('ativo');
-
-    document.querySelectorAll('.teclado-setas-cruz .btn-seta').forEach(btn => {
-        btn.classList.add('aguardar-direcao');
-    });
-}
-
-function cancelarModoLoop() {
-    multiplicadorPendente = 1;
-
-    const popover = document.getElementById('popover-loop');
-    if (popover) popover.classList.add('hidden');
-
-    const btnRepetir = document.getElementById('btn-repetir');
-    if (btnRepetir) btnRepetir.classList.remove('ativo');
-
-    document.querySelectorAll('.teclado-setas-cruz .btn-seta').forEach(btn => {
-        btn.classList.remove('aguardar-direcao');
-    });
-}   
-   
-   
-function iniciarJogo(totalRondas = 10, titulo = 'Apanha todo o lixo!', nivel = 1) {
+function iniciarJogo(totalRondas = 5, titulo = 'Guia o Robô até ao destino!') {
     desafioAtual = 1;
     totalDesafiosNivel = totalRondas;
     erradas = 0;
+    rondaLivreDica = 1;
 
-    rondaLivreDica = 0; 
-    atualizarEstadoBotaoDica();
+    const elemTotal = document.getElementById('val-total');
+    if (elemTotal) elemTotal.textContent = totalDesafiosNivel;
 
-    const elemTitulo = document.querySelector('.instrucao-titulo');
-    if (elemTitulo) elemTitulo.textContent = titulo;
+    const elemErros = document.getElementById('val-erros');
+    if (elemErros) elemErros.textContent = erradas;
 
     mostrarEcra('ecra-jogo');
     carregarRonda();
@@ -2706,33 +2052,87 @@ function carregarRonda() {
     limparLinhaCodigoDOM();
     limparConfetis();
 
-    if (!desafioAtual || desafioAtual < 1) desafioAtual = 1;
-
     const elemProgresso = document.getElementById('val-progresso');
     if (elemProgresso) elemProgresso.textContent = desafioAtual;
-
-    const elemTotal = document.getElementById('val-total');
-    if (elemTotal) elemTotal.textContent = totalDesafiosNivel;
 
     const perc = (desafioAtual / totalDesafiosNivel) * 100;
     const progressFill = document.getElementById('progress-fill');
     if (progressFill) progressFill.style.width = `${perc}%`;
 
-    // Carrega o mapa
+    // Sorteia e GUARDA o mapa fixo desta ronda
     mapaAtual = obterMapaRonda(desafioAtual);
     posRobo = { ...mapaAtual.inicio };
-    obstaculos = mapaAtual.obstaculos;
 
-    lixos = mapaAtual.lixos.map(l => ({ 
-        ...l,
-        img: l.img || tiposLixo[Math.floor(Math.random() * tiposLixo.length)]
-    }));
+    // ATUALIZADO: Clona o destino e atribui uma imagem sorteada para esta ronda
+    posDestino = { 
+        ...mapaAtual.destino,
+        img: tiposLixo[Math.floor(Math.random() * tiposLixo.length)]
+    };
+
+    obstaculos = mapaAtual.obstaculos;
 
     renderizarGrelha();
     atualizarEstadoBotaoDica();
     resetTimerImpaciencia();
 }
 
+function obterMapaRonda(ronda) {
+    const imagensObstaculos = ['sofa.png', 'gato.png', 'vaso.png'];
+    let mapaValido = false;
+    let mapaGerado = null;
+
+    while (!mapaValido) {
+        // 1. Posição inicial ALEATÓRIA para o Robô
+        const inicio = { 
+            x: Math.floor(Math.random() * TOTAL_COLUNAS), 
+            y: Math.floor(Math.random() * TOTAL_LINHAS) 
+        };
+        
+        // 2. Posição ALEATÓRIA para o Destino (Terra), garantindo que não coincide com o Robô
+        let destino;
+        do {
+            destino = { 
+                x: Math.floor(Math.random() * TOTAL_COLUNAS), 
+                y: Math.floor(Math.random() * TOTAL_LINHAS) 
+            };
+        } while (destino.x === inicio.x && destino.y === inicio.y);
+
+        // 3. Baralha os 3 obstáculos distintos
+        const obsTipos = baralharArray(imagensObstaculos);
+        let obstaculosGerados = [];
+
+        // 4. Sorteia posições para os 3 obstáculos sem sobreposição com o Robô ou Terra
+        let tentativas = 0;
+        while (obstaculosGerados.length < 3 && tentativas < 50) {
+            tentativas++;
+            let rx = Math.floor(Math.random() * TOTAL_COLUNAS);
+            let ry = Math.floor(Math.random() * TOTAL_LINHAS);
+
+            const ehInicio = (rx === inicio.x && ry === inicio.y);
+            const ehDestino = (rx === destino.x && ry === destino.y);
+            const jaExiste = obstaculosGerados.some(o => o.x === rx && o.y === ry);
+
+            if (!ehInicio && !ehDestino && !jaExiste) {
+                obstaculosGerados.push({
+                    x: rx,
+                    y: ry,
+                    img: obsTipos[obstaculosGerados.length]
+                });
+            }
+        }
+
+        // 5. Valida via BFS se existe um caminho válido entre 2 e 10 passos
+        const menorCaminho = calcularMenorCaminho(inicio, destino, obstaculosGerados);
+        if (menorCaminho >= 2 && menorCaminho <= 10) {
+            mapaValido = true;
+            mapaGerado = { inicio, destino, obstaculos: obstaculosGerados };
+        }
+    }
+
+    return mapaGerado;
+}
+
+/* Algoritmo BFS para garantir que o mapa gerado é solúvel e tem <= 10 passos */
 function calcularMenorCaminho(inicio, destino, listaObstaculos) {
     let fila = [{ x: inicio.x, y: inicio.y, dist: 0 }];
     let visitados = new Set([`${inicio.x},${inicio.y}`]);
@@ -2762,80 +2162,6 @@ function calcularMenorCaminho(inicio, destino, listaObstaculos) {
     return -1;
 }
 
-/* ==========================================
-   ESTADO ADICIONAL PARA O 4.º ANO
-   ========================================== */
-let lixos = []; // Lista de posições {x, y} com lixo na ronda atual
-
-function obterMapaRonda(ronda) {
-    const imagensObstaculos = ['sofa.png', 'gato.png', 'cao.png', 'vaso.png', 'cadeira.png', 'mesa.png', 'balanca.png', 'brinquedos.png'];
-    
-    let numLixos = 1;
-    if (ronda === 2 || ronda === 3) numLixos = 2;
-    else if (ronda >= 4 && ronda <= 7) numLixos = 3;
-    else if (ronda >= 8) numLixos = 4;
-
-    const numObstaculos = Math.min(5, 2 + Math.floor((ronda - 1) / 3));
-
-    let mapaValido = false;
-    let mapaGerado = null;
-
-    while (!mapaValido) {
-        const inicio = { 
-            x: Math.floor(Math.random() * TOTAL_COLUNAS), 
-            y: Math.floor(Math.random() * TOTAL_LINHAS) 
-        };
-        
-        let obstaculosGerados = [];
-        let lixosGerados = [];
-
-        // 1. Gerar Obstáculos
-        let tentativas = 0;
-        while (obstaculosGerados.length < numObstaculos && tentativas < 60) {
-            tentativas++;
-            let rx = Math.floor(Math.random() * TOTAL_COLUNAS);
-            let ry = Math.floor(Math.random() * TOTAL_LINHAS);
-
-            if ((rx !== inicio.x || ry !== inicio.y) && 
-                !obstaculosGerados.some(o => o.x === rx && o.y === ry)) {
-                
-                obstaculosGerados.push({
-                    x: rx, y: ry,
-                    img: imagensObstaculos[obstaculosGerados.length % imagensObstaculos.length]
-                });
-            }
-        }
-
-        // 2. Gerar Lixos em células livres
-        tentativas = 0;
-        while (lixosGerados.length < numLixos && tentativas < 60) {
-            tentativas++;
-            let lx = Math.floor(Math.random() * TOTAL_COLUNAS);
-            let ly = Math.floor(Math.random() * TOTAL_LINHAS);
-
-            const ehInicio = (lx === inicio.x && ly === inicio.y);
-            const jaObs = obstaculosGerados.some(o => o.x === lx && o.y === ly);
-            const jaLixo = lixosGerados.some(l => l.x === lx && l.y === ly);
-
-            if (!ehInicio && !jaObs && !jaLixo) {
-                lixosGerados.push({ x: lx, y: ly });
-            }
-        }
-
-        // 3. Validar se TODOS os lixos são alcançáveis pelo robô
-        const todosAlcancaveis = lixosGerados.every(lixo => 
-            calcularMenorCaminho(inicio, lixo, obstaculosGerados) > 0
-        );
-
-        if (todosAlcancaveis && lixosGerados.length === numLixos) {
-            mapaValido = true;
-            mapaGerado = { inicio, obstaculos: obstaculosGerados, lixos: lixosGerados };
-        }
-    }
-
-    return mapaGerado;
-}
-
 function renderizarGrelha() {
     const grelha = document.getElementById('grelha-jogo');
     if (!grelha) return;
@@ -2848,17 +2174,18 @@ function renderizarGrelha() {
             celula.dataset.x = x;
             celula.dataset.y = y;
 
-            const ehRobo = (x === posRobo.x && y === posRobo.y);
-            const lixo = lixos.find(l => l.x === x && l.y === y);
-            const obs = obstaculos.find(o => o.x === x && o.y === y);
-
-            if (ehRobo) {
+            if (x === posRobo.x && y === posRobo.y) {
                 celula.innerHTML = `<img src="img/robo.png" alt="Robô" id="elem-robo">`;
-            } else if (lixo) {
-                celula.classList.add('celula-lixo');
-                celula.innerHTML = `<img src="img/${lixo.img}" class="icone-lixo-grelha" alt="Lixo">`;
-            } else if (obs) {
-                celula.innerHTML = `<img src="img/${obs.img}" alt="Obstáculo">`;
+            } else if (x === posDestino.x && y === posDestino.y) {
+                // Adiciona a classe de destaque ao destino
+                celula.classList.add('celula-destino');
+                // ATUALIZADO: Carrega a imagem dinamente sorteada
+                celula.innerHTML = `<img src="img/${posDestino.img}" class="icone-lixo-grelha" alt="Destino (Sujidade)">`;
+            } else {
+                const obs = obstaculos.find(o => o.x === x && o.y === y);
+                if (obs) {
+                    celula.innerHTML = `<img src="img/${obs.img}" alt="Obstáculo">`;
+                }
             }
 
             grelha.appendChild(celula);
@@ -2866,75 +2193,19 @@ function renderizarGrelha() {
     }
 }
 
-
-function adicionarComandoAcao(tipoAcao) {
-    if (emExecucao) return;
-
-    if (sequenciaComandos.length >= MAX_COMANDOS) {
-        showToast("Chegaste ao limite de 15 comandos!", true);
-        return;
-    }
-
-    sequenciaComandos.push({ acao: tipoAcao });
-    tocarSom('clique');
-    cancelarModoLoop();
-    atualizarLinhaCodigoDOM();
-    resetTimerImpaciencia();
-}
-
 /* ==========================================
    6. CONSTRUÇÃO E LINHA DE CÓDIGO
    ========================================== */
 function adicionarComando(direcao) {
     if (emExecucao) return;
-
-    if (sequenciaComandos.length >= MAX_COMANDOS) {
-        showToast("Chegaste ao limite de 15 comandos!", true);
-        cancelarModoLoop();
+    if (sequenciaComandos.length >= 10) {
+        showToast('Atingiste o limite máximo de 10 passos!', true);
         return;
     }
 
-    sequenciaComandos.push({
-        direcao: direcao,
-        count: multiplicadorPendente
-    });
-
-    tocarSom('clique');
-
-    cancelarModoLoop();
-
+    tocarSom('flip');
+    sequenciaComandos.push(direcao);
     atualizarLinhaCodigoDOM();
-    resetTimerImpaciencia();
-}
-
-
-function renderizarLinhaCodigo() {
-    const slots = document.querySelectorAll('.bloco-comando-slot');
-    
-    slots.forEach((slot, index) => {
-        slot.innerHTML = '';
-        slot.className = 'bloco-comando-slot'; // Reset de classes
-
-        if (index < sequenciaComandos.length) {
-            const cmd = sequenciaComandos[index];
-            slot.classList.add(`cmd-${cmd.direcao}`);
-
-            // Se for um movimento repetido (3x, 4x, 5x), desenha a badge
-            if (cmd.count > 1) {
-                slot.classList.add('tem-loop');
-                const badge = document.createElement('span');
-                badge.className = 'badge-multiplicador';
-                badge.innerText = `${cmd.count}×`;
-                slot.appendChild(badge);
-            }
-
-            // Seta do movimento
-            const img = document.createElement('img');
-            img.src = `img/seta_${cmd.direcao}.svg`;
-            img.alt = cmd.direcao;
-            slot.appendChild(img);
-        }
-    });
 }
 
 function removerUltimoComando() {
@@ -2952,57 +2223,28 @@ function limparCodigo() {
 }
 
 function atualizarLinhaCodigoDOM() {
-    const slots = document.querySelectorAll('.bloco-comando-slot');
-    
-    slots.forEach((slot, index) => {
-        slot.innerHTML = '';
-        slot.className = 'bloco-comando-slot';
+    const linha = document.getElementById('linha-codigo');
+    if (!linha) return;
 
-        if (index < sequenciaComandos.length) {
-            const item = sequenciaComandos[index];
+    if (sequenciaComandos.length === 0) {
+        limparLinhaCodigoDOM();
+        return;
+    }
 
-            if (item.acao === 'apanhar') {
-                // Renderiza o Slot de APANHAR
-                slot.classList.add('cmd-apanhar');
-                const img = document.createElement('img');
-                img.src = 'img/apanhar.svg';
-                img.alt = 'Apanhar';
-                slot.appendChild(img);
-            } else {
-                // Renderiza os Slots de Movimento (Setas e Repetições)
-                const direcao = typeof item === 'object' ? item.direcao : item;
-                const repeticoes = typeof item === 'object' ? item.count : 1;
-
-                slot.classList.add(`cmd-${direcao}`);
-
-                if (repeticoes > 1) {
-                    slot.classList.add('tem-loop');
-                    const badge = document.createElement('span');
-                    badge.className = 'badge-multiplicador';
-                    badge.innerText = `${repeticoes}×`;
-                    slot.appendChild(badge);
-                }
-
-                const img = document.createElement('img');
-                img.src = `img/seta_${direcao}.svg`;
-                img.alt = direcao;
-                slot.appendChild(img);
-            }
-        }
+    linha.innerHTML = '';
+    sequenciaComandos.forEach((cmd, idx) => {
+        const bloco = document.createElement('div');
+        bloco.className = `bloco-comando cmd-${cmd}`;
+        bloco.id = `bloco-cmd-${idx}`;
+        bloco.innerHTML = `<img src="img/seta_${cmd}.svg" alt="${cmd}">`;
+        linha.appendChild(bloco);
     });
 }
 
 function limparLinhaCodigoDOM() {
-    const container = document.getElementById('linha-codigo');
-    if (!container) return;
-    
-    container.innerHTML = '';
-
-    for (let i = 0; i < MAX_COMANDOS; i++) {
-        const slot = document.createElement('div');
-        slot.className = 'bloco-comando-slot';
-        slot.dataset.index = i;
-        container.appendChild(slot);
+    const linha = document.getElementById('linha-codigo');
+    if (linha) {
+        linha.innerHTML = `<span class="placeholder-codigo">Clica nas setas para programar...</span>`;
     }
 }
 
@@ -3016,18 +2258,12 @@ function baralharArray(arr) {
 }
 
 /* ==========================================
-   7. EXECUÇÃO DO ALGORITMO
+   7. EXECUÇÃO DO ALGORITMO (PASSO A PASSO)
    ========================================== */
 async function executarSequencia() {
     if (emExecucao) return;
     if (sequenciaComandos.length === 0) {
-        showToast('Cria primeiro uma sequência de comandos!', true);
-        return;
-    }
-
-    if (!validarUsoDeLoops()) {
-        tocarSom('erro');
-        showToast('Otimiza o código! Usa o botão REPETIR quando andares 3 ou mais vezes para a mesma direção.', true);
+        showToast('Cria primeiro uma sequência de setas!', true);
         return;
     }
 
@@ -3038,80 +2274,42 @@ async function executarSequencia() {
     let yAtual = posRobo.y;
 
     for (let i = 0; i < sequenciaComandos.length; i++) {
-        const item = sequenciaComandos[i];
+        const cmd = sequenciaComandos[i];
         destacarBlocoAtivo(i);
 
-        // 1. COMANDO APANHAR
-        if (item.acao === 'apanhar') {
-            const indexLixo = lixos.findIndex(l => l.x === xAtual && l.y === yAtual);
+        if (cmd === 'cima') yAtual--;
+        else if (cmd === 'baixo') yAtual++;
+        else if (cmd === 'esquerda') xAtual--;
+        else if (cmd === 'direita') xAtual++;
 
-            if (indexLixo !== -1) {
-                // Efeito visual da escova a rodopiar na célula
-                const celulaRobo = document.querySelector(`.celula-grelha[data-x="${xAtual}"][data-y="${yAtual}"]`);
-                if (celulaRobo) {
-                    celulaRobo.innerHTML = `<img src="img/apanhar1.svg" class="anim-espanador" alt="Apanhar">`;
-                }
-
-                tocarSom('flip');
-                await new Promise(r => setTimeout(r, 500));
-
-                // Remove o lixo recolhido do array ativo
-                lixos.splice(indexLixo, 1);
-                renderizarGrelha();
-            } else {
-                tratarErroExecucao('Não há lixo nesta casa para apanhar!');
-                return;
-            }
-        } 
-        // 2. COMANDOS DE MOVIMENTO
-        else {
-            const direcao = typeof item === 'object' ? item.direcao : item;
-            const repeticoes = typeof item === 'object' ? item.count : 1;
-
-            for (let rep = 0; rep < repeticoes; rep++) {
-                if (direcao === 'cima') yAtual--;
-                else if (direcao === 'baixo') yAtual++;
-                else if (direcao === 'esquerda') xAtual--;
-                else if (direcao === 'direita') xAtual++;
-
-                if (xAtual < 0 || xAtual >= TOTAL_COLUNAS || yAtual < 0 || yAtual >= TOTAL_LINHAS) {
-                    tratarErroExecucao('O Robô saiu da grelha!');
-                    return;
-                }
-
-                if (obstaculos.some(o => o.x === xAtual && o.y === yAtual)) {
-                    tratarErroExecucao('O Robô bateu num obstáculo!');
-                    return;
-                }
-
-                posRobo = { x: xAtual, y: yAtual };
-                tocarSom('passo');
-                renderizarGrelha();
-
-                await new Promise(r => setTimeout(r, 400));
-            }
+        if (xAtual < 0 || xAtual >= TOTAL_COLUNAS || yAtual < 0 || yAtual >= TOTAL_LINHAS) {
+            tratarErroExecucao('O Robô saiu da grelha!');
+            return;
         }
+
+        if (obstaculos.some(o => o.x === xAtual && o.y === yAtual)) {
+            tratarErroExecucao('O Robô bateu num obstáculo!');
+            return;
+        }
+
+        posRobo = { x: xAtual, y: yAtual };
+        tocarSom('passo'); // Toca o som de passo a cada movimento do robô
+        renderizarGrelha();
+
+        await new Promise(r => setTimeout(r, 400));
     }
 
-    // 3. VERIFICAÇÃO DE VITÓRIA (Sem destino final! Basta limpar a grelha)
-    if (lixos.length === 0) {
+    if (posRobo.x === posDestino.x && posRobo.y === posDestino.y) {
         concluirRondaSucesso();
     } else {
-        tratarErroExecucao(`Ainda ficou ${lixos.length} lixo(s) por apanhar!`);
+        tratarErroExecucao('O Robô não chegou ao destino!');
     }
 }
 
 function destacarBlocoAtivo(index) {
-    for (let i = 0; i < MAX_COMANDOS; i++) {
-        const slot = document.getElementById(`slot-comando-${i}`);
-        if (!slot) continue;
-
-        if (i === index) {
-            slot.classList.add('ativo');
-        } else {
-            slot.classList.remove('ativo');
-        }
-    }
+    document.querySelectorAll('.bloco-comando').forEach((b, i) => {
+        b.classList.toggle('ativo', i === index);
+    });
 }
 
 /* ==========================================
@@ -3133,11 +2331,13 @@ function tratarErroExecucao(mensagem) {
     }
 
     setTimeout(() => {
+        // Volta à posição inicial do MESMO mapa (não gera mapa novo)
         posRobo = { ...mapaAtual.inicio };
-        // Repõe todos os lixos iniciais da ronda
-        lixos = mapaAtual.lixos.map(l => ({ ...l }));
         
+        // Remove o destaque de seleção dos blocos de código
         destacarBlocoAtivo(-1);
+        
+        // Redesenha a grelha mantendo a sequência de comandos na caixa para edição
         renderizarGrelha();
         
         emExecucao = false;
@@ -3175,23 +2375,17 @@ function concluirRondaSucesso() {
    9. MODAL DE DICA E AÇÕES DE NAVEGAÇÃO
    ========================================== */
 function atualizarEstadoBotaoDica() {
-    const btnDica = document.getElementById('btn-dica'); // ou .btn-dica
+    const btnDica = document.getElementById('btn-dica');
     if (!btnDica) return;
 
-    const estaBloqueado = desafioAtual < rondaLivreDica;
+    btnDica.innerHTML = `${SVG_BULB} Dica`;
 
-    if (estaBloqueado) {
+    if (desafioAtual < rondaLivreDica) {
         btnDica.classList.add('desativado');
-        btnDica.disabled = true;
+        btnDica.classList.remove('dica-impaciente');
     } else {
         btnDica.classList.remove('desativado');
-        btnDica.disabled = false;
     }
-}
-
-function limparDestaquesDica() {
-    document.querySelectorAll('.celula-dica').forEach(el => el.classList.remove('celula-dica'));
-    document.querySelectorAll('.btn-dica-destaque').forEach(el => el.classList.remove('btn-dica-destaque'));
 }
 
 /* ==========================================
@@ -3200,115 +2394,42 @@ function limparDestaquesDica() {
 function usarDica() {
     if (desafioAtual < rondaLivreDica || emExecucao) return;
 
-    const DURACAO_DESTAQUE = 4500;
-
-    // 1. CASO O ROBÔ JÁ ESTEJA EM CIMA DE UM LIXO -> SUGERE APANHAR
-    const estaEmCimaDeLixo = lixos && lixos.some(l => l.x === posRobo.x && l.y === posRobo.y);
-    if (estaEmCimaDeLixo) {
-        pararTimerImpaciencia();
-        rondaLivreDica = desafioAtual + 2;
-        atualizarEstadoBotaoDica();
-
-        const btnApanhar = document.getElementById('btn-apanhar');
-        if (btnApanhar) {
-            btnApanhar.classList.add('dica-destaque');
-            setTimeout(() => btnApanhar.classList.remove('dica-destaque'), DURACAO_DESTAQUE);
-        }
-
-        const celulaRobo = document.querySelector(`.celula-grelha[data-x="${posRobo.x}"][data-y="${posRobo.y}"]`);
-        if (celulaRobo) {
-            celulaRobo.classList.add('celula-dica-proxima');
-            setTimeout(() => celulaRobo.classList.remove('celula-dica-proxima'), DURACAO_DESTAQUE);
-        }
-
-        showToast('Já estás no lixo! Usa o botão APANHAR.');
-        tocarSom('flip');
-        return;
-    }
-
-    // 2. SELEÇÃO DO LIXO MAIS PRÓXIMO ALCANÇÁVEL
-    if (!lixos || lixos.length === 0) return;
-
-    let alvoLixo = null;
-    let proximaDirecao = null;
-    let menorDistancia = Infinity;
-
-    for (const lixo of lixos) {
-        const dir = obterProximoPassoCerto(posRobo, lixo, obstaculos);
-        if (dir) {
-            const dist = Math.abs(posRobo.x - lixo.x) + Math.abs(posRobo.y - lixo.y);
-            if (dist < menorDistancia) {
-                menorDistancia = dist;
-                alvoLixo = lixo;
-                proximaDirecao = dir;
-            }
-        }
-    }
-
-    if (!proximaDirecao || !alvoLixo) return;
+    const proximaDirecao = obterProximoPassoCerto(posRobo, posDestino, obstaculos);
+    if (!proximaDirecao) return;
 
     pararTimerImpaciencia();
+
     rondaLivreDica = desafioAtual + 2;
     atualizarEstadoBotaoDica();
 
-    // 3. CALCULA QUANTOS PASSOS SEGUIDOS O ROBÔ PODE DAR NESSA DIREÇÃO
-    let passosSeguidos = 0;
-    let xTemp = posRobo.x;
-    let yTemp = posRobo.y;
+    const DURACAO_DESTAQUE = 4500;
 
-    while (passosSeguidos < 5) {
-        let proxX = xTemp;
-        let proxY = yTemp;
+    // Destaque da seta no painel de controlo
+    const seletorSeta = {
+        'cima': '.btn-seta.bg-azul',
+        'baixo': '.btn-seta.bg-turquesa',
+        'esquerda': '.btn-seta.bg-roxo',
+        'direita': '.btn-seta.bg-laranja'
+    }[proximaDirecao];
 
-        if (proximaDirecao === 'cima') proxY--;
-        else if (proximaDirecao === 'baixo') proxY++;
-        else if (proximaDirecao === 'esquerda') proxX--;
-        else if (proximaDirecao === 'direita') proxX++;
-
-        // Para se sair da grelha ou encontrar um obstáculo
-        if (proxX < 0 || proxX >= TOTAL_COLUNAS || proxY < 0 || proxY >= TOTAL_LINHAS) break;
-        if (obstaculos.some(o => o.x === proxX && o.y === proxY)) break;
-
-        xTemp = proxX;
-        yTemp = proxY;
-        passosSeguidos++;
-
-        // Para se a casa atingida tiver um lixo (o robô deve parar para apanhar)
-        if (lixos.some(l => l.x === xTemp && l.y === yTemp)) break;
-
-        // Se o caminho mudar de direção na casa seguinte, para a contagem da reta
-        const proxDirNoCaminho = obterProximoPassoCerto({ x: xTemp, y: yTemp }, alvoLixo, obstaculos);
-        if (proxDirNoCaminho !== proximaDirecao) break;
+    const btnSetaCerta = document.querySelector(seletorSeta);
+    if (btnSetaCerta) {
+        btnSetaCerta.classList.add('dica-destaque');
+        setTimeout(() => btnSetaCerta.classList.remove('dica-destaque'), DURACAO_DESTAQUE);
     }
 
-    // 4. DECIDE QUAL BOTÃO ILUMINAR (REPETIR VS SETA DIRECIONAL)
-    if (passosSeguidos >= 3) {
-        const btnRepetir = document.getElementById('btn-repetir');
-        if (btnRepetir) {
-            btnRepetir.classList.add('dica-destaque');
-            setTimeout(() => btnRepetir.classList.remove('dica-destaque'), DURACAO_DESTAQUE);
-        }
-        showToast(`Usa o bloco REPETIR para dar ${passosSeguidos} passos!`);
-    } else {
-        const seletorSeta = {
-            'cima': '.btn-seta.bg-azul',
-            'baixo': '.btn-seta.bg-turquesa',
-            'esquerda': '.btn-seta.bg-roxo',
-            'direita': '.btn-seta.bg-laranja'
-        }[proximaDirecao];
+    // Destaque da próxima célula na grelha
+    let proxX = posRobo.x;
+    let proxY = posRobo.y;
+    if (proximaDirecao === 'cima') proxY--;
+    else if (proximaDirecao === 'baixo') proxY++;
+    else if (proximaDirecao === 'esquerda') proxX--;
+    else if (proximaDirecao === 'direita') proxX++;
 
-        const btnSetaCerta = document.querySelector(seletorSeta);
-        if (btnSetaCerta) {
-            btnSetaCerta.classList.add('dica-destaque');
-            setTimeout(() => btnSetaCerta.classList.remove('dica-destaque'), DURACAO_DESTAQUE);
-        }
-    }
-
-    // 5. ILUMINA A CÉLULA ONDE O ROBÔ VAI PARAR
-    const celulaAlvo = document.querySelector(`.celula-grelha[data-x="${xTemp}"][data-y="${yTemp}"]`);
-    if (celulaAlvo) {
-        celulaAlvo.classList.add('celula-dica-proxima');
-        setTimeout(() => celulaAlvo.classList.remove('celula-dica-proxima'), DURACAO_DESTAQUE);
+    const celulaProx = document.querySelector(`.celula-grelha[data-x="${proxX}"][data-y="${proxY}"]`);
+    if (celulaProx) {
+        celulaProx.classList.add('celula-dica-proxima');
+        setTimeout(() => celulaProx.classList.remove('celula-dica-proxima'), DURACAO_DESTAQUE);
     }
 
     tocarSom('flip');
@@ -3396,16 +2517,7 @@ function tocarSom(tipo) {
         gain.gain.exponentialRampToValueAtTime(0.001, agora + 0.06);
         osc.start(agora);
         osc.stop(agora + 0.06);
-		
-	} else if (tipo === 'clique') {
-		osc.type = 'sine';
-		osc.frequency.setValueAtTime(500, agora);
-		osc.frequency.exponentialRampToValueAtTime(700, agora + 0.04);
-		gain.gain.setValueAtTime(0.04, agora);
-		gain.gain.exponentialRampToValueAtTime(0.001, agora + 0.04);
-		osc.start(agora);
-		osc.stop(agora + 0.04);
-	} else if (tipo === 'flip') {
+    } else if (tipo === 'flip') {
         osc.frequency.setValueAtTime(400, agora);
         osc.frequency.exponentialRampToValueAtTime(600, agora + 0.1);
         gain.gain.setValueAtTime(0.05, agora);
