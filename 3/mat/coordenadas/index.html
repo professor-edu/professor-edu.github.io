@@ -1161,6 +1161,14 @@
 			}
 		}
 		
+		.icon-seta-opcao {
+			width: 26px;
+			height: 26px;
+			vertical-align: middle;
+			margin: 0 4px;
+			display: inline-block;
+		}
+		
 
     </style>
 </head>
@@ -1575,46 +1583,84 @@
 			}
 			// --- TIPO 2: CAMINHOS NA GRELHA ---
 			else if (tipoRonda === 2) {
-				let cenoura = { nome: "Cenoura", file: "img/cenoura.png" };
-				let coelho = { nome: "Coelho", file: "img/coelho.png" };
+				const PARES_CAMINHO = [
+					{ animal: { nome: "Coelho", file: "img/coelho.png" }, alvo: { nome: "Cenoura", file: "img/cenoura.png" }, artigo: "à" },
+					{ animal: { nome: "Macaco", file: "img/macaco.png" }, alvo: { nome: "Banana", file: "img/banana.png" }, artigo: "à" },
+					{ animal: { nome: "Elefante", file: "img/elefante.png" }, alvo: { nome: "Erva", file: "img/erva.png" }, artigo: "à" },
+					{ animal: { nome: "Caracol", file: "img/caracol.png" }, alvo: { nome: "Folha", file: "img/folha.png" }, artigo: "à" },
+					{ animal: { nome: "Urso", file: "img/urso.png" }, alvo: { nome: "Salmão", file: "img/salmao.png" }, artigo: "ao" }
+				];
 
-				// O destino da cenoura também deve usar coordenadas únicas na sessão
-				let colDestIdx = obterNumeroAleatorio(2, colLetras.length - 1); 
-				let linDest = obterNumeroAleatorio(3, nLinhas); 
-				let chaveCoord = `${colLetras[colDestIdx]}${linDest}`;
-				let tentativas = 0;
+				// Sorteia um dos pares para a ronda atual
+				let parSorteado = baralharArray(PARES_CAMINHO)[0];
+				let animal = parSorteado.animal;
+				let alvo = parSorteado.alvo;
 
-				while (coordenadasUsadas.includes(chaveCoord) && tentativas < 20) {
-					colDestIdx = obterNumeroAleatorio(2, colLetras.length - 1);
-					linDest = obterNumeroAleatorio(3, nLinhas);
-					chaveCoord = `${colLetras[colDestIdx]}${linDest}`;
-					tentativas++;
+				// Tags das setas em formato SVG
+				let imgDir = `<img src="img/seta_direita.svg" class="icon-seta-opcao" alt="Direita">`;
+				let imgEsq = `<img src="img/seta_esquerda.svg" class="icon-seta-opcao" alt="Esquerda">`;
+				let imgCima = `<img src="img/seta_cima.svg" class="icon-seta-opcao" alt="Cima">`;
+				let imgBaixo = `<img src="img/seta_baixo.svg" class="icon-seta-opcao" alt="Baixo">`;
+
+				// 2. Sorteia posições de Origem (Animal) e Destino (Alvo) aleatórias na grelha
+				let colOrigIdx = obterNumeroAleatorio(0, colLetras.length - 1);
+				let linOrig = obterNumeroAleatorio(1, nLinhas);
+				
+				let colDestIdx = obterNumeroAleatorio(0, colLetras.length - 1);
+				let linDest = obterNumeroAleatorio(1, nLinhas);
+
+				// Garante que o alvo não calha na mesma linha ou coluna do animal (obrigando a usar 2 direções)
+				let tentativasPos = 0;
+				while ((colOrigIdx === colDestIdx || linOrig === linDest) && tentativasPos < 20) {
+					colDestIdx = obterNumeroAleatorio(0, colLetras.length - 1);
+					linDest = obterNumeroAleatorio(1, nLinhas);
+					tentativasPos++;
 				}
-				coordenadasUsadas.push(chaveCoord);
 
-				let passosDir = colDestIdx; 
-				let passosCima = linDest - 1; 
+				// 3. Calcula os passos necessários (Deltas)
+				let diffCol = colDestIdx - colOrigIdx; // >0 Direita, <0 Esquerda
+				let diffLin = linDest - linOrig;       // >0 Cima, <0 Baixo
 
-				let rotaCorreta = `${passosDir} ➡️ e ${passosCima} ⬆️`;
-				let rErrada1 = `${passosDir} ➡️ e ${Math.max(1, passosCima - 1)} ⬆️`;
-				let rErrada2 = `${Math.max(1, passosDir - 1)} ➡️ e ${passosCima} ⬆️`;
-				let rErrada3 = `${passosDir + 1} ➡️ e ${passosCima} ⬆️`;
+				// Função interna para formatar o texto com os SVGs
+				const formatarRota = (dCol, dLin) => {
+					let parteH = dCol > 0 ? `${dCol} ${imgDir}` : `${Math.abs(dCol)} ${imgEsq}`;
+					let parteV = dLin > 0 ? `${dLin} ${imgCima}` : `${Math.abs(dLin)} ${imgBaixo}`;
+					return `${parteH} e ${parteV}`;
+				};
+
+				let rotaCorreta = formatarRota(diffCol, diffLin);
+
+				// 4. Gerar Opções Incorretas (Distratores)
+				let alt1Col = diffCol > 0 ? diffCol - 1 : diffCol + 1;
+				if (alt1Col === 0) alt1Col = diffCol > 0 ? 1 : -1;
+				let rErrada1 = formatarRota(alt1Col, diffLin);
+
+				let alt2Lin = diffLin > 0 ? diffLin - 1 : diffLin + 1;
+				if (alt2Lin === 0) alt2Lin = diffLin > 0 ? 1 : -1;
+				let rErrada2 = formatarRota(diffCol, alt2Lin);
+
+				let rErrada3 = formatarRota(-diffCol, diffLin); // Inverte o sentido horizontal
 
 				let erradas = [...new Set([rErrada1, rErrada2, rErrada3])].filter(r => r !== rotaCorreta);
 				while (erradas.length < 3) {
-					erradas.push(`${obterNumeroAleatorio(1, 6)} ➡️ e ${obterNumeroAleatorio(1, 6)} ⬆️`);
+					let rColRandom = obterNumeroAleatorio(1, 3) * (Math.random() < 0.5 ? 1 : -1);
+					let rLinRandom = obterNumeroAleatorio(1, 3) * (Math.random() < 0.5 ? 1 : -1);
+					let cand = formatarRota(rColRandom, rLinRandom);
+					if (cand !== rotaCorreta && !erradas.includes(cand)) {
+						erradas.push(cand);
+					}
 				}
 
 				sessoes.push({
 					tipo: 'caminhos',
-					pergunta: `Ajuda o <span class="destaque-texto-verde">Coelho</span> a chegar à <span class="destaque-texto">Cenoura</span>!<br> Qual é a rota correta?`,
+					pergunta: `Ajuda o <span class="destaque-texto-verde">${animal.nome}</span> a chegar ${parSorteado.artigo} <span class="destaque-texto">${alvo.nome}</span>!<br> Qual é a rota correta?`,
 					grelhaItens: [
-						{ animal: coelho, col: 'A', lin: 1 },
-						{ animal: cenoura, col: colLetras[colDestIdx], lin: linDest }
+						{ animal: animal, col: colLetras[colOrigIdx], lin: linOrig },
+						{ animal: alvo, col: colLetras[colDestIdx], lin: linDest }
 					],
 					opcoes: baralharArray([rotaCorreta, erradas[0], erradas[1], erradas[2]]),
 					correto: rotaCorreta,
-					dicaTexto: `Conta quantos quadradinhos o coelho tem de andar para a direita e depois quantos tem de subir!`
+					dicaTexto: `Olha para a posição do ${animal.nome}: conta quantos quadradinhos tem de andar de lado e depois quantos tem de subir ou descer!`
 				});
 			}
 		}
@@ -1786,7 +1832,7 @@
 		ronda.opcoes.forEach((opcao, index) => {
 			const btn = document.createElement('button');
 			btn.className = `btn-opcao-vibrante ${classesCores[index]}`; // Garante uma cor única sem repetições
-			btn.textContent = opcao;
+			btn.innerHTML = opcao;
 			btn.onclick = () => verificarResposta(opcao, ronda.correto, btn);
 			opcoesGrid.appendChild(btn);
 		});
