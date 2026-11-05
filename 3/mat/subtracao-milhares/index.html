@@ -2447,6 +2447,121 @@ document.getElementById('game-area').addEventListener('keydown', function(event)
     }
 });
 
+	function auditarBaseSubtracao(baseDados) {
+
+    function calcularCompensacao(minuendo, subtraendo) {
+
+        const min = minuendo.toString().padStart(4, '0').split('').map(Number);
+        const sub = subtraendo.toString().padStart(4, '0').split('').map(Number);
+
+        let [mMin, cMin, dMin, uMin] = min;
+        let [mSub, cSub, dSub, uSub] = sub;
+
+        const resultado = {
+            "u-emp": "0",
+            "d-emp": "0",
+            "c-emp": "0",
+            "m-emp": "0",
+
+            "d-dev": "0",
+            "c-dev": "0",
+            "m-dev": "0"
+        };
+
+        // UNIDADES
+        if (uMin < uSub) {
+            resultado["u-emp"] = "1";
+            resultado["d-dev"] = "1";
+
+            uMin += 10;
+            dSub += 1;
+        }
+
+        resultado["u-res"] = String(uMin - uSub);
+
+        // DEZENAS
+        if (dMin < dSub) {
+            resultado["d-emp"] = "1";
+            resultado["c-dev"] = "1";
+
+            dMin += 10;
+            cSub += 1;
+        }
+
+        resultado["d-res"] = String(dMin - dSub);
+
+        // CENTENAS
+        if (cMin < cSub) {
+            resultado["c-emp"] = "1";
+            resultado["m-dev"] = "1";
+
+            cMin += 10;
+            mSub += 1;
+        }
+
+        resultado["c-res"] = String(cMin - cSub);
+
+        // MILHARES
+        resultado["m-res"] = String(mMin - mSub);
+
+        return resultado;
+    }
+
+    const erros = [];
+
+    baseDados.forEach((questao, indice) => {
+
+        const esperado = calcularCompensacao(
+            parseInt(questao.minuendo),
+            parseInt(questao.subtraendo)
+        );
+
+        const diferencas = [];
+
+        Object.keys(esperado).forEach(campo => {
+
+            const bd = String(questao.corretos[campo]);
+            const calc = String(esperado[campo]);
+
+            if (bd !== calc) {
+                diferencas.push({
+                    campo,
+                    bd,
+                    calculado: calc
+                });
+            }
+        });
+
+        if (diferencas.length > 0) {
+            erros.push({
+                questao: indice + 1,
+                operacao: `${questao.minuendo} - ${questao.subtraendo}`,
+                diferencas
+            });
+        }
+    });
+
+    if (erros.length === 0) {
+        console.log("✅ Base de dados validada sem erros.");
+        return;
+    }
+
+    console.log("❌ Inconsistências encontradas:");
+    console.table(erros);
+
+    erros.forEach(erro => {
+        console.group(
+            `Questão ${erro.questao}: ${erro.operacao}`
+        );
+
+        console.table(erro.diferencas);
+
+        console.groupEnd();
+    });
+
+    return erros;
+}
+
 </script>
 <script type="module" src="/contador.js"></script></body>
 </html>
