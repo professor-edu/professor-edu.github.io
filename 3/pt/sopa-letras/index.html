@@ -1239,6 +1239,83 @@
     transform: scale(1.05);
 }
 
+/* =========================================
+   CARTÃO DO MELHOR TEMPO (MENU INICIAL)
+   ========================================= */
+.melhor-tempo-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 2px solid #bcdcff;
+    border-radius: 14px;
+    padding: 10px 18px;
+    margin-top: 35px;
+    font-size: 0.95rem;
+    color: var(--azul-escuro, #1e272e);
+    box-shadow: 0 4px 12px rgba(0, 145, 255, 0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.melhor-tempo-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 145, 255, 0.15);
+}
+
+.melhor-tempo-container svg {
+    stroke: var(--azul-vibrante, #0091ff);
+}
+
+.melhor-tempo-container strong {
+    color: var(--azul-vibrante, #0091ff);
+    font-weight: 800;
+    font-size: 1.05rem;
+}
+
+/* Container pai para alinhar a caixa e o botão na vertical */
+.contentor-recorde-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Botão de Apagar Recorde Estilizado */
+.btn-apagar-tempo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: #ffffff;
+    border: 1.5px solid #fca5a5;
+    border-radius: 10px;
+    padding: 5px 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #ef4444;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(239, 68, 68, 0.08);
+    transition: all 0.2s ease;
+}
+
+.btn-apagar-tempo:hover {
+    background: #fef2f2;
+    border-color: #f87171;
+    color: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.15);
+}
+
+.btn-apagar-tempo:active {
+    transform: translateY(0);
+}
+
+/* Ajuste fino do SVG dentro do botão */
+.btn-apagar-tempo svg {
+    flex-shrink: 0;
+}
+
     </style>
 </head>
 <body>
@@ -1323,7 +1400,7 @@
                 Encontra todas as palavras escondidas no menor tempo!
             </div>
             
-            <!-- BOTÃO ÚNICO DE INÍCIO DE JOGO (PERFEITAMENTE INTEGRADO) -->
+
 			<div class="grid-niveis" style="grid-template-columns: 1fr; max-width: 360px; margin: 0 auto 20px auto;">
 				<button class="btn-nivel-novo bg-azul" onclick="iniciarJogo(8)">
 					<img src="../img-titulos/sopa_letras_menu_1.svg" class="icon-btn-nivel" alt="" onerror="this.style.display='none'">
@@ -1331,6 +1408,28 @@
                         <span class="btn-nivel-titulo">▶ COMEÇAR O JOGO</span>
                         <span class="btn-nivel-subtitulo">Sopa de 6 Palavras Aleatórias</span>
                     </div>
+				</button>
+			</div>
+			
+			<div class="contentor-recorde-wrapper">
+				<!-- CAIXA DO MELHOR TEMPO -->
+				<div class="melhor-tempo-container" id="melhor-tempo-box">
+					<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="12" cy="12" r="10"></circle>
+						<polyline points="12 6 12 12 16 14"></polyline>
+					</svg>
+					<span>O meu melhor tempo: <strong id="val-melhor-tempo">--:--</strong></span>
+				</div>
+
+				<!-- BOTÃO APAGAR (POR BAIXO) -->
+				<button class="btn-apagar-tempo" onclick="apagarMelhorTempo()" title="Apagar melhor tempo">
+					<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<polyline points="3 6 5 6 21 6"></polyline>
+						<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+						<line x1="10" y1="11" x2="10" y2="17"></line>
+						<line x1="14" y1="11" x2="14" y2="17"></line>
+					</svg>
+					<span>Apagar Recorde</span>
 				</button>
 			</div>
         </div>
@@ -2100,25 +2199,31 @@
 		if (modal) modal.classList.remove('active');
 	}
 
-	function finalizarJogo() {
-		document.getElementById('progress-fill').style.width = '100%';
-		pararTimerImpaciencia();
-		clearInterval(timerCronometro); // Pára o relógio
+function finalizarJogo() {
+    const progressFill = document.getElementById('progress-fill');
+    if (progressFill) progressFill.style.width = '100%';
 
-		// Calcula o tempo final
-		const minutos = Math.floor(tempoSegundos / 60).toString().padStart(2, '0');
-		const segundos = (tempoSegundos % 60).toString().padStart(2, '0');
-		const tempoFinal = `${minutos}:${segundos}`;
+    if (typeof pararTimerImpaciencia === 'function') pararTimerImpaciencia();
+    if (typeof timerCronometro !== 'undefined') clearInterval(timerCronometro);
 
-		document.getElementById('final-tempo').textContent = tempoFinal;
-		document.getElementById('final-erros').textContent = erradas;
+    const minutos = Math.floor(tempoSegundos / 60).toString().padStart(2, '0');
+    const segundos = (tempoSegundos % 60).toString().padStart(2, '0');
+    const tempoFinal = `${minutos}:${segundos}`;
 
-		setTimeout(() => {
-			mostrarEcra('ecra-fim');
-			tocarSom('vitoria');
-			dispararConfetis();
-		}, 500);
-	}
+    const elemFinalTempo = document.getElementById('final-tempo');
+    if (elemFinalTempo) elemFinalTempo.textContent = tempoFinal;
+
+    const elemFinalErros = document.getElementById('final-erros');
+    if (elemFinalErros) elemFinalErros.textContent = erradas;
+
+    verificarEGuardarMelhorTempo();
+
+    setTimeout(() => {
+        mostrarEcra('ecra-fim');
+        if (typeof tocarSom === 'function') tocarSom('vitoria');
+        if (typeof dispararConfetis === 'function') dispararConfetis();
+    }, 500);
+}
 
 	function reiniciarJogo() {
 		iniciarJogo(totalDesafiosNivel);
@@ -2130,6 +2235,65 @@
 		limparConfetis();
 		mostrarEcra('ecra-selecao');
 	}
+	
+	// Converte segundos em formato visual (ex: 75 seg -> 01:15)
+function formatarTempo(segundos) {
+    if (segundos === null || segundos === undefined) return "--:--";
+    const m = Math.floor(segundos / 60).toString().padStart(2, '0');
+    const s = (segundos % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+}
+
+// 1. CARREGAR O MELHOR TEMPO (Chamar ao abrir o jogo)
+function carregarMelhorTempo() {
+    const melhorGuardado = localStorage.getItem('melhorTempoJogo');
+    const elemMelhor = document.getElementById('val-melhor-tempo');
+
+    if (elemMelhor) {
+        if (melhorGuardado !== null) {
+            elemMelhor.textContent = formatarTempo(parseInt(melhorGuardado, 10));
+        } else {
+            elemMelhor.textContent = "--:--";
+        }
+    }
+}
+
+// 2. VERIFICAR E GUARDAR
+function verificarEGuardarMelhorTempo() {
+    // Pára o relógio usando a variável correta
+    if (typeof timerCronometro !== 'undefined') clearInterval(timerCronometro);
+
+    const melhorGuardado = localStorage.getItem('melhorTempoJogo');
+    const recordeAtual = melhorGuardado !== null ? parseInt(melhorGuardado, 10) : Infinity;
+
+    // Se o tempo atual for menor do que o recorde guardado (ou for o 1º jogo)
+    if (tempoSegundos < recordeAtual) {
+        localStorage.setItem('melhorTempoJogo', tempoSegundos);
+        if (typeof carregarMelhorTempo === 'function') carregarMelhorTempo();
+        return true;
+    }
+    return false;
+}
+
+// 3. APAGAR O MELHOR TEMPO
+function apagarMelhorTempo() {
+    // Elimina o recorde diretamente sem pedir confirmação
+    localStorage.removeItem('melhorTempoJogo');
+    
+    // Atualiza o valor visual para "--:--"
+    carregarMelhorTempo();
+    
+    // Opcional: mostra a tua mensagem customizada no jogo se a função existir
+    if (typeof showToast === 'function') {
+        showToast("Melhor tempo apagado!");
+    }
+}
+
+// Carrega o recorde assim que a página é aberta
+document.addEventListener('DOMContentLoaded', () => {
+    carregarMelhorTempo();
+});
+
 
 	/* ==========================================
 	   SINTETIZADOR DE SOM RETRO ELETRÓNICO

@@ -1097,6 +1097,95 @@ footer p { font-size: 0.8rem; color: var(--cor-4ano-dark); margin: 0; }
     width: 45px; height: 45px; border-radius: 50%; font-weight: bold; font-size: 1.5rem; cursor: pointer;
 }
 
+/* =========================================================
+   REGRAS DE FULLSCREEN (PC/Desktop)
+   ========================================================= */
+
+/* Escondido por defeito em mobile e tablets */
+#btn-fullscreen {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    #btn-fullscreen {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        border: 2px solid var(--cor-4ano-dark);
+        border-radius: 12px;
+        padding: 6px;
+        cursor: pointer;
+        color: var(--cor-4ano-dark);
+        transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    #btn-fullscreen:hover {
+        background: var(--bg-header);
+        transform: scale(1.08);
+    }
+	
+	#btn-fullscreen svg path {
+		stroke: currentColor;
+		stroke-width: 1px;
+		stroke-linejoin: round;
+	}
+}
+
+#cartao-jogo:fullscreen {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #f4faff !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    position: relative !important;
+
+    zoom: 1.38;
+}
+
+/* Botão Sair de Fullscreen */
+.btn-sair-fullscreen {
+    display: none;
+}
+
+#cartao-jogo:fullscreen .btn-sair-fullscreen {
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10000;
+    background: #ffffff;
+    border: 2px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #475569;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+#cartao-jogo:fullscreen .btn-sair-fullscreen:hover {
+    background: #fef2f2;
+    border-color: #f87171;
+    color: #dc2626;
+    transform: scale(1.05);
+}
+
+
+
+
     </style>
 </head>
 <body>
@@ -1121,6 +1210,12 @@ footer p { font-size: 0.8rem; color: var(--cor-4ano-dark); margin: 0; }
 
 <main>
     <div class="cartao-jogo-container" id="cartao-jogo">
+			<button class="btn-sair-fullscreen" onclick="toggleFullscreen()" title="Sair do Ecrã Inteiro (ESC)">
+						<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+							<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+						</svg>
+						<span>Sair (ESC)</span>
+			</button>  
         <div id="confetti-container" class="confetti-container"></div>
         <div class="toast-msg" id="toast-msg"></div>
 
@@ -1129,32 +1224,32 @@ footer p { font-size: 0.8rem; color: var(--cor-4ano-dark); margin: 0; }
 
         <!-- ECRÃ 1: SELEÇÃO -->
         <div id="ecra-selecao" class="ecra">
-<div class="animacao-tutorial">
-    <!-- Camada 1: Chuva de Letras (Cores Claras para Contraste) -->
-    <div class="sopa-bg-letras">
-        <div class="linha-letras">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</div>
-        <div class="linha-letras">H I S T O R I A P O R T U G A L L I B E R D A D E</div>
-        <div class="linha-letras">C O R P O H U M A N O S I S T E M A S O L A R E S</div>
-        <div class="linha-letras">D I R E I T O S H U M A N O S U N I A O E U R O P</div>
-        <div class="linha-letras">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</div>
-        <div class="linha-letras">H I S T O R I A P O R T U G A L L I B E R D A D E</div>
-		<div class="linha-letras">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</div>
-		<div class="linha-letras">D I R E I T O S H U M A N O S U N I A O E U R O P</div>
-		<div class="linha-letras">H I S T O R I A P O R T U G A L L I B E R D A D E</div>
-    </div>
+				<div class="animacao-tutorial">
+					<!-- Camada 1: Chuva de Letras (Cores Claras para Contraste) -->
+					<div class="sopa-bg-letras">
+						<div class="linha-letras">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</div>
+						<div class="linha-letras">H I S T O R I A P O R T U G A L L I B E R D A D E</div>
+						<div class="linha-letras">C O R P O H U M A N O S I S T E M A S O L A R E S</div>
+						<div class="linha-letras">D I R E I T O S H U M A N O S U N I A O E U R O P</div>
+						<div class="linha-letras">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</div>
+						<div class="linha-letras">H I S T O R I A P O R T U G A L L I B E R D A D E</div>
+						<div class="linha-letras">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</div>
+						<div class="linha-letras">D I R E I T O S H U M A N O S U N I A O E U R O P</div>
+						<div class="linha-letras">H I S T O R I A P O R T U G A L L I B E R D A D E</div>
+					</div>
 
-    <!-- Camada 2: Caixa de Foco (Scanner) -->
-    <div class="scan-focus-box"></div>
+					<!-- Camada 2: Caixa de Foco (Scanner) -->
+					<div class="scan-focus-box"></div>
 
-    <!-- Camada 3: Ícones (Cores reais nos cantos) -->
-    <img src="menu_1.png" class="icon-scan i-top-l">
-    <img src="menu_2.png" class="icon-scan i-top-r">
-    <img src="menu_3.png" class="icon-scan i-bot-l">
-    <img src="menu_4.png" class="icon-scan i-bot-r">
+					<!-- Camada 3: Ícones (Cores reais nos cantos) -->
+					<img src="menu_1.png" class="icon-scan i-top-l">
+					<img src="menu_2.png" class="icon-scan i-top-r">
+					<img src="menu_3.png" class="icon-scan i-bot-l">
+					<img src="menu_4.png" class="icon-scan i-bot-r">
 
-    <!-- Camada 4: Label Técnica na Base -->
-    <div class="label-era">SISTEMA_SOPA: A DESCODIFICAR CONCEITOS...</div>
-</div>
+					<!-- Camada 4: Label Técnica na Base -->
+					<div class="label-era">SISTEMA_SOPA: A DESCODIFICAR CONCEITOS...</div>
+				</div>
             <h2 class="titulo-menu">Qual é o teu melhor tempo?</h2>
 
             <!-- GRELHA DE NÍVEIS: 2-2-1 -->
@@ -1231,6 +1326,14 @@ footer p { font-size: 0.8rem; color: var(--cor-4ano-dark); margin: 0; }
 					<span id="icone-tempo-svg"></span>
 					<span id="val-tempo">00:00</span>
 				</div>
+				<button id="btn-fullscreen" onclick="toggleFullscreen()" title="Ecrã Inteiro" aria-label="Ecrã Inteiro">
+					<svg id="icon-fs-enter" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+						<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+					</svg>
+					<svg id="icon-fs-exit" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display:none;">
+						<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+					</svg>
+				</button>
 			</div>
 
 			<!-- CONTENTOR DA ÁREA DE JOGO DINÂMICA -->
@@ -1564,6 +1667,26 @@ function gerarGrelhaSopa(lista) {
     }
 
     return { matriz, colocadas };
+}
+function toggleFullscreen() {
+    const elem = document.getElementById('cartao-jogo');
+    if (!elem) return;
+
+    if (!document.fullscreenElement) {
+        // Entra em Fullscreen
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+        }
+    } else {
+        // Sai de Fullscreen
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+    }
 }
 
 /* =====================================================================

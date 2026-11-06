@@ -1127,6 +1127,171 @@ footer p { font-size: 0.8rem; color: var(--cor-4ano-dark); margin: 0; }
     width: 45px; height: 45px; border-radius: 50%; font-weight: bold; font-size: 1.5rem; cursor: pointer;
 }
 
+/* =========================================================
+   REGRAS DE FULLSCREEN (PC/Desktop)
+   ========================================================= */
+
+/* Escondido por defeito em mobile e tablets */
+#btn-fullscreen {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    #btn-fullscreen {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        border: 2px solid var(--cor-4ano-dark);
+        border-radius: 12px;
+        padding: 6px;
+        cursor: pointer;
+        color: var(--cor-4ano-dark);
+        transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    #btn-fullscreen:hover {
+        background: var(--bg-header);
+        transform: scale(1.08);
+    }
+	
+	#btn-fullscreen svg path {
+		stroke: currentColor;
+		stroke-width: 1px;
+		stroke-linejoin: round;
+	}
+}
+
+#cartao-jogo:fullscreen {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #f4faff !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    position: relative !important;
+
+    zoom: 1.38;
+}
+
+/* Botão Sair de Fullscreen */
+.btn-sair-fullscreen {
+    display: none;
+}
+
+#cartao-jogo:fullscreen .btn-sair-fullscreen {
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10000;
+    background: #ffffff;
+    border: 2px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #475569;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+#cartao-jogo:fullscreen .btn-sair-fullscreen:hover {
+    background: #fef2f2;
+    border-color: #f87171;
+    color: #dc2626;
+    transform: scale(1.05);
+}
+
+
+
+/* =========================================
+   CARTÃO DO MELHOR TEMPO (MENU INICIAL)
+   ========================================= */
+.melhor-tempo-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 2px solid #bcdcff;
+    border-radius: 14px;
+    padding: 10px 18px;
+    margin-top: 35px;
+    font-size: 0.95rem;
+    color: var(--azul-escuro, #1e272e);
+    box-shadow: 0 4px 12px rgba(0, 145, 255, 0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.melhor-tempo-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 145, 255, 0.15);
+}
+
+.melhor-tempo-container svg {
+    stroke: var(--azul-vibrante, #0091ff);
+}
+
+.melhor-tempo-container strong {
+    color: var(--azul-vibrante, #0091ff);
+    font-weight: 800;
+    font-size: 1.05rem;
+}
+
+/* Container pai para alinhar a caixa e o botão na vertical */
+.contentor-recorde-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Botão de Apagar Recorde Estilizado */
+.btn-apagar-tempo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: #ffffff;
+    border: 1.5px solid #fca5a5;
+    border-radius: 10px;
+    padding: 5px 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #ef4444;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(239, 68, 68, 0.08);
+    transition: all 0.2s ease;
+}
+
+.btn-apagar-tempo:hover {
+    background: #fef2f2;
+    border-color: #f87171;
+    color: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.15);
+}
+
+.btn-apagar-tempo:active {
+    transform: translateY(0);
+}
+
+/* Ajuste fino do SVG dentro do botão */
+.btn-apagar-tempo svg {
+    flex-shrink: 0;
+}
+
     </style>
 </head>
 <body>
@@ -1151,6 +1316,12 @@ footer p { font-size: 0.8rem; color: var(--cor-4ano-dark); margin: 0; }
 
 <main>
     <div class="cartao-jogo-container" id="cartao-jogo">
+	<button class="btn-sair-fullscreen" onclick="toggleFullscreen()" title="Sair do Ecrã Inteiro (ESC)">
+						<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+							<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+						</svg>
+						<span>Sair (ESC)</span>
+			</button> 
         <div id="confetti-container" class="confetti-container"></div>
         <div class="toast-msg" id="toast-msg"></div>
 
@@ -1229,6 +1400,29 @@ footer p { font-size: 0.8rem; color: var(--cor-4ano-dark); margin: 0; }
 
 				
 			</div>
+
+			<div class="contentor-recorde-wrapper">
+
+				<div class="melhor-tempo-container" id="melhor-tempo-box">
+					<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="12" cy="12" r="10"></circle>
+						<polyline points="12 6 12 12 16 14"></polyline>
+					</svg>
+					<span>O meu melhor tempo: <strong id="val-melhor-tempo">--:--</strong></span>
+				</div>
+
+				<!-- BOTÃO APAGAR (POR BAIXO) -->
+				<button class="btn-apagar-tempo" onclick="apagarMelhorTempo()" title="Apagar melhor tempo">
+					<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<polyline points="3 6 5 6 21 6"></polyline>
+						<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+						<line x1="10" y1="11" x2="10" y2="17"></line>
+						<line x1="14" y1="11" x2="14" y2="17"></line>
+					</svg>
+					<span>Apagar Recorde</span>
+				</button>
+			</div>
+
         </div>
 
 
@@ -1244,16 +1438,24 @@ footer p { font-size: 0.8rem; color: var(--cor-4ano-dark); margin: 0; }
 					<span id="val-progresso">0</span>/<span id="val-total">8</span>
 				</div>
 
-				<!-- Barra de Progresso (Enche à medida que encontram palavras) -->
+
 				<div class="progress-bg">
 					<div id="progress-fill" class="progress-fill"></div>
 				</div>
 
-				<!-- Temporizador (Substitui o Badge de Erros) -->
+
 				<div class="badge-erros">
 					<span id="icone-tempo-svg"></span>
 					<span id="val-tempo">00:00</span>
 				</div>
+				<button id="btn-fullscreen" onclick="toggleFullscreen()" title="Ecrã Inteiro" aria-label="Ecrã Inteiro">
+					<svg id="icon-fs-enter" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+						<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+					</svg>
+					<svg id="icon-fs-exit" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display:none;">
+						<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+					</svg>
+				</button>
 			</div>
 
 			<!-- CONTENTOR DA ÁREA DE JOGO DINÂMICA -->
@@ -1411,6 +1613,27 @@ function prepararJogo(sistema) {
     
     mostrarEcra('ecra-jogo');
     carregarRonda();
+}
+
+function toggleFullscreen() {
+    const elem = document.getElementById('cartao-jogo');
+    if (!elem) return;
+
+    if (!document.fullscreenElement) {
+        // Entra em Fullscreen
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+        }
+    } else {
+        // Sai de Fullscreen
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+    }
 }
 
 /* =====================================================================
@@ -1704,6 +1927,7 @@ function finalizarJogo() {
     document.querySelector('.end-stats').innerHTML = `Tempo Total: <strong>${document.getElementById('val-tempo').textContent}</strong>`;
     document.getElementById('rank-container').innerHTML = `<img src="../../../SVG/taca.svg" class="taca-vitoria" style="width:130px;">`;
     tocarSom('vitoria'); dispararConfetis();
+	verificarEGuardarMelhorTempo();
 }
 
 function animarFoguetao(state) {
@@ -1784,6 +2008,65 @@ function voltarAoMenuPrincipal() { mostrarEcra('ecra-selecao'); document.getElem
 function reiniciarJogo() { prepararJogo(sistemaAtivo); limparConfetis(); }
 function baralharArray(a) { for(let i=a.length-1; i>0; i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 function showToast(m) { const t = document.getElementById('toast-msg'); t.textContent = m; t.classList.add('active'); setTimeout(()=>t.classList.remove('active'), 2500); }
+
+
+// Converte segundos em formato visual (ex: 75 seg -> 01:15)
+function formatarTempo(segundos) {
+    if (segundos === null || segundos === undefined) return "--:--";
+    const m = Math.floor(segundos / 60).toString().padStart(2, '0');
+    const s = (segundos % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+}
+
+// 1. CARREGAR O MELHOR TEMPO (Chamar ao abrir o jogo)
+function carregarMelhorTempo() {
+    const melhorGuardado = localStorage.getItem('melhorTempoJogo');
+    const elemMelhor = document.getElementById('val-melhor-tempo');
+
+    if (elemMelhor) {
+        if (melhorGuardado !== null) {
+            elemMelhor.textContent = formatarTempo(parseInt(melhorGuardado, 10));
+        } else {
+            elemMelhor.textContent = "--:--";
+        }
+    }
+}
+
+// 2. VERIFICAR E GUARDAR (Chamar dentro da função finalizarJogo)
+function verificarEGuardarMelhorTempo() {
+    clearInterval(cronometroInterval); // Para o relógio
+
+    const melhorGuardado = localStorage.getItem('melhorTempoJogo');
+    const recordeAtual = melhorGuardado ? parseInt(melhorGuardado, 10) : Infinity;
+
+    // Se o tempo atual for menor do que o recorde guardado (ou for o 1º jogo)
+    if (tempoSegundos < recordeAtual) {
+        localStorage.setItem('melhorTempoJogo', tempoSegundos);
+        carregarMelhorTempo();
+        return true; // Retorna true se bateu o recorde!
+    }
+    return false;
+}
+
+// 3. APAGAR O MELHOR TEMPO
+function apagarMelhorTempo() {
+    // Elimina o recorde diretamente sem pedir confirmação
+    localStorage.removeItem('melhorTempoJogo');
+    
+    // Atualiza o valor visual para "--:--"
+    carregarMelhorTempo();
+    
+    // Opcional: mostra a tua mensagem customizada no jogo se a função existir
+    if (typeof showToast === 'function') {
+        showToast("Melhor tempo apagado!");
+    }
+}
+
+// Carrega o recorde assim que a página é aberta
+document.addEventListener('DOMContentLoaded', () => {
+    carregarMelhorTempo();
+});
+
 </script>
 <script type="module" src="/contador.js"></script></body>
 </html>
