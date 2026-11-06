@@ -2194,7 +2194,7 @@
 
 
 /* =========================================================
-   REGRAS DE FULLSCREEN COM ESCALA PERFEITA (PC/Desktop)
+   REGRAS DE FULLSCREEN (PC/Desktop)
    ========================================================= */
 
 /* Escondido por defeito em mobile e tablets */
@@ -2208,21 +2208,26 @@
         align-items: center;
         justify-content: center;
         background: #ffffff;
-        border: 2px solid #bae6fd;
+        border: 2px solid var(--cor-4ano-dark);
         border-radius: 12px;
         padding: 6px;
         cursor: pointer;
-        color: #0284c7;
+        color: var(--cor-4ano-dark);
         transition: transform 0.15s ease, background-color 0.15s ease;
     }
 
     #btn-fullscreen:hover {
-        background: #e0f2fe;
+        background: var(--bg-header);
         transform: scale(1.08);
     }
+	
+	#btn-fullscreen svg path {
+		stroke: currentColor;
+		stroke-width: 1px;
+		stroke-linejoin: round;
+	}
 }
 
-/* Container principal em modo Fullscreen */
 #cartao-jogo:fullscreen {
     width: 100vw !important;
     height: 100vh !important;
@@ -2239,7 +2244,6 @@
     overflow: hidden !important;
     position: relative !important;
 
-    /* Aumenta todo o jogo e ecrãs finais em 38% */
     zoom: 1.38;
 }
 
@@ -2248,7 +2252,6 @@
     display: none;
 }
 
-/* Mostra o botão Sair em qualquer ecrã quando o #cartao-jogo estiver em Fullscreen */
 #cartao-jogo:fullscreen .btn-sair-fullscreen {
     display: flex !important;
     align-items: center;
