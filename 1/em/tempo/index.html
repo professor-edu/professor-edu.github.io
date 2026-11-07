@@ -435,6 +435,82 @@
     background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px);
     background-size: 25px 25px;
   }
+  
+  /* =========================================
+   CARTÃO DO MELHOR TEMPO (MENU INICIAL)
+   ========================================= */
+.contentor-recorde-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.melhor-tempo-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 2px solid #bcdcff;
+    border-radius: 14px;
+    padding: 10px 18px;
+    margin-top: 35px;
+    font-size: 0.95rem;
+    color: var(--azul-escuro, #1e272e);
+    box-shadow: 0 4px 12px rgba(0, 145, 255, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.melhor-tempo-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 145, 255, 0.25);
+}
+
+.melhor-tempo-container svg {
+    stroke: var(--azul-vibrante, #0091ff);
+}
+
+.melhor-tempo-container strong {
+    color: var(--azul-vibrante, #0091ff);
+    font-weight: 800;
+    font-size: 1.05rem;
+}
+
+/* Botão de Apagar Recorde Estilizado */
+.btn-apagar-tempo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: #ffffff;
+    border: 1.5px solid #fca5a5;
+    border-radius: 10px;
+    padding: 5px 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #ef4444;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(239, 68, 68, 0.08);
+    transition: all 0.2s ease;
+}
+
+.btn-apagar-tempo:hover {
+    background: #fef2f2;
+    border-color: #f87171;
+    color: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.15);
+}
+
+.btn-apagar-tempo:active {
+    transform: translateY(0);
+}
+
+.btn-apagar-tempo svg {
+    flex-shrink: 0;
+}
+  
 </style>
 </head>
 <body>
@@ -486,6 +562,28 @@
             <button class="btn-acao1" onclick="iniciarJogo()">
 				Começar o Jogo <img src="../../../SVG/seta_direita.svg" class="icon-svg-voltar" alt="">
 			</button>
+			
+			<div class="contentor-recorde-wrapper">
+				<div class="melhor-tempo-container" id="melhor-tempo-box">
+					<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="12" cy="12" r="10"></circle>
+						<polyline points="12 6 12 12 16 14"></polyline>
+					</svg>
+					<span>O meu melhor tempo: <strong id="val-melhor-tempo">--:--</strong></span>
+				</div>
+
+				<button type="button" class="btn-apagar-tempo" onclick="apagarMelhorTempo('rec_memoria_tempo')" title="Apagar melhor tempo">
+					<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<polyline points="3 6 5 6 21 6"></polyline>
+						<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+						<line x1="10" y1="11" x2="10" y2="17"></line>
+						<line x1="14" y1="11" x2="14" y2="17"></line>
+					</svg>
+					<span>Apagar Recorde</span>
+				</button>
+			</div>
+			
+			
         </div>
 
         <!-- ECRÃ DE JOGO -->
@@ -533,6 +631,52 @@
 <script>
     document.getElementById('ano-atual').innerText = new Date().getFullYear();
     
+	// 1. Carrega o tempo assim que o ecrã abre
+document.addEventListener('DOMContentLoaded', () => {
+    carregarMelhorTempo('rec_memoria_tempo');
+});
+
+// 2. Converte segundos para formato "MM:SS"
+function formatarTempo(segundos) {
+    if (segundos === null || segundos === undefined || isNaN(segundos)) return "--:--";
+    const m = Math.floor(segundos / 60).toString().padStart(2, '0');
+    const s = (segundos % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+}
+
+// 3. Lê do localStorage
+function carregarMelhorTempo(chaveJogo, idDisplay = 'val-melhor-tempo') {
+    const recorde = localStorage.getItem(chaveJogo);
+    const elem = document.getElementById(idDisplay);
+    if (elem) {
+        elem.textContent = recorde !== null ? formatarTempo(parseInt(recorde, 10)) : "--:--";
+    }
+}
+
+// 4. Guarda se for novo recorde
+function guardarMelhorTempo(tempoAtualSegundos, chaveJogo, idDisplay = 'val-melhor-tempo') {
+    const recordeGuardado = localStorage.getItem(chaveJogo);
+    const recordeAtual = recordeGuardado !== null ? parseInt(recordeGuardado, 10) : Infinity;
+
+    if (tempoAtualSegundos < recordeAtual) {
+        localStorage.setItem(chaveJogo, tempoAtualSegundos);
+        carregarMelhorTempo(chaveJogo, idDisplay);
+        return true;
+    }
+    return false;
+}
+
+// 5. Apaga o recorde sem caixas pop-up do sistema
+function apagarMelhorTempo(chaveJogo, idDisplay = 'val-melhor-tempo') {
+    localStorage.removeItem(chaveJogo);
+    carregarMelhorTempo(chaveJogo, idDisplay);
+    if (typeof showToast === 'function') {
+        showToast("Recorde deste jogo apagado!");
+    }
+}
+
+	
+	
     // ==========================================
     // SVGs UI
     // ==========================================
@@ -814,6 +958,8 @@
     function finalizarJogo() {
         pararCronometro();
         document.getElementById('tempo-final-texto').textContent = timerDisplay.textContent;
+		guardarMelhorTempo(segundos, 'rec_memoria_tempo');
+
         mostrarEcra('ecra-fim');
         tocarSom('vitoria'); 
         dispararConfetis();
