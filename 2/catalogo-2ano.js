@@ -71,5 +71,6 @@ const todosOsJogos =[
 	{ nome: "Flutua ou Afunda?", icone: "icones/flutua_afunda.png", link: "em/flutua-afunda/", cat: "em" },
 	{ nome: "Os 5 Sentidos", icone: "icones/5_sentidos.png", link: "em/5-sentidos/", cat: "em" },
 	{ nome: "A Família", icone: "icones/familia.png", link: "em/familia/", cat: "em" },
-	{ nome: "Super Quiz", icone: "icones/quiz_estudo_meio.png", link: "em/quiz/", cat: "em" }
+	{ nome: "Super Quiz", icone: "icones/quiz_estudo_meio.png", link: "em/quiz/", cat: "em" },
+	{ nome: "Missão Calendário", icone: "icones/missao_calendario.png", link: "em/missao-calendario/", cat: "em" }
 ];
