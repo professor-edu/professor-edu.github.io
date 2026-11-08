@@ -17,10 +17,10 @@ const novidadesSite = [
     {
         ano: "ano2",
         rotulo: "2º ANO",
-		disciplina: "PT",
-        nome: "Letras Mágicas",
-        icone: "2/icones/letras_magicas.png",
-        link: "2/pt/letras-magicas/"
+		disciplina: "EM",
+        nome: "Missão Calendário",
+        icone: "2/icones/missao_calendario.png",
+        link: "2/em/missao-calendario/"
     },
     {
         ano: "ano3",

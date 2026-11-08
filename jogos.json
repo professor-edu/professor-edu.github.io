@@ -1406,7 +1406,14 @@
         "disciplina": "Estudo do Meio",
         "tags": ["super", "quiz", "revisões", "perguntas"]
     },
-
+	{
+        "nome": "Missão Calendário",
+        "icone": "/2/icones/missao_calendario.png",
+        "link": "/2/em/missao-calendario/",
+        "ano": "2º Ano",
+        "disciplina": "Estudo do Meio",
+        "tags": ["calendário", "meses do ano", "dias da semana", "estações do ano", "sequência temporal", "ontem hoje amanhã", "noção do tempo", "som"]
+    },
     {
         "nome": "Determinantes Artigos",
         "icone": "/3/icones/determinantes_artigos.png",

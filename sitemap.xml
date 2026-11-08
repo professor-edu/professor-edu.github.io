@@ -181,6 +181,7 @@
   <url><loc>https://professor-edu.github.io/2/em/5-sentidos/</loc><priority>0.8</priority></url>
   <url><loc>https://professor-edu.github.io/2/em/familia/</loc><priority>0.8</priority></url>
   <url><loc>https://professor-edu.github.io/2/em/quiz/</loc><priority>0.8</priority></url>
+  <url><loc>https://professor-edu.github.io/2/em/missao-calendario/</loc><priority>0.8</priority></url>
   <url><loc>https://professor-edu.github.io/3/pt/determinantes-artigos/</loc><priority>0.8</priority></url>
   <url><loc>https://professor-edu.github.io/3/pt/sinonimos-antonimos/</loc><priority>0.8</priority></url>
   <url><loc>https://professor-edu.github.io/3/pt/graus/</loc><priority>0.8</priority></url>
@@ -274,5 +275,4 @@
   <url><loc>https://professor-edu.github.io/4/em/terra-viva/</loc><priority>0.8</priority></url>
   <url><loc>https://professor-edu.github.io/4/em/sopa-letras/</loc><priority>0.8</priority></url>
   <url><loc>https://professor-edu.github.io/4/em/sopa-letras-tec/</loc><priority>0.8</priority></url>
-
 </urlset>
