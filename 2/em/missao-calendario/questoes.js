@@ -59,7 +59,7 @@ const CONFIG_JOGO = {
                 {
                     pergunta: "Qual é o <span class='destaque-amarelo'>último</span> dia da semana de aulas?",
                     audio: "audio/dias_q4.mp3",
-                    imagemPergunta: "img/crianca_alegre_fim_aulas.png",
+                    imagemPergunta: "img/mochila_escola.png",
                     opcoes: ["Sexta-feira", "Quarta-feira", "Domingo", "Segunda-feira"],
                     correta: "Sexta-feira",
                     dica: { texto: "É o dia em que terminam as aulas e começa o descanso!" }

@@ -1013,6 +1013,75 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes moverRiscas { 0% { background-position: 0 0; } 100% { background-position: 30px 0; } }
 		
+		
+		/* ==========================================
+		   MASCOTE DE FEEDBACK
+		========================================== */
+		#mascote-feedback {
+			position: absolute;
+			bottom: 15px;
+			right: 15px;
+			width: 100px;
+			height: 100px;
+			z-index: 100;
+			pointer-events: none;
+			transition: all 0.5s ease; 
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		#mascote-feedback img { 
+			width: 100%; 
+			height: 100%; 
+			object-fit: contain; 
+		}
+
+		.mascote-normal { animation: balancoMascote 5s infinite ease-in-out; }
+		.mascote-erro { animation: shakeError 0.4s ease-in-out; }
+		.mascote-sucesso { animation: saltoAlegria 0.8s ease-out; }
+
+		@keyframes balancoMascote {
+			0%, 100% { 
+				transform: translateY(0) rotate(0deg); 
+			}
+			25% { 
+				transform: translateY(-6px) rotate(-4deg);
+			}
+			50% { 
+				transform: translateY(0) rotate(0deg);
+			}
+			75% { 
+				transform: translateY(-6px) rotate(4deg);
+			}
+		}
+
+		@keyframes shakeError {
+			0%, 100% { transform: translateX(0); }
+			20%, 60% { transform: translateX(-8px) rotate(-4deg); }
+			40%, 80% { transform: translateX(8px) rotate(4deg); }
+		}
+
+		@keyframes saltoAlegria {
+			0%, 100% { transform: translateY(0) scale(1); }
+			30% { transform: translateY(-45px) scale(1.1, 0.9); }
+			50% { transform: translateY(-55px) scale(0.9, 1.1); }
+		}
+
+		@media (max-width: 600px) {
+			#mascote-feedback { 
+				width: 60px; 
+				height: 60px; 
+				right: 5px; 
+				bottom: 5px; 
+			}
+		}
+
+		@media (max-width: 600px) and (orientation: portrait) {
+			#mascote-feedback {
+				display: none !important;
+			}
+		}
 
 		/* =========================================================
 		   REGRAS DE FULLSCREEN (PC/Desktop)
@@ -1639,7 +1708,9 @@
 
         <!-- ECRÃ DE JOGO -->
         <div id="ecra-jogo" class="ecra">
-            
+            <div id="mascote-feedback" style="display: none;">
+				<img src="img/mascote_normal.png" class="mascote-mascote" alt="Mascote do Jogo">
+			</div>
             <div class="status-bar-jogo">
 				<button class="btn-voltar-menu" onclick="voltarAoMenu()" id="btn-home-svg" aria-label="Voltar ao menu"></button>
 				<button id="btn-dica" class="btn-dica" onclick="usarDica()" aria-label="Usar dica"></button>
@@ -1833,6 +1904,42 @@
    JOGO
    ========================================== */
    
+function animarMascote(estado) {
+    const container = document.getElementById('mascote-feedback');
+    if (!container) return;
+    const imgNode = container.querySelector('img');
+
+    container.classList.remove('mascote-normal', 'mascote-erro', 'mascote-sucesso');
+    void container.offsetWidth;
+
+    if (estado === 'normal') {
+        if (imgNode) imgNode.src = "img/mascote_normal.png";
+        container.classList.add('mascote-normal');
+    }
+    else if (estado === 'erro') {
+        if (imgNode) imgNode.src = "img/mascote_erro.png";
+        container.classList.add('mascote-erro');
+        setTimeout(() => animarMascote('normal'), 700);
+    }
+    else if (estado === 'acerto') {
+        if (imgNode) imgNode.src = "img/mascote_acerto.png";
+        container.classList.add('mascote-sucesso');
+        setTimeout(() => {
+            // Substituído totalRondas por totalDesafiosNivel
+            if (typeof totalDesafiosNivel !== 'undefined' && desafioAtual < totalDesafiosNivel) {
+                animarMascote('normal');
+            }
+        }, 1000);
+    }
+}
+
+	function mostrarMascote(visivel) {
+		const container = document.getElementById('mascote-feedback');
+		if (container) {
+			container.style.display = visivel ? 'flex' : 'none';
+		}
+	}
+	
 	function carregarRonda() {
 		pararVoz();
 		resetTimerImpaciencia();
@@ -1878,18 +1985,13 @@
 
 		const paletaCores = ['cor-azul', 'cor-amarelo', 'cor-roxo', 'cor-rosa'];
 		const coresSorteadas = baralharArray([...paletaCores]);
-
-
 		const opcoesSorteadas = baralharArray([...ronda.opcoes]);
-
 
 		html += `<div class="opcoes-container" id="opcoes-container">`;
 		
 		opcoesSorteadas.forEach((opcao, index) => {
 			const eCorreta = (opcao === ronda.correta);
 			const fnClique = eCorreta ? "simularAcerto(this)" : "simularErro(this)";
-			
-
 			const classeCor = coresSorteadas[index % coresSorteadas.length];
 			
 			html += `
@@ -1901,8 +2003,13 @@
 
 		html += `</div>`;
 		
+		// Injeta o HTML no ecrã e atualiza o placar
 		gameArea.innerHTML = html;
 		atualizarPlacar();
+
+		// Ativa e coloca a mascote a flutuar ao carregar a nova ronda
+		mostrarMascote(true);
+		animarMascote('normal');
 	}
 	
 	function iniciarJogo(numQuestoes = 10, tituloNivel = "", idNivel = 1) {
@@ -2061,6 +2168,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function simularAcerto(btn) {
 	pararVoz();
+	animarMascote('acerto');
 	pararTimerImpaciencia();
 	document.querySelectorAll('.btn-opcao, .bloco-arrastar').forEach(b => {
 		b.classList.add('btn-disabled');
@@ -2095,6 +2203,7 @@ function simularAcerto(btn) {
 }
 
 function simularErro(btn) {
+	animarMascote('erro');
 	btn.classList.add('erro-vibrante');
 	tocarSom('erro');
 	erradas++;
@@ -2113,13 +2222,13 @@ function finalizarJogo() {
 	}, 500);
 }
 
-/* CORRIGIDO: Reinicia o jogo mantendo o nível atual */
 function reiniciarJogo() {
 	iniciarJogo(totalDesafiosNivel, nivelAtualTitulo, nivelAtualId);
 }
 
 function voltarAoMenu() {
 	pararVoz();
+	mostrarMascote(false);
 	document.getElementById('subtitulo-header').textContent = "Escolhe um minijogo para começar!";
 	limparConfetis();
 	mostrarEcra('ecra-selecao');
