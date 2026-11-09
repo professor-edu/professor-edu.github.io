@@ -19,7 +19,7 @@ const CONFIG_JOGO = {
                 {
                     id: 101,
                     tipo: "situacao",
-                    pergunta: "O remédio da avó",
+                    pergunta: "<span class='destaque-badge'>O remédio da avó</span>",
                     audio: "audios/situacao_remedio.mp3", // Áudio: "A avó do Duarte está com uma constipação e precisa de xarope. Onde deve ir comprar o medicamento?"
                     dica: "É o local onde se vendem medicamentos e xaropes para a saúde.",
                     opcoesImagem: [
@@ -33,7 +33,7 @@ const CONFIG_JOGO = {
                 {
                     id: 102,
                     tipo: "padrao",
-                    pergunta: "Onde vamos para comprar medicamentos prescritos pelo médico?",
+                    pergunta: "<span class='destaque-badge'>Medicamentos prescritos pelo médico</span>",
                     audio: "audios/q_farmacia.mp3", // Áudio: "Quando o médico nos passa uma receita de remédios, em que estabelecimento os vamos buscar?"
                     dica: "Procura o estabelecimento onde os farmacêuticos nos atendem.",
                     opcoes: ["Farmácia", "Teatro", "Banco", "Supermercado"],
@@ -42,8 +42,8 @@ const CONFIG_JOGO = {
                 {
                     id: 103,
                     tipo: "situacao",
-                    pergunta: "A carta para o amigo",
-                    audio: "audios/situacao_carta.mp3", // Áudio: "O Tomás escreveu um postal de parabéns ao primo que mora longe. Onde é que ele deve ir para o enviar?"
+                    pergunta: "<span class='destaque-badge'>O postal para o amigo</span>",
+                    audio: "audios/situacao_carta.mp3", // Áudio: "O Tomás escreveu um postal de parabéns ao amigo que mora longe. Onde é que ele deve ir para o enviar?"
                     dica: "É o sítio onde colamos selos e pesamos as encomendas.",
                     opcoesImagem: [
                         { img: "img/correios.jpg", alt: "Correios", valor: "Correios" },
@@ -56,8 +56,8 @@ const CONFIG_JOGO = {
                 {
                     id: 104,
                     tipo: "padrao",
-                    pergunta: "Qual é a instituição responsável por enviar cartas e encomendas?",
-                    audio: "audios/q_correios.mp3", // Áudio: "Qual é o serviço público para onde levamos as cartas para que os carteiros as entreguem?"
+                    pergunta: "<span class='destaque-badge'>Cartas e encomendas</span>",
+                    audio: "audios/q_correios.mp3", // Áudio: "Qual é o serviço público para onde levamos as cartas ou encomendas para que os carteiros as entreguem?"
                     dica: "É o serviço onde trabalham os carteiros.",
                     opcoes: ["Correios", "Biblioteca", "Tribunal", "Piscina Municipal"],
                     correta: "Correios"
@@ -65,7 +65,7 @@ const CONFIG_JOGO = {
                 {
                     id: 105,
                     tipo: "situacao",
-                    pergunta: "Tratamento de emergência",
+                    pergunta: "<span class='destaque-badge'>Tratamento de emergência</span>",
                     audio: "audios/situacao_hospital.mp3", // Áudio: "O Leo caiu a andar de bicicleta, magoou-se com gravidade e precisa de ver um médico urgente. Para onde o vai levar a ambulância?"
                     dica: "Local onde trabalham equipas de médicos e enfermeiros 24 horas por dia.",
                     opcoesImagem: [
@@ -79,8 +79,8 @@ const CONFIG_JOGO = {
                 {
                     id: 106,
                     tipo: "padrao",
-                    pergunta: "Em caso de doença súbita ou acidente grave, onde devemos ir?",
-                    audio: "audios/q_hospital.mp3", // Áudio: "Se alguém tiver uma emergência de saúde grave durante a noite, a que edifício de saúde deve recorrer?"
+                    pergunta: "<span class='destaque-amarelo'>Doença súbita ou acidente grave</span>",
+                    audio: "audios/q_hospital.mp3", // Áudio: "Se alguém tiver uma emergência de saúde grave durante a noite, a que serviço de saúde deve recorrer?"
                     dica: "É para onde as ambulâncias levam os doentes urgentes.",
                     opcoes: ["Hospital", "Museu", "Banco", "Teatro"],
                     correta: "Hospital"
@@ -88,7 +88,7 @@ const CONFIG_JOGO = {
                 {
                     id: 107,
                     tipo: "situacao",
-                    pergunta: "Guardar as poupanças",
+                    pergunta: "<span class='destaque-amarelo'>Guardar as poupanças</span>",
                     audio: "audios/situacao_banco.mp3", // Áudio: "A Maria encheu o seu mealheiro de moedas e os pais vão ajudá-la a guardar o dinheiro numa conta segura. Onde vão?"
                     dica: "Espaço onde se depositam moedas e notas em segurança.",
                     opcoesImagem: [
@@ -102,16 +102,16 @@ const CONFIG_JOGO = {
                 {
                     id: 108,
                     tipo: "padrao",
-                    pergunta: "Qual o local indicado para guardar dinheiro em segurança ou tratar de finanças?",
+                    pergunta: "<span class='destaque-amarelo'>Guardar o dinheiro em segurança</span>",
                     audio: "audios/q_banco.mp3", // Áudio: "Onde é que os adultos vão para guardar as suas poupanças ou utilizar o Multibanco?"
-                    dica: "Tem caixas automáticas (Multibanco) para levantar dinheiro.",
+                    dica: "Tem caixas automáticas (Multibanco) para levantar ou depositar dinheiro.",
                     opcoes: ["Banco", "Escola", "Centro de Saúde", "Biblioteca"],
                     correta: "Banco"
                 },
                 {
                     id: 109,
                     tipo: "situacao",
-                    pergunta: "Requisitar um livro",
+                    pergunta: "<span class='destaque-amarelo'>Requisitar um livro</span>",
                     audio: "audios/situacao_livro.mp3", // Áudio: "A Matilde precisa de pesquisar sobre dinossauros para um trabalho da escola. Onde pode ir pedir um livro emprestado?"
                     dica: "Local cheio de prateleiras com livros de histórias e enciclopédias.",
                     opcoesImagem: [
@@ -125,7 +125,7 @@ const CONFIG_JOGO = {
                 {
                     id: 110,
                     tipo: "padrao",
-                    pergunta: "Onde podemos consultar e requisitar livros para aprender coisas novas?",
+                    pergunta: "<span class='destaque-amarelo'>Consultar e requisitar livros</span>",
                     audio: "audios/q_biblioteca.mp3", // Áudio: "Qual é o local público da cidade onde podemos ler em silêncio e levar livros para casa?"
                     dica: "É um local público de leitura onde devemos fazer silêncio.",
                     opcoes: ["Biblioteca", "Tribunal", "Piscina Municipal", "Farmácia"],
@@ -134,7 +134,7 @@ const CONFIG_JOGO = {
                 {
                     id: 111,
                     tipo: "situacao",
-                    pergunta: "Fazer as compras de comida",
+                    pergunta: "<span class='destaque-fundo'>Fazer as compras</span>",
                     audio: "audios/situacao_compras.mp3", // Áudio: "O pai precisa de encher o carrinho com fruta, pão, iogurtes e vegetais para a semana. Onde deve ir?"
                     dica: "Local onde usamos um carrinho para escolher fruta, pão e leite.",
                     opcoesImagem: [
@@ -148,8 +148,8 @@ const CONFIG_JOGO = {
                 {
                     id: 112,
                     tipo: "padrao",
-                    pergunta: "Onde se compram os alimentos e produtos para responder às necessidades diárias da família?",
-                    audio: "audios/q_supermercado.mp3", // Áudio: "Em que grande loja da comunidade encontramos toda a comida necessária para o dia a dia?"
+                    pergunta: "<span class='destaque-fundo'>Alimentos e outros produtos</span>",
+                    audio: "audios/q_supermercado.mp3", // Áudio: "Em que grande loja da comunidade encontramos toda a comida necessária e outros produtos para o dia a dia?"
                     dica: "Loja de grande dimensão com várias secções de alimentação.",
                     opcoes: ["Supermercado", "Teatro", "PSP", "Biblioteca"],
                     correta: "Supermercado"
@@ -157,7 +157,7 @@ const CONFIG_JOGO = {
                 {
                     id: 113,
                     tipo: "situacao",
-                    pergunta: "A aula de natação",
+                    pergunta: "<span class='destaque-fundo'>Aula de natação</span>",
                     audio: "audios/situacao_natacao.mp3", // Áudio: "Ao fim da tarde, a Sofia equipa-se com o fato de banho e a touca para aprender a nadar. Aonde é que a mãe a vai levar?"
                     dica: "Instalação desportiva com tanques de água cobertos.",
                     opcoesImagem: [
@@ -171,7 +171,7 @@ const CONFIG_JOGO = {
                 {
                     id: 114,
                     tipo: "padrao",
-                    pergunta: "A PSP e a GNR são forças de segurança que servem para...",
+                    pergunta: "<span class='destaque-fundo'>A PSP e a GNR servem para...</span>",
                     audio: "audios/q_seguranca.mp3", // Áudio: "Qual é o principal dever dos polícias e guardas que patrulham as nossas ruas?"
                     dica: "Pensa naquilo que os agentes da autoridade fazem na rua.",
                     opcoes: ["Proteger as populações", "Vender alimentos", "Emprestar livros", "Fazer espetáculos"],
@@ -180,7 +180,7 @@ const CONFIG_JOGO = {
                 {
                     id: 115,
                     tipo: "situacao",
-                    pergunta: "Pedir ajuda à polícia",
+                    pergunta: "<span class='destaque-fundo'>Pedir ajuda</span>",
                     audio: "audios/situacao_policia.mp3", // Áudio: "Se te perderes da tua família durante um passeio no centro da cidade, a que profissionais de farda deves pedir ajuda?"
                     dica: "Procura a entidade onde trabalham guardas e agentes de farda.",
                     opcoesImagem: [
@@ -194,7 +194,7 @@ const CONFIG_JOGO = {
                 {
                     id: 116,
                     tipo: "padrao",
-                    pergunta: "Onde assistimos a peças de teatro, musicais e apresentações artísticas?",
+                    pergunta: "<span class='destaque-badge'>Peças de teatro, musicais e apresentações artísticas</span>",
                     audio: "audios/q_teatro.mp3", // Áudio: "Qual é o edifício com palco e cortinas onde se realizam peças dramáticas e musicais?"
                     dica: "É um edifício com palco, cortinas vermelhas e plateia.",
                     opcoes: ["Teatro", "Hospital", "Banco", "Supermercado"],
@@ -203,7 +203,7 @@ const CONFIG_JOGO = {
                 {
                     id: 117,
                     tipo: "situacao",
-                    pergunta: "Ver uma peça ao vivo",
+                    pergunta: "<span class='destaque-amarelo'>Ver uma peça ao vivo</span>",
                     audio: "audios/situacao_teatro.mp3", // Áudio: "A turma do 2.º ano vai fazer uma visita de estudo para ver um espetáculo de marionetas num palco real. Aonde é que o autocarro os leva?"
                     dica: "Espaço cultural de artes cénicas e espetáculos.",
                     opcoesImagem: [
@@ -217,7 +217,7 @@ const CONFIG_JOGO = {
                 {
                     id: 118,
                     tipo: "padrao",
-                    pergunta: "Qual é o local encarregue de julgar e garantir a defesa dos direitos dos cidadãos?",
+                    pergunta: "<span class='destaque-fundo'>Direitos dos cidadãos</span>",
                     audio: "audios/q_tribunal.mp3", // Áudio: "Onde trabalham os juízes para resolver problemas entre as pessoas e aplicar a lei com justiça?"
                     dica: "É o local onde trabalham os juízes e advogados.",
                     opcoes: ["Tribunal", "Escola", "Biblioteca", "Piscina Municipal"],
@@ -226,8 +226,8 @@ const CONFIG_JOGO = {
                 {
                     id: 119,
                     tipo: "padrao",
-                    pergunta: "Onde podemos passear ao ar livre, brincar no parque infantil e conviver com a família?",
-                    audio: "audios/q_parque.mp3", // Áudio: "Qual é o espaço verde ao ar livre onde podemos andar de escorrega e fazer piqueniques em família?"
+                    pergunta: "<span class='destaque-badge'>Passear, brincar e conviver ao ar livre</span>",
+                    audio: "audios/q_parque.mp3", // Áudio: "Qual é o espaço verde ao ar livre onde podemos andar de escorrega, brincar e fazer piqueniques em família?"
                     dica: "Espaço verde público com baloiços e escorregas.",
                     opcoes: ["Parque", "Hospital", "GNR", "Tribunal"],
                     correta: "Parque"
@@ -235,8 +235,8 @@ const CONFIG_JOGO = {
                 {
                     id: 120,
                     tipo: "situacao",
-                    pergunta: "Brincar no baloiço",
-                    audio: "audios/situacao_parque.mp3", // Áudio: "O Martim quer andar de baloiço e jogar à bola com os amigos numa tarde de sol. Onde se vão divertir?"
+                    pergunta: "<span class='destaque-amarelo'>Brincar no baloiço</span>",
+                    audio: "audios/situacao_parque.mp3", // Áudio: "O Martim quer andar de baloiço e jogar à bola com os amigos numa tarde de sol. Onde vão?"
                     dica: "Local de lazer na natureza dentro ou fora da cidade.",
                     opcoesImagem: [
                         { img: "img/parque.jpg", alt: "Parque", valor: "Parque" },
@@ -449,7 +449,7 @@ const CONFIG_JOGO = {
                 {
                     id: 301,
                     tipo: "cidadania",
-                    pergunta: "Aguardar pacientemente a sua vez na fila dos correios sem passar à frente de ninguém.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> aguardar pacientemente a sua vez na fila dos correios sem passar à frente de ninguém?",
                     audio: "audios/cid_01.mp3",
                     dica: "Respeitar a ordem de chegada é um dever de boa convivência.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -459,7 +459,7 @@ const CONFIG_JOGO = {
                 {
                     id: 302,
                     tipo: "cidadania",
-                    pergunta: "Passar à frente de uma pessoa idosa na fila de espera do Centro de Saúde.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> passar à frente de uma pessoa idosa na fila de espera do Centro de Saúde?",
                     audio: "audios/cid_02.mp3",
                     dica: "As pessoas idosas devem ter prioridade no atendimento.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -469,7 +469,7 @@ const CONFIG_JOGO = {
                 {
                     id: 303,
                     tipo: "cidadania",
-                    pergunta: "Falar em voz baixa e respeitar o silêncio na Biblioteca Municipal.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> falar em voz baixa e respeitar o silêncio na Biblioteca Municipal?",
                     audio: "audios/cid_03.mp3",
                     dica: "O silêncio permite que os outros consigam ler e concentrar-se.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -479,7 +479,7 @@ const CONFIG_JOGO = {
                 {
                     id: 304,
                     tipo: "cidadania",
-                    pergunta: "Correr e gritar nos corredores de um Hospital.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> correr e gritar nos corredores de um Hospital?",
                     audio: "audios/cid_04.mp3",
                     dica: "Os doentes precisam de tranquilidade e repouso para recuperar.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -489,7 +489,7 @@ const CONFIG_JOGO = {
                 {
                     id: 305,
                     tipo: "cidadania",
-                    pergunta: "Cuidar dos brinquedos e equipamentos do parque infantil sem os estragar.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> cuidar dos brinquedos e equipamentos do parque infantil sem os estragar?",
                     audio: "audios/cid_05.mp3",
                     dica: "Os brinquedos públicos são de todos e devem durar muito tempo.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -499,7 +499,7 @@ const CONFIG_JOGO = {
                 {
                     id: 306,
                     tipo: "cidadania",
-                    pergunta: "Deitar papéis e embalagens para o chão do parque em vez de usar o lixo.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> deitar papéis e embalagens para o chão do parque em vez de usar o caixote do lixo?",
                     audio: "audios/cid_06.mp3",
                     dica: "O lixo deve ser colocado sempre no caixote ou no ecoponto.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -509,7 +509,7 @@ const CONFIG_JOGO = {
                 {
                     id: 307,
                     tipo: "cidadania",
-                    pergunta: "Atravessar a rua na passadeira e respeitar as indicações do agente da polícia.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> atravessar a rua na passadeira e respeitar as indicações do agente da polícia?",
                     audio: "audios/cid_07.mp3",
                     dica: "Cumprir as regras de trânsito evita acidentes graves.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -519,7 +519,7 @@ const CONFIG_JOGO = {
                 {
                     id: 308,
                     tipo: "cidadania",
-                    pergunta: "Empurrar os colegas para entrar primeiro no autocarro ou na escola.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> empurrar os colegas para entrar primeiro no autocarro ou na escola?",
                     audio: "audios/cid_08.mp3",
                     dica: "Empurrar pode magoar alguém e demonstra falta de respeito.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -529,7 +529,7 @@ const CONFIG_JOGO = {
                 {
                     id: 309,
                     tipo: "cidadania",
-                    pergunta: "Dar prioridade de lugar a grávidas, idosos ou pessoas com mobilidade reduzida.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> dar prioridade de lugar a grávidas, idosos ou pessoas com mobilidade reduzida?",
                     audio: "audios/cid_09.mp3",
                     dica: "Ajudar quem tem maior necessidade é uma atitude cidadã.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -539,7 +539,7 @@ const CONFIG_JOGO = {
                 {
                     id: 310,
                     tipo: "cidadania",
-                    pergunta: "Tocar nos quadros e esculturas do museu quando há um aviso a proibir.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> tocar nos quadros e esculturas do museu quando há um aviso a proibir?",
                     audio: "audios/cid_10.mp3",
                     dica: "Tocar nas obras de arte pode estragá-las para sempre.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -549,7 +549,7 @@ const CONFIG_JOGO = {
                 {
                     id: 311,
                     tipo: "cidadania",
-                    pergunta: "Desligar o telemóvel ou colocá-lo no silêncio durante uma peça no teatro.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> desligar o telemóvel ou colocá-lo no silêncio durante uma peça no teatro ou no cinema?",
                     audio: "audios/cid_11.mp3",
                     dica: "Sons de telemóvel desconcentram os atores e perturbam a plateia.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -559,7 +559,7 @@ const CONFIG_JOGO = {
                 {
                     id: 312,
                     tipo: "cidadania",
-                    pergunta: "Deixar a torneira a correr nos balneários da piscina municipal sem necessidade.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> deixar a torneira a correr nos balneários da piscina municipal sem necessidade?",
                     audio: "audios/cid_12.mp3",
                     dica: "A água é um bem precioso que não deve ser desperdiçado.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -569,7 +569,7 @@ const CONFIG_JOGO = {
                 {
                     id: 313,
                     tipo: "cidadania",
-                    pergunta: "Pedir ajuda com educação a um agente da PSP ou GNR se te sentires perdido.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> pedir ajuda com educação a um agente da PSP ou GNR se te sentires perdido?",
                     audio: "audios/cid_13.mp3",
                     dica: "Os agentes de autoridade estão lá para nos apoiar e proteger.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -579,7 +579,7 @@ const CONFIG_JOGO = {
                 {
                     id: 314,
                     tipo: "cidadania",
-                    pergunta: "Riscar ou rasgar as páginas dos livros requisitados na biblioteca.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> riscar ou rasgar as páginas dos livros requisitados na biblioteca?",
                     audio: "audios/cid_14.mp3",
                     dica: "Os livros da biblioteca vão ser lidos por muitas outras crianças.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -589,7 +589,7 @@ const CONFIG_JOGO = {
                 {
                     id: 315,
                     tipo: "cidadania",
-                    pergunta: "Respeitar as indicações de segurança dos bombeiros em situações de emergência.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> respeitar as indicações de segurança dos bombeiros em situações de emergência?",
                     audio: "audios/cid_15.mp3",
                     dica: "Seguir as orientações dos bombeiros garante a nossa segurança.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -599,7 +599,7 @@ const CONFIG_JOGO = {
                 {
                     id: 316,
                     tipo: "cidadania",
-                    pergunta: "Fazer barulho excessivo na sala de espera das consultas de saúde.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> fazer barulho excessivo na sala de espera das consultas médicas?",
                     audio: "audios/cid_16.mp3",
                     dica: "As pessoas que estão à espera de consulta podem estar maldispostas.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -609,7 +609,7 @@ const CONFIG_JOGO = {
                 {
                     id: 317,
                     tipo: "cidadania",
-                    pergunta: "Separar as embalagens nos ecopontos para manter a cidade limpa.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> separar as embalagens nos ecopontos para manter a cidade limpa?",
                     audio: "audios/cid_17.mp3",
                     dica: "Reciclar ajuda a proteger o meio ambiente do nosso município.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -619,7 +619,7 @@ const CONFIG_JOGO = {
                 {
                     id: 318,
                     tipo: "cidadania",
-                    pergunta: "Arrancar plantas e estragar os canteiros dos jardins públicos.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> arrancar plantas e estragar os canteiros dos jardins públicos?",
                     audio: "audios/cid_18.mp3",
                     dica: "As plantas enfeitam a cidade e devem ser preservadas.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -629,7 +629,7 @@ const CONFIG_JOGO = {
                 {
                     id: 319,
                     tipo: "cidadania",
-                    pergunta: "Cumprimentar com bom dia ou boa tarde os funcionários dos serviços públicos.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> cumprimentar com bom dia ou boa tarde os funcionários dos serviços públicos?",
                     audio: "audios/cid_19.mp3",
                     dica: "A simpatia e a educação tornam a convivência na comunidade melhor.",
                     imagemPergunta: "img/cidadania.jpg",
@@ -639,7 +639,7 @@ const CONFIG_JOGO = {
                 {
                     id: 320,
                     tipo: "cidadania",
-                    pergunta: "Escribilhar ou desenhar nas paredes dos edifícios e serviços da comunidade.",
+                    pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> escrever, desenhar ou pintar nas paredes dos edifícios ou nos monumentos da comunidade?",
                     audio: "audios/cid_20.mp3",
                     dica: "Devemos manter os edifícios públicos limpos e bem cuidados.",
                     imagemPergunta: "img/cidadania.jpg",
