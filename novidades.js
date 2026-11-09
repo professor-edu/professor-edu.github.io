@@ -18,9 +18,9 @@ const novidadesSite = [
         ano: "ano2",
         rotulo: "2º ANO",
 		disciplina: "EM",
-        nome: "Missão Calendário",
-        icone: "2/icones/missao_calendario.png",
-        link: "2/em/missao-calendario/"
+        nome: "Instituições e Serviços",
+        icone: "2/icones/instituicoes_servicos.png",
+        link: "2/em/instituicoes-servicos/"
     },
     {
         ano: "ano3",

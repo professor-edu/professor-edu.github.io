@@ -198,7 +198,8 @@ export const CATALOGO_JOGOS = [
 	{ nome: "Os 5 Sentidos", icone: "2/icones/5_sentidos.png", link: "2/em/5-sentidos/", ano: "2º Ano" },
 	{ nome: "A Família", icone: "2/icones/familia.png", link: "2/em/familia/", ano: "2º Ano" },
 	{ nome: "Super Quiz", icone: "2/icones/quiz_estudo_meio.png", link: "2/em/quiz/", ano: "2º Ano" },
-	{ nome: "Missão Calendário", icone: "2/icones/missao_calendario.png", link: "2/em/missao-calendario/", ano: "2º Ano" }, 
+	{ nome: "Missão Calendário", icone: "2/icones/missao_calendario.png", link: "2/em/missao-calendario/", ano: "2º Ano" },
+	{ nome: "Instituições e Serviços", icone: "2/icones/instituicoes_servicos.png", link: "2/em/instituicoes-servicos/", ano: "2º Ano" }, 	
 
 	// ------------------------------------
 	// 3º ANO

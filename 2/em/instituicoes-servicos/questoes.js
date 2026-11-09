@@ -24,7 +24,6 @@ const CONFIG_JOGO = {
                     dica: "É o local onde se vendem medicamentos e xaropes para a saúde.",
                     opcoesImagem: [
                         { img: "img/farmacia.jpg", alt: "Farmácia", valor: "Farmácia" },
-                        { img: "img/banco.jpg", alt: "Banco", valor: "Banco" },
                         { img: "img/correios.jpg", alt: "Correios", valor: "Correios" },
                         { img: "img/escola.jpg", alt: "Escola", valor: "Escola" }
                     ],
@@ -47,7 +46,6 @@ const CONFIG_JOGO = {
                     dica: "É o sítio onde colamos selos e pesamos as encomendas.",
                     opcoesImagem: [
                         { img: "img/correios.jpg", alt: "Correios", valor: "Correios" },
-                        { img: "img/hospital.jpg", alt: "Hospital", valor: "Hospital" },
                         { img: "img/teatro.jpg", alt: "Teatro", valor: "Teatro" },
                         { img: "img/parque.jpg", alt: "Parque", valor: "Parque" }
                     ],
@@ -71,7 +69,6 @@ const CONFIG_JOGO = {
                     opcoesImagem: [
                         { img: "img/hospital.jpg", alt: "Hospital", valor: "Hospital" },
                         { img: "img/tribunal.jpg", alt: "Tribunal", valor: "Tribunal" },
-                        { img: "img/supermercado.jpg", alt: "Supermercado", valor: "Supermercado" },
                         { img: "img/biblioteca.jpg", alt: "Biblioteca", valor: "Biblioteca" }
                     ],
                     correta: "Hospital"
@@ -92,7 +89,6 @@ const CONFIG_JOGO = {
                     audio: "audios/situacao_banco.mp3", // Áudio: "A Maria encheu o seu mealheiro de moedas e os pais vão ajudá-la a guardar o dinheiro numa conta segura. Onde vão?"
                     dica: "Espaço onde se depositam moedas e notas em segurança.",
                     opcoesImagem: [
-                        { img: "img/banco.jpg", alt: "Banco", valor: "Banco" },
                         { img: "img/farmacia.jpg", alt: "Farmácia", valor: "Farmácia" },
                         { img: "img/piscina.jpg", alt: "Piscina Municipal", valor: "Piscina Municipal" },
                         { img: "img/gnr.jpg", alt: "GNR", valor: "GNR" }
@@ -117,8 +113,7 @@ const CONFIG_JOGO = {
                     opcoesImagem: [
                         { img: "img/biblioteca.jpg", alt: "Biblioteca", valor: "Biblioteca" },
                         { img: "img/psp.jpg", alt: "PSP", valor: "PSP" },
-                        { img: "img/supermercado.jpg", alt: "Supermercado", valor: "Supermercado" },
-                        { img: "img/correios.jpg", alt: "Correios", valor: "Correios" }
+                        { img: "img/supermercado.jpg", alt: "Supermercado", valor: "Supermercado" }
                     ],
                     correta: "Biblioteca"
                 },
@@ -140,7 +135,6 @@ const CONFIG_JOGO = {
                     opcoesImagem: [
                         { img: "img/supermercado.jpg", alt: "Supermercado", valor: "Supermercado" },
                         { img: "img/tribunal.jpg", alt: "Tribunal", valor: "Tribunal" },
-                        { img: "img/centro_saude.jpg", alt: "Centro de Saúde", valor: "Centro de Saúde" },
                         { img: "img/museu.jpg", alt: "Museu", valor: "Museu" }
                     ],
                     correta: "Supermercado"
@@ -163,7 +157,6 @@ const CONFIG_JOGO = {
                     opcoesImagem: [
                         { img: "img/piscina.jpg", alt: "Piscina Municipal", valor: "Piscina Municipal" },
                         { img: "img/teatro.jpg", alt: "Teatro", valor: "Teatro" },
-                        { img: "img/farmacia.jpg", alt: "Farmácia", valor: "Farmácia" },
                         { img: "img/banco.jpg", alt: "Banco", valor: "Banco" }
                     ],
                     correta: "Piscina Municipal"
@@ -184,7 +177,6 @@ const CONFIG_JOGO = {
                     audio: "audios/situacao_policia.mp3", // Áudio: "Se te perderes da tua família durante um passeio no centro da cidade, a que profissionais de farda deves pedir ajuda?"
                     dica: "Procura a entidade onde trabalham guardas e agentes de farda.",
                     opcoesImagem: [
-                        { img: "img/psp.jpg", alt: "PSP / GNR", valor: "PSP / GNR" },
                         { img: "img/biblioteca.jpg", alt: "Biblioteca", valor: "Biblioteca" },
                         { img: "img/parque.jpg", alt: "Parque", valor: "Parque" },
                         { img: "img/farmacia.jpg", alt: "Farmácia", valor: "Farmácia" }
@@ -209,8 +201,7 @@ const CONFIG_JOGO = {
                     opcoesImagem: [
                         { img: "img/teatro.jpg", alt: "Teatro", valor: "Teatro" },
                         { img: "img/centro_saude.jpg", alt: "Centro de Saúde", valor: "Centro de Saúde" },
-                        { img: "img/banco.jpg", alt: "Banco", valor: "Banco" },
-                        { img: "img/correios.jpg", alt: "Correios", valor: "Correios" }
+                        { img: "img/banco.jpg", alt: "Banco", valor: "Banco" }
                     ],
                     correta: "Teatro"
                 },
@@ -240,7 +231,6 @@ const CONFIG_JOGO = {
                     dica: "Local de lazer na natureza dentro ou fora da cidade.",
                     opcoesImagem: [
                         { img: "img/parque.jpg", alt: "Parque", valor: "Parque" },
-                        { img: "img/hospital.jpg", alt: "Hospital", valor: "Hospital" },
                         { img: "img/gnr.jpg", alt: "GNR", valor: "GNR" },
                         { img: "img/tribunal.jpg", alt: "Tribunal", valor: "Tribunal" }
                     ],
@@ -452,7 +442,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> aguardar pacientemente a sua vez na fila dos correios sem passar à frente de ninguém?",
                     audio: "audios/cid_01.mp3",
                     dica: "Respeitar a ordem de chegada é um dever de boa convivência.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_01.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Certo"
                 },
@@ -462,7 +452,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> passar à frente de uma pessoa idosa na fila de espera do Centro de Saúde?",
                     audio: "audios/cid_02.mp3",
                     dica: "As pessoas idosas devem ter prioridade no atendimento.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_02.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Errado"
                 },
@@ -472,7 +462,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> falar em voz baixa e respeitar o silêncio na Biblioteca Municipal?",
                     audio: "audios/cid_03.mp3",
                     dica: "O silêncio permite que os outros consigam ler e concentrar-se.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_03.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Certo"
                 },
@@ -482,7 +472,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> correr e gritar nos corredores de um Hospital?",
                     audio: "audios/cid_04.mp3",
                     dica: "Os doentes precisam de tranquilidade e repouso para recuperar.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_04.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Errado"
                 },
@@ -492,7 +482,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> cuidar dos brinquedos e equipamentos do parque infantil sem os estragar?",
                     audio: "audios/cid_05.mp3",
                     dica: "Os brinquedos públicos são de todos e devem durar muito tempo.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_05.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Certo"
                 },
@@ -502,7 +492,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> deitar papéis e embalagens para o chão do parque em vez de usar o caixote do lixo?",
                     audio: "audios/cid_06.mp3",
                     dica: "O lixo deve ser colocado sempre no caixote ou no ecoponto.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_06.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Errado"
                 },
@@ -512,7 +502,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> atravessar a rua na passadeira e respeitar as indicações do agente da polícia?",
                     audio: "audios/cid_07.mp3",
                     dica: "Cumprir as regras de trânsito evita acidentes graves.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_07.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Certo"
                 },
@@ -522,7 +512,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> empurrar os colegas para entrar primeiro no autocarro ou na escola?",
                     audio: "audios/cid_08.mp3",
                     dica: "Empurrar pode magoar alguém e demonstra falta de respeito.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_08.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Errado"
                 },
@@ -532,7 +522,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> dar prioridade de lugar a grávidas, idosos ou pessoas com mobilidade reduzida?",
                     audio: "audios/cid_09.mp3",
                     dica: "Ajudar quem tem maior necessidade é uma atitude cidadã.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_09.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Certo"
                 },
@@ -542,7 +532,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> tocar nos quadros e esculturas do museu quando há um aviso a proibir?",
                     audio: "audios/cid_10.mp3",
                     dica: "Tocar nas obras de arte pode estragá-las para sempre.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_10.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Errado"
                 },
@@ -552,7 +542,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> desligar o telemóvel ou colocá-lo no silêncio durante uma peça no teatro ou no cinema?",
                     audio: "audios/cid_11.mp3",
                     dica: "Sons de telemóvel desconcentram os atores e perturbam a plateia.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_11.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Certo"
                 },
@@ -562,7 +552,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> deixar a torneira a correr nos balneários da piscina municipal sem necessidade?",
                     audio: "audios/cid_12.mp3",
                     dica: "A água é um bem precioso que não deve ser desperdiçado.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_12.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Errado"
                 },
@@ -572,7 +562,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> pedir ajuda com educação a um agente da PSP ou GNR se te sentires perdido?",
                     audio: "audios/cid_13.mp3",
                     dica: "Os agentes de autoridade estão lá para nos apoiar e proteger.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_13.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Certo"
                 },
@@ -582,7 +572,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> riscar ou rasgar as páginas dos livros requisitados na biblioteca?",
                     audio: "audios/cid_14.mp3",
                     dica: "Os livros da biblioteca vão ser lidos por muitas outras crianças.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_14.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Errado"
                 },
@@ -592,7 +582,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> respeitar as indicações de segurança dos bombeiros em situações de emergência?",
                     audio: "audios/cid_15.mp3",
                     dica: "Seguir as orientações dos bombeiros garante a nossa segurança.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_15.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Certo"
                 },
@@ -602,7 +592,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> fazer barulho excessivo na sala de espera das consultas médicas?",
                     audio: "audios/cid_16.mp3",
                     dica: "As pessoas que estão à espera de consulta podem estar maldispostas.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_16.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Errado"
                 },
@@ -612,7 +602,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> separar as embalagens nos ecopontos para manter a cidade limpa?",
                     audio: "audios/cid_17.mp3",
                     dica: "Reciclar ajuda a proteger o meio ambiente do nosso município.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_17.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Certo"
                 },
@@ -622,7 +612,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> arrancar plantas e estragar os canteiros dos jardins públicos?",
                     audio: "audios/cid_18.mp3",
                     dica: "As plantas enfeitam a cidade e devem ser preservadas.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_18.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Errado"
                 },
@@ -632,7 +622,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> cumprimentar com bom dia ou boa tarde os funcionários dos serviços públicos?",
                     audio: "audios/cid_19.mp3",
                     dica: "A simpatia e a educação tornam a convivência na comunidade melhor.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_19.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Certo"
                 },
@@ -642,7 +632,7 @@ const CONFIG_JOGO = {
                     pergunta: "É <span class='destaque-texto-verde'>certo</span> ou <span class='destaque-texto-vermelho'>errado</span> escrever, desenhar ou pintar nas paredes dos edifícios ou nos monumentos da comunidade?",
                     audio: "audios/cid_20.mp3",
                     dica: "Devemos manter os edifícios públicos limpos e bem cuidados.",
-                    imagemPergunta: "img/cidadania.jpg",
+                    imagemPergunta: "img/cid_20.jpg",
 					opcoes: ["Certo", "Errado"],
                     correta: "Errado"
                 }

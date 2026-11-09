@@ -180,15 +180,8 @@
 		.texto-intro { font-size: clamp(0.9rem, 3vw, 1rem); color: var(--azul-vibrante); margin-top: 0; margin-bottom: 25px; line-height: 1.5; max-width: 600px;}
 		
         /* =========================================
-           MENU INICIAL (ANIMAÇÃO GRELHA 2x2
+           MENU INICIAL
            ========================================= */
-        .animacao-tutorial {
-            width: 100%; max-width: 400px; height: 180px;
-            background: #f4faff; border: 3px dashed #bcdcff; border-radius: 20px;
-            margin: 0 auto 25px; display: flex; align-items: center; justify-content: center;
-            box-shadow: inset 0 0 15px rgba(0,145,255,0.05); color: var(--azul-vibrante); font-size: 1.2rem; font-weight: 900;
-            overflow: hidden;
-        }
 
         /* Grelha adaptada para 2x2 cartões alinhados */
         .grid-niveis {
@@ -197,7 +190,7 @@
             gap: 20px;
             width: 100%;
             max-width: 750px;
-            margin: 0 auto 20px;
+            margin: 20px auto 20px;
         }
 		
 		.grid-niveis > .btn-nivel-novo:only-child {
@@ -511,17 +504,15 @@
 			border: 3px solid color-mix(in srgb, var(--cor-em) 35%, #ffffff);
 			box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.04);
 			display: inline-block;
-			max-width: 260px;
+			max-width: 290px;
 			width: 100%;
 			margin: 5px 0 15px 0;
-			transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+			transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out, max-width 0.25s ease-in-out;
 		}
 
 		.img-pergunta-frame img {
 			width: 100%;
 			height: auto;
-			aspect-ratio: 4 / 3;
-			object-fit: cover;
 			border-radius: 14px;
 			display: block;
 		}
@@ -536,7 +527,7 @@
 		/* =========================================
 		CONTAINER E BOTÃO DE ÁUDIO DA PERGUNTA
 		========================================= */
-		.pergunta-texto { white-space: pre-line; line-height: 1.6; font-size: clamp(1rem, 4vw, 1.4rem); color: var(--azul-escuro); font-weight: bold; text-align: center; margin: 0 0 20px 0; animation: fadeIn 0.4s ease;}
+		.pergunta-texto { font-size: clamp(1rem, 4vw, 1.4rem); color: var(--azul-escuro); font-weight: bold; text-align: center; margin: 0 0 20px 0; animation: fadeIn 0.4s ease;}
 		
 		.pergunta-container {
 			display: flex;
@@ -1024,32 +1015,66 @@
 		   LAYOUTS DINÂMICOS DE OPÇÕES
 		========================================== */
 
-		.opcoes-grid-imagens {
-			display: grid;
-			grid-template-columns: repeat(2, 1fr);
-			gap: 25px;
-			width: 100%;
-			max-width: 500px;
-			margin: 0 auto;
-		}
+.opcoes-grid-imagens {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px 16px; /* Aumentado o gap vertical para dar margem à pílula */
+	width: 100%;
+	max-width: 820px;
+	margin: 0 auto 15px auto;
+}
 
-		.btn-opcao-imagem {
-			background: #ffffff;
-			border: 3px solid #e0e0e0;
-			border-radius: 16px;
-			padding: 8px;
-			cursor: pointer;
-			transition: transform 0.2s, border-color 0.2s;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-		}
+.btn-opcao-imagem {
+	position: relative; /* Essencial para a pílula se posicionar em relação ao botão */
+	background: #ffffff;
+	border: 3px solid #e0e0e0;
+	border-radius: 16px;
+	padding: 8px 8px 14px 8px; /* Espaço extra na parte inferior */
+	cursor: pointer;
+	transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+	width: 100%;
+}
 
-		.btn-opcao-imagem:hover {
-			transform: translateY(-3px);
-			border-color: #4ECDC4;
-		}
+.btn-opcao-imagem img {
+	width: 100%;
+	height: auto;
+	border-radius: 10px;
+	display: block;
+}
+
+/* Pílula / Tag de Legenda */
+.pilula-legenda {
+	position: absolute;
+	bottom: -12px;
+	background: var(--cor-em-dark);
+	color: #ffffff;
+	font-weight: 700;
+	font-size: 0.85rem;
+	padding: 4px 12px;
+	border-radius: 20px;
+	border: 2px solid #ffffff;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+	white-space: nowrap;
+	pointer-events: none;
+	transition: transform 0.2s ease-in-out, background-color 0.2s;
+}
+
+@media (hover: hover) {
+	.btn-opcao-imagem:hover {
+		transform: translateY(-3px) scale(1.02);
+		box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+		border-color: var(--cor-em);
+	}
+	
+	.btn-opcao-imagem:hover .pilula-legenda {
+		transform: scale(1.05);
+		background: var(--cor-em);
+	}
+}
 
 		.frame-4-3 {
 			width: 100%;
@@ -1132,21 +1157,99 @@
 
 		@media (max-width: 600px) and (orientation: portrait) {
 			.opcoes-grid-imagens {
-				gap: 8px;
-				max-width: 320px; /* Reduz tamanho em mobile */
+				grid-template-columns: 1fr;
+				gap: 22px; /* Garante espaço entre os botões para as pílulas não chocarem */
+				max-width: 280px;
 			}
 			
 			.btn-opcao-imagem {
-				padding: 4px;
+				padding: 6px 6px 12px 6px;
+			}
+
+			.pilula-legenda {
+				font-size: 0.8rem;
+				padding: 3px 10px;
+				bottom: -10px;
 			}
 
 			.opcoes-certo-errado {
-				grid-template-columns: 1fr; /* Em telemóveis muito pequenos, empilha 1 por linha */
+				grid-template-columns: 1fr;
 				gap: 10px;
 			}
 		}
 		
-		
+/* Container de Instrução do Menu */
+.instrucao-menu-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #edfff2;
+    padding: 16px 16px 16px 16px;
+    border-radius: 30px;
+    border: 2px solid color-mix(in srgb, var(--cor-azul-vibrante, #0091ff) 25%, #ffffff);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    margin: 20px 0 20px 0;
+}
+
+/* Botão de Som */
+.btn-ouvir-instrucao {
+    background: var(--cor-amarelo, #f59e0b);
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    padding: 0;
+}
+
+.btn-ouvir-instrucao:hover {
+    transform: scale(1.1);
+    background: #d97706;
+}
+
+.btn-ouvir-instrucao:active {
+    transform: scale(0.95);
+}
+
+.icon-som {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+/* Texto da Instrução */
+.instrucao-texto {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--azul-vibrante);
+    letter-spacing: -0.2px;
+	white-space: pre-line; 
+	line-height: 1.6;
+}
+
+/* Ajuste Mobile */
+@media (max-width: 600px) {
+    .instrucao-menu-container {
+        padding: 12px 12px 12px 12px;
+    }
+    .instrucao-texto {
+        font-size: 0.8rem;
+    }
+    .btn-ouvir-instrucao {
+        width: 32px;
+        height: 32px;
+    }
+    .icon-som {
+        width: 18px;
+        height: 18px;
+    }
+}		
 		
 /* ==========================================
    MASCOTE DE FEEDBACK (CORRIGIDO)
@@ -1426,11 +1529,7 @@
           footer { margin-top: auto; }
         }	
 
-		
-		/* =========================================
-           CSS ESPECÍFICO DO JOGO
-         ========================================= */		
-		
+	
 		
 		
 	
@@ -1438,6 +1537,306 @@
 		/* =========================================
            CSS ESPECÍFICO DA ANIMAÇÃO INICIAL
          ========================================= */
+
+.animacao-tutorial {
+    width: 100%;
+    max-width: 400px;
+    height: 180px;
+    background: linear-gradient(135deg, #f0f7ff 0%, #e0f0ff 100%);
+    border: 3px dashed #bcdcff; border-radius: 20px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 20px rgba(0, 145, 255, 0.08), 0 8px 20px rgba(59, 130, 246, 0.12);
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+}
+
+/* Palco da Animação */
+.tutorial-slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Indicador de Passos (Pontos de Progresso) */
+.tutorial-dots {
+    position: absolute;
+    bottom: 8px;
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+}
+
+.tutorial-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 10px;
+    background: #cbd5e1;
+    transition: all 0.3s ease;
+}
+
+/* Loop dos Pontos de Progresso */
+.dot.d1 { animation: dotAnim1 12s infinite; }
+.dot.d2 { animation: dotAnim2 12s infinite; }
+.dot.d3 { animation: dotAnim3 12s infinite; }
+
+@keyframes dotAnim1 {
+    0%, 30% { width: 22px; background: #3b82f6; }
+    33%, 100% { width: 8px; background: #cbd5e1; }
+}
+@keyframes dotAnim2 {
+    0%, 30% { width: 8px; background: #cbd5e1; }
+    33%, 63% { width: 22px; background: #8b5cf6; }
+    66%, 100% { width: 8px; background: #cbd5e1; }
+}
+@keyframes dotAnim3 {
+    0%, 63% { width: 8px; background: #cbd5e1; }
+    66%, 96% { width: 22px; background: #f59e0b; }
+    100% { width: 8px; background: #cbd5e1; }
+}
+
+/* Estrutura das Cenas */
+.tutorial-scene {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 12px 16px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+    pointer-events: none;
+}
+
+/* Etiqueta Superior de Cada Cena */
+.scene-badge {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 12px;
+    border-radius: 12px;
+    color: #ffffff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+.scene-badge.blue { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+.scene-badge.purple { background: linear-gradient(135deg, #a855f7, #7e22ce); }
+.scene-badge.gold { background: linear-gradient(135deg, #f59e0b, #d97706); }
+
+.scene-caption {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #334155;
+    margin: 0;
+    text-shadow: 0 1px 0 #ffffff;
+}
+
+/* TIMELINE GLOBAL DO SLIDER (12 Segundos Total: 4s por Cena) */
+.scene-1 { animation: sceneLoop1 12s infinite ease-in-out; }
+.scene-2 { animation: sceneLoop2 12s infinite ease-in-out; }
+.scene-3 { animation: sceneLoop3 12s infinite ease-in-out; }
+
+@keyframes sceneLoop1 {
+    0%, 3% { opacity: 0; transform: translateY(12px) scale(0.95); }
+    6%, 28% { opacity: 1; transform: translateY(0) scale(1); }
+    31%, 100% { opacity: 0; transform: translateY(-12px) scale(0.95); }
+}
+@keyframes sceneLoop2 {
+    0%, 33% { opacity: 0; transform: translateY(12px) scale(0.95); }
+    36%, 61% { opacity: 1; transform: translateY(0) scale(1); }
+    64%, 100% { opacity: 0; transform: translateY(-12px) scale(0.95); }
+}
+@keyframes sceneLoop3 {
+    0%, 66% { opacity: 0; transform: translateY(12px) scale(0.95); }
+    69%, 94% { opacity: 1; transform: translateY(0) scale(1); }
+    97%, 100% { opacity: 0; transform: translateY(-12px) scale(0.95); }
+}
+
+/* ================= CENA 1: ESCOLHER EDIFÍCIOS ================= */
+.building-card-anim {
+    background: #ffffff;
+    border: 2px solid #60a5fa;
+    border-radius: 16px;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 6px 14px rgba(59, 130, 246, 0.15);
+    position: relative;
+    transform: translateY(0);
+    animation: floatCard 3s infinite ease-in-out;
+}
+.building-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+.building-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.b-title {
+    font-size: 0.95rem;
+    font-weight: 900;
+    color: #1e3a8a;
+}
+.b-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #3b82f6;
+}
+.click-hand {
+    position: absolute;
+    right: -10px;
+    bottom: -12px;
+    font-size: 1.6rem;
+    animation: handClick 1.5s infinite ease-in-out;
+}
+
+.building-icon-svg {
+    width: 36px;
+    height: 36px;
+    display: block;
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.1));
+}
+
+.click-hand-svg {
+    position: absolute;
+    right: -10px;
+    bottom: -12px;
+    width: 28px;
+    height: 28px;
+    display: block;
+    animation: handClick 1.5s infinite ease-in-out;
+}
+
+@keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+@keyframes handClick {
+    0%, 100% { transform: scale(1) translate(0, 0); }
+    50% { transform: scale(1.2) translate(-4px, -4px); }
+}
+
+/* ================= CENA 2: CERTO OU ERRADO ================= */
+.citizenship-choice {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    justify-content: center;
+}
+.choice-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    border: 2px solid #e2e8f0;
+}
+.choice-right {
+    border-color: #4ade80;
+    background: #f0fdf4;
+    color: #166534;
+    animation: pulseRight 2s infinite ease-in-out;
+}
+.choice-wrong {
+    border-color: #fca5a5;
+    background: #fef2f2;
+    color: #991b1b;
+    opacity: 0.7;
+}
+.badge-mini {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: #ffffff;
+    font-weight: 900;
+}
+.badge-mini.up { background: #22c55e; box-shadow: 0 2px 6px rgba(34, 197, 94, 0.4); }
+.badge-mini.down { background: #ef4444; box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4); }
+
+.icon-badge-svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+    filter: brightness(0) invert(1); /* Torna o SVG branco para contrastar com o fundo colorido */
+}
+
+@keyframes pulseRight {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* ================= CENA 3: RECOMPENSAS & CONQUISTAS ================= */
+.rewards-pop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 4px 0;
+}
+.reward-item {
+    font-size: 2.2rem;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+}
+.reward-item.star { animation: popItem 1.8s infinite ease-in-out 0s; }
+.reward-item.trophy { animation: popItem 1.8s infinite ease-in-out 0.3s; }
+.reward-item.coin { animation: popItem 1.8s infinite ease-in-out 0.6s; }
+
+.mini-progress-track {
+    width: 140px;
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #cbd5e1;
+}
+
+.reward-item-svg {
+    width: 38px;
+    height: 38px;
+    display: block;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.12));
+}
+
+.reward-item-svg.star { animation: popItem 1.8s infinite ease-in-out 0s; }
+.reward-item-svg.trophy { animation: popItem 1.8s infinite ease-in-out 0.3s; }
+.reward-item-svg.coin { animation: popItem 1.8s infinite ease-in-out 0.6s; }
+
+.mini-progress-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    border-radius: 10px;
+    animation: fillTrack 4s infinite ease-in-out;
+}
+
+@keyframes popItem {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-6px) scale(1.15) rotate(5deg); }
+}
+@keyframes fillTrack {
+    0%, 66% { width: 15%; }
+    85%, 95% { width: 100%; }
+}
+		
 		
 
     </style>
@@ -1478,14 +1877,81 @@
         <!-- ECRÃ DE SELEÇÃO -->
         <div id="ecra-selecao" class="ecra">
             
-            <!-- ANIMAÇÃO RESERVADA -->
-            <div class="animacao-tutorial">
-                [ Espaço para Animação / Tutorial ]
-            </div>
-			<h2 class="titulo-menu">Escolhe o teu desafio!</h2>
-            <p class="texto-intro">
-                INSERIR AQUI UMA INSTRUÇÃO               
-            </p>
+
+		<div class="animacao-tutorial">
+			<div class="tutorial-slider">
+				
+				<!-- Indicador dos 3 Passos -->
+				<div class="tutorial-dots">
+					<span class="dot d1"></span>
+					<span class="dot d2"></span>
+					<span class="dot d3"></span>
+				</div>
+
+				<!-- CENA 1: Explora Locais e Serviços -->
+				<div class="tutorial-scene scene-1">
+					<span class="scene-badge blue">1. Explora a Comunidade</span>
+					
+					<div class="building-card-anim">
+						<img src="../../../SVG/hospital.svg" alt="Hospital" class="building-icon-svg">
+						<div class="building-info">
+							<span class="b-title">Hospital</span>
+							<span class="b-tag">Serviço Público</span>
+						</div>
+						<img src="../../../SVG/mao_cima.svg" alt="Clique" class="click-hand-svg">
+					</div>
+
+					<p class="scene-caption">Descobre para que serve cada local!</p>
+				</div>
+
+				<!-- CENA 2: Cidadania (Certo ou Errado) -->
+				<div class="tutorial-scene scene-2">
+					<span class="scene-badge purple">2. Pratica Cidadania</span>
+					
+					<div class="citizenship-choice">
+						<div class="choice-card choice-right">
+							<span>Respeitar a Fila</span>
+							<div class="badge-mini up">
+								<img src="../../../SVG/thumbs_up.svg" alt="Certo" class="icon-badge-svg">
+							</div>
+						</div>
+						<div class="choice-card choice-wrong">
+							<span>Empurrar</span>
+							<div class="badge-mini down">
+								<img src="../../../SVG/thumbs_down.svg" alt="Errado" class="icon-badge-svg">
+							</div>
+						</div>
+					</div>
+
+					<p class="scene-caption">Escolhe sempre as atitudes certas!</p>
+				</div>
+
+				<!-- CENA 3: Recompensas e Progresso -->
+				<div class="tutorial-scene scene-3">
+					<span class="scene-badge gold">3. Brinca e Aprende</span>
+					
+					<div class="rewards-pop">
+						<img src="../../../SVG/estrela.svg" alt="Estrela" class="reward-item-svg star">
+						<img src="../../../SVG/trofeu.svg" alt="Troféu" class="reward-item-svg trophy">
+
+					</div>
+
+					<div class="mini-progress-track">
+						<div class="mini-progress-fill"></div>
+					</div>
+
+					<p class="scene-caption">Acerta nos desafios!</p>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="instrucao-menu-container">
+			<button type="button" class="btn-ouvir-pergunta" onclick="tocarVoz('audios/instrucao_menu.mp3')" title="Ouvir instrução">
+				<img src="../../../SVG/audio.svg" alt="Ouvir instrução" class="icon-som">
+			</button>
+			<span class="instrucao-texto">Qual é a tua missão de hoje? Escolhe um desafio!</span>
+		</div>
             <!-- GRELHA 2x2 -->
 			<div class="grid-niveis"></div>
         </div>

@@ -1414,6 +1414,14 @@
         "disciplina": "Estudo do Meio",
         "tags": ["calendário", "meses do ano", "dias da semana", "estações do ano", "sequência temporal", "ontem hoje amanhã", "noção do tempo", "som"]
     },
+	{
+        "nome": "Instituições e Serviços",
+        "icone": "/2/icones/instituicoes_servico.png",
+        "link": "/2/em/instituicoes-servico/",
+        "ano": "2º Ano",
+        "disciplina": "Estudo do Meio",
+        "tags": ["comunidade", "cidadania", "certo ou errado", "saúde", "segurança", "educação", "cultura", "lazer", "som"]
+    },
     {
         "nome": "Determinantes Artigos",
         "icone": "/3/icones/determinantes_artigos.png",
