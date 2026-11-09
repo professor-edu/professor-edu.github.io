@@ -89,7 +89,7 @@ const CONFIG_JOGO = {
                     audio: "audios/situacao_banco.mp3", // Áudio: "A Maria encheu o seu mealheiro de moedas e os pais vão ajudá-la a guardar o dinheiro numa conta segura. Onde vão?"
                     dica: "Espaço onde se depositam moedas e notas em segurança.",
                     opcoesImagem: [
-                        { img: "img/farmacia.jpg", alt: "Farmácia", valor: "Farmácia" },
+                        { img: "img/banco.jpg", alt: "Banco", valor: "Banco" },
                         { img: "img/piscina.jpg", alt: "Piscina Municipal", valor: "Piscina Municipal" },
                         { img: "img/gnr.jpg", alt: "GNR", valor: "GNR" }
                     ],
@@ -178,7 +178,7 @@ const CONFIG_JOGO = {
                     dica: "Procura a entidade onde trabalham guardas e agentes de farda.",
                     opcoesImagem: [
                         { img: "img/biblioteca.jpg", alt: "Biblioteca", valor: "Biblioteca" },
-                        { img: "img/parque.jpg", alt: "Parque", valor: "Parque" },
+                        { img: "img/psp.jpg", alt: "PSP / GNR", valor: "PSP / GNR" },
                         { img: "img/farmacia.jpg", alt: "Farmácia", valor: "Farmácia" }
                     ],
                     correta: "PSP / GNR"
