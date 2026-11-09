@@ -72,5 +72,6 @@ const todosOsJogos =[
 	{ nome: "Os 5 Sentidos", icone: "icones/5_sentidos.png", link: "em/5-sentidos/", cat: "em" },
 	{ nome: "A Família", icone: "icones/familia.png", link: "em/familia/", cat: "em" },
 	{ nome: "Super Quiz", icone: "icones/quiz_estudo_meio.png", link: "em/quiz/", cat: "em" },
-	{ nome: "Missão Calendário", icone: "icones/missao_calendario.png", link: "em/missao-calendario/", cat: "em" }
+	{ nome: "Missão Calendário", icone: "icones/missao_calendario.png", link: "em/missao-calendario/", cat: "em" },
+	{ nome: "Instituições e Serviços", icone: "icones/instituicoes_servicos.png", link: "em/instituicoes-servicos/", cat: "em" }
 ];

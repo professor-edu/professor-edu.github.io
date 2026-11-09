@@ -127,9 +127,12 @@ function carregarRonda() {
             html += `<div class="opcoes-grid-imagens">`;
             baralharArray([...ronda.opcoesImagem]).forEach(item => {
                 const fnClique = (item.valor === ronda.correta) ? "simularAcerto(this)" : "simularErro(this)";
+                const textoLegenda = item.valor || item.alt; // Usa a propriedade 'valor' ou 'alt' do objeto
+
                 html += `
                     <button class="btn-opcao-imagem" onclick="${fnClique}">
                         <img src="${item.img}" alt="${item.alt}" class="frame-4-3" onerror="this.src='img/brincar_aprender.jpg';">
+                        <span class="pilula-legenda">${textoLegenda}</span>
                     </button>
                 `;
             });

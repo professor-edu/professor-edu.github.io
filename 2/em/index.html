@@ -887,7 +887,6 @@
 			<a href="quiz" class="destaque-principal">
 				<div class="badge badge-novo"><img src="../../SVG/DESTAQUE.svg" class="icon-svg-menu"> Destaque</div>
 				<div class="icone-wrapper">
-					<!-- SUBSTITUÍDO AQUI -->
 					<img src="../icones/quiz_estudo_meio.png" alt="Super Quiz" class="img-destaque-grande">
 				</div>
 			</a>
@@ -896,20 +895,18 @@
 			<a href="familia" class="destaque-secundario">
 				<div class="badge badge-destaque"><img src="../../SVG/TOP.svg" class="icon-svg-menu"> Top</div>
 				<div class="icone-wrapper">
-					<!-- SUBSTITUÍDO AQUI -->
 					<img src="../icones/familia.png" alt="" class="img-destaque-pequena">
 				</div>
 				<span class="nome-jogo">A Família</span>
 			</a>
 					
 					
-			<a href="missao-calendario" class="destaque-secundario">
+			<a href="instituicoes-servicos" class="destaque-secundario">
 				<div class="badge badge-destaque2"><img src="../../SVG/NOVO.svg" class="icon-svg-menu"> Novo</div>
 				<div class="icone-wrapper">
-					<!-- SUBSTITUÍDO AQUI -->
-					<img src="../icones/missao_calendario.png" alt="" class="img-destaque-pequena">
+					<img src="../icones/instituicoes_servicos.png" alt="" class="img-destaque-pequena">
 				</div>
-				<span class="nome-jogo">Missão Calendário</span>
+				<span class="nome-jogo">Instituições e Serviços</span>
 			</a>
     
 		</div>
@@ -1002,6 +999,34 @@
 							</ul>
 						<div class="botoes-verso">
 								<a href="plantas" class="btn-jogar">▶ Jogar</a>
+								<button class="btn-voltar-verso" onclick="fecharCartaoMobile(this)">↩</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="cartao-flip estudo-meio" onmouseleave="this.classList.remove('flipped')">
+				<div class="cartao-inner">
+					<!-- LADO DA FRENTE -->
+					<div class="cartao-frente">
+						<button class="btn-info" aria-label="Ver níveis" onclick="virarCartaoMobile(this)"></button>
+						<a href="missao-calendario" class="link-frente">
+							<div class="image-wrapper">
+								<img src="../icones/missao_calendario.png" alt="Missão Calendário" class="icone-imagem"></div>
+								<span class="nome-jogo">Missão Calendário</span>
+							</a>
+					</div>
+
+					<!-- LADO DO VERSO -->
+					<div class="cartao-verso">
+						<h4 class="titulo-verso">Neste jogo tens:</h4>
+							<ul class="lista-minijogos">
+								<li>Ontem, hoje, amanhã</li>
+								<li>Dias da semana</li>
+								<li>Meses e estações do ano</li>
+							</ul>
+						<div class="botoes-verso">
+								<a href="missão-calendario" class="btn-jogar">▶ Jogar</a>
 								<button class="btn-voltar-verso" onclick="fecharCartaoMobile(this)">↩</button>
 						</div>
 					</div>
