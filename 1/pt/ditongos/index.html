@@ -352,25 +352,81 @@
         .modal-box { background: white; width: 100%; max-width: 400px; border-radius: 25px; padding: 30px; text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.15); border-top: 8px solid var(--cor-1ano); }
         
         /* BOTÃO PRINCIPAL (USADO NO ECRÃ INICIAL E FIM) */
-        .btn-acao { 
-            background-color: var(--azul-escuro); color: white; border: none; padding: 15px 35px; 
-            font-size: 1.1rem; font-weight: 700; border-radius: 15px; cursor: pointer; 
-            box-shadow: 0 6px 0 #093273; display: flex; align-items: center; justify-content: center; 
-            gap: 10px; margin-bottom: 20px; width: 100%; max-width: 320px; 
-            transition: transform 0.2s, box-shadow 0.2s, filter 0.2s; 
-        }
-		
-		.btn-acao .icon-svg-btn {
-			margin-left: 8px;
-		}
-		
-		.icon-svg-btn {
-			width: 2.2rem;
-			height: 2.2rem;
-			vertical-align: middle;
-			display: inline-block;
-			object-fit: contain;
-		}
+/* =========================================
+   VARIÁVEIS DE TEMA (Padrão: Turquesa Brilhante)
+   Adiciona isto ao topo do teu CSS ou dentro de :root
+   ========================================= */
+:root {
+    --cor-acao: #15a3bc;          /* Turquesa vibrante principal */
+    --cor-acao-light: #26d2ec;    /* Brilho superior */
+    --cor-acao-dark: #108092;     /* Sombra 3D */
+    --cor-acao-sombra-suave: rgba(21, 163, 188, 0.2); /* Sombra de profundidade */
+}
+
+/* =========================================
+   BOTÃO DE AÇÃO (ESTILO INFANTIL)
+   Substitui as regras existentes por estas
+   ========================================= */
+.btn-acao {
+
+    background: linear-gradient(180deg, var(--cor-acao-light) 0%, var(--cor-acao) 100%);
+    color: white;
+    border: none;
+    padding: 16px 36px;
+    font-size: 1.1rem;
+    font-weight: 800; /* Fonte ligeiramente mais grossa */
+    border-radius: 25px; /* Aumentado para cantos mais suaves e redondos */
+    cursor: pointer;
+    box-shadow: 0 8px 0 var(--cor-acao-dark), 
+                0 10px 20px var(--cor-acao-sombra-suave);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+	margin-top: 20px;
+    width: 100%;
+    max-width: 320px;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                box-shadow 0.2s ease, 
+                filter 0.2s ease;
+    user-select: none;
+}
+
+/* =========================================
+   ÍCONE DENTRO DO BOTÃO
+   Manter a margem ou ajustar ligeiramente
+   ========================================= */
+.btn-acao .icon-svg-btn {
+    margin-left: 0;
+    width: 2.2em;
+    height: 2.2em;
+}
+
+/* =========================================
+   ESTADOS DE INTERAÇÃO (HOVER, ACTIVE)
+   Adaptação elástica e brilhante
+   ========================================= */
+@media (hover: hover) {
+    .btn-acao:hover {
+        transform: translateY(-4px); /* Elevação maior */
+        box-shadow: 0 12px 0 var(--cor-acao-dark), 
+                    0 15px 30px var(--cor-acao-sombra-suave); /* Sombra 3D maior */
+        filter: brightness(1.2); /* Brilho maior no hover */
+    }
+}
+
+.btn-acao:active {
+    transform: translateY(8px); /* Compressão maior no clique */
+    box-shadow: 0 0px 0 transparent, 
+                0 4px 8px var(--cor-acao-sombra-suave); /* Sombra 3D achatada e sombra drop suave */
+    transition: transform 0.1s ease; /* Transição mais rápida no clique */
+}
+
+
+
+
+
 		/* Espaçamento conforme a posição do ícone */
 		.btn-voltar-menu .icon-svg-btn {
 			margin-right: 8px;
@@ -388,9 +444,6 @@
 		}
 		
 		
-        @media (hover: hover) { .btn-acao:hover { transform: translateY(-3px); box-shadow: 0 9px 0 #093273; filter: brightness(1.15); } }
-        .btn-acao:active { transform: translateY(6px); box-shadow: 0 0px 0 transparent; }
-
         @media (max-width: 600px) {
             .fase1-alvo-container, .fase2-alvo-container { border-width: 4px; padding: 10px; }
             .btn-ditongo, .btn-imagem { border-width: 3px; box-shadow: 0 4px 0 #cbd5e1; border-radius: 15px;}
@@ -447,6 +500,53 @@
     background-image: radial-gradient(rgba(13, 71, 161, 0.06) 2px, transparent 2px);
     background-size: 25px 25px;
   }
+  
+  /* =========================================
+   BARRA DE ESTADO MOBILE (2 LINHAS PERFEITAS)
+   ========================================= */
+@media (max-width: 768px) {
+    .status-bar-jogo {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; /* Mantém os 4 botões distribuídos na Linha 1 */
+        align-items: center;
+        gap: 6px 2px;
+        padding: 6px 8px;
+    }
+
+    /* 1. LINHA 1: Os 4 elementos alinhados no topo */
+    .btn-voltar-menu,
+    .btn-dica,
+    .badge-ronda,
+    .badge-erros {
+        order: 1;
+        padding: 4px 6px !important;
+        font-size: 0.78rem !important;
+        gap: 3px !important;
+        flex: 0 1 auto;
+        white-space: nowrap;
+    }
+
+    /* Redução proporcional dos ícones sem alterar cores ou formas */
+    .btn-voltar-menu svg, 
+    .btn-dica svg, 
+    .badge-ronda svg, 
+    .badge-erros svg,
+    .svg-icon {
+        width: 14px !important;
+        height: 14px !important;
+    }
+
+    /* 2. LINHA 2: Barra de progresso isolada a 100% em baixo */
+    .progress-bg {
+        order: 2;
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        margin: 4px 0 0 0 !important;
+        height: 16px !important;
+    }
+}
 </style>
 </head>
 <body>
@@ -610,15 +710,17 @@
         { palavra: "vassoura", ditongo: "ou", destaque: "ou" },
 		{ palavra: "ouro", ditongo: "ou", destaque: "ou" },
         { palavra: "uivar", ditongo: "ui", destaque: "ui" },
-		{ palavra: "piu-piu", ditongo: "iu", destaque: "iu" },
-        { palavra: "pão", ditongo: "ão", destaque: "ão" },
-		{ palavra: "avião", ditongo: "ão", destaque: "ão" },
-        { palavra: "cão", ditongo: "ão", destaque: "ão" },
-		{ palavra: "balão", ditongo: "ão", destaque: "ão" },
-		{ palavra: "mão", ditongo: "ão", destaque: "ão" },
-		{ palavra: "coração", ditongo: "ão", destaque: "ão" },
-        { palavra: "mãe", ditongo: "ãe", destaque: "ãe" },
-        { palavra: "balões", ditongo: "õe", destaque: "õe" }
+		{ palavra: "praia", ditongo: "ai", destaque: "ai" },
+		{ palavra: "saia", ditongo: "ai", destaque: "ai" },
+		{ palavra: "queijo", ditongo: "ei", destaque: "ei" },
+		{ palavra: "noite", ditongo: "oi", destaque: "oi" },
+		{ palavra: "cenoura", ditongo: "ou", destaque: "ou" },
+		{ palavra: "ouvido", ditongo: "ou", destaque: "ou" },
+		{ palavra: "museu", ditongo: "eu", destaque: "eu" },
+		{ palavra: "baleia", ditongo: "ei", destaque: "ei" },
+		{ palavra: "cadeira", ditongo: "ei", destaque: "ei" },
+		{ palavra: "roupa", ditongo: "ou", destaque: "ou" },
+		{ palavra: "piu-piu", ditongo: "iu", destaque: "iu" }        
     ];
 
     function removerAcentos(palavra) {
@@ -692,6 +794,7 @@
     function voltarAoMenu() {
         ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
         elStatus.style.display = 'none';
+		limparConfetis();
         mostrarEcra('ecra-selecao');
     }
 
@@ -742,6 +845,7 @@ function atualizarProgresso() {
         elStatus.style.display = 'flex';
         atualizarProgresso();
         atualizarDicasUI();
+		limparConfetis();
         mostrarEcra('ecra-jogo');
         
         iniciarFase1();
@@ -1046,33 +1150,75 @@ function atualizarProgresso() {
         }
     }
 
-    const canvasConfetti = document.getElementById('confetti-canvas');
-    const ctxConfetti = canvasConfetti.getContext('2d');
-    let confetis = [];
+const canvasConfetti = document.getElementById('confetti-canvas');
+const ctxConfetti = canvasConfetti.getContext('2d');
+let confetis = [];
+let animConfettiId = null; // Guardar a referência do ciclo de animação
 
-    function redimensionarCanvas() { 
-        canvasConfetti.width = document.querySelector('.cartao-jogo-container').clientWidth; 
-        canvasConfetti.height = document.querySelector('.cartao-jogo-container').clientHeight; 
+function redimensionarCanvas() { 
+    const container = document.querySelector('.cartao-jogo-container');
+    if (container) {
+        canvasConfetti.width = container.clientWidth; 
+        canvasConfetti.height = container.clientHeight; 
     }
-    window.addEventListener('resize', redimensionarCanvas);
+}
+window.addEventListener('resize', redimensionarCanvas);
 
-    function dispararConfetis() {
-        redimensionarCanvas(); confetis = []; const cores = ['#0091ff', '#2ed573', '#ff4757', '#ffa502', '#eccc68'];
-        for (let i = 0; i < 150; i++) {
-            confetis.push({ x: Math.random() * canvasConfetti.width, y: Math.random() * canvasConfetti.height - canvasConfetti.height, w: Math.random() * 10 + 5, h: Math.random() * 10 + 5, cor: cores[Math.floor(Math.random() * cores.length)], velY: Math.random() * 3 + 2, velX: Math.random() * 2 - 1, rotacao: Math.random() * 360, velRotacao: Math.random() * 5 - 2.5 });
-        }
-        animarConfetis();
-    }
-
-    function animarConfetis() {
-        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); let ativos = false;
-        confetis.forEach(c => {
-            c.y += c.velY; c.x += c.velX; c.rotacao += c.velRotacao; if (c.y < canvasConfetti.height) ativos = true;
-            ctxConfetti.save(); ctxConfetti.translate(c.x, c.y); ctxConfetti.rotate(c.rotacao * Math.PI / 180);
-            ctxConfetti.fillStyle = c.cor; ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); ctxConfetti.restore();
+function dispararConfetis() {
+    limparConfetis(); // Limpa qualquer animação anterior antes de iniciar outra
+    redimensionarCanvas(); 
+    confetis = []; 
+    const cores = ['#0091ff', '#2ed573', '#ff4757', '#ffa502', '#eccc68'];
+    for (let i = 0; i < 150; i++) {
+        confetis.push({ 
+            x: Math.random() * canvasConfetti.width, 
+            y: Math.random() * canvasConfetti.height - canvasConfetti.height, 
+            w: Math.random() * 10 + 5, 
+            h: Math.random() * 10 + 5, 
+            cor: cores[Math.floor(Math.random() * cores.length)], 
+            velY: Math.random() * 3 + 2, 
+            velX: Math.random() * 2 - 1, 
+            rotacao: Math.random() * 360, 
+            velRotacao: Math.random() * 5 - 2.5 
         });
-        if (ativos) requestAnimationFrame(animarConfetis);
     }
+    animarConfetis();
+}
+
+function animarConfetis() {
+    ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); 
+    let ativos = false;
+    confetis.forEach(c => {
+        c.y += c.velY; 
+        c.x += c.velX; 
+        c.rotacao += c.velRotacao; 
+        if (c.y < canvasConfetti.height) ativos = true;
+        ctxConfetti.save(); 
+        ctxConfetti.translate(c.x, c.y); 
+        ctxConfetti.rotate(c.rotacao * Math.PI / 180);
+        ctxConfetti.fillStyle = c.cor; 
+        ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); 
+        ctxConfetti.restore();
+    });
+    
+    if (ativos) {
+        animConfettiId = requestAnimationFrame(animarConfetis);
+    }
+}
+
+function limparConfetis() {
+    // 1. Para imediatamente a animação se estiver a decorrer
+    if (animConfettiId) {
+        cancelAnimationFrame(animConfettiId);
+        animConfettiId = null;
+    }
+    // 2. Esvazia a lista de partículas
+    confetis = [];
+    // 3. Limpa completamente o Canvas
+    if (ctxConfetti && canvasConfetti) {
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+    }
+}
 
     // Arranca no menu
     window.onload = () => mostrarEcra('ecra-selecao');
