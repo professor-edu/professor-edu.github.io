@@ -36,6 +36,8 @@
             --cor-btn-laranja: #FA983A;
 			--cor-btn-rosa: #e04d8c;
 			--cor-btn-turquesa: #139ea3;
+			--cor-fullscreen: #8a72e0;
+			--cor-fullscreen-fundo: #f3f0ff;
         }
 
         body { 
@@ -130,52 +132,124 @@
         .ecra { width: 100%; flex: 1; display: none; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.4s ease; box-sizing: border-box; }
         #ecra-selecao { display: flex; }
         #ecra-jogo { justify-content: flex-start; }
-        .titulo-menu { font-size: 1.8rem; color: var(--azul-escuro); margin-bottom: 25px; font-weight: 900;}
+        .titulo-menu { font-size: clamp(1rem, 4vw, 1.6rem); color: var(--azul-escuro); margin-bottom: 20px; font-weight: 900;}
         
-        /* GRELHA INTELIGENTE PARA 2, 3 OU 4 CARTÕES */
-        .grelha-opcoes {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 800px;
-        }
+/* Ecrãs Largos / Desktop (Grelha de 3 colunas x 2 linhas = 6 textos) */
+.grelha-opcoes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    width: 100%;
+    max-width: 850px;
+    margin: 20px auto;
+}
 
-        .btn-nivel-menu {
-            background-color: white; border: 4px solid #ced6e0; border-radius: 20px;
-            padding: 20px; width: 100%; cursor: pointer;
-            box-shadow: 0 6px 0 #ced6e0; transition: all 0.2s ease;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; touch-action: manipulation;
-        }
-        @media (hover: hover) { .btn-nivel-menu:hover { transform: translateY(-4px); border-color: var(--cor-pt); box-shadow: 0 6px 0 var(--cor-pt); } }
-        .btn-nivel-menu:active { transform: translateY(6px); box-shadow: 0 0px 0 transparent; }
+@media (max-width: 600px) and (orientation: portrait) {
+    .grelha-opcoes {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 100%;
+    }
+}
+
+/* Tablets e Mobile Horizontal (Landscape) */
+@media (max-width: 900px) and (orientation: landscape) {
+    .grelha-opcoes {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .cartao-jogo-container {
+        padding-bottom: 20px;
+    }
+}
+
+.btn-nivel-menu {
+    position: relative !important;
+    background: linear-gradient(180deg, #ffffff 0%, #fff0f0 100%);
+    border: 3px solid #cbd5e1;
+    border-radius: 20px;
+    padding: 18px 14px;
+    width: 100%;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #94a3b8;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1), 
+                border-color 0.15s ease, 
+                background 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    touch-action: manipulation;
+    user-select: none;
+    overflow: hidden;
+}
+
+@media (hover: hover) {
+    .btn-nivel-menu:hover {
+        transform: translateY(-4px);
+        border-color: var(--cor-3ano);
+        box-shadow: 0 10px 0 var(--cor-3ano-dark);
+        background: #ffffff;
+    }
+    
+    .btn-nivel-menu:hover .nivel-icon {
+        transform: scale(1.08);
+        border-color: var(--cor-3ano-dark);
+    }
+}
+
+.btn-nivel-menu:active {
+    transform: translateY(4px) !important;
+    box-shadow: 0 2px 0 #94a3b8 !important;
+}
         
-        .nivel-icon {
-			background: #fff0f0;
-			width: 80px;
-			height: 80px;
-			border-radius: 50%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
+.nivel-icon {
+    background: #fff0f0;
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05), inset 0 -3px 0 rgba(0, 0, 0, 0.06);
+    border: 2px solid #cbd5e1;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    flex-shrink: 0;
+}
 
-		.nivel-icon img {
-			width: 68px;
-			height: 68px;
-		}
+.nivel-icon img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    display: block;
+}
 
-        .nivel-text { text-align: center; }
-        .nivel-titulo { font-size: 1.1rem; font-weight: 900; display: block; color: var(--azul-escuro); margin-bottom: 5px;}
+.nivel-text {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.nivel-titulo {
+    font-size: 1.05rem;
+    font-weight: 800;
+    display: block;
+    color: #0d47a1;
+    line-height: 1.2;
+    margin: 0;
+    letter-spacing: -0.2px;
+}
         .nivel-desc { font-size: 0.95rem; color: var(--text-main); font-weight: 500; }
 
-		@media (max-width: 600px) {
-			.grelha-opcoes {
-				grid-template-columns: repeat(2, minmax(0, 1fr));
-				gap: 12px;
-			}
-		}
-		
+	
 		@media (max-width: 600px) {
 			.btn-nivel-menu {
 				width: 100%;
@@ -192,13 +266,6 @@
 		}
 		
 		
-		@media (max-width: 360px) {
-			.grelha-opcoes {
-				grid-template-columns: 1fr;
-			}
-		}
-		
-		
         /* =========================================
            BARRA DE ESTADO DO JOGO
            ========================================= */
@@ -206,6 +273,7 @@
             display: flex; align-items: center; justify-content: space-between; gap: 10px;
             width: 100%; background: #fdf2f2; padding: 8px 12px;
             border-radius: 20px; border: 2px solid var(--cor-pt); margin-bottom: 15px; box-sizing: border-box;
+			max-width: 900px;
         }
 
         .btn-voltar-menu { background-color: white; color: var(--azul-escuro); border: 2px solid var(--cor-pt); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.2s; }
@@ -274,13 +342,44 @@
 
         /* ESTRELA NO MENU */
         .btn-nivel-menu { position: relative; }
-        .estrela-concluido {
-            position: absolute; top: -15px; right: -15px; font-size: 2.5rem;
-            filter: drop-shadow(0 4px 5px rgba(0,0,0,0.2)); display: none;
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .btn-nivel-menu.fechado .estrela-concluido { display: block; }
-        .btn-nivel-menu.fechado { border-color: #2ed573; box-shadow: 0 6px 0 #2ed573; background: #f0fdf4; }
+.estrela-concluido {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    opacity: 0;
+    transform: scale(0.4);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.btn-nivel-menu.fechado {
+    background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
+    border-color: #4ade80;
+    box-shadow: 0 6px 0 #22c55e;
+}
+
+@media (hover: hover) {
+    .btn-nivel-menu.fechado:hover {
+        border-color: #16a34a;
+        box-shadow: 0 10px 0 #15803d;
+    }
+}
+
+.btn-nivel-menu.fechado:active {
+    box-shadow: 0 2px 0 #15803d !important;
+}
+
+.btn-nivel-menu.fechado .estrela-concluido {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.estrela-concluido img {
+    width: 28px;
+    height: 28px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
 
         /* BOTÃO LIMPAR */
         .btn-limpar {
@@ -294,7 +393,7 @@
 		
 		.menu-acoes {
 			display: flex;
-			gap: 12px;
+			gap: 15px;
 			justify-content: center;
 			align-items: center;
 			flex-wrap: wrap;
@@ -327,31 +426,6 @@
 			box-shadow: 0 0 0 transparent;
 		}
 		
-		.btn-refresh-menu {
-			background-color: #e8f5e9;
-			color: #1b5e20;
-			border: none;
-			width: 44px;
-			height: 44px;
-			border-radius: 50%;
-			font-size: 1.4rem;
-			cursor: pointer;
-			box-shadow: 0 4px 0 #c8e6c9;
-			transition: 0.2s;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			margin-top: 40px;
-		}
-
-		.btn-refresh-menu:hover {
-			transform: scale(1.1);
-		}
-
-		.btn-refresh-menu:active {
-			transform: translateY(4px);
-			box-shadow: 0 0 0 transparent;
-		}
 
         /* QUADRO E CADERNO */
         .quadro-leitura {
@@ -424,11 +498,6 @@
 		
 
 		@media (orientation: landscape) {
-			.grelha-opcoes {
-				grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-				align-items: stretch;
-			}
-
 			.cartao-jogo-container {
 				padding-bottom: 20px;
 			}
@@ -481,59 +550,171 @@
 			display: block;
 		}
 
-		/* Modal */
-		.info-modal {
-			position: fixed;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			background: white;
-			width: calc(100% - 40px);
-			max-width: 480px;
-			max-height: 80vh;
-			overflow-y: auto;
-			border-radius: 25px;
-			padding: 25px 20px;
-			box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-			display: none;
-			z-index: 350;
-			text-align: left;
-			border: 2px solid var(--cor-3ano-dark);
-		}
+/* =========================================
+   MODAL DE AJUDA / INFORMAÇÃO (RESPONSIVO)
+   ========================================= */
 
-		.info-modal.active {
-			display: block;
-		}
+.info-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    width: calc(100% - 32px);
+    max-width: 720px; /* Expandido em ecrãs largos para comportar 2-3 colunas */
+    max-height: 82vh;
+    overflow-y: auto;
+    border-radius: 24px;
+    padding: 24px 22px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    display: none;
+    z-index: 350;
+    text-align: left;
+    border: 3px solid var(--cor-3ano-dark, #3b82f6);
+}
 
-		.info-modal h2,
-		.info-modal h3 {
-			color: var(--azul-escuro);
-			margin-top: 0;
-		}
+.info-modal.active {
+    display: block;
+}
 
-		.info-modal ul {
-			padding-left: 20px;
-		}
+/* Cabeçalho do Modal */
+.info-modal h2 {
+    color: var(--azul-escuro, #1e293b);
+    margin: 0 0 10px 0;
+    font-size: 1.35rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
-		.info-modal li {
-			margin-bottom: 8px;
-			font-size: 1rem;
-			color: var(--text-main);
-		}
+.info-modal h3 {
+    color: var(--azul-escuro, #1e293b);
+    margin: 18px 0 12px 0;
+    font-size: 1.1rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-top: 2px stroke #f1f5f9;
+    padding-top: 12px;
+}
 
-		/* Botão fechar */
-		.info-fechar {
-			position: absolute;
-			top: 15px;
-			right: 15px;
-			background: #f3d5d5;
-			border: none;
-			border-radius: 50%;
-			width: 34px;
-			height: 34px;
-			cursor: pointer;
-			font-weight: 900;
-		}
+.info-modal p {
+    color: var(--text-main, #475569);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+/* Botão Fechar (Estilo 3D) */
+.info-fechar {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: #fee2e2;
+    color: #ef4444;
+    border: 2px solid #fca5a5;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    font-weight: 900;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+    padding: 0;
+}
+
+.info-fechar:hover {
+    background: #fca5a5;
+    color: #991b1b;
+    transform: scale(1.1);
+}
+
+.info-fechar:active {
+    transform: scale(0.95);
+}
+
+/* Grelha de Textos Disponíveis (2 a 3 Colunas em Desktop) */
+#lista-textos-info {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 8px 10px;
+}
+
+/* Cada Item da Lista (Cartão Pílula Gamificado) */
+#lista-textos-info li {
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+    line-height: 1.2;
+}
+
+/* Destaque para Textos Concluídos com Estrela */
+#lista-textos-info li strong {
+    color: #22c55e;
+}
+
+#lista-textos-info li .icon-svg-titulo {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-left: 6px;
+}
+
+/* Estabilização da Barra de Scroll do Modal */
+.info-modal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.info-modal::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+.info-modal::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.info-modal::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* =========================================
+   ADAPTAÇÃO MOBILE (1 COLUNA ÚNICA)
+   ========================================= */
+@media (max-width: 600px) {
+    .info-modal {
+        max-width: 92%;
+        padding: 20px 14px;
+        max-height: 85vh;
+    }
+
+    #lista-textos-info {
+        grid-template-columns: 1fr; /* Força 1 coluna em telemóvel */
+        gap: 6px;
+    }
+
+    #lista-textos-info li {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+}
 	
 	.toast-msg {
 		display: none;
@@ -554,72 +735,197 @@
 		}
 
 		/* Modal */
-		.confirmar-modal {
-			position: fixed;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			background: white;
-			width: calc(100% - 40px);
-			max-width: 420px;
-			padding: 25px 20px;
-			border-radius: 25px;
-			box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-			border: 2px solid var(--cor-pt);
-			text-align: center;
-			display: none;
-			z-index: 350;
-		}
+/* =========================================
+   MODAL DE CONFIRMAÇÃO / LIMPAR PROGRESSO
+   ========================================= */
 
-		.confirmar-modal.active {
-			display: block;
-		}
+.confirmar-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    width: calc(100% - 32px);
+    max-width: 400px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 28px 24px 22px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    border: 3px solid #ef4444; /* Vermelho suave para indicação de ação destrutiva */
+    text-align: center;
+    display: none;
+    z-index: 350;
+    box-sizing: border-box;
+}
 
-		.confirmar-modal h3 {
-			color: var(--azul-escuro);
-			margin-top: 0;
-			font-size: 1.4rem;
-		}
+.confirmar-modal.active {
+    display: block;
+    animation: modalPopIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 
-		.confirmar-modal p {
-			color: var(--text-main);
-			font-size: 1rem;
-			line-height: 1.5;
-		}
+@keyframes modalPopIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -46%) scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
 
-		/* Botões */
-		.confirmar-acoes {
-			display: flex;
-			justify-content: center;
-			gap: 15px;
-			margin-top: 20px;
-		}
+/* Título e Ícone */
+.confirmar-modal h3 {
+    color: #1e293b;
+    margin: 0 0 12px 0;
+    font-size: 1.3rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
 
-		.btn-cancelar {
-			background: #eceff1;
-			color: #37474f;
-			border: none;
-			padding: 10px 20px;
-			border-radius: 20px;
-			font-weight: 700;
-			cursor: pointer;
-		}
+.confirmar-modal h3 img {
+    width: 28px;
+    height: 28px;
+}
 
-		.btn-confirmar {
-			background: #ff6b6b;
-			color: white;
-			border: none;
-			padding: 10px 20px;
-			border-radius: 20px;
-			font-weight: 700;
-			cursor: pointer;
-			box-shadow: 0 4px 0 #e04848;
-		}
+/* Mensagem descritiva */
+.confirmar-modal p {
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0 0 22px 0;
+    font-weight: 500;
+}
 
-		.btn-confirmar:active {
-			transform: translateY(4px);
-			box-shadow: none;
-		}
+.confirmar-modal p strong {
+    color: #dc2626;
+    display: block;
+    margin-top: 4px;
+    font-weight: 700;
+}
+
+/* Contentor dos Botões de Ação */
+.confirmar-acoes {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Botões 3D Gamificados */
+.btn-cancelar,
+.btn-confirmar {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 16px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    cursor: pointer;
+    touch-action: manipulation;
+    user-select: none;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+                background-color 0.15s ease;
+    border: none;
+}
+
+/* Botão Cancelar (Cinza Neutro 3D) */
+.btn-cancelar {
+    background: #f1f5f9;
+    color: #475569;
+    border: 2px solid #cbd5e1;
+    box-shadow: 0 4px 0 #94a3b8;
+}
+
+@media (hover: hover) {
+    .btn-cancelar:hover {
+        background: #ffffff;
+        border-color: #94a3b8;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 0 #64748b;
+    }
+}
+
+.btn-cancelar:active {
+    transform: translateY(2px) !important;
+    box-shadow: 0 1px 0 #64748b !important;
+}
+
+/* Botão Confirmar Apagar (Vermelho 3D) */
+.btn-confirmar {
+    background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
+    color: #ffffff;
+    border: 2px solid #b91c1c;
+    box-shadow: 0 4px 0 #991b1b;
+}
+
+@media (hover: hover) {
+    .btn-confirmar:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 0 #7f1d1d;
+    }
+}
+
+.btn-confirmar:active {
+    transform: translateY(2px) !important;
+    box-shadow: 0 1px 0 #7f1d1d !important;
+}
+
+/* =========================================
+   BOTÃO DISPARADOR "LIMPAR PROGRESSO"
+   ========================================= */
+
+.btn-limpar {
+    background: linear-gradient(180deg, #ffffff 0%, #fef2f2 100%);
+    color: #ef4444;
+    border: 2.5px solid #fca5a5;
+    border-radius: 16px;
+    padding: 10px 18px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #f87171;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    touch-action: manipulation;
+}
+
+@media (hover: hover) {
+    .btn-limpar:hover {
+        transform: translateY(-2px);
+        background: #ffffff;
+        border-color: #ef4444;
+        box-shadow: 0 6px 0 #dc2626;
+    }
+}
+
+.btn-limpar:active {
+    transform: translateY(2px) !important;
+    box-shadow: 0 1px 0 #dc2626 !important;
+}
+
+/* Adaptabilidade Mobile */
+@media (max-width: 400px) {
+    .confirmar-modal {
+        padding: 22px 16px 18px;
+    }
+
+    .confirmar-acoes {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn-cancelar,
+    .btn-confirmar {
+        width: 100%;
+    }
+}
 
 		/* =========================================
 		CORREÇÃO PARA TELEMÓVEIS NA HORIZONTAL
@@ -743,25 +1049,27 @@
 		position: relative !important;
 	}
 
-	.recorde-badge {
-		position: absolute;
-		bottom: 8px;
-		right: 12px;
-		background: #fffbeb;
-		border: 1.5px solid var(--cor-3ano);
-		color: #b45309; /* Tom castanho/cobre quente */
-		font-size: 0.72rem;
-		font-weight: 800;
-		padding: 2px 6px;
-		border-radius: 8px;
-		
-		/* Alinhamento de ícone + texto */
-		display: flex;
-		align-items: center;
-		gap: 4px;
-		box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-		pointer-events: none; /* Garante que o toque passa para o botão principal */
-	}
+.recorde-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1.5px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #475569;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-top: 2px;
+}
+
+.btn-nivel-menu.fechado .recorde-badge {
+    background: #ffffff;
+    border-color: #b45309;
+    color: #b45309;
+}
 
 	/* Tamanho do mini-relógio do recorde */
 	.recorde-badge svg {
@@ -770,12 +1078,58 @@
 		stroke: currentColor;
 	}
 
+@media (max-width: 600px) and (orientation: portrait) {
+    .btn-nivel-menu {
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 12px 10px;
+        gap: 14px;
+        min-height: 76px;
+    }
+
+    .nivel-icon {
+        width: 52px;
+        height: 52px;
+        flex-shrink: 0;
+    }
+
+    .nivel-icon img {
+        width: 38px;
+        height: 38px;
+    }
+
+    .nivel-text {
+        text-align: left;
+        align-items: flex-start;
+        flex: 1;
+        padding-right: 32px; /* Garante margem para não tocar na estrela à direita */
+    }
+
+    .nivel-titulo {
+        font-size: 0.98rem;
+    }
+
+    .recorde-badge {
+        margin-top: 2px;
+    }
+
+    .estrela-concluido {
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%) scale(0.4);
+    }
+
+    .btn-nivel-menu.fechado .estrela-concluido {
+        transform: translateY(-50%) scale(1);
+    }
+}
+
 
 	/* =========================================================
-   MELHORIAS DE USABILIDADE E LEITURA: "ESCRITA RÁPIDA"
+   USABILIDADE E LEITURA: "ESCRITA RÁPIDA"
    ========================================================= */
 
-/* 1. Alinhamento perfeito do texto com as linhas azuis do caderno */
+
 .caderno-escrita {
     /* Ajusta as linhas para 28px de altura */
     background-image: linear-gradient(rgba(202, 138, 4, 0.15) 1px, transparent 1px) !important;
@@ -791,14 +1145,14 @@
     padding-bottom: 0 !important;
 }
 
-/* Brilho de foco suave ao clicar no caderno para escrever */
+
 .caderno-escrita:focus {
     outline: none !important;
     border-color: var(--cor-3ano-dark) !important;
     box-shadow: 0 0 15px rgba(255, 138, 138, 0.25) !important;
 }
 
-/* 2. Suavização e contraste do quadro de leitura de pergaminho */
+
 .quadro-leitura {
     background-color: #fffdf2 !important; /* Amarelo pergaminho suave */
     border: 2px solid #ca8a04 !important;
@@ -807,6 +1161,201 @@
     font-size: 1.2rem !important;
     line-height: 1.5 !important;
     box-shadow: inset 0 0 15px rgba(202, 138, 4, 0.08), 0 4px 10px rgba(0,0,0,0.03) !important;
+}
+
+/* Contentor do Título com Navegação */
+.header-navegacao-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 10px;
+}
+
+.header-navegacao-menu .titulo-menu {
+    margin: 0;
+}
+
+/* Botões das Setas */
+.btn-seta-nav {
+    background: #ffffff;
+    border: 3px solid #3b82f6;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+    padding: 0;
+}
+
+.btn-seta-nav:hover:not(:disabled) {
+    transform: scale(1.1);
+    background-color: #e0f0ff;
+}
+
+.btn-seta-nav:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+.btn-seta-nav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    border-color: #cbd5e1;
+    box-shadow: none;
+}
+
+.icon-seta {
+    width: 26px;
+    height: 26px;
+    display: block;
+}
+
+/* =========================================================
+   REGRAS DE FULLSCREEN (PC/Desktop)
+   ========================================================= */
+
+/* Escondido por defeito em mobile e tablets */
+#btn-fullscreen {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    #btn-fullscreen {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        border: 2px solid var(--cor-fullscreen);
+        border-radius: 12px;
+        padding: 6px;
+        cursor: pointer;
+        color: var(--cor-fullscreen);
+        transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    #btn-fullscreen:hover {
+        background: var(--cor-fullscreen-fundo);
+        transform: scale(1.08);
+    }
+	
+	#btn-fullscreen svg path {
+		stroke: currentColor;
+		stroke-width: 1px;
+		stroke-linejoin: round;
+	}
+}
+
+#cartao-jogo:fullscreen {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #f4faff !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    position: relative !important;
+
+    zoom: 1.38;
+}
+
+/* Botão Sair de Fullscreen */
+.btn-sair-fullscreen {
+    display: none;
+}
+
+#cartao-jogo:fullscreen .btn-sair-fullscreen {
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10000;
+    background: #ffffff;
+    border: 2px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #475569;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+#cartao-jogo:fullscreen .btn-sair-fullscreen:hover {
+    background: #fef2f2;
+    border-color: #f87171;
+    color: #dc2626;
+    transform: scale(1.05);
+}
+
+/* =========================================
+   BARRA DE ESTADO MOBILE (2 LINHAS PERFEITAS)
+   ========================================= */
+@media (max-width: 768px) {
+    .status-bar-jogo {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 6px 8px;
+        padding: 6px 8px;
+    }
+
+    /* 1. LINHA 1: Os 4 elementos alinhados no topo */
+    .btn-voltar-menu,
+    .btn-dica,
+    .badge-ronda,
+    .badge-erros {
+        order: 1;
+        padding: 4px 6px !important;
+        font-size: 0.78rem !important;
+        gap: 3px !important;
+        flex: 0 1 auto;
+        white-space: nowrap;
+    }
+
+    /* Redução proporcional de todos os ícones da barra */
+    .btn-voltar-menu svg, 
+    .btn-dica svg, 
+    .badge-ronda svg, 
+    .badge-erros svg,
+    .badge-tempo svg,
+    .svg-icon {
+        width: 14px !important;
+        height: 14px !important;
+    }
+
+    /* 2. LINHA 2: Tempo à esquerda */
+    .badge-tempo {
+        order: 2;
+        flex: 0 0 auto !important;
+        padding: 4px 8px !important;
+        font-size: 0.78rem !important;
+        gap: 4px !important;
+        white-space: nowrap;
+    }
+
+    /* 3. LINHA 2: Barra de progresso à direita (preenche todo o espaço restante) */
+    .progress-bg {
+        order: 3;
+        flex: 1 1 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+        height: 26px !important;
+    }
 }
 	
 	
@@ -835,10 +1384,25 @@
 </header>
 
 <main>
-    <div class="cartao-jogo-container">
-        
+    <div class="cartao-jogo-container" id="cartao-jogo">
+        <button class="btn-sair-fullscreen" onclick="toggleFullscreen()" title="Sair do Ecrã Inteiro (ESC)">
+			<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+				<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+			</svg>
+				<span>Sair (ESC)</span>
+		</button> 
         <div id="ecra-selecao" class="ecra">
-            <h2 class="titulo-menu">Escolhe um Texto:</h2>
+            <div class="header-navegacao-menu">
+				<button type="button" class="btn-seta-nav" id="btn-pag-anterior" onclick="mudarPagina(-1)" title="Página Anterior">
+					<img src="../../../SVG/pagina_anterior.svg" alt="Anterior" class="icon-seta">
+				</button>
+				
+				<h2 class="titulo-menu">Escolhe um Texto</h2>
+				
+				<button type="button" class="btn-seta-nav" id="btn-pag-seguinte" onclick="mudarPagina(1)" title="Página Seguinte">
+					<img src="../../../SVG/pagina_seguinte.svg" alt="Seguinte" class="icon-seta">
+				</button>
+			</div>
             
             <div class="grelha-opcoes" id="grelha-textos">
                 <!-- Botões injetados via JS -->
@@ -851,9 +1415,6 @@
 				<img src="info.svg" class="icon-svg-titulo" alt="">
 			</button>
 
-			<button class="btn-refresh-menu" onclick="refrescarPagina()" aria-label="Refrescar página">
-				<img src="refresh.svg" class="icon-svg-titulo" alt="">
-			</button>
 			</div>
 		</div>
 		
@@ -866,6 +1427,13 @@
                 <div class="progress-bg"><div id="progress-fill" class="progress-fill"></div></div>
                 <div class="badge-erros"> <span id="icone-erro-svg"></span> <span id="val-erros">0</span></div>
 				<div class="badge-tempo"> <span id="icone-tempo-svg"></span> <span id="val-tempo">00:00</span></div>
+				<button id="btn-fullscreen" onclick="toggleFullscreen()" title="Ecrã Inteiro" aria-label="Ecrã Inteiro">
+					<svg id="icon-fs-enter" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+						<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+					</svg>
+					<svg id="icon-fs-exit" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display:none;">
+						<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+				</button>
             </div>
 
             <div class="toast-msg" id="toast-msg">Mensagem de aviso entra aqui!</div>
@@ -895,7 +1463,7 @@
 			<h2 class="end-title" id="end-title-text">Texto Concluído!<img src="../../../SVG/confeti.svg" class="icon-end-title" alt=""></h2>
             <div class="end-stats">
                 Cópia Perfeita!<br><br>
-                Tempo total de cópia: <strong id="final-tempo" style="color:var(--cor-3ano-dark)">00:00</strong> minutos.<br>
+                Tempo total: <strong id="final-tempo" style="color:var(--cor-3ano-dark)">00:00</strong> minutos.<br>
 				Tiveste <strong id="final-erros" style="color:#ff4757">0</strong> erros de distração.
             </div>
 
@@ -913,8 +1481,8 @@
 <script>
     // Dinâmica do ano no rodapé
     document.getElementById('ano-atual').innerText = new Date().getFullYear();
-	
-	// ==========================================
+    
+    // ==========================================
     // SVGs BARRA DE ESTADO
     // ==========================================
     const SVG_HOME = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" style="margin-right:4px; vertical-align:middle;"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5z" fill="#fff" stroke="#d35400" stroke-width="2" stroke-linejoin="round"/><rect x="10" y="12" width="4" height="10" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/></svg> Menu`;
@@ -922,194 +1490,377 @@
     const SVG_BULB = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px; vertical-align:middle;"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"></path></svg>`;
     const SVG_ERRO = `<svg viewBox="0 0 14 14" width="0.8em" height="0.8em" style="margin-right: 5px; vertical-align: middle;"><path d="M2 2 L12 12 M12 2 L2 12" stroke="var(--cor-pt, #ff4757)" stroke-width="3" stroke-linecap="round" /></svg>`;
     const SVG_CLOCK = `<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px; vertical-align:middle;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`;
-	const SVG_CLOCK_TINY = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`;
-	
-    // Injeção visual na carga da página
-    document.addEventListener("DOMContentLoaded", () => {
-        const btnHome = document.getElementById('btn-home-svg');
-        const badgeRonda = document.getElementById('badge-ronda-svg');
-        const btnAjuda = document.getElementById('btn-dica');
-        const iconeErro = document.getElementById('icone-erro-svg');
-		const iconeTempo = document.getElementById('icone-tempo-svg');
-			if (iconeTempo) iconeTempo.innerHTML = SVG_CLOCK;
-        
-        if(btnHome) btnHome.innerHTML = SVG_HOME;
-        if(btnAjuda) btnAjuda.innerHTML = SVG_BULB + ' Dica';
-        if(iconeErro) iconeErro.innerHTML = SVG_ERRO;
-        if(badgeRonda) badgeRonda.innerHTML = SVG_STAR;
-        
-    });
-	
-    // =========================================
-    // UI DA PÁGINA (NÃO APAGAR)
-    // =========================================
-    function toggleMenu() {
-        document.getElementById('sidebar').classList.toggle('active');
-        document.getElementById('overlay').classList.toggle('active');
-        document.getElementById('hamburgerBtn').classList.toggle('open');
-    }
+    const SVG_CLOCK_TINY = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; vertical-align:middle; margin-right:3px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`;
 
-    function mostrarEcra(id) {
-        document.querySelectorAll('.ecra').forEach(e => e.style.display = 'none');
-        document.getElementById(id).style.display = 'flex';
+const textosBase = [
+    {
+        id: "t1",
+        titulo: "O Lince-Ibérico",
+        icone: "img/lince.png",
+        texto: "O lince-ibérico é um felino muito raro e elegante. Ele adora saltar entre os arbustos e caçar coelhos na floresta. Cuidar e proteger este belo animal é um dever de todos nós!"
+    },
+    {
+        id: "t2",
+        titulo: "O Galo de Barcelos",
+        icone: "img/galo.png",
+        texto: "A lenda do Galo de Barcelos é um grande símbolo de Portugal! Conta a história de um milagre divertido que salvou um jovem viajante. Hoje, o galo colorido traz muita alegria e cor às nossas casas."
+    },
+    {
+        id: "t3",
+        titulo: "Os Descobrimentos",
+        icone: "img/caravela.png",
+        texto: "Há muitos séculos, os marinheiros portugueses viajaram pelo oceano! Eles usavam caravelas de madeira e orientavam-se através das estrelas. Descobrir novas terras foi uma grande e corajosa aventura!"
+    },
+    {
+        id: "t4",
+        titulo: "O Ciclo da Água",
+        icone: "img/agua.png",
+        texto: "A água faz uma viagem mágica e sem fim na natureza! O sol aquece a água dos rios, fazendo-a subir em vapor até formar nuvens. Depois, a chuva cai para regar os campos e encher os lagos de vida."
+    },
+    {
+        id: "t5",
+        titulo: "Serra da Estrela",
+        icone: "img/serra.png",
+        texto: "A Serra da Estrela é a montanha mais alta de Portugal continental! No inverno, a neve cobre os pinheiros de branco e convida a brincar. Lá em cima, faz-se um queijo de ovelha muito saboroso e tradicional."
+    },
+    {
+        id: "t6",
+        titulo: "O Castelo de Guimarães",
+        icone: "img/castelo.png",
+        texto: "O Castelo de Guimarães tem torres de pedra muito antigas! Foi aqui que nasceu Portugal e o nosso primeiro rei lutou com bravura. Visitar esta grande fortaleza é como fazer uma viagem no tempo."
+    },
+    {
+        id: "t7",
+        titulo: "A Dieta Mediterrânica",
+        icone: "img/dieta.png",
+        texto: "A nossa alimentação tradicional é muito saudável e saborosa! Comemos muito peixe fresco, legumes coloridos, fruta doce e azeite dourado. Beber água e partilhar a refeição com a família traz muita saúde!"
+    },
+    {
+        id: "t8",
+        titulo: "Luís de Camões",
+        icone: "img/camoes.png",
+        texto: "Luís de Camões foi um dos maiores poetas da nossa história! Ele escreveu histórias fantásticas de gigantes e mares desconhecidos. A sua obra é lida por crianças e adultos em todo o mundo."
+    },
+    {
+        id: "t9",
+        titulo: "O Mar de Portugal",
+        icone: "img/mar.png",
+        texto: "O mar que banha Portugal esconde segredos fantásticos! Temos ondas gigantes na Nazaré que desafiam os surfistas mais corajosos. Proteger a água azul e as praias limpas é a nossa missão de heróis!"
+    },
+    {
+        id: "t10",
+        titulo: "A Rã Verde",
+        icone: "img/ra.png",
+        texto: "A rã-verde vive alegremente nos charcos e lagoas de água doce. Ela salta entre os juncos e apanha insetos rápidos com a língua. O seu canto ritmado anima as noites quentes de primavera!"
+    },
+    {
+        id: "t11",
+        titulo: "As Abelhas",
+        icone: "img/abelha.png",
+        texto: "As abelhas trabalhadoras voam pelas flores de alecrim e urze. Elas colhem o néctar doce para fabricar um mel dourado e delicioso. Este mel natural dá-nos muita energia e protege a nossa garganta."
+    },
+    {
+        id: "t12",
+        titulo: "A Andorinha",
+        icone: "img/andorinha.png",
+        texto: "A andorinha-das-chaminés anuncia a chegada da primavera! Ela faz ninhos de lama nos telhados e voa em círculos rápidos no céu. No outono, viaja com o seu bando para terras quentes em África."
+    },
+    {
+        id: "t13",
+        titulo: "O Sol",
+        icone: "img/sol.png",
+        texto: "O sol é a estrela mais próxima e importante da Terra! Ele dá-nos a luz e o calor necessários para as plantas crescerem fortes. Sem o sol, o nosso planeta seria um lugar muito escuro e frio."
+    },
+    {
+        id: "t14",
+        titulo: "A Tartaruga-Marinha",
+        icone: "img/tartaruga.png",
+        texto: "A tartaruga-marinha viaja milhares de quilómetros no oceano azul! Ela nada devagar, alimentando-se de pequenas medusas e plantas marinhas. Evitar deitar plástico no mar salva estes animais tão simpáticos."
+    },
+    {
+        id: "t15",
+        titulo: "O Livro Mágico",
+        icone: "img/livro.png",
+        texto: "Abrir um livro é como acender um farol de imaginação! Podemos viajar no tempo, conhecer dragões e ser detetives de mistérios. Ler um pouco todos os dias faz-nos viajar sem sair do sítio."
+    },
+    {
+        id: "t16",
+        titulo: "A Ilha da Madeira",
+        icone: "img/madeira.png",
+        texto: "A bela Ilha da Madeira é um jardim verdejante no meio do oceano Atlântico! Ela é famosa pelas suas levadas antigas, flores coloridas e a rara floresta Laurissilva. Visitar esta pérola do mar é descobrir paisagens mágicas entre as montanhas e as falésias."
+    },
+    {
+        id: "t17",
+        titulo: "O Sobreiro",
+        icone: "img/sobreiro.png",
+        texto: "O sobreiro é a árvore nacional de Portugal e produz a famosa cortiça! O seu tronco forte protege a floresta e serve de abrigo a muitos animais carinhosos. Retirar a cortiça com cuidado ajuda a árvore a crescer ainda mais saudável."
+    },
+    {
+        id: "t18",
+        titulo: "Os Açores",
+        icone: "img/acores.png",
+        texto: "Os Açores são nove ilhas encantadoras situadas no meio do grande oceano Atlântico! Lá encontramos lagoas dentro de vulcões adormecidos, vacas a pastar nos prados verdes e marés quentes. É um verdadeiro paraíso natural repleto de mistério!"
+    },
+    {
+        id: "t19",
+        titulo: "O Golfinho-Roaz",
+        icone: "img/golfinho.png",
+        texto: "O golfinho-roaz adora dar saltos acrobáticos nas águas azuis do rio Sado! Ele comunica com os seus amigos através de assobios e cliques muito divertidos. Ver um grupo de golfinhos a nadar em liberdade é um espetáculo inesquecível!"
+    },
+    {
+        id: "t20",
+        titulo: "O Sistema Solar",
+        icone: "img/planetas.png",
+        texto: "O nosso planeta Terra gira em volta do Sol acompanhado por outros sete planetas fascinantes! Cada planeta tem as suas cores, tamanhos e luas misteriosas a flutuar no espaço. Explorar o universo ensina-nos como o mundo é grande e maravilhoso!"
+    },
+    {
+        id: "t21",
+        titulo: "Os Moinhos de Vento",
+        icone: "img/moinho.png",
+        texto: "Os velhos moinhos de vento têm grandes velas brancas que giram ao sabor da brisa! Antigamente, a força do vento fazia mover as mós de pedra para moer o trigo e fazer farinha. Hoje, continuam a enfeitar as nossas colinas com muita beleza!"
+    },
+    {
+        id: "t22",
+        titulo: "A Reciclagem",
+        icone: "img/reciclagem.png",
+        texto: "Separar o papel, o vidro e o plástico nos ecopontos coloridos é uma missão de grande valor! Ao reciclar as embalagens usadas, evitamos a poluição do planeta e poupamos os recursos da natureza. Pequenos gestos de hoje garantem um futuro muito mais limpo!"
+    },
+    {
+        id: "t23",
+        titulo: "O Fado Português",
+        icone: "img/guitarra.png",
+        texto: "O fado é a canção tradicional mais conhecida e emocionante de Portugal! Acompanhado pela guitarra portuguesa de doze cordas, canta histórias de saudade, do mar e das nossas cidades. Esta música bonita é património de toda a humanidade!"
+    },
+    {
+        id: "t24",
+        titulo: "D. Afonso Henriques",
+        icone: "img/rei.png",
+        texto: "D. Afonso Henriques foi o corajoso e valente primeiro rei do nosso país! Conhecido como O Conquistador, ele defendeu o território com grande determinação e fundou o reino de Portugal. A sua memória continua viva nos nossos livros de história!"
+    },
+    {
+        id: "t25",
+        titulo: "O Mocho-Galego",
+        icone: "img/mocho.png",
+        texto: "O mocho-galego é uma pequena ave de rapina com grandes olhos amarelos e muito curiosos! Durante a noite, ele vigia os campos em silêncio absoluto à procura de pequenos insetos. A sua visão noturna apurada faz dele um caçador fabuloso!"
+    },
+    {
+        id: "t26",
+        titulo: "As Estações do Ano",
+        icone: "img/estacoes.png",
+        texto: "A Terra demora um ano inteiro a dar uma volta completa ao redor do Sol! Durante essa viagem, passamos pelas floridas Primaveras, Verões quentes, Outonos dourados e Invernos frios. Cada estação traz cores, frutos e brincadeiras diferentes!"
+    },
+    {
+        id: "t27",
+        titulo: "O Elétrico",
+        icone: "img/eletrico.png",
+        texto: "O elétrico sobe e desce as colinas íngremes da cidade com o seu tilintar alegre! Ele desliza sobre carris de ferro pelas ruas antigas e calçadas históricas. Viajar num elétrico tradicional é uma das formas mais divertidas de passear!"
+    },
+    {
+        id: "t28",
+        titulo: "A Cegonha-Branca",
+        icone: "img/cegonha.png",
+        texto: "A cegonha-branca constrói ninhos gigantescos no topo de campanários e postes altos! Ela regressa todos os anos ao mesmo local para cuidar dos seus filhotes com grande carinho. O bater do seu bico faz um som ritmado muito especial!"
+    },
+    {
+        id: "t29",
+        titulo: "A Calçada Portuguesa",
+        icone: "img/calcada.png",
+        texto: "A calçada portuguesa é um verdadeiro mosaico de arte feito com pedras pretas e brancas! Os mestres calceteiros desenham caravelas, marés e flores nos passeios das nossas cidades. Caminhar sobre esta tradição é apreciar o talento dos nossos artesãos!"
+    },
+    {
+        id: "t30",
+        titulo: "As Energias Renováveis",
+        icone: "img/energia.png",
+        texto: "A energia limpa do sol, do vento e da água ajuda a proteger o nosso planeta! As grandes pás das ventoinhas e os painéis solares produzem eletricidade sem poluir o ar. Cuidar do ambiente é garantir uma Terra cheia de vida!"
     }
-	
-    function atualizarCronometro() {
-        tempoSegundos++;
-        const minutos = Math.floor(tempoSegundos / 60).toString().padStart(2, '0');
-        const segundos = (tempoSegundos % 60).toString().padStart(2, '0');
-        document.getElementById('val-tempo').textContent = `${minutos}:${segundos}`;
-    }
-
-    function showToast(msg, isError = false) {
-        const toast = document.getElementById('toast-msg');
-        toast.textContent = msg;
-        toast.style.borderColor = isError ? "#ff4757" : "#fbc531";
-        toast.style.color = isError ? "#ff4757" : "#b18500";
-        toast.style.backgroundColor = isError ? "#ffefef" : "#fff9c4";
-        toast.classList.add('active');
-        setTimeout(() => toast.classList.remove('active'), 3000);
-    }
-
-    // =========================================
-    // OS 10 TEXTOS DISPONÍVEIS NA BASE
-    // =========================================
-    const textosBase =[
-        {
-            id: "t1",
-            titulo: "O Lince-Ibérico",
-            icone: "img/lince.png",
-            texto: "O lince-ibérico é um felino muito raro e elegante. Ele adora saltar entre os arbustos e caçar coelhos na floresta. Cuidar e proteger este belo animal é um dever de todos nós!"
-        },
-        {
-            id: "t2",
-            titulo: "O Galo de Barcelos",
-            icone: "img/galo.png",
-            texto: "A lenda do Galo de Barcelos é um grande símbolo de Portugal! Conta a história de um milagre divertido que salvou um jovem viajante. Hoje, o galo colorido traz muita alegria e cor às nossas casas."
-        },
-        {
-            id: "t3",
-            titulo: "Os Descobrimentos",
-            icone: "img/caravela.png",
-            texto: "Há muitos séculos, os marinheiros portugueses viajaram pelo oceano! Eles usavam caravelas de madeira e orientavam-se através das estrelas. Descobrir novas terras foi uma grande e corajosa aventura!"
-        },
-        {
-            id: "t4",
-            titulo: "O Ciclo da Água",
-            icone: "img/agua.png",
-            texto: "A água faz uma viagem mágica e sem fim na natureza! O sol aquece a água dos rios, fazendo-a subir em vapor até formar nuvens. Depois, a chuva cai para regar os campos e encher os lagos de vida."
-        },
-        {
-            id: "t5",
-            titulo: "Serra da Estrela",
-            icone: "img/serra.png",
-            texto: "A Serra da Estrela é a montanha mais alta de Portugal continental! No inverno, a neve cobre os pinheiros de branco e convida a brincar. Lá em cima, faz-se um queijo de ovelha muito saboroso e tradicional."
-        },
-        {
-            id: "t6",
-            titulo: "O Castelo de Guimarães",
-            icone: "img/castelo.png",
-            texto: "O Castelo de Guimarães tem torres de pedra muito antigas! Foi aqui que nasceu Portugal e o nosso primeiro rei lutou com bravura. Visitar esta grande fortaleza é como fazer uma viagem no tempo."
-        },
-        {
-            id: "t7",
-            titulo: "A Dieta Mediterrânica",
-            icone: "img/dieta.png",
-            texto: "A nossa alimentação tradicional é muito saudável e saborosa! Comemos muito peixe fresco, legumes coloridos, fruta doce e azeite dourado. Beber água e partilhar a refeição com a família traz muita saúde!"
-        },
-        {
-            id: "t8",
-            titulo: "Luís de Camões",
-            icone: "img/camoes.png",
-            texto: "Luís de Camões foi um dos maiores poetas da nossa história! Ele escreveu histórias fantásticas de gigantes e mares desconhecidos. A sua obra é lida por crianças e adultos em todo o mundo."
-        },
-        {
-            id: "t9",
-            titulo: "O Mar de Portugal",
-            icone: "img/mar.png",
-            texto: "O mar que banha Portugal esconde segredos fantásticos! Temos ondas gigantes na Nazaré que desafiam os surfistas mais corajosos. Proteger a água azul e as praias limpas é a nossa missão de heróis!"
-        },
-		{
-            id: "t10",
-            titulo: "A Rã Verde",
-            icone: "img/ra.png",
-            texto: "A rã-verde vive alegremente nos charcos e lagoas de água doce. Ela salta entre os juncos e apanha insetos rápidos com a língua. O seu canto ritmado anima as noites quentes de primavera!"
-        },
-		{
-            id: "t11",
-            titulo: "As Abelhas",
-            icone: "img/abelha.png",
-            texto: "As abelhas trabalhadoras voam pelas flores de alecrim e urze. Elas colhem o néctar doce para fabricar um mel dourado e delicioso. Este mel natural dá-nos muita energia e protege a nossa garganta."
-        },
-        {
-            id: "t12",
-            titulo: "A Andorinha",
-            icone: "img/andorinha.png",
-            texto: "A andorinha-das-chaminés anuncia a chegada da primavera! Ela faz ninhos de lama nos telhados e voa em círculos rápidos no céu. No outono, viaja com o seu bando para terras quentes em África."
-        },
-		{
-            id: "t13",
-            titulo: "O Sol",
-            icone: "img/sol.png",
-            texto: "O sol é a estrela mais próxima e importante da Terra! Ele dá-nos a luz e o calor necessários para as plantas crescerem fortes. Sem o sol, o nosso planeta seria um lugar muito escuro e frio."
-        },
-        {
-            id: "t14",
-            titulo: "A Tartaruga-Marinha",
-            icone: "img/tartaruga.png",
-            texto: "A tartaruga-marinha viaja milhares de quilómetros no oceano azul! Ela nada devagar, alimentando-se de pequenas medusas e plantas marinhas. Evitar deitar plástico no mar salva estes animais tão simpáticos."
-        },
-        {
-            id: "t15",
-            titulo: "O Livro Mágico",
-            icone: "img/livro.png",
-            texto: "Abrir um livro é como acender um farol de imaginação! Podemos viajar no tempo, conhecer dragões e ser detetives de mistérios. Ler um pouco todos os dias faz-nos viajar sem sair do sítio."
-        },
-		{
-            id: "t16",
-            titulo: "A Ilha da Madeira",
-            icone: "img/ilha.png",
-            texto: "A bela Ilha da Madeira é um jardim verdejante no meio do oceano Atlântico! Ela é famosa pelas suas levadas antigas, flores coloridas e a rara floresta Laurissilva. Visitar esta pérola do mar é descobrir paisagens mágicas entre as montanhas e as falésias."
-        }
-    ];
+];
 
     // =========================================
     // VARIÁVEIS BASE DE CONTROLO DO JOGO
     // =========================================
-    let textosMenuAtuais =[]; // Guarda os 6 selecionados
+    let paginaAtual = 0;
+    let textosMenuAtuais = [];
     let textoAtualObj = null;
     let errosTotais = 0;
     let estavaCorreto = true;
-	let timerCronometro = null;
+    let timerCronometro = null;
     let tempoSegundos = 0;
     let memProgresso = {};
-
-    const grelhaTextos = document.getElementById('grelha-textos');
-    const inputCaderno = document.getElementById('caderno-input');
-    const quadroLeitura = document.getElementById('quadro-leitura');
-    const barraProgresso = document.getElementById('progress-fill');
-    const labelErros = document.getElementById('val-erros');
-    const labelTitulo = document.getElementById('val-titulo-texto');
+    let memRecordes = {};
 
     // =========================================
-    // LOCAL STORAGE E INICIALIZAÇÃO
+    // UI E NAVEGAÇÃO DA PÁGINA
     // =========================================
-    function carregarMemoriaESorteio() {
-		const recordesGuardados = localStorage.getItem('pt3_copias_recordes');
-		memRecordes = recordesGuardados ? JSON.parse(recordesGuardados) : {};
-		// Carrega apenas o progresso das estrelas
-		const guardado = localStorage.getItem('pt2_copias_estrelas');
-		memProgresso = guardado ? JSON.parse(guardado) : {};
+    function toggleMenu() {
+        document.getElementById('sidebar')?.classList.toggle('active');
+        document.getElementById('overlay')?.classList.toggle('active');
+        document.getElementById('hamburgerBtn')?.classList.toggle('open');
+    }
 
-		// Baralha sempre os 10 textos e escolhe 6 aleatórios
-		let baralhados = [...textosBase].sort(() => Math.random() - 0.5);
-		textosMenuAtuais = baralhados.slice(0, 6);
+    function mostrarEcra(id) {
+        document.querySelectorAll('.ecra').forEach(e => e.style.display = 'none');
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'flex';
+    }
+
+    function atualizarCronometro() {
+        tempoSegundos++;
+        const minutos = Math.floor(tempoSegundos / 60).toString().padStart(2, '0');
+        const segundos = (tempoSegundos % 60).toString().padStart(2, '0');
+        const valTempo = document.getElementById('val-tempo');
+        if (valTempo) valTempo.textContent = `${minutos}:${segundos}`;
+    }
+	
+	function toggleFullscreen() {
+		const elem = document.getElementById('cartao-jogo');
+		if (!elem) return;
+
+		if (!document.fullscreenElement) {
+			// Entra em Fullscreen
+			if (elem.requestFullscreen) {
+				elem.requestFullscreen();
+			} else if (elem.webkitRequestFullscreen) { /* Safari */
+				elem.webkitRequestFullscreen();
+			}
+		} else {
+			// Sai de Fullscreen
+			if (document.exitFullscreen) {
+				document.exitFullscreen();
+			} else if (document.webkitExitFullscreen) {
+				document.webkitExitFullscreen();
+			}
+		}
 	}
 
-    function sortearNovosTextos() {
-        let baralhados = [...textosBase].sort(() => Math.random() - 0.5);
-        textosMenuAtuais = baralhados.slice(0, 6);
+    // =========================================
+    // LOCAL STORAGE E MENU
+    // =========================================
+    function carregarMemoriaESorteio() {
+        const recordesGuardados = localStorage.getItem('pt3_copias_recordes');
+        memRecordes = recordesGuardados ? JSON.parse(recordesGuardados) : {};
         
+        const guardado = localStorage.getItem('pt2_copias_estrelas');
+        memProgresso = guardado ? JSON.parse(guardado) : {};
+
+        paginaAtual = 0;
+    }
+
+function obterItensPorPagina() {
+    // Se for mobile (<= 600px) e estiver em posição vertical (portrait)
+    const isMobilePortrait = window.matchMedia('(max-width: 600px) and (orientation: portrait)').matches;
+    return isMobilePortrait ? 3 : 6;
+}
+
+function mudarPagina(direcao) {
+    const itensPorPagina = obterItensPorPagina();
+    const totalPaginas = Math.ceil(textosBase.length / itensPorPagina);
+    
+    paginaAtual += direcao;
+
+    if (paginaAtual < 0) paginaAtual = 0;
+    if (paginaAtual >= totalPaginas) paginaAtual = totalPaginas - 1;
+
+    renderizarMenu();
+}
+
+    function refrescarPagina() {
+        paginaAtual = 0;
+        renderizarMenu();
+    }
+
+function renderizarMenu() {
+    const grelha = document.getElementById('grelha-textos');
+    if (!grelha) return;
+    
+    grelha.innerHTML = '';
+    
+    const itensPorPagina = obterItensPorPagina();
+    const totalPaginas = Math.ceil(textosBase.length / itensPorPagina);
+    
+    // Ajusta a página atual caso a mudança de orientação reduza o número total de páginas
+    if (paginaAtual >= totalPaginas) {
+        paginaAtual = Math.max(0, totalPaginas - 1);
+    }
+
+    const inicio = paginaAtual * itensPorPagina;
+    textosMenuAtuais = textosBase.slice(inicio, inicio + itensPorPagina);
+
+    textosMenuAtuais.forEach((txt, index) => {
+        const isFeito = memProgresso[txt.id] === true;
+        const recordeSegundos = memRecordes[txt.id];
+        let htmlRecorde = "";
+        
+        if (recordeSegundos !== undefined) {
+            const min = Math.floor(recordeSegundos / 60).toString().padStart(2, '0');
+            const seg = (recordeSegundos % 60).toString().padStart(2, '0');
+            htmlRecorde = `<div class="recorde-badge">${SVG_CLOCK_TINY} ${min}:${seg}</div>`;
+        }
+        
+        const btn = document.createElement('button');
+        btn.className = `btn-nivel-menu ${isFeito ? 'fechado' : ''}`;
+        btn.onclick = () => iniciarJogo(txt.id, inicio + index + 1);
+        
+        btn.innerHTML = `
+			<div class="estrela-concluido"><img src="estrela_pulsante.svg" class="icon-svg-titulo" alt=""></div>
+			<span class="nivel-icon">
+				<img src="${txt.icone}" alt="${txt.titulo}" onerror="this.src='img/brincar_aprender.jpg';">
+			</span>
+			<span class="nivel-text">
+				<span class="nivel-titulo">${txt.titulo}</span>
+				${htmlRecorde} <!-- Injetado aqui dentro, abaixo do título -->
+			</span>
+		`;
+        grelha.appendChild(btn);
+    });
+
+    // Atualiza estado desativado das setas de navegação
+    const btnAnt = document.getElementById('btn-pag-anterior');
+    const btnSeg = document.getElementById('btn-pag-seguinte');
+    if (btnAnt) btnAnt.disabled = (paginaAtual === 0);
+    if (btnSeg) btnSeg.disabled = (paginaAtual >= totalPaginas - 1);
+}
+
+    // =========================================
+    // LÓGICA DO JOGO DE ESCRITA
+    // =========================================
+    function iniciarJogo(id, numTextoVisivel) {
+        textoAtualObj = textosBase.find(t => t.id === id);
+        if (!textoAtualObj) return;
+
+        errosTotais = 0;
+        estavaCorreto = true;
+
+        const labelTitulo = document.getElementById('val-titulo-texto');
+        const labelErros = document.getElementById('val-erros');
+        const barraProgresso = document.getElementById('progress-fill');
+        const quadroLeitura = document.getElementById('quadro-leitura');
+        const inputCaderno = document.getElementById('caderno-input');
+
+        if (labelTitulo) labelTitulo.textContent = textoAtualObj.titulo;
+        if (labelErros) labelErros.textContent = "0";
+        if (barraProgresso) barraProgresso.style.width = "0%";
+
+        const elTituloJogo = document.getElementById('titulo-texto-jogo-texto');
+        const elIconeJogo = document.getElementById('icone-texto-jogo');
+        if (elTituloJogo) elTituloJogo.textContent = textoAtualObj.titulo;
+        if (elIconeJogo) elIconeJogo.innerHTML = `<img src="${textoAtualObj.icone}" alt="${textoAtualObj.titulo}">`;
+
+        if (quadroLeitura) quadroLeitura.textContent = textoAtualObj.texto;
+
+        if (inputCaderno) {
+            inputCaderno.value = "";
+            inputCaderno.classList.remove('erro', 'error-shake');
+        }
+
+        mostrarEcra('ecra-jogo');
+        if (inputCaderno) inputCaderno.focus();
+        
+        tempoSegundos = 0;
+        const valTempo = document.getElementById('val-tempo');
+        if (valTempo) valTempo.textContent = "00:00";
+        
+        clearInterval(timerCronometro);
+        timerCronometro = setInterval(atualizarCronometro, 1000);
     }
 
     function salvarEstrela(id) {
@@ -1117,324 +1868,298 @@
         localStorage.setItem('pt2_copias_estrelas', JSON.stringify(memProgresso));
     }
 
-    function limparProgresso() {
-		document.getElementById('confirmar-overlay').classList.add('active');
-		document.getElementById('confirmar-modal').classList.add('active');
-	}
-	
-	function fecharConfirmacao() {
-		document.getElementById('confirmar-overlay').classList.remove('active');
-		document.getElementById('confirmar-modal').classList.remove('active');
-	}
+    function concluirTexto() {
+        clearInterval(timerCronometro);
 
-	function confirmarLimpeza() {
-		localStorage.removeItem('pt2_copias_estrelas');
-		localStorage.removeItem('pt3_copias_recordes');
-		memRecordes = {};
-		memProgresso = {};
-		sortearNovosTextos();
-		renderizarMenu();
-		fecharConfirmacao();
-	}
-	
-
-    // =========================================
-    // LÓGICA DO JOGO 
-    // =========================================
-    function renderizarMenu() {
-        grelhaTextos.innerHTML = '';
+        const minutos = Math.floor(tempoSegundos / 60).toString().padStart(2, '0');
+        const segundos = (tempoSegundos % 60).toString().padStart(2, '0');
+        const tempoFinal = `${minutos}:${segundos}`;
         
-        textosMenuAtuais.forEach((txt, index) => {
-            const isFeito = memProgresso[txt.id] === true;
+        const finalTempo = document.getElementById('final-tempo');
+        if (finalTempo) finalTempo.textContent = tempoFinal;
+        
+        const recordeAnterior = memRecordes[textoAtualObj.id];
+        let mensagemRecorde = "";
+
+        if (recordeAnterior === undefined || tempoSegundos < recordeAnterior) {
+            memRecordes[textoAtualObj.id] = tempoSegundos;
+            localStorage.setItem('pt3_copias_recordes', JSON.stringify(memRecordes));
             
-            // Verifica se o texto tem um recorde de tempo guardado (Novo)
-            const recordeSegundos = memRecordes[txt.id];
-            let htmlRecorde = "";
-            
-            if (recordeSegundos !== undefined) {
-                const min = Math.floor(recordeSegundos / 60).toString().padStart(2, '0');
-                const seg = (recordeSegundos % 60).toString().padStart(2, '0');
-                htmlRecorde = `<div class="recorde-badge">${SVG_CLOCK_TINY} ${min}:${seg}</div>`;
+            if (recordeAnterior !== undefined) {
+                mensagemRecorde = "<br><span style='color: #22c55e; font-weight: bold;'>🎉 Novo Recorde Pessoal!</span>";
             }
-            
-            const btn = document.createElement('button');
-            btn.className = `btn-nivel-menu ${isFeito ? 'fechado' : ''}`;
-            btn.onclick = () => iniciarJogo(txt.id, index + 1);
-            
-            btn.innerHTML = `
-                <div class="estrela-concluido"><img src="estrela.svg" class="icon-svg-titulo" alt=""></div>
-                <span class="nivel-icon">
-					<img src="${txt.icone}" alt="">
-				</span>
-                <span class="nivel-text">
-                    <span class="nivel-titulo">${txt.titulo}</span>
-                </span>
-                ${htmlRecorde} <!-- Injeta o dístico do recorde aqui (Novo) -->
-            `;
-            grelhaTextos.appendChild(btn);
-        });
+        }
+
+        const endTitle = document.getElementById('end-title-text');
+        if (endTitle) {
+            const tituloFim = errosTotais === 0
+                ? `Cópia perfeita no texto "${textoAtualObj.titulo}"! <img src="estrela.svg" class="icon-svg-titulo" alt="">`
+                : `Bom trabalho no texto "${textoAtualObj.titulo}"! <img src="palmas.svg" class="icon-svg-titulo" alt="">`;
+            endTitle.innerHTML = tituloFim + mensagemRecorde;
+        }
+        
+        salvarEstrela(textoAtualObj.id);
+
+        const inputCaderno = document.getElementById('caderno-input');
+        if (inputCaderno) {
+            inputCaderno.blur();
+            inputCaderno.disabled = true;
+        }
+
+        const finalErros = document.getElementById('final-erros');
+        if (finalErros) finalErros.textContent = errosTotais;
+
+        setTimeout(() => {
+            tocarSom('vitoria');
+            dispararConfetis();
+            mostrarEcra('ecra-fim');
+            if (inputCaderno) inputCaderno.disabled = false;
+        }, 2000);
     }
 
-    function iniciarJogo(id, numTextoVisivel) {
-		textoAtualObj = textosMenuAtuais.find(t => t.id === id);
-		errosTotais = 0;
-		estavaCorreto = true;
-
-		labelTitulo.textContent = textoAtualObj.titulo;
-		labelErros.textContent = "0";
-		barraProgresso.style.width = "0%";
-
-		// título e ícone do texto (CORRETO)
-		document.getElementById('titulo-texto-jogo-texto').textContent =
-			textoAtualObj.titulo;
-
-		document.getElementById('icone-texto-jogo').innerHTML =
-			`<img src="${textoAtualObj.icone}" alt="">`;
-
-		quadroLeitura.textContent = textoAtualObj.texto;
-
-		inputCaderno.value = "";
-		inputCaderno.classList.remove('erro', 'error-shake');
-
-		mostrarEcra('ecra-jogo');
-		inputCaderno.focus();
-		
-		tempoSegundos = 0;
-		document.getElementById('val-tempo').textContent = "00:00";
-		clearInterval(timerCronometro);
-		timerCronometro = setInterval(atualizarCronometro, 1000);
-	}
-
-    // Validação em Tempo Real
-    inputCaderno.addEventListener('input', (e) => {
-        if (!textoAtualObj) return;
-
-        let digitado = e.target.value;
-        const original = textoAtualObj.texto;
-
-        // ==========================================
-        // ASSISTÊNCIA MÁGICA (Ignorar espaços extra)
-        // ==========================================
-        
-        // 1. Ignorar múltiplos espaços após pontuação (ex: ".  " vira automaticamente ". ")
-        const regexEspacosExtra = /([.,!?;:]) {2,}/g;
-        if (regexEspacosExtra.test(digitado)) {
-            digitado = digitado.replace(regexEspacosExtra, '$1 ');
-            e.target.value = digitado; // Atualiza a caixa de texto sem o aluno notar
-        }
-
-        // 2. BÓNUS: Se o aluno der "Espaço" no fim da frase, mas o texto pedir um "Enter" (\n)
-        if (digitado.length > 0) {
-            let ultimoChar = digitado[digitado.length - 1];
-            let charEsperado = original[digitado.length - 1];
-            
-            if (ultimoChar === ' ' && charEsperado === '\n') {
-                // Transforma automaticamente o espaço num Enter!
-                digitado = digitado.substring(0, digitado.length - 1) + '\n';
-                e.target.value = digitado;
-            }
-        }
-        // ==========================================
-
-        const alvoComparacao = original.substring(0, digitado.length);
-        const isCorrectNow = (digitado === alvoComparacao);
-
-        if (isCorrectNow) {
-            let perc = (digitado.length / original.length) * 100;
-            barraProgresso.style.width = `${perc}%`;
-            
-            inputCaderno.classList.remove('erro');
-            estavaCorreto = true;
-
-            if (digitado === original) {
-                concluirTexto();
-            }
-        } 
-        else {
-            inputCaderno.classList.add('erro');
-            
-            // Só conta 1 erro contínuo até que se corrija
-            if (estavaCorreto) {
-                errosTotais++;
-                labelErros.textContent = errosTotais;
-                tocarSom('erro');
-                
-                inputCaderno.classList.add('error-shake');
-                setTimeout(() => inputCaderno.classList.remove('error-shake'), 400);
-            }
-            estavaCorreto = false;
-        }
-    });
-
-    // Impede cópia da internet
-    inputCaderno.addEventListener('paste', e => e.preventDefault());
-
-    function concluirTexto() {
-		// Pára o relógio
-		clearInterval(timerCronometro);
-
-		// Formata e envia o tempo final para o ecrã de fim
-		const minutos = Math.floor(tempoSegundos / 60).toString().padStart(2, '0');
-		const segundos = (tempoSegundos % 60).toString().padStart(2, '0');
-		const tempoFinal = `${minutos}:${segundos}`;
-		document.getElementById('final-tempo').textContent = tempoFinal;
-		
-		// LÓGICA DE RECORDE PESSOAL (Novo)
-		const recordeAnterior = memRecordes[textoAtualObj.id];
-		let mensagemRecorde = "";
-
-		if (recordeAnterior === undefined || tempoSegundos < recordeAnterior) {
-			// Bateu o recorde ou é a primeira conclusão!
-			memRecordes[textoAtualObj.id] = tempoSegundos;
-			localStorage.setItem('pt3_copias_recordes', JSON.stringify(memRecordes));
-			
-			if (recordeAnterior !== undefined) {
-				mensagemRecorde = "<br><span style='color: #22c55e; font-weight: bold;'>🎉 Novo Recorde Pessoal!</span>";
-			}
-		}
-
-		// Atualiza o ecrã final com o tempo e a mensagem de recorde (Novo)
-		document.getElementById('end-title-text').innerHTML = errosTotais === 0
-			? `Cópia perfeita no texto "${textoAtualObj.titulo}"! <img src="estrela.svg" class="icon-svg-titulo" alt="">`
-			: `Bom trabalho no texto "${textoAtualObj.titulo}"! <img src="palmas.svg" class="icon-svg-titulo" alt="">`;
-
-		document.getElementById('end-title-text').innerHTML += mensagemRecorde;
-		
-		salvarEstrela(textoAtualObj.id);
-
-		// Bloqueia a escrita
-		inputCaderno.blur();
-		inputCaderno.disabled = true;
-
-		document.getElementById('final-erros').textContent = errosTotais;
-
-		const tituloFim = errosTotais === 0
-			? `Cópia perfeita no texto "${textoAtualObj.titulo}"! <img src="estrela.svg" class="icon-svg-titulo" alt="">`
-			: `Bom trabalho no texto "${textoAtualObj.titulo}"! <img src="palmas.svg" class="icon-svg-titulo" alt="">`;
-
-		document.getElementById('end-title-text').innerHTML = tituloFim;
-
-		// Espera alguns segundos antes de mostrar o ecrã final
-		setTimeout(() => {
-			tocarSom('vitoria');
-			dispararConfetis();
-			mostrarEcra('ecra-fim');
-
-			// Reativa o input para o próximo jogo
-			inputCaderno.disabled = false;
-		}, 3000);
-	}
-
     function voltarAoMenu() {
-        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+        if (ctxConfetti && canvasConfetti) {
+            ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+        }
         renderizarMenu();
         mostrarEcra('ecra-selecao');
-		clearInterval(timerCronometro);
+        clearInterval(timerCronometro);
+    }
+
+    // =========================================
+    // MODAIS (INFO & LIMPAR)
+    // =========================================
+    function limparProgresso() {
+        document.getElementById('confirmar-overlay')?.classList.add('active');
+        document.getElementById('confirmar-modal')?.classList.add('active');
+    }
+    
+    function fecharConfirmacao() {
+        document.getElementById('confirmar-overlay')?.classList.remove('active');
+        document.getElementById('confirmar-modal')?.classList.remove('active');
+    }
+
+    function confirmarLimpeza() {
+        localStorage.removeItem('pt2_copias_estrelas');
+        localStorage.removeItem('pt3_copias_recordes');
+        memRecordes = {};
+        memProgresso = {};
+        paginaAtual = 0;
+        renderizarMenu();
+        fecharConfirmacao();
+    }
+
+    function abrirInfo() {
+        const lista = document.getElementById('lista-textos-info');
+        if (!lista) return;
+
+        lista.innerHTML = '';
+        textosBase.forEach(txt => {
+            const li = document.createElement('li');
+            const isFeito = memProgresso[txt.id] === true;
+            
+            if (isFeito) {
+                li.innerHTML = `<strong>${txt.titulo}</strong> <img src="estrela.svg" class="icon-svg-titulo" alt="">`;
+            } else {
+                li.textContent = txt.titulo;
+            }
+            lista.appendChild(li);
+        });
+
+        document.getElementById('info-overlay')?.classList.add('active');
+        document.getElementById('info-modal')?.classList.add('active');
+    }
+
+    function fecharInfo() {
+        document.getElementById('info-overlay')?.classList.remove('active');
+        document.getElementById('info-modal')?.classList.remove('active');
     }
 
     // =========================================
     // SISTEMA DE SOM E CONFETIS
     // =========================================
     const AudioContext = window.AudioContext || window.webkitAudioContext;
-    const audioCtx = new AudioContext();
+    let audioCtx = null;
     
     function tocarSom(tipo) {
+        if (!audioCtx) audioCtx = new AudioContext();
         if (audioCtx.state === 'suspended') audioCtx.resume();
-        const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
-        osc.connect(gain); gain.connect(audioCtx.destination); const agora = audioCtx.currentTime;
+
+        const osc = audioCtx.createOscillator(); 
+        const gain = audioCtx.createGain();
+        osc.connect(gain); 
+        gain.connect(audioCtx.destination); 
+        const agora = audioCtx.currentTime;
 
         if (tipo === 'erro') {
-            osc.type = 'sawtooth'; osc.frequency.setValueAtTime(200, agora); osc.frequency.exponentialRampToValueAtTime(100, agora + 0.2);
-            gain.gain.setValueAtTime(0.15, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
-            osc.start(agora); osc.stop(agora + 0.3);
-        }
-        else if (tipo === 'vitoria') {
-            const notas =[523.25, 659.25, 783.99, 1046.50];
+            osc.type = 'sawtooth'; 
+            osc.frequency.setValueAtTime(200, agora); 
+            osc.frequency.exponentialRampToValueAtTime(100, agora + 0.2);
+            gain.gain.setValueAtTime(0.15, agora); 
+            gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.3);
+            osc.start(agora); 
+            osc.stop(agora + 0.3);
+        } else if (tipo === 'vitoria') {
+            const notas = [523.25, 659.25, 783.99, 1046.50];
             notas.forEach((freq, i) => {
-                const o = audioCtx.createOscillator(); const g = audioCtx.createGain(); o.connect(g); g.connect(audioCtx.destination);
-                o.type = 'sine'; o.frequency.value = freq; g.gain.setValueAtTime(0.1, agora + i * 0.15); g.gain.exponentialRampToValueAtTime(0.01, agora + i * 0.15 + 0.3);
-                o.start(agora + i * 0.15); o.stop(agora + i * 0.15 + 0.3);
+                const o = audioCtx.createOscillator(); 
+                const g = audioCtx.createGain(); 
+                o.connect(g); 
+                g.connect(audioCtx.destination);
+                o.type = 'sine'; 
+                o.frequency.value = freq; 
+                g.gain.setValueAtTime(0.1, agora + i * 0.15); 
+                g.gain.exponentialRampToValueAtTime(0.01, agora + i * 0.15 + 0.3);
+                o.start(agora + i * 0.15); 
+                o.stop(agora + i * 0.15 + 0.3);
             });
         }
     }
 
-    const canvasConfetti = document.getElementById('confetti-canvas') || document.createElement('canvas');
-    if (!document.getElementById('confetti-canvas')) {
-        canvasConfetti.id = 'confetti-canvas';
-        document.querySelector('.cartao-jogo-container').appendChild(canvasConfetti);
-    }
-    const ctxConfetti = canvasConfetti.getContext('2d');
-    let confetis =[];
+    let canvasConfetti, ctxConfetti;
+    let confetis = [];
 
     function redimensionarCanvas() { 
-        if(!canvasConfetti.parentElement) return;
-        canvasConfetti.width = canvasConfetti.parentElement.clientWidth; 
-        canvasConfetti.height = canvasConfetti.parentElement.clientHeight; 
+        if (canvasConfetti && canvasConfetti.parentElement) {
+            canvasConfetti.width = canvasConfetti.parentElement.clientWidth; 
+            canvasConfetti.height = canvasConfetti.parentElement.clientHeight; 
+        }
     }
-    window.addEventListener('resize', redimensionarCanvas);
 
     function dispararConfetis() {
-        redimensionarCanvas(); confetis =[]; const cores =['#ff6b6b', '#4dabf7', '#51cf66', '#fbc531', '#9b59b6'];
+        if (!canvasConfetti) return;
+        redimensionarCanvas(); 
+        confetis = []; 
+        const cores = ['#ff6b6b', '#4dabf7', '#51cf66', '#fbc531', '#9b59b6'];
         for (let i = 0; i < 150; i++) {
-            confetis.push({ x: Math.random() * canvasConfetti.width, y: Math.random() * canvasConfetti.height - canvasConfetti.height, w: Math.random() * 10 + 5, h: Math.random() * 10 + 5, cor: cores[Math.floor(Math.random() * cores.length)], velY: Math.random() * 3 + 2, velX: Math.random() * 2 - 1, rotacao: Math.random() * 360, velRotacao: Math.random() * 5 - 2.5 });
+            confetis.push({ 
+                x: Math.random() * canvasConfetti.width, 
+                y: Math.random() * canvasConfetti.height - canvasConfetti.height, 
+                w: Math.random() * 10 + 5, 
+                h: Math.random() * 10 + 5, 
+                cor: cores[Math.floor(Math.random() * cores.length)], 
+                velY: Math.random() * 3 + 2, 
+                velX: Math.random() * 2 - 1, 
+                rotacao: Math.random() * 360, 
+                velRotacao: Math.random() * 5 - 2.5 
+            });
         }
         animarConfetis();
     }
 
     function animarConfetis() {
-        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); let ativos = false;
+        if (!ctxConfetti) return;
+        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); 
+        let ativos = false;
         confetis.forEach(c => {
-            c.y += c.velY; c.x += c.velX; c.rotacao += c.velRotacao; if (c.y < canvasConfetti.height) ativos = true;
-            ctxConfetti.save(); ctxConfetti.translate(c.x, c.y); ctxConfetti.rotate(c.rotacao * Math.PI / 180);
-            ctxConfetti.fillStyle = c.cor; ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); ctxConfetti.restore();
+            c.y += c.velY; 
+            c.x += c.velX; 
+            c.rotacao += c.velRotacao; 
+            if (c.y < canvasConfetti.height) ativos = true;
+            ctxConfetti.save(); 
+            ctxConfetti.translate(c.x, c.y); 
+            ctxConfetti.rotate(c.rotacao * Math.PI / 180);
+            ctxConfetti.fillStyle = c.cor; 
+            ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); 
+            ctxConfetti.restore();
         });
         if (ativos) requestAnimationFrame(animarConfetis);
     }
 
-    // Arranca no menu
-    window.onload = () => {
+    // =========================================
+    // ARRANQUE DA APLICAÇÃO (DOM READY)
+    // =========================================
+    document.addEventListener("DOMContentLoaded", () => {
+        // Injeção de SVGs da barra de estado
+        const btnHome = document.getElementById('btn-home-svg');
+        const badgeRonda = document.getElementById('badge-ronda-svg');
+        const btnAjuda = document.getElementById('btn-dica');
+        const iconeErro = document.getElementById('icone-erro-svg');
+        const iconeTempo = document.getElementById('icone-tempo-svg');
+
+        if (iconeTempo) iconeTempo.innerHTML = SVG_CLOCK;
+        if (btnHome) btnHome.innerHTML = SVG_HOME;
+        if (btnAjuda) btnAjuda.innerHTML = SVG_BULB + ' Dica';
+        if (iconeErro) iconeErro.innerHTML = SVG_ERRO;
+        if (badgeRonda) badgeRonda.innerHTML = SVG_STAR;
+
+        // Configuração do Canvas de Confetis
+        canvasConfetti = document.getElementById('confetti-canvas');
+        if (!canvasConfetti) {
+            canvasConfetti = document.createElement('canvas');
+            canvasConfetti.id = 'confetti-canvas';
+            document.querySelector('.cartao-jogo-container')?.appendChild(canvasConfetti);
+        }
+        if (canvasConfetti) ctxConfetti = canvasConfetti.getContext('2d');
+        window.addEventListener('resize', () => {
+			renderizarMenu();
+		});
+
+        // Eventos do Input do Caderno
+        const inputCaderno = document.getElementById('caderno-input');
+        if (inputCaderno) {
+            inputCaderno.addEventListener('paste', e => e.preventDefault());
+            
+            inputCaderno.addEventListener('input', (e) => {
+                if (!textoAtualObj) return;
+
+                let digitado = e.target.value;
+                const original = textoAtualObj.texto;
+                const barraProgresso = document.getElementById('progress-fill');
+                const labelErros = document.getElementById('val-erros');
+
+                // Assistência de Espaços Extra
+                const regexEspacosExtra = /([.,!?;:]) {2,}/g;
+                if (regexEspacosExtra.test(digitado)) {
+                    digitado = digitado.replace(regexEspacosExtra, '$1 ');
+                    e.target.value = digitado;
+                }
+
+                // Assistência para Enter (\n)
+                if (digitado.length > 0) {
+                    let ultimoChar = digitado[digitado.length - 1];
+                    let charEsperado = original[digitado.length - 1];
+                    
+                    if (ultimoChar === ' ' && charEsperado === '\n') {
+                        digitado = digitado.substring(0, digitado.length - 1) + '\n';
+                        e.target.value = digitado;
+                    }
+                }
+
+                const alvoComparacao = original.substring(0, digitado.length);
+                const isCorrectNow = (digitado === alvoComparacao);
+
+                if (isCorrectNow) {
+                    let perc = (digitado.length / original.length) * 100;
+                    if (barraProgresso) barraProgresso.style.width = `${perc}%`;
+                    
+                    inputCaderno.classList.remove('erro');
+                    estavaCorreto = true;
+
+                    if (digitado === original) {
+                        concluirTexto();
+                    }
+                } else {
+                    inputCaderno.classList.add('erro');
+                    if (estavaCorreto) {
+                        errosTotais++;
+                        if (labelErros) labelErros.textContent = errosTotais;
+                        tocarSom('erro');
+                        
+                        inputCaderno.classList.add('error-shake');
+                        setTimeout(() => inputCaderno.classList.remove('error-shake'), 400);
+                    }
+                    estavaCorreto = false;
+                }
+            });
+        }
+
+        // Inicializa o jogo e renderiza o menu
         carregarMemoriaESorteio();
         renderizarMenu();
         mostrarEcra('ecra-selecao');
-    };
-	
-	function abrirInfo() {
-		const lista = document.getElementById('lista-textos-info');
-		lista.innerHTML = '';
-
-		// O forEach vai passar por TODOS os textos (mesmo os que adicionares no futuro)
-		textosBase.forEach(txt => {
-			const li = document.createElement('li');
-			
-			// Verifica se o texto atual (pelo ID) já tem estrela na memória
-			const isFeito = memProgresso[txt.id] === true;
-			
-			// Se estiver feito, adiciona a estrela ao lado do título
-			if (isFeito) {
-				li.innerHTML = `<strong>${txt.titulo}</strong> <img src="estrela.svg" class="icon-svg-titulo" alt="">`;
-			} else {
-				// Se não estiver feito, mostra apenas o título normal
-				li.textContent = txt.titulo;
-			}
-			
-			lista.appendChild(li);
-		});
-
-		document.getElementById('info-overlay').classList.add('active');
-		document.getElementById('info-modal').classList.add('active');
-	}
-
-	function fecharInfo() {
-		document.getElementById('info-overlay').classList.remove('active');
-		document.getElementById('info-modal').classList.remove('active');
-	}
-	
-	function refrescarPagina() {
-    location.reload();
-}
-
+    });
 </script>
-
 <!-- Pop up de Limpar progresso -->
 <div class="confirmar-overlay" id="confirmar-overlay"></div>
 
@@ -1442,8 +2167,8 @@
     <h3><img src="limpar_progresso.svg" class="icon-svg-titulo" alt=""> Limpar progresso?</h3>
 
     <p>
-        Queres apagar as estrelas conquistadas e sortear novos textos?
-        Esta ação não pode ser desfeita.
+        Queres apagar os tempos e as estrelas conquistadas?
+        <strong>Esta ação não pode ser desfeita.</strong>
     </p>
 
     <div class="confirmar-acoes">
@@ -1469,16 +2194,7 @@
 
     <h3><img src="textos.svg" class="icon-svg-titulo" alt=""> Textos disponíveis</h3>
     <ul id="lista-textos-info"></ul>
-
-    <h3><img src="refresh.svg" class="icon-svg-titulo" alt=""> Textos aleatórios</h3>
-    <p>
-        Sempre que refrescas a página (F5) ou clicares em <img src="refresh.svg" class="icon-svg-titulo" alt="">
-        os textos do menu inicial mudam automaticamente.
-    </p>
 </div>
-
-
-
 <script type="module" src="/contador.js"></script></body>
 </html>
 
