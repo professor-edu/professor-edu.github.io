@@ -34,7 +34,7 @@ const CONFIG_JOGO = {
                     tipo: "padrao",
                     pergunta: "<span class='destaque-badge'>Medicamentos prescritos pelo médico</span>",
                     audio: "audios/q_farmacia.mp3", // Áudio: "Quando o médico nos passa uma receita de remédios, em que estabelecimento os vamos buscar?"
-                    dica: "Procura o estabelecimento onde os farmacêuticos nos atendem.",
+                    dica: { tipo: "highlight" },
                     opcoes: ["Farmácia", "Teatro", "Banco", "Supermercado"],
                     correta: "Farmácia"
                 },
@@ -56,7 +56,7 @@ const CONFIG_JOGO = {
                     tipo: "padrao",
                     pergunta: "<span class='destaque-badge'>Cartas e encomendas</span>",
                     audio: "audios/q_correios.mp3", // Áudio: "Qual é o serviço público para onde levamos as cartas ou encomendas para que os carteiros as entreguem?"
-                    dica: "É o serviço onde trabalham os carteiros.",
+                    dica: { tipo: "highlight" },
                     opcoes: ["Correios", "Biblioteca", "Tribunal", "Piscina Municipal"],
                     correta: "Correios"
                 },
@@ -78,7 +78,7 @@ const CONFIG_JOGO = {
                     tipo: "padrao",
                     pergunta: "<span class='destaque-amarelo'>Doença súbita ou acidente grave</span>",
                     audio: "audios/q_hospital.mp3", // Áudio: "Se alguém tiver uma emergência de saúde grave durante a noite, a que serviço de saúde deve recorrer?"
-                    dica: "É para onde as ambulâncias levam os doentes urgentes.",
+                    dica: { tipo: "highlight" },
                     opcoes: ["Hospital", "Museu", "Banco", "Teatro"],
                     correta: "Hospital"
                 },
@@ -100,7 +100,7 @@ const CONFIG_JOGO = {
                     tipo: "padrao",
                     pergunta: "<span class='destaque-amarelo'>Guardar o dinheiro em segurança</span>",
                     audio: "audios/q_banco.mp3", // Áudio: "Onde é que os adultos vão para guardar as suas poupanças ou utilizar o Multibanco?"
-                    dica: "Tem caixas automáticas (Multibanco) para levantar ou depositar dinheiro.",
+                    dica: { tipo: "50-50" },
                     opcoes: ["Banco", "Escola", "Centro de Saúde", "Biblioteca"],
                     correta: "Banco"
                 },
@@ -122,7 +122,7 @@ const CONFIG_JOGO = {
                     tipo: "padrao",
                     pergunta: "<span class='destaque-amarelo'>Consultar e requisitar livros</span>",
                     audio: "audios/q_biblioteca.mp3", // Áudio: "Qual é o local público da cidade onde podemos ler em silêncio e levar livros para casa?"
-                    dica: "É um local público de leitura onde devemos fazer silêncio.",
+                    dica: { tipo: "50-50" },
                     opcoes: ["Biblioteca", "Tribunal", "Piscina Municipal", "Farmácia"],
                     correta: "Biblioteca"
                 },
@@ -144,7 +144,7 @@ const CONFIG_JOGO = {
                     tipo: "padrao",
                     pergunta: "<span class='destaque-fundo'>Alimentos e outros produtos</span>",
                     audio: "audios/q_supermercado.mp3", // Áudio: "Em que grande loja da comunidade encontramos toda a comida necessária e outros produtos para o dia a dia?"
-                    dica: "Loja de grande dimensão com várias secções de alimentação.",
+                    dica: { tipo: "highlight" },
                     opcoes: ["Supermercado", "Teatro", "PSP", "Biblioteca"],
                     correta: "Supermercado"
                 },
@@ -166,7 +166,7 @@ const CONFIG_JOGO = {
                     tipo: "padrao",
                     pergunta: "<span class='destaque-fundo'>A PSP e a GNR servem para...</span>",
                     audio: "audios/q_seguranca.mp3", // Áudio: "Qual é o principal dever dos polícias e guardas que patrulham as nossas ruas?"
-                    dica: "Pensa naquilo que os agentes da autoridade fazem na rua.",
+                    dica: { tipo: "highlight" },
                     opcoes: ["Proteger as populações", "Vender alimentos", "Emprestar livros", "Fazer espetáculos"],
                     correta: "Proteger as populações"
                 },
@@ -174,21 +174,21 @@ const CONFIG_JOGO = {
                     id: 115,
                     tipo: "situacao",
                     pergunta: "<span class='destaque-fundo'>Pedir ajuda</span>",
-                    audio: "audios/situacao_policia.mp3", // Áudio: "Se te perderes da tua família durante um passeio no centro da cidade, a que profissionais de farda deves pedir ajuda?"
-                    dica: "Procura a entidade onde trabalham guardas e agentes de farda.",
+                    audio: "audios/situacao_policia.mp3", // Áudio: "Se te perderes da tua família durante um passeio no centro da cidade, a que profissionais de farda azul deves pedir ajuda?"
+                    dica: "Este polícias são responsáveis pela segurança nas localidades.",
                     opcoesImagem: [
                         { img: "img/biblioteca.jpg", alt: "Biblioteca", valor: "Biblioteca" },
-                        { img: "img/psp.jpg", alt: "PSP / GNR", valor: "PSP / GNR" },
+                        { img: "img/psp.jpg", alt: "PSP", valor: "PSP" },
                         { img: "img/farmacia.jpg", alt: "Farmácia", valor: "Farmácia" }
                     ],
-                    correta: "PSP / GNR"
+                    correta: "PSP"
                 },
                 {
                     id: 116,
                     tipo: "padrao",
                     pergunta: "<span class='destaque-badge'>Peças de teatro, musicais e apresentações artísticas</span>",
                     audio: "audios/q_teatro.mp3", // Áudio: "Qual é o edifício com palco e cortinas onde se realizam peças dramáticas e musicais?"
-                    dica: "É um edifício com palco, cortinas vermelhas e plateia.",
+                    dica: { tipo: "50-50" },
                     opcoes: ["Teatro", "Hospital", "Banco", "Supermercado"],
                     correta: "Teatro"
                 },
@@ -235,9 +235,87 @@ const CONFIG_JOGO = {
                         { img: "img/tribunal.jpg", alt: "Tribunal", valor: "Tribunal" }
                     ],
                     correta: "Parque"
-                }
-            ]
-        },
+					},
+					{
+					id: 121,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>Apagar um incêndio</span>",
+					audio: "audios/situacao_bombeiros.mp3", // Áudio: "Houve um pequeno fogo num terreno perto de casa do Afonso. Quem devemos chamar com urgência para apagar as chamas?"
+					dica: "Profissionais que usam carros vermelhos com sirene e grandes mangueiras de água.",
+					opcoesImagem: [
+						{ img: "img/bombeiros.jpg", alt: "Bombeiros", valor: "Bombeiros" },
+						{ img: "img/biblioteca.jpg", alt: "Biblioteca", valor: "Biblioteca" },
+						{ img: "img/teatro.jpg", alt: "Teatro", valor: "Teatro" }
+					],
+					correta: "Bombeiros"
+				},
+				{
+					id: 122,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>Vacina e consulta de rotina</span>",
+					audio: "audios/situacao_centro_saude.mp3", // Áudio: "A Inês precisa de tomar a vacina do plano nacional e fazer um exame de rotina com o seu médico de família. Onde deve ir?"
+					dica: "Local de cuidados de saúde primários e vacinação da nossa localidade.",
+					opcoesImagem: [
+						{ img: "img/centro_saude.jpg", alt: "Centro de Saúde", valor: "Centro de Saúde" },
+						{ img: "img/banco.jpg", alt: "Banco", valor: "Banco" },
+						{ img: "img/correios.jpg", alt: "Correios", valor: "Correios" }
+					],
+					correta: "Centro de Saúde"
+				},
+				{
+					id: 123,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>Brincar e aprender</span>",
+					audio: "audios/situacao_escola.mp3", // Áudio: "Todos os dias de manhã, o Diogo prepara a mochila para ir ter aulas com a professora e os colegas. Onde vai ele?"
+					dica: "Estabelecimento de ensino onde estão as salas de aula e o recreio.",
+					opcoesImagem: [
+						{ img: "img/escola.jpg", alt: "Escola", valor: "Escola" },
+						{ img: "img/piscina.jpg", alt: "Piscina Municipal", valor: "Piscina Municipal" },
+						{ img: "img/supermercado.jpg", alt: "Supermercado", valor: "Supermercado" }
+					],
+					correta: "Escola"
+				},
+				{
+					id: 124,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>Ver quadros e fósseis</span>",
+					audio: "audios/situacao_museu.mp3", // Áudio: "O Gabriel vai com a família ver uma exposição de quadros antigos e ossos de animais do passado. Que local cultural vão visitar?"
+					dica: "Edifício onde se guardam e expõem coleções de arte, história e ciência.",
+					opcoesImagem: [
+						{ img: "img/museu.jpg", alt: "Museu", valor: "Museu" },
+						{ img: "img/farmacia.jpg", alt: "Farmácia", valor: "Farmácia" },
+						{ img: "img/parque.jpg", alt: "Parque", valor: "Parque" }
+					],
+					correta: "Museu"
+				},
+				{
+					id: 125,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>Resolver um desacordo perante a lei</span>",
+					audio: "audios/situacao_tribunal.mp3", // Áudio: "Duas pessoas têm uma dúvida sobre quem é o dono de um terreno e precisam que um juiz decida de acordo com a lei. Aonde vão?"
+					dica: "Local de trabalho dos juízes e advogados para fazer cumprir a justiça.",
+					opcoesImagem: [
+						{ img: "img/tribunal.jpg", alt: "Tribunal", valor: "Tribunal" },
+						{ img: "img/hospital.jpg", alt: "Hospital", valor: "Hospital" },
+						{ img: "img/psp.jpg", alt: "PSP / GNR", valor: "PSP / GNR" }
+					],
+					correta: "Tribunal"
+				},
+				{
+					id: 126,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>Segurança na aldeia e na estrada</span>",
+					audio: "audios/situacao_gnr.mp3", // Áudio: "O avô do Martim precisa de ajuda porque teve um acidente de carro numa estrada de campo, fora da cidade. Que força de segurança de farda verde costuma patrulhar estas zonas?"
+					dica: "Força militar responsável pela segurança nos campos, vilas e estradas nacionais.",
+					opcoesImagem: [
+						{ img: "img/gnr.jpg", alt: "GNR", valor: "GNR" },
+						{ img: "img/teatro.jpg", alt: "Teatro", valor: "Teatro" },
+						{ img: "img/piscina.jpg", alt: "Piscina Municipal", valor: "Piscina Municipal" }
+					],
+					correta: "GNR"
+				}
+				]
+			},
         {
             id: 2,
             titulo: "Categorias da Cidade",
@@ -250,7 +328,7 @@ const CONFIG_JOGO = {
                     id: 201,
                     tipo: "categoria",
                     pergunta: "A que categoria pertence?\n<span class='destaque-badge'>Hospital</span>",
-                    dica: "Relaciona-se com tratar doenças e cuidar do bem-estar físico.",
+                    dica: { tipo: "highlight" },
                     imagemPergunta: "img/hospital.jpg",
                     opcoes: ["Saúde", "Segurança", "Educação", "Cultura e Lazer"],
                     correta: "Saúde"
@@ -259,7 +337,7 @@ const CONFIG_JOGO = {
                     id: 202,
                     tipo: "categoria",
                     pergunta: "A que categoria pertence?\n<span class='destaque-badge'>Farmácia</span>",
-                    dica: "Fornece remédios para curar e prevenir doenças.",
+                    dica: { tipo: "50-50" },
                     imagemPergunta: "img/farmacia.jpg",
                     opcoes: ["Saúde", "Segurança", "Educação", "Cultura e Lazer"],
                     correta: "Saúde"
@@ -277,7 +355,7 @@ const CONFIG_JOGO = {
                     id: 204,
                     tipo: "categoria",
                     pergunta: "A que categoria pertence?\n<span class='destaque-badge'>Polícia de Segurança Pública (PSP)</span>",
-                    dica: "A sua principal função é manter a ordem e a proteção da população.",
+                    dica: "A sua principal função é manter a ordem e a proteção da população nas localidades.",
                     imagemPergunta: "img/psp.jpg",
                     opcoes: ["Saúde", "Segurança", "Educação", "Cultura e Lazer"],
                     correta: "Segurança"
@@ -286,7 +364,7 @@ const CONFIG_JOGO = {
                     id: 205,
                     tipo: "categoria",
                     pergunta: "A que categoria pertence?\n<span class='destaque-badge'>Guarda Nacional Republicana (GNR)</span>",
-                    dica: "Zela pelo cumprimento das leis e proteção dos cidadãos.",
+                    dica: "A sua principal função é manter a ordem e a proteção da população fora das localidades.",
                     imagemPergunta: "img/gnr.jpg",
                     opcoes: ["Saúde", "Segurança", "Educação", "Cultura e Lazer"],
                     correta: "Segurança"
@@ -295,7 +373,7 @@ const CONFIG_JOGO = {
                     id: 206,
                     tipo: "categoria",
                     pergunta: "A que categoria pertence?\n<span class='destaque-badge'>Tribunal</span>",
-                    dica: "Garante a justiça e o cumprimento dos direitos e deveres.",
+                    dica: { tipo: "50-50" },
                     imagemPergunta: "img/tribunal.jpg",
                     opcoes: ["Saúde", "Segurança", "Educação", "Cultura e Lazer"],
                     correta: "Segurança"
@@ -304,7 +382,7 @@ const CONFIG_JOGO = {
                     id: 207,
                     tipo: "categoria",
                     pergunta: "A que categoria pertence?\n<span class='destaque-badge'>Escola</span>",
-                    dica: "Local de ensino, aprendizagem e formação dos cidadãos.",
+                    dica: { tipo: "highlight" },
                     imagemPergunta: "img/escola.jpg",
                     opcoes: ["Saúde", "Segurança", "Educação", "Cultura e Lazer"],
                     correta: "Educação"
@@ -322,7 +400,7 @@ const CONFIG_JOGO = {
                     id: 209,
                     tipo: "categoria",
                     pergunta: "A que categoria pertence?\n<span class='destaque-badge'>Teatro</span>",
-                    dica: "Local de arte, entretenimento e cultura para os tempos livres.",
+                    dica: { tipo: "highlight" },
                     imagemPergunta: "img/teatro.jpg",
                     opcoes: ["Saúde", "Segurança", "Educação", "Cultura e Lazer"],
                     correta: "Cultura e Lazer"
@@ -331,7 +409,7 @@ const CONFIG_JOGO = {
                     id: 210,
                     tipo: "categoria",
                     pergunta: "A que categoria pertence?\n<span class='destaque-badge'>Museu</span>",
-                    dica: "Guarda objetos históricos e obras de arte para visitação pública.",
+                    dica: "Guarda objetos históricos e obras de arte para as pessoas visitarem.",
                     imagemPergunta: "img/museu.jpg",
                     opcoes: ["Saúde", "Segurança", "Educação", "Cultura e Lazer"],
                     correta: "Cultura e Lazer"
@@ -340,7 +418,7 @@ const CONFIG_JOGO = {
                     id: 211,
                     tipo: "categoria",
                     pergunta: "A que categoria pertence?\n<span class='destaque-badge'>Piscina Municipal</span>",
-                    dica: "Espaço de desporto, recreação e tempos livres.",
+                    dica: { tipo: "50-50" },
                     imagemPergunta: "img/piscina.jpg",
                     opcoes: ["Saúde", "Segurança", "Educação", "Cultura e Lazer"],
                     correta: "Cultura e Lazer"
@@ -349,7 +427,7 @@ const CONFIG_JOGO = {
                     id: 212,
                     tipo: "categoria",
                     pergunta: "A que categoria pertence?\n<span class='destaque-badge'>Parque Infantil e de Lazer</span>",
-                    dica: "Local ao ar livre destinado à brincadeira e descanso.",
+                    dica: "Local ao ar livre destinado à brincadeira e ao descanso.",
                     imagemPergunta: "img/parque.jpg",
                     opcoes: ["Saúde", "Segurança", "Educação", "Cultura e Lazer"],
                     correta: "Cultura e Lazer"
@@ -367,7 +445,7 @@ const CONFIG_JOGO = {
                     id: 214,
                     tipo: "categoria",
                     pergunta: "Qual é a categoria das vacinas e \ndas consultas de rotina do médico de família?",
-                    dica: "Atividades focadas no bem-estar físico e prevenção de doenças.",
+                    dica: { tipo: "highlight" },
                     imagemPergunta: "img/centro_saude.jpg",
                     opcoes: ["Saúde", "Segurança", "Educação", "Cultura e Lazer"],
                     correta: "Saúde"
@@ -376,7 +454,7 @@ const CONFIG_JOGO = {
                     id: 215,
                     tipo: "categoria",
                     pergunta: "A aprendizagem da leitura, da escrita e da matemática\n pertence a que categoria?",
-                    dica: "Atividade desenvolvida na escola pelos professores.",
+                    dica: { tipo: "highlight" },
                     imagemPergunta: "img/escola.jpg",
                     opcoes: ["Saúde", "Segurança", "Educação", "Cultura e Lazer"],
                     correta: "Educação"
@@ -394,7 +472,7 @@ const CONFIG_JOGO = {
                     id: 217,
                     tipo: "categoria",
                     pergunta: "A que categoria pertence uma \nexposição de escultura e pintura antiga?",
-                    dica: "Atividade que enriquece os conhecimentos artísticos e culturais.",
+                    dica: { tipo: "highlight" },
                     imagemPergunta: "img/museu.jpg",
                     opcoes: ["Saúde", "Segurança", "Educação", "Cultura e Lazer"],
                     correta: "Cultura e Lazer"
@@ -403,7 +481,7 @@ const CONFIG_JOGO = {
                     id: 218,
                     tipo: "categoria",
                     pergunta: "A que categoria pertence a assistência médica\n prestada pelo <span class='destaque-badge'>INEM</span>?",
-                    dica: "Serviço de socorro médico de emergência.",
+                    dica: { tipo: "highlight" },
                     imagemPergunta: "img/hospital.jpg",
                     opcoes: ["Saúde", "Segurança", "Educação", "Cultura e Lazer"],
                     correta: "Saúde"
@@ -412,7 +490,7 @@ const CONFIG_JOGO = {
                     id: 219,
                     tipo: "categoria",
                     pergunta: "A que categoria pertence um pavilhão municipal para desporto?",
-                    dica: "Local para praticar atividade física e ocupação saudável do tempo.",
+                    dica: { tipo: "highlight" },
                     imagemPergunta: "img/piscina.jpg",
                     opcoes: ["Saúde", "Segurança", "Educação", "Cultura e Lazer"],
                     correta: "Cultura e Lazer"
@@ -421,7 +499,7 @@ const CONFIG_JOGO = {
                     id: 220,
                     tipo: "categoria",
                     pergunta: "A que categoria pertence a formação dos cidadãos para o futuro?",
-                    dica: "Processo de ensino e aprendizagem escolar.",
+                    dica: { tipo: "50-50" },
                     imagemPergunta: "img/escola.jpg",
                     opcoes: ["Saúde", "Segurança", "Educação", "Cultura e Lazer"],
                     correta: "Educação"
