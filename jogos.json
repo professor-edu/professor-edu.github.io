@@ -655,7 +655,15 @@
         "link": "/1/pt/ditongos",
         "ano": "1º Ano",
         "disciplina": "Português",
-        "tags": ["ditongos", "vogais", "letras"]
+        "tags": ["ditongos", "vogais", "letras", "som"]
+    },
+	{
+        "nome": "Ditongos Nasais",
+        "icone": "/1/icones/ditongos_nasais.png",
+        "link": "/1/pt/ditongos-nasais",
+        "ano": "1º Ano",
+        "disciplina": "Português",
+        "tags": ["ditongos", "vogais", "letras", "ditongos nasais", "som"]
     },
     {
         "nome": "Letra P",

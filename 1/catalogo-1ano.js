@@ -42,6 +42,7 @@ const todosOsJogos =[
 	{ nome: "Monstro das Imagens", icone: "icones/monstro_imagens.png", link: "pt/monstro-imagens", cat: "pt" },
 	{ nome: "O Ritmo das Palavras", icone: "icones/ritmo_palavras.png", link: "pt/ritmo-palavras", cat: "pt" },
 	{ nome: "Ditongos", icone: "icones/ditongos.png", link: "pt/ditongos/", cat: "pt" },
+	{ nome: "Ditongos Nasais", icone: "icones/ditongos_nasais.png", link: "pt/ditongos-nasais/", cat: "pt" },
 	{ nome: "Letra P", icone: "icones/letra_p.png", link: "pt/letra-p/", cat: "pt" },
 	{ nome: "Letra T", icone: "icones/letra_t.png", link: "pt/letra-t/", cat: "pt" },
 	{ nome: "Letra L", icone: "icones/letra_l.png", link: "pt/letra-l/", cat: "pt" },
