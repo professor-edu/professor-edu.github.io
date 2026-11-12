@@ -980,7 +980,14 @@
         "disciplina": "Estudo do Meio",
         "tags": ["família", "parentes", "árvore genealógica", "som"]
     },
-
+	{
+        "nome": "Desafio Final de Mestre",
+        "icone": "/1/icones/super_quiz.png",
+        "link": "/1/em/super-quiz/",
+        "ano": "1º Ano",
+        "disciplina": "Estudo do Meio",
+        "tags": ["quiz", "desafio", "som"]
+    },
     {
         "nome": "Masculino e Feminino",
         "icone": "/2/icones/genero.png",

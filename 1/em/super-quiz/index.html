@@ -215,20 +215,46 @@
 			}
 		}
 
-        .btn-nivel-novo {
-            width: 100%; padding: 20px; border-radius: 20px; border: 4px solid white;
-            color: white; font-size: 1.2rem; font-weight: 900; cursor: pointer; display: flex;
-            flex-direction: column; align-items: center; justify-content: center; gap: 8px;
-            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
-            box-shadow: 0 6px 0 #e2e8f0, 0 10px 15px rgba(0,0,0,0.08); text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-            touch-action: manipulation; user-select: none; text-align: center;
-        }
+.btn-nivel-novo {
+    width: 100%; padding: 20px; border-radius: 20px; border: 4px solid white;
+    color: white; font-size: 1.2rem; font-weight: 900; cursor: pointer; display: flex;
+    flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    box-shadow: 0 6px 0 #e2e8f0, 0 10px 15px rgba(0,0,0,0.08); text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    touch-action: manipulation; user-select: none; text-align: center;
+    
+    /* Adicionar a animação em loop continuo */
+    animation: pulsarBotao 2.2s infinite ease-in-out;
+}
 
-        @media (hover: hover) {
-            .btn-nivel-novo:hover {
-                transform: translateY(-2px); box-shadow: 0 8px 0 #cbd5e1, 0 12px 20px rgba(0,0,0,0.12); filter: brightness(1.05);
-            }
-        }
+@keyframes pulsarBotao {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 6px 0 #e2e8f0, 0 10px 15px rgba(0,0,0,0.08);
+    }
+    50% {
+        transform: scale(1.03);
+        /* Adiciona um brilho colorido pronunciado na base */
+        box-shadow: 0 6px 0 #e2e8f0, 0 16px 25px rgba(16, 128, 146, 0.45);
+        filter: brightness(1.03);
+    }
+}
+
+@media (hover: hover) {
+    .btn-nivel-novo:hover {
+        /* Pausa o pulsar ao passar o rato para o controlo ficar fluido */
+        animation-play-state: paused;
+        transform: translateY(-3px) scale(1.02); 
+        box-shadow: 0 9px 0 #cbd5e1, 0 14px 22px rgba(0,0,0,0.15); 
+        filter: brightness(1.08);
+    }
+}
+
+.btn-nivel-novo:active {
+    animation-play-state: paused;
+    transform: translateY(3px) scale(0.98);
+    box-shadow: 0 3px 0 #cbd5e1, 0 4px 8px rgba(0,0,0,0.1);
+}
 
         .btn-nivel-novo:active { transform: translateY(6px) !important; box-shadow: 0 0px 0 transparent, 0 0px 0 transparent !important; }
 
@@ -303,29 +329,35 @@
             }
         }
 		
-		/* ==========================================
-		   DICA HIGHLIGHT - ANIMAÇÃO DE PULSO
-		========================================== */
-		.btn-opcao.dica-highlight-ativa {
-			border-color: var(--cor-sucesso, #2ed573) !important;
-			z-index: 5; /* Garante que fica por cima visualmente */
-			animation: pulsoDicaHighlight 1.3s infinite ease-in-out;
-		}
+/* ==========================================
+   DICA HIGHLIGHT - ANIMAÇÃO DE PULSO
+========================================== */
+.btn-opcao.dica-highlight-ativa,
+.btn-opcao-imagem.dica-highlight-ativa {
+	border-color: var(--cor-sucesso, #2ed573) !important;
+	z-index: 5;
+	animation: pulsoDicaHighlight 1.3s infinite ease-in-out;
+}
 
-		@keyframes pulsoDicaHighlight {
-			0% {
-				transform: scale(1);
-				box-shadow: 0 0 0 0 rgba(46, 213, 115, 0.7);
-			}
-			50% {
-				transform: scale(1.06);
-				box-shadow: 0 0 22px 6px rgba(46, 213, 115, 0.8);
-			}
-			100% {
-				transform: scale(1);
-				box-shadow: 0 0 0 0 rgba(46, 213, 115, 0);
-			}
-		}
+.btn-opcao-imagem.dica-highlight-ativa .pilula-legenda {
+	background: var(--cor-sucesso, #2ed573) !important;
+	color: #ffffff !important;
+}
+
+@keyframes pulsoDicaHighlight {
+	0% {
+		transform: scale(1);
+		box-shadow: 0 0 0 0 rgba(46, 213, 115, 0.7);
+	}
+	50% {
+		transform: scale(1.06);
+		box-shadow: 0 0 22px 6px rgba(46, 213, 115, 0.8);
+	}
+	100% {
+		transform: scale(1);
+		box-shadow: 0 0 0 0 rgba(46, 213, 115, 0);
+	}
+}
 
         .badge-ronda { 
             background: white; 
@@ -809,99 +841,144 @@
             box-shadow: 0 6px 0 var(--cor-erro) !important;
         }
 
-        /* =========================================
-           ECRÃ FIM, TRANSIÇÃO E BOTÕES DE AÇÃO 
-        ========================================= */
-        .end-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--azul-escuro); margin-bottom: 25px; display: flex; align-items: center; justify-content: center; gap: 15px; }
-		.icon-end-title {
-			/* O tamanho 1.2em garante que o ícone acompanhe o crescimento do clamp */
-			width: 1.2em; 
-			height: 1.2em;
-			object-fit: contain;
-			/* Um leve drop-shadow para dar profundidade, combinando com o estilo de jogo */
-			filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
-		}	
-        
-        .end-stats { 
-            font-size: 1.3rem; color: var(--text-main); margin-bottom: 40px; 
-            text-align: center; background: var(--bg-header); padding: 30px 20px; 
-            border-radius: 20px; border: 2px dashed var(--cor-em); line-height: 1.5; 
-        }
+/* =========================================
+   ECRÃ FIM, TRANSIÇÃO E BOTÕES DE AÇÃO (RESPONSIVO)
+========================================= */
+.end-title { 
+	font-size: clamp(1.6rem, 5vw, 2.3rem); 
+	color: var(--azul-escuro); 
+	margin-bottom: clamp(10px, 3vw, 20px); 
+	display: flex; 
+	align-items: center; 
+	justify-content: center; 
+	gap: 12px; 
+	text-align: center;
+}
 
-        .botoes-acao-container { display: flex; flex-direction: column; align-items: center; gap: 35px; width: 100%; }
+.icon-end-title {
+	width: 1.2em; 
+	height: 1.2em;
+	object-fit: contain;
+	flex-shrink: 0;
+	filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}	
 
-        .btn-acao { 
-            border: 4px solid white; color: white; padding: 15px 30px; 
-            font-size: 1.2rem; font-weight: 900; border-radius: 20px; cursor: pointer; 
-            display: flex; align-items: center; justify-content: center; gap: 12px; 
-            width: 100%; max-width: 320px; transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease; 
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); touch-action: manipulation; 
-            text-transform: uppercase; letter-spacing: 1px;
-        }
-        @media (hover: hover) { .btn-acao:hover { transform: translateY(-2px); filter: brightness(1.05); } }
-        .btn-acao:active { transform: translateY(6px) !important; box-shadow: 0 0px 0 transparent !important; }
+.end-stats { 
+	font-size: clamp(1rem, 3.5vw, 1.25rem); 
+	color: var(--text-main); 
+	margin-bottom: clamp(16px, 4vw, 26px); /* Reduzido de 40px para não empurrar os botões */
+	text-align: center; 
+	background: var(--bg-header); 
+	padding: clamp(16px, 4vw, 25px) clamp(15px, 4vw, 20px); 
+	border-radius: 20px; 
+	border: 2px dashed var(--cor-em); 
+	line-height: 1.4; 
+	width: 100%;
+	max-width: 420px;
+	box-sizing: border-box;
+}
 
-        /* Variantes de Cor para os Botões de Ação */
-        .btn-acao.primario { background-color: var(--cor-btn-verde); box-shadow: 0 6px 0 #45b062, 0 10px 15px rgba(0,0,0,0.1); }
-        @media (hover: hover) { .btn-acao.primario:hover { box-shadow: 0 8px 0 #45b062, 0 12px 20px rgba(0,0,0,0.15); } }
-        
-        .btn-acao.secundario { background-color: var(--cor-btn-laranja); box-shadow: 0 6px 0 #d97d2c, 0 10px 15px rgba(0,0,0,0.1); }
-        @media (hover: hover) { .btn-acao.secundario:hover { box-shadow: 0 8px 0 #d97d2c, 0 12px 20px rgba(0,0,0,0.15); } }
-        
-        .btn-acao.terciario { background-color: var(--cor-btn-azul); box-shadow: 0 6px 0 #4a8deb, 0 10px 15px rgba(0,0,0,0.1); }
-        @media (hover: hover) { .btn-acao.terciario:hover { box-shadow: 0 8px 0 #4a8deb, 0 12px 20px rgba(0,0,0,0.15); } }
-		
-		.icon-acao {
-			width: 1.4em;
-			height: 1.4em;
-			object-fit: contain;
-			flex-shrink: 0; 
-			pointer-events: none;
-			transition: transform 0.2s ease;
-		}
+.botoes-acao-container { 
+	display: flex; 
+	flex-direction: column; 
+	align-items: center; 
+	gap: clamp(12px, 3vw, 16px); /* Reduzido o gap de 35px para um valor equilibrado em mobile */
+	width: 100%; 
+}
 
-		.primario:hover .icon-acao, 
-		.secundario:hover .icon-acao,
-		.terciario:hover .icon-acao	{
-			transform: translateX(4px);
-		}
-		
-		/* =====================================================================
-           DANÇA DE VITÓRIA DA TAÇA (BRILHO DOURADO E BALANÇO RITMADO)
-           ===================================================================== */
-        
-        .taca-vitoria {
-            width: clamp(80px, 15vw, 130px); 
-            margin-bottom: 15px; 
-            object-fit: contain;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            
-            /* Encadeamento: corre o popIn uma vez e depois corre o tacaDanca infinitamente após 0.6s */
-            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
-                       tacaDanca 3s infinite 0.6s ease-in-out;
-        }
+.btn-acao { 
+	border: 3.5px solid white; 
+	color: white; 
+	padding: clamp(10px, 2.5vw, 14px) clamp(18px, 4vw, 28px); 
+	font-size: clamp(0.95rem, 3.6vw, 1.15rem); 
+	font-weight: 900; 
+	border-radius: 18px; 
+	cursor: pointer; 
+	display: flex; 
+	align-items: center; 
+	justify-content: center; 
+	gap: 10px; 
+	width: 100%; 
+	max-width: 320px; 
+	min-height: 50px; /* Garante altura uniforme e excelente área de toque */
+	transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease; 
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.25); 
+	touch-action: manipulation; 
+	text-transform: uppercase; 
+	letter-spacing: 0.5px;
+	box-sizing: border-box;
+}
 
-        /* Keyframes da dança (Gera micro-saltos de comemoração e pulsação da sombra dourada) */
-        @keyframes tacaDanca {
-            0%, 100% { 
-                transform: translateY(0) scale(1) rotate(0deg); 
-                filter: drop-shadow(0 6px 12px rgba(251, 197, 49, 0.3)); /* Sombra dourada suave */
-            }
-            25% { 
-                transform: translateY(-10px) scale(1.06) rotate(-4deg); /* Salta e inclina para a esquerda */
-                filter: drop-shadow(0 14px 24px rgba(251, 197, 49, 0.65)); /* Brilho dourado forte */
-            }
-            50% { 
-                transform: translateY(0) scale(1) rotate(0deg); 
-                filter: drop-shadow(0 6px 12px rgba(251, 197, 49, 0.3));
-            }
-            75% { 
-                transform: translateY(-10px) scale(1.06) rotate(4deg); /* Salta e inclina para a direita */
-                filter: drop-shadow(0 14px 24px rgba(251, 197, 49, 0.65));
-            }
-        }		
+@media (hover: hover) { 
+	.btn-acao:hover { 
+		transform: translateY(-2px); 
+		filter: brightness(1.05); 
+	} 
+}
+
+.btn-acao:active { 
+	transform: translateY(4px) !important; 
+	box-shadow: 0 2px 0 transparent !important; 
+}
+
+/* Variantes de Cor para os Botões de Ação */
+.btn-acao.primario { background-color: var(--cor-btn-verde); box-shadow: 0 6px 0 #45b062, 0 8px 15px rgba(0,0,0,0.1); }
+@media (hover: hover) { .btn-acao.primario:hover { box-shadow: 0 8px 0 #45b062, 0 10px 18px rgba(0,0,0,0.15); } }
+
+.btn-acao.secundario { background-color: var(--cor-btn-laranja); box-shadow: 0 6px 0 #d97d2c, 0 8px 15px rgba(0,0,0,0.1); }
+@media (hover: hover) { .btn-acao.secundario:hover { box-shadow: 0 8px 0 #d97d2c, 0 10px 18px rgba(0,0,0,0.15); } }
+
+.btn-acao.terciario { background-color: var(--cor-btn-azul); box-shadow: 0 6px 0 #4a8deb, 0 8px 15px rgba(0,0,0,0.1); }
+@media (hover: hover) { .btn-acao.terciario:hover { box-shadow: 0 8px 0 #4a8deb, 0 10px 18px rgba(0,0,0,0.15); } }
+
+/* SVGs e Ícones dentro dos Botões */
+.icon-acao {
+	width: 1.3em;
+	height: 1.3em;
+	object-fit: contain;
+	flex-shrink: 0; /* Impede que o ícone esmague se o texto for longo */
+	pointer-events: none;
+	fill: currentColor;
+	stroke: currentColor;
+	transition: transform 0.2s ease;
+}
+
+.btn-acao:hover .icon-acao {
+	transform: scale(1.18) rotate(-6deg); /* Animação mais lúdica que o simples transladar */
+}
+
+/* =====================================================================
+   DANÇA DE VITÓRIA DA TAÇA (BRILHO DOURADO E BALANÇO RITMADO)
+   ===================================================================== */
+.taca-vitoria {
+	width: clamp(75px, 14vw, 120px); 
+	margin-bottom: clamp(10px, 3vw, 16px); 
+	object-fit: contain;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
+	           tacaDanca 3s infinite 0.6s ease-in-out;
+}
+
+@keyframes tacaDanca {
+	0%, 100% { 
+		transform: translateY(0) scale(1) rotate(0deg); 
+		filter: drop-shadow(0 6px 12px rgba(251, 197, 49, 0.3)); 
+	}
+	25% { 
+		transform: translateY(-8px) scale(1.06) rotate(-4deg); 
+		filter: drop-shadow(0 12px 20px rgba(251, 197, 49, 0.65)); 
+	}
+	50% { 
+		transform: translateY(0) scale(1) rotate(0deg); 
+		filter: drop-shadow(0 6px 12px rgba(251, 197, 49, 0.3));
+	}
+	75% { 
+		transform: translateY(-8px) scale(1.06) rotate(4deg); 
+		filter: drop-shadow(0 12px 20px rgba(251, 197, 49, 0.65));
+	}
+}	
 		
 		
 		/* =========================================
@@ -1556,289 +1633,274 @@
     user-select: none;
 }
 
-/* Palco da Animação */
-.tutorial-slider {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* =========================================================
+   ESTILOS OPTIMIZADOS PARA PREENCHIMENTO MÁXIMO DO CONTAINER
+   ========================================================= */
+
+.tut-bg-sparkles {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* Indicador de Passos (Pontos de Progresso) */
-.tutorial-dots {
-    position: absolute;
-    bottom: 8px;
-    display: flex;
-    gap: 6px;
-    z-index: 10;
+.sparkle {
+  position: absolute;
+  opacity: 0.7;
+  animation: floatSparkle 3s infinite ease-in-out alternate;
+}
+.sp-1 { top: 10%; left: 6%; animation-delay: 0s; }
+.sp-2 { top: 60%; right: 6%; animation-delay: 1s; }
+.sp-3 { bottom: 10%; left: 8%; animation-delay: 1.8s; }
+
+@keyframes floatSparkle {
+  0% { transform: translateY(0) scale(0.85); opacity: 0.4; }
+  100% { transform: translateY(-8px) scale(1.2); opacity: 1; }
 }
 
-.tutorial-dots .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 10px;
-    background: #cbd5e1;
-    transition: all 0.3s ease;
+/* Estrutura de Transição das Cenas */
+.tut-cena {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly; /* Distribui o espaço vertical de forma equilibrada */
+  padding: 8px 12px;
+  box-sizing: border-box;
+  opacity: 0;
+  z-index: 2;
+  animation: cycleCenas 12s infinite ease-in-out;
 }
 
-/* Loop dos Pontos de Progresso */
-.dot.d1 { animation: dotAnim1 12s infinite; }
-.dot.d2 { animation: dotAnim2 12s infinite; }
-.dot.d3 { animation: dotAnim3 12s infinite; }
+.tut-cena-1 { animation-delay: 0s; }
+.tut-cena-2 { animation-delay: 3s; }
+.tut-cena-3 { animation-delay: 6s; }
+.tut-cena-4 { animation-delay: 9s; }
 
-@keyframes dotAnim1 {
-    0%, 30% { width: 22px; background: #3b82f6; }
-    33%, 100% { width: 8px; background: #cbd5e1; }
-}
-@keyframes dotAnim2 {
-    0%, 30% { width: 8px; background: #cbd5e1; }
-    33%, 63% { width: 22px; background: #8b5cf6; }
-    66%, 100% { width: 8px; background: #cbd5e1; }
-}
-@keyframes dotAnim3 {
-    0%, 63% { width: 8px; background: #cbd5e1; }
-    66%, 96% { width: 22px; background: #f59e0b; }
-    100% { width: 8px; background: #cbd5e1; }
+@keyframes cycleCenas {
+  0% { opacity: 0; transform: scale(0.92) translateY(10px); }
+  3%, 22% { opacity: 1; transform: scale(1) translateY(0); }
+  25%, 100% { opacity: 0; transform: scale(1.05) translateY(-10px); }
 }
 
-/* Estrutura das Cenas */
-.tutorial-scene {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    padding: 12px 16px 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    opacity: 0;
-    transform: translateY(12px) scale(0.95);
-    pointer-events: none;
+/* ---- CENA 1: MASCOTE TECO ---- */
+.tut-mascote-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tut-img-teco {
+  width: 85px;
+  height: 85px;
+  object-fit: contain;
+  animation: bounceTeco 2s infinite ease-in-out;
 }
 
-/* Etiqueta Superior de Cada Cena */
-.scene-badge {
-    font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 3px 12px;
-    border-radius: 12px;
-    color: #ffffff;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-}
-.scene-badge.blue { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
-.scene-badge.purple { background: linear-gradient(135deg, #a855f7, #7e22ce); }
-.scene-badge.gold { background: linear-gradient(135deg, #f59e0b, #d97706); }
-
-.scene-caption {
-    font-size: 0.85rem;
-    font-weight: 800;
-    color: #334155;
-    margin: 0;
-    text-shadow: 0 1px 0 #ffffff;
+@keyframes bounceTeco {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(3deg); }
 }
 
-/* TIMELINE GLOBAL DO SLIDER (12 Segundos Total: 4s por Cena) */
-.scene-1 { animation: sceneLoop1 12s infinite ease-in-out; }
-.scene-2 { animation: sceneLoop2 12s infinite ease-in-out; }
-.scene-3 { animation: sceneLoop3 12s infinite ease-in-out; }
-
-@keyframes sceneLoop1 {
-    0%, 3% { opacity: 0; transform: translateY(12px) scale(0.95); }
-    6%, 28% { opacity: 1; transform: translateY(0) scale(1); }
-    31%, 100% { opacity: 0; transform: translateY(-12px) scale(0.95); }
+.tut-balao {
+  background: #ffffff;
+  padding: 6px 20px;
+  border-radius: 50px;
+  box-shadow: 0 4px 14px rgba(16, 128, 146, 0.18);
+  border: 2.5px solid #51cf66;
+  text-align: center;
 }
-@keyframes sceneLoop2 {
-    0%, 33% { opacity: 0; transform: translateY(12px) scale(0.95); }
-    36%, 61% { opacity: 1; transform: translateY(0) scale(1); }
-    64%, 100% { opacity: 0; transform: translateY(-12px) scale(0.95); }
+.tut-tag {
+  display: inline-block;
+  background: #108092;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 10px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
 }
-@keyframes sceneLoop3 {
-    0%, 66% { opacity: 0; transform: translateY(12px) scale(0.95); }
-    69%, 94% { opacity: 1; transform: translateY(0) scale(1); }
-    97%, 100% { opacity: 0; transform: translateY(-12px) scale(0.95); }
-}
-
-/* ================= CENA 1: ESCOLHER EDIFÍCIOS ================= */
-.building-card-anim {
-    background: #ffffff;
-    border: 2px solid #60a5fa;
-    border-radius: 16px;
-    padding: 8px 14px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 6px 14px rgba(59, 130, 246, 0.15);
-    position: relative;
-    transform: translateY(0);
-    animation: floatCard 3s infinite ease-in-out;
-}
-.building-icon {
-    font-size: 2rem;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-}
-.building-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-.b-title {
-    font-size: 0.95rem;
-    font-weight: 900;
-    color: #1e3a8a;
-}
-.b-tag {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: #3b82f6;
-}
-.click-hand {
-    position: absolute;
-    right: -10px;
-    bottom: -12px;
-    font-size: 1.6rem;
-    animation: handClick 1.5s infinite ease-in-out;
+.tut-titulo {
+  margin: 0;
+  font-size: 15px;
+  color: #2b3a4a;
 }
 
-.building-icon-svg {
-    width: 36px;
-    height: 36px;
-    display: block;
-    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.1));
+/* ---- CENA 2: TIPO SITUAÇÃO ---- */
+.tut-tipo-badge {
+  font-size: 13px;
+  font-weight: bold;
+  color: #fff;
+  padding: 4px 16px;
+  border-radius: 14px;
+}
+.badge-situacao { background: #51cf66; }
+.badge-cidadania { background: #108092; }
+
+.tut-cards-grid {
+  display: flex;
+  gap: 16px;
+}
+.tut-card-opt {
+  width: 72px;
+  height: 72px;
+  background: #ffffff;
+  border: 3px solid #e0e0e0;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 6px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+.tut-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.opt-correct {
+  border-color: #51cf66;
+  box-shadow: 0 0 16px rgba(81, 207, 102, 0.5);
+  animation: selectCard 1.2s infinite alternate ease-in-out;
+}
+.tut-check-badge {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  background: #51cf66;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-.click-hand-svg {
-    position: absolute;
-    right: -10px;
-    bottom: -12px;
-    width: 28px;
-    height: 28px;
-    display: block;
-    animation: handClick 1.5s infinite ease-in-out;
+@keyframes selectCard {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
 }
 
-@keyframes floatCard {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-4px); }
-}
-@keyframes handClick {
-    0%, 100% { transform: scale(1) translate(0, 0); }
-    50% { transform: scale(1.2) translate(-4px, -4px); }
+.tut-subtext {
+  font-size: 13px;
+  color: #333;
+  margin: 0;
+  font-weight: 700;
 }
 
-/* ================= CENA 2: CERTO OU ERRADO ================= */
-.citizenship-choice {
-    display: flex;
-    gap: 12px;
-    width: 100%;
-    justify-content: center;
+/* ---- CENA 3: TIPO CIDADANIA ---- */
+.tut-cidadania-preview {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #ffffff;
+  padding: 10px 20px;
+  border-radius: 18px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(16, 128, 146, 0.12);
 }
-.choice-card {
-    background: #ffffff;
-    border-radius: 14px;
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 800;
-    font-size: 0.8rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-    border: 2px solid #e2e8f0;
+.tut-cena-img-box {
+  width: 75px;
+  height: 75px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.choice-right {
-    border-color: #4ade80;
-    background: #f0fdf4;
-    color: #166534;
-    animation: pulseRight 2s infinite ease-in-out;
+.tut-img-cidadania {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.choice-wrong {
-    border-color: #fca5a5;
-    background: #fef2f2;
-    color: #991b1b;
-    opacity: 0.7;
+.tut-botoes-cidadania {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
-.badge-mini {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    color: #ffffff;
-    font-weight: 900;
+.tut-btn-demo {
+  font-size: 13px;
+  font-weight: bold;
+  padding: 6px 18px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.5;
 }
-.badge-mini.up { background: #22c55e; box-shadow: 0 2px 6px rgba(34, 197, 94, 0.4); }
-.badge-mini.down { background: #ef4444; box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4); }
-
-.icon-badge-svg {
-    width: 14px;
-    height: 14px;
-    display: block;
-    filter: brightness(0) invert(1); /* Torna o SVG branco para contrastar com o fundo colorido */
+.tut-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
 }
-
-@keyframes pulseRight {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+.btn-certo {
+  background: #e6fcf5;
+  color: #0ca678 !important;
+  border: 2px solid #0ca678;
 }
-
-/* ================= CENA 3: RECOMPENSAS & CONQUISTAS ================= */
-.rewards-pop {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin: 4px 0;
+.btn-certo.active {
+  opacity: 1;
+  box-shadow: 0 0 12px rgba(12, 166, 120, 0.4);
+  animation: pulseCerto 1.2s infinite alternate ease-in-out;
 }
-.reward-item {
-    font-size: 2.2rem;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
-}
-.reward-item.star { animation: popItem 1.8s infinite ease-in-out 0s; }
-.reward-item.trophy { animation: popItem 1.8s infinite ease-in-out 0.3s; }
-.reward-item.coin { animation: popItem 1.8s infinite ease-in-out 0.6s; }
-
-.mini-progress-track {
-    width: 140px;
-    height: 10px;
-    background: #e2e8f0;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid #cbd5e1;
+.btn-errado {
+  background: #fff5f5;
+  color: #f03e3e !important;
+  border: 2px solid #f03e3e;
 }
 
-.reward-item-svg {
-    width: 38px;
-    height: 38px;
-    display: block;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.12));
+@keyframes pulseCerto {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
 }
 
-.reward-item-svg.star { animation: popItem 1.8s infinite ease-in-out 0s; }
-.reward-item-svg.trophy { animation: popItem 1.8s infinite ease-in-out 0.3s; }
-.reward-item-svg.coin { animation: popItem 1.8s infinite ease-in-out 0.6s; }
+/* ---- CENA 4: RECOMPENSA ---- */
+.tut-trofeu-glow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tut-trofeu {
+  animation: trophyFloat 2s infinite ease-in-out;
+  filter: drop-shadow(0 6px 12px rgba(255, 192, 0, 0.45));
+}
+.tut-star {
+  animation: starPop 1.5s infinite alternate ease-in-out;
+}
+.star-left { animation-delay: 0.2s; }
+.star-right { animation-delay: 0.6s; }
 
-.mini-progress-fill {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, #f59e0b, #fbbf24);
-    border-radius: 10px;
-    animation: fillTrack 4s infinite ease-in-out;
+@keyframes trophyFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(-3deg); }
+}
+@keyframes starPop {
+  0% { transform: scale(0.7) rotate(0deg); opacity: 0.5; }
+  100% { transform: scale(1.3) rotate(15deg); opacity: 1; }
 }
 
-@keyframes popItem {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-6px) scale(1.15) rotate(5deg); }
+.tut-final-text {
+  text-align: center;
+  color: #108092;
 }
-@keyframes fillTrack {
-    0%, 66% { width: 15%; }
-    85%, 95% { width: 100%; }
+.tut-final-text strong {
+  display: block;
+  font-size: 17px;
+  color: #2b3a4a;
 }
-		
+.tut-final-text span {
+  font-size: 13px;
+  font-weight: 600;
+}	
 		
 
     </style>
@@ -1879,80 +1941,98 @@
         <!-- ECRÃ DE SELEÇÃO -->
         <div id="ecra-selecao" class="ecra">
             
+<div class="animacao-tutorial">
+  <!-- Fundo com brilhos SVG ampliados -->
+  <div class="tut-bg-sparkles">
+    <svg class="sparkle sp-1" viewBox="0 0 24 24" width="20" height="20"><path fill="#FFD700" d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/></svg>
+    <svg class="sparkle sp-2" viewBox="0 0 24 24" width="22" height="22"><path fill="#4DABF7" d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/></svg>
+    <svg class="sparkle sp-3" viewBox="0 0 24 24" width="18" height="18"><path fill="#FFD700" d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/></svg>
+  </div>
 
-		<div class="animacao-tutorial">
-			<div class="tutorial-slider">
-				
-				<!-- Indicador dos 3 Passos -->
-				<div class="tutorial-dots">
-					<span class="dot d1"></span>
-					<span class="dot d2"></span>
-					<span class="dot d3"></span>
-				</div>
+  <!-- CENA 1: Apresentação do Teco -->
+  <div class="tut-cena tut-cena-1">
+    <div class="tut-mascote-wrapper">
+      <img src="img/mascote_normal.png" alt="Teco" class="tut-img-teco" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <!-- Fallback SVG caso a imagem do Teco ainda não esteja no caminho -->
+      <svg class="tut-svg-teco-fallback" viewBox="0 0 64 64" width="80" height="80" style="display:none;">
+        <circle cx="32" cy="34" r="22" fill="#8B5A2B"/>
+        <circle cx="32" cy="34" r="17" fill="#F5DEB3"/>
+        <circle cx="23" cy="28" r="7" fill="#FFF"/><circle cx="41" cy="28" r="7" fill="#FFF"/>
+        <circle cx="23" cy="28" r="3.5" fill="#2B3A4A"/><circle cx="41" cy="28" r="3.5" fill="#2B3A4A"/>
+        <polygon points="32,32 28,38 36,38" fill="#FF9800"/>
+      </svg>
+    </div>
+    <div class="tut-balao">
+      <span class="tut-tag">Super Quiz</span>
+      <p class="tut-titulo">Aprende com o <strong>Teco</strong>!</p>
+    </div>
+  </div>
 
-				<!-- CENA 1: Explora Locais e Serviços -->
-				<div class="tutorial-scene scene-1">
-					<span class="scene-badge blue">1. Explora a Comunidade</span>
-					
-					<div class="building-card-anim">
-						<img src="../../../SVG/hospital.svg" alt="Hospital" class="building-icon-svg">
-						<div class="building-info">
-							<span class="b-title">Hospital</span>
-							<span class="b-tag">Serviço Público</span>
-						</div>
-						<img src="../../../SVG/mao_cima.svg" alt="Clique" class="click-hand-svg">
-					</div>
+  <!-- CENA 2: Tipo Situação -->
+  <div class="tut-cena tut-cena-2">
+    <div class="tut-tipo-badge badge-situacao">Escolhe a Imagem</div>
+    <div class="tut-cards-grid">
+      <div class="tut-card-opt opt-wrong">
+        <img src="img/batatas_fritas.png" alt="Batatas Fritas" class="tut-card-img">
+      </div>
+      <div class="tut-card-opt opt-correct">
+        <img src="img/maca.png" alt="Maçã" class="tut-card-img">
+        <div class="tut-check-badge">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#FFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+      </div>
+      <div class="tut-card-opt opt-wrong">
+        <img src="img/refrigerante.png" alt="Refrigerante" class="tut-card-img">
+      </div>
+    </div>
+    <p class="tut-subtext">Descobre a resposta certa!</p>
+  </div>
 
-					<p class="scene-caption">Descobre para que serve cada local!</p>
-				</div>
+  <!-- CENA 3: Tipo Cidadania -->
+  <div class="tut-cena tut-cena-3">
+    <div class="tut-tipo-badge badge-cidadania">Atitude Correta?</div>
+    <div class="tut-cidadania-preview">
+      <div class="tut-cena-img-box">
+        <img src="img/arrumar_quarto.jpg" alt="Cidadania" class="tut-img-cidadania">
+      </div>
+      <div class="tut-botoes-cidadania">
+        <div class="tut-btn-demo btn-certo active">
+          <span class="tut-dot"></span> Certo
+        </div>
+        <div class="tut-btn-demo btn-errado">
+          <span class="tut-dot"></span> Errado
+        </div>
+      </div>
+    </div>
+  </div>
 
-				<!-- CENA 2: Cidadania (Certo ou Errado) -->
-				<div class="tutorial-scene scene-2">
-					<span class="scene-badge purple">2. Pratica Cidadania</span>
-					
-					<div class="citizenship-choice">
-						<div class="choice-card choice-right">
-							<span>Respeitar a Fila</span>
-							<div class="badge-mini up">
-								<img src="../../../SVG/thumbs_up.svg" alt="Certo" class="icon-badge-svg">
-							</div>
-						</div>
-						<div class="choice-card choice-wrong">
-							<span>Empurrar</span>
-							<div class="badge-mini down">
-								<img src="../../../SVG/thumbs_down.svg" alt="Errado" class="icon-badge-svg">
-							</div>
-						</div>
-					</div>
+  <!-- CENA 4: Recompensa / Troféu -->
+  <div class="tut-cena tut-cena-4">
+    <div class="tut-trofeu-glow">
+      <svg class="tut-star star-left" viewBox="0 0 24 24" width="28" height="28"><path fill="#FFD700" d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/></svg>
+      <svg class="tut-trofeu" viewBox="0 0 24 24" width="80" height="80" fill="#FFC107" stroke="#E65100" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2h12v3a5 5 0 0 1-5 5h-2a5 5 0 0 1-5-5V2z"/>
+        <path d="M6 4H3a2 2 0 0 0-2 2v1a4 4 0 0 0 4 4h1"/>
+        <path d="M18 4h3a2 2 0 0 1 2 2v1a4 4 0 0 1-4 4h-1"/>
+        <path d="M12 10v6"/>
+        <path d="M8 22h8v-2H8v2z"/>
+        <path d="M9 16h6v4H9v-4z"/>
+      </svg>
+      <svg class="tut-star star-right" viewBox="0 0 24 24" width="28" height="28"><path fill="#FFD700" d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/></svg>
+    </div>
+    <div class="tut-final-text">
+      <strong>50 Perguntas</strong>
+      <span>Ganha o Desafio Global!</span>
+    </div>
+  </div>
+</div>
 
-					<p class="scene-caption">Escolhe sempre as atitudes certas!</p>
-				</div>
-
-				<!-- CENA 3: Recompensas e Progresso -->
-				<div class="tutorial-scene scene-3">
-					<span class="scene-badge gold">3. Brinca e Aprende</span>
-					
-					<div class="rewards-pop">
-						<img src="../../../SVG/estrela.svg" alt="Estrela" class="reward-item-svg star">
-						<img src="../../../SVG/trofeu.svg" alt="Troféu" class="reward-item-svg trophy">
-
-					</div>
-
-					<div class="mini-progress-track">
-						<div class="mini-progress-fill"></div>
-					</div>
-
-					<p class="scene-caption">Acerta nos desafios!</p>
-				</div>
-
-			</div>
-		</div>
 
 		<div class="instrucao-menu-container">
 			<button type="button" class="btn-ouvir-pergunta" onclick="tocarVoz('audios/instrucao_menu.mp3')" title="Ouvir instrução">
 				<img src="../../../SVG/audio.svg" alt="Ouvir instrução" class="icon-som">
 			</button>
-			<span class="instrucao-texto">ALTERAR O AUDIO? És capaz?</span>
+			<span class="instrucao-texto">Estás à altura do desafio?</span>
 		</div>
             <!-- GRELHA 2x2 -->
 			<div class="grid-niveis"></div>
@@ -2087,6 +2167,7 @@
 	let vozAtual = null;
 	let caminhoVozAtual = "";
 
+	let historicoPerguntasUsadas = [];
 	function resetTimerImpaciencia() {
 		clearTimeout(timerImpaciencia);
 		const btnDica = document.getElementById('btn-dica');
@@ -2172,6 +2253,9 @@
 /* ==========================================
    JOGO
    ========================================== */
+
+
+
    
 function animarMascote(estado) {
     const container = document.getElementById('mascote-feedback');
@@ -2303,12 +2387,21 @@ function aplicarDica5050(ronda) {
 }
 
 function aplicarHighlightRespostaCorreta(ronda) {
-	document.querySelectorAll('.btn-opcao').forEach(btn => {
-		const textoBtn = btn.textContent.trim();
-		const img = btn.querySelector('img');
-		const altImg = img ? img.alt.trim() : '';
+	const botoes = document.querySelectorAll('.btn-opcao, .btn-opcao-imagem');
+	const respostaCorreta = ronda.correta.trim().toLowerCase();
 
-		if (textoBtn === ronda.correta || (altImg && altImg.toLowerCase() === ronda.correta.toLowerCase())) {
+	botoes.forEach(btn => {
+		const textoBtn = btn.textContent.trim().toLowerCase();
+		const img = btn.querySelector('img');
+		const altImg = img ? img.alt.trim().toLowerCase() : '';
+		const dataValor = btn.dataset.valor ? btn.dataset.valor.trim().toLowerCase() : '';
+
+		if (
+			textoBtn === respostaCorreta || 
+			altImg === respostaCorreta || 
+			dataValor === respostaCorreta ||
+			(textoBtn.length > 0 && textoBtn.includes(respostaCorreta))
+		) {
 			btn.classList.add('dica-highlight-ativa');
 		}
 	});
@@ -2586,6 +2679,7 @@ function limparConfetis() {
 	}
 }	
 </script>
+<script src="bancoRecursos.js"></script>
 <script src="questoes.js"></script>
 <script src="engine.js"></script>
 <script type="module" src="/contador.js"></script></body>

@@ -11,7 +11,7 @@ const CONFIG_JOGO = {
         {
             id: "quiz-global",
             titulo: "Desafio Global",
-            subtitulo: "50 Perguntas sobre todo o ano letivo",
+            subtitulo: "70 Perguntas sobre todo o ano letivo",
             icone: "img/mascote_normal.png",
             corClasse: "bg-turquesa",
             numQuestoes: 10,
@@ -402,7 +402,7 @@ const CONFIG_JOGO = {
                 {
                     id: 403,
                     tipo: "situacao",
-                    pergunta: "<span class='destaque-badge'>Segurança Pública</span>",
+                    pergunta: "<span class='destaque-badge'>Profissões e Serviços</span>",
                     audio: "audios/e4_03.mp3", // Áudio: "Quem ajuda a manter a ordem nas ruas e a proteger a segurança das pessoas?"
                     dica: { tipo: "highlight" },
                     opcoesImagem: [
@@ -425,7 +425,7 @@ const CONFIG_JOGO = {
                 {
                     id: 405,
                     tipo: "situacao",
-                    pergunta: "<span class='destaque-badge'>Espaços Escolares</span>",
+                    pergunta: "<span class='destaque-badge'>Profissões e Serviços</span>",
                     audio: "audios/e4_05.mp3", // Áudio: "Quem nos ensina a ler, a escrever e a aprender coisas novas na escola?"
                     dica: { tipo: "highlight" },
                     opcoesImagem: [
@@ -609,7 +609,192 @@ const CONFIG_JOGO = {
                     imagemPergunta: "img/apanhar_lixo.jpg",
                     opcoes: ["Certo", "Errado"],
                     correta: "Certo"
-                }
+                },
+				
+				/* =========================================================
+                   Novas Questões Dinâmicas (intrusos aleatórios)
+                 ========================================================= */
+				 
+				{
+					id: 601,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>Profissões e Serviços</span>",
+					audio: "audios/e6_01.mp3", // Áudio: "Quem é o profissional que conduz os aviões para levar os passageiros?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "profissoes",
+					correta: "Piloto"
+				},
+				{
+					id: 602,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>Profissões e Serviços</span>",
+					audio: "audios/e6_02.mp3", // Áudio: "Quem é o profissional que constrói e repara móveis de madeira?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "profissoes",
+					correta: "Carpinteiro"
+				},
+				{
+					id: 603,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>Profissões e Serviços</span>",
+					audio: "audios/e6_03.mp3", // Áudio: "Quem entrega as cartas e as encomendas na nossa casa?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "profissoes",
+					correta: "Carteiro"
+				},
+				{
+					id: 604,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>Profissões e Serviços</span>",
+					audio: "audios/e6_04.mp3", // Áudio: "Quem prepara as refeições nos restaurantes e cantinas?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "profissoes",
+					correta: "Cozinheiro"
+				},
+				{
+					id: 605,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>Profissões e Serviços</span>",
+					audio: "audios/e6_05.mp3", // Áudio: "Quem cuida das flores e corta a relva nos jardins e parques?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "profissoes",
+					correta: "Jardineiro"
+				},
+				{
+					id: 606,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>À Descoberta de Si Mesmo</span>",
+					audio: "audios/e6_06.mp3", // Áudio: "Quem cuida de nós e nos consulta quando estamos doentes?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "profissoes",
+					correta: "Médico"
+				},
+				{
+					id: 607,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>Vestuário e Estações</span>",
+					audio: "audios/e6_07.mp3", // Áudio: "O que deves vestir para ir dar um mergulho na praia num dia de Verão?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "vestuario",
+					correta: "Fato de Banho"
+				},
+				{
+					id: 608,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>Vestuário e Estações</span>",
+					audio: "audios/e6_08.mp3", // Áudio: "O que deves usar na cabeça para te protegeres do frio num dia chuvoso de Inverno?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "vestuario",
+					correta: "Gorro"
+				},
+				{
+					id: 609,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>A Nossa Escola</span>",
+					audio: "audios/e6_09.mp3", // Áudio: "Onde guardas os teus lápis, borracha e afia para a escola?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "objetos_escola",
+					correta: "Estojo"
+				},
+				{
+					id: 610,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>A Nossa Escola</span>",
+					audio: "audios/e6_10.mp3", // Áudio: "Qual é o objeto que usas para transportar os teus cadernos e livros nas costas?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "objetos_escola",
+					correta: "Mochila"
+				},
+				{
+					id: 611,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>O Corpo Humano</span>",
+					audio: "audios/e6_11.mp3", // Áudio: "Qual é o órgão do sentido da visão que usas para ver tudo à tua volta?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "corpo_sentidos",
+					correta: "Olho"
+				},
+				{
+					id: 612,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>O Corpo Humano</span>",
+					audio: "audios/e6_12.mp3", // Áudio: "Qual é o órgão do sentido da audição que usas para ouvir os sons e a música?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "corpo_sentidos",
+					correta: "Orelha"
+				},
+				{
+					id: 613,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>A Nossa Escola</span>",
+					audio: "audios/e6_13.mp3", // Áudio: "Qual é o espaço silencioso onde podemos ler e requisitar livros?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "locais_espacos",
+					correta: "Biblioteca"
+				},
+				{
+					id: 614,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>A Nossa Casa</span>",
+					audio: "audios/e6_14.mp3", // Áudio: "Em que divisão da casa se preparam e cozinham as refeições deliciosas?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "locais_espacos",
+					correta: "Cozinha"
+				},
+				{
+					id: 615,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>A Nossa Localidade</span>",
+					audio: "audios/e6_15.mp3", // Áudio: "Em que loja da nossa comunidade se fabrica e compra o pão fresco?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "locais_espacos",
+					correta: "Padaria"
+				},
+				{
+					id: 616,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>Fases da Vida</span>",
+					audio: "audios/e6_16.mp3", // Áudio: "Em que fase da vida se encontra uma pessoa crescida que já trabalha e cuida da família?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "familia_fases",
+					correta: "Adulto"
+				},
+				{
+					id: 617,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>A Nossa Família</span>",
+					audio: "audios/e6_17.mp3", // Áudio: "Como se chamam os filhos dos mesmos pais que crescem e vivem juntos?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "familia_fases",
+					correta: "Irmãos"
+				},
+				{
+					id: 618,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>A Nossa Família</span>",
+					audio: "audios/e6_18.mp3", // Áudio: "Como se chamam as filhas dos nossos tios e tias com quem brincamos nas festas?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "familia_fases",
+					correta: "Primas"
+				},
+				{
+					id: 619,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>Profissões e Serviços</span>",
+					audio: "audios/e6_19.mp3", // Áudio: "Quem é o profissional que repara os carros e motas na oficina?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "profissoes",
+					correta: "Mecânico"
+				},
+				{
+					id: 620,
+					tipo: "situacao",
+					pergunta: "<span class='destaque-badge'>Fases da Vida</span>",
+					audio: "audios/e6_20.mp3", // Áudio: "Em que fase da vida te encontras tu, que andas na escola a aprender e a brincar?"
+					dica: { tipo: "highlight" },
+					categoriaDistratores: "familia_fases",
+					correta: "Criança"
+				}
             ]
         }
     ]

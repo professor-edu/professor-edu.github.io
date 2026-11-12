@@ -89,5 +89,6 @@ const todosOsJogos =[
     { nome: "Memória dos Alimentos", icone: "icones/memoria_alimentos.png", link: "em/alimentos/", cat: "em" },
     { nome: "Memória dos Animais", icone: "icones/memoria_animais.png", link: "em/animais/", cat: "em" },
     { nome: "Memória do Tempo", icone: "icones/memoria_tempo.png", link: "em/tempo/", cat: "em" },
-	{ nome: "A Família", icone: "icones/familia.png", link: "em/familia/", cat: "em" }
+	{ nome: "A Família", icone: "icones/familia.png", link: "em/familia/", cat: "em" },
+	{ nome: "Desafio Final de Mestre", icone: "icones/super_quiz.png", link: "em/super-quiz/", cat: "em" }
 ];

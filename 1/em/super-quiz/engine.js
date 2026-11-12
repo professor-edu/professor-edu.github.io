@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('icone-erro-svg').innerHTML = SVG_ERRO;
 });
 
-/* Aplica as variáveis de cor dinamicamente no CSS */
 function aplicarTemaVisual() {
     if (!CONFIG_JOGO || !CONFIG_JOGO.tema) return;
 
@@ -24,7 +23,6 @@ function aplicarTemaVisual() {
     if (titulo) titulo.textContent = CONFIG_JOGO.subtituloMenu;
 }
 
-/* Constrói o Menu Principal consoante o número de níveis no questoes.js */
 function gerarMenuInicial() {
     const grid = document.querySelector('.grid-niveis');
     if (!grid || !CONFIG_JOGO.niveis) return;
@@ -32,7 +30,6 @@ function gerarMenuInicial() {
     let htmlMenu = '';
 
     CONFIG_JOGO.niveis.forEach(nivel => {
-        // CORREÇÃO: Adicionadas aspas simples à volta de '${nivel.id}'
         htmlMenu += `
             <button class="btn-nivel-novo ${nivel.corClasse}" onclick="iniciarJogo(${nivel.numQuestoes}, '${nivel.titulo}', '${nivel.id}')">
                 <img src="${nivel.icone}" class="icon-btn-nivel" alt="" onerror="this.style.display='none'">
@@ -58,7 +55,7 @@ function iniciarJogo(numQuestoes = 10, tituloNivel = "", idNivel = "quiz-global"
     const nivelDados = CONFIG_JOGO.niveis.find(n => n.id === idNivel) || CONFIG_JOGO.niveis[0];
     let poolPerguntas = [];
 
-    // Se o nível tiver a flag 'misturarModos: true', junta automaticamente as perguntas de todos os outros níveis
+    // Carrega o pool de perguntas do nível
     if (nivelDados && nivelDados.misturarModos) {
         CONFIG_JOGO.niveis.forEach(n => {
             if (n.perguntas && !n.misturarModos) {
@@ -68,15 +65,28 @@ function iniciarJogo(numQuestoes = 10, tituloNivel = "", idNivel = "quiz-global"
     } else {
         poolPerguntas = nivelDados ? (nivelDados.perguntas || []) : [];
     }
-    
-    totalDesafiosNivel = Math.min(numQuestoes, poolPerguntas.length);
+
+    // =========================================================
+    // SISTEMA ANTI-REPETIÇÃO
+    // =========================================================
+    let perguntasDisponiveis = poolPerguntas.filter(p => !historicoPerguntasUsadas.includes(p.id));
+
+    if (perguntasDisponiveis.length < numQuestoes) {
+        historicoPerguntasUsadas = [];
+        perguntasDisponiveis = [...poolPerguntas];
+    }
+
+    totalDesafiosNivel = Math.min(numQuestoes, perguntasDisponiveis.length);
+
+    rondasSorteadas = baralharArray(perguntasDisponiveis).slice(0, totalDesafiosNivel);
+
+    rondasSorteadas.forEach(p => historicoPerguntasUsadas.push(p.id));
+    // =========================================================
 
     const subtitulo = document.getElementById('subtitulo-header');
     if (subtitulo && tituloNivel !== "") {
         subtitulo.textContent = tituloNivel;
     }
-
-    rondasSorteadas = baralharArray(poolPerguntas).slice(0, totalDesafiosNivel);
 
     limparConfetis();
     atualizarPlacar();
@@ -125,13 +135,20 @@ function carregarRonda() {
         case 'opcoes-imagem':
         case 'situacao':
             html += `<div class="opcoes-grid-imagens">`;
-            baralharArray([...ronda.opcoesImagem]).forEach(item => {
-                const fnClique = (item.valor === ronda.correta) ? "simularAcerto(this)" : "simularErro(this)";
-                const textoLegenda = item.valor || item.alt; // Usa a propriedade 'valor' ou 'alt' do objeto
+            
+            // OBTÉM AS OPÇÕES (Manuais ou Geradas Dinamicamente do BANCO_RECURSOS)
+            const opcoesImagem = prepararOpcoesPergunta(ronda);
+
+            opcoesImagem.forEach(item => {
+                const respostaCorretaLower = ronda.correta.trim().toLowerCase();
+                const valorItemLower = (item.valor || item.alt || '').trim().toLowerCase();
+
+                const fnClique = (valorItemLower === respostaCorretaLower) ? "simularAcerto(this)" : "simularErro(this)";
+                const textoLegenda = item.valor || item.alt;
 
                 html += `
-                    <button class="btn-opcao-imagem" onclick="${fnClique}">
-                        <img src="${item.img}" alt="${item.alt}" class="frame-4-3" onerror="this.src='img/brincar_aprender.jpg';">
+                    <button class="btn-opcao-imagem" onclick="${fnClique}" data-valor="${textoLegenda}">
+                        <img src="${item.img}" alt="${item.alt}" class="frame-1-1" onerror="this.src='img/brincar_aprender.jpg';">
                         <span class="pilula-legenda">${textoLegenda}</span>
                     </button>
                 `;
