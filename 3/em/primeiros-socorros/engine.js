@@ -46,7 +46,9 @@ function gerarMenuInicial() {
     grid.innerHTML = htmlMenu;
 }
 
-// (Universal para qualquer jogo)
+// Guarda os IDs das perguntas já jogadas em cada nível durante a sessão
+let historicoPerguntas = {};
+
 function iniciarJogo(numQuestoes = 10, tituloNivel = "", idNivel = 1) {
     erradas = 0;
     desafioAtual = 0;
@@ -76,7 +78,25 @@ function iniciarJogo(numQuestoes = 10, tituloNivel = "", idNivel = 1) {
         subtitulo.textContent = tituloNivel;
     }
 
-    rondasSorteadas = baralharArray(poolPerguntas).slice(0, totalDesafiosNivel);
+    // 1. Garante que existe uma lista de histórico para este nível específico
+    if (!historicoPerguntas[idNivel]) {
+        historicoPerguntas[idNivel] = [];
+    }
+
+    // 2. Retira do baralho as perguntas cujos IDs já foram jogados
+    let perguntasDisponiveis = poolPerguntas.filter(
+        p => !historicoPerguntas[idNivel].includes(p.id)
+    );
+
+    // 3. Se sobrarem menos de 10 perguntas (ex: ao iniciar a 3.ª ronda), reinicia o histórico deste nível
+    if (perguntasDisponiveis.length < totalDesafiosNivel) {
+        historicoPerguntas[idNivel] = [];
+        perguntasDisponiveis = [...poolPerguntas];
+    }
+
+    // 4. Baralha apenas as não usadas, escolhe 10 e guarda os seus IDs no histórico
+    rondasSorteadas = baralharArray(perguntasDisponiveis).slice(0, totalDesafiosNivel);
+    historicoPerguntas[idNivel].push(...rondasSorteadas.map(p => p.id));
 
     limparConfetis();
     atualizarPlacar();

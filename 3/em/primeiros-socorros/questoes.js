@@ -280,7 +280,7 @@ const CONFIG_JOGO = {
                     id: 202,
                     tipo: "padrao",
                     pergunta: "<span class='destaque-badge'>Limpar uma Ferida</span>",
-                    audio: "audios/202.mp3", // Áudio: "Como devemos lavar uma ferida na pele, com água ou soro fisiológico?"
+                    audio: "audios/202.mp3", // Áudio: "Usando água ou soro fisiológico, como devemos lavar uma ferida na pele?"
                     dica: { tipo: "highlight" },
                     opcoes: [
                         "Do centro para fora, para arrastar a sujidade",

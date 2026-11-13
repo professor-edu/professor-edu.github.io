@@ -2338,13 +2338,13 @@
 		if(btnDica) btnDica.classList.remove('dica-impaciente');
 	}
 	
-	function baralharArray(arr) {
-		let array = [...arr];
-		for (let i = array.length - 1; i > 0; i--) {
+	function baralharArray(array) {
+		const copia = [...array];
+		for (let i = copia.length - 1; i > 0; i--) {
 			const j = Math.floor(Math.random() * (i + 1));
-			[array[i], array[j]] = [array[j], array[i]];
+			[copia[i], copia[j]] = [copia[j], copia[i]];
 		}
-		return array;
+		return copia;
 	}
 	
 /* ==========================================
