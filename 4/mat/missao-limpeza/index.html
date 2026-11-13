@@ -874,6 +874,28 @@
 			transform: translateY(4px) !important; 
 			box-shadow: 0 0px 0 transparent !important; 
 		}
+		
+		/* Ajusta o padding apenas nos botões que tiverem subtítulo, mantendo ~62px de altura */
+		.btn-acao:has(.btn-subtitulo) {
+			padding: 9px 24px;
+		}
+
+		.btn-texto {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			line-height: 1.1;
+		}
+
+		.btn-subtitulo {
+			font-size: 0.72rem;
+			font-weight: 700;
+			letter-spacing: 0.8px;
+			opacity: 0.9;
+			margin-top: 2px;
+			/* Se preferires em minúsculas (ex: "novos mapas"), descomenta a linha abaixo: */
+			text-transform: none;
+}
 
         /* Variantes de Cor para os Botões de Ação */
         .btn-acao.primario { background-color: var(--cor-btn-verde); box-shadow: 0 6px 0 #45b062, 0 10px 15px rgba(0,0,0,0.1); }
@@ -2555,10 +2577,14 @@
             </div>
            
 			
-			<div class="botoes-acao-container">
-				<button class="btn-acao primario" onclick="reiniciarJogo()">JOGAR DE NOVO <img src="../../../SVG/jogar_novo.svg" class="icon-acao" alt=""></button>
-				<button class="btn-acao terciario" onclick="voltarAoMenu()">VOLTAR AO MENU <img src="../../../SVG/menu_principal.svg" class="icon-acao" alt=""></button>
-			</div>
+<div class="botoes-acao-container">
+    <button class="btn-acao primario" onclick="reiniciarJogo()"><span class="btn-texto">JOGAR DE NOVO<span class="btn-subtitulo">(mapas diferentes a cada jogada)</span></span><img src="../../../SVG/jogar_novo.svg" class="icon-acao" alt=""></button>
+
+    <button class="btn-acao terciario" onclick="voltarAoMenu()">
+        VOLTAR AO MENU
+        <img src="../../../SVG/menu_principal.svg" class="icon-acao" alt="">
+    </button>
+</div>
 			
         </div>
     </div>
@@ -2955,10 +2981,14 @@ function obterMapaRonda(ronda) {
             calcularMenorCaminho(inicio, lixo, obstaculosGerados) > 0
         );
 
-        if (todosAlcancaveis && lixosGerados.length === numLixos) {
-            mapaValido = true;
-            mapaGerado = { inicio, obstaculos: obstaculosGerados, lixos: lixosGerados };
-        }
+        if (
+			todosAlcancaveis &&
+			lixosGerados.length === numLixos &&
+			calcularMinimoBlocos(inicio, obstaculosGerados, lixosGerados, MAX_COMANDOS) !== -1
+		) {
+			mapaValido = true;
+			mapaGerado = { inicio, obstaculos: obstaculosGerados, lixos: lixosGerados };
+		}
     }
 
     return mapaGerado;
@@ -3128,7 +3158,8 @@ function limparLinhaCodigoDOM() {
 
     for (let i = 0; i < MAX_COMANDOS; i++) {
         const slot = document.createElement('div');
-        slot.className = 'bloco-comando-slot';
+        slot.id = `slot-comando-${i}`;
+		slot.className = 'bloco-comando-slot';
         slot.dataset.index = i;
         container.appendChild(slot);
     }
@@ -3307,7 +3338,7 @@ function concluirRondaSucesso() {
    9. MODAL DE DICA E AÇÕES DE NAVEGAÇÃO
    ========================================== */
 function atualizarEstadoBotaoDica() {
-    const btnDica = document.getElementById('btn-dica'); // ou .btn-dica
+    const btnDica = document.getElementById('btn-dica');
     if (!btnDica) return;
 
     const estaBloqueado = desafioAtual < rondaLivreDica;
@@ -3329,105 +3360,157 @@ function limparDestaquesDica() {
 /* ==========================================
    AÇÃO DE USAR A DICA VISUAL
    ========================================== */
+function simularSequenciaAtual() {
+    let x = posRobo.x;
+    let y = posRobo.y;
+    let mask = 0;
+
+    for (const item of sequenciaComandos) {
+        if (item.acao === 'apanhar') {
+            const idx = lixos.findIndex((l, i) => l.x === x && l.y === y && !(mask & (1 << i)));
+            if (idx === -1) return null; // Tentou apanhar onde não há lixo
+            mask |= (1 << idx);
+        } else {
+            const direcao = typeof item === 'object' ? item.direcao : item;
+            const repeticoes = typeof item === 'object' ? item.count : 1;
+
+            for (let r = 0; r < repeticoes; r++) {
+                if (direcao === 'cima') y--;
+                else if (direcao === 'baixo') y++;
+                else if (direcao === 'esquerda') x--;
+                else if (direcao === 'direita') x++;
+
+                if (x < 0 || x >= TOTAL_COLUNAS || y < 0 || y >= TOTAL_LINHAS) return null;
+                if (obstaculos.some(o => o.x === x && o.y === y)) return null;
+            }
+        }
+    }
+
+    return { x, y, mask, slotsUsados: sequenciaComandos.length };
+}
+
+function obterMelhorDica(x0, y0, mask0, slotsRestantes) {
+    const melhorTotal = calcularMinimoBlocos({ x: x0, y: y0 }, obstaculos, lixos, slotsRestantes, mask0);
+    if (melhorTotal <= 0) return null;
+
+    const obsSet = new Set(obstaculos.map(o => `${o.x},${o.y}`));
+    const lixoMap = new Map(lixos.map((l, i) => [`${l.x},${l.y}`, 1 << i]));
+
+    // 1. Verifica se Apanhar agora faz parte de uma solução ótima
+    const bit = lixoMap.get(`${x0},${y0}`) || 0;
+    if (bit && !(mask0 & bit)) {
+        const resto = calcularMinimoBlocos({ x: x0, y: y0 }, obstaculos, lixos, slotsRestantes - 1, mask0 | bit);
+        if (resto !== -1 && 1 + resto === melhorTotal) {
+            return { tipo: 'apanhar', xDestino: x0, yDestino: y0 };
+        }
+    }
+
+    // 2. Testa todas as retas possíveis (1 a 5 passos) e escolhe a que minimiza os blocos totais
+    const dirs = [
+        { dx: 0, dy: -1, nome: 'cima' },
+        { dx: 0, dy: 1, nome: 'baixo' },
+        { dx: -1, dy: 0, nome: 'esquerda' },
+        { dx: 1, dy: 0, nome: 'direita' }
+    ];
+
+    const candidatos = [];
+    for (const { dx, dy, nome } of dirs) {
+        let nx = x0, ny = y0;
+        for (let passos = 1; passos <= 5; passos++) {
+            nx += dx;
+            ny += dy;
+            if (nx < 0 || nx >= TOTAL_COLUNAS || ny < 0 || ny >= TOTAL_LINHAS) break;
+            if (obsSet.has(`${nx},${ny}`)) break;
+
+            const custoMov = (passos === 2) ? 2 : 1;
+            if (custoMov <= slotsRestantes) {
+                const resto = calcularMinimoBlocos({ x: nx, y: ny }, obstaculos, lixos, slotsRestantes - custoMov, mask0);
+                if (resto !== -1 && custoMov + resto === melhorTotal) {
+                    candidatos.push({
+                        tipo: 'mover',
+                        direcao: nome,
+                        passos,
+                        xDestino: nx,
+                        yDestino: ny
+                    });
+                }
+            }
+        }
+    }
+
+    if (candidatos.length === 0) return null;
+
+    // Dá prioridade a movimentos com Repetir (3, 4 ou 5 passos)
+    candidatos.sort((a, b) => {
+        const loopA = a.passos >= 3 ? 1 : 0;
+        const loopB = b.passos >= 3 ? 1 : 0;
+        if (loopB !== loopA) return loopB - loopA;
+        return b.passos - a.passos;
+    });
+
+    return candidatos[0];
+}
+
 function usarDica() {
     if (desafioAtual < rondaLivreDica || emExecucao) return;
+    if (!lixos || lixos.length === 0) return;
 
     const DURACAO_DESTAQUE = 4500;
+    const estadoAtual = simularSequenciaAtual();
 
-    // 1. CASO O ROBÔ JÁ ESTEJA EM CIMA DE UM LIXO -> SUGERE APANHAR
-    const estaEmCimaDeLixo = lixos && lixos.some(l => l.x === posRobo.x && l.y === posRobo.y);
-    if (estaEmCimaDeLixo) {
-        pararTimerImpaciencia();
-        rondaLivreDica = desafioAtual + 2;
-        atualizarEstadoBotaoDica();
+    if (!estadoAtual) {
+        showToast('A sequência atual bate num obstáculo ou sai da grelha. Tira os últimos blocos!', true);
+        tocarSom('erro');
+        return;
+    }
 
+    const slotsRestantes = MAX_COMANDOS - estadoAtual.slotsUsados;
+    const dica = obterMelhorDica(estadoAtual.x, estadoAtual.y, estadoAtual.mask, slotsRestantes);
+
+    if (!dica) {
+        showToast('Com os blocos que já puseste não chega para apanhar tudo. Tenta outro caminho!', true);
+        tocarSom('erro');
+        return;
+    }
+
+    pararTimerImpaciencia();
+    rondaLivreDica = desafioAtual + 2;
+    atualizarEstadoBotaoDica();
+
+    // 1. SUGESTÃO: APANHAR
+    if (dica.tipo === 'apanhar') {
         const btnApanhar = document.getElementById('btn-apanhar');
         if (btnApanhar) {
             btnApanhar.classList.add('dica-destaque');
             setTimeout(() => btnApanhar.classList.remove('dica-destaque'), DURACAO_DESTAQUE);
         }
 
-        const celulaRobo = document.querySelector(`.celula-grelha[data-x="${posRobo.x}"][data-y="${posRobo.y}"]`);
+        const celulaRobo = document.querySelector(`.celula-grelha[data-x="${dica.xDestino}"][data-y="${dica.yDestino}"]`);
         if (celulaRobo) {
             celulaRobo.classList.add('celula-dica-proxima');
             setTimeout(() => celulaRobo.classList.remove('celula-dica-proxima'), DURACAO_DESTAQUE);
         }
 
-        showToast('Já estás no lixo! Usa o botão APANHAR.');
+        showToast('Estás em cima do lixo! Usa o botão APANHAR.');
         tocarSom('flip');
         return;
     }
 
-    // 2. SELEÇÃO DO LIXO MAIS PRÓXIMO ALCANÇÁVEL
-    if (!lixos || lixos.length === 0) return;
-
-    let alvoLixo = null;
-    let proximaDirecao = null;
-    let menorDistancia = Infinity;
-
-    for (const lixo of lixos) {
-        const dir = obterProximoPassoCerto(posRobo, lixo, obstaculos);
-        if (dir) {
-            const dist = Math.abs(posRobo.x - lixo.x) + Math.abs(posRobo.y - lixo.y);
-            if (dist < menorDistancia) {
-                menorDistancia = dist;
-                alvoLixo = lixo;
-                proximaDirecao = dir;
-            }
-        }
-    }
-
-    if (!proximaDirecao || !alvoLixo) return;
-
-    pararTimerImpaciencia();
-    rondaLivreDica = desafioAtual + 2;
-    atualizarEstadoBotaoDica();
-
-    // 3. CALCULA QUANTOS PASSOS SEGUIDOS O ROBÔ PODE DAR NESSA DIREÇÃO
-    let passosSeguidos = 0;
-    let xTemp = posRobo.x;
-    let yTemp = posRobo.y;
-
-    while (passosSeguidos < 5) {
-        let proxX = xTemp;
-        let proxY = yTemp;
-
-        if (proximaDirecao === 'cima') proxY--;
-        else if (proximaDirecao === 'baixo') proxY++;
-        else if (proximaDirecao === 'esquerda') proxX--;
-        else if (proximaDirecao === 'direita') proxX++;
-
-        // Para se sair da grelha ou encontrar um obstáculo
-        if (proxX < 0 || proxX >= TOTAL_COLUNAS || proxY < 0 || proxY >= TOTAL_LINHAS) break;
-        if (obstaculos.some(o => o.x === proxX && o.y === proxY)) break;
-
-        xTemp = proxX;
-        yTemp = proxY;
-        passosSeguidos++;
-
-        // Para se a casa atingida tiver um lixo (o robô deve parar para apanhar)
-        if (lixos.some(l => l.x === xTemp && l.y === yTemp)) break;
-
-        // Se o caminho mudar de direção na casa seguinte, para a contagem da reta
-        const proxDirNoCaminho = obterProximoPassoCerto({ x: xTemp, y: yTemp }, alvoLixo, obstaculos);
-        if (proxDirNoCaminho !== proximaDirecao) break;
-    }
-
-    // 4. DECIDE QUAL BOTÃO ILUMINAR (REPETIR VS SETA DIRECIONAL)
-    if (passosSeguidos >= 3) {
+    // 2. SUGESTÃO: MOVER (REPETIR VS SETA DIRECIONAL)
+    if (dica.passos >= 3) {
         const btnRepetir = document.getElementById('btn-repetir');
         if (btnRepetir) {
             btnRepetir.classList.add('dica-destaque');
             setTimeout(() => btnRepetir.classList.remove('dica-destaque'), DURACAO_DESTAQUE);
         }
-        showToast(`Usa o bloco REPETIR para dar ${passosSeguidos} passos!`);
+        showToast(`Usa o bloco REPETIR para dar ${dica.passos} passos!`);
     } else {
         const seletorSeta = {
             'cima': '.btn-seta.bg-azul',
             'baixo': '.btn-seta.bg-turquesa',
             'esquerda': '.btn-seta.bg-roxo',
             'direita': '.btn-seta.bg-laranja'
-        }[proximaDirecao];
+        }[dica.direcao];
 
         const btnSetaCerta = document.querySelector(seletorSeta);
         if (btnSetaCerta) {
@@ -3436,8 +3519,8 @@ function usarDica() {
         }
     }
 
-    // 5. ILUMINA A CÉLULA ONDE O ROBÔ VAI PARAR
-    const celulaAlvo = document.querySelector(`.celula-grelha[data-x="${xTemp}"][data-y="${yTemp}"]`);
+    // 3. ILUMINA A CÉLULA ONDE O ROBÔ VAI PARAR
+    const celulaAlvo = document.querySelector(`.celula-grelha[data-x="${dica.xDestino}"][data-y="${dica.yDestino}"]`);
     if (celulaAlvo) {
         celulaAlvo.classList.add('celula-dica-proxima');
         setTimeout(() => celulaAlvo.classList.remove('celula-dica-proxima'), DURACAO_DESTAQUE);
@@ -3476,6 +3559,64 @@ function obterProximoPassoCerto(inicio, destino, listaObstaculos) {
         }
     }
     return null;
+}
+
+function calcularMinimoBlocos(inicio, listaObstaculos, listaLixos, limite = MAX_COMANDOS, maskInicial = 0) {
+    const obsSet = new Set(listaObstaculos.map(o => `${o.x},${o.y}`));
+    const nLixos = listaLixos.length;
+    const alvoMask = (1 << nLixos) - 1;
+    if (maskInicial === alvoMask) return 0;
+
+    const lixoMap = new Map(listaLixos.map((l, i) => [`${l.x},${l.y}`, 1 << i]));
+
+    const buckets = Array.from({ length: limite + 1 }, () => []);
+    buckets[0].push({ x: inicio.x, y: inicio.y, mask: maskInicial });
+
+    const dist = Array.from({ length: TOTAL_COLUNAS }, () =>
+        Array.from({ length: TOTAL_LINHAS }, () => Array(1 << nLixos).fill(999))
+    );
+    dist[inicio.x][inicio.y][maskInicial] = 0;
+
+    const dirs = [
+        { dx: 0, dy: -1 }, { dx: 0, dy: 1 },
+        { dx: -1, dy: 0 }, { dx: 1, dy: 0 }
+    ];
+
+    for (let custo = 0; custo <= limite; custo++) {
+        for (const estado of buckets[custo]) {
+            const { x, y, mask } = estado;
+            if (custo > dist[x][y][mask]) continue;
+            if (mask === alvoMask) return custo;
+
+            const bit = lixoMap.get(`${x},${y}`) || 0;
+            if (bit && !(mask & bit)) {
+                const nMask = mask | bit;
+                const nCusto = custo + 1;
+                if (nCusto <= limite && nCusto < dist[x][y][nMask]) {
+                    dist[x][y][nMask] = nCusto;
+                    buckets[nCusto].push({ x, y, mask: nMask });
+                }
+            }
+
+            for (const { dx, dy } of dirs) {
+                let nx = x, ny = y;
+                for (let passos = 1; passos <= 5; passos++) {
+                    nx += dx;
+                    ny += dy;
+                    if (nx < 0 || nx >= TOTAL_COLUNAS || ny < 0 || ny >= TOTAL_LINHAS) break;
+                    if (obsSet.has(`${nx},${ny}`)) break;
+
+                    const custoMov = (passos === 2) ? 2 : 1;
+                    const nCusto = custo + custoMov;
+                    if (nCusto <= limite && nCusto < dist[nx][ny][mask]) {
+                        dist[nx][ny][mask] = nCusto;
+                        buckets[nCusto].push({ x: nx, y: ny, mask });
+                    }
+                }
+            }
+        }
+    }
+    return -1;
 }
 
 function fecharModalDica() {
