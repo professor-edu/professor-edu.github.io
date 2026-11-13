@@ -67,6 +67,7 @@ const todosOsJogos =[
 	{ nome: "A Teia da Vida", icone: "icones/teia_vida.png", link: "em/teia-vida/", cat: "em" },
 	{ nome: "Terra, Lua e Luz", icone: "icones/terra_lua_luz.png", link: "em/terra-lua-luz/", cat: "em" },
 	{ nome: "Relevo e Rios", icone: "icones/relevo.png", link: "em/relevo/", cat: "em" },
-	{ nome: "Continentes e Oceanos", icone: "icones/continentes_oceanos.png", link: "em/continentes-oceanos/", cat: "em" }
+	{ nome: "Continentes e Oceanos", icone: "icones/continentes_oceanos.png", link: "em/continentes-oceanos/", cat: "em" },
+	{ nome: "Primeiros Socorros", icone: "icones/primeiros_socorros.png", link: "em/primeiros-socorros/", cat: "em" }
 
 ];

@@ -259,7 +259,8 @@ export const CATALOGO_JOGOS = [
 	{ nome: "A Teia da Vida", icone: "3/icones/teia_vida.png", link: "3/em/teia-vida/", ano: "3º Ano" },
 	{ nome: "Terra, Lua e Luz", icone: "3/icones/terra_lua_luz.png", link: "3/em/terra-lua-luz/", ano: "3º Ano" },
 	{ nome: "Relevo e Rios", icone: "3/icones/relevo.png", link: "3/em/relevo/", ano: "3º Ano" },
-	{ nome: "Continentes e Oceanos", icone: "3/icones/continentes_oceanos.png", link: "3/em/continentes-oceanos/", ano: "3º Ano" },  
+	{ nome: "Continentes e Oceanos", icone: "3/icones/continentes_oceanos.png", link: "3/em/continentes-oceanos/", ano: "3º Ano" },
+	{ nome: "Primeiros Socorros", icone: "3/icones/primeiros_socorros.png", link: "3/em/primeiros-socorros/", ano: "3º Ano" },  	
 
 	// ------------------------------------
 	// 4º ANO

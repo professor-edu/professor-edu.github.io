@@ -1824,7 +1824,14 @@
         "disciplina": "Estudo do Meio",
         "tags": ["continentes", "oceanos", "mapa", "geografia", "terra", "mundo"]
     },
-
+	{
+        "nome": "Primeiros Socorros",
+        "icone": "/3/icones/primeiros_socorros.png",
+        "link": "/3/em/primeiros-socorros/",
+        "ano": "3º Ano",
+        "disciplina": "Estudo do Meio",
+        "tags": ["saúde", "segurança", "emergência", "salvamento", "cuidados", "prevenção", "som"]
+    },
     {
         "nome": "Fábrica dos Plurais",
         "icone": "/4/icones/fabrica_plurais.png",

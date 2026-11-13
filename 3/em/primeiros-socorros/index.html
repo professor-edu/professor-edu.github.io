@@ -182,13 +182,6 @@
         /* =========================================
            MENU INICIAL (ANIMAÇÃO GRELHA 2x2
            ========================================= */
-        .animacao-tutorial {
-            width: 100%; max-width: 400px; height: 180px;
-            background: #f4faff; border: 3px dashed #bcdcff; border-radius: 20px;
-            margin: 0 auto 25px; display: flex; align-items: center; justify-content: center;
-            box-shadow: inset 0 0 15px rgba(0,145,255,0.05); color: var(--azul-vibrante); font-size: 1.2rem; font-weight: 900;
-            overflow: hidden;
-        }
 
         /* Grelha adaptada para 2x2 cartões alinhados */
         .grid-niveis {
@@ -1606,19 +1599,454 @@
           main { justify-content: flex-start !important; overflow-y: visible !important; }
           footer { margin-top: auto; }
         }	
-
-		
-		/* =========================================
-           CSS ESPECÍFICO DO JOGO
-         ========================================= */		
-		
-		
 		
 	
 
 		/* =========================================
            CSS ESPECÍFICO DA ANIMAÇÃO INICIAL
          ========================================= */
+		
+/* Mantém integralmente as propriedades originais do teu contentor */
+.animacao-tutorial {
+    width: 100%; max-width: 400px; height: 180px;
+    background: #f4faff; border: 3px dashed #bcdcff; border-radius: 20px;
+    margin: 0 auto 25px; display: flex; align-items: center; justify-content: center;
+    box-shadow: inset 0 0 15px rgba(0,145,255,0.05); color: var(--azul-vibrante, #0091ff); font-size: 1.2rem; font-weight: 900;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+/* HUD Superior (Indicadores de cena) */
+.tut-hud-top {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 5;
+}
+
+.tut-step-dots {
+    display: flex;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 4px 10px;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(0, 145, 255, 0.08);
+}
+
+.tut-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #cbd5e1;
+    transition: all 0.3s ease;
+}
+
+.tut-dot-1 { animation: tutDot1 16s infinite; }
+.tut-dot-2 { animation: tutDot2 16s infinite; }
+.tut-dot-3 { animation: tutDot3 16s infinite; }
+.tut-dot-4 { animation: tutDot4 16s infinite; }
+
+/* Palco Principal */
+.tut-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.tut-scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 14px 10px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.tut-scene-1 { animation: tutFadeScene1 16s infinite; }
+.tut-scene-2 { animation: tutFadeScene2 16s infinite; }
+.tut-scene-3 { animation: tutFadeScene3 16s infinite; }
+.tut-scene-4 { animation: tutFadeScene4 16s infinite; }
+
+/* Legenda Explicativa Inferior */
+.tut-caption {
+    margin-top: auto;
+    background: #ffffff;
+    color: #0369a1;
+    font-size: clamp(0.78rem, 3.2vw, 0.9rem);
+    font-weight: 800;
+    padding: 5px 14px;
+    border-radius: 12px;
+    border: 1.5px solid #bae6fd;
+    box-shadow: 0 3px 8px rgba(0, 145, 255, 0.1);
+    letter-spacing: 0.2px;
+}
+
+/* --- CENA 1: CARTÃO ÁUDIO --- */
+.tut-card-pergunta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #ffffff;
+    padding: 12px 16px;
+    border-radius: 16px;
+    width: 82%;
+    max-width: 280px;
+    border: 2px solid #e0f2fe;
+    box-shadow: 0 6px 14px rgba(0, 145, 255, 0.1);
+    margin-top: 8px;
+}
+
+.tut-audio-btn {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #facc15, #eab308);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 3px 0 #ca8a04;
+    animation: tutBtnPulse1 16s infinite;
+}
+
+.tut-svg-icon { width: 22px; height: 22px; }
+
+.tut-sound-wave {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2.5px solid #facc15;
+    opacity: 0;
+    animation: tutSoundRing 16s infinite;
+}
+
+.tut-text-lines {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.tut-line {
+    height: 9px;
+    border-radius: 6px;
+    background: #e2e8f0;
+}
+.tut-line-long { width: 95%; background: #bae6fd; }
+.tut-line-short { width: 65%; }
+
+/* --- CENA 2: CARTÕES DE IMAGEM --- */
+.tut-options-row {
+    display: flex;
+    gap: 10px;
+    width: 88%;
+    max-width: 310px;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.tut-opt-box {
+    position: relative;
+    flex: 1;
+    aspect-ratio: 4 / 3;
+    max-width: 86px;
+    background: #ffffff;
+    border-radius: 14px;
+    border: 2.5px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+}
+
+.tut-svg-med { width: 32px; height: 32px; }
+
+.tut-opt-correct {
+    animation: tutCardSelect 16s infinite;
+}
+
+.tut-check-badge {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #2ecc71;
+    border: 2px solid #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0);
+    animation: tutBadgePop 16s infinite;
+}
+.tut-check-badge svg { width: 13px; height: 13px; }
+
+/* --- CENA 3: DICA E CERTO/ERRADO --- */
+.tut-hint-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    width: 86%;
+    margin-top: 4px;
+}
+
+.tut-hint-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #fef9c3;
+    color: #b45309;
+    border: 2px solid #fde047;
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    animation: tutHintClick 16s infinite;
+}
+.tut-svg-bulb { width: 15px; height: 15px; }
+
+.tut-dual-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 250px;
+}
+
+.tut-pill-btn {
+    flex: 1;
+    padding: 8px 0;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 900;
+    text-align: center;
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    color: #64748b;
+}
+
+.tut-pill-certo {
+    animation: tutHighlightHint 16s infinite;
+}
+
+/* --- CENA 4: VITÓRIA E PROGRESSO --- */
+.tut-victory-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 80%;
+    margin-top: 6px;
+}
+
+.tut-trophy-circle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 15px rgba(46, 204, 113, 0.35);
+    animation: tutTrophyBounce 16s infinite;
+}
+.tut-svg-trophy { width: 28px; height: 28px; }
+
+.tut-progress-bar {
+    width: 75%;
+    max-width: 210px;
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1.5px solid #ffffff;
+}
+
+.tut-progress-fill {
+    height: 100%;
+    width: 20%;
+    background: linear-gradient(90deg, #2ecc71, #0091ff);
+    border-radius: 10px;
+    animation: tutBarFill 16s infinite;
+}
+
+/* Confettis Geométricos Vetoriais (Zero Emojis) */
+.tut-confetti-layer {
+    position: absolute;
+    inset: -10px;
+    pointer-events: none;
+}
+.tut-shape {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    opacity: 0;
+    animation: tutConfettiBurst 16s infinite;
+}
+.tut-s1 { background: #2ecc71; border-radius: 50%; top: 20%; left: 22%; }
+.tut-s2 { background: #facc15; border-radius: 2px; top: 15%; right: 24%; transform: rotate(25deg); }
+.tut-s3 { background: #0091ff; border-radius: 50%; top: 55%; left: 16%; }
+.tut-s4 { background: #f43f5e; border-radius: 2px; top: 50%; right: 18%; transform: rotate(-20deg); }
+.tut-s5 { background: #a855f7; border-radius: 50%; top: 8%; left: 48%; }
+.tut-s6 { background: #fb923c; border-radius: 2px; top: 65%; right: 32%; }
+
+/* --- CURSOR VETORIAL --- */
+.tut-cursor {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    pointer-events: none;
+    animation: tutCursorMove 16s infinite cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.tut-cursor svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.22));
+}
+
+.tut-click-ripple {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2.5px solid #0091ff;
+    opacity: 0;
+    animation: tutRipple 16s infinite;
+}
+
+/* =========================================================
+   KEYFRAMES COREOGRAFADOS (CICLO DE 16 SEGUNDOS)
+========================================================= */
+
+/* Visibilidade das 4 Cenas */
+@keyframes tutFadeScene1 {
+    0%, 22% { opacity: 1; transform: translateY(0); }
+    25%, 97% { opacity: 0; transform: translateY(-6px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes tutFadeScene2 {
+    0%, 23% { opacity: 0; transform: translateY(6px); }
+    26%, 47% { opacity: 1; transform: translateY(0); }
+    50%, 100% { opacity: 0; transform: translateY(-6px); }
+}
+@keyframes tutFadeScene3 {
+    0%, 48% { opacity: 0; transform: translateY(6px); }
+    51%, 72% { opacity: 1; transform: translateY(0); }
+    75%, 100% { opacity: 0; transform: translateY(-6px); }
+}
+@keyframes tutFadeScene4 {
+    0%, 73% { opacity: 0; transform: translateY(6px); }
+    76%, 97% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-6px); }
+}
+
+/* Dots Ativos */
+@keyframes tutDot1 { 0%, 24% { background: #0091ff; width: 16px; border-radius: 6px; } 25%, 100% { background: #cbd5e1; width: 7px; } }
+@keyframes tutDot2 { 0%, 24% { background: #cbd5e1; width: 7px; } 25%, 49% { background: #0091ff; width: 16px; border-radius: 6px; } 50%, 100% { background: #cbd5e1; width: 7px; } }
+@keyframes tutDot3 { 0%, 49% { background: #cbd5e1; width: 7px; } 50%, 74% { background: #0091ff; width: 16px; border-radius: 6px; } 75%, 100% { background: #cbd5e1; width: 7px; } }
+@keyframes tutDot4 { 0%, 74% { background: #cbd5e1; width: 7px; } 75%, 99% { background: #2ecc71; width: 16px; border-radius: 6px; } 100% { background: #cbd5e1; width: 7px; } }
+
+/* Movimento e Cliques do Cursor */
+@keyframes tutCursorMove {
+    /* Cena 1: vai ao botão áudio */
+    0%   { transform: translate(60px, 20px) scale(1); opacity: 0; }
+    5%   { transform: translate(-88px, -12px) scale(1); opacity: 1; }
+    10%  { transform: translate(-88px, -12px) scale(0.82); }
+    13%  { transform: translate(-88px, -12px) scale(1); }
+    22%  { opacity: 1; }
+    24%  { opacity: 0; }
+
+    /* Cena 2: vai ao cartão do meio */
+    26%  { transform: translate(70px, 25px) scale(1); opacity: 0; }
+    31%  { transform: translate(0px, -8px) scale(1); opacity: 1; }
+    35%  { transform: translate(0px, -8px) scale(0.82); }
+    38%  { transform: translate(0px, -8px) scale(1); }
+    47%  { opacity: 1; }
+    49%  { opacity: 0; }
+
+    /* Cena 3: vai ao botão Dica */
+    51%  { transform: translate(65px, 15px) scale(1); opacity: 0; }
+    56%  { transform: translate(6px, -43px) scale(1); opacity: 1; }
+    60%  { transform: translate(6px, -43px) scale(0.82); }
+    63%  { transform: translate(6px, -43px) scale(1); }
+    72%  { opacity: 1; }
+    74%  { opacity: 0; }
+
+    /* Cena 4: esconde o cursor durante a celebração */
+    75%, 100% { opacity: 0; transform: translate(60px, 20px) scale(1); }
+}
+
+@keyframes tutRipple {
+    0%, 9%, 34%, 59% { transform: scale(0.5); opacity: 0; }
+    10%, 35%, 60% { transform: scale(0.6); opacity: 0.9; }
+    16%, 41%, 66% { transform: scale(1.8); opacity: 0; }
+    100% { opacity: 0; }
+}
+
+/* Micro-interações de cada cena */
+@keyframes tutBtnPulse1 {
+    0%, 9%, 15%, 100% { transform: scale(1); }
+    11% { transform: scale(0.9); }
+}
+@keyframes tutSoundRing {
+    0%, 10% { transform: scale(0.9); opacity: 0; }
+    12% { opacity: 0.85; }
+    21% { transform: scale(1.45); opacity: 0; }
+    100% { opacity: 0; }
+}
+@keyframes tutCardSelect {
+    0%, 34% { border-color: #e2e8f0; background: #ffffff; transform: scale(1); }
+    36%, 48% { border-color: #2ecc71; background: #ecfdf5; transform: scale(1.06); box-shadow: 0 6px 14px rgba(46, 204, 113, 0.22); }
+    50%, 100% { border-color: #e2e8f0; background: #ffffff; transform: scale(1); }
+}
+@keyframes tutBadgePop {
+    0%, 35% { transform: scale(0); }
+    39%, 48% { transform: scale(1); }
+    50%, 100% { transform: scale(0); }
+}
+@keyframes tutHintClick {
+    0%, 59%, 65%, 100% { transform: scale(1); }
+    61% { transform: scale(0.92); }
+}
+@keyframes tutHighlightHint {
+    0%, 61% { border-color: #e2e8f0; background: #ffffff; color: #64748b; box-shadow: none; }
+    63%, 73% { border-color: #2ecc71; background: #dcfce7; color: #15803d; box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.25); }
+    75%, 100% { border-color: #e2e8f0; background: #ffffff; color: #64748b; }
+}
+@keyframes tutTrophyBounce {
+    0%, 75% { transform: scale(0.6); }
+    80% { transform: scale(1.12); }
+    84%, 96% { transform: scale(1); }
+    100% { transform: scale(0.6); }
+}
+@keyframes tutBarFill {
+    0%, 76% { width: 25%; }
+    86%, 97% { width: 100%; }
+    100% { width: 25%; }
+}
+@keyframes tutConfettiBurst {
+    0%, 77% { opacity: 0; transform: translateY(8px) scale(0.4); }
+    81% { opacity: 1; transform: translateY(-6px) scale(1.1); }
+    93% { opacity: 0.9; transform: translateY(4px) scale(1); }
+    97%, 100% { opacity: 0; }
+}		
 		
 
     </style>
@@ -1659,10 +2087,98 @@
         <!-- ECRÃ DE SELEÇÃO -->
         <div id="ecra-selecao" class="ecra">
             
-            <!-- ANIMAÇÃO RESERVADA -->
-            <div class="animacao-tutorial">
-                [ Espaço para Animação / Tutorial ]
+<div class="animacao-tutorial" aria-label="Tutorial de como jogar">
+    <!-- Barra de Progresso das Cenas (Topo) -->
+    <div class="tut-hud-top">
+        <div class="tut-step-dots">
+            <span class="tut-dot tut-dot-1"></span>
+            <span class="tut-dot tut-dot-2"></span>
+            <span class="tut-dot tut-dot-3"></span>
+            <span class="tut-dot tut-dot-4"></span>
+        </div>
+    </div>
+
+    <!-- Palco das Cenas -->
+    <div class="tut-stage">
+        
+        <!-- CENA 1: OUVIR E LER A PERGUNTA -->
+        <div class="tut-scene tut-scene-1">
+            <div class="tut-card-pergunta">
+                <div class="tut-audio-btn">
+                    <svg viewBox="0 0 24 24" class="tut-svg-icon"><path d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span class="tut-sound-wave"></span>
+                </div>
+                <div class="tut-text-lines">
+                    <span class="tut-line tut-line-long"></span>
+                    <span class="tut-line tut-line-short"></span>
+                </div>
             </div>
+            <div class="tut-caption">1. Ouve ou lê a questão</div>
+        </div>
+
+        <!-- CENA 2: ESCOLHER A RESPOSTA CERTA -->
+        <div class="tut-scene tut-scene-2">
+            <div class="tut-options-row">
+                <div class="tut-opt-box">
+                    <svg viewBox="0 0 24 24" class="tut-svg-med"><path d="M12 2v20M2 12h20" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/></svg>
+                </div>
+                <div class="tut-opt-box tut-opt-correct">
+                    <svg viewBox="0 0 24 24" class="tut-svg-med"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="#0091ff"/></svg>
+                    <span class="tut-check-badge">
+                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                </div>
+                <div class="tut-opt-box">
+                    <svg viewBox="0 0 24 24" class="tut-svg-med"><circle cx="12" cy="12" r="7" fill="none" stroke="#94a3b8" stroke-width="2.5"/></svg>
+                </div>
+            </div>
+            <div class="tut-caption">2. Toca na resposta certa</div>
+        </div>
+
+        <!-- CENA 3: USAR A DICA -->
+        <div class="tut-scene tut-scene-3">
+            <div class="tut-hint-layout">
+                <div class="tut-hint-btn">
+                    <svg viewBox="0 0 24 24" class="tut-svg-bulb"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span>Dica</span>
+                </div>
+                <div class="tut-dual-row">
+                    <div class="tut-pill-btn tut-pill-certo">Certo</div>
+                    <div class="tut-pill-btn tut-pill-errado">Errado</div>
+                </div>
+            </div>
+            <div class="tut-caption">3. Com dúvidas? Usa a Dica!</div>
+        </div>
+
+        <!-- CENA 4: COMPLETAR A MISSÃO -->
+        <div class="tut-scene tut-scene-4">
+            <div class="tut-victory-wrap">
+                <div class="tut-confetti-layer">
+                    <span class="tut-shape tut-s1"></span>
+                    <span class="tut-shape tut-s2"></span>
+                    <span class="tut-shape tut-s3"></span>
+                    <span class="tut-shape tut-s4"></span>
+                    <span class="tut-shape tut-s5"></span>
+                    <span class="tut-shape tut-s6"></span>
+                </div>
+                <div class="tut-trophy-circle">
+                    <svg viewBox="0 0 24 24" class="tut-svg-trophy"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2Z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="tut-progress-bar">
+                    <div class="tut-progress-fill"></div>
+                </div>
+            </div>
+            <div class="tut-caption">4. Completa os 10 desafios!</div>
+        </div>
+
+        <!-- CURSOR VETORIAL ANIMADO -->
+        <div class="tut-cursor">
+            <svg viewBox="0 0 24 24"><path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.86a.5.5 0 0 0-.85.35Z" fill="#1e293b" stroke="#ffffff" stroke-width="1.8"/></svg>
+            <span class="tut-click-ripple"></span>
+        </div>
+
+    </div>
+</div>
 		<div class="instrucao-menu-container">
 			<button type="button" class="btn-ouvir-pergunta" onclick="tocarVoz('audios/instrucao_menu.mp3')" title="Ouvir instrução">
 				<img src="../../../SVG/audio.svg" alt="Ouvir instrução" class="icon-som">
@@ -1736,30 +2252,31 @@
 			
 			<div class="botoes-acao-container">
 				<button class="btn-acao primario" onclick="reiniciarJogo()"><span class="btn-texto">JOGAR DE NOVO<span class="btn-subtitulo">(questões diferentes)</span></span><img src="../../../SVG/jogar_novo.svg" class="icon-acao" alt=""></button>
-				<button class="btn-acao terciario" onclick="voltarAoMenu())"><span class="btn-texto">VOLTAR AO MENU<span class="btn-subtitulo">(mudar de tema)</span></span><img src="../../../SVG/menu_principal.svg" class="icon-acao" alt=""></button>	
+				<button class="btn-acao terciario" onclick="voltarAoMenu()"><span class="btn-texto">VOLTAR AO MENU<span class="btn-subtitulo">(mudar de tema)</span></span><img src="../../../SVG/menu_principal.svg" class="icon-acao" alt=""></button>	
 			</div>
 			
         </div>
+		
+		<div id="modal-ajuda" class="modal-ajuda-overlay" onclick="if(event.target === this) fecharModalDica()">
+			<div class="modal-ajuda-box">
+				<button class="btn-fechar-modal" onclick="fecharModalDica()">✕</button>
+				<div class="ajuda-icone">
+					<svg viewBox="0 0 24 24" width="50" height="50" fill="#fff9c4" stroke="#fbc531" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M9 18h6"></path>
+						<path d="M10 22h4"></path>
+						<path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"></path>
+					</svg>
+				</div>
+				<div id="modal-dica-conteudo" class="ajuda-texto"></div>
+			</div>
+		</div>
+
+		<div id="modal-imagem" class="modal-imagem-overlay" onclick="fecharImagemModal()">
+			<span class="fechar-modal-img">&times;</span>
+			<img id="img-modal-expandida" src="" alt="Imagem ampliada">
+		</div>
     </div>
 </main>
-<div id="modal-ajuda" class="modal-ajuda-overlay" onclick="if(event.target === this) fecharModalDica()">
-    <div class="modal-ajuda-box">
-        <button class="btn-fechar-modal" onclick="fecharModalDica()">✕</button>
-        <div class="ajuda-icone">
-            <svg viewBox="0 0 24 24" width="50" height="50" fill="#fff9c4" stroke="#fbc531" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 18h6"></path>
-                <path d="M10 22h4"></path>
-                <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"></path>
-            </svg>
-        </div>
-        <div id="modal-dica-conteudo" class="ajuda-texto"></div>
-    </div>
-</div>
-
-<div id="modal-imagem" class="modal-imagem-overlay" onclick="fecharImagemModal()">
-    <span class="fechar-modal-img">&times;</span>
-    <img id="img-modal-expandida" src="" alt="Imagem ampliada">
-</div>
 
 <footer>
     <p><span id="ano-atual"> </span><img src="../../../SVG/3_ano.webp" class="icon-svg-footer" alt=""> <a href="https://eb1pemarinheira.pt/" target="_blank" style="color:inherit; text-decoration:none; font-weight:700;">EB1/PE da Marinheira</a></p>
