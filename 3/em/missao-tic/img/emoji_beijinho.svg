@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="46" cy="50" r="36" fill="#FACC15" stroke="#CA8A04" stroke-width="3.5"/>
+  <!-- Olho esquerdo a piscar -->
+  <path d="M30 43 Q35 37 40 43" fill="none" stroke="#422006" stroke-width="4" stroke-linecap="round"/>
+  <!-- Olho direito aberto -->
+  <circle cx="58" cy="42" r="4.5" fill="#422006"/>
+  <!-- Boca de beijo -->
+  <path d="M47 56 Q54 58 49 62 Q54 65 47 68" fill="none" stroke="#422006" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Coração -->
+  <path d="M74 58 C74 52 82 52 82 58 C82 52 90 52 90 58 C90 66 82 72 82 72 C82 72 74 66 74 58 Z" fill="#EF4444"/>
+</svg>

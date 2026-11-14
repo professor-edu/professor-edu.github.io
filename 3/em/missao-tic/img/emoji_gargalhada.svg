@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="38" fill="#FACC15" stroke="#CA8A04" stroke-width="3.5"/>
+  <!-- Olhos felizes fechados -->
+  <path d="M30 43 Q37 35 44 43" fill="none" stroke="#422006" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M56 43 Q63 35 70 43" fill="none" stroke="#422006" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- Boca a rir -->
+  <path d="M31 55 Q50 79 69 55 Z" fill="#FFFFFF" stroke="#422006" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- Lágrimas de alegria -->
+  <path d="M23 48 C23 48 14 55 14 60 A6 6 0 1 0 25 57 Z" fill="#38BDF8" stroke="#0284C7" stroke-width="2"/>
+  <path d="M77 48 C77 48 86 55 86 60 A6 6 0 1 1 75 57 Z" fill="#38BDF8" stroke="#0284C7" stroke-width="2"/>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="38" fill="#FACC15" stroke="#CA8A04" stroke-width="3.5"/>
+  <!-- Olho coração esquerdo -->
+  <path d="M27 38 C27 32 35 32 35 38 C35 32 43 32 43 38 C43 45 35 51 35 51 C35 51 27 45 27 38 Z" fill="#EF4444"/>
+  <!-- Olho coração direito -->
+  <path d="M57 38 C57 32 65 32 65 38 C65 32 73 32 73 38 C73 45 65 51 65 51 C65 51 57 45 57 38 Z" fill="#EF4444"/>
+  <!-- Sorriso largo -->
+  <path d="M33 58 Q50 77 67 58 Z" fill="#FFFFFF" stroke="#422006" stroke-width="3.5" stroke-linejoin="round"/>
+</svg>

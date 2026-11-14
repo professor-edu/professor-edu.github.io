@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Punho azul -->
+  <rect x="16" y="46" width="16" height="34" rx="4" fill="#3B82F6" stroke="#1D4ED8" stroke-width="3"/>
+  <!-- Mão e polegar -->
+  <path d="M32 48 L45 25 C47 21 53 22 53 27 L52 43 L72 43 C77 43 80 47 79 51 L75 73 C74 77 70 80 65 80 L32 80 Z" fill="#FACC15" stroke="#B45309" stroke-width="3.5" stroke-linejoin="round"/>
+</svg>
