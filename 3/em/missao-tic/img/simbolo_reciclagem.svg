@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Tampa do ecoponto -->
+  <rect x="24" y="18" width="52" height="9" rx="4" fill="#FACC15" stroke="#854D0E" stroke-width="3.5"/>
+  <rect x="42" y="13" width="16" height="6" rx="3" fill="#EAB308" stroke="#854D0E" stroke-width="3"/>
+  <!-- Corpo do ecoponto -->
+  <path d="M27 27 L73 27 L68 78 Q67.5 82 63 82 L37 82 Q32.5 82 32 78 Z" fill="#FACC15" stroke="#854D0E" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- Rodas -->
+  <circle cx="36" cy="85" r="5" fill="#1E293B"/>
+  <circle cx="64" cy="85" r="5" fill="#1E293B"/>
+  <!-- Símbolo de reciclagem no centro -->
+  <path d="M50 40 L57 50 L43 50 Z" fill="none" stroke="#15803D" stroke-width="3.2" stroke-linejoin="round"/>
+  <path d="M41 56 L59 56 L50 67 Z" fill="none" stroke="#15803D" stroke-width="3.2" stroke-linejoin="round"/>
+</svg>
