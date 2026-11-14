@@ -68,6 +68,7 @@ const todosOsJogos =[
 	{ nome: "Terra, Lua e Luz", icone: "icones/terra_lua_luz.png", link: "em/terra-lua-luz/", cat: "em" },
 	{ nome: "Relevo e Rios", icone: "icones/relevo.png", link: "em/relevo/", cat: "em" },
 	{ nome: "Continentes e Oceanos", icone: "icones/continentes_oceanos.png", link: "em/continentes-oceanos/", cat: "em" },
-	{ nome: "Primeiros Socorros", icone: "icones/primeiros_socorros.png", link: "em/primeiros-socorros/", cat: "em" }
+	{ nome: "Primeiros Socorros", icone: "icones/primeiros_socorros.png", link: "em/primeiros-socorros/", cat: "em" },
+	{ nome: "Missão TIC", icone: "icones/missao_tic.png", link: "em/missao-tic/", cat: "em" }
 
 ];

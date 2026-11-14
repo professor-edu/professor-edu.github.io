@@ -88,15 +88,35 @@ function iniciarJogo(numQuestoes = 10, tituloNivel = "", idNivel = 1) {
         p => !historicoPerguntas[idNivel].includes(p.id)
     );
 
-    // 3. Se sobrarem menos de 10 perguntas (ex: ao iniciar a 3.ª ronda), reinicia o histórico deste nível
-    if (perguntasDisponiveis.length < totalDesafiosNivel) {
+    // 3. Sorteia as perguntas (aproveitando eventuais inéditas restantes antes de renovar o baralho)
+    if (perguntasDisponiveis.length >= totalDesafiosNivel) {
+        rondasSorteadas = baralharArray(perguntasDisponiveis).slice(0, totalDesafiosNivel);
+    } else {
+        const restantesIneditas = baralharArray(perguntasDisponiveis);
         historicoPerguntas[idNivel] = [];
-        perguntasDisponiveis = [...poolPerguntas];
+
+        const idsJaEscolhidos = new Set(restantesIneditas.map(p => p.id));
+        const complemento = baralharArray(
+            poolPerguntas.filter(p => !idsJaEscolhidos.has(p.id))
+        ).slice(0, totalDesafiosNivel - restantesIneditas.length);
+
+        rondasSorteadas = [...restantesIneditas, ...complemento];
     }
 
-    // 4. Baralha apenas as não usadas, escolhe 10 e guarda os seus IDs no histórico
-    rondasSorteadas = baralharArray(perguntasDisponiveis).slice(0, totalDesafiosNivel);
+    // 4. Guarda os IDs desta ronda no histórico
     historicoPerguntas[idNivel].push(...rondasSorteadas.map(p => p.id));
+
+    // 5. Atualiza o subtítulo do botão "JOGAR DE NOVO" consoante as questões inéditas que sobram
+    const subtituloJogarNovo = document.querySelector('.botoes-acao-container .btn-acao.primario .btn-subtitulo');
+    if (subtituloJogarNovo) {
+        const restantesParaProxima = poolPerguntas.length - historicoPerguntas[idNivel].length;
+        if (restantesParaProxima >= totalDesafiosNivel) {
+            subtituloJogarNovo.textContent = "(questões diferentes)";
+            subtituloJogarNovo.style.display = "";
+        } else {
+            subtituloJogarNovo.style.display = "none";
+        }
+    }
 
     limparConfetis();
     atualizarPlacar();
