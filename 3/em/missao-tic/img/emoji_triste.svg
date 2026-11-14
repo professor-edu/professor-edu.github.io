@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="38" fill="#FACC15" stroke="#CA8A04" stroke-width="3.5"/>
+  <!-- Sobrancelhas tristes -->
+  <line x1="29" y1="40" x2="41" y2="35" stroke="#422006" stroke-width="4" stroke-linecap="round"/>
+  <line x1="71" y1="40" x2="59" y2="35" stroke="#422006" stroke-width="4" stroke-linecap="round"/>
+  <!-- Olhos -->
+  <circle cx="37" cy="47" r="4.5" fill="#422006"/>
+  <circle cx="63" cy="47" r="4.5" fill="#422006"/>
+  <!-- Boca triste -->
+  <path d="M37 70 Q50 59 63 70" fill="none" stroke="#422006" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- Gota de lágrima/suor -->
+  <path d="M74 47 C74 47 81 56 81 61 A7 7 0 1 1 67 61 C67 56 74 47 74 47 Z" fill="#38BDF8" stroke="#0284C7" stroke-width="2"/>
+</svg>

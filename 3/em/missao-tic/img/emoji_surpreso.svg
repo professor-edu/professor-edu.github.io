@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <!-- Gradiente da face amarela com volume suave -->
+    <radialGradient id="faceGradSurpreso" cx="42%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#FFF078" />
+      <stop offset="65%" stop-color="#FFD026" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </radialGradient>
+
+    <!-- Gradiente interior da boca -->
+    <linearGradient id="mouthGradSurpreso" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3B1A0E" />
+      <stop offset="100%" stop-color="#6B2D16" />
+    </linearGradient>
+
+    <!-- Recorte para a língua dentro da boca -->
+    <clipPath id="mouthClipSurpreso">
+      <ellipse cx="60" cy="82" rx="11.5" ry="14.5" />
+    </clipPath>
+  </defs>
+
+  <!-- Sombra base suave -->
+  <ellipse cx="60" cy="111" rx="34" ry="5" fill="#000000" opacity="0.12" />
+
+  <!-- Rosto principal -->
+  <circle cx="60" cy="60" r="50" fill="url(#faceGradSurpreso)" stroke="#D97706" stroke-width="2.5" />
+
+  <!-- Brilho superior estilo autocolante 3D -->
+  <ellipse cx="60" cy="26" rx="26" ry="10" fill="#FFFFFF" opacity="0.35" />
+
+  <!-- Bochechas rosadas -->
+  <ellipse cx="31" cy="69" rx="8.5" ry="5.5" fill="#FB7185" opacity="0.45" />
+  <ellipse cx="89" cy="69" rx="8.5" ry="5.5" fill="#FB7185" opacity="0.45" />
+
+  <!-- Sobrancelhas arqueadas (expressão de surpresa) -->
+  <path d="M 32 34 Q 43 24 53 33" fill="none" stroke="#5C3419" stroke-width="4.5" stroke-linecap="round" />
+  <path d="M 67 33 Q 77 24 88 34" fill="none" stroke="#5C3419" stroke-width="4.5" stroke-linecap="round" />
+
+  <!-- Olho esquerdo bem aberto -->
+  <circle cx="43" cy="52" r="10.5" fill="#FFFFFF" stroke="#D97706" stroke-width="1.5" />
+  <circle cx="43" cy="52" r="5.2" fill="#2D180C" />
+  <circle cx="45.2" cy="49.5" r="2" fill="#FFFFFF" />
+
+  <!-- Olho direito bem aberto -->
+  <circle cx="77" cy="52" r="10.5" fill="#FFFFFF" stroke="#D97706" stroke-width="1.5" />
+  <circle cx="77" cy="52" r="5.2" fill="#2D180C" />
+  <circle cx="79.2" cy="49.5" r="2" fill="#FFFFFF" />
+
+  <!-- Boca aberta em "O" -->
+  <ellipse cx="60" cy="82" rx="11.5" ry="14.5" fill="url(#mouthGradSurpreso)" stroke="#B45309" stroke-width="2" />
+  <ellipse cx="60" cy="91" rx="7.5" ry="5.5" fill="#F43F5E" clip-path="url(#mouthClipSurpreso)" />
+</svg>

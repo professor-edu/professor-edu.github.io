@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="38" fill="#EF4444" stroke="#991B1B" stroke-width="3.5"/>
+  <!-- Sobrancelhas franzidas -->
+  <line x1="29" y1="36" x2="43" y2="43" stroke="#450A0A" stroke-width="4.5" stroke-linecap="round"/>
+  <line x1="71" y1="36" x2="57" y2="43" stroke="#450A0A" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- Olhos -->
+  <circle cx="37" cy="48" r="4.5" fill="#450A0A"/>
+  <circle cx="63" cy="48" r="4.5" fill="#450A0A"/>
+  <!-- Boca zangada -->
+  <path d="M36 69 Q50 58 64 69" fill="none" stroke="#450A0A" stroke-width="4.5" stroke-linecap="round"/>
+</svg>
