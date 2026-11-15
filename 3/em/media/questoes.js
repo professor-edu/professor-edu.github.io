@@ -226,7 +226,7 @@ const CONFIG_JOGO = {
                     tipo: "situacao",
                     categoriaDistratores: "media_historia",
                     mostrarLegenda: false,
-                    pergunta: "Toca no <span class='destaque-badge'>Telégrafo elétrico</span>.",
+                    pergunta: "Toca no <span class='destaque-badge'>Telégrafo elétrico</span>",
                     correta: "Telégrafo elétrico",
                     dica: "Aparelho de madeira e metal usado para enviar código Morse."
                 },
@@ -235,7 +235,7 @@ const CONFIG_JOGO = {
                     tipo: "situacao",
                     categoriaDistratores: "media_historia",
                     mostrarLegenda: false,
-                    pergunta: "Qual destes é o <span class='destaque-badge'>Jornal antigo</span>?",
+                    pergunta: "Qual destes é o <span class='destaque-badge'>Jornal antigo</span>",
                     correta: "Jornal antigo",
                     dica: "Folha amarelada impressa com colunas de texto."
                 },
@@ -244,7 +244,7 @@ const CONFIG_JOGO = {
                     tipo: "situacao",
                     categoriaDistratores: "media_historia",
                     mostrarLegenda: false,
-                    pergunta: "Identifica o <span class='destaque-badge'>Rádio antigo</span>.",
+                    pergunta: "Identifica o <span class='destaque-badge'>Rádio antigo</span>",
                     correta: "Rádio antigo",
                     dica: "Caixa de madeira com altifalante de tecido e botões redondos."
                 },
@@ -253,7 +253,7 @@ const CONFIG_JOGO = {
                     tipo: "situacao",
                     categoriaDistratores: "media_historia",
                     mostrarLegenda: false,
-                    pergunta: "Qual destas imagens mostra a <span class='destaque-badge'>Televisão antiga</span>?",
+                    pergunta: "Qual destas imagens mostra a <span class='destaque-badge'>Televisão antiga</span>",
                     correta: "Televisão antiga",
                     dica: "Aparelho antigo com ecrã pequeno e antena em V no topo."
                 },
@@ -284,7 +284,7 @@ const CONFIG_JOGO = {
                 {
                     id: 210,
                     tipo: "padrao",
-                    pergunta: "O que representavam as <span class='destaque-fundo'>gravuras rupestres</span>'",
+                    pergunta: "<span class='destaque-fundo'>Gravuras Rupestres</span>\n O que representavam?",
                     opcoes: ["Caçadas e conquistas", "Notícias de jornal", "Mapas da internet", "Programas de rádio"],
                     correta: "Caçadas e conquistas",
                     dica: "Mostravam o quotidiano dos primeiros seres humanos."
@@ -292,7 +292,7 @@ const CONFIG_JOGO = {
                 {
                     id: 211,
                     tipo: "padrao",
-                    pergunta: "Quem desenvolveu a técnica do <span class='destaque-badge'>papiro</span>?",
+                    pergunta: "A técnica do <span class='destaque-badge'>papiro</span> foi desenvolvida por que povo?",
                     opcoes: ["Os egípcios", "Os romanos", "Os portugueses", "Os gregos"],
                     correta: "Os egípcios",
                     dica: "Civilização antiga que vivia junto ao rio Nilo."
@@ -300,7 +300,7 @@ const CONFIG_JOGO = {
                 {
                     id: 212,
                     tipo: "texto",
-                    pergunta: "O papiro surgiu por volta do ano ________.",
+                    pergunta: "O <span class='destaque-texto-verde'>papiro</span> surgiu por volta do ano ________.",
                     opcoes: ["2500 a.C.", "40 000 a.C.", "1900", "2020"],
                     correta: "2500 a.C.",
                     dica: "Surgiu depois da arte rupestre e antes do jornal."
@@ -308,7 +308,7 @@ const CONFIG_JOGO = {
                 {
                     id: 213,
                     tipo: "texto",
-                    pergunta: "O jornal impresso em papel surgiu no ________.",
+                    pergunta: "O <span class='destaque-texto-verde'>jornal impresso</span> em papel surgiu no ________.",
                     opcoes: ["séc. XVII", "séc. XXI", "tempo das cavernas", "Antigo Egito"],
                     correta: "séc. XVII",
                     dica: "Apareceu antes do rádio e da televisão."
@@ -316,7 +316,7 @@ const CONFIG_JOGO = {
                 {
                     id: 214,
                     tipo: "texto",
-                    pergunta: "O rádio comunicava à distância através do ________.",
+                    pergunta: "O <span class='destaque-texto-verde'>rádio</span> comunica à distância através do ________.",
                     opcoes: ["som", "papel", "papiro", "vídeo"],
                     correta: "som",
                     dica: "Não tinha ecrã, apenas altifalante."
@@ -324,7 +324,7 @@ const CONFIG_JOGO = {
                 {
                     id: 215,
                     tipo: "texto",
-                    pergunta: "A televisão trouxe informação com som e ________.",
+                    pergunta: "A <span class='destaque-texto-verde'>televisão</span> trouxe informação com som e ________.",
                     opcoes: ["imagem", "papiro", "pedra", "fumo"],
                     correta: "imagem",
                     dica: "Permitiu ver e ouvir acontecimentos à distância."
@@ -332,7 +332,7 @@ const CONFIG_JOGO = {
                 {
                     id: 216,
                     tipo: "padrao",
-                    pergunta: "<span class='destaque-badge'>Enviava mensagens por impulsos elétricos</span>",
+                    pergunta: "Grande inovação tecnológica que <span class='destaque-badge'>enviava mensagens por impulsos elétricos</span>.\n O que era?",
                     opcoes: ["Telégrafo elétrico", "Arte rupestre", "Revista", "Cartaz"],
                     correta: "Telégrafo elétrico",
                     dica: "Foi uma invenção marcante do século XIX."
