@@ -86,7 +86,7 @@ const CONFIG_JOGO = {
                 {
                     id: 109,
                     tipo: "padrao",
-                    pergunta: "<span class='destaque-badge'>Trocar ideias e sentimentos entre pessoas</span>",
+                    pergunta: "O que é?\n <span class='destaque-badge'>Trocar ideias e sentimentos entre pessoas</span>",
                     opcoes: ["Comunicação", "Isolamento", "Publicidade", "Silêncio"],
                     correta: "Comunicação",
                     dica: "É a interação entre pessoas que partilham informações."

@@ -1073,6 +1073,35 @@
 						</div>
 					</div>
 				</div>
+				
+				<div class="cartao-flip estudo-meio" onmouseleave="this.classList.remove('flipped')">
+					<div class="cartao-inner">
+						<!-- LADO DA FRENTE -->
+						<div class="cartao-frente">
+							<button class="btn-info" aria-label="Ver níveis" onclick="virarCartaoMobile(this)"></button>
+							<a href="media" class="link-frente">
+								<div class="image-wrapper">
+									<img src="../icones/os_media.png" alt="Os Media" class="icone-imagem">
+								</div>
+								<span class="nome-jogo">Os Media</span>
+							</a>
+						</div>
+						<!-- LADO DO VERSO -->
+						<div class="cartao-verso">
+								<h4 class="titulo-verso">Neste jogo tens:</h4>
+								<ul class="lista-minijogos">
+									<li>Media no dia-a-dia</li>
+									<li>Evolução dos media</li>
+									<li>Vantagens e desvantagens</li>
+									<li>Notícias falsas</li>
+								</ul>
+							<div class="botoes-verso">
+									<a href="media" class="btn-jogar">▶ Jogar</a>
+									<button class="btn-voltar-verso" onclick="fecharCartaoMobile(this)">↩</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			
 			
 			

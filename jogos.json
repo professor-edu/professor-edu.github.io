@@ -1832,13 +1832,21 @@
         "disciplina": "Estudo do Meio",
         "tags": ["saúde", "segurança", "emergência", "salvamento", "cuidados", "prevenção", "som"]
     },
-		{
+	{
         "nome": "Missão TIC",
         "icone": "/3/icones/missao_tic.png",
         "link": "/3/em/missao-tic/",
         "ano": "3º Ano",
         "disciplina": "Estudo do Meio",
-        "tags": ["tecnologia", "segurança", "emojis", "internet",]
+        "tags": ["tecnologia", "segurança", "emojis", "internet"]
+    },
+	{
+        "nome": "Os Media",
+        "icone": "/3/icones/os_media.png",
+        "link": "/3/em/media/",
+        "ano": "3º Ano",
+        "disciplina": "Estudo do Meio",
+        "tags": ["tecnologia", "meios de comunicação social", "meios de comunicação pessoal", "fake news", "notícias falsas", "evolução dos media"]
     },
     {
         "nome": "Fábrica dos Plurais",
