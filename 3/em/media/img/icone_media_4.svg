@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <path d="M20 14H44V28C44 34.6 38.6 40 32 40C25.4 40 20 34.6 20 28V14Z" fill="#ffffff" fill-opacity="0.22" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" />
+  <path d="M20 19H13C13 26 16 30 20 30" stroke="#ffffff" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M44 19H51C51 26 48 30 44 30" stroke="#ffffff" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M32 40V49" stroke="#ffffff" stroke-width="4" stroke-linecap="round" />
+  <path d="M22 50H42" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" />
+  <polygon points="32,19 34.2,23.8 39.5,24.4 35.6,28 36.6,33.2 32,30.6 27.4,33.2 28.4,28 24.5,24.4 29.8,23.8" fill="#fde047" />
+</svg>
