@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <circle cx="32" cy="32" r="30" fill="#FFFFFF" />
+  <!-- Cartão de imagem -->
+  <rect x="21" y="13" width="22" height="17" rx="3" fill="#FEF08A" stroke="#F59E0B" stroke-width="2" />
+  <circle cx="27" cy="18.5" r="2" fill="#F97316" />
+  <path d="M23 28 L29 22 L33 26 L36 23 L41 28 Z" fill="#22C55E" />
+  <!-- Capa do livro -->
+  <path d="M14 34 Q32 38 50 34 L50 47 Q32 51 14 47 Z" fill="#0EA5E9" />
+  <!-- Páginas -->
+  <path d="M16 32 Q24 33 32 36 L32 46 Q24 43 16 42 Z" fill="#F8FAFC" />
+  <path d="M48 32 Q40 33 32 36 L32 46 Q40 43 48 42 Z" fill="#E2E8F0" />
+</svg>

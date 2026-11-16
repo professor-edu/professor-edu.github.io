@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <circle cx="32" cy="32" r="30" fill="#FFFFFF" />
+  <!-- Asas do troféu -->
+  <path d="M22 20 H17 C15 20 15 28 21 29" fill="none" stroke="#F59E0B" stroke-width="3" stroke-linecap="round" />
+  <path d="M42 20 H47 C49 20 49 28 43 29" fill="none" stroke="#F59E0B" stroke-width="3" stroke-linecap="round" />
+  <!-- Taça -->
+  <path d="M21 16 H43 L40 31 C39 36 35 38 32 38 C29 38 25 36 24 31 Z" fill="#FBBF24" />
+  <!-- Pé e base -->
+  <path d="M29 38 H35 L36 44 H28 Z" fill="#F59E0B" />
+  <path d="M23 44 H41 A2 2 0 0 1 43 46 V48 H21 V46 A2 2 0 0 1 23 44 Z" fill="#B45309" />
+  <!-- Estrela central -->
+  <polygon points="32,20 33.8,23.8 38,24.4 35,27.3 35.7,31.5 32,29.5 28.3,31.5 29,27.3 26,24.4 30.2,23.8" fill="#FFFFFF" />
+</svg>

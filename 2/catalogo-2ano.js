@@ -28,6 +28,7 @@ const todosOsJogos =[
 	{ nome: "Palavras por Minuto", icone: "icones/palavras_minuto.png", link: "pt/palavras-minuto/", cat: "pt" },
 	{ nome: "Super Quiz", icone: "icones/quiz_portugues.png", link: "pt/quiz/", cat: "pt" },
 	{ nome: "Determinantes Artigos", icone: "icones/determinantes_artigos.png", link: "pt/determinantes-artigos/", cat: "pt" },
+	{ nome: "Caça às Sílabas", icone: "icones/numero_silabas.png", link: "pt/numero-silabas/", cat: "pt" },
 	
 	
     // ------------------------------------
