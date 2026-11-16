@@ -632,7 +632,7 @@ const CONFIG_JOGO = {
                     id: 309,
                     tipo: "texto",
                     infoDivisao: true,
-                    pergunta: "A divisão silábica oral de <span class=.destaque-fundo'>carro</span> é ________.",
+                    pergunta: "A divisão silábica oral de <span class='destaque-fundo'>carro</span> é ________.",
                     opcoes: ["ca-rro", "car-ro", "c-ar-ro", "ca-r-ro"],
                     correta: "ca-rro",
                     dica: "Na divisão silábica fonética, o «rr» nunca se separa!"
@@ -641,7 +641,7 @@ const CONFIG_JOGO = {
                     id: 310,
                     tipo: "texto",
                     infoDivisao: true,
-                    pergunta: "A divisão silábica oral de <span class=.destaque-fundo'>pássaro</span> é ________.",
+                    pergunta: "A divisão silábica oral de <span class='destaque-fundo'>pássaro</span> é ________.",
                     opcoes: ["pá-ssa-ro", "pás-sa-ro", "pá-sa-ro", "páss-a-ro"],
                     correta: "pá-ssa-ro",
                     dica: "Na fala, o «ss» fica todo na mesma sílaba: pá-ssa-ro."
@@ -650,7 +650,7 @@ const CONFIG_JOGO = {
                     id: 311,
                     tipo: "texto",
                     infoDivisao: true,
-                    pergunta: "A divisão silábica oral de <span class=.destaque-fundo'>girassol</span> é ________.",
+                    pergunta: "A divisão silábica oral de <span class='destaque-fundo'>girassol</span> é ________.",
                     opcoes: ["gi-ra-ssol", "gi-ras-sol", "gir-a-ssol", "gi-ra-sol"],
                     correta: "gi-ra-ssol",
                     dica: "Mantém o «ss» junto na última sílaba: gi-ra-ssol."
@@ -659,7 +659,7 @@ const CONFIG_JOGO = {
                     id: 312,
                     tipo: "texto",
                     infoDivisao: true,
-                    pergunta: "A divisão silábica oral de <span class=.destaque-fundo'>abelha</span> é ________.",
+                    pergunta: "A divisão silábica oral de <span class='destaque-fundo'>abelha</span> é ________.",
                     opcoes: ["a-be-lha", "a-bel-ha", "ab-e-lha", "a-be-lh-a"],
                     correta: "a-be-lha",
                     dica: "As letras «lh» representam um único som e nunca se separam."
@@ -668,7 +668,7 @@ const CONFIG_JOGO = {
                     id: 313,
                     tipo: "texto",
                     infoDivisao: true,
-                    pergunta: "A divisão silábica oral de <span class=.destaque-fundo'>galinha</span> é ________.",
+                    pergunta: "A divisão silábica oral de <span class='destaque-fundo'>galinha</span> é ________.",
                     opcoes: ["ga-li-nha", "ga-lin-ha", "gal-i-nha", "ga-li-nh-a"],
                     correta: "ga-li-nha",
                     dica: "As letras «nh» formam um único som e ficam sempre juntas."
@@ -677,7 +677,7 @@ const CONFIG_JOGO = {
                     id: 314,
                     tipo: "texto",
                     infoDivisao: true,
-                    pergunta: "A divisão silábica oral de <span class=.destaque-fundo'>chocolate</span> é ________.",
+                    pergunta: "A divisão silábica oral de <span class='destaque-fundo'>chocolate</span> é ________.",
                     opcoes: ["cho-co-la-te", "ch-o-co-la-te", "choc-o-la-te", "cho-co-lat-e"],
                     correta: "cho-co-la-te",
                     dica: "O grupo «ch» nunca se separa: cho-co-la-te."
