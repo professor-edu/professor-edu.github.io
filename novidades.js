@@ -26,9 +26,9 @@ const novidadesSite = [
         ano: "ano3",
         rotulo: "3º ANO",
 		disciplina: "EM",
-        nome: "Continentes e Oceanos",
-        icone: "3/icones/continentes_oceanos.png",
-        link: "3/em/continentes-oceanos/"
+        nome: "Super Sopa de Letras",
+        icone: "3/icones/sopa_letras_em.png",
+        link: "3/em/sopa-letras/"
     },
     {
         ano: "ano4",

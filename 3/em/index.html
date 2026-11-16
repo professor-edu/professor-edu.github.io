@@ -858,12 +858,12 @@
 			</a>
 				
 				
-			<a href="continentes-oceanos" class="destaque-secundario">
+			<a href="sopa-letras" class="destaque-secundario">
 				<div class="badge badge-destaque2"><img src="../../SVG/NOVO.svg" class="icon-svg-menu"> Novo</div>
 				<div class="icone-wrapper">
-					<img src="../icones/continentes_oceanos.png" alt="Continentes e Oceanos" class="img-destaque-pequena">
+					<img src="../icones/sopa_letras_em.png" alt="Super Sopa de Letras" class="img-destaque-pequena">
 				</div>
-				<span class="nome-jogo">Continentes e Oceanos</span>
+				<span class="nome-jogo">Super Sopa de Letras</span>
 			</a>
 		
 		</div>
@@ -989,6 +989,35 @@
 						</div>
 					</div>
 				</div>
+				
+				<div class="cartao-flip estudo-meio" onmouseleave="this.classList.remove('flipped')">
+					<div class="cartao-inner">
+						<!-- LADO DA FRENTE -->
+						<div class="cartao-frente">
+							<button class="btn-info" aria-label="Ver níveis" onclick="virarCartaoMobile(this)"></button>
+							<a href="continentes-oceanos" class="link-frente">
+								<div class="image-wrapper">
+									<img src="../icones/continentes_oceanos.png" alt="Continentes e Oceanos" class="icone-imagem">
+								</div>
+								<span class="nome-jogo">Continentes e Oceanos</span>
+							</a>
+						</div>
+						<!-- LADO DO VERSO -->
+						<div class="cartao-verso">
+								<h4 class="titulo-verso">Neste jogo vais:</h4>
+								<p class="texto-info">Conhecer o nosso planeta!</p>
+								<ul class="lista-minijogos">
+									<li>Continentes e oceanos</li>
+									<li>Animais pelo mundo</li>
+								</ul>
+							<div class="botoes-verso">
+									<a href="continentes-oceanos" class="btn-jogar">▶ Jogar</a>
+									<button class="btn-voltar-verso" onclick="fecharCartaoMobile(this)">↩</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 				
 				<div class="cartao-flip estudo-meio" onmouseleave="this.classList.remove('flipped')">
 					<div class="cartao-inner">

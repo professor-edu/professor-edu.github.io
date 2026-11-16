@@ -1848,6 +1848,14 @@
         "disciplina": "Estudo do Meio",
         "tags": ["tecnologia", "meios de comunicação social", "meios de comunicação pessoal", "fake news", "notícias falsas", "evolução dos media"]
     },
+	{
+        "nome": "Super Sopa de Letras",
+        "icone": "/3/icones/sopa_letras_em.png",
+        "link": "/3/em/sopa-letras/",
+        "ano": "3º Ano",
+        "disciplina": "Estudo do Meio",
+        "tags": ["tecnologia", "sopa de letras", "revisões"]
+    },
     {
         "nome": "Fábrica dos Plurais",
         "icone": "/4/icones/fabrica_plurais.png",

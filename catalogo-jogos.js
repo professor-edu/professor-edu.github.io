@@ -263,6 +263,7 @@ export const CATALOGO_JOGOS = [
 	{ nome: "Primeiros Socorros", icone: "3/icones/primeiros_socorros.png", link: "3/em/primeiros-socorros/", ano: "3º Ano" },
 	{ nome: "Missão TIC", icone: "3/icones/missao_tic.png", link: "3/em/missao-tic/", ano: "3º Ano" },
 	{ nome: "Os Media", icone: "3/icones/os_media.png", link: "3/em/media/", ano: "3º Ano" },
+	{ nome: "Super Sopa de Letras", icone: "3/icones/sopa_letras_em.png", link: "3/em/sopa-letras/", ano: "3º Ano" },
 
 	// ------------------------------------
 	// 4º ANO

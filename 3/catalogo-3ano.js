@@ -70,6 +70,7 @@ const todosOsJogos =[
 	{ nome: "Continentes e Oceanos", icone: "icones/continentes_oceanos.png", link: "em/continentes-oceanos/", cat: "em" },
 	{ nome: "Primeiros Socorros", icone: "icones/primeiros_socorros.png", link: "em/primeiros-socorros/", cat: "em" },
 	{ nome: "Missão TIC", icone: "icones/missao_tic.png", link: "em/missao-tic/", cat: "em" },
-	{ nome: "Os Media", icone: "icones/os_media.png", link: "em/media/", cat: "em" }
+	{ nome: "Os Media", icone: "icones/os_media.png", link: "em/media/", cat: "em" },
+	{ nome: "Super Sopa de Letras", icone: "icones/sopa_letras_em.png", link: "em/sopa-letras/", cat: "em" }
 
 ];
