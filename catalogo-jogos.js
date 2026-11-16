@@ -162,6 +162,7 @@ export const CATALOGO_JOGOS = [
 	{ nome: "Palavras por Minuto", icone: "2/icones/palavras_minuto.png", link: "2/pt/palavras-minuto/", ano: "2º Ano" },
 	{ nome: "Super Quiz", icone: "2/icones/quiz_portugues.png", link: "2/pt/quiz/", ano: "2º Ano" },
 	{ nome: "Determinantes Artigos", icone: "2/icones/determinantes_artigos.png", link: "2/pt/determinantes-artigos/", ano: "2º Ano" },
+	{ nome: "Caça às Sílabas", icone: "2/icones/numero_silabas.png", link: "2/pt/numero-silabas/", ano: "2º Ano" },
 
 	// Matemática (mat)
 	{ nome: "Máquina das Tabuadas", icone: "2/icones/tabuadas.png", link: "2/mat/tabuadas/", ano: "2º Ano" },

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 100" width="160" height="100">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fffbeb" />
+      <stop offset="100%" stop-color="#fef3c7" />
+    </linearGradient>
+    <linearGradient id="badge3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+  </defs>
+  <rect width="160" height="100" rx="16" fill="url(#bg3)" />
+  <!-- Brilhos decorativos -->
+  <circle cx="29" cy="28" r="3.5" fill="#fcd34d" opacity="0.8" />
+  <circle cx="131" cy="66" r="4" fill="#fcd34d" opacity="0.8" />
+  <path d="M128 20 L130 25 L135 27 L130 29 L128 34 L126 29 L121 27 L126 25 Z" fill="#3b82f6" />
+  <!-- Emblema 3D -->
+  <rect x="48" y="13" width="64" height="58" rx="18" fill="#b45309" />
+  <rect x="48" y="10" width="64" height="58" rx="18" fill="url(#badge3)" />
+  <path d="M54 15 H106 A12 12 0 0 1 108 24 H52 A12 12 0 0 1 54 15 Z" fill="#ffffff" opacity="0.28" />
+  <!-- Número -->
+  <text x="80" y="51" text-anchor="middle" font-family="system-ui, -apple-system, &#39;Segoe UI&#39;, Roboto, sans-serif" font-size="36" font-weight="900" fill="#ffffff">3</text>
+  <!-- Indicador de 3 sílabas -->
+  <rect x="44" y="79" width="20" height="10" rx="5" fill="#d97706" />
+  <rect x="70" y="79" width="20" height="10" rx="5" fill="#d97706" />
+  <rect x="96" y="79" width="20" height="10" rx="5" fill="#d97706" />
+</svg>

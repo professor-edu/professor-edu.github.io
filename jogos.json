@@ -1122,7 +1122,7 @@
         "link": "/2/pt/divisao-silabica/",
         "ano": "2º Ano",
         "disciplina": "Português",
-        "tags": ["divisão silábica", "sílabas", "fonologia"]
+        "tags": ["divisão silábica", "sílabas", "fonologia", "número de sílabas", "monossílabo", "dissílabo", "trissílabo", "polissílabo"]
     },
     {
         "nome": "Palavras por Minuto",
@@ -1148,7 +1148,14 @@
         "disciplina": "Português",
         "tags": ["determinantes", "artigos", "gramática", "artigos definidos", "artigos indefinidos"]
     },
-	
+	{
+        "nome": "Caça às Sílabas",
+        "icone": "/2/icones/numero_silabas.png",
+        "link": "/2/pt/numero-silabas/",
+        "ano": "2º Ano",
+        "disciplina": "Português",
+        "tags": ["monossílabo", "dissílabo", "trissílabo", "polissílabo", "classificação", "número de sílabas", "divisão silábica"]
+    },
     {
         "nome": "Máquina das Tabuadas",
         "icone": "/2/icones/tabuadas.png",
