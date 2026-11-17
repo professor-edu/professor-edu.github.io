@@ -163,6 +163,7 @@ export const CATALOGO_JOGOS = [
 	{ nome: "Super Quiz", icone: "2/icones/quiz_portugues.png", link: "2/pt/quiz/", ano: "2º Ano" },
 	{ nome: "Determinantes Artigos", icone: "2/icones/determinantes_artigos.png", link: "2/pt/determinantes-artigos/", ano: "2º Ano" },
 	{ nome: "Caça às Sílabas", icone: "2/icones/numero_silabas.png", link: "2/pt/numero-silabas/", ano: "2º Ano" },
+	{ nome: "Detetive do Género", icone: "2/icones/detetive_genero.png", link: "2/pt/detetive-genero/", ano: "2º Ano" },
 
 	// Matemática (mat)
 	{ nome: "Máquina das Tabuadas", icone: "2/icones/tabuadas.png", link: "2/mat/tabuadas/", ano: "2º Ano" },

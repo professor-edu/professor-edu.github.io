@@ -1862,6 +1862,422 @@
             box-shadow: inset 0 0 15px rgba(0,145,255,0.05); color: var(--azul-vibrante); font-size: 1.2rem; font-weight: 900;
             overflow: hidden;
         }
+		
+		/* === ANIMAÇÃO TUTORIAL MULTI-CENAS (DETETIVE DO GÉNERO) === */
+.tut-palco {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    pointer-events: none;
+}
+
+.tut-particula {
+    position: absolute;
+    font-size: 0.75rem;
+    opacity: 0.35;
+    animation: tutFlutuar 3s ease-in-out infinite alternate;
+}
+.tut-p1 { top: 14px; left: 22px; color: #3b82f6; }
+.tut-p2 { top: 18px; right: 24px; color: #ec4899; animation-delay: 0.8s; }
+.tut-p3 { bottom: 22px; left: 28px; color: #f59e0b; font-size: 0.55rem; animation-delay: 1.4s; }
+
+@keyframes tutFlutuar {
+    from { transform: translateY(0) scale(1); }
+    to { transform: translateY(-4px) scale(1.15); }
+}
+
+.tut-cena {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 12px;
+    opacity: 0;
+}
+
+.tut-etiqueta {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #64748b;
+    background: #ffffff;
+    padding: 2px 10px;
+    border-radius: 999px;
+    border: 1.5px solid #dbeafe;
+    margin-bottom: 8px;
+}
+
+/* --- CENA 1: LACUNA O / A --- */
+.tut-cena-1 { animation: tutCicloCena1 12s infinite; }
+
+.tut-frase-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.tut-lacuna {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 32px;
+    border-radius: 9px;
+    background: #e2e8f0;
+    border: 2px dashed #94a3b8;
+    font-size: 1.15rem;
+    font-weight: 900;
+    animation: tutLacunaEstado 12s infinite;
+}
+
+.tut-lacuna-letra {
+    opacity: 0;
+    transform: scale(0.4);
+    animation: tutLacunaLetra 12s infinite;
+}
+
+.tut-palavra-alvo {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #1e3a8a;
+}
+
+.tut-botoes-oa {
+    display: flex;
+    gap: 18px;
+}
+
+.tut-btn-mini {
+    width: 54px;
+    height: 38px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    font-weight: 900;
+    background: #ffffff;
+}
+
+.tut-btn-o {
+    color: #2563eb;
+    border: 2px solid #93c5fd;
+    box-shadow: 0 3px 0 #3b82f6;
+    animation: tutPressO 12s infinite;
+}
+
+.tut-btn-a {
+    color: #db2777;
+    border: 2px solid #f9a8d4;
+    box-shadow: 0 3px 0 #ec4899;
+}
+
+/* --- CENA 2: CLASSIFICAÇÃO RÁPIDA --- */
+.tut-cena-2 { animation: tutCicloCena2 12s infinite; }
+
+.tut-badge-scan {
+    position: relative;
+    background: linear-gradient(180deg, #8b5cf6 0%, #6d28d9 100%);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 900;
+    padding: 4px 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 0 #4c1d95;
+    margin-bottom: 12px;
+}
+
+.tut-lupa {
+    position: absolute;
+    top: -6px;
+    left: -10px;
+    animation: tutLupaScan 12s infinite;
+}
+
+.tut-cartoes-row {
+    display: flex;
+    gap: 14px;
+}
+
+.tut-cartao {
+    position: relative;
+    width: 96px;
+    height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+}
+
+.tut-cartao-masc {
+    background: #dbeafe;
+    border: 2px solid #93c5fd;
+}
+.tut-cartao-masc .tut-cartao-pill {
+    background: linear-gradient(180deg, #60a5fa 0%, #2563eb 100%);
+    box-shadow: 0 3px 0 #1d4ed8;
+}
+
+.tut-cartao-fem {
+    background: #fce7f3;
+    border: 2px solid #f9a8d4;
+    animation: tutPressFem 12s infinite;
+}
+.tut-cartao-fem .tut-cartao-pill {
+    background: linear-gradient(180deg, #f472b6 0%, #db2777 100%);
+    box-shadow: 0 3px 0 #9d174d;
+}
+
+.tut-cartao-pill {
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 900;
+    padding: 5px 12px;
+    border-radius: 9px;
+}
+
+.tut-check {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #16a34a;
+    color: #ffffff;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+    opacity: 0;
+    transform: scale(0);
+    animation: tutCheckPop 12s infinite;
+}
+
+/* --- CENA 3: CONSTRUTOR DE PALAVRAS --- */
+.tut-cena-3 { animation: tutCicloCena3 12s infinite; }
+
+.tut-construtor-topo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.tut-mini-pill {
+    background: #7c3aed;
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 900;
+    padding: 4px 10px;
+    border-radius: 8px;
+}
+
+.tut-seta {
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+.tut-slots-row {
+    display: flex;
+    gap: 5px;
+}
+
+.tut-slot {
+    width: 28px;
+    height: 32px;
+    border-bottom: 3px solid #94a3b8;
+    border-radius: 6px 6px 2px 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    font-weight: 900;
+    color: transparent;
+}
+
+.tut-s1 { animation: tutSlot1 12s infinite; }
+.tut-s2 { animation: tutSlot2 12s infinite; }
+.tut-s3 { animation: tutSlot3 12s infinite; }
+.tut-s4 { animation: tutSlot4 12s infinite; }
+
+.tut-teclas-row {
+    display: flex;
+    gap: 8px;
+}
+
+.tut-tecla {
+    width: 30px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #475569 0%, #334155 100%);
+    box-shadow: 0 3px 0 #1e293b;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tut-t1 { animation: tutTecla1 12s infinite; }
+.tut-t2 { animation: tutTecla2 12s infinite; }
+.tut-t3 { animation: tutTecla3 12s infinite; }
+.tut-t4 { animation: tutTecla4 12s infinite; }
+
+/* --- CURSORES E INDICADORES --- */
+.tut-cursor {
+    position: absolute;
+    z-index: 10;
+    filter: drop-shadow(0 3px 4px rgba(15, 23, 42, 0.25));
+}
+
+.tut-cursor-1 {
+    left: calc(50% - 34px);
+    top: 112px;
+    animation: tutCursor1 12s infinite;
+}
+
+.tut-cursor-2 {
+    left: calc(50% + 48px);
+    top: 104px;
+    animation: tutCursor2 12s infinite;
+}
+
+.tut-indicadores {
+    position: absolute;
+    bottom: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+}
+
+.tut-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: #cbd5e1;
+}
+.tut-dot-1 { animation: tutDot1 12s infinite; }
+.tut-dot-2 { animation: tutDot2 12s infinite; }
+.tut-dot-3 { animation: tutDot3 12s infinite; }
+
+/* === KEYFRAMES (LOOP 12s) === */
+@keyframes tutCicloCena1 {
+    0% { opacity: 0; transform: translateY(8px) scale(0.96); }
+    3%, 30% { opacity: 1; transform: translateY(0) scale(1); }
+    33.33%, 100% { opacity: 0; transform: translateY(-8px) scale(0.96); }
+}
+
+@keyframes tutCicloCena2 {
+    0%, 33.33% { opacity: 0; transform: translateY(8px) scale(0.96); }
+    36.33%, 63.33% { opacity: 1; transform: translateY(0) scale(1); }
+    66.66%, 100% { opacity: 0; transform: translateY(-8px) scale(0.96); }
+}
+
+@keyframes tutCicloCena3 {
+    0%, 66.66% { opacity: 0; transform: translateY(8px) scale(0.96); }
+    69.66%, 96.5% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-8px) scale(0.96); }
+}
+
+/* Interações Cena 1 */
+@keyframes tutCursor1 {
+    0%, 7% { opacity: 0; transform: translate(18px, 16px) scale(1); }
+    11% { opacity: 1; transform: translate(0, 0) scale(1); }
+    14% { transform: translate(0, 2px) scale(0.86); }
+    17%, 26% { opacity: 1; transform: translate(0, 0) scale(1); }
+    30%, 100% { opacity: 0; }
+}
+
+@keyframes tutPressO {
+    0%, 12%, 17%, 100% { transform: translateY(0) scale(1); }
+    14.5% { transform: translateY(3px) scale(0.93); box-shadow: 0 0 0 #3b82f6; }
+}
+
+@keyframes tutLacunaEstado {
+    0%, 15% { background: #e2e8f0; border: 2px dashed #94a3b8; transform: scale(1); }
+    17% { background: #dcfce7; border: 2px solid #16a34a; transform: scale(1.12); }
+    20%, 33% { background: #dcfce7; border: 2px solid #16a34a; transform: scale(1); }
+    100% { background: #e2e8f0; border: 2px dashed #94a3b8; }
+}
+
+@keyframes tutLacunaLetra {
+    0%, 15% { opacity: 0; transform: scale(0.4); color: #15803d; }
+    18%, 33% { opacity: 1; transform: scale(1); color: #15803d; }
+    100% { opacity: 0; }
+}
+
+/* Interações Cena 2 */
+@keyframes tutLupaScan {
+    0%, 36% { transform: translateX(0) rotate(0deg); }
+    42% { transform: translateX(52px) rotate(12deg); }
+    47%, 100% { transform: translateX(26px) rotate(0deg); }
+}
+
+@keyframes tutCursor2 {
+    0%, 42% { opacity: 0; transform: translate(16px, 16px) scale(1); }
+    46% { opacity: 1; transform: translate(0, 0) scale(1); }
+    49% { transform: translate(0, 2px) scale(0.86); }
+    52%, 60% { opacity: 1; transform: translate(0, 0) scale(1); }
+    64%, 100% { opacity: 0; }
+}
+
+@keyframes tutPressFem {
+    0%, 47%, 100% { transform: scale(1); box-shadow: none; }
+    49.5% { transform: scale(0.92); }
+    52%, 63% { transform: scale(1.03); box-shadow: 0 0 0 3px #22c55e; }
+}
+
+@keyframes tutCheckPop {
+    0%, 50% { opacity: 0; transform: scale(0); }
+    53%, 63% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; }
+}
+
+/* Interações Cena 3 */
+@keyframes tutTecla1 { 0%, 72% { opacity: 1; transform: scale(1); } 73.5%, 100% { opacity: 0.22; transform: scale(0.9); } }
+@keyframes tutTecla2 { 0%, 75% { opacity: 1; transform: scale(1); } 76.5%, 100% { opacity: 0.22; transform: scale(0.9); } }
+@keyframes tutTecla3 { 0%, 78% { opacity: 1; transform: scale(1); } 79.5%, 100% { opacity: 0.22; transform: scale(0.9); } }
+@keyframes tutTecla4 { 0%, 81% { opacity: 1; transform: scale(1); } 82.5%, 100% { opacity: 0.22; transform: scale(0.9); } }
+
+@keyframes tutSlot1 {
+    0%, 72.5% { color: transparent; background: transparent; border-bottom-color: #94a3b8; transform: translateY(0); }
+    74%, 83% { color: #1e3a8a; background: #eff6ff; border-bottom-color: #3b82f6; transform: translateY(0); }
+    85% { color: #15803d; background: #dcfce7; border-bottom-color: #16a34a; transform: translateY(-4px); }
+    88%, 100% { color: #15803d; background: #dcfce7; border-bottom-color: #16a34a; transform: translateY(0); }
+}
+@keyframes tutSlot2 {
+    0%, 75.5% { color: transparent; background: transparent; border-bottom-color: #94a3b8; transform: translateY(0); }
+    77%, 83.5% { color: #1e3a8a; background: #eff6ff; border-bottom-color: #3b82f6; transform: translateY(0); }
+    86% { color: #15803d; background: #dcfce7; border-bottom-color: #16a34a; transform: translateY(-4px); }
+    89%, 100% { color: #15803d; background: #dcfce7; border-bottom-color: #16a34a; transform: translateY(0); }
+}
+@keyframes tutSlot3 {
+    0%, 78.5% { color: transparent; background: transparent; border-bottom-color: #94a3b8; transform: translateY(0); }
+    80%, 84% { color: #1e3a8a; background: #eff6ff; border-bottom-color: #3b82f6; transform: translateY(0); }
+    87% { color: #15803d; background: #dcfce7; border-bottom-color: #16a34a; transform: translateY(-4px); }
+    90%, 100% { color: #15803d; background: #dcfce7; border-bottom-color: #16a34a; transform: translateY(0); }
+}
+@keyframes tutSlot4 {
+    0%, 81.5% { color: transparent; background: transparent; border-bottom-color: #94a3b8; transform: translateY(0); }
+    83%, 84.5% { color: #1e3a8a; background: #eff6ff; border-bottom-color: #3b82f6; transform: translateY(0); }
+    88% { color: #15803d; background: #dcfce7; border-bottom-color: #16a34a; transform: translateY(-4px); }
+    91%, 100% { color: #15803d; background: #dcfce7; border-bottom-color: #16a34a; transform: translateY(0); }
+}
+
+/* Indicadores inferiores */
+@keyframes tutDot1 { 0%, 33% { width: 16px; background: #3b82f6; } 33.33%, 100% { width: 6px; background: #cbd5e1; } }
+@keyframes tutDot2 { 0%, 33% { width: 6px; background: #cbd5e1; } 33.33%, 66.33% { width: 16px; background: #db2777; } 66.66%, 100% { width: 6px; background: #cbd5e1; } }
+@keyframes tutDot3 { 0%, 66.33% { width: 6px; background: #cbd5e1; } 66.66%, 99.5% { width: 16px; background: #7c3aed; } 100% { width: 6px; background: #cbd5e1; } }
 
 
 
@@ -2044,10 +2460,87 @@
         <!-- ECRÃ DE SELEÇÃO -->
         <div id="ecra-selecao" class="ecra">
             
-            <!-- ANIMAÇÃO RESERVADA -->
-            <div class="animacao-tutorial">
+<div class="animacao-tutorial">
+    <div class="tut-palco" aria-hidden="true">
+        <!-- Partículas decorativas suaves -->
+        <span class="tut-particula tut-p1">✦</span>
+        <span class="tut-particula tut-p2">✦</span>
+        <span class="tut-particula tut-p3">●</span>
 
+        <!-- CENA 1: Lacuna O / A -->
+        <div class="tut-cena tut-cena-1">
+            <div class="tut-etiqueta">1. Descobre o artigo</div>
+            <div class="tut-frase-box">
+                <span class="tut-lacuna"><span class="tut-lacuna-letra">O</span></span>
+                <span class="tut-palavra-alvo">LÁPIS</span>
             </div>
+            <div class="tut-botoes-oa">
+                <div class="tut-btn-mini tut-btn-o">O</div>
+                <div class="tut-btn-mini tut-btn-a">A</div>
+            </div>
+            <div class="tut-cursor tut-cursor-1">
+                <svg viewBox="0 0 32 32" width="28" height="28">
+                    <path d="M12 3a2.5 2.5 0 0 1 2.5 2.5v8.2l1.3-.4a2.3 2.3 0 0 1 2.8 1.2l.4.8 1.3-.3a2.3 2.3 0 0 1 2.7 1.5l.8 2.5c.6 1.9.4 4-.6 5.7l-1.4 2.4c-.7 1.2-2 1.9-3.4 1.9h-6.2c-1.5 0-2.9-.8-3.6-2.1l-2.6-4.7a2.2 2.2 0 0 1 .7-2.9 2.2 2.2 0 0 1 2.8.3l1 .9V5.5A2.5 2.5 0 0 1 12 3z" fill="#ffffff" stroke="#1e293b" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- CENA 2: Classificação com Lupa e Cartões -->
+        <div class="tut-cena tut-cena-2">
+            <div class="tut-etiqueta">2. Classifica o género</div>
+            <div class="tut-badge-scan">
+                <span>FLOR</span>
+                <svg class="tut-lupa" viewBox="0 0 36 36" width="28" height="28">
+                    <line x1="21" y1="21" x2="31" y2="31" stroke="#d97706" stroke-width="4.5" stroke-linecap="round"/>
+                    <circle cx="15" cy="15" r="10" fill="#e0f2fe" stroke="#7c3aed" stroke-width="3.5"/>
+                    <path d="M10 11 A6 6 0 0 1 16 9" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="tut-cartoes-row">
+                <div class="tut-cartao tut-cartao-masc">
+                    <div class="tut-cartao-pill">O / UM</div>
+                </div>
+                <div class="tut-cartao tut-cartao-fem">
+                    <div class="tut-cartao-pill">A / UMA</div>
+                    <span class="tut-check">✓</span>
+                </div>
+            </div>
+            <div class="tut-cursor tut-cursor-2">
+                <svg viewBox="0 0 32 32" width="28" height="28">
+                    <path d="M12 3a2.5 2.5 0 0 1 2.5 2.5v8.2l1.3-.4a2.3 2.3 0 0 1 2.8 1.2l.4.8 1.3-.3a2.3 2.3 0 0 1 2.7 1.5l.8 2.5c.6 1.9.4 4-.6 5.7l-1.4 2.4c-.7 1.2-2 1.9-3.4 1.9h-6.2c-1.5 0-2.9-.8-3.6-2.1l-2.6-4.7a2.2 2.2 0 0 1 .7-2.9 2.2 2.2 0 0 1 2.8.3l1 .9V5.5A2.5 2.5 0 0 1 12 3z" fill="#ffffff" stroke="#1e293b" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- CENA 3: Construtor de Palavras -->
+        <div class="tut-cena tut-cena-3">
+            <div class="tut-etiqueta">3. Forma o par feminino</div>
+            <div class="tut-construtor-topo">
+                <span class="tut-mini-pill">GATO</span>
+                <span class="tut-seta">➔</span>
+                <div class="tut-slots-row">
+                    <span class="tut-slot tut-s1">G</span>
+                    <span class="tut-slot tut-s2">A</span>
+                    <span class="tut-slot tut-s3">T</span>
+                    <span class="tut-slot tut-s4">A</span>
+                </div>
+            </div>
+            <div class="tut-teclas-row">
+                <span class="tut-tecla tut-t2">a</span>
+                <span class="tut-tecla tut-t3">t</span>
+                <span class="tut-tecla tut-t1">g</span>
+                <span class="tut-tecla tut-t4">a</span>
+            </div>
+        </div>
+
+        <!-- Indicador de progresso das 3 cenas -->
+        <div class="tut-indicadores">
+            <span class="tut-dot tut-dot-1"></span>
+            <span class="tut-dot tut-dot-2"></span>
+            <span class="tut-dot tut-dot-3"></span>
+        </div>
+    </div>
+</div>
 
 		<div class="instrucao-menu-container">
 			<button type="button" class="btn-ouvir-pergunta" onclick="tocarVoz('audio/instrucao_menu.mp3')" title="Ouvir instrução">

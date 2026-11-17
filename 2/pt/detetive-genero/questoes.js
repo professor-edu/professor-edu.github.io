@@ -685,7 +685,7 @@ const CONFIG_JOGO = {
                     id: 305,
                     tipo: "padrao",
                     pergunta: "Qual é o feminino de\n<span class='destaque-badge'>ZANGÃO</span>?",
-                    opcoes: ["abelha", "zangona", "vespa", "zangã"],
+                    opcoes: ["abelha", "zangona", "zanga", "zangã"],
                     correta: "abelha",
                     dica: "Na colmeia, o macho é o zangão e a fêmea é a abelha."
                 },

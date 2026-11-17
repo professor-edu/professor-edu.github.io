@@ -988,13 +988,21 @@
         "disciplina": "Estudo do Meio",
         "tags": ["quiz", "desafio", "som"]
     },
+	{
+        "nome": "Detetive do Género",
+        "icone": "/2/icones/detetive_genero.png",
+        "link": "/2/pt/detetive-genero/",
+        "ano": "2º Ano",
+        "disciplina": "Português",
+        "tags": ["masculino", "feminino", "género", "gramática", "nomes", "som"]
+    },
     {
         "nome": "Masculino e Feminino",
         "icone": "/2/icones/genero.png",
         "link": "/2/pt/genero/",
         "ano": "2º Ano",
         "disciplina": "Português",
-        "tags": ["masculino", "feminino", "gênero", "gramática", "nomes"]
+        "tags": ["masculino", "feminino", "género", "gramática", "nomes"]
     },
     {
         "nome": "Singular e Plural",
@@ -1877,7 +1885,7 @@
         "link": "/4/pt/fabrica-femininos/",
         "ano": "4º Ano",
         "disciplina": "Português",
-        "tags": ["feminino", "masculino", "gênero", "nomes", "gramática"]
+        "tags": ["feminino", "masculino", "género", "nomes", "gramática"]
     },
     {
         "nome": "Graus dos Adjetivos",
