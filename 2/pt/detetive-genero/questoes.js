@@ -25,7 +25,8 @@ const CONFIG_JOGO = {
                     tipo: "lacuna",
                     ordemFixa: true,
                     pergunta: "Completa com o artigo correto:\n______ mesa",
-                    opcoes: ["O", "A"],
+                    imagemPergunta: "img/mesa.png",
+					opcoes: ["O", "A"],
                     correta: "A",
                     dica: "Dizemos «a mesa», por isso é um nome feminino."
                 },
@@ -34,7 +35,8 @@ const CONFIG_JOGO = {
                     tipo: "lacuna",
                     ordemFixa: true,
                     pergunta: "Completa com o artigo correto:\n______ lápis",
-                    opcoes: ["O", "A"],
+                    imagemPergunta: "img/lapis.png",
+					opcoes: ["O", "A"],
                     correta: "O",
                     dica: "Dizemos «o lápis», por isso é um nome masculino."
                 },
@@ -43,7 +45,8 @@ const CONFIG_JOGO = {
                     tipo: "lacuna",
                     ordemFixa: true,
                     pergunta: "Completa com o artigo correto:\n______ janela",
-                    opcoes: ["O", "A"],
+                    imagemPergunta: "img/janela.png",
+					opcoes: ["O", "A"],
                     correta: "A",
                     dica: "Dizemos «a janela», por isso é um nome feminino."
                 },
@@ -52,7 +55,8 @@ const CONFIG_JOGO = {
                     tipo: "lacuna",
                     ordemFixa: true,
                     pergunta: "Completa com o artigo correto:\n______ caderno",
-                    opcoes: ["O", "A"],
+                    imagemPergunta: "img/caderno.png",
+					opcoes: ["O", "A"],
                     correta: "O",
                     dica: "Dizemos «o caderno», por isso é um nome masculino."
                 },
@@ -61,7 +65,8 @@ const CONFIG_JOGO = {
                     tipo: "lacuna",
                     ordemFixa: true,
                     pergunta: "Completa com o artigo correto:\n______ árvore",
-                    opcoes: ["O", "A"],
+                    imagemPergunta: "img/arvore.png",
+					opcoes: ["O", "A"],
                     correta: "A",
                     dica: "Dizemos «a árvore», por isso é um nome feminino."
                 },
@@ -70,7 +75,8 @@ const CONFIG_JOGO = {
                     tipo: "lacuna",
                     ordemFixa: true,
                     pergunta: "Completa com o artigo correto:\n______ peixe",
-                    opcoes: ["O", "A"],
+                    imagemPergunta: "img/peixe.png",
+					opcoes: ["O", "A"],
                     correta: "O",
                     dica: "Dizemos «o peixe», por isso é um nome masculino."
                 },
@@ -79,7 +85,8 @@ const CONFIG_JOGO = {
                     tipo: "lacuna",
                     ordemFixa: true,
                     pergunta: "Completa com o artigo correto:\n______ escola",
-                    opcoes: ["O", "A"],
+                    imagemPergunta: "img/escola.png",
+					opcoes: ["O", "A"],
                     correta: "A",
                     dica: "Dizemos «a escola», por isso é um nome feminino."
                 },
@@ -88,7 +95,8 @@ const CONFIG_JOGO = {
                     tipo: "lacuna",
                     ordemFixa: true,
                     pergunta: "Completa com o artigo correto:\n______ jardim",
-                    opcoes: ["O", "A"],
+                    imagemPergunta: "img/jardim.png",
+					opcoes: ["O", "A"],
                     correta: "O",
                     dica: "Dizemos «o jardim», por isso é um nome masculino."
                 },
@@ -97,7 +105,8 @@ const CONFIG_JOGO = {
                     tipo: "lacuna",
                     ordemFixa: true,
                     pergunta: "Completa com o artigo correto:\n______ nuvem",
-                    opcoes: ["O", "A"],
+                    imagemPergunta: "img/nuvem.png",
+					opcoes: ["O", "A"],
                     correta: "A",
                     dica: "Dizemos «a nuvem», por isso é um nome feminino."
                 },
@@ -106,7 +115,8 @@ const CONFIG_JOGO = {
                     tipo: "lacuna",
                     ordemFixa: true,
                     pergunta: "Completa com o artigo correto:\n______ relógio",
-                    opcoes: ["O", "A"],
+                    imagemPergunta: "img/relogio.png",
+					opcoes: ["O", "A"],
                     correta: "O",
                     dica: "Dizemos «o relógio», por isso é um nome masculino."
                 },
@@ -261,48 +271,80 @@ const CONFIG_JOGO = {
                 {
                     id: 123,
                     tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>MENINO</span>",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>MENINO</span>",
                     imagemPergunta: "img/menina.png",
                     correta: "menina",
-                    textoAudio: "Escreve o feminino de menino. Menina.",
+                    audio: "audio/menina.mp3",
+					textoAudio: "Escreve o <strong>feminino</strong> de menino.",
                     dica: "Troca o «o» final por «a»: menina."
                 },
                 {
                     id: 124,
                     tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>AVÔ</span>",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>AVÔ</span>",
                     imagemPergunta: "img/avo.png",
                     correta: "avó",
-                    textoAudio: "Escreve o feminino de avô. Avó.",
+                    audio: "audio/avo.mp3",
+					textoAudio: "Escreve o <strong>feminino</strong> de avô.",
                     dica: "O acento circunflexo muda para acento agudo: avó."
                 },
                 {
                     id: 125,
                     tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>GATO</span>",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>GATO</span>",
                     imagemPergunta: "img/gata.png",
                     correta: "gata",
-                    textoAudio: "Escreve o feminino de gato. Gata.",
+                    audio: "audio/gata.mp3",
+					textoAudio: "Escreve o <strong>feminino</strong> de gato.",
                     dica: "Troca o «o» final por «a»: gata."
                 },
                 {
                     id: 126,
                     tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>PATO</span>",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>PATO</span>",
                     imagemPergunta: "img/pata.png",
                     correta: "pata",
-                    textoAudio: "Escreve o feminino de pato. Pata.",
+                    audio: "audio/pata.mp3",
+					textoAudio: "Escreve o <strong>feminino</strong> de pato.",
                     dica: "Troca o «o» final por «a»: pata."
                 },
                 {
                     id: 127,
                     tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>NOIVO</span>",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>NOIVO</span>",
                     imagemPergunta: "img/noiva.png",
                     correta: "noiva",
-                    textoAudio: "Escreve o feminino de noivo. Noiva.",
+                    audio: "audio/noiva.mp3",
+					textoAudio: "Escreve o <strong>feminino</strong> de noivo.",
                     dica: "Troca o «o» final por «a»: noiva."
-                }
+                },
+				{
+                    id: 128,
+                    tipo: "construtor",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>LOBO</span>",
+                    imagemPergunta: "img/loba.png",
+                    audio: "audio/loba.mp3",
+                    correta: "loba",
+                    dica: "Troca o «o» final por «a»: loba."
+                },
+                {
+                    id: 129,
+                    tipo: "construtor",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>COELHO</span>",
+                    imagemPergunta: "img/coelha.png",
+                    audio: "audio/coelha.mp3",
+                    correta: "coelha",
+                    dica: "Troca o «o» final por «a»: coelha."
+                },
+                {
+                    id: 130,
+                    tipo: "construtor",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>URSO</span>",
+                    imagemPergunta: "img/ursa.png",
+                    audio: "audio/ursa.mp3",
+                    correta: "ursa",
+                    dica: "Troca o «o» final por «a»: ursa."
+                },
             ]
         },
 
@@ -462,57 +504,135 @@ const CONFIG_JOGO = {
                 {
                     id: 217,
                     tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>REI</span>",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>REI</span>",
                     imagemPergunta: "img/rainha.png",
                     correta: "rainha",
-                    textoAudio: "Escreve o feminino de rei. Rainha.",
+                    audio: "audio/rainha.mp3",
+					textoAudio: "Escreve o <strong>feminino</strong> de rei.",
                     dica: "O par feminino de rei é rainha."
                 },
                 {
                     id: 218,
                     tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>PRÍNCIPE</span>",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>PRÍNCIPE</span>",
                     imagemPergunta: "img/princesa.png",
                     correta: "princesa",
-                    textoAudio: "Escreve o feminino de príncipe. Princesa.",
+                    audio: "audio/princesa.mp3",
+					textoAudio: "Escreve o <strong>feminino</strong> de príncipe.",
                     dica: "Escreve-se com «s» antes do «a» final: princesa."
                 },
                 {
                     id: 219,
                     tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>LEÃO</span>",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>LEÃO</span>",
                     imagemPergunta: "img/leoa.png",
                     correta: "leoa",
-                    textoAudio: "Escreve o feminino de leão. Leoa.",
+                    audio: "audio/leoa.mp3",
+					textoAudio: "Escreve o <strong>feminino</strong> de leão.",
                     dica: "A fêmea do leão é a leoa."
                 },
                 {
                     id: 220,
                     tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>GALO</span>",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>GALO</span>",
                     imagemPergunta: "img/galinha.png",
                     correta: "galinha",
-                    textoAudio: "Escreve o feminino de galo. Galinha.",
+                    audio: "audio/galinha.mp3",
+					textoAudio: "Escreve o <strong>feminino</strong> de galo.",
                     dica: "A fêmea do galo é a galinha."
                 },
                 {
                     id: 221,
                     tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>BRUXO</span>",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>BRUXO</span>",
                     imagemPergunta: "img/bruxa.png",
                     correta: "bruxa",
-                    textoAudio: "Escreve o feminino de bruxo. Bruxa.",
+                    audio: "audio/bruxa.mp3",
+					textoAudio: "Escreve o <strong>feminino</strong> de bruxo.",
                     dica: "Troca o «o» final por «a»: bruxa."
                 },
                 {
                     id: 222,
                     tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>PROFESSOR</span>",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>PROFESSOR</span>",
                     imagemPergunta: "img/professora.png",
                     correta: "professora",
-                    textoAudio: "Escreve o feminino de professor. Professora.",
+                    audio: "audio/professora.mp3",
+					textoAudio: "Escreve o <strong>feminino</strong> de professor.",
                     dica: "Escreve-se com dois «s» e um «a» no fim: professora."
-                }
+                },
+				{
+                    id: 223,
+                    tipo: "construtor",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>DOUTOR</span>",
+                    imagemPergunta: "img/doutora.png",
+                    audio: "audio/doutora.mp3",
+                    correta: "doutora",
+                    dica: "Nos nomes terminados em «-or», acrescenta-se «a»: doutora."
+                },
+                {
+                    id: 224,
+                    tipo: "construtor",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>BOMBEIRO</span>",
+                    imagemPergunta: "img/bombeira.png",
+                    audio: "audio/bombeira.mp3",
+                    correta: "bombeira",
+                    dica: "Troca o «o» final por «a»: bombeira."
+                },
+                {
+                    id: 225,
+                    tipo: "construtor",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>NADADOR</span>",
+                    imagemPergunta: "img/nadadora.png",
+                    audio: "audio/nadadora.mp3",
+                    correta: "nadadora",
+                    dica: "Acrescenta «a» no final: nadadora."
+                },
+                {
+                    id: 226,
+                    tipo: "construtor",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>CAMPONÊS</span>",
+                    imagemPergunta: "img/camponesa.png",
+                    audio: "audio/camponesa.mp3",
+                    correta: "camponesa",
+                    dica: "Acrescenta «-a» e desaparece o acento circunflexo: camponesa."
+                },
+                {
+                    id: 227,
+                    tipo: "construtor",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>COMILÃO</span>",
+                    imagemPergunta: "img/comilona.png",
+                    audio: "audio/comilona.mp3",
+                    correta: "comilona",
+                    dica: "A terminação «-ão» muda para «-ona»: comilona."
+                },
+                {
+                    id: 228,
+                    tipo: "construtor",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>TIGRE</span>",
+                    imagemPergunta: "img/tigresa.png",
+                    audio: "audio/tigresa.mp3",
+                    correta: "tigresa",
+                    dica: "A fêmea do tigre é a tigresa (escreve-se com «s»)."
+                },
+                {
+                    id: 229,
+                    tipo: "construtor",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>ELEFANTE</span>",
+                    imagemPergunta: "img/elefanta.png",
+                    audio: "audio/elefanta.mp3",
+                    correta: "elefanta",
+                    dica: "Troca o «e» final por «a»: elefanta."
+                },
+                {
+                    id: 230,
+                    tipo: "construtor",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>JUIZ</span>",
+                    imagemPergunta: "img/juiza.png",
+                    audio: "audio/juiza.mp3",
+                    correta: "juíza",
+                    dica: "Acrescenta «a» no fim e leva acento agudo no «í»: juíza."
+                },
             ]
         },
 
@@ -677,249 +797,151 @@ const CONFIG_JOGO = {
                     correta: "A",
                     dica: "Dizemos «a tribo». É um nome feminino!"
                 },
-
-                // --- Construtor de Palavras (5 questões) ---
                 {
                     id: 317,
                     tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>BOI</span>",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>BOI</span>",
                     imagemPergunta: "img/vaca.png",
                     correta: "vaca",
-                    textoAudio: "Escreve o feminino de boi. Vaca.",
+                    audio: "audio/vaca.mp3",
+					textoAudio: "Escreve o <strong>feminino</strong> de boi.",
                     dica: "A fêmea do boi é a vaca."
                 },
                 {
                     id: 318,
                     tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>CAVALO</span>",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>CAVALO</span>",
                     imagemPergunta: "img/egua.png",
                     correta: "égua",
-                    textoAudio: "Escreve o feminino de cavalo. Égua.",
+                    audio: "audio/egua.mp3",
+					textoAudio: "Escreve o <strong>feminino</strong> de cavalo.",
                     dica: "A fêmea do cavalo é a égua (leva acento agudo no «é»)."
                 },
                 {
                     id: 319,
                     tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>CARNEIRO</span>",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>CARNEIRO</span>",
                     imagemPergunta: "img/ovelha.png",
                     correta: "ovelha",
-                    textoAudio: "Escreve o feminino de carneiro. Ovelha.",
+                    audio: "audio/ovelha.mp3",
+					textoAudio: "Escreve o <strong>feminino</strong> de carneiro.",
                     dica: "A fêmea do carneiro é a ovelha."
                 },
                 {
                     id: 320,
                     tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>ATOR</span>",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>ATOR</span>",
                     imagemPergunta: "img/atriz.png",
                     correta: "atriz",
-                    textoAudio: "Escreve o feminino de ator. Atriz.",
+                    audio: "audio/atriz.mp3",
+					textoAudio: "Escreve o <strong>feminino</strong> de ator.",
                     dica: "Termina com a letra «z»: atriz."
                 },
                 {
                     id: 321,
                     tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>ANÃO</span>",
+                    pergunta: "Escreve o <strong>feminino</strong> de\n<span class='destaque-badge'>ANÃO</span>",
                     imagemPergunta: "img/ana.png",
                     correta: "anã",
-                    textoAudio: "Escreve o feminino de anão. Anã.",
+                    audio: "audio/ana.mp3",
+					textoAudio: "Escreve o <strong>feminino</strong> de anão.",
                     dica: "Termina em «ã» com til: anã."
-                }
+                },
+				{
+                    id: 322,
+                    tipo: "padrao",
+                    pergunta: "Qual é o <strong>masculino</strong> de\n<span class='destaque-badge'>ÉGUA</span>?",
+                    imagemPergunta: "img/egua.png",
+					opcoes: ["cavalo", "éguo", "boi", "burro"],
+                    correta: "cavalo",
+                    dica: "O par masculino de égua é cavalo."
+                },
+                {
+                    id: 323,
+                    tipo: "padrao",
+                    pergunta: "Qual é o <strong>masculino</strong> de\n<span class='destaque-badge'>ABELHA</span>?",
+                    imagemPergunta: "img/a_abelha.png",
+					opcoes: ["zangão", "abelho", "besouro", "mosca"],
+                    correta: "zangão",
+                    dica: "O macho da abelha é o zangão."
+                },
+                {
+                    id: 324,
+                    tipo: "padrao",
+                    pergunta: "Qual é o <strong>masculino</strong> de\n<span class='destaque-badge'>NORA</span>?",
+                    imagemPergunta: "img/nora.png",
+					opcoes: ["genro", "noro", "sogro", "cunhado"],
+                    correta: "genro",
+                    dica: "O par masculino de nora é genro."
+                },
+                {
+                    id: 325,
+                    tipo: "padrao",
+                    pergunta: "Qual é o <strong>masculino</strong> de\n<span class='destaque-badge'>OVELHA</span>?",
+                    imagemPergunta: "img/ovelha.png",
+					opcoes: ["carneiro", "ovelho", "bode", "touro"],
+                    correta: "carneiro",
+                    dica: "O macho da ovelha é o carneiro."
+                },
+                {
+                    id: 326,
+                    tipo: "padrao",
+                    pergunta: "Qual é o <strong>masculino</strong> de\n<span class='destaque-badge'>MADRINHA</span>?",
+                    imagemPergunta: "img/madrinha.png",
+					opcoes: ["padrinho", "madrinho", "padre", "compadre"],
+                    correta: "padrinho",
+                    dica: "O par masculino de madrinha é padrinho."
+                },
+                {
+                    id: 327,
+                    tipo: "padrao",
+                    pergunta: "Qual é o <strong>masculino</strong> de\n<span class='destaque-badge'>CABRA</span>?",
+                    imagemPergunta: "img/cabra.png",
+					opcoes: ["bode", "cabro", "carneiro", "boi"],
+                    correta: "bode",
+                    dica: "O macho da cabra é o bode."
+                },
+				{
+                    id: 328,
+                    tipo: "construtor",
+                    pergunta: "Escreve o <strong>masculino</strong> de\n<span class='destaque-badge'>CADELA</span>",
+                    imagemPergunta: "img/o_cao.png",
+                    audio: "audio/cao.mp3",
+                    correta: "cão",
+                    dica: "O par masculino de cadela é cão (com til no «ã»)."
+                },
+                {
+                    id: 329,
+                    tipo: "construtor",
+                    pergunta: "Escreve o <strong>masculino</strong> de\n<span class='destaque-badge'>CABRA</span>",
+                    imagemPergunta: "img/bode.png",
+                    audio: "audio/bode.mp3",
+                    correta: "bode",
+                    dica: "O macho da cabra é o bode."
+                },
+                {
+                    id: 330,
+                    tipo: "construtor",
+                    pergunta: "Escreve o <strong>masculino</strong> de\n<span class='destaque-badge'>OVELHA</span>",
+                    imagemPergunta: "img/carneiro.png",
+                    audio: "audio/carneiro.mp3",
+                    correta: "carneiro",
+                    dica: "O macho da ovelha é o carneiro."
+                },
             ]
         },
 
         // =====================================================================
         // NÍVEL 4: SUPER DESAFIO
-        // (20 questões mistas: sentido inverso, armadilhas, imagens e construtor)
         // =====================================================================
         {
             id: 4,
             titulo: "Super Desafio",
-            subtitulo: "O desafio final de masculino e feminino",
+            subtitulo: "Mistura todos os níveis!",
             corClasse: "bg-laranja",
             icone: "img/icone_genero_4.svg",
             numQuestoes: 10,
-            perguntas: [
-                {
-                    id: 401,
-                    tipo: "padrao",
-                    pergunta: "Qual é o masculino de\n<span class='destaque-badge'>ÉGUA</span>?",
-                    opcoes: ["cavalo", "éguo", "boi", "burro"],
-                    correta: "cavalo",
-                    dica: "O par masculino de égua é cavalo."
-                },
-                {
-                    id: 402,
-                    tipo: "padrao",
-                    pergunta: "Qual é o masculino de\n<span class='destaque-badge'>ABELHA</span>?",
-                    opcoes: ["zangão", "abelho", "besouro", "mosca"],
-                    correta: "zangão",
-                    dica: "O macho da abelha é o zangão."
-                },
-                {
-                    id: 403,
-                    tipo: "padrao",
-                    pergunta: "Qual é o masculino de\n<span class='destaque-badge'>NORA</span>?",
-                    opcoes: ["genro", "noro", "sogro", "cunhado"],
-                    correta: "genro",
-                    dica: "O par masculino de nora é genro."
-                },
-                {
-                    id: 404,
-                    tipo: "padrao",
-                    pergunta: "Qual é o masculino de\n<span class='destaque-badge'>OVELHA</span>?",
-                    opcoes: ["carneiro", "ovelho", "bode", "touro"],
-                    correta: "carneiro",
-                    dica: "O macho da ovelha é o carneiro."
-                },
-                {
-                    id: 405,
-                    tipo: "padrao",
-                    pergunta: "Qual é o masculino de\n<span class='destaque-badge'>MADRINHA</span>?",
-                    opcoes: ["padrinho", "madrinho", "padre", "compadre"],
-                    correta: "padrinho",
-                    dica: "O par masculino de madrinha é padrinho."
-                },
-                {
-                    id: 406,
-                    tipo: "padrao",
-                    pergunta: "Qual é o masculino de\n<span class='destaque-badge'>CABRA</span>?",
-                    opcoes: ["bode", "cabro", "carneiro", "boi"],
-                    correta: "bode",
-                    dica: "O macho da cabra é o bode."
-                },
-                {
-                    id: 407,
-                    tipo: "lacuna",
-                    ordemFixa: true,
-                    pergunta: "Completa com o artigo correto:\n______ planeta",
-                    opcoes: ["O", "A"],
-                    correta: "O",
-                    dica: "Dizemos «o planeta». É masculino!"
-                },
-                {
-                    id: 408,
-                    tipo: "lacuna",
-                    ordemFixa: true,
-                    pergunta: "Completa com o artigo correto:\n______ tribo",
-                    opcoes: ["O", "A"],
-                    correta: "A",
-                    dica: "Dizemos «a tribo». É feminino!"
-                },
-                {
-                    id: 409,
-                    tipo: "lacuna",
-                    ordemFixa: true,
-                    pergunta: "Completa com o artigo correto:\n______ pijama",
-                    opcoes: ["O", "A"],
-                    correta: "O",
-                    dica: "Dizemos «o pijama». É masculino!"
-                },
-                {
-                    id: 410,
-                    tipo: "lacuna",
-                    ordemFixa: true,
-                    pergunta: "Completa com o artigo correto:\n______ moto",
-                    opcoes: ["O", "A"],
-                    correta: "A",
-                    dica: "Dizemos «a moto». É feminino!"
-                },
-                {
-                    id: 411,
-                    tipo: "situacao",
-                    ordemFixa: true,
-                    pergunta: "<span class='destaque-badge'>MAPA</span>",
-                    opcoesImagem: [
-                        { valor: "Masculino", img: "img/genero_masculino.svg", alt: "Masculino" },
-                        { valor: "Feminino", img: "img/genero_feminino.svg", alt: "Feminino" }
-                    ],
-                    correta: "Masculino",
-                    dica: "Dizemos «o mapa» ou «um mapa»."
-                },
-                {
-                    id: 412,
-                    tipo: "situacao",
-                    ordemFixa: true,
-                    pergunta: "<span class='destaque-badge'>FOTO</span>",
-                    opcoesImagem: [
-                        { valor: "Masculino", img: "img/genero_masculino.svg", alt: "Masculino" },
-                        { valor: "Feminino", img: "img/genero_feminino.svg", alt: "Feminino" }
-                    ],
-                    correta: "Feminino",
-                    dica: "Dizemos «a foto» ou «uma foto»."
-                },
-                {
-                    id: 413,
-                    tipo: "situacao",
-                    categoriaDistratores: "genero_imagens",
-                    legendaAlt: true,
-                    pergunta: "Toca na imagem que representa um nome\n<span class='destaque-badge'>Feminino</span>",
-                    correta: "Feminino",
-                    dica: "Procura a palavra que usa o artigo «a» antes do nome."
-                },
-                {
-                    id: 414,
-                    tipo: "situacao",
-                    categoriaDistratores: "genero_imagens",
-                    legendaAlt: true,
-                    pergunta: "Toca na imagem que representa um nome\n<span class='destaque-badge'>Masculino</span>",
-                    correta: "Masculino",
-                    dica: "Procura a palavra que usa o artigo «o» antes do nome."
-                },
-                {
-                    id: 415,
-                    tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>ATOR</span>",
-                    imagemPergunta: "img/atriz.png",
-                    correta: "atriz",
-                    textoAudio: "Escreve o feminino de ator. Atriz.",
-                    dica: "Escreve-se com «z» no final: atriz."
-                },
-                {
-                    id: 416,
-                    tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>CAVALO</span>",
-                    imagemPergunta: "img/egua.png",
-                    correta: "égua",
-                    textoAudio: "Escreve o feminino de cavalo. Égua.",
-                    dica: "Não te esqueças do acento agudo no «é»: égua."
-                },
-                {
-                    id: 417,
-                    tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>PRÍNCIPE</span>",
-                    imagemPergunta: "img/princesa.png",
-                    correta: "princesa",
-                    textoAudio: "Escreve o feminino de príncipe. Princesa.",
-                    dica: "Escreve-se com «s»: princesa."
-                },
-                {
-                    id: 418,
-                    tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>ANÃO</span>",
-                    imagemPergunta: "img/ana.png",
-                    correta: "anã",
-                    textoAudio: "Escreve o feminino de anão. Anã.",
-                    dica: "Termina em «ã»: anã."
-                },
-                {
-                    id: 419,
-                    tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>GALO</span>",
-                    imagemPergunta: "img/galinha.png",
-                    correta: "galinha",
-                    textoAudio: "Escreve o feminino de galo. Galinha.",
-                    dica: "Escreve-se com «nh»: galinha."
-                },
-                {
-                    id: 420,
-                    tipo: "construtor",
-                    pergunta: "Escreve o feminino de\n<span class='destaque-badge'>REI</span>",
-                    imagemPergunta: "img/rainha.png",
-                    correta: "rainha",
-                    textoAudio: "Escreve o feminino de rei. Rainha.",
-                    dica: "O par feminino de rei é rainha."
-                }
-            ]
+            misturarModos: true
         }
     ]
 };

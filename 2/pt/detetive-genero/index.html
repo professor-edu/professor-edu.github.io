@@ -1664,28 +1664,14 @@
     position: relative;
 }
 
-.btn-audio-construtor {
+.btn-ouvir-pergunta.btn-ouvir-frame {
     position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: linear-gradient(180deg, #fcd34d 0%, #f59e0b 100%);
-    border: 3px solid #ffffff;
-    box-shadow: 0 4px 10px rgba(217, 119, 6, 0.35);
-    color: #ffffff;
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+    top: -8px;
+    right: -8px;
+    width: 34px;
+    height: 34px;
+    border-width: 2.5px;
     z-index: 5;
-    transition: transform 0.15s ease;
-}
-
-.btn-audio-construtor:active {
-    transform: scale(0.9);
 }
 
 .construtor-wrapper {
@@ -1806,6 +1792,62 @@
     }
 }
 
+
+/* Botões compactos para opções curtas (ex: O / A) */
+.opcoes-container.botoes-curtos {
+    max-width: 340px;
+    gap: 20px;
+    justify-content: center;
+}
+
+.opcoes-container.botoes-curtos .btn-opcao {
+    flex: 0 0 auto;
+    width: 120px;
+    min-width: 110px;
+    height: 64px;
+    padding: 0;
+    font-size: 1.55rem;
+    border-radius: 16px;
+}
+
+#game-area:has(.opcoes-lacuna) .img-pergunta-frame {
+    max-height: 150px;
+    padding: 6px;
+}
+
+#game-area:has(.opcoes-lacuna) .img-pergunta-frame img {
+    max-height: 132px;
+    width: auto;
+}
+
+@media (max-width: 600px) {
+    .opcoes-container.botoes-curtos {
+        flex-direction: row;
+        gap: 16px;
+    }
+
+    .opcoes-container.botoes-curtos .btn-opcao {
+        width: 105px;
+        height: 58px;
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
+    #game-area:has(.construtor-wrapper) .img-pergunta-frame {
+        max-height: 135px;
+        padding: 6px;
+    }
+
+    #game-area:has(.construtor-wrapper) .img-pergunta-frame img {
+        max-height: 118px;
+        width: auto;
+    }
+
+    .construtor-wrapper {
+        gap: 14px;
+    }
+}
 
 	
 
