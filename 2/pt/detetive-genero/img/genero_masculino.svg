@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 100" width="160" height="100">
+  <defs>
+    <linearGradient id="bgMasc" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#eff6ff" />
+      <stop offset="100%" stop-color="#dbeafe" />
+    </linearGradient>
+    <linearGradient id="badgeMasc" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+  </defs>
+  <rect width="160" height="100" rx="16" fill="url(#bgMasc)" />
+  <!-- Brilhos decorativos -->
+  <circle cx="24" cy="24" r="3.5" fill="#93c5fd" opacity="0.8" />
+  <circle cx="136" cy="74" r="4" fill="#93c5fd" opacity="0.8" />
+  <path d="M132 18 L134 23 L139 25 L134 27 L132 32 L130 27 L125 25 L130 23 Z" fill="#fbbf24" />
+  <!-- Emblema 3D -->
+  <rect x="26" y="18" width="108" height="66" rx="18" fill="#1d4ed8" />
+  <rect x="26" y="14" width="108" height="66" rx="18" fill="url(#badgeMasc)" />
+  <path d="M34 19 H126 A12 12 0 0 1 128 28 H32 A12 12 0 0 1 34 19 Z" fill="#ffffff" opacity="0.25" />
+  <!-- Artigos O / UM -->
+  <text x="80" y="58" text-anchor="middle" font-family="system-ui, -apple-system, &#39;Segoe UI&#39;, Roboto, sans-serif" font-weight="900" fill="#ffffff">
+    <tspan font-size="34">O</tspan>
+    <tspan font-size="20" fill="#bfdbfe"> / </tspan>
+    <tspan font-size="24" fill="#fde047">UM</tspan>
+  </text>
+</svg>

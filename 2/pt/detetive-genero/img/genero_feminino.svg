@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 100" width="160" height="100">
+  <defs>
+    <linearGradient id="bgFem" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdf2f8" />
+      <stop offset="100%" stop-color="#fce7f3" />
+    </linearGradient>
+    <linearGradient id="badgeFem" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f472b6" />
+      <stop offset="100%" stop-color="#db2777" />
+    </linearGradient>
+  </defs>
+  <rect width="160" height="100" rx="16" fill="url(#bgFem)" />
+  <!-- Brilhos decorativos -->
+  <circle cx="136" cy="24" r="3.5" fill="#f9a8d4" opacity="0.8" />
+  <circle cx="24" cy="74" r="4" fill="#f9a8d4" opacity="0.8" />
+  <path d="M28 18 L30 23 L35 25 L30 27 L28 32 L26 27 L21 25 L26 23 Z" fill="#fbbf24" />
+  <!-- Emblema 3D -->
+  <rect x="22" y="18" width="116" height="66" rx="18" fill="#9d174d" />
+  <rect x="22" y="14" width="116" height="66" rx="18" fill="url(#badgeFem)" />
+  <path d="M30 19 H130 A12 12 0 0 1 132 28 H28 A12 12 0 0 1 30 19 Z" fill="#ffffff" opacity="0.25" />
+  <!-- Artigos A / UMA -->
+  <text x="80" y="58" text-anchor="middle" font-family="system-ui, -apple-system, &#39;Segoe UI&#39;, Roboto, sans-serif" font-weight="900" fill="#ffffff">
+    <tspan font-size="34">A</tspan>
+    <tspan font-size="20" fill="#fbcfe8"> / </tspan>
+    <tspan font-size="23" fill="#fde047">UMA</tspan>
+  </text>
+</svg>
