@@ -574,6 +574,12 @@ async function abrirPesquisa() {
 function fecharPesquisa() {
     const modal = document.getElementById('modal-pesquisa');
     if (modal) modal.style.display = 'none';
+    document.body.style.overflow = '';
+
+    // Fecha também a sidebar e o respetivo fundo escuro
+    document.getElementById('sidebar')?.classList.remove('active');
+    document.getElementById('overlay')?.classList.remove('active');
+    document.getElementById('hamburgerBtn')?.classList.remove('open');
 }
 
 function fecharPesquisaFora(event) {
@@ -581,3 +587,12 @@ function fecharPesquisaFora(event) {
         fecharPesquisa();
     }
 }
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const modal = document.getElementById('modal-pesquisa');
+        if (modal && modal.style.display === 'flex') {
+            fecharPesquisa();
+        }
+    }
+});
