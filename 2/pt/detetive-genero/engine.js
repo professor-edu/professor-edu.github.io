@@ -148,9 +148,9 @@ function carregarRonda() {
         }
     }
 
-    // Áudio + Texto da Pergunta
-    let btnAudioHTML = ronda.audio ? `
-        <button type="button" class="btn-ouvir-pergunta" onclick="tocarVoz('${ronda.audio}')" title="Ouvir Pergunta">
+    // Áudio ao lado do texto (só aparece aqui se NÃO houver imagem central)
+    let btnAudioHTML = (ronda.audio && !ronda.imagemPergunta) ? `
+        <button type="button" class="btn-ouvir-pergunta" onclick="tocarVoz('${ronda.audio}')" title="Ouvir">
             <img src="../../../SVG/audio.svg" alt="Ouvir" class="icon-audio">
         </button>` : '';
 
@@ -167,11 +167,17 @@ function carregarRonda() {
         </div>
     `;
 
-    // Imagem Central (se existir)
+    // Imagem Central (se existir áudio, coloca o botão pulsante no canto da moldura)
     if (ronda.imagemPergunta) {
+        let btnAudioFrameHTML = ronda.audio ? `
+            <button type="button" class="btn-ouvir-pergunta btn-ouvir-frame" onclick="tocarVoz('${ronda.audio}')" title="Ouvir">
+                <img src="../../../SVG/audio.svg" alt="Ouvir" class="icon-audio">
+            </button>` : '';
+
         html += `
             <div class="img-pergunta-frame">
                 <img src="${ronda.imagemPergunta}" alt="Ilustração" onclick="abrirImagemModal(this.src)" onerror="this.onerror=null; this.src='img/brincar_aprender.jpg';">
+                ${btnAudioFrameHTML}
             </div>
         `;
     }
@@ -190,7 +196,7 @@ function carregarRonda() {
             }
 
             html += `<div class="opcoes-grid-imagens${classeGrid}">`;
-            const mostrarLegenda = ronda.mostrarLegenda !== false; // Por defeito é true
+            const mostrarLegenda = ronda.mostrarLegenda !== false;
             const usarAltNaLegenda = ronda.legendaAlt === true || (typeof CONFIG_JOGO !== 'undefined' && CONFIG_JOGO.legendaAlt === true);
             
             opcoesGeradas.forEach(item => {
@@ -215,8 +221,6 @@ function carregarRonda() {
         case 'dupla-opcao':
         case 'cidadania': {
             html += `<div class="opcoes-certo-errado">`;
-            
-            // SEM BARALHAR: Mantém exatamente a ordem definida no questoes.js (Certo/Seguro 1.º, Errado/Perigoso 2.º)
             ronda.opcoes.forEach(opcao => {
                 const texto = (typeof opcao === 'object') ? opcao.texto : opcao;
                 const fnClique = (texto.trim().toLowerCase() === ronda.correta.trim().toLowerCase()) ? "simularAcerto(this)" : "simularErro(this)";
@@ -243,9 +247,12 @@ function carregarRonda() {
             const coresSorteadas = baralharArray([...paletaCores]);
             const opcoesLacuna = ronda.ordemFixa ? [...ronda.opcoes] : baralharArray([...ronda.opcoes]);
             const eGrelhaCurta = opcoesLacuna.length === 4 && opcoesLacuna.every(op => op.replace(/<[^>]*>/g, '').trim().length <= 14);
-            const classeGridMobile = eGrelhaCurta ? ' grid-2x2-mobile' : '';
+            const eBotaoCurto = opcoesLacuna.length <= 3 && opcoesLacuna.every(op => op.replace(/<[^>]*>/g, '').trim().length <= 4);
 
-            html += `<div class="opcoes-container opcoes-lacuna${classeGridMobile}" id="opcoes-container">`;
+            const classeGridMobile = eGrelhaCurta ? ' grid-2x2-mobile' : '';
+            const classeBotaoCurto = eBotaoCurto ? ' botoes-curtos' : '';
+
+            html += `<div class="opcoes-container opcoes-lacuna${classeGridMobile}${classeBotaoCurto}" id="opcoes-container">`;
             opcoesLacuna.forEach((opcao, index) => {
                 const eCorreta = opcao.trim().toLowerCase() === ronda.correta.trim().toLowerCase();
                 const classeCor = coresSorteadas[index % coresSorteadas.length];
@@ -266,15 +273,12 @@ function carregarRonda() {
             const letras = palavraAlvo.split('');
             let letrasBaralhadas = baralharArray([...letras]);
             
-            // Garante que as letras não ficam exatamente na ordem certa ao baralhar
             if (letras.length > 1 && letrasBaralhadas.join('') === palavraAlvo) {
                 letrasBaralhadas.reverse();
             }
 
-            const textoAudio = (ronda.textoAudio || `${ronda.pergunta.replace(/<[^>]*>/g, ' ')}. ${palavraAlvo}`).replace(/"/g, '&quot;');
-
             html += `
-                <div class="construtor-wrapper" id="construtor-wrapper" data-alvo="${palavraAlvo}" data-audio="${textoAudio}">
+                <div class="construtor-wrapper" id="construtor-wrapper" data-alvo="${palavraAlvo}">
                     <div class="construtor-slots" id="construtor-slots">
                         ${letras.map((_, i) => `<div class="construtor-slot" data-slot="${i}" onclick="devolverLetraConstrutor(this)"></div>`).join('')}
                     </div>
@@ -312,21 +316,6 @@ function carregarRonda() {
     }
 
     gameArea.innerHTML = html;
-
-    if (ronda.tipo === 'construtor') {
-        const frameImg = gameArea.querySelector('.img-pergunta-frame');
-        const wrapper = document.getElementById('construtor-wrapper');
-        if (frameImg && wrapper) {
-            const btnAudio = document.createElement('button');
-            btnAudio.type = 'button';
-            btnAudio.className = 'btn-audio-construtor';
-            btnAudio.title = 'Ouvir palavra';
-            btnAudio.innerHTML = '🔊';
-            btnAudio.onclick = () => falarTextoConstrutor(wrapper.dataset.audio, ronda.audio);
-            frameImg.appendChild(btnAudio);
-        }
-    }
-
     atualizarPlacar();
     mostrarMascote(true);
     animarMascote('normal');
@@ -470,18 +459,3 @@ function verificarConstrutor() {
     }
 }
 
-function falarTextoConstrutor(texto, ficheiroAudio) {
-    if (ficheiroAudio) {
-        const audio = new Audio(ficheiroAudio);
-        audio.play().catch(() => {});
-        return;
-    }
-
-    if ('speechSynthesis' in window && texto) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(texto.replace(/\s+/g, ' ').trim());
-        utterance.lang = 'pt-PT';
-        utterance.rate = 0.92;
-        window.speechSynthesis.speak(utterance);
-    }
-}
