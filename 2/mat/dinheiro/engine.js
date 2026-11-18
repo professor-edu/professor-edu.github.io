@@ -143,29 +143,29 @@ function iniciarJogo(numQuestoes = 10, tituloNivel = "", idNivel = 1) {
 }
 
 const PASTA_DINHEIRO = 'img/dinheiro/';
-const EXT_DINHEIRO = '.jpg';
+const EXT_DINHEIRO = '.png';
 
 const CATALOGO_DINHEIRO = {
     // Moedas 1:1 (256x256)
-    '1c':   { ficheiro: '1c',   tipo: 'moeda', tamanho: 40, nome: 'Moeda de 1 cêntimo' },
-    '2c':   { ficheiro: '2c',   tipo: 'moeda', tamanho: 44, nome: 'Moeda de 2 cêntimos' },
-    '5c':   { ficheiro: '5c',   tipo: 'moeda', tamanho: 48, nome: 'Moeda de 5 cêntimos' },
-    '10c':  { ficheiro: '10c',  tipo: 'moeda', tamanho: 46, nome: 'Moeda de 10 cêntimos' },
-    '20c':  { ficheiro: '20c',  tipo: 'moeda', tamanho: 51, nome: 'Moeda de 20 cêntimos' },
-    '50c':  { ficheiro: '50c',  tipo: 'moeda', tamanho: 56, nome: 'Moeda de 50 cêntimos' },
-    '1e':   { ficheiro: '1e',   tipo: 'moeda', tamanho: 54, nome: 'Moeda de 1 euro' },
-    '2e':   { ficheiro: '2e',   tipo: 'moeda', tamanho: 60, nome: 'Moeda de 2 euros' },
+    '1c':   { ficheiro: '1c',   tipo: 'moeda', tamanho: 52,  nome: 'Moeda de 1 cêntimo' },
+    '2c':   { ficheiro: '2c',   tipo: 'moeda', tamanho: 56,  nome: 'Moeda de 2 cêntimos' },
+    '5c':   { ficheiro: '5c',   tipo: 'moeda', tamanho: 60,  nome: 'Moeda de 5 cêntimos' },
+    '10c':  { ficheiro: '10c',  tipo: 'moeda', tamanho: 58,  nome: 'Moeda de 10 cêntimos' },
+    '20c':  { ficheiro: '20c',  tipo: 'moeda', tamanho: 64,  nome: 'Moeda de 20 cêntimos' },
+    '50c':  { ficheiro: '50c',  tipo: 'moeda', tamanho: 70,  nome: 'Moeda de 50 cêntimos' },
+    '1e':   { ficheiro: '1e',   tipo: 'moeda', tamanho: 68,  nome: 'Moeda de 1 euro' },
+    '2e':   { ficheiro: '2e',   tipo: 'moeda', tamanho: 76,  nome: 'Moeda de 2 euros' },
     // Notas 16:9 (500x279)
-    '5e':   { ficheiro: '5e',   tipo: 'nota',  tamanho: 76, nome: 'Nota de 5 euros' },
-    '10e':  { ficheiro: '10e',  tipo: 'nota',  tamanho: 80, nome: 'Nota de 10 euros' },
-    '20e':  { ficheiro: '20e',  tipo: 'nota',  tamanho: 84, nome: 'Nota de 20 euros' },
-    '50e':  { ficheiro: '50e',  tipo: 'nota',  tamanho: 88, nome: 'Nota de 50 euros' },
-    '100e': { ficheiro: '100e', tipo: 'nota',  tamanho: 90, nome: 'Nota de 100 euros' },
-    '200e': { ficheiro: '200e', tipo: 'nota',  tamanho: 92, nome: 'Nota de 200 euros' },
-    '500e': { ficheiro: '500e', tipo: 'nota',  tamanho: 94, nome: 'Nota de 500 euros' }
+    '5e':   { ficheiro: '5e',   tipo: 'nota',  tamanho: 108, nome: 'Nota de 5 euros' },
+    '10e':  { ficheiro: '10e',  tipo: 'nota',  tamanho: 114, nome: 'Nota de 10 euros' },
+    '20e':  { ficheiro: '20e',  tipo: 'nota',  tamanho: 120, nome: 'Nota de 20 euros' },
+    '50e':  { ficheiro: '50e',  tipo: 'nota',  tamanho: 124, nome: 'Nota de 50 euros' },
+    '100e': { ficheiro: '100e', tipo: 'nota',  tamanho: 128, nome: 'Nota de 100 euros' },
+    '200e': { ficheiro: '200e', tipo: 'nota',  tamanho: 130, nome: 'Nota de 200 euros' },
+    '500e': { ficheiro: '500e', tipo: 'nota',  tamanho: 132, nome: 'Nota de 500 euros' }
 };
 
-function renderizarDinheiro(lista, emOpcao = false) {
+function renderizarDinheiro(lista, emOpcao = false, emModal = false) {
     if (!Array.isArray(lista) || lista.length === 0) return '';
 
     const pesoLargura = lista.reduce((soma, codigo) => {
@@ -175,14 +175,18 @@ function renderizarDinheiro(lista, emOpcao = false) {
     }, 0);
 
     let fatorEscala = 1;
-    if (emOpcao) {
-        if (pesoLargura <= 2.0) fatorEscala = 0.85;
-        else if (pesoLargura <= 3.8) fatorEscala = 0.66;
-        else fatorEscala = 0.52;
+    if (emModal) {
+        if (pesoLargura <= 3.6) fatorEscala = 1.65;
+        else if (pesoLargura <= 6.0) fatorEscala = 1.35;
+        else fatorEscala = 1.1;
+    } else if (emOpcao) {
+        if (pesoLargura <= 2.0) fatorEscala = 0.72;
+        else if (pesoLargura <= 3.8) fatorEscala = 0.56;
+        else fatorEscala = 0.45;
     } else {
         if (pesoLargura <= 3.6) fatorEscala = 1.0;
-        else if (pesoLargura <= 6.0) fatorEscala = 0.82;
-        else fatorEscala = 0.68;
+        else if (pesoLargura <= 6.0) fatorEscala = 0.84;
+        else fatorEscala = 0.72;
     }
 
     const itensHTML = lista.map((codigo, idx) => {
@@ -197,14 +201,55 @@ function renderizarDinheiro(lista, emOpcao = false) {
         return `<img 
             src="${PASTA_DINHEIRO}${item.ficheiro}${EXT_DINHEIRO}" 
             alt="${item.nome}" 
-            title="${item.nome}"
             class="item-dinheiro item-${item.tipo}" 
             style="${estilo} animation-delay: ${idx * 0.05}s;"
         >`;
     }).join('');
 
-    return `<div class="grupo-dinheiro ${emOpcao ? 'grupo-dinheiro-opcao' : ''}">${itensHTML}</div>`;
+    const interativo = !emOpcao && !emModal;
+    const listaSerializada = JSON.stringify(lista).replace(/"/g, '&quot;');
+    const atributoClique = interativo ? `onclick="abrirModalDinheiro(${listaSerializada})" title="Clica para ampliar"` : '';
+    const badgeZoom = interativo ? `<span class="badge-zoom-dinheiro" aria-hidden="true">🔍</span>` : '';
+    const classeExtra = emModal ? 'grupo-dinheiro-modal' : (emOpcao ? 'grupo-dinheiro-opcao' : 'grupo-dinheiro-interativo');
+
+    return `<div class="grupo-dinheiro ${classeExtra}" ${atributoClique}>${itensHTML}${badgeZoom}</div>`;
 }
+
+function abrirModalDinheiro(lista) {
+    if (!Array.isArray(lista) || lista.length === 0) return;
+
+    let overlay = document.getElementById('modal-dinheiro-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'modal-dinheiro-overlay';
+        overlay.className = 'modal-imagem-overlay';
+        overlay.onclick = (e) => {
+            if (e.target === overlay || e.target.closest('.btn-fechar-modal-dinheiro')) {
+                fecharModalDinheiro();
+            }
+        };
+        document.body.appendChild(overlay);
+    }
+
+    overlay.innerHTML = `
+        <div class="modal-dinheiro-box" onclick="event.stopPropagation()">
+            <button type="button" class="btn-fechar-modal-dinheiro" onclick="fecharModalDinheiro()" title="Fechar">✕</button>
+            ${renderizarDinheiro(lista, false, true)}
+        </div>
+    `;
+    overlay.style.display = 'flex';
+}
+
+function fecharModalDinheiro() {
+    const overlay = document.getElementById('modal-dinheiro-overlay');
+    if (overlay) {
+        overlay.style.display = 'none';
+    }
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') fecharModalDinheiro();
+});
 
 function carregarRonda() {
     construtorBloqueado = false;

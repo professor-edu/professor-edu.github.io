@@ -480,17 +480,17 @@ const CONFIG_JOGO = {
                     opcoes: [
                         { dinheiro: ["200e"], valor: "200e" },
                         { dinheiro: ["100e"], valor: "100e" },
-                        { dinheiro: ["500e"], valor: "500e" },
+                        { dinheiro: ["20e"], valor: "20e" },
                         { dinheiro: ["50e"], valor: "50e" }
                     ]
                 },
                 {
                     tipo: "opcoes-imagem",
-                    pergunta: "Qual destas é a nota de <strong>500 euros</strong>?",
+                    pergunta: "Qual destas é a nota de <strong>50 euros</strong>?",
                     mostrarLegenda: false,
-                    correta: "500e",
+                    correta: "50e",
                     opcoes: [
-                        { dinheiro: ["500e"], valor: "500e" },
+                        { dinheiro: ["20e"], valor: "20e" },
                         { dinheiro: ["200e"], valor: "200e" },
                         { dinheiro: ["100e"], valor: "100e" },
                         { dinheiro: ["50e"], valor: "50e" }

@@ -1657,9 +1657,22 @@
     text-align: center;
 }
 
+/* Etiqueta de destaque para preços e valores nas perguntas */
+.destaque-badge {
+    display: inline-block;
+    background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px solid #f59e0b;
+    color: #92400e;
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+    padding: 1px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+    box-shadow: 0 2px 0 rgba(217, 119, 6, 0.25);
+    vertical-align: baseline;
+}
 
-
-/* === CONSTRUTOR DE PALAVRAS === */
+/* === MOLDURA DA PERGUNTA E ÁUDIO === */
 .img-pergunta-frame {
     position: relative;
 }
@@ -1675,7 +1688,6 @@
     z-index: 5;
 }
 
-/* Garante que o SVG do som não herda as restrições das ilustrações da moldura */
 #game-area .img-pergunta-frame .btn-ouvir-frame .icon-audio {
     width: 72% !important;
     height: 72% !important;
@@ -1684,6 +1696,105 @@
     border-radius: 0;
 }
 
+.img-espelho {
+    transform: scaleX(-1);
+}
+
+/* Moldura da pergunta com 2 imagens lado a lado */
+.img-pergunta-frame.frame-plural {
+    gap: 8px;
+    padding: 8px 14px;
+}
+
+#game-area:has(.img-pergunta-frame.frame-plural) .img-pergunta-frame.frame-plural img {
+    max-width: 48%;
+    max-height: 145px;
+}
+
+/* Cartões de opção com 2 imagens lado a lado */
+.btn-opcao-imagem .imgs-wrapper-dupla {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.btn-opcao-imagem .imgs-wrapper-dupla img {
+    width: 47%;
+    max-width: 47%;
+}
+
+/* === DINHEIRO DINÂMICO (MOEDAS E NOTAS) === */
+.img-pergunta-frame.frame-dinheiro {
+    width: auto;
+    max-width: 92%;
+    min-height: 104px;
+    height: auto !important;
+    max-height: none !important;
+    padding: 10px 18px;
+}
+
+.grupo-dinheiro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 4px;
+}
+
+.grupo-dinheiro-opcao {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    gap: 5px;
+    padding: 8px;
+}
+
+.item-dinheiro {
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    user-select: none;
+    pointer-events: none;
+    animation: popDinheiro 0.28s ease-out backwards;
+}
+
+.item-moeda {
+    border-radius: 50%;
+}
+
+.item-nota {
+    border-radius: 4px;
+}
+
+@keyframes popDinheiro {
+    from { opacity: 0; transform: scale(0.82) translateY(4px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* === CARTÕES DE DECISÃO SVG (SIM/NÃO, MOEDA/NOTA) === */
+.btn-opcao-imagem:has(.img-cartao-svg) {
+    padding: 10px 12px;
+    min-height: auto;
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.btn-opcao-imagem:has(.img-cartao-svg):hover {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.img-cartao-svg {
+    width: 100%;
+    max-width: 190px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+/* === CONSTRUTOR DE PALAVRAS / VALORES === */
 .construtor-wrapper {
     display: flex;
     flex-direction: column;
@@ -1695,7 +1806,6 @@
     animation: fadeIn 0.35s ease;
 }
 
-/* Linha de traços / espaços da palavra */
 .construtor-slots {
     display: flex;
     justify-content: center;
@@ -1743,7 +1853,6 @@
     color: #b91c1c;
 }
 
-/* Teclas de letras baralhadas em baixo */
 .construtor-teclado {
     display: flex;
     justify-content: center;
@@ -1786,24 +1895,7 @@
     75% { transform: translateX(6px); }
 }
 
-/* Ajuste compacto para mobile vertical sem scroll */
-@media (max-width: 600px) and (orientation: portrait) {
-    .area-jogo-custom:has(.construtor-wrapper) .img-pergunta-frame {
-        max-height: 135px;
-        padding: 8px;
-    }
-
-    .area-jogo-custom:has(.construtor-wrapper) .img-pergunta-frame img {
-        max-height: 115px;
-    }
-
-    .construtor-wrapper {
-        gap: 14px;
-    }
-}
-
-
-/* Botões compactos para opções curtas (ex: O / A) */
+/* === OPÇÕES CURTAS E LACUNAS === */
 .opcoes-container.botoes-curtos {
     max-width: 340px;
     gap: 20px;
@@ -1820,98 +1912,17 @@
     border-radius: 16px;
 }
 
-#game-area:has(.opcoes-lacuna) .img-pergunta-frame {
+#game-area:has(.opcoes-lacuna) .img-pergunta-frame:not(.frame-dinheiro) {
     max-height: 150px;
     padding: 6px;
 }
 
-#game-area:has(.opcoes-lacuna) .img-pergunta-frame img {
+#game-area:has(.opcoes-lacuna) .img-pergunta-frame:not(.frame-dinheiro) img {
     max-height: 132px;
     width: auto;
 }
 
-.img-espelho {
-    transform: scaleX(-1);
-}
-
-/* Moldura da pergunta com 2 imagens lado a lado */
-.img-pergunta-frame.frame-plural {
-    gap: 8px;
-    padding: 8px 14px;
-}
-
-#game-area:has(.img-pergunta-frame.frame-plural) .img-pergunta-frame.frame-plural img {
-    max-width: 48%;
-    max-height: 145px;
-}
-
-/* Cartões de opção com 2 imagens lado a lado */
-.btn-opcao-imagem .imgs-wrapper-dupla {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    width: 100%;
-}
-
-.img-pergunta-frame.frame-dinheiro {
-    width: auto;
-    max-width: 92%;
-    min-height: 110px;
-    padding: 12px 18px;
-}
-
-.grupo-dinheiro {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 6px;
-}
-
-.grupo-dinheiro-opcao {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    gap: 5px;
-    padding: 8px;
-}
-
-.item-dinheiro {
-    object-fit: contain;
-    mix-blend-mode: multiply;
-    user-select: none;
-    pointer-events: none;
-    animation: popDinheiro 0.28s ease-out backwards;
-}
-
-.item-moeda {
-    border-radius: 50%;
-}
-
-.item-nota {
-    border-radius: 4px;
-}
-
-@keyframes popDinheiro {
-    from { opacity: 0; transform: scale(0.82) translateY(4px); }
-    to   { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-.img-cartao-svg {
-    width: 100%;
-    max-width: 180px;
-    height: auto;
-    object-fit: contain;
-    display: block;
-    margin: 4px auto;
-}
-
-.btn-opcao-imagem .imgs-wrapper-dupla img {
-    width: 47%;
-    max-width: 47%;
-}
-
+/* === RESPONSIVO MOBILE === */
 @media (max-width: 600px) {
     .opcoes-container.botoes-curtos {
         flex-direction: row;
@@ -1923,15 +1934,21 @@
         height: 58px;
         font-size: 1.4rem;
     }
+
+    .img-cartao-svg {
+        max-width: 145px;
+    }
 }
 
 @media (max-width: 600px) and (orientation: portrait) {
-    #game-area:has(.construtor-wrapper) .img-pergunta-frame {
+    .area-jogo-custom:has(.construtor-wrapper) .img-pergunta-frame:not(.frame-dinheiro),
+    #game-area:has(.construtor-wrapper) .img-pergunta-frame:not(.frame-dinheiro) {
         max-height: 135px;
         padding: 6px;
     }
 
-    #game-area:has(.construtor-wrapper) .img-pergunta-frame img {
+    .area-jogo-custom:has(.construtor-wrapper) .img-pergunta-frame:not(.frame-dinheiro) img,
+    #game-area:has(.construtor-wrapper) .img-pergunta-frame:not(.frame-dinheiro) img {
         max-height: 118px;
         width: auto;
     }
@@ -1939,8 +1956,122 @@
     .construtor-wrapper {
         gap: 14px;
     }
+
+    .grupo-dinheiro-opcao {
+        aspect-ratio: auto;
+        min-height: 82px;
+        padding: 6px 4px;
+        gap: 4px;
+    }
 }
 
+/* === HOVER E ZOOM NA MOLDURA DO DINHEIRO === */
+.img-pergunta-frame.frame-dinheiro {
+    cursor: zoom-in;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.img-pergunta-frame.frame-dinheiro:hover {
+    transform: translateY(-2px) scale(1.03);
+    border-color: var(--cor-em, #10b981);
+    box-shadow: 0 10px 24px rgba(16, 185, 129, 0.18);
+}
+
+.grupo-dinheiro-interativo {
+    cursor: zoom-in;
+}
+
+.badge-zoom-dinheiro {
+    position: absolute;
+    bottom: -9px;
+    right: -9px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #cbd5e1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    pointer-events: none;
+    transition: transform 0.2s ease;
+}
+
+.img-pergunta-frame.frame-dinheiro:hover .badge-zoom-dinheiro {
+    transform: scale(1.12);
+    border-color: var(--cor-em, #10b981);
+}
+
+/* === MODAL DE AMPLIAÇÃO DO DINHEIRO === */
+.modal-dinheiro-box {
+    position: relative;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 28px 32px;
+    max-width: 92vw;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: popDinheiro 0.22s ease-out;
+}
+
+.grupo-dinheiro-modal {
+    gap: 16px;
+    padding: 8px;
+}
+
+.grupo-dinheiro-modal .item-dinheiro {
+    max-width: 82vw;
+    height: auto;
+}
+
+.btn-fechar-modal-dinheiro {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    background: #f1f5f9;
+    color: #334155;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.btn-fechar-modal-dinheiro:hover {
+    background: #e2e8f0;
+    transform: scale(1.08);
+}
+
+@media (max-width: 600px) {
+    .modal-dinheiro-box {
+        padding: 24px 16px;
+    }
+
+    .grupo-dinheiro-modal {
+        gap: 10px;
+    }
+
+    .grupo-dinheiro-modal .item-nota {
+        max-height: 115px;
+    }
+
+    .grupo-dinheiro-modal .item-moeda {
+        max-width: 78px;
+        max-height: 78px;
+    }
+}
 	
 
 /* =========================================
