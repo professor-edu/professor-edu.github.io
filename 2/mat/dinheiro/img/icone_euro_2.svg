@@ -1,0 +1,36 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sacoGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="etiquetaGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="100%" stop-color="#facc15" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sombra base -->
+  <ellipse cx="48" cy="89" rx="34" ry="5.5" fill="#cbd5e1" opacity="0.6" />
+
+  <!-- Moeda a espreitar do saco -->
+  <circle cx="58" cy="31" r="12" fill="#fbbf24" stroke="#b45309" stroke-width="2.5" />
+  <text x="58" y="36" font-family="system-ui, sans-serif" font-size="13" font-weight="900" fill="#78350f" text-anchor="middle">€</text>
+
+  <!-- Alça do saco -->
+  <path d="M 33 34 V 23 C 33 15, 57 15, 57 23 V 34" fill="none" stroke="#0369a1" stroke-width="4.5" stroke-linecap="round" />
+
+  <!-- Corpo do saco de compras -->
+  <path d="M 21 34 H 69 L 74 82 C 74.5 85, 72 87, 69 87 H 21 C 18 87, 15.5 85, 16 82 Z" fill="url(#sacoGrad)" stroke="#0369a1" stroke-width="2.5" stroke-linejoin="round" />
+  
+  <!-- Detalhe de dobra superior -->
+  <line x1="20" y1="43" x2="70" y2="43" stroke="#bae6fd" stroke-width="2" stroke-linecap="round" />
+
+  <!-- Etiqueta de preço pendurada à direita -->
+  <g transform="translate(68, 52) rotate(14)">
+    <line x1="-8" y1="-8" x2="2" y2="2" stroke="#475569" stroke-width="2" stroke-linecap="round" />
+    <path d="M 0 0 H 18 L 26 12 L 18 24 H 0 Z" fill="url(#etiquetaGrad)" stroke="#ca8a04" stroke-width="2.2" stroke-linejoin="round" />
+    <circle cx="5" cy="12" r="2" fill="#ffffff" stroke="#ca8a04" stroke-width="1.2" />
+    <text x="15" y="16.5" font-family="system-ui, sans-serif" font-size="13" font-weight="900" fill="#854d0e" text-anchor="middle">€</text>
+  </g>
+</svg>

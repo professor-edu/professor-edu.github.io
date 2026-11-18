@@ -1,0 +1,10 @@
+<svg width="160" height="60" viewBox="0 0 160 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo Azul -->
+  <rect x="2" y="2" width="156" height="54" rx="10" fill="#0369a1" />
+  <rect x="0" y="0" width="156" height="54" rx="10" fill="#0ea5e9" stroke="#0284c7" stroke-width="2" />
+  <!-- Ícone de Moeda (Círculo dourado com €) -->
+  <circle cx="35" cy="30" r="15" fill="#fbbf24" stroke="#b45309" stroke-width="1.5" />
+  <text x="35" y="38.5" font-family="system-ui, sans-serif" font-size="18" font-weight="900" fill="#b45309" text-anchor="middle">€</text>
+  <!-- Texto: MOEDA -->
+  <text x="95" y="38" font-family="system-ui, sans-serif" font-size="26" font-weight="900" fill="#ffffff" text-anchor="middle">MOEDA</text>
+</svg>

@@ -1,0 +1,37 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="nota5Grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#cbd5e1" />
+      <stop offset="100%" stop-color="#94a3b8" />
+    </linearGradient>
+    <linearGradient id="ouroGrad1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fde047" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sombra base -->
+  <ellipse cx="50" cy="88" rx="36" ry="6" fill="#cbd5e1" opacity="0.6" />
+
+  <!-- Nota de 5€ inclinada atrás -->
+  <g transform="rotate(-12 50 38)">
+    <rect x="16" y="16" width="68" height="40" rx="6" fill="url(#nota5Grad)" stroke="#475569" stroke-width="2.5" />
+    <rect x="21" y="21" width="58" height="30" rx="3" fill="none" stroke="#f8fafc" stroke-width="1.5" stroke-dasharray="3 2" />
+    <text x="34" y="42" font-family="system-ui, sans-serif" font-size="18" font-weight="900" fill="#1e293b" text-anchor="middle">5€</text>
+    <circle cx="64" cy="36" r="9" fill="#64748b" opacity="0.35" />
+  </g>
+
+  <!-- Moeda de 2€ (Esquerda) -->
+  <g transform="translate(34, 64)">
+    <circle cx="0" cy="0" r="21" fill="#e2e8f0" stroke="#475569" stroke-width="2.5" />
+    <circle cx="0" cy="0" r="14.5" fill="url(#ouroGrad1)" stroke="#b45309" stroke-width="1.5" />
+    <text x="0" y="6" font-family="system-ui, sans-serif" font-size="16" font-weight="900" fill="#78350f" text-anchor="middle">2€</text>
+  </g>
+
+  <!-- Moeda de 1€ (Direita) -->
+  <g transform="translate(68, 67)">
+    <circle cx="0" cy="0" r="18.5" fill="url(#ouroGrad1)" stroke="#b45309" stroke-width="2.5" />
+    <circle cx="0" cy="0" r="12.5" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
+    <text x="0" y="5.5" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#334155" text-anchor="middle">1€</text>
+  </g>
+</svg>

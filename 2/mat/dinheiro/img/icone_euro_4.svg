@@ -1,0 +1,32 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="trofeuGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fde047" />
+      <stop offset="55%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sombra base -->
+  <ellipse cx="50" cy="89" rx="30" ry="5.5" fill="#cbd5e1" opacity="0.6" />
+
+  <!-- Asas laterais do troféu -->
+  <path d="M 30 27 H 19 C 14 27, 14 45, 23 47 L 31 49" fill="none" stroke="#d97706" stroke-width="4.5" stroke-linecap="round" />
+  <path d="M 70 27 H 81 C 86 27, 86 45, 77 47 L 69 49" fill="none" stroke="#d97706" stroke-width="4.5" stroke-linecap="round" />
+
+  <!-- Haste e base do troféu -->
+  <rect x="44" y="58" width="12" height="15" fill="#d97706" />
+  <rect x="32" y="72" width="36" height="7" rx="3.5" fill="#f59e0b" stroke="#92400e" stroke-width="2" />
+  <rect x="27" y="78" width="46" height="9" rx="4" fill="#334155" stroke="#1e293b" stroke-width="2" />
+
+  <!-- Taça principal -->
+  <path d="M 28 20 H 72 L 67 46 C 65 56, 58 61, 50 61 C 42 61, 35 56, 33 46 Z" fill="url(#trofeuGrad)" stroke="#92400e" stroke-width="2.5" stroke-linejoin="round" />
+
+  <!-- Medalhão central com símbolo € -->
+  <circle cx="50" cy="39" r="13" fill="#7c3aed" stroke="#ffffff" stroke-width="2" />
+  <text x="50" y="45" font-family="system-ui, sans-serif" font-size="17" font-weight="900" fill="#fde047" text-anchor="middle">€</text>
+
+  <!-- Estrelas decorativas -->
+  <path d="M 18 12 L 20 17 L 25 19 L 20 21 L 18 26 L 16 21 L 11 19 L 16 17 Z" fill="#38bdf8" />
+  <path d="M 83 11 L 85 15 L 89 17 L 85 19 L 83 23 L 81 19 L 77 17 L 81 15 Z" fill="#f43f5e" />
+</svg>

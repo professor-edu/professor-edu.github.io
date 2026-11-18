@@ -1,0 +1,7 @@
+<svg width="160" height="60" viewBox="0 0 160 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo Vermelho com sombra suave -->
+  <rect x="2" y="2" width="156" height="54" rx="10" fill="#dc2626" />
+  <rect x="0" y="0" width="156" height="54" rx="10" fill="#ef4444" stroke="#b91c1c" stroke-width="2" />
+  <!-- Texto: NÃO -->
+  <text x="78" y="38" font-family="system-ui, sans-serif" font-size="30" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="1">NÃO</text>
+</svg>

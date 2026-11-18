@@ -1,0 +1,7 @@
+<svg width="160" height="60" viewBox="0 0 160 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo Verde com sombra suave -->
+  <rect x="2" y="2" width="156" height="54" rx="10" fill="#16a34a" />
+  <rect x="0" y="0" width="156" height="54" rx="10" fill="#22c55e" stroke="#15803d" stroke-width="2" />
+  <!-- Texto: SIM -->
+  <text x="78" y="38" font-family="system-ui, sans-serif" font-size="30" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="1">SIM</text>
+</svg>

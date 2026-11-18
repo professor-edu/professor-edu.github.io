@@ -180,6 +180,32 @@
   touch-action: manipulation;
 }
 
+
+/* =========================================
+           CONFETIS
+        ========================================= */
+        .confetti-container { position: absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; pointer-events:none; border-radius:30px; z-index: 10; }
+		
+		/* Confetis Limitados ao Container */
+        .confetti { 
+            position: absolute; 
+            width: 12px; 
+            height: 12px; 
+            border-radius: 2px;
+            opacity: 0; 
+            animation: fall linear forwards; 
+            pointer-events: none;
+            z-index: 15;
+        }
+        @keyframes fall { 
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; } 
+            80% { opacity: 1; }
+            100% { transform: translateY(1000px) rotate(720deg); opacity: 0; } 
+        }
+
+
+
+
 .area-jogo-custom::after {
   content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='16' viewBox='0 0 64 16' fill='none' stroke='%231971c2' stroke-width='2' stroke-linecap='round' opacity='0.45'%3E%3C!-- Mais --%3E%3Cline x1='8' y1='4' x2='8' y2='12'/%3E%3Cline x1='4' y1='8' x2='12' y2='8'/%3E%3C!-- Menos --%3E%3Cline x1='20' y1='8' x2='28' y2='8'/%3E%3C!-- Multiplicação --%3E%3Cline x1='36' y1='4' x2='44' y2='12'/%3E%3Cline x1='44' y1='4' x2='36' y2='12'/%3E%3C!-- Divisão --%3E%3Cline x1='52' y1='8' x2='60' y2='8'/%3E%3Ccircle cx='56' cy='4' r='1' fill='%231971c2'/%3E%3Ccircle cx='56' cy='12' r='1' fill='%231971c2'/%3E%3C/svg%3E");
   position: absolute;
@@ -294,7 +320,7 @@
             <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
             </button>
-            <a href="../" class="btn-voltar" onclick="voltarAoMenu()">⬅️ Voltar</a>
+            <a href="../" class="btn-voltar"><img src="../../../SVG/voltar.svg" class="icon-svg-voltar" alt=""> Voltar</a>
         </div>
         
         <h1>Missão Matemática <img src="../img-titulos/missao-matematica.svg" class="icon-svg-titulo" alt=""></h1>
@@ -421,7 +447,8 @@
     }
 
     function voltarAoMenu() {
-        mostrarEcra('ecra-selecao');
+        limparConfetis();
+		mostrarEcra('ecra-selecao');
     }
 
     function showToast(msg, error = false) {
@@ -529,7 +556,8 @@ function atualizarPlacar() {
     }
 
     function avancarParaProximaRonda() {
-        mostrarEcra('ecra-jogo');
+        limparConfetis();
+		mostrarEcra('ecra-jogo');
         gerarExercicio();
     }
 
@@ -930,6 +958,13 @@ function atualizarPlacar() {
         });
         if (ativos) requestAnimationFrame(animarConfetis);
     }
+	
+	function limparConfetis() {
+		const container = document.getElementById('confetti-canvas');
+		if (container) {
+			container.innerHTML = '';
+		}
+	}
 
     window.onload = () => mostrarEcra('ecra-selecao');
 </script>
