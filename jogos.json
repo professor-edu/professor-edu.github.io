@@ -1004,6 +1004,14 @@
         "disciplina": "Português",
         "tags": ["masculino", "feminino", "género", "gramática", "nomes"]
     },
+	{
+        "nome": "Missão Singular Plural",
+        "icone": "/2/icones/missao_singular_plural.png",
+        "link": "/2/pt/missao-singular-plural/",
+        "ano": "2º Ano",
+        "disciplina": "Português",
+        "tags": ["singular", "plural", "número", "gramática", "nomes", "som"]
+    },
     {
         "nome": "Singular e Plural",
         "icone": "/2/icones/numero.png",

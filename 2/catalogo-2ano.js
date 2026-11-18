@@ -30,6 +30,7 @@ const todosOsJogos =[
 	{ nome: "Determinantes Artigos", icone: "icones/determinantes_artigos.png", link: "pt/determinantes-artigos/", cat: "pt" },
 	{ nome: "Caça às Sílabas", icone: "icones/numero_silabas.png", link: "pt/numero-silabas/", cat: "pt" },
 	{ nome: "Detetive do Género", icone: "icones/detetive_genero.png", link: "pt/detetive-genero/", cat: "pt" },
+	{ nome: "Missão Singular Plural", icone: "icones/missao_singular_plural.png", link: "pt/missao-singular-plural/", cat: "pt" },
 	
 	
     // ------------------------------------
