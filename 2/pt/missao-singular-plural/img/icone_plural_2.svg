@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="pl2Purple" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+  </defs>
+
+  <!-- Base branca arredondada -->
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="#ffffff" />
+
+  <!-- Seta curva superior (Azul) -->
+  <path d="M 16 23 A 18 18 0 0 1 46 18" fill="none" stroke="#3b82f6" stroke-width="4.5" stroke-linecap="round" />
+  <polygon points="49,22 48,12 40,18" fill="#2563eb" />
+
+  <!-- Seta curva inferior (Verde Esmeralda) -->
+  <path d="M 48 41 A 18 18 0 0 1 18 46" fill="none" stroke="#10b981" stroke-width="4.5" stroke-linecap="round" />
+  <polygon points="15,42 16,52 24,46" fill="#059669" />
+
+  <!-- Pílula central 3D (-ES) -->
+  <rect x="16" y="24" width="32" height="20" rx="7" fill="#5b21b6" />
+  <rect x="16" y="21.5" width="32" height="20" rx="7" fill="url(#pl2Purple)" />
+  <text x="32" y="35.5" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="900" fill="#ffffff" letter-spacing="0.5">-ES</text>
+</svg>
