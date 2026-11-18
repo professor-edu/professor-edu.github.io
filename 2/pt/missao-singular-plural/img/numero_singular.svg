@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" width="200" height="150">
+  <defs>
+    <linearGradient id="gradSingTile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+    <linearGradient id="gradSingStar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fde047" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sombra suave no chão -->
+  <ellipse cx="100" cy="134" rx="46" ry="6" fill="#cbd5e1" opacity="0.6" />
+
+  <!-- Peça 3D Única (Singular) -->
+  <rect x="46" y="24" width="108" height="104" rx="24" fill="#1d4ed8" />
+  <rect x="46" y="18" width="108" height="104" rx="24" fill="url(#gradSingTile)" />
+
+  <!-- Brilho superior 3D -->
+  <rect x="54" y="23" width="92" height="14" rx="7" fill="#ffffff" opacity="0.22" />
+
+  <!-- Texto Principal: O / A -->
+  <text x="100" y="74" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="900" fill="#ffffff" letter-spacing="1">
+    O <tspan font-size="26" opacity="0.8">/</tspan> A
+  </text>
+
+  <!-- Subtexto: UM • UMA -->
+  <text x="100" y="103" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="800" fill="#dbeafe" letter-spacing="1.2">
+    UM • UMA
+  </text>
+
+  <!-- Estrela única (1 elemento) no canto superior direito -->
+  <g transform="translate(148, 22)">
+    <circle cx="0" cy="2" r="15" fill="#d97706" />
+    <circle cx="0" cy="0" r="15" fill="url(#gradSingStar)" stroke="#ffffff" stroke-width="2.5" />
+    <text x="0" y="5" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="900" fill="#78350f">1</text>
+  </g>
+</svg>
