@@ -1316,6 +1316,14 @@
         "disciplina": "Matemática",
         "tags": ["gráficos", "estatística", "dados", "tabelas"]
     },
+	{
+        "nome": "O Dinheiro",
+        "icone": "/2/icones/dinheiro.png",
+        "link": "/2/mat/dinheiro/",
+        "ano": "2º Ano",
+        "disciplina": "Matemática",
+        "tags": ["notas", "moedas", "euro", "dinheiro"]
+    },
     {
         "nome": "Figuras e Sólidos",
         "icone": "/2/icones/figuras_solidos.png",

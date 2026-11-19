@@ -349,6 +349,7 @@ function carregarRonda() {
             
             opcoesGeradas.forEach(item => {
                 const valorValidacao = (item.valor || item.alt || '').trim().toLowerCase();
+                const valorSeguro = valorValidacao.replace(/"/g, '&quot;');
                 const eCorreta = valorValidacao === ronda.correta.trim().toLowerCase();
                 const textoLegenda = usarAltNaLegenda ? (item.alt || item.valor || '') : (item.valor || item.alt || '');
                 const fnClique = eCorreta ? "simularAcerto(this)" : "simularErro(this)";
@@ -374,7 +375,7 @@ function carregarRonda() {
                 }
 
                 html += `
-                    <button class="btn-opcao-imagem${classeExtra}" onclick="${fnClique}">
+                    <button class="btn-opcao-imagem${classeExtra}" data-correta="${eCorreta}" data-valor="${valorSeguro}" onclick="${fnClique}">
                         ${htmlImagem}
                         ${htmlLegenda}
                     </button>
@@ -389,7 +390,8 @@ function carregarRonda() {
             html += `<div class="opcoes-certo-errado">`;
             ronda.opcoes.forEach(opcao => {
                 const texto = (typeof opcao === 'object') ? opcao.texto : opcao;
-                const fnClique = (texto.trim().toLowerCase() === ronda.correta.trim().toLowerCase()) ? "simularAcerto(this)" : "simularErro(this)";
+                const eCorreta = texto.trim().toLowerCase() === ronda.correta.trim().toLowerCase();
+                const fnClique = eCorreta ? "simularAcerto(this)" : "simularErro(this)";
                 
                 const textoLower = texto.toLowerCase();
                 const ePositivo = (textoLower.includes("certo") || textoLower.includes("seguro") || textoLower.includes("vantagem")) && !textoLower.includes("desvantagem");
@@ -397,7 +399,7 @@ function carregarRonda() {
                 const caminhoSVG = ePositivo ? "../../../SVG/thumbs_up.svg" : "../../../SVG/thumbs_down.svg";
                 
                 html += `
-                    <button class="btn-opcao ${classeEstilo}" onclick="${fnClique}">
+                    <button class="btn-opcao ${classeEstilo}" data-correta="${eCorreta}" onclick="${fnClique}">
                         <span>${texto}</span>
                         <img src="${caminhoSVG}" alt="" class="icon-resposta-svg">
                     </button>
@@ -425,7 +427,7 @@ function carregarRonda() {
                 const opcaoSegura = opcao.replace(/"/g, '&quot;');
 
                 html += `
-                    <button class="btn-opcao ${classeCor}" data-opcao="${opcaoSegura}" onclick="verificarLacuna(this, ${eCorreta})">
+                    <button class="btn-opcao ${classeCor}" data-correta="${eCorreta}" data-opcao="${opcaoSegura}" onclick="verificarLacuna(this, ${eCorreta})">
                         ${opcao}
                     </button>
                 `;
@@ -470,10 +472,11 @@ function carregarRonda() {
             
             html += `<div class="opcoes-container${classeGridMobile}" id="opcoes-container">`;
             opcoesTexto.forEach((opcao, index) => {
-                const fnClique = (opcao.trim().toLowerCase() === ronda.correta.trim().toLowerCase()) ? "simularAcerto(this)" : "simularErro(this)";
+                const eCorreta = opcao.trim().toLowerCase() === ronda.correta.trim().toLowerCase();
+                const fnClique = eCorreta ? "simularAcerto(this)" : "simularErro(this)";
                 const classeCor = coresSorteadas[index % coresSorteadas.length];
                 html += `
-                    <button class="btn-opcao ${classeCor}" onclick="${fnClique}">
+                    <button class="btn-opcao ${classeCor}" data-correta="${eCorreta}" onclick="${fnClique}">
                         ${opcao}
                     </button>
                 `;

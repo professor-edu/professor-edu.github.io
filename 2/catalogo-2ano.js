@@ -60,6 +60,7 @@ const todosOsJogos =[
 	{ nome: "Problemas no Caderno", icone: "icones/problemas_caderno.png", link: "mat/problemas-caderno/", cat: "mat" },
 	{ nome: "O Robô das Contas", icone: "icones/robo_contas.png", link: "mat/robo-contas/", cat: "mat" },
 	{ nome: "O Robô Explorador", icone: "icones/robo_explorador.png", link: "mat/robo-explorador/", cat: "mat" },
+	{ nome: "O Dinheiro", icone: "icones/dinheiro.png", link: "mat/dinheiro/", cat: "mat" },
 	
     
     // ------------------------------------
