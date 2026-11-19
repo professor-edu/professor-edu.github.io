@@ -20,7 +20,7 @@ const CONFIG_JOGO = {
             perguntas: [
                 {
                     tipo: "situacao",
-                    pergunta: "Observa a imagem. É uma moeda ou uma nota?",
+                    pergunta: "<span class='destaque-amarelo'>O que é?</span>",
                     dinheiro: ["2e"],
                     mostrarLegenda: false,
                     ordemFixa: true,
@@ -32,7 +32,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "situacao",
-                    pergunta: "Observa a imagem. É uma moeda ou uma nota?",
+                    pergunta: "<span class='destaque-amarelo'>O que é?</span>",
                     dinheiro: ["10e"],
                     mostrarLegenda: false,
                     ordemFixa: true,
@@ -44,7 +44,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "situacao",
-                    pergunta: "Classifica este elemento do euro.",
+                    pergunta: "<span class='destaque-amarelo'>O que é?</span>",
                     dinheiro: ["5e"],
                     mostrarLegenda: false,
                     ordemFixa: true,
@@ -56,7 +56,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "situacao",
-                    pergunta: "Classifica este elemento do euro.",
+                    pergunta: "<span class='destaque-amarelo'>O que é?</span>",
                     dinheiro: ["1e"],
                     mostrarLegenda: false,
                     ordemFixa: true,
@@ -68,7 +68,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "opcoes-imagem",
-                    pergunta: "Qual destas é a nota de <strong>10 euros</strong>?",
+                    pergunta: "Clica na nota de <span class='destaque-badge'>10 euros</span>",
                     mostrarLegenda: false,
                     correta: "10e",
                     opcoes: [
@@ -80,7 +80,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "opcoes-imagem",
-                    pergunta: "Qual destas é a moeda de <strong>2 euros</strong>?",
+                    pergunta: "Clica na moeda de <span class='destaque-badge'>2 euros</span>",
                     mostrarLegenda: false,
                     correta: "2e",
                     opcoes: [
@@ -92,7 +92,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "opcoes-imagem",
-                    pergunta: "Onde estão <strong>3 euros</strong>?",
+                    pergunta: "Onde estão <span class='destaque-fundo'>3 euros</span>?",
                     mostrarLegenda: false,
                     correta: "3e",
                     opcoes: [
@@ -104,7 +104,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "opcoes-imagem",
-                    pergunta: "Onde estão <strong>7 euros</strong>?",
+                    pergunta: "Onde estão <span class='destaque-fundo'>7 euros</span>?",
                     mostrarLegenda: false,
                     correta: "7e",
                     opcoes: [
@@ -116,7 +116,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "opcoes-imagem",
-                    pergunta: "Onde está <strong>mais dinheiro</strong>?",
+                    pergunta: "Onde está <span class='destaque-fundo'>mais dinheiro</span>?",
                     mostrarLegenda: false,
                     correta: "15e",
                     opcoes: [
@@ -128,7 +128,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "opcoes-imagem",
-                    pergunta: "Onde está <strong>menos dinheiro</strong>?",
+                    pergunta: "Onde está <span class='destaque-fundo'>menos dinheiro</span>?",
                     mostrarLegenda: false,
                     correta: "3e",
                     opcoes: [
@@ -168,14 +168,14 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "lacuna",
-                    pergunta: "Duas notas de 5 € valem o mesmo que uma nota de ________.",
+                    pergunta: "Duas notas de <span class='destaque-fundo'>5 €</span> valem o mesmo que uma nota de ________.",
                     dinheiro: ["5e", "5e"],
                     correta: "10 €",
                     opcoes: ["10 €", "20 €", "5 €", "15 €"]
                 },
                 {
                     tipo: "lacuna",
-                    pergunta: "Duas moedas de 1 € valem o mesmo que uma moeda de ________.",
+                    pergunta: "Duas moedas de <span class='destaque-fundo'>1 €</span> valem o mesmo que uma moeda de ________.",
                     dinheiro: ["1e", "1e"],
                     correta: "2 €",
                     opcoes: ["2 €", "5 €", "1 €", "10 €"]
@@ -189,21 +189,21 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "construtor",
-                    pergunta: "Escreve o nome deste tipo de dinheiro.",
+                    pergunta: "Moeda ou Nota?",
                     dinheiro: ["5e"],
                     correta: "NOTA",
                     letrasExtras: ["M", "D"]
                 },
                 {
                     tipo: "construtor",
-                    pergunta: "Escreve o nome deste tipo de dinheiro.",
+                    pergunta: "Na imagem está uma...",
                     dinheiro: ["2e"],
                     correta: "MOEDA",
                     letrasExtras: ["N", "T"]
                 },
                 {
                     tipo: "construtor",
-                    pergunta: "Escreve por extenso o valor desta nota.",
+                    pergunta: "Escreve por extenso o <span class='destaque-texto-verde'>valor</span> desta nota.",
                     dinheiro: ["20e"],
                     correta: "VINTE",
                     letrasExtras: ["D", "Z"]
@@ -296,7 +296,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "opcoes-imagem",
-                    pergunta: "Qual conjunto paga exatamente um carrinho de <span class='destaque-badge'>15 €</span>?",
+                    pergunta: "Que conjunto paga <span class='destaque-texto-verde'>exatamente</span> um carrinho de <span class='destaque-badge'>15 €</span>?",
                     mostrarLegenda: false,
                     correta: "15e",
                     opcoes: [
@@ -308,7 +308,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "opcoes-imagem",
-                    pergunta: "Qual conjunto paga exatamente uma camisola de <span class='destaque-badge'>9 €</span>?",
+                    pergunta: "Que conjunto paga <span class='destaque-texto-verde'>exatamente</span> uma camisola de <span class='destaque-badge'>9 €</span>?",
                     mostrarLegenda: false,
                     correta: "9e",
                     opcoes: [
@@ -346,40 +346,40 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "padrao",
-                    pergunta: "Compras uma borracha por <span class='destaque-badge'>2 €</span> e um caderno por <span class='destaque-badge'>5 €</span>. Quanto pagas ao todo?",
+                    pergunta: "Compras uma borracha por <span class='destaque-badge'>2 €</span> e um caderno por <span class='destaque-badge'>5 €</span>.\nQuanto pagas ao todo?",
                     correta: "7 €",
                     opcoes: ["7 €", "3 €", "8 €", "10 €"]
                 },
                 {
                     tipo: "padrao",
-                    pergunta: "Um sumo custa <span class='destaque-badge'>3 €</span> e uma sandes custa <span class='destaque-badge'>4 €</span>. Qual é o total?",
+                    pergunta: "Um sumo custa <span class='destaque-badge'>3 €</span> e uma sandes custa <span class='destaque-badge'>4 €</span>.\nQual é o total?",
                     correta: "7 €",
                     opcoes: ["7 €", "6 €", "1 €", "8 €"]
                 },
                 {
                     tipo: "padrao",
-                    pergunta: "Pagas uma revista de <span class='destaque-badge'>7 €</span> com esta nota de 10 €. Quanto recebes de troco?",
+                    pergunta: "Pagas uma revista de <span class='destaque-badge'>7 €</span> com esta nota de <span class='destaque-badge'>10 €</span>.\nQuanto recebes de troco?",
                     dinheiro: ["10e"],
                     correta: "3 €",
                     opcoes: ["3 €", "4 €", "2 €", "17 €"]
                 },
                 {
                     tipo: "padrao",
-                    pergunta: "Compras um casaco de <span class='destaque-badge'>15 €</span> e pagas com 20 €. Qual é o troco?",
+                    pergunta: "Compras um casaco de <span class='destaque-badge'>15 €</span> e pagas com <span class='destaque-badge'>20 €</span>.\nQual é o troco?",
                     dinheiro: ["20e"],
                     correta: "5 €",
                     opcoes: ["5 €", "10 €", "4 €", "35 €"]
                 },
                 {
                     tipo: "lacuna",
-                    pergunta: "Pagaste um gelado de <span class='destaque-badge'>3 €</span> com esta nota. Recebes ________ de troco.",
+                    pergunta: "Pagaste um gelado de <span class='destaque-badge'>3 €</span> com esta nota.\nRecebes ________ de troco.",
                     dinheiro: ["5e"],
                     correta: "2 €",
                     opcoes: ["2 €", "3 €", "1 €", "8 €"]
                 },
                 {
                     tipo: "lacuna",
-                    pergunta: "Dois livros custam <span class='destaque-badge'>6 €</span> cada um. Os dois juntos custam ________.",
+                    pergunta: "Dois livros custam <span class='destaque-badge'>6 €</span> cada um.\nOs dois juntos custam ________.",
                     correta: "12 €",
                     opcoes: ["12 €", "8 €", "10 €", "6 €"]
                 },
@@ -391,22 +391,22 @@ const CONFIG_JOGO = {
                     opcoes: ["20 €", "10 €", "30 €", "15 €"]
                 },
                 {
-                    tipo: "construtor",
-                    pergunta: "Pagaste um livro de <span class='destaque-badge'>6 €</span> com esta nota. Quanto recebes de troco?",
-                    dinheiro: ["10e"],
-                    correta: "4€",
-                    letrasExtras: ["2", "5", "6"]
-                },
+					tipo: "construtor",
+					pergunta: "Pagaste um livro de <span class='destaque-badge'>6 €</span> com esta nota. Quanto recebes de troco? <span class='subtexto-pergunta'>(não te esqueças do símbolo € depois do número)</span>",
+					dinheiro: ["10e"],
+					correta: "4€",
+					letrasExtras: ["2", "5", "6"]
+				},
+				{
+					tipo: "construtor",
+					pergunta: "Pagaste uma bola de <span class='destaque-badge'>12 €</span> com esta nota. Quanto recebes de troco? <span class='subtexto-pergunta'>(não te esqueças do símbolo € depois do número)</span>",
+					dinheiro: ["20e"],
+					correta: "8€",
+					letrasExtras: ["6", "7", "2"]
+				},
                 {
                     tipo: "construtor",
-                    pergunta: "Pagaste uma bola de <span class='destaque-badge'>12 €</span> com esta nota. Quanto recebes de troco?",
-                    dinheiro: ["20e"],
-                    correta: "8€",
-                    letrasExtras: ["6", "7", "2"]
-                },
-                {
-                    tipo: "construtor",
-                    pergunta: "Como se chama o dinheiro que o vendedor nos devolve quando pagamos a mais?",
+                    pergunta: "Como se chama o dinheiro que o vendedor nos <span class='destaque-texto-verde'>devolve</span> quando pagamos a mais?",
                     correta: "TROCO",
                     letrasExtras: ["N", "A"]
                 }
@@ -419,7 +419,7 @@ const CONFIG_JOGO = {
         {
             id: 3,
             titulo: "Cêntimos e Notas Grandes",
-            subtitulo: "Descobre os cêntimos, o 1 € e as notas até 500 €",
+            subtitulo: "Descobre os cêntimos, o 1 € e as notas até 200 €",
             corClasse: "bg-roxo",
             icone: "img/icone_euro_3.svg",
             numQuestoes: 10,

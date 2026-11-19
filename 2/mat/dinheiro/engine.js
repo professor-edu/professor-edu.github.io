@@ -180,9 +180,9 @@ function renderizarDinheiro(lista, emOpcao = false, emModal = false) {
         else if (pesoLargura <= 6.0) fatorEscala = 1.35;
         else fatorEscala = 1.1;
     } else if (emOpcao) {
-        if (pesoLargura <= 2.0) fatorEscala = 0.72;
-        else if (pesoLargura <= 3.8) fatorEscala = 0.56;
-        else fatorEscala = 0.45;
+        if (pesoLargura <= 2.0) fatorEscala = 0.86;
+        else if (pesoLargura <= 3.8) fatorEscala = 0.72;
+        else fatorEscala = 0.56;
     } else {
         if (pesoLargura <= 3.6) fatorEscala = 1.0;
         else if (pesoLargura <= 6.0) fatorEscala = 0.84;
