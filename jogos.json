@@ -1260,6 +1260,14 @@
         "disciplina": "Matemática",
         "tags": ["estratégias", "cálculo", "cálculo mental", "contas"]
     },
+	{
+        "nome": "O Detetive dos Números",
+        "icone": "/2/icones/detetive_numeros.png",
+        "link": "/2/mat/detetive-numeros/",
+        "ano": "2º Ano",
+        "disciplina": "Matemática",
+        "tags": ["números pares", "cálculo", "cálculo mental", "números ímpares", "ábaco", "MAB", "material multibásico", "números até 100", "números até 500", "números até 1000", "igualdades", "maior menor igual"]
+    },
     {
         "nome": "Tabuadas Flash",
         "icone": "/2/icones/tabuadas_flash.png",

@@ -311,7 +311,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "padrao",
-                    pergunta: "Qual destes números é <span class='destaque-texto-fundo'>ímpar</span>?",
+                    pergunta: "Qual destes números é <span class='destaque-fundo'>ímpar</span>?",
                     correta: "31",
                     opcoes: ["31", "24", "48", "90"],
                     dica: {
@@ -422,7 +422,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "situacao",
-                    pergunta: "O cofre tem o código <span class='destaque-badge'>245</span>. Este número é...",
+                    pergunta: "O cofre tem o código <span class='destaque-badge'>245</span>.\nEste número é...",
                     mostrarLegenda: false,
                     ordemFixa: true,
                     correta: "ÍMPAR",
@@ -437,7 +437,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "situacao",
-                    pergunta: "Pista do arquivo: <span class='destaque-badge'>300</span> é um número...",
+                    pergunta: "Pista do arquivo.\n<span class='destaque-badge'>300</span> é um número...",
                     mostrarLegenda: false,
                     ordemFixa: true,
                     correta: "PAR",
@@ -452,7 +452,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "situacao",
-                    pergunta: "Encontraste a ficha <span class='destaque-badge'>411</span>. Este número é...",
+                    pergunta: "Encontraste a ficha <span class='destaque-badge'>411</span>.\nEste número é...",
                     mostrarLegenda: false,
                     ordemFixa: true,
                     correta: "ÍMPAR",
@@ -467,7 +467,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "situacao",
-                    pergunta: "Pista: «Uma centena é igual a <span class='destaque-badge'>10</span> dezenas.» Está certo?",
+                    pergunta: "<span class='destaque-fundo'>Uma centena</span> é igual a <span class='destaque-amarelo'>10</span> dezenas.\nEstá certo?",
                     mostrarLegenda: false,
                     ordemFixa: true,
                     correta: "SIM",
@@ -482,7 +482,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "situacao",
-                    pergunta: "Pista: «No número <span class='destaque-badge'>342</span>, o algarismo 3 vale 30.» Está certo?",
+                    pergunta: "No número <span class='destaque-amarelo'>342</span>, o algarismo <span class='destaque-fundo'>3 vale 30</span>.\nEstá certo?",
                     mostrarLegenda: false,
                     ordemFixa: true,
                     correta: "NÃO",
@@ -593,7 +593,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "lacuna",
-                    pergunta: "Compara os números: <span class='destaque-badge'>245</span> ________ <span class='destaque-badge'>254</span>",
+                    pergunta: "Compara os números.\n<span class='destaque-badge'>245</span> ________ <span class='destaque-badge'>254</span>",
                     ordemFixa: true,
                     correta: "<",
                     opcoes: ["<", ">", "="],
@@ -604,7 +604,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "lacuna",
-                    pergunta: "Compara os valores: <span class='destaque-badge'>412</span> ________ <span class='destaque-badge'>398</span>",
+                    pergunta: "Compara os valores.\n<span class='destaque-badge'>412</span> ________ <span class='destaque-badge'>398</span>",
                     ordemFixa: true,
                     correta: ">",
                     opcoes: ["<", ">", "="],
@@ -615,7 +615,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "lacuna",
-                    pergunta: "Compara as duas pistas: <span class='destaque-fundo'>3 centenas</span> ________ <span class='destaque-badge'>300</span>",
+                    pergunta: "Compara as duas pistas.\n<span class='destaque-fundo'>3 centenas</span> ________ <span class='destaque-badge'>300</span>",
                     ordemFixa: true,
                     correta: "=",
                     opcoes: ["<", ">", "="],
@@ -626,7 +626,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "lacuna",
-                    pergunta: "Completa a sequência: 100 — 200 — ________ — 400",
+                    pergunta: "Completa a sequência.\n100 -> 200 -> ________ -> 400",
                     correta: "300",
                     opcoes: ["300", "250", "500", "210"],
                     dica: {
@@ -646,7 +646,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "lacuna",
-                    pergunta: "Decomposição: <span class='destaque-badge'>468</span> = 400 + ________ + 8",
+                    pergunta: "Decomposição.\n<span class='destaque-badge'>468</span> = 400 + ________ + 8",
                     correta: "60",
                     opcoes: ["60", "6", "600", "40"],
                     dica: {
@@ -666,7 +666,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "padrao",
-                    pergunta: "Qual é o valor do algarismo <span class='destaque-amarelo'>4</span> no número <span class='destaque-badge'>429</span>?",
+                    pergunta: "Qual é o valor do algarismo <span class='destaque-amarelo'>4</span> no número <span class='destaque-fundo'>429</span>?",
                     correta: "400",
                     opcoes: ["400", "40", "4", "420"],
                     dica: {
@@ -769,7 +769,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "construtor",
-                    pergunta: "Escreve em algarismos: <span class='destaque-fundo'>quatrocentos e quinze</span>.",
+                    pergunta: "Escreve em algarismos.\n<span class='destaque-amarelo'>quatrocentos e quinze</span>",
                     correta: "415",
                     letrasExtras: ["5", "0"],
                     dica: {
@@ -808,7 +808,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "situacao",
-                    pergunta: "O código secreto é <span class='destaque-badge'>903</span>. Este número é...",
+                    pergunta: "O código secreto é <span class='destaque-badge'>903</span>.\nEste número é...",
                     mostrarLegenda: false,
                     ordemFixa: true,
                     correta: "ÍMPAR",
@@ -838,7 +838,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "situacao",
-                    pergunta: "Pista do cofre: <span class='destaque-badge'>657</span> é um número...",
+                    pergunta: "Pista do cofre.\n<span class='destaque-badge'>657</span> é um número...",
                     mostrarLegenda: false,
                     ordemFixa: true,
                     correta: "ÍMPAR",
@@ -853,7 +853,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "situacao",
-                    pergunta: "Pista: «<span class='destaque-badge'>10</span> centenas formam o número <span class='destaque-badge'>1000</span>.» Está certo?",
+                    pergunta: "<span class='destaque-badge'>10</span> centenas formam o número <span class='destaque-badge'>1000</span>.\nEstá certo?",
                     mostrarLegenda: false,
                     ordemFixa: true,
                     correta: "SIM",
@@ -868,7 +868,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "situacao",
-                    pergunta: "Pista: «O número <span class='destaque-badge'>508</span> tem 5 centenas e 8 dezenas.» Está certo?",
+                    pergunta: "O número <span class='destaque-badge'>508</span> tem 5 centenas e 8 dezenas.\nEstá certo?",
                     mostrarLegenda: false,
                     ordemFixa: true,
                     correta: "NÃO",
@@ -883,7 +883,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "opcoes-imagem",
-                    pergunta: "Atenção ao zero! Qual ábaco representa o número <span class='destaque-badge'>305</span>?",
+                    pergunta: "<span class='destaque-fundo'>Atenção ao zero!</span>\nQue ábaco representa o número <span class='destaque-badge'>305</span>?",
                     mostrarLegenda: false,
                     correta: "305",
                     opcoes: [
@@ -899,7 +899,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "opcoes-imagem",
-                    pergunta: "Qual ábaco mostra o número <span class='destaque-badge'>640</span>?",
+                    pergunta: "Que ábaco mostra o número <span class='destaque-badge'>640</span>?",
                     mostrarLegenda: false,
                     correta: "640",
                     opcoes: [
@@ -979,7 +979,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "lacuna",
-                    pergunta: "Compara os números: <span class='destaque-badge'>709</span> ________ <span class='destaque-badge'>790</span>",
+                    pergunta: "Compara os números.\n<span class='destaque-badge'>709</span> ________ <span class='destaque-badge'>790</span>",
                     ordemFixa: true,
                     correta: "<",
                     opcoes: ["<", ">", "="],
@@ -990,7 +990,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "lacuna",
-                    pergunta: "Compara os valores: <span class='destaque-badge'>850</span> ________ <span class='destaque-badge'>805</span>",
+                    pergunta: "Compara os valores.\n<span class='destaque-badge'>850</span> ________ <span class='destaque-badge'>805</span>",
                     ordemFixa: true,
                     correta: ">",
                     opcoes: ["<", ">", "="],
@@ -1001,7 +1001,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "lacuna",
-                    pergunta: "Compara as equivalências: <span class='destaque-fundo'>10 centenas</span> ________ <span class='destaque-badge'>1000</span>",
+                    pergunta: "Compara as equivalências.\n<span class='destaque-fundo'>10 centenas</span> ________ <span class='destaque-badge'>1000</span>",
                     ordemFixa: true,
                     correta: "=",
                     opcoes: ["<", ">", "="],
@@ -1022,7 +1022,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "lacuna",
-                    pergunta: "O número imediatamente <span class='destaque-texto-verde'>depois</span> de <span class='destaque-badge'>899</span> é ________.",
+                    pergunta: "O número imediatamente <span class='destaque-texto-vermelho'>depois</span> de <span class='destaque-badge'>899</span> é ________.",
                     correta: "900",
                     opcoes: ["900", "898", "890", "1000"],
                     dica: {
@@ -1032,7 +1032,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "lacuna",
-                    pergunta: "Completa o código: 650 — 700 — ________ — 800",
+                    pergunta: "Completa o código.\n 650 — 700 — ________ — 800",
                     correta: "750",
                     opcoes: ["750", "710", "705", "850"],
                     dica: {
@@ -1042,7 +1042,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "padrao",
-                    pergunta: "Qual número corresponde a <span class='destaque-fundo'>9 centenas, 0 dezenas e 4 unidades</span>?",
+                    pergunta: "Qual o número que corresponde a <span class='destaque-fundo'>9 centenas, 0 dezenas e 4 unidades</span>?",
                     correta: "904",
                     opcoes: ["904", "940", "409", "94"],
                     dica: {
@@ -1062,7 +1062,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "padrao",
-                    pergunta: "Quantas <span class='destaque-texto-verde'>dezenas</span> tem ao todo o número <span class='destaque-badge'>600</span>?",
+                    pergunta: "Quantas <span class='destaque-texto-verde'>dezenas</span> tem <strong>ao todo</strong> o número <span class='destaque-badge'>600</span>?",
                     correta: "60 dezenas",
                     opcoes: ["60 dezenas", "6 dezenas", "600 dezenas", "10 dezenas"],
                     dica: {
@@ -1092,7 +1092,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "padrao",
-                    pergunta: "Qual destes números está entre <span class='destaque-badge'>680</span> e <span class='destaque-badge'>710</span>?",
+                    pergunta: "Qual destes números está <strong>entre</strong> <span class='destaque-badge'>680</span> e <span class='destaque-badge'>710</span>?",
                     correta: "695",
                     opcoes: ["695", "675", "715", "609"],
                     dica: {
@@ -1134,7 +1134,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "construtor",
-                    pergunta: "Abre o cofre! Forma o <span class='destaque-texto-verde'>maior</span> número possível com os algarismos 3, 8 e 1.",
+                    pergunta: "Abre o cofre!\nForma o <span class='destaque-texto-verde'>maior</span> número possível com os algarismos 3, 8 e 1.",
                     correta: "831",
                     letrasExtras: ["0"],
                     dica: {
@@ -1144,7 +1144,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "construtor",
-                    pergunta: "Abre o cofre! Forma o <span class='destaque-texto-verde'>menor</span> número de três algarismos com 5, 0 e 2.",
+                    pergunta: "Abre o cofre!\nForma o <span class='destaque-texto-verde'>menor</span> número de três algarismos com 5, 0 e 2.",
                     correta: "205",
                     letrasExtras: ["8"],
                     dica: {

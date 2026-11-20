@@ -61,6 +61,7 @@ const todosOsJogos =[
 	{ nome: "O Robô das Contas", icone: "icones/robo_contas.png", link: "mat/robo-contas/", cat: "mat" },
 	{ nome: "O Robô Explorador", icone: "icones/robo_explorador.png", link: "mat/robo-explorador/", cat: "mat" },
 	{ nome: "O Dinheiro", icone: "icones/dinheiro.png", link: "mat/dinheiro/", cat: "mat" },
+	{ nome: "O Detetive dos Números", icone: "icones/detetive_numeros.png", link: "mat/detetive-numeros/", cat: "mat" },
 	
     
     // ------------------------------------

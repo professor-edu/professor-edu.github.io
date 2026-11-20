@@ -192,6 +192,7 @@ export const CATALOGO_JOGOS = [
 	{ nome: "O Robô das Contas", icone: "2/icones/robo_contas.png", link: "2/mat/robo-contas/", ano: "2º Ano" },
 	{ nome: "O Robô Explorador", icone: "2/icones/robo_explorador.png", link: "2/mat/robo-explorador/", ano: "2º Ano" },
 	{ nome: "O Dinheiro", icone: "2/icones/dinheiro.png", link: "2/mat/dinheiro/", ano: "2º Ano" },
+	{ nome: "O Detetive dos Números", icone: "2/icones/detetive_numeros.png", link: "2/mat/detetive-numeros/", ano: "2º Ano" },
 
 	// Estudo do Meio (em)
 	{ nome: "Animais", icone: "2/icones/animais.png", link: "2/em/animais/", ano: "2º Ano" },
