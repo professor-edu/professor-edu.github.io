@@ -545,7 +545,8 @@
     }
 
     function voltarAoMenu() {
-        resetEstadoJogo();
+        terminarConfetis();
+		resetEstadoJogo();
         mostrarEcra('ecra-selecao');
     }
 
@@ -967,21 +968,63 @@ atualizarPlacarUI: function () {
     function redimensionarCanvas() { canvasConfetti.width = canvasConfetti.parentElement.clientWidth; canvasConfetti.height = canvasConfetti.parentElement.clientHeight; }
     window.addEventListener('resize', redimensionarCanvas);
 
-    function dispararConfetis() {
-        redimensionarCanvas(); confetis =[]; const cores =['#ff6b6b', '#4dabf7', '#51cf66', '#fbc531', '#9b59b6'];
-        for (let i = 0; i < 150; i++) confetis.push({ x: Math.random() * canvasConfetti.width, y: Math.random() * canvasConfetti.height - canvasConfetti.height, w: Math.random() * 10 + 5, h: Math.random() * 10 + 5, cor: cores[Math.floor(Math.random() * cores.length)], velY: Math.random() * 3 + 2, velX: Math.random() * 2 - 1, rotacao: Math.random() * 360, velRotacao: Math.random() * 5 - 2.5 });
-        animarConfetis();
-    }
-    function animarConfetis() {
-        ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); let ativos = false;
-        confetis.forEach(c => {
-            c.y += c.velY; c.x += c.velX; c.rotacao += c.velRotacao; if (c.y < canvasConfetti.height) ativos = true;
-            ctxConfetti.save(); ctxConfetti.translate(c.x, c.y); ctxConfetti.rotate(c.rotacao * Math.PI / 180);
-            ctxConfetti.fillStyle = c.cor; ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); ctxConfetti.restore();
+let animacaoConfetisId = null;
+
+function dispararConfetis() {
+    terminarConfetis(); // Garante que não fica nenhuma animação anterior a correr
+    redimensionarCanvas(); 
+    confetis = []; 
+    const cores = ['#ff6b6b', '#4dabf7', '#51cf66', '#fbc531', '#9b59b6'];
+    
+    for (let i = 0; i < 150; i++) {
+        confetis.push({ 
+            x: Math.random() * canvasConfetti.width, 
+            y: Math.random() * canvasConfetti.height - canvasConfetti.height, 
+            w: Math.random() * 10 + 5, 
+            h: Math.random() * 10 + 5, 
+            cor: cores[Math.floor(Math.random() * cores.length)], 
+            velY: Math.random() * 3 + 2, 
+            velX: Math.random() * 2 - 1, 
+            rotacao: Math.random() * 360, 
+            velRotacao: Math.random() * 5 - 2.5 
         });
-        if (ativos) { requestAnimationFrame(animarConfetis); } 
-        else { ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); }
     }
+    animarConfetis();
+}
+
+function animarConfetis() {
+    ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); 
+    let ativos = false;
+    
+    confetis.forEach(c => {
+        c.y += c.velY; 
+        c.x += c.velX; 
+        c.rotacao += c.velRotacao; 
+        if (c.y < canvasConfetti.height) ativos = true;
+        
+        ctxConfetti.save(); 
+        ctxConfetti.translate(c.x, c.y); 
+        ctxConfetti.rotate(c.rotacao * Math.PI / 180);
+        ctxConfetti.fillStyle = c.cor; 
+        ctxConfetti.fillRect(-c.w/2, -c.h/2, c.w, c.h); 
+        ctxConfetti.restore();
+    });
+
+    if (ativos) { 
+        animacaoConfetisId = requestAnimationFrame(animarConfetis); 
+    } else { 
+        terminarConfetis(); 
+    }
+}
+
+function terminarConfetis() {
+    if (animacaoConfetisId) {
+        cancelAnimationFrame(animacaoConfetisId);
+        animacaoConfetisId = null;
+    }
+    confetis = [];
+    ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+}
 
     window.onload = () => mostrarEcra('ecra-selecao'); 
 
