@@ -792,6 +792,7 @@ const CONFIG_JOGO = {
                     opcoesImagem: [
                         { img: "img/bandeira_vermelha.jpg", alt: "Bandeira vermelha", valor: "Bandeira vermelha" },
                         { img: "img/bandeira_verde.jpg", alt: "Bandeira verde", valor: "Bandeira verde" },
+						{ img: "img/bandeira_xadrez.jpg", alt: "Bandeira axadrezada", valor: "Bandeira axadrezada" },
                         { img: "img/bandeira_amarela.jpg", alt: "Bandeira amarela", valor: "Bandeira amarela" }
                     ],
                     correta: "Bandeira vermelha"
@@ -823,7 +824,7 @@ const CONFIG_JOGO = {
                 {
                     id: 405,
                     tipo: "dupla-opcao",
-                    pergunta: "O menino está a correr à volta da piscina atrás de uma bola. Este comportamento é seguro?",
+                    pergunta: "O menino está a correr à volta da piscina atrás de uma bola. Este comportamento está certo ou errado?",
                     audio: "audios/n4_q05.mp3",
                     imagemPergunta: "img/correr_piscina_bola.jpg",
                     dica: { tipo: "highlight", texto: "O chão à volta da piscina está molhado e escorregadio: podes cair!" },
@@ -833,7 +834,7 @@ const CONFIG_JOGO = {
                 {
                     id: 406,
                     tipo: "opcoes-imagem",
-                    pergunta: "Que símbolo indica que é PROIBIDO correr junto à piscina?",
+                    pergunta: "Que símbolo indica que é <span class='destaque-amarelo'>PROIBIDO</span> correr junto à piscina?",
                     audio: "audios/n4_q06.mp3",
                     dica: { tipo: "50-50", texto: "Procura o círculo vermelho com uma pessoa a correr riscada." },
                     opcoesImagem: [
@@ -847,7 +848,7 @@ const CONFIG_JOGO = {
                 {
                     id: 407,
                     tipo: "opcoes-texto",
-                    pergunta: "Quando está hasteada a bandeira AMARELA na praia, o que podes fazer?",
+                    pergunta: "Quando está hasteada a bandeira <span class='destaque-amarelo'>AMARELA</span> na praia, o que podes fazer?",
                     audio: "audios/n4_q07.mp3",
                     imagemPergunta: "img/bandeira_amarela.jpg",
                     dica: { tipo: "50-50", texto: "Com bandeira amarela não se pode nadar, mas podes molhar os pés junto à areia." },
@@ -888,7 +889,7 @@ const CONFIG_JOGO = {
                 {
                     id: 410,
                     tipo: "ordenar",
-                    pergunta: "Ordena os cuidados a ter quando chegas à piscina:",
+                    pergunta: "Ordena os cuidados a ter quando chegas à piscina.",
                     audio: "audios/n4_q10.mp3",
                     dica: { tipo: "highlight", texto: "Antes de entrar na água tomamos duche e entramos sempre pelas escadas sem correr!" },
                     itens: [
@@ -901,7 +902,7 @@ const CONFIG_JOGO = {
                 {
                     id: 411,
                     tipo: "opcoes-imagem",
-                    pergunta: "Que símbolo significa que é PROIBIDO nadar naquele local?",
+                    pergunta: "Que símbolo significa que é <span class='destaque-texto-vermelho'>PROIBIDO</span> nadar naquele local?",
                     audio: "audios/n4_q11.mp3",
                     dica: { tipo: "50-50", texto: "Procura o círculo vermelho com uma pessoa a nadar riscada." },
                     opcoesImagem: [
@@ -914,12 +915,12 @@ const CONFIG_JOGO = {
                 {
                     id: 412,
                     tipo: "dupla-opcao",
-                    pergunta: "As crianças estão a brincar na água com bóia, perto da praia vigiada e com bandeira verde. Está seguro?",
+                    pergunta: "As crianças estão a brincar na água com bóia, perto da praia vigiada e com bandeira verde.\nÉ seguro ou não?",
                     audio: "audios/n4_q12.mp3",
                     imagemPergunta: "img/criancas_praia_bandeira_verde.jpg",
                     dica: { tipo: "highlight", texto: "Com bandeira verde e sempre vigiadas por adultos, as crianças brincam em segurança!" },
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Certo"
+                    opcoes: ["Sim", "Não"],
+                    correta: "Sim"
                 },
                 {
                     id: 413,
@@ -933,12 +934,12 @@ const CONFIG_JOGO = {
                 {
                     id: 414,
                     tipo: "dupla-opcao",
-                    pergunta: "Mergulhar de cabeça numa piscina onde está o sinal de 'Proibido mergulhar' é seguro?",
+                    pergunta: "Mergulhar de cabeça numa piscina onde está o sinal de <span class='destaque-texto-vermelho'>Proibido mergulhar</span> é seguro?",
                     audio: "audios/n4_q14.mp3",
                     imagemPergunta: "img/simbolo_proibido_mergulhar.jpg",
                     dica: "A água pode ser pouco profunda e podes bater com a cabeça no fundo!",
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Errado"
+                    opcoes: ["Sim", "Não"],
+                    correta: "Não"
                 },
                 {
                     id: 415,
@@ -969,7 +970,7 @@ const CONFIG_JOGO = {
                 {
                     id: 417,
                     tipo: "lacuna",
-                    pergunta: "Nas praias e nas piscinas há ___ que deves respeitar para te divertires em segurança.",
+                    pergunta: "Nas praias e nas piscinas, para te divertires em segurança, deves respeitar os ___.",
                     audio: "audios/n4_q17.mp3",
                     dica: { tipo: "50-50", texto: "São os sinais e as bandeiras que vemos junto à água." },
                     opcoes: ["símbolos", "brinquedos", "gelados", "baldes"],
@@ -978,7 +979,7 @@ const CONFIG_JOGO = {
                 {
                     id: 418,
                     tipo: "ordenar",
-                    pergunta: "Ordena as bandeiras da praia da MAIS SEGURA para a MAIS PERIGOSA:",
+                    pergunta: "Ordena as bandeiras da praia da <span class='destaque-texto-verde'>MAIS SEGURA</span> para a <span class='destaque-texto-vermelho'>MAIS PERIGOSA</span>.",
                     audio: "audios/n4_q18.mp3",
                     dica: { tipo: "highlight", texto: "Começa na bandeira verde (banho permitido) e termina na vermelha (banho proibido)!" },
                     itens: [
@@ -1001,7 +1002,7 @@ const CONFIG_JOGO = {
                 {
                     id: 420,
                     tipo: "opcoes-texto",
-                    pergunta: "Por que razão não se deve correr na borda da piscina?",
+                    pergunta: "Por que razão não se deve correr na beira da piscina?",
                     audio: "audios/n4_q20.mp3",
                     dica: { tipo: "50-50", texto: "A água salpicada deixa o pavimento escorregadio." },
                     opcoes: [
