@@ -560,12 +560,15 @@ function carregarRonda() {
         case 'cidadania': {
             html += `<div class="opcoes-certo-errado">`;
 
+            const palavrasPositivas = ["certo", "certa", "correto", "correta", "seguro", "segura", "vantagem", "sim", "verdade", "verdadeiro", "verdadeira", "adequado", "adequada", "saudável"];
+            const palavrasNegativas = ["errado", "errada", "incorreto", "incorreta", "inseguro", "insegura", "desvantagem", "não", "mentira", "falso", "falsa", "desadequado", "desadequada"];
+
             ronda.opcoes.forEach(opcao => {
                 const texto = (typeof opcao === 'object') ? opcao.texto : opcao;
                 const fnClique = (texto.trim().toLowerCase() === ronda.correta.trim().toLowerCase()) ? "simularAcerto(this)" : "simularErro(this)";
 
                 const textoLower = texto.toLowerCase();
-                const ePositivo = (textoLower.includes("certo") || textoLower.includes("seguro") || textoLower.includes("vantagem")) && !textoLower.includes("desvantagem");
+                const ePositivo = palavrasPositivas.some(p => textoLower.includes(p)) && !palavrasNegativas.some(n => textoLower.includes(n));
                 const classeEstilo = ePositivo ? "btn-certo" : "btn-errado";
                 const caminhoSVG = ePositivo ? "../../../SVG/thumbs_up.svg" : "../../../SVG/thumbs_down.svg";
 

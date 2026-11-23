@@ -57,27 +57,27 @@ const CONFIG_JOGO = {
                 {
                     id: 103,
                     tipo: "dupla-opcao",
-                    pergunta: "Observa a imagem. Este hábito ajuda a manter os dentes saudáveis?",
+                    pergunta: "Observa a imagem.\n Este hábito ajuda a manter os dentes saudáveis?",
                     audio: "audios/n1_q03.mp3",
                     imagemPergunta: "img/escovar_dentes.jpg",
                     dica: { tipo: "highlight", texto: "Devemos escovar os dentes depois das refeições!" },
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Certo"
+                    opcoes: ["Sim", "Não"],
+                    correta: "Sim"
                 },
                 {
                     id: 104,
                     tipo: "dupla-opcao",
-                    pergunta: "A menina saiu à rua num dia de chuva só de t-shirt e calções. O vestuário está adequado?",
+                    pergunta: "A menina saiu à rua num dia de chuva só de t-shirt e calções.\n O vestuário está adequado?",
                     audio: "audios/n1_q04.mp3",
                     imagemPergunta: "img/chuva_roupa_verao.jpg",
                     dica: "Quando chove e está frio, precisamos de impermeável e roupa quente.",
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Errado"
+                    opcoes: ["Sim", "Não"],
+                    correta: "Não"
                 },
                 {
                     id: 105,
                     tipo: "ordenar",
-                    pergunta: "Ordena os momentos da refeição do 1.º ao 3.º passo:",
+                    pergunta: "Ordena os momentos da refeição do 1.º ao 3.º passo.",
                     audio: "audios/n1_q05.mp3",
                     dica: { tipo: "highlight", texto: "Primeiro lavamos as mãos e só no fim lavamos os dentes!" },
                     itens: [
@@ -90,7 +90,7 @@ const CONFIG_JOGO = {
                 {
                     id: 106,
                     tipo: "opcoes-imagem",
-                    pergunta: "Qual destes objetos NÃO pertence à tua higiene pessoal?",
+                    pergunta: "Qual destes objetos <span class='destaque-amarelo'>NÃO</span> pertence à tua higiene pessoal?",
                     audio: "audios/n1_q06.mp3",
                     dica: { tipo: "50-50", texto: "Procura o objeto que serve para comer e não para limpar o corpo." },
                     opcoesImagem: [
@@ -104,7 +104,7 @@ const CONFIG_JOGO = {
                 {
                     id: 107,
                     tipo: "opcoes-texto",
-                    pergunta: "Hoje é dia 20 de novembro. Qual destes iogurtes podes comer ao lanche?",
+                    pergunta: "Hoje é dia <span class='destaque-fundo'>20 de novembro</span>.\nQual destes iogurtes podes comer ao lanche?",
                     audio: "audios/n1_q07.mp3",
                     imagemPergunta: "img/iogurtes_validade.jpg",
                     dica: { tipo: "50-50", texto: "A data de validade tem de ser depois do dia de hoje!" },
@@ -118,7 +118,7 @@ const CONFIG_JOGO = {
                 {
                     id: 108,
                     tipo: "opcoes-imagem",
-                    pergunta: "Qual é o lanche mais saudável para levares para a escola?",
+                    pergunta: "Qual é o lanche <span class='destaque-fundo'>mais saudável</span> para levares para a escola?",
                     audio: "audios/n1_q08.mp3",
                     dica: { tipo: "highlight", texto: "Um bom lanche tem pão escuro, fruta fresca e água!" },
                     opcoesImagem: [
@@ -154,7 +154,7 @@ const CONFIG_JOGO = {
                 {
                     id: 111,
                     tipo: "dupla-opcao",
-                    pergunta: "O menino está a passar muito frio junto ao mar sem casaco. Esta situação é saudável?",
+                    pergunta: "O menino está a passar muito frio junto ao mar sem casaco.\nEsta situação é saudável?",
                     audio: "audios/n1_q11.mp3",
                     imagemPergunta: "img/menino_com_frio.jpg",
                     dica: { tipo: "highlight", texto: "Não proteger o corpo do frio pode deixar-nos doentes!" },
@@ -164,7 +164,7 @@ const CONFIG_JOGO = {
                 {
                     id: 112,
                     tipo: "opcoes-texto",
-                    pergunta: "O que deves comer só ocasionalmente para manteres os dentes saudáveis?",
+                    pergunta: "O que deves comer só de <span class='destaque-fundo'>vez em quando</span> para manteres os dentes saudáveis?",
                     audio: "audios/n1_q12.mp3",
                     dica: { tipo: "50-50", texto: "Alimentos com muito açúcar provocam cáries nos dentes." },
                     opcoes: ["Bolos e rebuçados", "Maçãs e peras", "Sopa de legumes", "Pão e queijo"],
@@ -173,7 +173,7 @@ const CONFIG_JOGO = {
                 {
                     id: 113,
                     tipo: "ordenar",
-                    pergunta: "Ordena a rotina de higiene da manhã antes de ir para a escola:",
+                    pergunta: "Ordena a rotina de higiene da manhã antes de ir para a escola.",
                     audio: "audios/n1_q13.mp3",
                     dica: { tipo: "highlight", texto: "Primeiro vestimos a roupa lavada, tomamos o pequeno-almoço e no fim lavamos os dentes!" },
                     itens: [
@@ -199,7 +199,7 @@ const CONFIG_JOGO = {
                 {
                     id: 115,
                     tipo: "dupla-opcao",
-                    pergunta: "A menina vai dormir vestida com um pijama limpo e confortável. Está adequado?",
+                    pergunta: "A menina vai dormir vestida com um pijama limpo e confortável.\nEstá certo?",
                     audio: "audios/n1_q15.mp3",
                     imagemPergunta: "img/menina_pijama.jpg",
                     dica: { tipo: "highlight", texto: "O pijama é a roupa ideal para descansar bem durante a noite!" },
@@ -281,22 +281,22 @@ const CONFIG_JOGO = {
                 {
                     id: 201,
                     tipo: "dupla-opcao",
-                    pergunta: "O menino ajudou o colega em cadeira de rodas a apanhar o lápis do chão. Esta atitude é correta?",
+                    pergunta: "O menino ajudou o colega em cadeira de rodas a apanhar o lápis do chão.\nEsta atitude está certa ou errada?",
                     audio: "audios/n2_q01.mp3",
                     imagemPergunta: "img/ajudar_colega_cadeira.jpg",
                     dica: { tipo: "highlight", texto: "Ajudar os colegas torna a escola melhor para todos!" },
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Certo"
+                    opcoes: ["Certa", "Errada"],
+                    correta: "Certa"
                 },
                 {
                     id: 202,
                     tipo: "dupla-opcao",
-                    pergunta: "O rapaz pôs o pé à frente da colega e fê-la cair no corredor. Esta atitude é correta?",
+                    pergunta: "O rapaz pôs o pé à frente da colega e fê-la cair no corredor.\nEsta atitude está certa ou errada?",
                     audio: "audios/n2_q02.mp3",
                     imagemPergunta: "img/fazer_cair_colega.jpg",
                     dica: { tipo: "highlight", texto: "Magoar os outros nunca é brincadeira!" },
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Errado"
+                    opcoes: ["Certa", "Errada"],
+                    correta: "Errada"
                 },
                 {
                     id: 203,
@@ -327,7 +327,7 @@ const CONFIG_JOGO = {
                 {
                     id: 205,
                     tipo: "lacuna",
-                    pergunta: "Para nos protegermos de doenças graves devemos ter as ___ em dia.",
+                    pergunta: "Para nos protegermos de doenças graves devemos ter em dia as nossas ___.",
                     audio: "audios/n2_q05.mp3",
                     dica: { tipo: "50-50", texto: "São dadas no centro de saúde pelo enfermeiro ou médico." },
                     opcoes: ["vacinas", "brincadeiras", "sapatilhas", "mochilas"],
@@ -350,17 +350,17 @@ const CONFIG_JOGO = {
                 {
                     id: 207,
                     tipo: "dupla-opcao",
-                    pergunta: "As duas meninas estão a partilhar os seus brinquedos no recreio. Esta atitude contribui para o bem-estar de todos?",
+                    pergunta: "As duas meninas estão a partilhar os seus brinquedos no recreio.\nEsta atitude contribui para o bem-estar de todos?",
                     audio: "audios/n2_q07.mp3",
                     imagemPergunta: "img/partilhar_brinquedos.jpg",
                     dica: { tipo: "highlight", texto: "Partilhar e respeitar os amigos faz todos mais felizes!" },
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Certo"
+                    opcoes: ["Sim", "Não"],
+                    correta: "Sim"
                 },
                 {
                     id: 208,
                     tipo: "ordenar",
-                    pergunta: "Ordena os passos para reciclar uma garrafa de plástico vazia:",
+                    pergunta: "Ordena os passos para reciclar uma garrafa de plástico vazia.",
                     audio: "audios/n2_q08.mp3",
                     dica: { tipo: "highlight", texto: "Primeiro esvaziamos e espalmamos a garrafa, depois procuramos o ecoponto amarelo!" },
                     itens: [
@@ -373,7 +373,7 @@ const CONFIG_JOGO = {
                 {
                     id: 209,
                     tipo: "opcoes-texto",
-                    pergunta: "Porque é importante ter as vacinas em dia?",
+                    pergunta: "Por que é importante ter as vacinas em dia?",
                     audio: "audios/n2_q09.mp3",
                     imagemPergunta: "img/tomar_vacina.jpg",
                     dica: { tipo: "50-50", texto: "As vacinas protegem a nossa saúde e a das pessoas à nossa volta." },
@@ -387,7 +387,7 @@ const CONFIG_JOGO = {
                 {
                     id: 210,
                     tipo: "opcoes-imagem",
-                    pergunta: "Vês lixo espalhado na areia da praia. Qual é a atitude correta?",
+                    pergunta: "Vês lixo espalhado na areia da praia.\nQual é a atitude correta?",
                     audio: "audios/n2_q10.mp3",
                     dica: { tipo: "highlight", texto: "Recolher o lixo evita que vá parar ao mar e magoe os animais!" },
                     opcoesImagem: [
@@ -428,7 +428,7 @@ const CONFIG_JOGO = {
                 {
                     id: 214,
                     tipo: "opcoes-imagem",
-                    pergunta: "Um colega caiu no recreio e magoou-se. O que deves fazer?",
+                    pergunta: "Um colega caiu no recreio e magoou-se.\nO que deves fazer?",
                     audio: "audios/n2_q14.mp3",
                     dica: { tipo: "50-50", texto: "Ajudar o colega e avisar um adulto da escola é o mais seguro!" },
                     opcoesImagem: [
@@ -441,7 +441,7 @@ const CONFIG_JOGO = {
                 {
                     id: 215,
                     tipo: "ordenar",
-                    pergunta: "Ordena o que acontece quando ficas doente em casa:",
+                    pergunta: "Ordena o que acontece quando ficas doente em casa.",
                     audio: "audios/n2_q15.mp3",
                     dica: { tipo: "highlight", texto: "Primeiro avisamos os pais, depois vamos ao médico ou descansamos e só voltamos à escola quando estivermos bem!" },
                     itens: [
@@ -542,7 +542,7 @@ const CONFIG_JOGO = {
                 {
                     id: 303,
                     tipo: "dupla-opcao",
-                    pergunta: "O menino está a tentar meter os dedos numa tomada elétrica. Este comportamento é seguro?",
+                    pergunta: "O menino está a tentar meter os dedos numa tomada elétrica.\nEste comportamento é seguro?",
                     audio: "audios/n3_q03.mp3",
                     imagemPergunta: "img/mexer_tomada.jpg",
                     dica: { tipo: "highlight", texto: "Nunca se mexe nas tomadas! Podes apanhar um choque elétrico muito perigoso." },
@@ -552,7 +552,7 @@ const CONFIG_JOGO = {
                 {
                     id: 304,
                     tipo: "dupla-opcao",
-                    pergunta: "O menino viaja no banco de trás do carro com o cinto de segurança bem apertado. Está a cumprir as regras?",
+                    pergunta: "O menino viaja no banco de trás do carro com o cinto de segurança bem apertado.\nEstá a cumprir as regras?",
                     audio: "audios/n3_q04.mp3",
                     imagemPergunta: "img/cinto_seguranca_carro.jpg",
                     dica: { tipo: "highlight", texto: "O cinto de segurança protege-nos em todas as viagens de carro!" },
@@ -576,7 +576,7 @@ const CONFIG_JOGO = {
                 {
                     id: 306,
                     tipo: "ordenar",
-                    pergunta: "Ordena os passos para atravessar a rua em segurança na passadeira:",
+                    pergunta: "Ordena os passos para atravessar a rua em segurança na passadeira.",
                     audio: "audios/n3_q06.mp3",
                     dica: { tipo: "highlight", texto: "Primeiro paramos no passeio, depois olhamos para os dois lados e só atravessamos quando não vêm carros!" },
                     itens: [
@@ -603,7 +603,7 @@ const CONFIG_JOGO = {
                 {
                     id: 308,
                     tipo: "dupla-opcao",
-                    pergunta: "Os dois meninos estão a atravessar a passadeira a olhar para o telemóvel sem atenção à estrada. Está certo?",
+                    pergunta: "Os dois meninos estão a atravessar a passadeira a olhar para o telemóvel sem atenção à estrada.\nEstá certo?",
                     audio: "audios/n3_q08.mp3",
                     imagemPergunta: "img/passadeira_telemovel.jpg",
                     dica: { tipo: "highlight", texto: "Ao atravessar a rua devemos olhar sempre para a estrada e nunca para ecrãs!" },
@@ -626,7 +626,7 @@ const CONFIG_JOGO = {
                 {
                     id: 310,
                     tipo: "opcoes-texto",
-                    pergunta: "Na escola, o que pode provocar correr ou saltar nas escadas?",
+                    pergunta: "Na escola, o que pode acontecer se correres ou saltares nas escadas?",
                     audio: "audios/n3_q10.mp3",
                     imagemPergunta: "img/correr_escadas_escola.jpg",
                     dica: { tipo: "highlight", texto: "As escadas devem ser descidas devagar e a segurar no corrimão!" },
@@ -644,8 +644,8 @@ const CONFIG_JOGO = {
                     audio: "audios/n3_q11.mp3",
                     imagemPergunta: "img/trotinete_capacete.jpg",
                     dica: "O capacete protege a cabeça em caso de queda.",
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Certo"
+                    opcoes: ["Sim", "Não"],
+                    correta: "Sim"
                 },
                 {
                     id: 312,
@@ -672,7 +672,7 @@ const CONFIG_JOGO = {
                 {
                     id: 314,
                     tipo: "dupla-opcao",
-                    pergunta: "Lutar e empurrar os colegas no recreio da escola é um comportamento seguro?",
+                    pergunta: "Lutar e empurrar os colegas no recreio da escola é um comportamento certo ou errado?",
                     audio: "audios/n3_q14.mp3",
                     imagemPergunta: "img/lutar_recreio.jpg",
                     dica: { tipo: "highlight", texto: "Empurrar pode provocar quedas graves e partir um braço ou uma perna!" },
@@ -709,7 +709,7 @@ const CONFIG_JOGO = {
                 {
                     id: 317,
                     tipo: "ordenar",
-                    pergunta: "Ordena o que deves fazer se presenciarem um acidente em casa:",
+                    pergunta: "Ordena o que deves fazer se assistires a um acidente em casa.",
                     audio: "audios/n3_q17.mp3",
                     dica: { tipo: "highlight", texto: "Primeiro mantém a calma e chama um adulto; se for preciso, liga-se para o 112!" },
                     itens: [
@@ -726,8 +726,8 @@ const CONFIG_JOGO = {
                     audio: "audios/n3_q18.mp3",
                     imagemPergunta: "img/bola_junto_estrada.jpg",
                     dica: "A bola pode rolar para a estrada e a criança correr atrás dela sem ver os carros!",
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Certo"
+                    opcoes: ["Sim", "Não"],
+                    correta: "Sim"
                 },
                 {
                     id: 319,
