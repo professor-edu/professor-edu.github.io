@@ -640,7 +640,7 @@ const CONFIG_JOGO = {
                 {
                     id: 311,
                     tipo: "dupla-opcao",
-                    pergunta: "A menina anda de trotinete no passeio com o capacete bem colocado. Está a cumprir as regras de segurança?",
+                    pergunta: "A menina anda de trotinete no passeio com o capacete bem colocado.\nEstá a cumprir as regras de segurança?",
                     audio: "audios/n3_q11.mp3",
                     imagemPergunta: "img/trotinete_capacete.jpg",
                     dica: "O capacete protege a cabeça em caso de queda.",

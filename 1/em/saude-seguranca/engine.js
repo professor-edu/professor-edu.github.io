@@ -596,7 +596,7 @@ function carregarRonda() {
                 const opcaoSegura = opcao.replace(/"/g, '&quot;');
 
                 html += `
-                    <button class="btn-opcao ${classeCor}" data-opcao="${opcaoSegura}" onclick="verificarLacuna(this, ${eCorreta})">
+                    <button class="btn-opcao ${classeCor}" data-opcao="${opcaoSegura}" onmouseenter="lerTextoOpcao(this)" onmouseleave="pararLeituraOpcao()" onclick="verificarLacuna(this, ${eCorreta})">
                         ${opcao}
                     </button>
                 `;
@@ -618,7 +618,7 @@ function carregarRonda() {
                 const fnClique = (opcao.trim().toLowerCase() === ronda.correta.trim().toLowerCase()) ? "simularAcerto(this)" : "simularErro(this)";
                 const classeCor = coresSorteadas[index % coresSorteadas.length];
                 html += `
-                    <button class="btn-opcao ${classeCor}" onclick="${fnClique}">
+                    <button class="btn-opcao ${classeCor}" onmouseenter="lerTextoOpcao(this)" onmouseleave="pararLeituraOpcao()" onclick="${fnClique}">
                         ${opcao}
                     </button>
                 `;
@@ -918,9 +918,7 @@ function usarDica() {
         aplicarHighlightRespostaCorreta(ronda);
     } else if (ronda.dica.tipo === '50-50') {
         aplicarDica5050(ronda);
-    }
-
-    if (htmlDica.trim() !== '') {
+    } else if (htmlDica.trim() !== '') {
         abrirModalDica(htmlDica);
     }
 
@@ -1114,7 +1112,8 @@ function tocarSom(tipo) {
 }
 
 function tocarVoz(caminhoMp3) {
-    try {
+    pararLeituraOpcao();
+	try {
         if (vozAtual) {
             const estavaATocarOMesmo = (caminhoVozAtual === caminhoMp3) && !vozAtual.paused;
 
@@ -1148,11 +1147,49 @@ function tocarVoz(caminhoMp3) {
 }
 
 function pararVoz() {
-    if (vozAtual) {
+    pararLeituraOpcao();
+	if (vozAtual) {
         vozAtual.pause();
         vozAtual.currentTime = 0;
         vozAtual = null;
         caminhoVozAtual = "";
+    }
+}
+
+let timerLeituraOpcao = null;
+
+function lerTextoOpcao(btn) {
+    if (!('speechSynthesis' in window)) return;
+    if (btn && btn.classList.contains('btn-disabled')) return;
+
+    // 1. Pára imediatamente qualquer áudio MP3 ou voz anterior
+    pararVoz();
+    window.speechSynthesis.cancel();
+    clearTimeout(timerLeituraOpcao);
+
+    // 2. Aguarda 150ms antes de falar (evita encravar a fila se a criança passar o rato depressa)
+    timerLeituraOpcao = setTimeout(() => {
+        if (btn.classList.contains('btn-disabled')) return;
+
+        const texto = btn.textContent.trim();
+        const fala = new SpeechSynthesisUtterance(texto);
+        fala.lang = 'pt-PT';
+        fala.rate = 0.92;
+
+        const vozes = window.speechSynthesis.getVoices();
+        const vozPT = vozes.find(v => v.lang === 'pt-PT' && v.name.includes('Natural'))
+                   || vozes.find(v => v.lang === 'pt-PT')
+                   || vozes.find(v => v.lang.startsWith('pt'));
+        if (vozPT) fala.voice = vozPT;
+
+        window.speechSynthesis.speak(fala);
+    }, 150);
+}
+
+function pararLeituraOpcao() {
+    clearTimeout(timerLeituraOpcao);
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
     }
 }
 
