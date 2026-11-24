@@ -1,1016 +1,839 @@
-/* ==========================================================================
-   CONFIGURAÇÃO DO JOGO: SAÚDE E SEGURANÇA (1.º ANO - ESTUDO DO MEIO)
-   ========================================================================== */
+// =========================================================================
+// COORDENADAS PARTILHADAS DAS PLANTAS (Ajustar 1 vez após gerar as imagens)
+// x, y -> versão 16:9 (PC/Tablet) | xMobile, yMobile -> versão 4:3 (Telemóvel)
+// =========================================================================
+
+const PONTOS_BAIRRO = [
+    { id: "casa", label: "Casa", x: 24, y: 74, xMobile: 25, yMobile: 74, mostrarLabel: true },
+    { id: "bombeiros", label: "Bombeiros", x: 18, y: 30, xMobile: 20, yMobile: 30, mostrarLabel: true },
+    { id: "escola", label: "Escola", x: 40, y: 22, xMobile: 40, yMobile: 22, mostrarLabel: true },
+    { id: "jardim", label: "Jardim", x: 50, y: 48, xMobile: 50, yMobile: 48, mostrarLabel: true },
+    { id: "padaria", label: "Padaria", x: 75, y: 25, xMobile: 74, yMobile: 25, mostrarLabel: true },
+    { id: "parque", label: "Parque", x: 78, y: 70, xMobile: 76, yMobile: 70, mostrarLabel: true },
+    { id: "supermercado", label: "Supermercado", x: 52, y: 78, xMobile: 52, yMobile: 78, mostrarLabel: true }
+];
+
+const PONTOS_CIDADE = [
+    { id: "hotel", label: "Hotel", x: 38, y: 24, xMobile: 34, yMobile: 34, mostrarLabel: true },
+    { id: "hospital", label: "Hospital", x: 22, y: 54, xMobile: 24, yMobile: 54, mostrarLabel: true },
+    { id: "restaurante", label: "Restaurante", x: 26, y: 80, xMobile: 28, yMobile: 80, mostrarLabel: true },
+    { id: "farmacia", label: "Farmácia", x: 50, y: 46, xMobile: 50, yMobile: 46, mostrarLabel: true },
+    { id: "estacao", label: "Estação", x: 76, y: 26, xMobile: 74, yMobile: 26, mostrarLabel: true },
+    { id: "jardim", label: "Jardim", x: 76, y: 74, xMobile: 74, yMobile: 74, mostrarLabel: true }
+];
+
+const PONTOS_ESCOLA = [
+    { id: "portao", label: "Portão", x: 20, y: 76, xMobile: 22, yMobile: 76, mostrarLabel: true },
+    { id: "sala", label: "Sala de Aula", x: 22, y: 28, xMobile: 24, yMobile: 28, mostrarLabel: true },
+    { id: "biblioteca", label: "Biblioteca", x: 50, y: 22, xMobile: 50, yMobile: 22, mostrarLabel: true },
+    { id: "cantina", label: "Cantina", x: 78, y: 28, xMobile: 76, yMobile: 28, mostrarLabel: true },
+    { id: "recreio", label: "Recreio", x: 50, y: 74, xMobile: 50, yMobile: 74, mostrarLabel: true },
+    { id: "ginasio", label: "Ginásio", x: 78, y: 74, xMobile: 76, yMobile: 74, mostrarLabel: true }
+];
 
 const CONFIG_JOGO = {
-    titulo: "Saúde e Segurança",
-    subtituloMenu: "Escolhe um desafio para cuidares de ti e dos outros!",
-    cooldownDica: 2, // No 1.º ano, a dica recarrega mais depressa (a cada 2 rondas)
-
-    tema: {
-        corPrimaria: "#51cf66",    // Verde (Estudo do Meio)
-        corSecundaria: "#2b8a3e",  // Verde escuro para bordas e pílulas
-        corAno: "#ff6b6b",         // Cor destaque do 1.º Ano
-        corAnoDark: "#e03131",
-        bgHeader: "#e3f2fd"
-    },
-
+    titulo: "Mapas e Itinerários",
+    subtitulo: "Aprende a orientar-te e a traçar caminhos!",
     niveis: [
-        /* ==================================================================
-           NÍVEL 1: CORPO SÃO E VIDA SAUDÁVEL (20 QUESTÕES)
-           ================================================================== */
+        // =====================================================================
+        // NÍVEL 1: O MEU BAIRRO E OS LUGARES DO QUOTIDIANO (20 perguntas)
+        // =====================================================================
         {
             id: 1,
-            titulo: "Corpo São e Vida Saudável",
-            subtitulo: "Higiene, alimentação e vestuário",
-            corClasse: "bg-verde",
+            titulo: "O Meu Bairro",
+            subtitulo: "Conhece os espaços da tua localidade",
             icone: "img/icon_nivel1.svg",
-            numQuestoes: 10,
+			corClasse: "bg-turquesa",
+            cor: "#0091ff",
             perguntas: [
                 {
-                    id: 101,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Qual destes alimentos deves consumir todos os dias?",
+                    tipo: "opcoes-texto",
+                    pergunta: "Observa a planta do bairro.\nOnde vamos comprar pão fresco de manhã?",
                     audio: "audios/n1_q01.mp3",
-                    dica: { tipo: "50-50", texto: "Escolhe um alimento natural e rico em vitaminas!" },
-                    opcoesImagem: [
-                        { img: "img/fruta_variada.jpg", alt: "Fruta variada", valor: "Fruta variada" },
-                        { img: "img/pizza.jpg", alt: "Pizza", valor: "Pizza" },
-                        { img: "img/bolos_doces.jpg", alt: "Bolos e doces", valor: "Bolos e doces" },
-                        { img: "img/batatas_fritas.jpg", alt: "Batatas fritas", valor: "Batatas fritas" }
-                    ],
-                    correta: "Fruta variada"
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    opcoes: ["Padaria", "Bombeiros", "Parque infantil", "Escola"],
+                    correta: "Padaria",
+                    dica: { tipo: "50-50", texto: "Procura o edifício com um croissant no telhado!" }
                 },
                 {
-                    id: 102,
-                    tipo: "opcoes-imagem",
-                    pergunta: "O que deves beber com regularidade ao longo do dia?",
+                    tipo: "opcoes-texto",
+                    pergunta: "Para onde vamos estudar, ler e aprender com a professora e os colegas?",
                     audio: "audios/n1_q02.mp3",
-                    dica: { tipo: "highlight", texto: "É transparente, fresca e mata a sede sem açúcar!" },
-                    opcoesImagem: [
-                        { img: "img/garrafa_agua.jpg", alt: "Água", valor: "Água" },
-                        { img: "img/sumo_pacote.jpg", alt: "Sumo açucarado", valor: "Sumo açucarado" },
-                        { img: "img/refrigerante.jpg", alt: "Refrigerante", valor: "Refrigerante" }
-                    ],
-                    correta: "Água"
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    opcoes: ["Escola", "Supermercado", "Bombeiros", "Padaria"],
+                    correta: "Escola",
+                    dica: { tipo: "highlight", texto: "É o edifício amarelo com um relógio." }
                 },
                 {
-                    id: 103,
-                    tipo: "dupla-opcao",
-                    pergunta: "Observa a imagem.\n Este hábito ajuda a manter os dentes saudáveis?",
+                    tipo: "opcoes-texto",
+                    pergunta: "Se houver um incêndio ou alguém precisar de socorro urgente, quem chamamos para ajudar?",
                     audio: "audios/n1_q03.mp3",
-                    imagemPergunta: "img/escovar_dentes.jpg",
-                    dica: { tipo: "highlight", texto: "Devemos escovar os dentes depois das refeições!" },
-                    opcoes: ["Sim", "Não"],
-                    correta: "Sim"
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    opcoes: ["Bombeiros", "Padaria", "Supermercado", "Parque infantil"],
+                    correta: "Bombeiros",
+                    dica: { tipo: "50-50", texto: "Tem um camião vermelho estacionado à porta!" }
                 },
                 {
-                    id: 104,
-                    tipo: "dupla-opcao",
-                    pergunta: "A menina saiu à rua num dia de chuva só de t-shirt e calções.\n O vestuário está adequado?",
+                    tipo: "cidadania",
+                    pergunta: "A <span class='destaque-amarelo'>planta</span> é um desenho visto de cima que mostra onde ficam os lugares de um espaço.",
                     audio: "audios/n1_q04.mp3",
-                    imagemPergunta: "img/chuva_roupa_verao.jpg",
-                    dica: "Quando chove e está frio, precisamos de impermeável e roupa quente.",
-                    opcoes: ["Sim", "Não"],
-                    correta: "Não"
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    opcoes: ["Verdade", "Mentira"],
+                    correta: "Verdade",
+                    dica: { tipo: "texto", texto: "Imagina que és um pombo a voar lá no alto e a olhar para baixo!" }
                 },
                 {
-                    id: 105,
-                    tipo: "ordenar",
-                    pergunta: "Ordena os momentos da refeição do 1.º ao 3.º passo.",
+                    tipo: "opcoes-texto",
+                    pergunta: "Onde podemos andar de baloiço, escorrega e brincar ao ar livre no bairro?",
                     audio: "audios/n1_q05.mp3",
-                    dica: { tipo: "highlight", texto: "Primeiro lavamos as mãos e só no fim lavamos os dentes!" },
-                    itens: [
-                        { texto: "Lavar as mãos", img: "img/lavar_maos.jpg" },
-                        { texto: "Jantar", img: "img/jantar_saudavel.jpg" },
-                        { texto: "Lavar as mãos e os dentes", img: "img/lavar_maos_dentes.jpg" }
-                    ],
-                    correta: "Lavar as mãos | Jantar | Lavar as mãos e os dentes"
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    opcoes: ["Parque infantil", "Hospital", "Estação", "Farmácia"],
+                    correta: "Parque infantil",
+                    dica: { tipo: "highlight", texto: "Fica no canto inferior direito do bairro." }
                 },
                 {
-                    id: 106,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Qual destes objetos <span class='destaque-amarelo'>NÃO</span> pertence à tua higiene pessoal?",
+                    tipo: "lacuna",
+                    pergunta: "Para comprar fruta, leite e legumes para casa vamos ao ________.",
                     audio: "audios/n1_q06.mp3",
-                    dica: { tipo: "50-50", texto: "Procura o objeto que serve para comer e não para limpar o corpo." },
-                    opcoesImagem: [
-                        { img: "img/maca.jpg", alt: "Maçã", valor: "Maçã" },
-                        { img: "img/sabonete.jpg", alt: "Sabonete", valor: "Sabonete" },
-                        { img: "img/papel_higienico.jpg", alt: "Papel higiénico", valor: "Papel higiénico" },
-                        { img: "img/escova_pasta_dentes.jpg", alt: "Escova e pasta de dentes", valor: "Escova e pasta" }
-                    ],
-                    correta: "Maçã"
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    opcoes: ["supermercado", "quartel", "baloiço", "estádio"],
+                    correta: "supermercado",
+                    dica: { tipo: "50-50", texto: "Tem um carrinho de compras no telhado." }
                 },
                 {
-                    id: 107,
                     tipo: "opcoes-texto",
-                    pergunta: "Hoje é dia <span class='destaque-fundo'>20 de novembro</span>.\nQual destes iogurtes podes comer ao lanche?",
+                    pergunta: "Observa a planta da cidade.\nOnde vamos quando estamos doentes e precisamos de um médico?",
                     audio: "audios/n1_q07.mp3",
-                    imagemPergunta: "img/iogurtes_validade.jpg",
-                    dica: { tipo: "50-50", texto: "A data de validade tem de ser depois do dia de hoje!" },
-                    opcoes: [
-                        "O iogurte com validade até 28/12",
-                        "O iogurte com validade até 15/10",
-                        "Qualquer um dos dois iogurtes"
-                    ],
-                    correta: "O iogurte com validade até 28/12"
+                    imagemPergunta: "img/planta_cidade_16x9.jpg",
+                    opcoes: ["Hospital", "Hotel", "Restaurante", "Estação"],
+                    correta: "Hospital",
+                    dica: { tipo: "highlight", texto: "Tem uma cruz vermelha na fachada." }
                 },
                 {
-                    id: 108,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Qual é o lanche <span class='destaque-fundo'>mais saudável</span> para levares para a escola?",
+                    tipo: "opcoes-texto",
+                    pergunta: "Onde compramos os medicamentos que o médico receitou?",
                     audio: "audios/n1_q08.mp3",
-                    dica: { tipo: "highlight", texto: "Um bom lanche tem pão escuro, fruta fresca e água!" },
-                    opcoesImagem: [
-                        { img: "img/lanche_saudavel.jpg", alt: "Sandes, fruta e água", valor: "Sandes, fruta e água" },
-                        { img: "img/lanche_doces.jpg", alt: "Chocolates, bolachas e sumo", valor: "Chocolates e sumo" },
-                        { img: "img/lanche_batatas.jpg", alt: "Batatas fritas e refrigerante", valor: "Fritos e refrigerante" }
-                    ],
-                    correta: "Sandes, fruta e água"
+                    imagemPergunta: "img/planta_cidade_16x9.jpg",
+                    opcoes: ["Farmácia", "Padaria", "Parque", "Estação"],
+                    correta: "Farmácia",
+                    dica: { tipo: "50-50", texto: "Tem uma cruz verde luminosa à entrada." }
                 },
                 {
-                    id: 109,
-                    tipo: "lacuna",
-                    pergunta: "Depois de usar a sanita devo usar papel higiénico e descarregar o ___.",
+                    tipo: "cidadania",
+                    pergunta: "Na planta do bairro do Afonso existe uma escola e um parque infantil.",
                     audio: "audios/n1_q09.mp3",
-                    dica: { tipo: "50-50", texto: "É o botão ou puxador que liberta a água na sanita." },
-                    opcoes: ["autoclismo", "lavatório", "chuveiro", "espelho"],
-                    correta: "autoclismo"
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    opcoes: ["Sim", "Não"],
+                    correta: "Sim",
+                    dica: { tipo: "texto", texto: "Observa bem a parte de cima e o canto direito da planta." }
                 },
                 {
-                    id: 110,
-                    tipo: "opcoes-imagem",
-                    pergunta: "O que deves levar na mochila para as aulas de natação?",
+                    tipo: "opcoes-texto",
+                    pergunta: "Onde apanhamos o comboio para fazer uma viagem para outra cidade?",
                     audio: "audios/n1_q10.mp3",
-                    dica: { tipo: "50-50", texto: "Serve para proteger os olhos dentro de água!" },
-                    opcoesImagem: [
-                        { img: "img/oculos_natacao.jpg", alt: "Óculos de natação", valor: "Óculos de natação" },
-                        { img: "img/pantufas_quarto.jpg", alt: "Pantufas de quarto", valor: "Pantufas de quarto" },
-                        { img: "img/chapeu_pano.jpg", alt: "Chapéu de sol", valor: "Chapéu de sol" },
-                        { img: "img/botas_neve.jpg", alt: "Botas de inverno", valor: "Botas de inverno" }
-                    ],
-                    correta: "Óculos de natação"
+                    imagemPergunta: "img/planta_cidade_16x9.jpg",
+                    opcoes: ["Estação de comboios", "Farmácia", "Supermercado", "Bombeiros"],
+                    correta: "Estação de comboios",
+                    dica: { tipo: "highlight", texto: "Procura os carris no canto superior direito." }
                 },
                 {
-                    id: 111,
-                    tipo: "dupla-opcao",
-                    pergunta: "O menino está a passar muito frio junto ao mar sem casaco.\nEsta situação é saudável?",
+                    tipo: "opcoes-texto",
+                    pergunta: "Observa a planta da escola.\nOnde almoçamos e lanchamos na hora da refeição?",
                     audio: "audios/n1_q11.mp3",
-                    imagemPergunta: "img/menino_com_frio.jpg",
-                    dica: { tipo: "highlight", texto: "Não proteger o corpo do frio pode deixar-nos doentes!" },
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Errado"
+                    imagemPergunta: "img/planta_escola_16x9.jpg",
+                    opcoes: ["Cantina", "Biblioteca", "Ginásio", "Portão"],
+                    correta: "Cantina",
+                    dica: { tipo: "50-50", texto: "É o edifício com uma maçã no telhado." }
                 },
                 {
-                    id: 112,
                     tipo: "opcoes-texto",
-                    pergunta: "O que deves comer só de <span class='destaque-fundo'>vez em quando</span> para manteres os dentes saudáveis?",
+                    pergunta: "Onde podemos requisitar livros e ouvir histórias em silêncio na escola?",
                     audio: "audios/n1_q12.mp3",
-                    dica: { tipo: "50-50", texto: "Alimentos com muito açúcar provocam cáries nos dentes." },
-                    opcoes: ["Bolos e rebuçados", "Maçãs e peras", "Sopa de legumes", "Pão e queijo"],
-                    correta: "Bolos e rebuçados"
+                    imagemPergunta: "img/planta_escola_16x9.jpg",
+                    opcoes: ["Biblioteca", "Recreio", "Ginásio", "Cantina"],
+                    correta: "Biblioteca",
+                    dica: { tipo: "highlight", texto: "Tem um livro aberto desenhado no telhado." }
                 },
                 {
-                    id: 113,
-                    tipo: "ordenar",
-                    pergunta: "Ordena a rotina de higiene da manhã antes de ir para a escola.",
-                    audio: "audios/n1_q13.mp3",
-                    dica: { tipo: "highlight", texto: "Primeiro vestimos a roupa lavada, tomamos o pequeno-almoço e no fim lavamos os dentes!" },
-                    itens: [
-                        { texto: "Vestir roupa lavada", img: "img/vestir_roupa_lavada.jpg" },
-                        { texto: "Tomar o pequeno-almoço", img: "img/pequeno_almoco.jpg" },
-                        { texto: "Escovar os dentes", img: "img/escovar_dentes.jpg" }
-                    ],
-                    correta: "Vestir roupa lavada | Tomar o pequeno-almoço | Escovar os dentes"
-                },
-                {
-                    id: 114,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Qual destas imagens mostra um hábito de higiene diário?",
-                    audio: "audios/n1_q14.mp3",
-                    dica: { tipo: "50-50", texto: "Manter o corpo limpo ajuda a evitar doenças." },
-                    opcoesImagem: [
-                        { img: "img/tomar_banho.jpg", alt: "Tomar banho", valor: "Tomar banho" },
-                        { img: "img/ver_televisao.jpg", alt: "Ver televisão", valor: "Ver televisão" },
-                        { img: "img/jogar_videojogos.jpg", alt: "Jogar consola", valor: "Jogar consola" }
-                    ],
-                    correta: "Tomar banho"
-                },
-                {
-                    id: 115,
-                    tipo: "dupla-opcao",
-                    pergunta: "A menina vai dormir vestida com um pijama limpo e confortável.\nEstá certo?",
-                    audio: "audios/n1_q15.mp3",
-                    imagemPergunta: "img/menina_pijama.jpg",
-                    dica: { tipo: "highlight", texto: "O pijama é a roupa ideal para descansar bem durante a noite!" },
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Certo"
-                },
-                {
-                    id: 116,
                     tipo: "lacuna",
-                    pergunta: "Para seres saudável deves fazer uma alimentação completa, equilibrada e ___.",
-                    audio: "audios/n1_q16.mp3",
-                    dica: { tipo: "50-50", texto: "Significa comer vários tipos de alimentos diferentes." },
-                    opcoes: ["variada", "açucarada", "salgada", "repetida"],
-                    correta: "variada"
+                    pergunta: "Na escola, brincamos com os colegas durante o intervalo no ________.",
+                    audio: "audios/n1_q13.mp3",
+                    imagemPergunta: "img/planta_escola_16x9.jpg",
+                    opcoes: ["recreio", "telhado", "autocarro", "armário"],
+                    correta: "recreio",
+                    dica: { tipo: "50-50", texto: "Fica ao ar livre, com baloiços e jogo da macaca." }
                 },
                 {
-                    id: 117,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Que vestuário deves usar na aula de Educação Física?",
-                    audio: "audios/n1_q17.mp3",
-                    dica: { tipo: "50-50", texto: "Precisas de roupa leve e sapatilhas para correr e saltar!" },
-                    opcoesImagem: [
-                        { img: "img/roupa_desporto.jpg", alt: "Fato de treino e sapatilhas", valor: "Fato de treino" },
-                        { img: "img/pijama_dormir.jpg", alt: "Pijama", valor: "Pijama" },
-                        { img: "img/casaco_inverno_pesado.jpg", alt: "Casaco pesado e cachecol", valor: "Casaco de neve" }
-                    ],
-                    correta: "Fato de treino"
+                    tipo: "cidadania",
+                    pergunta: "Todas as ruas e localidades são exatamente iguais e têm os mesmos edifícios.",
+                    audio: "audios/n1_q14.mp3",
+                    imagemPergunta: "img/planta_cidade_16x9.jpg",
+                    opcoes: ["Verdade", "Mentira"],
+                    correta: "Mentira",
+                    dica: { tipo: "texto", texto: "Cada aldeia, vila ou cidade tem lugares diferentes." }
                 },
                 {
-                    id: 118,
                     tipo: "opcoes-texto",
-                    pergunta: "Quando deves lavar sempre as mãos com água e sabão?",
+                    pergunta: "Onde dormem os turistas e viajantes quando visitam uma cidade?",
+                    audio: "audios/n1_q15.mp3",
+                    imagemPergunta: "img/planta_cidade_16x9.jpg",
+                    opcoes: ["Hotel", "Hospital", "Escola", "Supermercado"],
+                    correta: "Hotel",
+                    dica: { tipo: "50-50", texto: "É um edifício alto com o símbolo de uma cama." }
+                },
+                {
+                    tipo: "opcoes-texto",
+                    pergunta: "Na planta da escola, onde fazemos aulas de Educação Física quando está a chover?",
+                    audio: "audios/n1_q16.mp3",
+                    imagemPergunta: "img/planta_escola_16x9.jpg",
+                    opcoes: ["Ginásio", "Biblioteca", "Cantina", "Portão"],
+                    correta: "Ginásio",
+                    dica: { tipo: "highlight", texto: "Tem o símbolo de um cesto de basquetebol." }
+                },
+                {
+                    tipo: "cidadania",
+                    pergunta: "Na planta da cidade existe um jardim com uma fonte para passear.",
+                    audio: "audios/n1_q17.mp3",
+                    imagemPergunta: "img/planta_cidade_16x9.jpg",
+                    opcoes: ["Sim", "Não"],
+                    correta: "Sim",
+                    dica: { tipo: "texto", texto: "Olha para o canto inferior direito da planta da cidade." }
+                },
+                {
+                    tipo: "opcoes-texto",
+                    pergunta: "O que serve para ajudar os peões a atravessar a rua em segurança?",
                     audio: "audios/n1_q18.mp3",
-                    dica: { tipo: "highlight", texto: "As mãos tocam em muitos objetos e podem ter micróbios invisíveis!" },
-                    opcoes: [
-                        "Antes de comer e depois de ir à casa de banho",
-                        "Apenas ao domingo antes de dormir",
-                        "Só quando as mãos têm tinta"
-                    ],
-                    correta: "Antes de comer e depois de ir à casa de banho"
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    opcoes: ["As passadeiras", "Os telhados", "As árvores", "As fontes"],
+                    correta: "As passadeiras",
+                    dica: { tipo: "50-50", texto: "São as riscas brancas pintadas no chão das estradas." }
                 },
                 {
-                    id: 119,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Qual destas crianças está a cuidar do seu cabelo?",
+                    tipo: "lacuna",
+                    pergunta: "O desenho simplificado de um bairro ou cidade visto de cima chama-se ________.",
                     audio: "audios/n1_q19.mp3",
-                    dica: { tipo: "highlight", texto: "Pentear o cabelo todos os dias faz parte da higiene pessoal!" },
-                    opcoesImagem: [
-                        { img: "img/pentear_cabelo.jpg", alt: "Pentear o cabelo", valor: "Pentear o cabelo" },
-                        { img: "img/cortar_unhas.jpg", alt: "Cortar as unhas", valor: "Cortar as unhas" },
-                        { img: "img/lavar_maos.jpg", alt: "Lavar as mãos", valor: "Lavar as mãos" }
-                    ],
-                    correta: "Pentear o cabelo"
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    opcoes: ["planta", "retrato", "bilhete", "canção"],
+                    correta: "planta",
+                    dica: { tipo: "highlight", texto: "Começa por 'p' e ajuda-nos a localizar edifícios." }
                 },
                 {
-                    id: 120,
-                    tipo: "dupla-opcao",
-                    pergunta: "Cortar e manter as unhas limpas ajuda a evitar a acumulação de sujidade.",
+                    tipo: "mapa-cliques",
+                    pergunta: "Toca na <span class='destaque-fundo'>Casa do Afonso</span> e depois na <span class='destaque-fundo'>Escola</span>.",
                     audio: "audios/n1_q20.mp3",
-                    imagemPergunta: "img/cortar_unhas.jpg",
-                    dica: "Debaixo das unhas compridas acumulam-se micróbios.",
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Certo"
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    pontos: PONTOS_BAIRRO,
+                    correta: "casa | escola",
+                    dica: { tipo: "highlight", texto: "Começa na casa de telhado vermelho!" }
                 }
             ]
         },
 
-        /* ==================================================================
-           NÍVEL 2: CUIDAR DE MIM E DOS OUTROS (20 QUESTÕES)
-           ================================================================== */
+        // =====================================================================
+        // NÍVEL 2: SINAIS DE INFORMAÇÃO (20 perguntas)
+        // =====================================================================
         {
             id: 2,
-            titulo: "Cuidar de Mim e dos Outros",
-            subtitulo: "Convivência, saúde e ambiente",
-            corClasse: "bg-azul",
+            titulo: "Sinais de Informação",
+            subtitulo: "Descobre o que indica cada sinal azul",
             icone: "img/icon_nivel2.svg",
-            numQuestoes: 10,
+			corClasse: "bg-laranja",
+            cor: "#20c997",
             perguntas: [
                 {
-                    id: 201,
-                    tipo: "dupla-opcao",
-                    pergunta: "O menino ajudou o colega em cadeira de rodas a apanhar o lápis do chão.\nEsta atitude está certa ou errada?",
+                    tipo: "opcoes-texto",
+                    pergunta: "Que local indica este sinal azul com a letra H?",
                     audio: "audios/n2_q01.mp3",
-                    imagemPergunta: "img/ajudar_colega_cadeira.jpg",
-                    dica: { tipo: "highlight", texto: "Ajudar os colegas torna a escola melhor para todos!" },
-                    opcoes: ["Certa", "Errada"],
-                    correta: "Certa"
+                    imagemPergunta: "img/sinal_hospital.svg",
+                    opcoes: ["Hospital", "Hotel", "Escola", "Estação"],
+                    correta: "Hospital",
+                    dica: { tipo: "50-50", texto: "É onde vamos quando precisamos de cuidados médicos." }
                 },
                 {
-                    id: 202,
-                    tipo: "dupla-opcao",
-                    pergunta: "O rapaz pôs o pé à frente da colega e fê-la cair no corredor.\nEsta atitude está certa ou errada?",
+                    tipo: "opcoes-imagem",
+                    pergunta: "Qual destes sinais indica onde fica uma <span class='destaque-badge'>Farmácia</span>?",
                     audio: "audios/n2_q02.mp3",
-                    imagemPergunta: "img/fazer_cair_colega.jpg",
-                    dica: { tipo: "highlight", texto: "Magoar os outros nunca é brincadeira!" },
-                    opcoes: ["Certa", "Errada"],
-                    correta: "Errada"
+                    categoriaDistratores: "sinais",
+					mostrarLegenda: false,
+                    correta: "Farmácia",
+                    dica: { tipo: "highlight", texto: "Tem uma cruz verde sobre um quadrado branco." }
                 },
                 {
-                    id: 203,
-                    tipo: "opcoes-imagem",
-                    pergunta: "O que deves fazer quando estás com febre e doente?",
+                    tipo: "opcoes-texto",
+                    pergunta: "Observa o sinal. Que transporte podemos apanhar neste local?",
                     audio: "audios/n2_q03.mp3",
-                    dica: { tipo: "50-50", texto: "Assim recuperas mais depressa e não contagias os teus colegas!" },
-                    opcoesImagem: [
-                        { img: "img/ficar_casa_doente.jpg", alt: "Ficar em casa a descansar", valor: "Ficar em casa" },
-                        { img: "img/ir_escola_doente.jpg", alt: "Ir para a escola com febre", valor: "Ir para a escola" },
-                        { img: "img/correr_chuva.jpg", alt: "Ir brincar à chuva", valor: "Brincar à chuva" }
-                    ],
-                    correta: "Ficar em casa"
+                    imagemPergunta: "img/sinal_comboios.svg",
+                    opcoes: ["Comboio", "Avião", "Barco", "Bicicleta"],
+                    correta: "Comboio",
+                    dica: { tipo: "50-50", texto: "O desenho mostra um veículo a sair de um túnel sobre carris." }
                 },
                 {
-                    id: 204,
                     tipo: "opcoes-imagem",
-                    pergunta: "Como deves agir na sala de aula quando queres falar?",
+                    pergunta: "Toca no sinal que indica uma <span class='destaque-amarelo'>Estação de Autocarros</span>.",
                     audio: "audios/n2_q04.mp3",
-                    dica: { tipo: "50-50", texto: "É uma regra importante para todos se ouvirem!" },
-                    opcoesImagem: [
-                        { img: "img/levantar_dedo_aula.jpg", alt: "Levantar o dedo e esperar", valor: "Levantar o dedo" },
-                        { img: "img/gritar_aula.jpg", alt: "Gritar por cima dos colegas", valor: "Gritar na sala" },
-                        { img: "img/correr_sala.jpg", alt: "Correr entre as mesas", valor: "Correr na sala" }
-                    ],
-                    correta: "Levantar o dedo"
+                    categoriaDistratores: "sinais",
+					mostrarLegenda: false,
+                    correta: "Estação de autocarros",
+                    dica: { tipo: "highlight", texto: "Procura o veículo grande com rodas e várias janelas." }
                 },
                 {
-                    id: 205,
-                    tipo: "lacuna",
-                    pergunta: "Para nos protegermos de doenças graves devemos ter em dia as nossas ___.",
+                    tipo: "opcoes-texto",
+                    pergunta: "O que significa este sinal com um garfo e uma faca cruzados?",
                     audio: "audios/n2_q05.mp3",
-                    dica: { tipo: "50-50", texto: "São dadas no centro de saúde pelo enfermeiro ou médico." },
-                    opcoes: ["vacinas", "brincadeiras", "sapatilhas", "mochilas"],
-                    correta: "vacinas"
+                    imagemPergunta: "img/sinal_restaurante.svg",
+                    opcoes: ["Restaurante", "Oficina", "Biblioteca", "Parque"],
+                    correta: "Restaurante",
+                    dica: { tipo: "50-50", texto: "É o lugar onde vamos almoçar ou jantar fora." }
                 },
                 {
-                    id: 206,
                     tipo: "opcoes-imagem",
-                    pergunta: "Qual destas imagens mostra crianças a ajudar a manter o planeta limpo?",
+                    pergunta: "Qual destes sinais indica um <span class='destaque-amarelo'>Café</span>?",
                     audio: "audios/n2_q06.mp3",
-                    dica: { tipo: "50-50", texto: "Separar o lixo nos ecopontos protege a natureza!" },
-                    opcoesImagem: [
-                        { img: "img/separar_lixo_ecoponto.jpg", alt: "Colocar lixo no ecoponto", valor: "Usar os ecopontos" },
-                        { img: "img/lixo_chao_parque.jpg", alt: "Deitar lixo para o chão", valor: "Deitar lixo no chão" },
-                        { img: "img/lixo_praia.jpg", alt: "Deixar garrafas na areia", valor: "Sujar a praia" },
-                        { img: "img/estragar_plantas.jpg", alt: "Arrancar flores do jardim", valor: "Estragar plantas" }
-                    ],
-                    correta: "Usar os ecopontos"
+                    categoriaDistratores: "sinais",
+					mostrarLegenda: false,
+                    correta: "Café",
+                    dica: { tipo: "highlight", texto: "Tem o desenho de uma chávena sobre um pires." }
                 },
                 {
-                    id: 207,
-                    tipo: "dupla-opcao",
-                    pergunta: "As duas meninas estão a partilhar os seus brinquedos no recreio.\nEsta atitude contribui para o bem-estar de todos?",
+                    tipo: "opcoes-texto",
+                    pergunta: "Para onde nos orienta este sinal com o desenho de uma cama?",
                     audio: "audios/n2_q07.mp3",
-                    imagemPergunta: "img/partilhar_brinquedos.jpg",
-                    dica: { tipo: "highlight", texto: "Partilhar e respeitar os amigos faz todos mais felizes!" },
-                    opcoes: ["Sim", "Não"],
-                    correta: "Sim"
+                    imagemPergunta: "img/sinal_hotel.svg",
+                    opcoes: ["Hotel", "Hospital", "Escola", "Supermercado"],
+                    correta: "Hotel",
+                    dica: { tipo: "50-50", texto: "Serve para dormir e descansar durante uma viagem." }
                 },
                 {
-                    id: 208,
-                    tipo: "ordenar",
-                    pergunta: "Ordena os passos para reciclar uma garrafa de plástico vazia.",
+                    tipo: "opcoes-imagem",
+                    pergunta: "O carro ficou sem combustível! Qual é o sinal da <span class='destaque-fundo'>Bomba de Gasolina</span>?",
                     audio: "audios/n2_q08.mp3",
-                    dica: { tipo: "highlight", texto: "Primeiro esvaziamos e espalmamos a garrafa, depois procuramos o ecoponto amarelo!" },
-                    itens: [
-                        { texto: "Esvaziar e espalmar a garrafa", img: "img/espalmar_garrafa.jpg" },
-                        { texto: "Ir até aos ecopontos", img: "img/ir_ecopontos.jpg" },
-                        { texto: "Colocar no ecoponto amarelo", img: "img/ecoponto_amarelo.jpg" }
-                    ],
-                    correta: "Esvaziar e espalmar a garrafa | Ir até aos ecopontos | Colocar no ecoponto amarelo"
+                    categoriaDistratores: "sinais",
+					mostrarLegenda: false,
+                    correta: "Bomba de gasolina",
+                    dica: { tipo: "highlight", texto: "Procura o desenho de uma bomba com mangueira." }
                 },
                 {
-                    id: 209,
                     tipo: "opcoes-texto",
-                    pergunta: "Por que é importante ter as vacinas em dia?",
+                    pergunta: "Que local indica este sinal com o desenho de um avião?",
                     audio: "audios/n2_q09.mp3",
-                    imagemPergunta: "img/tomar_vacina.jpg",
-                    dica: { tipo: "50-50", texto: "As vacinas protegem a nossa saúde e a das pessoas à nossa volta." },
-                    opcoes: [
-                        "Para evitar doenças e proteger todos",
-                        "Para não precisar de tomar banho",
-                        "Para poder comer muitos doces"
-                    ],
-                    correta: "Para evitar doenças e proteger todos"
+                    imagemPergunta: "img/sinal_aeroporto.svg",
+                    opcoes: ["Aeroporto", "Estação de comboios", "Parque infantil", "Padaria"],
+                    correta: "Aeroporto",
+                    dica: { tipo: "50-50", texto: "É de onde descolam e aterram os aviões." }
                 },
                 {
-                    id: 210,
                     tipo: "opcoes-imagem",
-                    pergunta: "Vês lixo espalhado na areia da praia.\nQual é a atitude correta?",
+                    pergunta: "Qual destes sinais indica onde podemos estacionar o carro?",
                     audio: "audios/n2_q10.mp3",
-                    dica: { tipo: "highlight", texto: "Recolher o lixo evita que vá parar ao mar e magoe os animais!" },
-                    opcoesImagem: [
-                        { img: "img/limpar_lixo_praia.jpg", alt: "Apanhar o lixo para um saco", valor: "Apanhar o lixo" },
-                        { img: "img/enterrar_lixo_areia.jpg", alt: "Esconder o lixo na areia", valor: "Esconder na areia" },
-                        { img: "img/atirar_lixo_mar.jpg", alt: "Atirar o lixo para o mar", valor: "Atirar para o mar" }
-                    ],
-                    correta: "Apanhar o lixo"
+                    categoriaDistratores: "sinais",
+					mostrarLegenda: false,
+                    correta: "Estacionamento",
+                    dica: { tipo: "highlight", texto: "Tem a letra P branca sobre fundo azul." }
                 },
                 {
-                    id: 211,
-                    tipo: "lacuna",
-                    pergunta: "O bem-estar dos outros também depende de ti, por isso deves respeitar e ___.",
+                    tipo: "opcoes-texto",
+                    pergunta: "O carro avariou!\nQue local indica este sinal com uma chave de ferramentas?",
                     audio: "audios/n2_q11.mp3",
-                    dica: { tipo: "50-50", texto: "Significa dividir brinquedos e materiais com os colegas." },
-                    opcoes: ["partilhar", "empurrar", "gritar", "esconder"],
-                    correta: "partilhar"
+                    imagemPergunta: "img/sinal_oficina.svg",
+                    opcoes: ["Oficina", "Restaurante", "Farmácia", "Hotel"],
+                    correta: "Oficina",
+                    dica: { tipo: "50-50", texto: "É onde os mecânicos reparam os automóveis." }
                 },
                 {
-                    id: 212,
-                    tipo: "dupla-opcao",
-                    pergunta: "Deixar um colega sozinho e triste no recreio sem o deixar brincar é uma boa atitude?",
+                    tipo: "opcoes-imagem",
+                    pergunta: "Estamos perdidos numa cidade! Qual é o sinal do <span class='destaque-fundo'>Posto de Informações</span>?",
                     audio: "audios/n2_q12.mp3",
-                    imagemPergunta: "img/colega_excluido.jpg",
-                    dica: "Devemos incluir todos nas brincadeiras!",
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Errado"
+                    categoriaDistratores: "sinais",
+					mostrarLegenda: false,
+                    correta: "Posto de informações",
+                    dica: { tipo: "highlight", texto: "Tem a letra 'i' no centro da placa." }
                 },
                 {
-                    id: 213,
-                    tipo: "opcoes-texto",
-                    pergunta: "Em que ecoponto deves colocar um jornal velho ou uma caixa de cartão?",
+                    tipo: "cidadania",
+                    pergunta: "Os sinais azuis quadrados ou retangulares servem para dar informações úteis sobre locais e serviços.",
                     audio: "audios/n2_q13.mp3",
-                    dica: { tipo: "50-50", texto: "O ecoponto do papel tem a cor do céu e do mar!" },
-                    opcoes: ["Ecoponto azul", "Ecoponto verde", "Ecoponto amarelo", "Ecoponto vermelho"],
-                    correta: "Ecoponto azul"
+                    imagemPergunta: "img/sinal_informacoes.svg",
+                    opcoes: ["Certo", "Errado"],
+                    correta: "Certo",
+                    dica: { tipo: "texto", texto: "Por isso se chamam sinais de informação!" }
                 },
                 {
-                    id: 214,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Um colega caiu no recreio e magoou-se.\nO que deves fazer?",
+                    tipo: "cidadania",
+                    pergunta: "Este sinal indica que estamos perto de uma pastelaria ou padaria.",
                     audio: "audios/n2_q14.mp3",
-                    dica: { tipo: "50-50", texto: "Ajudar o colega e avisar um adulto da escola é o mais seguro!" },
-                    opcoesImagem: [
-                        { img: "img/ajudar_colega_caiu.jpg", alt: "Ajudar e chamar um adulto", valor: "Ajudar e chamar um adulto" },
-                        { img: "img/rir_colega_caiu.jpg", alt: "Rir do colega", valor: "Rir do colega" },
-                        { img: "img/ignorar_colega.jpg", alt: "Fingir que não viu", valor: "Fingir que não viu" }
-                    ],
-                    correta: "Ajudar e chamar um adulto"
-                },
-                {
-                    id: 215,
-                    tipo: "ordenar",
-                    pergunta: "Ordena o que acontece quando ficas doente em casa.",
-                    audio: "audios/n2_q15.mp3",
-                    dica: { tipo: "highlight", texto: "Primeiro avisamos os pais, depois vamos ao médico ou descansamos e só voltamos à escola quando estivermos bem!" },
-                    itens: [
-                        { texto: "Avisar os pais que te sentes mal", img: "img/avisar_pais_doente.jpg" },
-                        { texto: "Descansar e tomar os medicamentos", img: "img/ficar_casa_doente.jpg" },
-                        { texto: "Regressar à escola já curado", img: "img/regressar_escola_bem.jpg" }
-                    ],
-                    correta: "Avisar os pais que te sentes mal | Descansar e tomar os medicamentos | Regressar à escola já curado"
-                },
-                {
-                    id: 216,
-                    tipo: "dupla-opcao",
-                    pergunta: "Cumprimentar os professores, funcionários e colegas com educação melhora o ambiente da escola.",
-                    audio: "audios/n2_q16.mp3",
-                    imagemPergunta: "img/cumprimentar_escola.jpg",
-                    dica: { tipo: "highlight", texto: "Dizer 'Bom dia' e 'Obrigado' mostra respeito pelos outros!" },
+                    imagemPergunta: "img/sinal_hospital.svg",
                     opcoes: ["Certo", "Errado"],
-                    correta: "Certo"
+                    correta: "Errado",
+                    dica: { tipo: "texto", texto: "A letra H significa Hospital." }
                 },
                 {
-                    id: 217,
-                    tipo: "opcoes-texto",
-                    pergunta: "Qual destas ações ajuda a poupar água em casa e na escola?",
-                    audio: "audios/n2_q17.mp3",
-                    dica: { tipo: "50-50", texto: "Não precisamos da água a correr enquanto ensaboamos as mãos ou escovamos os dentes." },
-                    opcoes: [
-                        "Fechar a torneira enquanto escovo os dentes",
-                        "Deixar a torneira aberta enquanto brinco",
-                        "Puxar o autoclismo várias vezes sem precisar"
-                    ],
-                    correta: "Fechar a torneira enquanto escovo os dentes"
-                },
-                {
-                    id: 218,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Qual destas atitudes mostra respeito pelas regras da sala de aula?",
-                    audio: "audios/n2_q18.mp3",
-                    dica: { tipo: "highlight", texto: "Ouvir com atenção quando o professor explica ajuda todos a aprender!" },
-                    opcoesImagem: [
-                        { img: "img/ouvir_professora.jpg", alt: "Ouvir a professora com atenção", valor: "Ouvir com atenção" },
-                        { img: "img/atirar_avioes_papel.jpg", alt: "Atirar aviões de papel na aula", valor: "Atirar papéis" },
-                        { img: "img/riscar_mesa.jpg", alt: "Riscar a mesa da escola", valor: "Riscar a mesa" }
-                    ],
-                    correta: "Ouvir com atenção"
-                },
-                {
-                    id: 219,
                     tipo: "lacuna",
-                    pergunta: "Na escola, na rua e em casa devemos respeitar as ___ de convivência.",
-                    audio: "audios/n2_q19.mp3",
-                    dica: { tipo: "50-50", texto: "São combinados que ajudam todos a viver em harmonia." },
-                    opcoes: ["regras", "paredes", "nuvens", "pedras"],
-                    correta: "regras"
+                    pergunta: "Quando vemos um sinal azul com um garfo e uma faca, sabemos que há um ________ por perto.",
+                    audio: "audios/n2_q15.mp3",
+                    imagemPergunta: "img/sinal_restaurante.svg",
+                    opcoes: ["restaurante", "aeroporto", "parque", "quartel"],
+                    correta: "restaurante",
+                    dica: { tipo: "50-50", texto: "Serve para fazer refeições." }
                 },
                 {
-                    id: 220,
-                    tipo: "dupla-opcao",
-                    pergunta: "Arrumar os materiais e os brinquedos depois de os usar ajuda os outros e mantém o espaço organizado.",
-                    audio: "audios/n2_q20.mp3",
-                    imagemPergunta: "img/arrumar_brinquedos.jpg",
-                    dica: "Cada coisa no seu lugar evita quedas e facilita a próxima brincadeira!",
+                    tipo: "opcoes-imagem",
+                    pergunta: "Qual destes sinais devemos procurar se alguém ficar doente na rua?",
+                    audio: "audios/n2_q16.mp3",
+                    categoriaDistratores: "sinais",
+					mostrarLegenda: false,
+                    correta: "Hospital",
+                    dica: { tipo: "highlight", texto: "Procura o sinal com a letra H." }
+                },
+                {
+                    tipo: "opcoes-texto",
+                    pergunta: "Qual é a cor principal dos sinais de informação que vimos neste nível?",
+                    audio: "audios/n2_q17.mp3",
+                    imagemPergunta: "img/sinal_estacionamento.svg",
+                    opcoes: ["Azul", "Vermelho", "Amarelo", "Roxo"],
+                    correta: "Azul",
+                    dica: { tipo: "50-50", texto: "Observa a cor de fundo da placa na imagem." }
+                },
+                {
+                    tipo: "cidadania",
+                    pergunta: "O sinal com uma chave de bocas indica um lugar onde podemos comprar livros.",
+                    audio: "audios/n2_q18.mp3",
+                    imagemPergunta: "img/sinal_oficina.svg",
                     opcoes: ["Certo", "Errado"],
-                    correta: "Certo"
+                    correta: "Errado",
+                    dica: { tipo: "texto", texto: "A chave serve para reparar carros numa oficina." }
+                },
+                {
+                    tipo: "lacuna",
+                    pergunta: "O sinal azul com a <span class='destaque-fundo'>letra P</span> indica um parque de ________.",
+                    audio: "audios/n2_q19.mp3",
+                    imagemPergunta: "img/sinal_estacionamento.svg",
+                    opcoes: ["estacionamento", "diversões", "bombeiros", "campismo"],
+                    correta: "estacionamento",
+                    dica: { tipo: "highlight", texto: "É onde os condutores deixam os carros estacionados." }
+                },
+                {
+                    tipo: "opcoes-imagem",
+                    pergunta: "Vamos viajar de avião!\nToca no sinal que nos leva até ao Aeroporto.",
+                    audio: "audios/n2_q20.mp3",
+                    categoriaDistratores: "sinais",
+					mostrarLegenda: false,
+                    correta: "Aeroporto",
+                    dica: { tipo: "highlight", texto: "Procura o desenho do avião." }
                 }
             ]
         },
 
-        /* ==================================================================
-           NÍVEL 3: SEMPRE EM SEGURANÇA! (20 QUESTÕES)
-           ================================================================== */
+        // =====================================================================
+        // NÍVEL 3: O QUE É UM ITINERÁRIO? (20 perguntas)
+        // =====================================================================
         {
             id: 3,
-            titulo: "Sempre em Segurança!",
-            subtitulo: "Em casa, na rua e na escola",
-            corClasse: "bg-laranja",
+            titulo: "O que é um Itinerário?",
+            subtitulo: "Partida, paragens e ponto de chegada",
             icone: "img/icon_nivel3.svg",
-            numQuestoes: 10,
+			corClasse: "bg-azul",
+            cor: "#ff922b",
             perguntas: [
                 {
-                    id: 301,
                     tipo: "lacuna",
-                    pergunta: "Em caso de acidente ou emergência médica devemos ligar para o ___.",
+                    pergunta: "Ao caminho percorrido entre um ponto de partida e um ponto de chegada chama-se ________.",
                     audio: "audios/n3_q01.mp3",
-                    dica: { tipo: "50-50", texto: "É o número europeu de emergência médica: tem três algarismos e começa por 11..." },
-                    opcoes: ["112", "115", "118", "100"],
-                    correta: "112"
+                    imagemPergunta: "img/planta_percursos_16x9.jpg",
+                    opcoes: ["itinerário", "semáforo", "edifício", "calendário"],
+                    correta: "itinerário",
+                    dica: { tipo: "50-50", texto: "É o nome do percurso que fazemos de um lugar para outro." }
                 },
                 {
-                    id: 302,
                     tipo: "opcoes-texto",
-                    pergunta: "Observa o semáforo dos peões (boneco vermelho). Para quem é seguro avançar?",
+                    pergunta: "O Afonso sai de <span class='destaque-fundo'>Casa</span> e vai até à <span class='destaque-fundo'>Escola</span>.\nQual é o seu ponto de partida?",
                     audio: "audios/n3_q02.mp3",
-                    imagemPergunta: "img/semaforo_peoes_vermelho.jpg",
-                    dica: { tipo: "50-50", texto: "Quando o boneco está vermelho, os peões têm de esperar no passeio!" },
-                    opcoes: ["Para o carro", "Para os peões", "Para ambos ao mesmo tempo"],
-                    correta: "Para o carro"
+                    imagemPergunta: "img/planta_percursos_16x9.jpg",
+                    opcoes: ["Casa", "Escola", "Padaria", "Parque"],
+                    correta: "Casa",
+                    dica: { tipo: "highlight", texto: "Ponto de partida é o lugar onde o caminho começa." }
                 },
                 {
-                    id: 303,
-                    tipo: "dupla-opcao",
-                    pergunta: "O menino está a tentar meter os dedos numa tomada elétrica.\nEste comportamento é seguro?",
+                    tipo: "opcoes-texto",
+                    pergunta: "No mesmo percurso de <span class='destaque-fundo'>Casa</span> até à <span class='destaque-fundo'>Escola</span>, qual é o ponto de chegada?",
                     audio: "audios/n3_q03.mp3",
-                    imagemPergunta: "img/mexer_tomada.jpg",
-                    dica: { tipo: "highlight", texto: "Nunca se mexe nas tomadas! Podes apanhar um choque elétrico muito perigoso." },
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Errado"
+                    imagemPergunta: "img/planta_percursos_16x9.jpg",
+                    opcoes: ["Escola", "Casa", "Hospital", "Estação"],
+                    correta: "Escola",
+                    dica: { tipo: "50-50", texto: "Ponto de chegada é o destino final do caminho." }
                 },
                 {
-                    id: 304,
-                    tipo: "dupla-opcao",
-                    pergunta: "O menino viaja no banco de trás do carro com o cinto de segurança bem apertado.\nEstá a cumprir as regras?",
+                    tipo: "cidadania",
+                    pergunta: "Observa a planta.\nO caminho tracejado azul é mais curto do que o caminho tracejado vermelho.",
                     audio: "audios/n3_q04.mp3",
-                    imagemPergunta: "img/cinto_seguranca_carro.jpg",
-                    dica: { tipo: "highlight", texto: "O cinto de segurança protege-nos em todas as viagens de carro!" },
+                    imagemPergunta: "img/planta_percursos_16x9.jpg",
                     opcoes: ["Certo", "Errado"],
-                    correta: "Certo"
+                    correta: "Certo",
+                    dica: { tipo: "texto", texto: "O caminho azul vai direto, enquanto o vermelho dá uma volta maior." }
                 },
                 {
-                    id: 305,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Qual destas imagens mostra uma atitude segura em casa?",
+                    tipo: "opcoes-texto",
+                    pergunta: "Observa os dois caminhos entre a <span class='destaque-fundo'>Casa</span> e a <span class='destaque-fundo'>Escola</span>.\nQual é o itinerário mais longo?",
                     audio: "audios/n3_q05.mp3",
-                    dica: { tipo: "50-50", texto: "As crianças devem manter distância do forno quente enquanto o adulto cozinha." },
-                    opcoesImagem: [
-                        { img: "img/longe_forno_quente.jpg", alt: "Ficar longe do forno quente", valor: "Ficar longe do forno" },
-                        { img: "img/trepar_moveis_cozinha.jpg", alt: "Trepar aos armários da cozinha", valor: "Trepar aos armários" },
-                        { img: "img/brincar_fosforos.jpg", alt: "Brincar com fósforos", valor: "Brincar com fósforos" },
-                        { img: "img/saltar_sofa_janela.jpg", alt: "Subir para o sofá junto à janela", valor: "Subir junto à janela" }
-                    ],
-                    correta: "Ficar longe do forno"
+                    imagemPergunta: "img/planta_percursos_16x9.jpg",
+                    opcoes: ["O caminho vermelho", "O caminho azul", "São iguais", "Nenhum chega à escola"],
+                    correta: "O caminho vermelho",
+                    dica: { tipo: "50-50", texto: "É o percurso que passa à volta do parque e da padaria." }
                 },
                 {
-                    id: 306,
                     tipo: "ordenar",
-                    pergunta: "Ordena os passos para atravessar a rua em segurança na passadeira.",
+                    pergunta: "<span class='destaque-fundo'>A Maria sai da Escola, vai à Farmácia e depois chega a Casa.</span>\nOrdena o itinerário.",
                     audio: "audios/n3_q06.mp3",
-                    dica: { tipo: "highlight", texto: "Primeiro paramos no passeio, depois olhamos para os dois lados e só atravessamos quando não vêm carros!" },
                     itens: [
-                        { texto: "Parar junto à passadeira", img: "img/parar_passadeira.jpg" },
-                        { texto: "Olhar para a esquerda e para a direita", img: "img/olhar_dois_lados.jpg" },
-                        { texto: "Atravessar de mão dada sem correr", img: "img/atravessar_mao_dada.jpg" }
+                        { texto: "Escola" },
+                        { texto: "Farmácia" },
+                        { texto: "Casa" }
                     ],
-                    correta: "Parar junto à passadeira | Olhar para a esquerda e para a direita | Atravessar de mão dada sem correr"
+                    correta: "Escola | Farmácia | Casa",
+                    dica: { tipo: "highlight", texto: "Onde começa o percurso da Maria? Na Escola!" }
                 },
                 {
-                    id: 307,
-                    tipo: "opcoes-texto",
-                    pergunta: "O que pode acontecer se uma criança brincar com fósforos ou isqueiros?",
-                    audio: "audios/n3_q07.mp3",
-                    imagemPergunta: "img/menina_fosforos.jpg",
-                    dica: { tipo: "50-50", texto: "O fogo é muito perigoso e nunca é um brinquedo." },
-                    opcoes: [
-                        "Pode queimar-se ou provocar um incêndio",
-                        "Pode apanhar uma constipação",
-                        "Não acontece nada de mal"
-                    ],
-                    correta: "Pode queimar-se ou provocar um incêndio"
-                },
-                {
-                    id: 308,
-                    tipo: "dupla-opcao",
-                    pergunta: "Os dois meninos estão a atravessar a passadeira a olhar para o telemóvel sem atenção à estrada.\nEstá certo?",
-                    audio: "audios/n3_q08.mp3",
-                    imagemPergunta: "img/passadeira_telemovel.jpg",
-                    dica: { tipo: "highlight", texto: "Ao atravessar a rua devemos olhar sempre para a estrada e nunca para ecrãs!" },
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Errado"
-                },
-                {
-                    id: 309,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Como deves circular de bicicleta na rua?",
-                    audio: "audios/n3_q09.mp3",
-                    dica: { tipo: "50-50", texto: "Usa sempre capacete e circula na ciclovia quando existir!" },
-                    opcoesImagem: [
-                        { img: "img/bicicleta_ciclovia_capacete.jpg", alt: "Na ciclovia e com capacete", valor: "Na ciclovia com capacete" },
-                        { img: "img/bicicleta_sem_capacete_estrada.jpg", alt: "No meio dos carros sem capacete", valor: "No meio dos carros" },
-                        { img: "img/bicicleta_sem_maos.jpg", alt: "A andar sem mãos no guiador", valor: "Sem mãos no guiador" }
-                    ],
-                    correta: "Na ciclovia com capacete"
-                },
-                {
-                    id: 310,
-                    tipo: "opcoes-texto",
-                    pergunta: "Na escola, o que pode acontecer se correres ou saltares nas escadas?",
-                    audio: "audios/n3_q10.mp3",
-                    imagemPergunta: "img/correr_escadas_escola.jpg",
-                    dica: { tipo: "highlight", texto: "As escadas devem ser descidas devagar e a segurar no corrimão!" },
-                    opcoes: [
-                        "Tropeçar, cair e magoar-se",
-                        "Chegar mais depressa sem perigo",
-                        "Ganhar uma medalha"
-                    ],
-                    correta: "Tropeçar, cair e magoar-se"
-                },
-                {
-                    id: 311,
-                    tipo: "dupla-opcao",
-                    pergunta: "A menina anda de trotinete no passeio com o capacete bem colocado.\nEstá a cumprir as regras de segurança?",
-                    audio: "audios/n3_q11.mp3",
-                    imagemPergunta: "img/trotinete_capacete.jpg",
-                    dica: "O capacete protege a cabeça em caso de queda.",
-                    opcoes: ["Sim", "Não"],
-                    correta: "Sim"
-                },
-                {
-                    id: 312,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Onde deves caminhar quando vais a pé numa estrada sem passeio?",
-                    audio: "audios/n3_q12.mp3",
-                    dica: { tipo: "50-50", texto: "Caminha sempre pela berma, em fila e de frente para os carros que vêm!" },
-                    opcoesImagem: [
-                        { img: "img/caminhar_berma_fila.jpg", alt: "Pela berma em fila", valor: "Pela berma em fila" },
-                        { img: "img/caminhar_meio_estrada.jpg", alt: "No meio da estrada", valor: "No meio da estrada" },
-                        { img: "img/brincar_bola_estrada.jpg", alt: "A jogar à bola na estrada", valor: "A jogar na estrada" }
-                    ],
-                    correta: "Pela berma em fila"
-                },
-                {
-                    id: 313,
-                    tipo: "lacuna",
-                    pergunta: "Na escola devemos evitar comportamentos ___ que podem provocar acidentes.",
-                    audio: "audios/n3_q13.mp3",
-                    dica: { tipo: "50-50", texto: "São atitudes arriscadas como empurrar ou correr nas escadas." },
-                    opcoes: ["perigosos", "seguros", "calmos", "divertidos"],
-                    correta: "perigosos"
-                },
-                {
-                    id: 314,
-                    tipo: "dupla-opcao",
-                    pergunta: "Lutar e empurrar os colegas no recreio da escola é um comportamento certo ou errado?",
-                    audio: "audios/n3_q14.mp3",
-                    imagemPergunta: "img/lutar_recreio.jpg",
-                    dica: { tipo: "highlight", texto: "Empurrar pode provocar quedas graves e partir um braço ou uma perna!" },
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Errado"
-                },
-                {
-                    id: 315,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Qual é a maneira mais segura de uma criança pequena atravessar a rua?",
-                    audio: "audios/n3_q15.mp3",
-                    dica: { tipo: "highlight", texto: "Na passadeira e sempre de mão dada com um adulto!" },
-                    opcoesImagem: [
-                        { img: "img/atravessar_mao_dada.jpg", alt: "Na passadeira de mão dada com adultos", valor: "De mão dada na passadeira" },
-                        { img: "img/correr_entre_carros.jpg", alt: "A correr entre os carros estacionados", valor: "Correr entre os carros" },
-                        { img: "img/atravessar_fora_passadeira.jpg", alt: "Fora da passadeira a correr", valor: "Fora da passadeira" }
-                    ],
-                    correta: "De mão dada na passadeira"
-                },
-                {
-                    id: 316,
-                    tipo: "opcoes-texto",
-                    pergunta: "O que significa o símbolo amarelo com um raio junto a um quadro elétrico?",
-                    audio: "audios/n3_q16.mp3",
-                    imagemPergunta: "img/sinal_perigo_eletricidade.jpg",
-                    dica: { tipo: "50-50", texto: "Avisa que há eletricidade e risco de choque!" },
-                    opcoes: [
-                        "Perigo de choque elétrico",
-                        "Proibido comer aqui",
-                        "Zona de brincadeira"
-                    ],
-                    correta: "Perigo de choque elétrico"
-                },
-                {
-                    id: 317,
                     tipo: "ordenar",
-                    pergunta: "Ordena o que deves fazer se assistires a um acidente em casa.",
-                    audio: "audios/n3_q17.mp3",
-                    dica: { tipo: "highlight", texto: "Primeiro mantém a calma e chama um adulto; se for preciso, liga-se para o 112!" },
+                    pergunta: "Ordena o percurso da manhã.\n<span class='destaque-fundo'>Acordar em Casa, passar na Padaria e chegar à Escola.</span>",
+                    audio: "audios/n3_q07.mp3",
                     itens: [
-                        { texto: "Manter a calma e não mexer no perigo", img: "img/manter_calma.jpg" },
-                        { texto: "Chamar logo um adulto", img: "img/chamar_adulto.jpg" },
-                        { texto: "Ligar para o 112 se houver feridos", img: "img/telemovel_112.jpg" }
+                        { texto: "Casa" },
+                        { texto: "Padaria" },
+                        { texto: "Escola" }
                     ],
-                    correta: "Manter a calma e não mexer no perigo | Chamar logo um adulto | Ligar para o 112 se houver feridos"
+                    correta: "Casa | Padaria | Escola",
+                    dica: { tipo: "50-50", texto: "O último lugar onde chega é a Escola." }
                 },
                 {
-                    id: 318,
-                    tipo: "dupla-opcao",
-                    pergunta: "Brincar com a bola mesmo junto à estrada onde passam carros é uma atitude perigosa.",
-                    audio: "audios/n3_q18.mp3",
-                    imagemPergunta: "img/bola_junto_estrada.jpg",
-                    dica: "A bola pode rolar para a estrada e a criança correr atrás dela sem ver os carros!",
+                    tipo: "cidadania",
+                    pergunta: "Para ir de um lugar a outro numa localidade só existe sempre um único caminho possível.",
+                    audio: "audios/n3_q08.mp3",
+                    imagemPergunta: "img/planta_percursos_16x9.jpg",
+                    opcoes: ["verdade", "Mentira"],
+                    correta: "Mentira",
+                    dica: { tipo: "texto", texto: "Como vês na planta, podemos escolher caminhos mais curtos ou mais longos!" }
+                },
+                {
+                    tipo: "mapa-cliques",
+                    pergunta: "Traça o caminho do Afonso.\nParte de <span class='destaque-badge'>Casa</span> e vai até ao <span class='destaque-badge'>Parque infantil</span>.",
+                    audio: "audios/n3_q09.mp3",
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    pontos: PONTOS_BAIRRO,
+                    correta: "casa | parque",
+                    dica: { tipo: "highlight", texto: "Toca primeiro na Casa e depois no Parque!" }
+                },
+                {
+                    tipo: "mapa-cliques",
+                    pergunta: "Traça o percurso na escola.\nVai do Portão até à Sala de Aula.",
+                    audio: "audios/n3_q10.mp3",
+                    imagemPergunta: "img/planta_escola_16x9.jpg",
+                    pontos: PONTOS_ESCOLA,
+                    correta: "portao | sala",
+                    dica: { tipo: "highlight", texto: "Começa no Portão onde está o autocarro amarelo." }
+                },
+                {
+                    tipo: "ordenar",
+                    pergunta: "Ordena o percurso na cidade.\n'Sair do <span class='destaque-fundo'>Hotel</span>, almoçar no <span class='destaque-fundo'>Restaurante</span> e passear no <span class='destaque-fundo'>Jardim</span>.'",
+                    audio: "audios/n3_q11.mp3",
+                    itens: [
+                        { texto: "Hotel" },
+                        { texto: "Restaurante" },
+                        { texto: "Jardim" }
+                    ],
+                    correta: "Hotel | Restaurante | Jardim",
+                    dica: { tipo: "highlight", texto: "O primeiro passo é sair do Hotel." }
+                },
+                {
+                    tipo: "lacuna",
+                    pergunta: "O local onde <span class='destaque-texto-verde'>iniciamos</span> um itinerário chama-se ponto de ________.",
+                    audio: "audios/n3_q12.mp3",
+                    imagemPergunta: "img/planta_percursos_16x9.jpg",
+                    opcoes: ["partida", "chegada", "paragem", "descanso"],
+                    correta: "partida",
+                    dica: { tipo: "50-50", texto: "É de onde partimos para começar o caminho." }
+                },
+                {
+                    tipo: "lacuna",
+                    pergunta: "O <span class='destaque-fundo'>destino final</span> onde termina um itinerário chama-se ponto de ________.",
+                    audio: "audios/n3_q13.mp3",
+                    imagemPergunta: "img/planta_percursos_16x9.jpg",
+                    opcoes: ["chegada", "partida", "saída", "início"],
+                    correta: "chegada",
+                    dica: { tipo: "50-50", texto: "É o lugar onde chegamos no fim." }
+                },
+                {
+                    tipo: "mapa-cliques",
+                    pergunta: "Na cidade, vai do <span class='destaque-fundo'>Hospital</span> até à <span class='destaque-fundo'>Farmácia</span>.",
+                    audio: "audios/n3_q14.mp3",
+                    imagemPergunta: "img/planta_cidade_16x9.jpg",
+                    pontos: PONTOS_CIDADE,
+                    correta: "hospital | farmacia",
+                    dica: { tipo: "highlight", texto: "Começa no Hospital (cruz vermelha) e toca na Farmácia (cruz verde)." }
+                },
+                {
+                    tipo: "ordenar",
+                    pergunta: "Ordena a rotina na escola.\n<span class='destaque-fundo'>Entrar pelo Portão, ir à Sala de Aula e brincar no Recreio.</span>",
+                    audio: "audios/n3_q15.mp3",
+                    itens: [
+                        { texto: "Portão" },
+                        { texto: "Sala de Aula" },
+                        { texto: "Recreio" }
+                    ],
+                    correta: "Portão | Sala de Aula | Recreio",
+                    dica: { tipo: "50-50", texto: "Primeiro entras pelo Portão da escola." }
+                },
+                {
+                    tipo: "cidadania",
+                    pergunta: "Na planta dos dois itinerários, o caminho azul passa por cima de uma passadeira.",
+                    audio: "audios/n3_q16.mp3",
+                    imagemPergunta: "img/planta_percursos_16x9.jpg",
                     opcoes: ["Sim", "Não"],
-                    correta: "Sim"
+                    correta: "Sim",
+                    dica: { tipo: "texto", texto: "Repara nas riscas brancas na rua por onde passa a linha azul." }
                 },
                 {
-                    id: 319,
                     tipo: "opcoes-texto",
-                    pergunta: "Como deves sentar-te na cadeira da sala de aula para proteger as tuas costas?",
-                    audio: "audios/n3_q19.mp3",
-                    dica: { tipo: "50-50", texto: "Não te baloices na cadeira e apoia bem as costas no encosto." },
-                    opcoes: [
-                        "Com as costas direitas e os pés no chão",
-                        "A baloiçar a cadeira para trás",
-                        "De joelhos em cima da cadeira"
-                    ],
-                    correta: "Com as costas direitas e os pés no chão"
+                    pergunta: "Se o Pedro está na <span class='destaque-badge'>Biblioteca</span> e vai para a <span class='destaque-badge'>Cantina</span>, qual é o ponto de partida?",
+                    audio: "audios/n3_q17.mp3",
+                    imagemPergunta: "img/planta_escola_16x9.jpg",
+                    opcoes: ["Biblioteca", "Cantina", "Recreio", "Ginásio"],
+                    correta: "Biblioteca",
+                    dica: { tipo: "50-50", texto: "É o local onde o Pedro já se encontra antes de começar a andar." }
                 },
                 {
-                    id: 320,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Para que número deves ligar em caso de emergência médica?",
-                    audio: "audios/n3_q20.mp3",
-                    dica: { tipo: "highlight", texto: "Procura o telemóvel que mostra o número 112!" },
-                    opcoesImagem: [
-                        { img: "img/telemovel_112.jpg", alt: "Telemóvel com 112", valor: "112" },
-                        { img: "img/telemovel_115.jpg", alt: "Telemóvel com 115", valor: "115" },
-                        { img: "img/telemovel_118.jpg", alt: "Telemóvel com 118", valor: "118" }
+                    tipo: "mapa-cliques",
+                    pergunta: "Ajuda o Afonso a ir da <span class='destaque-fundo'>Escola</span> até ao <span class='destaque-fundo'>Supermercado</span>.",
+                    audio: "audios/n3_q18.mp3",
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    pontos: PONTOS_BAIRRO,
+                    correta: "escola | supermercado",
+                    dica: { tipo: "highlight", texto: "Parte da Escola e toca no Supermercado." }
+                },
+                {
+                    tipo: "ordenar",
+                    pergunta: "Ordena o percurso.\n<span class='destaque-fundo'>Partir da Estação, passar na Farmácia e chegar ao Hospital.</span>",
+                    audio: "audios/n3_q19.mp3",
+                    itens: [
+                        { texto: "Estação" },
+                        { texto: "Farmácia" },
+                        { texto: "Hospital" }
                     ],
-                    correta: "112"
+                    correta: "Estação | Farmácia | Hospital",
+                    dica: { tipo: "highlight", texto: "O ponto de partida é a Estação." }
+                },
+                {
+                    tipo: "cidadania",
+                    pergunta: "Um itinerário tem <span class='destaque-texto-verde'>sempre</span> um ponto de partida e um ponto de chegada.",
+                    audio: "audios/n3_q20.mp3",
+                    imagemPergunta: "img/planta_percursos_16x9.jpg",
+                    opcoes: ["Verdadeiro", "Falso"],
+                    correta: "Verdadeiro",
+                    dica: { tipo: "texto", texto: "Todo o caminho começa num sítio e termina noutro." }
                 }
             ]
         },
 
-        /* ==================================================================
-           NÍVEL 4: PRAIA E PISCINA SEGURAS (20 QUESTÕES)
-           ================================================================== */
+        // =====================================================================
+        // NÍVEL 4: SEGUIR E TRAÇAR CAMINHOS COMPLETOS (20 perguntas)
+        // =====================================================================
         {
             id: 4,
-            titulo: "Praia e Piscina Seguras",
-            subtitulo: "Bandeiras e símbolos aquáticos",
-            corClasse: "bg-turquesa",
+            titulo: "Mestre dos Mapas",
+            subtitulo: "Traça percursos completos com várias paragens",
             icone: "img/icon_nivel4.svg",
-            numQuestoes: 10,
+			corClasse: "bg-roxo",
+            cor: "#f06595",
             perguntas: [
                 {
-                    id: 401,
-                    tipo: "opcoes-imagem",
-                    pergunta: "O mar está calmo e o banho é permitido. Qual é a bandeira que deve estar hasteada?",
+                    tipo: "mapa-cliques",
+                    pergunta: "<span class='destaque-fundo'>Traça o itinerário do Afonso: sai de Casa, passa na Padaria e chega à Escola.</span>",
                     audio: "audios/n4_q01.mp3",
-                    dica: { tipo: "50-50", texto: "Tal como nos semáforos, esta cor significa que podes avançar com segurança!" },
-                    opcoesImagem: [
-                        { img: "img/bandeira_verde.jpg", alt: "Bandeira verde", valor: "Bandeira verde" },
-                        { img: "img/bandeira_amarela.jpg", alt: "Bandeira amarela", valor: "Bandeira amarela" },
-                        { img: "img/bandeira_vermelha.jpg", alt: "Bandeira vermelha", valor: "Bandeira vermelha" },
-                        { img: "img/bandeira_xadrez.jpg", alt: "Bandeira axadrezada", valor: "Bandeira axadrezada" }
-                    ],
-                    correta: "Bandeira verde"
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    pontos: PONTOS_BAIRRO,
+                    correta: "casa | padaria | escola",
+                    dica: { tipo: "highlight", texto: "Segue esta ordem: Casa → Padaria → Escola." }
                 },
                 {
-                    id: 402,
-                    tipo: "opcoes-imagem",
-                    pergunta: "O mar tem ondas gigantes e muito perigosas. Qual é a bandeira que proíbe entrar na água?",
+                    tipo: "mapa-cliques",
+                    pergunta: "<span class='destaque-fundo'>Depois das aulas, vai da Escola até ao Parque infantil, <span class='destaque-texto-vermelho'>passando</span> pelo Jardim.</span>",
                     audio: "audios/n4_q02.mp3",
-                    dica: { tipo: "highlight", texto: "É a cor do perigo e de parar!" },
-                    opcoesImagem: [
-                        { img: "img/bandeira_vermelha.jpg", alt: "Bandeira vermelha", valor: "Bandeira vermelha" },
-                        { img: "img/bandeira_verde.jpg", alt: "Bandeira verde", valor: "Bandeira verde" },
-						{ img: "img/bandeira_xadrez.jpg", alt: "Bandeira axadrezada", valor: "Bandeira axadrezada" },
-                        { img: "img/bandeira_amarela.jpg", alt: "Bandeira amarela", valor: "Bandeira amarela" }
-                    ],
-                    correta: "Bandeira vermelha"
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    pontos: PONTOS_BAIRRO,
+                    correta: "escola | jardim | parque",
+                    dica: { tipo: "50-50", texto: "Começa na Escola, passa no Jardim central e termina no Parque." }
                 },
                 {
-                    id: 403,
-                    tipo: "opcoes-texto",
-                    pergunta: "O que significa este símbolo que encontramos nas praias e piscinas?",
+                    tipo: "mapa-cliques",
+                    pergunta: "Na cidade, ajuda a mãe a ir do Hotel ao Hospital e depois à Farmácia.",
                     audio: "audios/n4_q03.mp3",
-                    imagemPergunta: "img/simbolo_proibido_mergulhar.jpg",
-                    dica: { tipo: "50-50", texto: "O círculo vermelho com um traço indica uma proibição: não saltes de cabeça!" },
-                    opcoes: ["Proibido mergulhar", "Obrigatório mergulhar", "Proibido correr"],
-                    correta: "Proibido mergulhar"
+                    imagemPergunta: "img/planta_cidade_16x9.jpg",
+                    pontos: PONTOS_CIDADE,
+                    correta: "hotel | hospital | farmacia",
+                    dica: { tipo: "highlight", texto: "Parte do Hotel, vai ao Hospital e termina na Farmácia." }
                 },
                 {
-                    id: 404,
-                    tipo: "opcoes-texto",
-                    pergunta: "O que indica este símbolo azul à entrada da piscina?",
+                    tipo: "mapa-cliques",
+                    pergunta: "Na escola, vai da Sala de Aula até à Cantina, <span class='destaque-texto-verde'>passando primeiro</span> pela Biblioteca.",
                     audio: "audios/n4_q04.mp3",
-                    imagemPergunta: "img/simbolo_tomar_duche.jpg",
-                    dica: { tipo: "highlight", texto: "Os sinais azuis redondos indicam uma obrigação para manter a água limpa!" },
-                    opcoes: [
-                        "Obrigatório tomar duche antes de entrar",
-                        "Proibido tomar banho",
-                        "Proibido nadar"
-                    ],
-                    correta: "Obrigatório tomar duche antes de entrar"
+                    imagemPergunta: "img/planta_escola_16x9.jpg",
+                    pontos: PONTOS_ESCOLA,
+                    correta: "sala | biblioteca | cantina",
+                    dica: { tipo: "highlight", texto: "Sala de Aula → Biblioteca → Cantina." }
                 },
                 {
-                    id: 405,
-                    tipo: "dupla-opcao",
-                    pergunta: "O menino está a correr à volta da piscina atrás de uma bola. Este comportamento está certo ou errado?",
+                    tipo: "ordenar",
+                    pergunta: "Ouve e ordena o itinerário da Maria.\n<span class='destaque-fundo'>Sai da Escola, vai à Farmácia, brinca no Parque e volta a Casa.</span>",
                     audio: "audios/n4_q05.mp3",
-                    imagemPergunta: "img/correr_piscina_bola.jpg",
-                    dica: { tipo: "highlight", texto: "O chão à volta da piscina está molhado e escorregadio: podes cair!" },
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Errado"
+                    itens: [
+                        { texto: "Escola" },
+                        { texto: "Farmácia" },
+                        { texto: "Parque" },
+                        { texto: "Casa" }
+                    ],
+                    correta: "Escola | Farmácia | Parque | Casa",
+                    dica: { tipo: "50-50", texto: "A Maria começa na Escola e termina em Casa." }
                 },
                 {
-                    id: 406,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Que símbolo indica que é <span class='destaque-amarelo'>PROIBIDO</span> correr junto à piscina?",
+                    tipo: "mapa-cliques",
+                    pergunta: "Traça o percurso.\nParte do Supermercado, passa pelo Jardim e vai até aos Bombeiros.",
                     audio: "audios/n4_q06.mp3",
-                    dica: { tipo: "50-50", texto: "Procura o círculo vermelho com uma pessoa a correr riscada." },
-                    opcoesImagem: [
-                        { img: "img/simbolo_proibido_correr.jpg", alt: "Proibido correr", valor: "Proibido correr" },
-                        { img: "img/simbolo_proibido_nadar.jpg", alt: "Proibido nadar", valor: "Proibido nadar" },
-                        { img: "img/simbolo_proibido_mergulhar.jpg", alt: "Proibido mergulhar", valor: "Proibido mergulhar" },
-                        { img: "img/simbolo_tomar_duche.jpg", alt: "Tomar duche", valor: "Tomar duche" }
-                    ],
-                    correta: "Proibido correr"
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    pontos: PONTOS_BAIRRO,
+                    correta: "supermercado | jardim | bombeiros",
+                    dica: { tipo: "highlight", texto: "Começa no Supermercado, passa no meio (Jardim) e sobe até aos Bombeiros." }
                 },
                 {
-                    id: 407,
-                    tipo: "opcoes-texto",
-                    pergunta: "Quando está hasteada a bandeira <span class='destaque-amarelo'>AMARELA</span> na praia, o que podes fazer?",
+                    tipo: "cidadania",
+                    pergunta: "Ao seguir um itinerário a pé na rua, devemos atravessar sempre nas passadeiras e andar pelo passeio.",
                     audio: "audios/n4_q07.mp3",
-                    imagemPergunta: "img/bandeira_amarela.jpg",
-                    dica: { tipo: "50-50", texto: "Com bandeira amarela não se pode nadar, mas podes molhar os pés junto à areia." },
-                    opcoes: [
-                        "Andar à beira-mar sem nadar",
-                        "Nadar para longe da areia",
-                        "Mergulhar nas ondas grandes"
-                    ],
-                    correta: "Andar à beira-mar sem nadar"
+                    imagemPergunta: "img/planta_percursos_16x9.jpg",
+                    opcoes: ["Sim", "Não"],
+                    correta: "Sim",
+                    dica: { tipo: "texto", texto: "A segurança na rua faz parte de qualquer bom itinerário!" }
                 },
                 {
-                    id: 408,
-                    tipo: "opcoes-texto",
-                    pergunta: "O que significa a bandeira axadrezada (aos quadrados pretos e brancos) na praia?",
+                    tipo: "mapa-cliques",
+                    pergunta: "Traça este passeio na cidade.\n<span class='destaque-fundo'>Sai da Estação, passa pelo Jardim e almoça no Restaurante.</span>",
                     audio: "audios/n4_q08.mp3",
-                    imagemPergunta: "img/bandeira_xadrez.jpg",
-                    dica: { tipo: "50-50", texto: "Indica que o nadador-salvador se ausentou temporariamente do posto." },
-                    opcoes: [
-                        "Praia temporariamente sem vigilância",
-                        "Corrida de barcos na praia",
-                        "Mar completamente seguro"
-                    ],
-                    correta: "Praia temporariamente sem vigilância"
+                    imagemPergunta: "img/planta_cidade_16x9.jpg",
+                    pontos: PONTOS_CIDADE,
+                    correta: "estacao | jardim | restaurante",
+                    dica: { tipo: "50-50", texto: "Estação → Jardim → Restaurante." }
                 },
                 {
-                    id: 409,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Qual destas bandeiras delimita a zona reservada apenas a banhistas?",
+                    tipo: "mapa-cliques",
+                    pergunta: "No fim do dia escolar, vai do Recreio até ao Portão, <span class='destaque-texto-verde'>passando</span> pelo Ginásio.",
                     audio: "audios/n4_q09.mp3",
-                    dica: { tipo: "highlight", texto: "Tem duas cores: vermelha em cima e amarela em baixo!" },
-                    opcoesImagem: [
-                        { img: "img/bandeira_vermelha_amarela.jpg", alt: "Bandeira vermelha e amarela", valor: "Bandeira vermelha e amarela" },
-                        { img: "img/bandeira_verde.jpg", alt: "Bandeira verde", valor: "Bandeira verde" },
-                        { img: "img/bandeira_xadrez.jpg", alt: "Bandeira axadrezada", valor: "Bandeira axadrezada" }
-                    ],
-                    correta: "Bandeira vermelha e amarela"
+                    imagemPergunta: "img/planta_escola_16x9.jpg",
+                    pontos: PONTOS_ESCOLA,
+                    correta: "recreio | ginasio | portao",
+                    dica: { tipo: "highlight", texto: "Começa no Recreio, passa pelo Ginásio e sai no Portão." }
                 },
                 {
-                    id: 410,
                     tipo: "ordenar",
-                    pergunta: "Ordena os cuidados a ter quando chegas à piscina.",
+                    pergunta: "Ordena o percurso do carteiro.\n<span class='destaque-fundo'>Sai dos Bombeiros, entrega carta na Escola, passa na Padaria e chega ao Parque.</span>",
                     audio: "audios/n4_q10.mp3",
-                    dica: { tipo: "highlight", texto: "Antes de entrar na água tomamos duche e entramos sempre pelas escadas sem correr!" },
                     itens: [
-                        { texto: "Tomar duche antes de entrar", img: "img/tomar_duche_piscina.jpg" },
-                        { texto: "Caminhar devagar sem correr", img: "img/caminhar_piscina.jpg" },
-                        { texto: "Entrar na água pelas escadas", img: "img/entrar_escadas_piscina.jpg" }
+                        { texto: "Bombeiros" },
+                        { texto: "Escola" },
+                        { texto: "Padaria" },
+                        { texto: "Parque" }
                     ],
-                    correta: "Tomar duche antes de entrar | Caminhar devagar sem correr | Entrar na água pelas escadas"
+                    correta: "Bombeiros | Escola | Padaria | Parque",
+                    dica: { tipo: "highlight", texto: "O primeiro ponto é nos Bombeiros." }
                 },
                 {
-                    id: 411,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Que símbolo significa que é <span class='destaque-texto-vermelho'>PROIBIDO</span> nadar naquele local?",
+                    tipo: "opcoes-texto",
+                    pergunta: "Observa a planta do bairro.\nQual destes lugares fica mais perto da casa do Afonso?",
                     audio: "audios/n4_q11.mp3",
-                    dica: { tipo: "50-50", texto: "Procura o círculo vermelho com uma pessoa a nadar riscada." },
-                    opcoesImagem: [
-                        { img: "img/simbolo_proibido_nadar.jpg", alt: "Proibido nadar", valor: "Proibido nadar" },
-                        { img: "img/simbolo_proibido_correr.jpg", alt: "Proibido correr", valor: "Proibido correr" },
-                        { img: "img/simbolo_tomar_duche.jpg", alt: "Tomar duche", valor: "Tomar duche" }
-                    ],
-                    correta: "Proibido nadar"
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    opcoes: ["O Supermercado", "A Padaria", "O Parque infantil", "Os Bombeiros"],
+                    correta: "Os Bombeiros",
+                    dica: { tipo: "50-50", texto: "Olha para os edifícios na parte de baixo da planta." }
                 },
                 {
-                    id: 412,
-                    tipo: "dupla-opcao",
-                    pergunta: "As crianças estão a brincar na água com bóia, perto da praia vigiada e com bandeira verde.\nÉ seguro ou não?",
+                    tipo: "mapa-cliques",
+                    pergunta: "Faz o caminho completo.\n<span class='destaque-fundo'>Casa → Supermercado → Parque infantil</span>",
                     audio: "audios/n4_q12.mp3",
-                    imagemPergunta: "img/criancas_praia_bandeira_verde.jpg",
-                    dica: { tipo: "highlight", texto: "Com bandeira verde e sempre vigiadas por adultos, as crianças brincam em segurança!" },
-                    opcoes: ["Sim", "Não"],
-                    correta: "Sim"
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    pontos: PONTOS_BAIRRO,
+                    correta: "casa | supermercado | parque",
+                    dica: { tipo: "highlight", texto: "Segue pela parte de baixo do bairro da esquerda para a direita." }
                 },
                 {
-                    id: 413,
-                    tipo: "lacuna",
-                    pergunta: "Na praia devemos escolher sempre zonas vigiadas pelo ___.",
+                    tipo: "mapa-cliques",
+                    pergunta: "Na cidade, vai do Restaurante até à Estação, <span class='destaque-texto-verde'>passando</span> pela Farmácia.",
                     audio: "audios/n4_q13.mp3",
-                    dica: { tipo: "50-50", texto: "É o profissional que vigia os banhistas na praia." },
-                    opcoes: ["nadador-salvador", "carteiro", "bombeiro", "polícia"],
-                    correta: "nadador-salvador"
+                    imagemPergunta: "img/planta_cidade_16x9.jpg",
+                    pontos: PONTOS_CIDADE,
+                    correta: "restaurante | farmacia | estacao",
+                    dica: { tipo: "50-50", texto: "Restaurante (em baixo à esquerda) → Farmácia (centro) → Estação (em cima à direita)." }
                 },
                 {
-                    id: 414,
-                    tipo: "dupla-opcao",
-                    pergunta: "Mergulhar de cabeça numa piscina onde está o sinal de <span class='destaque-texto-vermelho'>Proibido mergulhar</span> é seguro?",
+                    tipo: "cidadania",
+                    pergunta: "Numa planta, se trocarmos o ponto de partida com o ponto de chegada, fazemos o caminho de regresso.",
                     audio: "audios/n4_q14.mp3",
-                    imagemPergunta: "img/simbolo_proibido_mergulhar.jpg",
-                    dica: "A água pode ser pouco profunda e podes bater com a cabeça no fundo!",
-                    opcoes: ["Sim", "Não"],
-                    correta: "Não"
+                    imagemPergunta: "img/planta_percursos_16x9.jpg",
+                    opcoes: ["Verdadeiro", "Falso"],
+                    correta: "Verdadeiro",
+                    dica: { tipo: "texto", texto: "Ir de Casa para a Escola e depois da Escola para Casa é o caminho de volta!" }
                 },
                 {
-                    id: 415,
-                    tipo: "opcoes-texto",
-                    pergunta: "Para te protegeres do sol na praia, o que deves fazer?",
+                    tipo: "mapa-cliques",
+                    pergunta: "Na escola, faz o itinerário.\n<span class='destaque-fundo'>Portão → Biblioteca → Recreio</span>",
                     audio: "audios/n4_q15.mp3",
-                    dica: { tipo: "50-50", texto: "O sol nas horas de maior calor pode provocar queimaduras." },
-                    opcoes: [
-                        "Pôr protetor solar, usar chapéu e beber água",
-                        "Ficar ao sol ao meio-dia sem chapéu",
-                        "Não pôr protetor solar"
-                    ],
-                    correta: "Pôr protetor solar, usar chapéu e beber água"
+                    imagemPergunta: "img/planta_escola_16x9.jpg",
+                    pontos: PONTOS_ESCOLA,
+                    correta: "portao | biblioteca | recreio",
+                    dica: { tipo: "highlight", texto: "Entra no Portão, sobe à Biblioteca e desce até ao Recreio." }
                 },
                 {
-                    id: 416,
-                    tipo: "opcoes-imagem",
-                    pergunta: "Qual destas imagens mostra uma praia com bandeira vermelha?",
-                    audio: "audios/n4_q16.mp3",
-                    dica: { tipo: "highlight", texto: "Com bandeira vermelha ninguém entra na água e as ondas são muito fortes!" },
-                    opcoesImagem: [
-                        { img: "img/praia_ondas_vermelha.jpg", alt: "Mar agitado e bandeira vermelha", valor: "Mar agitado" },
-                        { img: "img/criancas_praia_bandeira_verde.jpg", alt: "Mar calmo e bandeira verde", valor: "Mar calmo" },
-                        { img: "img/menina_beira_mar_amarela.jpg", alt: "À beira-mar com bandeira amarela", valor: "À beira-mar" }
-                    ],
-                    correta: "Mar agitado"
-                },
-                {
-                    id: 417,
-                    tipo: "lacuna",
-                    pergunta: "Nas praias e nas piscinas, para te divertires em segurança, deves respeitar os ___.",
-                    audio: "audios/n4_q17.mp3",
-                    dica: { tipo: "50-50", texto: "São os sinais e as bandeiras que vemos junto à água." },
-                    opcoes: ["símbolos", "brinquedos", "gelados", "baldes"],
-                    correta: "símbolos"
-                },
-                {
-                    id: 418,
                     tipo: "ordenar",
-                    pergunta: "Ordena as bandeiras da praia da <span class='destaque-texto-verde'>MAIS SEGURA</span> para a <span class='destaque-texto-vermelho'>MAIS PERIGOSA</span>.",
-                    audio: "audios/n4_q18.mp3",
-                    dica: { tipo: "highlight", texto: "Começa na bandeira verde (banho permitido) e termina na vermelha (banho proibido)!" },
+                    pergunta: "Ordena o percurso de volta a casa.\n<span class='destaque-fundo'>Sair do Parque, comprar pão na Padaria, passar no Jardim e chegar a Casa</span>",
+                    audio: "audios/n4_q16.mp3",
                     itens: [
-                        { texto: "Bandeira verde", img: "img/bandeira_verde.jpg" },
-                        { texto: "Bandeira amarela", img: "img/bandeira_amarela.jpg" },
-                        { texto: "Bandeira vermelha", img: "img/bandeira_vermelha.jpg" }
+                        { texto: "Parque" },
+                        { texto: "Padaria" },
+                        { texto: "Jardim" },
+                        { texto: "Casa" }
                     ],
-                    correta: "Bandeira verde | Bandeira amarela | Bandeira vermelha"
+                    correta: "Parque | Padaria | Jardim | Casa",
+                    dica: { tipo: "50-50", texto: "O último destino é chegar a Casa." }
                 },
                 {
-                    id: 419,
-                    tipo: "dupla-opcao",
-                    pergunta: "Uma criança que não sabe nadar deve entrar no mar sozinha sem adultos por perto.",
-                    audio: "audios/n4_q19.mp3",
-                    imagemPergunta: "img/crianca_sozinha_mar.jpg",
-                    dica: { tipo: "highlight", texto: "As crianças devem estar sempre acompanhadas por um adulto junto à água!" },
-                    opcoes: ["Certo", "Errado"],
-                    correta: "Errado"
-                },
-                {
-                    id: 420,
                     tipo: "opcoes-texto",
-                    pergunta: "Por que razão não se deve correr na beira da piscina?",
+                    pergunta: "Se o Afonso está no Parque infantil e quer ir para a Padaria, para que lado da planta vai subir?",
+                    audio: "audios/n4_q17.mp3",
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    opcoes: ["Para cima", "Para baixo", "Para fora do mapa", "Não precisa de andar"],
+                    correta: "Para cima",
+                    dica: { tipo: "50-50", texto: "O Parque está em baixo à direita e a Padaria está logo acima." }
+                },
+                {
+                    tipo: "mapa-cliques",
+                    pergunta: "<span class='destaque-amarelo'>Super desafio!</span> Traça o itinerário com 4 pontos:\nCasa → Escola → Jardim → Parque.",
+                    audio: "audios/n4_q18.mp3",
+                    imagemPergunta: "img/planta_bairro_16x9.jpg",
+                    pontos: PONTOS_BAIRRO,
+                    correta: "casa | escola | jardim | parque",
+                    dica: { tipo: "highlight", texto: "Começa na Casa, sobe à Escola, passa no Jardim e termina no Parque!" }
+                },
+                {
+                    tipo: "mapa-cliques",
+                    pergunta: "<span class='destaque-amarelo'>Super desafio na cidade!</span>\nHotel → Hospital → Farmácia → Jardim",
+                    audio: "audios/n4_q19.mp3",
+                    imagemPergunta: "img/planta_cidade_16x9.jpg",
+                    pontos: PONTOS_CIDADE,
+                    correta: "hotel | hospital | farmacia | jardim",
+                    dica: { tipo: "highlight", texto: "Começa no Hotel, desce ao Hospital, vai ao centro (Farmácia) e termina no Jardim." }
+                },
+                {
+                    tipo: "mapa-cliques",
+                    pergunta: "<span class='destaque-amarelo'>Missão final do Pombo-Correio!</span>\nPortão → Sala de Aula → Cantina → Recreio",
                     audio: "audios/n4_q20.mp3",
-                    dica: { tipo: "50-50", texto: "A água salpicada deixa o pavimento escorregadio." },
-                    opcoes: [
-                        "Porque o chão está molhado e podemos escorregar",
-                        "Porque estraga a água da piscina",
-                        "Porque faz barulho demais"
-                    ],
-                    correta: "Porque o chão está molhado e podemos escorregar"
+                    imagemPergunta: "img/planta_escola_16x9.jpg",
+                    pontos: PONTOS_ESCOLA,
+                    correta: "portao | sala | cantina | recreio",
+                    dica: { tipo: "highlight", texto: "Entra no Portão, vai à Sala de Aula, almoça na Cantina e brinca no Recreio!" }
                 }
             ]
         }

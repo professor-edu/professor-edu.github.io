@@ -217,6 +217,30 @@ function injetarEstilosOrdenar() {
             z-index: 5;
             animation: pulsoDicaHighlight 1.3s infinite ease-in-out;
         }
+
+        /* Adapta automaticamente para 4 ou 5 colunas em ecrãs largos sem partir linha */
+        @media (min-width: 601px) {
+            .ordenar-slots-container:has(> :nth-child(4)),
+            .ordenar-opcoes-grid:has(> :nth-child(4)) {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 10px;
+            }
+            .ordenar-slots-container:has(> :nth-child(5)),
+            .ordenar-opcoes-grid:has(> :nth-child(5)) {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 8px;
+            }
+            .ordenar-slots-container:has(> :nth-child(4)) .ordenar-slot {
+                min-height: 78px;
+                padding: 12px 6px 8px 6px;
+            }
+            .ordenar-slots-container:has(> :nth-child(4)) .ordenar-slot-placeholder,
+            .ordenar-slots-container:has(> :nth-child(4)) .ordenar-slot-texto,
+            .ordenar-opcoes-grid:has(> :nth-child(4)) .ordenar-card-texto {
+                font-size: 0.8rem;
+            }
+        }
+
         @media (max-width: 600px) and (orientation: portrait) {
             .ordenar-slots-container,
             .ordenar-opcoes-grid {
@@ -386,6 +410,10 @@ function iniciarJogo(idNivel = 1) {
     } else {
         poolPerguntas = nivelDados.perguntas || [];
     }
+
+    poolPerguntas.forEach((p, idx) => {
+        if (!p.id) p.id = `n${nivelAtualId}_p${idx + 1}`;
+    });
 
     totalDesafiosNivel = Math.min(numQuestoes, poolPerguntas.length);
 
