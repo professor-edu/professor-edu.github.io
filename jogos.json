@@ -981,6 +981,22 @@
         "tags": ["família", "parentes", "árvore genealógica", "som"]
     },
 	{
+        "nome": "Saúde e Segurança",
+        "icone": "/1/icones/saude_seguranca.png",
+        "link": "/1/em/saude-seguranca/",
+        "ano": "1º Ano",
+        "disciplina": "Estudo do Meio",
+        "tags": ["higiene", "alimentação", "vestuário", "segurança", "símbolos", "bandeiras", "som"]
+    },
+	{
+        "nome": "Mapas e Itinerários",
+        "icone": "/1/icones/mapas_itinerarios.png",
+        "link": "/1/em/mapas-itinerarios/",
+        "ano": "1º Ano",
+        "disciplina": "Estudo do Meio",
+        "tags": ["bairro", "sinais", "caminhos", "localidade", "símbolos", "som"]
+    },
+	{
         "nome": "Desafio Final de Mestre",
         "icone": "/1/icones/super_quiz.png",
         "link": "/1/em/super-quiz/",

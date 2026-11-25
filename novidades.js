@@ -9,10 +9,10 @@ const novidadesSite = [
     {
         ano: "ano1",
         rotulo: "1º ANO",
-        nome: "Letras PTLDM",
-		disciplina: "PT",
-        icone: "1/icones/letras.png",
-        link: "1/pt/letras/"
+        nome: "Saúde e Segurança",
+		disciplina: "EM",
+        icone: "1/icones/saude_seguranca.png",
+        link: "1/em/saude-seguranca/"
     },
     {
         ano: "ano2",

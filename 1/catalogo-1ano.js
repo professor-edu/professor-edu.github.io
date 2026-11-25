@@ -90,5 +90,7 @@ const todosOsJogos =[
     { nome: "Memória dos Animais", icone: "icones/memoria_animais.png", link: "em/animais/", cat: "em" },
     { nome: "Memória do Tempo", icone: "icones/memoria_tempo.png", link: "em/tempo/", cat: "em" },
 	{ nome: "A Família", icone: "icones/familia.png", link: "em/familia/", cat: "em" },
+	{ nome: "Saúde e Segurança", icone: "icones/saude_seguranca.png", link: "em/saude-seguranca/", cat: "em" },
+	{ nome: "Mapas e Itinerários", icone: "icones/mapas_itinerarios.png", link: "em/mapas-itinerarios/", cat: "em" },
 	{ nome: "Desafio Final de Mestre", icone: "icones/super_quiz.png", link: "em/super-quiz/", cat: "em" }
 ];

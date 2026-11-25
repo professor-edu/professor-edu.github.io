@@ -260,7 +260,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "opcoes-texto",
-                    pergunta: "Observa o sinal. Que transporte podemos apanhar neste local?",
+                    pergunta: "Observa o sinal.\nQue transporte podemos apanhar neste local?",
                     audio: "audios/n2_q03.mp3",
                     imagemPergunta: "img/sinal_comboios.svg",
                     opcoes: ["Comboio", "Avião", "Barco", "Bicicleta"],
@@ -341,7 +341,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "opcoes-imagem",
-                    pergunta: "Estamos perdidos numa cidade! Qual é o sinal do <span class='destaque-fundo'>Posto de Informações</span>?",
+                    pergunta: "Estamos perdidos numa cidade!\nQual é o sinal do <span class='destaque-fundo'>Posto de Informações</span>?",
                     audio: "audios/n2_q12.mp3",
                     categoriaDistratores: "sinais",
 					mostrarLegenda: false,
@@ -413,7 +413,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "opcoes-imagem",
-                    pergunta: "Vamos viajar de avião!\nToca no sinal que nos leva até ao Aeroporto.",
+                    pergunta: "Vamos viajar de avião!\nToca no sinal que nos indica o Aeroporto.",
                     audio: "audios/n2_q20.mp3",
                     categoriaDistratores: "sinais",
 					mostrarLegenda: false,
@@ -681,7 +681,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "ordenar",
-                    pergunta: "Ouve e ordena o itinerário da Maria.\n<span class='destaque-fundo'>Sai da Escola, vai à Farmácia, brinca no Parque e volta a Casa.</span>",
+                    pergunta: "Ordena o itinerário da Maria.\n<span class='destaque-fundo'>Sai da Escola, vai à Farmácia, brinca no Parque e volta a Casa.</span>",
                     audio: "audios/n4_q05.mp3",
                     itens: [
                         { texto: "Escola" },
@@ -694,7 +694,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "mapa-cliques",
-                    pergunta: "Traça o percurso.\nParte do Supermercado, passa pelo Jardim e vai até aos Bombeiros.",
+                    pergunta: "Faz o percurso.\nParte do Supermercado, passa pelo Jardim e vai até aos Bombeiros.",
                     audio: "audios/n4_q06.mp3",
                     imagemPergunta: "img/planta_bairro_16x9.jpg",
                     pontos: PONTOS_BAIRRO,
@@ -721,7 +721,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "mapa-cliques",
-                    pergunta: "No fim do dia escolar, vai do Recreio até ao Portão, <span class='destaque-texto-verde'>passando</span> pelo Ginásio.",
+                    pergunta: "No fim do dia de escola, vai do Recreio até ao Portão, <span class='destaque-texto-verde'>passando primeiro</span> pelo Ginásio.",
                     audio: "audios/n4_q09.mp3",
                     imagemPergunta: "img/planta_escola_16x9.jpg",
                     pontos: PONTOS_ESCOLA,
@@ -801,7 +801,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "opcoes-texto",
-                    pergunta: "Se o Afonso está no Parque infantil e quer ir para a Padaria, para que lado da planta vai subir?",
+                    pergunta: "Se o Afonso está no Parque Infantil e quer ir para a Padaria, para que lado da planta deve ir?",
                     audio: "audios/n4_q17.mp3",
                     imagemPergunta: "img/planta_bairro_16x9.jpg",
                     opcoes: ["Para cima", "Para baixo", "Para fora do mapa", "Não precisa de andar"],
@@ -810,7 +810,7 @@ const CONFIG_JOGO = {
                 },
                 {
                     tipo: "mapa-cliques",
-                    pergunta: "<span class='destaque-amarelo'>Super desafio!</span> Traça o itinerário com 4 pontos:\nCasa → Escola → Jardim → Parque.",
+                    pergunta: "<span class='destaque-amarelo'>Super desafio!</span> Traça o itinerário com 4 pontos:\nCasa → Escola → Jardim → Parque",
                     audio: "audios/n4_q18.mp3",
                     imagemPergunta: "img/planta_bairro_16x9.jpg",
                     pontos: PONTOS_BAIRRO,

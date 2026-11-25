@@ -135,6 +135,8 @@ export const CATALOGO_JOGOS = [
 	{ nome: "Memória dos Animais", icone: "1/icones/memoria_animais.png", link: "1/em/animais/", ano: "1º Ano" },
 	{ nome: "Memória do Tempo", icone: "1/icones/memoria_tempo.png", link: "1/em/tempo/", ano: "1º Ano" },
 	{ nome: "A Família", icone: "1/icones/familia.png", link: "1/em/familia/", ano: "1º Ano" },
+	{ nome: "Saúde e Segurança", icone: "1/icones/saude_seguranca.png", link: "1/em/saude-seguranca/", ano: "1º Ano" },
+	{ nome: "Mapas e Itinerários", icone: "1/icones/mapas_itinerarios.png", link: "1/em/mapas-itinerarios/", ano: "1º Ano" },
 	{ nome: "Desafio Final de Mestre", icone: "1/icones/super_quiz.png", link: "1/em/super-quiz/", ano: "1º Ano" },
 
 	// ------------------------------------
